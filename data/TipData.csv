@@ -1,0 +1,423 @@
+Day,Meal,Payment,Party,Age,GiftCard,Comps,Alcohol,Bday,Bill,W/Tip,Tip,Tip Percentage
+Wednesday,Dinner,Credit,,Middle,No,No,Yes,No,34.5,38.5,4,0.115942029
+Wednesday,Dinner,Credit,,SenCit,No,No,No,No,27.5,32.5,5,0.181818182
+Wednesday,Dinner,Credit,,SenCit,No,No,Yes,No,16.16,18.66,2.5,0.15470297
+Wednesday,Dinner,Cash,,Yadult,No,No,Yes,Yes,21.96,27,5.04,0.229508197
+Wednesday,Dinner,Cash,,Yadult,No,No,Yes,No,49.5,60,10.5,0.212121212
+Wednesday,Dinner,Credit/CashTip,,SenCit,Yes,No,Yes,No,29.94,34.94,5,0.167000668
+Wednesday,Dinner,Credit,,Middle,No,Yes,No,No,43.89,50,6.11,0.139211666
+Friday,Dinner,Cash,,Middle,No,No,No,No,23.96,25.96,2,0.083472454
+Friday,Dinner,Credit,,SenCit,No,No,Yes,No,57.35,64.35,7,0.122057541
+Friday,Dinner,Cash,,Yadult,Yes,No,Yes,No,35.22,43,7.78,0.220897217
+Friday,Dinner,Credit,,Middle,No,No,No,No,37.44,45.44,8,0.213675214
+Friday,Dinner,Cash,,Middle,Yes,No,Yes,No,51.86,57.86,6,0.115696105
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,37.95,45,7.05,0.185770751
+Friday,Dinner,Credit/CashTip,,Yadult,No,No,Yes,No,32.53,37.33,4.8,0.147556102
+Friday,Dinner,Credit,,Yadult,No,No,No,No,9.63,10.63,1,0.10384216
+Friday,Dinner,Credit,,Yadult,No,No,No,No,12.19,17.19,5,0.410172272
+Friday,Dinner,Credit,,Yadult,No,No,No,No,10.16,11.66,1.5,0.147637795
+Friday,Dinner,Credit,,Yadult,No,No,No,No,9.63,11.63,2,0.20768432
+Friday,Dinner,Credit,,Yadult,No,No,No,No,22.36,26,3.64,0.162790698
+Friday,Dinner,Credit,,Yadult,No,No,No,No,9.63,11.13,1.5,0.15576324
+Friday,Dinner,Credit,,Yadult,No,No,No,No,13.37,16.37,3,0.224382947
+Friday,Dinner,Cash,,Yadult,No,No,No,No,9.63,12,2.37,0.246105919
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,42.16,47.16,5,0.118595825
+Friday,Dinner,Credit,,Middle,No,No,No,No,51.74,65,13.26,0.256281407
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,105.57,125.57,20,0.18944776
+Friday,Dinner,Cash,,SenCit,No,No,No,No,46.46,53.04,6.58,0.141627206
+Friday,Dinner,Cash,,Middle,No,No,Yes,No,44.05,52,7.95,0.180476731
+Saturday,Dinner,Credit,,Middle,No,No,No,No,32.77,37.77,5,0.152578578
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,24.17,28.97,4.8,0.198593297
+Saturday,Dinner,Cash,,Middle,No,No,Yes,No,29.08,31.5,2.42,0.083218707
+Saturday,Dinner,Credit/CashTip,,Middle,No,No,No,No,48.92,53.92,5,0.102207686
+Saturday,Dinner,Credit,,Middle,No,No,No,No,35.75,40.75,5,0.13986014
+Saturday,Dinner,Credit,,,No,No,No,No,52.74,60,7.26,0.137656428
+Saturday,Dinner,Cash,,Middle,No,No,Yes,No,36.81,40.25,3.44,0.093452866
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,33.99,43,9.01,0.265077964
+Saturday,Dinner,Credit,,Middle,No,No,No,No,29.62,34.62,5,0.168804862
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,71.37,76.37,5,0.070057447
+Saturday,Dinner,Credit,,Middle,No,No,No,No,44.61,53.53,8.92,0.199955167
+Saturday,Dinner,Credit,,Middle,No,No,No,No,43.95,43.95,0,0
+Saturday,Dinner,Credit,,SenCit,No,No,No,No,51.15,61,9.85,0.19257087
+Saturday,Dinner,Cash,,Middle,No,No,No,No,36.69,43,6.31,0.171981466
+Saturday,Dinner,Credit/CashTip,,Middle,No,No,Yes,No,39.69,45.69,6,0.15117158
+Saturday,Dinner,Cash,,Yadult,No,No,No,No,26.54,29.55,3.01,0.113413715
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,35.62,43.62,8,0.224592925
+Saturday,Late Night,Cash,,Yadult,No,No,No,No,58.22,63.23,5.01,0.086052903
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,5.77,6.64,0.87,0.150779896
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,4.82,5.82,1,0.20746888
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,13.36,16.36,3,0.224550898
+Saturday,Late Night,Cash,,Yadult,No,No,No,No,3.74,6.74,3,0.802139037
+Saturday,Late Night,Cash,,Yadult,No,No,No,No,8.56,11,2.44,0.285046729
+Saturday,Late Night,Credit,,Middle,No,No,Yes,No,22.5,27.5,5,0.222222222
+Sunday,Lunch,Credit,,Middle,No,No,Yes,No,30.78,33.78,3,0.097465887
+Sunday,Lunch,Credit,,Middle,No,No,Yes,No,50.39,60.39,10,0.198452074
+Sunday,Lunch,Credit,,Middle,No,No,No,No,21.4,24.4,3,0.140186916
+Sunday,Lunch,Cash,,SenCit,No,No,No,No,20.01,23.01,3,0.149925037
+Sunday,Lunch,Credit,,Middle,No,No,Yes,No,48.42,58.42,10,0.206526229
+Sunday,Lunch,Credit,,Middle,No,No,No,No,25.02,30,4.98,0.199040767
+Sunday,Lunch,Credit,,Middle,No,No,No,No,26.52,30,3.48,0.131221719
+Sunday,Lunch,Credit,,SenCit,No,No,No,No,11.56,14.06,2.5,0.216262976
+Sunday,Lunch,Cash,,Middle,No,No,Yes,No,8.9,10,1.1,0.123595506
+Sunday,Lunch,Credit,,Middle,No,No,No,No,12.92,15.92,3,0.232198142
+Sunday,Lunch,Cash,,Yadult,No,No,No,No,50.52,56,5.48,0.108471892
+Sunday,Lunch,Cash,,Middle,No,No,No,No,17.97,20.51,2.54,0.141346689
+Sunday,Lunch,Cash,,SenCit,Yes,No,No,No,26.73,32.73,6,0.224466891
+Sunday,Lunch,Credit/CashTip,,Middle,No,No,No,No,27.16,32.16,5,0.184094256
+Sunday,Lunch,Credit,,Middle,No,No,No,No,78.03,94,15.97,0.204664872
+Sunday,Dinner,Credit,,Middle,No,No,No,No,31.1,37,5.9,0.189710611
+Sunday,Dinner,Cash,,SenCit,No,No,No,No,23.1,26.6,3.5,0.151515152
+Sunday,Dinner,Credit,,Middle,No,No,No,No,39.14,45.14,6,0.153295861
+Sunday,Dinner,Credit,,Middle,Yes,No,No,No,55.87,63.87,8,0.143189547
+Sunday,Dinner,Credit,,Middle,No,No,Yes,No,36.18,42.18,6,0.165837479
+Sunday,Dinner,Credit,,Middle,Yes,No,Yes,No,34.55,38.55,4,0.11577424
+Sunday,Dinner,Credit,,Middle,No,No,Yes,No,35.4,41.4,6,0.169491525
+Sunday,Dinner,Credit,,Middle,No,No,No,No,42.48,47.98,5.5,0.129472693
+Sunday,Dinner,Credit,,Middle,No,No,Yes,No,59.57,71.57,12,0.20144368
+Sunday,Dinner,Credit/CashTip,,SenCit,No,No,No,No,81.04,92.04,11,0.135735439
+Sunday,Dinner,Credit/CashTip,,Middle,No,No,No,No,39.58,42.58,3,0.075795856
+Sunday,Dinner,Credit/CashTip,,Yadult,No,No,Yes,No,33.28,40.28,7,0.210336538
+Sunday,Dinner,Credit,,Middle,No,No,Yes,No,35.07,38,2.93,0.083547191
+Sunday,Dinner,Credit,,Middle,No,No,Yes,No,47.08,52.08,5,0.106202209
+Sunday,Late Night,Credit,,Middle,No,No,No,No,16.04,19.04,3,0.187032419
+Thursday,Dinner,Cash,,SenCit,No,No,No,No,38.28,42,3.72,0.097178683
+Thursday,Dinner,Credit,,SenCit,No,No,No,No,36.79,43.79,7,0.190269095
+Thursday,Dinner,Credit,,Middle,No,No,No,No,42.46,48.74,6.28,0.14790391
+Thursday,Dinner,Credit,,Middle,No,No,Yes,No,46,53,7,0.152173913
+Thursday,Dinner,Credit,,SenCit,No,No,No,No,23.75,27.75,4,0.168421053
+Thursday,Dinner,Cash,,Yadult,No,No,Yes,No,56.2,63,6.8,0.120996441
+Thursday,Dinner,Cash,,Middle,No,Yes,Yes,No,85,95,10,0.117647059
+Thursday,Dinner,Credit,,Middle,No,No,No,No,38.71,45,6.29,0.162490313
+Thursday,Dinner,Credit,,SenCit,No,No,Yes,No,15.6,18.1,2.5,0.16025641
+Thursday,Dinner,Cash,,Yadult,No,No,No,No,14.21,17.21,3,0.21111893
+Thursday,Dinner,Credit,,Middle,No,No,Yes,No,65.37,80.37,15,0.229463056
+Thursday,Dinner,Credit,,Yadult,No,No,Yes,No,57.41,62.41,5,0.087092841
+Friday,Dinner,Credit,,SenCit,Yes,No,No,No,34.99,39.99,5,0.142897971
+Friday,Dinner,Cash,,SenCit,No,No,No,No,22.8,26,3.2,0.140350877
+Friday,Dinner,Credit,,SenCit,No,No,Yes,No,39.34,45.34,6,0.152516523
+Friday,Dinner,Cash,,Middle,No,No,Yes,No,58.27,66.27,8,0.137291917
+Friday,Dinner,Credit,,Middle,No,No,No,No,24.62,28.62,4,0.162469537
+Friday,Dinner,Cash,,Middle,No,No,No,No,32.53,37,4.47,0.13741162
+Friday,Dinner,Cash,,Yadult,No,No,No,No,29.2,34,4.8,0.164383562
+Friday,Dinner,Cash,,Yadult,No,No,No,No,12.19,15,2.81,0.230516817
+Friday,Dinner,Cash,,Middle,No,No,No,No,26.54,31,4.46,0.168048229
+Friday,Dinner,Credit,,Middle,No,No,No,No,28.45,32.75,4.3,0.151142355
+Friday,Dinner,Cash,,SenCit,No,No,No,No,24.82,30,5.18,0.208702659
+Friday,Dinner,Cash,,Middle,No,No,Yes,No,50.4,58,7.6,0.150793651
+Friday,Dinner,Credit,,SenCit,No,No,No,No,30.27,35.27,5,0.165180046
+Friday,Dinner,Credit/CashTip,,SenCit,No,No,No,No,44.27,48.27,4,0.090354642
+Friday,Dinner,Cash,,Middle,No,No,Yes,No,14.56,18.56,4,0.274725275
+Friday,Dinner,Credit,,Middle,No,No,No,No,35.09,38.09,3,0.085494443
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,41.1,49.1,8,0.194647202
+Friday,Dinner,Cash,,Yadult,No,No,No,No,36.17,42.17,6,0.165883329
+Friday,Dinner,Credit,,Middle,No,No,No,No,12.39,13.39,1,0.08071025
+Friday,Dinner,Credit,,Middle,No,No,No,No,28.45,32.75,4.3,0.151142355
+Saturday,Dinner,Credit,,SenCit,No,No,Yes,No,38.81,46.81,8,0.20613244
+Saturday,Dinner,Credit,,Middle,No,No,No,No,22.49,27.49,5,0.222321032
+Saturday,Dinner,Credit,,Middle,No,No,No,No,23.56,28.56,5,0.212224109
+Saturday,Dinner,Credit,,Middle,No,No,No,No,22.9,25.9,3,0.131004367
+Saturday,Dinner,Credit,,Middle,No,No,No,No,18.07,23,4.93,0.272827892
+Saturday,Dinner,Credit,,Middle,No,No,No,No,18.07,23.07,5,0.276701716
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,21.42,26.42,5,0.233426704
+Saturday,Dinner,Cash,,Yadult,No,No,No,No,17.97,19.97,2,0.111296605
+Saturday,Late Night,Credit,,Middle,No,No,No,No,15.56,18,2.44,0.156812339
+Saturday,Late Night,Credit,,Middle,No,No,No,No,13.8,16.8,3,0.217391304
+Saturday,Late Night,Cash,,Middle,No,No,No,No,1.7,2,0.3,0.176470588
+Saturday,Late Night,Credit,,Middle,No,No,No,No,8.34,10,1.66,0.199040767
+Saturday,Late Night,Credit,,Middle,No,No,No,No,12.77,15.27,2.5,0.195771339
+Saturday,Late Night,Credit,,Middle,No,No,No,No,10.7,13.2,2.5,0.23364486
+Saturday,Late Night,Cash,,Middle,No,No,No,No,4.98,7,2.02,0.40562249
+Saturday,Late Night,Credit,,Middle,No,No,No,No,4.98,6.98,2,0.401606426
+Saturday,Late Night,Credit,,Middle,No,No,No,No,11.87,13.37,1.5,0.126368997
+Saturday,Late Night,Credit,,Middle,No,No,No,No,15.56,18,2.44,0.156812339
+Saturday,Late Night,Cash,,Yadult,No,No,No,No,18.13,22,3.87,0.213458356
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,4.82,5.82,1,0.20746888
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,10.71,14,3.29,0.307189542
+Saturday,Late Night,Credit,,Yadult,No,No,No,No,8.03,9.5,1.47,0.183063512
+Saturday,Late Night,Cash,,Yadult,No,No,Yes,No,12.38,17,4.62,0.373182553
+Saturday,Late Night,Credit,,Yadult,No,No,Yes,No,11.47,13.47,2,0.174367916
+Saturday,Late Night,Credit,,Yadult,No,No,Yes,No,7.83,9.83,2,0.255427842
+Saturday,Late Night,Credit,,Yadult,No,No,Yes,No,13.99,17,3.01,0.215153681
+Saturday,Late Night,Credit,,Yadult,No,No,Yes,No,17.76,21.76,4,0.225225225
+Saturday,Late Night,Cash,,Yadult,No,No,Yes,No,16.77,20,3.23,0.192605844
+Saturday,Late Night,Cash,,Yadult,No,No,No,No,16.8,18,1.2,0.071428571
+Saturday,Late Night,Credit/CashTip,,Yadult,No,No,Yes,No,35.7,43.7,8,0.224089636
+Saturday,Dinner,Credit/CashTip,,SenCit,No,No,No,No,62.41,74.41,12,0.192276879
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,54.4,65.4,11,0.202205882
+Saturday,Dinner,Credit,,SenCit,No,No,Yes,No,164.13,194.13,30,0.182781941
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,33.28,39.28,6,0.180288462
+Saturday,Dinner,Credit/CashTip,,Middle,No,No,No,No,36.26,41.26,5,0.137892995
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,33.44,40,6.56,0.196172249
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,39.15,42.15,3,0.076628352
+Saturday,Dinner,Credit,,SenCit,No,No,Yes,No,35.83,41.33,5.5,0.153502651
+Saturday,Dinner,Cash,,Middle,No,No,Yes,No,41.19,48,6.81,0.165331391
+Saturday,Dinner,Cash,,Middle,No,No,No,No,49,54,5,0.102040816
+Sunday,Lunch,Credit,,SenCit,No,No,Yes,No,26.54,32,5.46,0.205727204
+Sunday,Lunch,Credit,,SenCit,No,No,Yes,No,12.84,15.84,3,0.23364486
+Sunday,Lunch,Credit,,Middle,No,No,No,No,38.73,44.73,6,0.154918668
+Sunday,Lunch,Credit,,Middle,Yes,No,No,No,51.8,58.8,7,0.135135135
+Sunday,Lunch,Cash,,SenCit,Yes,No,Yes,No,25.78,29,3.22,0.124903026
+Sunday,Lunch,Credit,,SenCit,No,No,No,No,22.47,26.47,4,0.178015131
+Sunday,Lunch,Cash,,Middle,No,No,No,No,15.52,18.52,3,0.193298969
+Sunday,Lunch,Credit,,Middle,No,No,No,No,55.83,66.83,11,0.197026688
+Sunday,Lunch,Credit,,Middle,No,No,No,No,19.26,23.26,4,0.20768432
+Sunday,Lunch,Cash,,Yadult,No,No,No,No,27.6,34,6.4,0.231884058
+Sunday,Lunch,Credit,,SenCit,No,No,Yes,No,17.89,21,3.11,0.173840134
+Sunday,Lunch,Credit,,Middle,No,No,No,No,21.42,26.42,5,0.233426704
+Sunday,Lunch,Credit,,SenCit,Yes,No,No,No,21.61,25,3.39,0.156871819
+Sunday,Lunch,Credit/CashTip,,Middle,No,No,No,No,33.48,38.48,5,0.149342891
+Sunday,Lunch,Cash,,Yadult,No,No,No,No,28.14,32.14,4,0.142146411
+Sunday,Dinner,Cash,,SenCit,No,No,Yes,No,29.25,33,3.75,0.128205128
+Sunday,Dinner,Cash,,Middle,Yes,No,Yes,No,34.92,41,6.08,0.174112257
+Sunday,Dinner,Cash,,Middle,No,No,Yes,No,29.29,33,3.71,0.126664391
+Sunday,Dinner,Cash,,Yadult,No,No,Yes,No,47.15,49.15,2,0.042417815
+Sunday,Dinner,Credit,,Middle,No,No,No,No,83.13,99.13,16,0.192469626
+Sunday,Dinner,Credit/CashTip,,Middle,No,No,No,No,32.3,38.3,6,0.185758514
+Sunday,Dinner,Credit,,SenCit,No,No,No,No,36.07,45,8.93,0.247574161
+Sunday,Dinner,Credit,,SenCit,No,No,Yes,No,66.72,76.72,10,0.149880096
+Sunday,Dinner,Cash,,Middle,No,No,Yes,No,29.39,33.89,4.5,0.153113304
+Sunday,Dinner,Credit/CashTip,,SenCit,No,No,Yes,No,36.65,41.65,5,0.136425648
+Monday,Dinner,Cash,,Middle,Yes,No,No,No,42.41,47,4.59,0.108229191
+Monday,Dinner,Credit,,Middle,No,No,No,No,14.73,17,2.27,0.154107264
+Monday,Dinner,Credit,,Middle,Yes,No,Yes,No,54.44,62.44,8,0.146950771
+Monday,Dinner,Credit/CashTip,,Middle,No,No,No,No,66.59,76.59,10,0.150172699
+Monday,Dinner,Credit,,Middle,No,No,No,No,54.55,62.55,8,0.146654445
+Monday,Dinner,Credit,,Yadult,No,No,No,No,11.98,13.98,2,0.166944908
+Monday,Dinner,Credit,,Yadult,No,No,No,No,5.35,6.35,1,0.186915888
+Monday,Dinner,Credit,,Middle,No,No,No,No,23.77,28.77,5,0.21034918
+Monday,Dinner,Credit,,Middle,No,Yes,Yes,No,42.28,48.28,6,0.141911069
+Monday,Dinner,Credit,,Yadult,No,No,No,No,37.88,41.88,4,0.105596621
+Tuesday,Lunch,Credit,,Middle,No,No,No,No,19.45,22,2.55,0.131105398
+Tuesday,Lunch,Credit,,Middle,No,No,No,No,45.44,52.44,7,0.154049296
+Tuesday,Lunch,Credit,,Middle,No,No,No,No,12.19,14,1.81,0.148482363
+Tuesday,Lunch,Cash,,Yadult,No,No,No,No,26.54,30,3.46,0.130369254
+Tuesday,Lunch,Cash,,Middle,No,No,No,No,12.19,15,2.81,0.230516817
+Tuesday,Lunch,Credit,,Middle,No,No,No,No,12.84,15,2.16,0.168224299
+Tuesday,Lunch,Cash,,Middle,No,No,No,No,27.82,31.82,4,0.143781452
+Tuesday,Lunch,Cash,,SenCit,No,No,No,No,13.79,16,2.21,0.160261059
+Tuesday,Lunch,Cash,,SenCit,No,No,No,No,28.33,32.33,4,0.141193082
+Tuesday,Lunch,Credit,,Middle,No,No,No,No,21.81,27.81,6,0.275103164
+Tuesday,Dinner,Credit/CashTip,,Yadult,No,No,No,No,15.62,17.62,2,0.128040973
+Tuesday,Dinner,Credit,,Middle,No,No,No,No,15.5,17.5,2,0.129032258
+Tuesday,Dinner,Credit,,Middle,No,No,No,No,33.8,39,5.2,0.153846154
+Tuesday,Dinner,Cash,,Middle,No,No,No,No,23.98,27,3.02,0.125938282
+Tuesday,Dinner,Cash,,Yadult,No,No,Yes,No,31.01,37,5.99,0.193163496
+Tuesday,Dinner,Credit,,Middle,Yes,No,Yes,No,31.08,37.05,5.97,0.192084942
+Tuesday,Dinner,Credit,,SenCit,No,Yes,No,No,60.14,70.14,10,0.166278683
+Tuesday,Dinner,Cash,,Middle,No,No,No,No,31.14,39.14,8,0.256904303
+Tuesday,Dinner,Credit,,Middle,No,No,No,No,56.91,66.91,10,0.175716043
+Tuesday,Dinner,Credit,,SenCit,No,No,No,No,12.31,15.31,3,0.243704305
+Tuesday,Dinner,Credit,,Middle,No,Yes,No,Yes,44.84,54.84,10,0.223015165
+Wednesday,Dinner,Credit,,Middle,No,Yes,Yes,No,65.49,74.49,9,0.137425561
+Wednesday,Dinner,Credit,,Middle,Yes,No,Yes,No,33.37,39,5.63,0.168714414
+Wednesday,Dinner,Credit,,Yadult,No,No,Yes,No,24.12,26.12,2,0.08291874
+Wednesday,Dinner,Cash,,Yadult,No,No,No,No,15.62,17.62,2,0.128040973
+Wednesday,Dinner,Credit,,Middle,No,No,Yes,No,33.19,35,1.81,0.054534498
+Wednesday,Dinner,Credit,,SenCit,No,No,Yes,No,31.38,35,3.62,0.115360102
+Wednesday,Dinner,Cash,,Middle,No,No,No,Yes,55.85,65,9.15,0.163831692
+Friday,Dinner,Credit,,SenCit,No,No,No,No,27.71,33.71,6,0.216528329
+Friday,Dinner,Cash,,Yadult,No,No,Yes,No,37.18,42,4.82,0.129639591
+Friday,Dinner,Cash,,Middle,No,No,Yes,No,43.89,51,7.11,0.161995899
+Friday,Dinner,Credit,,Middle,No,No,No,No,44.89,49.89,5,0.111383382
+Friday,Dinner,Credit,,Middle,No,No,No,No,52.49,64.99,12.5,0.238140598
+Friday,Dinner,Credit,,Middle,No,No,No,No,42.14,49.14,7,0.166112957
+Friday,Dinner,Credit,,Middle,No,No,No,No,31.24,36,4.76,0.152368758
+Friday,Dinner,Credit,,Yadult,No,No,Yes,No,48.72,53.72,5,0.102627258
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,31.78,36.78,5,0.157331655
+Friday,Dinner,Credit,,Middle,No,No,No,No,22.47,25.47,3,0.133511348
+Friday,Dinner,Credit,,Middle,No,Yes,No,No,14.33,20,5.67,0.395673412
+Friday,Dinner,Credit,,SenCit,No,No,No,No,29.52,33.52,4,0.135501355
+Friday,Dinner,Credit,,Middle,No,No,Yes,No,43.9,51.9,8,0.182232346
+Saturday,Dinner,Cash,,Middle,No,No,No,No,46.02,52,5.98,0.129943503
+Saturday,Dinner,Credit,,Middle,No,No,No,No,64.69,77.69,13,0.200958417
+Saturday,Dinner,Cash,,Middle,Yes,No,No,No,42.79,49.79,7,0.163589624
+Saturday,Dinner,Credit,,SenCit,No,No,No,No,58.54,70.54,12,0.204988042
+Saturday,Dinner,Cash,,Middle,No,No,Yes,No,44.08,50,5.92,0.13430127
+Saturday,Dinner,Credit,,Middle,No,No,Yes,No,43.21,50.21,7,0.161999537
+Saturday,Dinner,Credit,,Middle,No,No,No,No,23.33,28.33,5,0.214316331
+Saturday,Dinner,Credit,,Middle,Yes,No,No,No,28.24,32.24,4,0.141643059
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,31.62,35.62,4,0.126502214
+Saturday,Dinner,N/A,,Middle,Yes,Yes,No,No,40.3,50,9.7,0.240694789
+Saturday,Dinner,Credit,,Yadult,Yes,No,No,No,28.46,31.46,3,0.105411103
+Saturday,Dinner,Credit,,SenCit,Yes,Yes,No,No,13.37,15.37,2,0.149588631
+Saturday,Dinner,Cash,,SenCit,No,No,No,No,48.14,55,6.86,0.142501039
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,18.2,21.8,3.6,0.197802198
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,29.95,33.95,4,0.133555927
+Saturday,Dinner,Credit,,Yadult,No,No,Yes,No,23.22,25,1.78,0.076658053
+Saturday,Dinner,Credit,,Yadult,No,No,No,No,11.24,14,2.76,0.245551601
+Saturday,Dinner,Credit,,Yadult,No,No,Yes,No,28.77,32.1,3.33,0.115745568
+Saturday,Dinner,Cash,,Yadult,No,No,No,No,24.38,28.38,4,0.164068909
+Saturday,Dinner,Credit,,SenCit,No,No,Yes,No,40.12,47,6.88,0.171485543
+Saturday,Dinner,Credit,,Middle,No,No,No,No,49.53,60,10.47,0.211387038
+Saturday,Dinner,Cash,,Middle,No,No,No,No,23.98,28,4.02,0.1676397
+Saturday,Dinner,Credit,1,Yadult,No,No,No,No,17.01,20,2.99,0.175778954
+Saturday,Dinner,Credit,1,Yadult,No,No,No,No,14.23,16.23,2,0.140548138
+Saturday,Dinner,Credit,,Middle,Yes,No,No,No,27.18,32.18,5,0.183958793
+Saturday,Dinner,Credit,,Middle,No,No,No,No,49.21,59.21,10,0.20321073
+Tuesday,Dinner,Credit,1,SenCit,No,No,No,No,20.97,25.97,5,0.238435861
+Tuesday,Dinner,Credit,3,Middle,No,No,No,No,20.87,24.87,4,0.191662674
+Tuesday,Dinner,Cash,2,SenCit,No,No,No,No,34.66,45,10.34,0.298326601
+Tuesday,Dinner,Credit,2,Middle,No,No,No,No,25.15,30,4.85,0.192842942
+Tuesday,Dinner,Cash,4,Yadult,No,No,No,No,48.17,53.17,5,0.103799045
+Tuesday,Dinner,Credit,3,Middle,No,Yes,No,No,22.66,26.66,4,0.176522507
+Tuesday,Dinner,Cash,2,Middle,No,No,No,No,25.25,30.25,5,0.198019802
+Tuesday,Dinner,Cash,1,SenCit,No,No,No,No,9.42,11,1.58,0.167728238
+Tuesday,Dinner,Cash,2,Middle,No,No,Yes,No,41.56,48,6.44,0.154956689
+Tuesday,Dinner,Cash,2,Yadult,No,No,No,No,38.15,49.15,11,0.288335518
+Tuesday,Dinner,Cash,1,SenCit,No,No,No,No,9.09,10.84,1.75,0.192519252
+Tuesday,Dinner,Cash,1,SenCit,No,No,No,No,11.77,13.77,2,0.169923534
+Tuesday,Dinner,Cash,1,Middle,No,No,No,No,13.47,16,2.53,0.187824796
+Tuesday,Dinner,Credit,1,Middle,No,No,Yes,No,18.38,21.38,3,0.163220892
+Tuesday,Dinner,Credit,1,Middle,No,No,Yes,No,18.17,23.17,5,0.275178866
+Tuesday,Dinner,Cash,2,Middle,No,No,No,No,28.56,34.56,6,0.210084034
+Tuesday,Dinner,Credit,3,Middle,No,No,No,No,23.42,27.42,4,0.170794193
+Tuesday,Dinner,Cash,2,Middle,No,No,Yes,No,44.91,50,5.09,0.113337787
+Tuesday,Dinner,Credit,2,Middle,No,No,Yes,No,36.64,42.14,5.5,0.15010917
+Tuesday,Dinner,Cash,3,Yadult,No,No,Yes,No,29.14,32.14,3,0.10295127
+Tuesday,Late Night,Cash,1,Yadult,No,No,No,No,4.82,5.5,0.68,0.141078838
+Tuesday,Late Night,Cash,1,Yadult,No,No,No,No,4.82,5,0.18,0.037344398
+Tuesday,Late Night,Cash,1,Yadult,No,No,No,No,4.82,6,1.18,0.244813278
+Tuesday,Late Night,Credit,1,Yadult,No,No,No,No,4.82,5.5,0.68,0.141078838
+Tuesday,Late Night,Cash,1,Yadult,No,No,No,No,4.82,5,0.18,0.037344398
+Tuesday,Late Night,Credit,1,Yadult,No,No,No,No,3.74,4.74,1,0.267379679
+Tuesday,Late Night,Credit,1,Yadult,No,No,No,No,4.82,5.82,1,0.20746888
+Tuesday,Late Night,Cash,8,Middle,Yes,Yes,Yes,Yes,85.54,105,19.46,0.227495908
+Tuesday,Late Night,Cash,1,Yadult,No,No,No,No,4.82,5.82,1,0.20746888
+Tuesday,Late Night,Credit,1,Yadult,No,No,Yes,No,8.1,10,1.9,0.234567901
+Tuesday,Late Night,Credit,1,Yadult,No,No,Yes,No,8.13,9.63,1.5,0.184501845
+Tuesday,Late Night,Credit,2,SenCit,No,No,No,No,12.24,16.24,4,0.326797386
+Tuesday,Late Night,Credit,1,SenCit,No,No,No,No,3.63,5.63,2,0.550964187
+Tuesday,Late Night,Credit,2,SenCit,No,No,Yes,No,11.49,13,1.51,0.131418625
+Tuesday,Late Night,Cash,2,SenCit,No,No,Yes,No,28.33,32,3.67,0.129544652
+Wednesday,Dinner,Credit,2,Middle,No,No,No,No,26.54,31.54,5,0.188394876
+Wednesday,Dinner,Credit,3,Middle,No,No,No,No,42.88,50.88,8,0.186567164
+Wednesday,Dinner,Credit,2,Middle,No,Yes,Yes,No,47.39,52.39,5,0.105507491
+Wednesday,Dinner,Cash,3,Middle,No,No,No,No,42.26,47.76,5.5,0.130146711
+Wednesday,Dinner,Credit,4,Middle,No,Yes,Yes,No,69.52,79.52,10,0.143843498
+Wednesday,Dinner,Credit,7,SenCit,No,No,No,No,85.93,100.93,15,0.174560689
+Saturday,Lunch,Credit,2,Middle,No,No,No,No,23.98,27.98,4,0.166805671
+Saturday,Lunch,Credit,2,Middle,No,No,No,No,32.09,36.09,4,0.124649423
+Saturday,Lunch,Cash,1,SenCit,No,No,No,No,15.4,19,3.6,0.233766234
+Saturday,Lunch,Credit/CashTip,2,Yadult,No,No,No,No,29.52,33.52,4,0.135501355
+Saturday,Lunch,Credit,4,Middle,No,No,No,No,41.63,47.63,6,0.144126832
+Saturday,Lunch,Cash,2,SenCit,Yes,Yes,No,No,21.2,25.29,4.09,0.192924528
+Saturday,Lunch,Credit,2,Yadult,No,No,No,No,32.08,37.08,5,0.155860349
+Saturday,Lunch,Credit,3,Middle,No,No,Yes,No,42.58,49.58,7,0.16439643
+Saturday,Lunch,Cash,3,Middle,No,No,No,No,48.86,57,8.14,0.166598445
+Saturday,Lunch,Credit,4,Middle,No,No,No,No,36.46,43,6.54,0.179374657
+Saturday,Lunch,Cash,2,Middle,No,No,No,No,33.49,38,4.51,0.134667065
+Saturday,Lunch,Credit,2,SenCit,No,Yes,Yes,No,29.59,35.59,6,0.202771206
+Saturday,Lunch,Cash,2,SenCit,Yes,No,No,No,21.2,24.29,3.09,0.145754717
+Saturday,Lunch,Credit,2,Middle,No,No,No,No,30.28,32.38,2.1,0.069352708
+Saturday,Lunch,Credit,2,Middle,No,No,No,No,34.02,40,5.98,0.175778954
+Saturday,Lunch,Credit,5,Middle,No,No,No,No,83.13,98.13,15,0.180440274
+Saturday,Lunch,Cash,2,Middle,Yes,No,No,No,32.42,40,7.58,0.233806292
+Saturday,Lunch,Credit,2,Yadult,No,No,Yes,No,24.7,30,5.3,0.214574899
+Saturday,Dinner,Credit,2,SenCit,No,No,Yes,No,44.39,48.39,4,0.090110385
+Saturday,Dinner,Credit,3,Middle,No,Yes,Yes,No,54.88,64.88,10,0.182215743
+Saturday,Dinner,Cash,5,Middle,No,Yes,No,No,68.33,80,11.67,0.170788819
+Saturday,Dinner,Cash,2,Yadult,No,No,No,No,23.75,28,4.25,0.178947368
+Saturday,Dinner,Credit,3,Middle,No,No,No,No,44.55,52.55,8,0.179573513
+Saturday,Dinner,Credit,2,Middle,No,No,Yes,No,30.9,36.9,6,0.194174757
+Saturday,Dinner,Credit/CashTip,3,Middle,No,No,Yes,No,34.81,38.81,4,0.114909509
+Saturday,Dinner,Cash,2,SenCit,No,No,No,No,23.98,29,5.02,0.209341118
+Saturday,Dinner,Credit,4,Middle,No,No,Yes,No,88.22,104.22,16,0.18136477
+Saturday,Dinner,Cash,2,Middle,No,No,Yes,No,34.8,42,7.2,0.206896552
+Saturday,Dinner,Credit,3,Middle,No,No,No,No,34.68,40.68,6,0.173010381
+Tuesday,Dinner,Cash,1,Middle,Yes,No,No,No,13.15,16.15,3,0.228136882
+Tuesday,Dinner,Credit,1,Middle,No,No,No,No,22.69,24.69,2,0.088144557
+Tuesday,Dinner,Credit,3,SenCit,No,No,No,Yes,46.87,56.87,10,0.213356091
+Tuesday,Dinner,Cash,2,Middle,No,No,No,No,32.4,36.4,4,0.12345679
+Tuesday,Dinner,Cash,2,Middle,Yes,No,No,No,26.54,30.54,4,0.150715901
+Tuesday,Dinner,Credit,2,Middle,No,No,Yes,No,19.3,23.3,4,0.207253886
+Tuesday,Dinner,Cash,4,Middle,No,No,Yes,No,51.16,60,8.84,0.172791243
+Tuesday,Dinner,Cash,2,Middle,No,No,No,No,26.54,31,4.46,0.168048229
+Tuesday,Dinner,Credit,1,Yadult,No,No,No,No,12.08,12.08,0,0
+Tuesday,Dinner,Cash,1,Yadult,No,No,No,No,12.19,13.59,1.4,0.114848236
+Tuesday,Dinner,Credit,2,Middle,No,No,Yes,No,45.88,53.88,8,0.174367916
+Thursday,Dinner,Credit,1,Yadult,No,No,No,No,13.1,15.6,2.5,0.190839695
+Thursday,Dinner,Credit,1,Yadult,No,No,No,No,13.11,15.61,2.5,0.190694127
+Thursday,Dinner,Cash,2,SenCit,No,No,Yes,No,26.88,30,3.12,0.116071429
+Thursday,Dinner,Credit,2,Middle,No,No,No,No,26.54,31.54,5,0.188394876
+Thursday,Dinner,Credit,1,Middle,No,No,Yes,No,21.61,24.61,3,0.138824618
+Thursday,Dinner,Cash,1,SenCit,No,No,No,No,9.63,11.63,2,0.20768432
+Thursday,Dinner,Credit,6,SenCit,No,No,No,No,68.49,78.49,10,0.146006716
+Thursday,Dinner,Credit,4,Middle,No,No,Yes,No,59.05,65.05,6,0.101608806
+Thursday,Dinner,Credit/CashTip,2,Middle,No,No,No,No,26.54,31.54,5,0.188394876
+Thursday,Dinner,Credit/CashTip,2,Yadult,No,No,Yes,Yes,17.61,22.61,5,0.283929585
+Thursday,Dinner,Credit,1,SenCit,No,No,No,No,19.68,25.68,6,0.304878049
+Thursday,Dinner,Cash,2,SenCit,Yes,No,No,No,25.36,32,6.64,0.261829653
+Thursday,Dinner,Credit,4,Middle,Yes,Yes,Yes,No,46.04,52,5.96,0.12945265
+Thursday,Dinner,Credit,3,SenCit,No,No,Yes,Yes,60.58,69.58,9,0.148563882
+Thursday,Dinner,Credit,2,Middle,No,No,No,No,28.46,34,5.54,0.194659171
+Thursday,Dinner,Credit,2,Middle,No,Yes,No,No,24.18,28.18,4,0.165425972
+Thursday,Dinner,Credit,1,SenCit,No,No,No,No,11.56,13.25,1.69,0.146193772
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,4.98,5,0.02,0.004016064
+Friday,Late Night,Cash,2,Yadult,No,No,No,No,10.98,12.98,2,0.182149362
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,13.95,13.95,0,0
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,2.14,2.14,0,0
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,2.13,3,0.87,0.408450704
+Friday,Late Night,Cash,1,Middle,No,No,Yes,No,15.53,20,4.47,0.287830006
+Friday,Late Night,Credit,1,Yadult,No,No,No,No,21.65,21.65,0,0
+Friday,Late Night,Credit,2,Middle,No,No,Yes,No,15.66,18.66,3,0.191570881
+Friday,Late Night,Credit,1,Middle,No,No,No,No,13.49,15,1.51,0.111934766
+Friday,Late Night,Credit,2,Middle,No,No,No,No,14.19,16,1.81,0.127554616
+Friday,Late Night,Credit,3,Middle,No,No,Yes,No,25.4,29.4,4,0.157480315
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,7.91,10,2.09,0.264222503
+Friday,Late Night,Cash,1,Yadult,No,No,No,No,2.13,3,0.87,0.408450704
+Friday,Late Night,Credit,1,Yadult,No,No,No,No,6.52,10,3.48,0.533742331
+Friday,Late Night,Credit,3,Middle,No,No,No,No,14.61,18.61,4,0.273785079
+Friday,Late Night,Cash,6,Middle,Yes,No,No,No,29.18,34.18,5,0.17135024
+Friday,Late Night,Credit,2,Middle,No,No,Yes,No,23.6,29,5.4,0.228813559
+Friday,Late Night,Cash,1,Middle,No,No,No,No,7.38,7.38,0,0
+Friday,Late Night,Credit,1,Middle,No,No,No,No,17.55,19.55,2,0.113960114
+Friday,Late Night,Cash,3,Middle,No,No,No,No,43.87,50,6.13,0.139731023
+Saturday,Dinner,Credit,3,Middle,No,No,No,No,32.57,38.57,6,0.184218606
+Saturday,Dinner,Cash,4,Middle,No,No,No,No,31.71,40,8.29,0.261431725
+Saturday,Dinner,Cash,2,Middle,No,No,No,No,23.98,28,4.02,0.1676397
+Saturday,Dinner,Credit,4,Middle,No,No,No,No,57.45,66.5,9.05,0.157528285
+Saturday,Dinner,Credit,3,Middle,Yes,No,No,No,31.45,34.45,3,0.095389507
+Saturday,Dinner,Credit,2,Yadult,No,No,No,No,30.82,36,5.18,0.16807268
+Saturday,Dinner,Credit,2,Middle,No,No,No,No,30.82,35.82,5,0.162232317
+Saturday,Dinner,Credit,4,Middle,No,No,Yes,No,63.71,72.71,9,0.141265108
+Saturday,Dinner,Credit,2,Middle,No,No,Yes,No,27.09,32,4.91,0.181247693
+Saturday,Dinner,Credit,2,Middle,No,No,Yes,No,28.24,33.24,5,0.177053824
+Saturday,Dinner,Credit,2,Middle,No,No,No,No,28.02,32.02,4,0.142755175
+Saturday,Dinner,Cash,3,Middle,No,No,No,No,32.52,36,3.48,0.10701107
+Saturday,Dinner,Credit,4,Middle,No,No,Yes,No,57.86,67.86,10,0.172830971
+Saturday,Dinner,Credit,2,SenCit,Yes,No,No,No,39.16,46.16,7,0.17875383
+Saturday,Dinner,Cash,2,Middle,Yes,No,Yes,No,33.44,36,2.56,0.076555024
+Saturday,Dinner,Credit,2,Middle,No,No,No,No,30.6,35.1,4.5,0.147058824
+Saturday,Dinner,Credit,5,Middle,No,No,No,No,64.28,74.28,10,0.155569384
+Saturday,Dinner,Credit,2,Yadult,No,No,No,No,27.81,31.81,4,0.143833154
+Saturday,Dinner,Credit,5,Middle,No,No,No,No,50.82,60.82,10,0.196772924
+Saturday,Late Night,Cash,2,Yadult,No,No,No,No,6.95,8,1.05,0.151079137
+Saturday,Dinner,Credit,4,Middle,No,No,No,Yes,52.06,62.06,10,0.192086055
+Saturday,Late Night,Credit/CashTip,2,Yadult,No,No,Yes,No,24.21,29.21,5,0.206526229
+Sunday,Lunch,Credit,2,Middle,No,No,No,No,25.24,29.24,4,0.158478605
+Sunday,Lunch,Credit/CashTip,3,SenCit,No,No,No,No,30.38,35.38,5,0.164581962
+Sunday,Lunch,Credit,4,Middle,No,No,No,No,41.48,45.48,4,0.096432015
+Sunday,Lunch,Credit,9,SenCit,No,No,No,No,102.07,117.07,15,0.14695797
+Sunday,Lunch,Credit/CashTip,4,Middle,No,No,Yes,No,69.56,74.56,5,0.071880391
+Sunday,Lunch,Credit,3,Middle,No,No,No,No,33.81,43.81,10,0.295770482
+Sunday,Lunch,Cash,2,SenCit,No,No,No,No,22.79,26,3.21,0.140851251
+Sunday,Lunch,Cash,2,SenCit,No,No,No,No,25.68,30,4.32,0.168224299
+Sunday,Lunch,Credit,4,SenCit,No,No,No,No,44.3,52.3,8,0.180586907
+Sunday,Lunch,Credit,6,Middle,No,No,Yes,No,79.66,94.66,15,0.188300276
+Sunday,Lunch,Cash,2,Middle,No,No,No,No,19.77,23.77,4,0.202326758
+Sunday,Lunch,Cash,2,Middle,No,No,No,No,30.16,35.16,5,0.165782493
+Sunday,Lunch,Cash,2,Yadult,No,No,No,No,17.12,18,0.88,0.051401869
+Sunday,Lunch,Credit,3,Middle,No,No,Yes,No,34.7,37.7,3,0.086455331
+Sunday,Dinner,Cash,2,SenCit,No,No,Yes,No,35.81,42,6.19,0.172856744
+Sunday,Dinner,Credit,2,Yadult,No,No,Yes,No,20.58,25.58,5,0.242954325
+Sunday,Dinner,Credit,2,Middle,No,No,No,No,37.89,42.89,5,0.13196094
+Sunday,Dinner,Cash,3,SenCit,No,No,No,Yes,43.88,48.88,5,0.113947129
+Sunday,Dinner,Credit,2,Middle,No,No,Yes,No,34.66,38.66,4,0.115406809
+Sunday,Dinner,Credit,3,Middle,No,No,No,No,29.82,33.82,4,0.134138162
+Sunday,Dinner,Credit,3,Middle,Yes,No,No,No,56.04,61.04,5,0.089221984
+Sunday,Dinner,Cash,2,SenCit,No,No,No,No,30.93,40,9.07,0.293242806
+Sunday,Dinner,Credit,2,Yadult,No,No,No,No,21.39,26.39,5,0.233754091
+Sunday,Dinner,Cash,2,Middle,No,No,Yes,No,45.91,50,4.09,0.089087345
+Sunday,Dinner,Credit,2,Yadult,No,No,No,No,24.82,29.82,5,0.201450443
+Sunday,Dinner,Credit,4,SenCit,No,No,No,No,61.4,71.4,10,0.16286645
+Sunday,Dinner,Cash,2,Yadult,No,No,No,No,35.08,40,4.92,0.140250855

@@ -1,0 +1,498 @@
+,id,diary,previous,perform_type,memory,audience,pa,na,age,gender,instrument,years_study,mpqab,mpqsr,mpqpem,mpqnem,mpqcon
+1,1,1,0,Solo,Unspecified,Instructor,40,11,18,Female,voice,3,16,7,52,16,30
+2,1,2,1,Large Ensemble,Memory,Public Performance,33,19,18,Female,voice,3,16,7,52,16,30
+3,1,3,2,Large Ensemble,Memory,Public Performance,49,14,18,Female,voice,3,16,7,52,16,30
+4,1,4,3,Solo,Memory,Public Performance,41,19,18,Female,voice,3,16,7,52,16,30
+5,1,5,4,Solo,Memory,Student(s),31,10,18,Female,voice,3,16,7,52,16,30
+6,1,6,5,Solo,Memory,Student(s),33,13,18,Female,voice,3,16,7,52,16,30
+7,1,7,6,Solo,Memory,Instructor,34,11,18,Female,voice,3,16,7,52,16,30
+8,1,8,7,Solo,Memory,Juried Recital,43,13,18,Female,voice,3,16,7,52,16,30
+9,1,9,8,Solo,Score,Instructor,34,10,18,Female,voice,3,16,7,52,16,30
+10,1,10,9,Solo,Score,Student(s),45,10,18,Female,voice,3,16,7,52,16,30
+11,1,11,10,Solo,Score,Instructor,36,10,18,Female,voice,3,16,7,52,16,30
+12,1,12,11,Solo,Memory,Instructor,39,10,18,Female,voice,3,16,7,52,16,30
+13,1,13,12,Solo,Memory,Juried Recital,44,10,18,Female,voice,3,16,7,52,16,30
+14,2,1,0,Solo,Memory,Student(s),26,19,18,Female,voice,4,25,10,28,21,39
+15,2,2,1,Large Ensemble,Memory,Public Performance,28,17,18,Female,voice,4,25,10,28,21,39
+16,2,3,2,Solo,Unspecified,Instructor,21,12,18,Female,voice,4,25,10,28,21,39
+17,2,4,3,Solo,Memory,Instructor,24,13,18,Female,voice,4,25,10,28,21,39
+18,2,5,4,Solo,Memory,Juried Recital,31,19,18,Female,voice,4,25,10,28,21,39
+19,2,6,5,Solo,Unspecified,Public Performance,21,16,18,Female,voice,4,25,10,28,21,39
+20,2,7,6,Solo,Unspecified,Public Performance,17,14,18,Female,voice,4,25,10,28,21,39
+21,2,8,7,Small Ensemble,Memory,Public Performance,27,12,18,Female,voice,4,25,10,28,21,39
+22,2,9,8,Small Ensemble,Memory,Public Performance,26,11,18,Female,voice,4,25,10,28,21,39
+23,2,10,9,Small Ensemble,Memory,Public Performance,26,10,18,Female,voice,4,25,10,28,21,39
+24,2,11,10,Solo,Unspecified,Instructor,30,12,18,Female,voice,4,25,10,28,21,39
+25,2,12,11,Solo,Score,Instructor,34,13,18,Female,voice,4,25,10,28,21,39
+26,2,13,12,Solo,Unspecified,Instructor,34,12,18,Female,voice,4,25,10,28,21,39
+27,2,14,13,Solo,Unspecified,Instructor,24,13,18,Female,voice,4,25,10,28,21,39
+28,3,1,0,Small Ensemble,Score,Public Performance,36,14,19,Female,voice,8,12,6,23,21,88
+29,3,2,1,Solo,Memory,Instructor,39,10,19,Female,voice,8,12,6,23,21,88
+30,3,3,2,Solo,Memory,Juried Recital,40,20,19,Female,voice,8,12,6,23,21,88
+31,3,4,3,Solo,Score,Instructor,17,10,19,Female,voice,8,12,6,23,21,88
+32,3,5,4,Solo,Score,Instructor,36,10,19,Female,voice,8,12,6,23,21,88
+33,3,6,5,Small Ensemble,Memory,Student(s),22,17,19,Female,voice,8,12,6,23,21,88
+34,3,7,6,Solo,Score,Instructor,28,15,19,Female,voice,8,12,6,23,21,88
+35,3,8,7,Solo,Score,Instructor,24,12,19,Female,voice,8,12,6,23,21,88
+36,3,9,8,Small Ensemble,Memory,Student(s),28,15,19,Female,voice,8,12,6,23,21,88
+37,3,10,9,Small Ensemble,Memory,Student(s),28,13,19,Female,voice,8,12,6,23,21,88
+38,3,11,10,Small Ensemble,Score,Public Performance,34,16,19,Female,voice,8,12,6,23,21,88
+39,3,12,11,Small Ensemble,Score,Public Performance,35,16,19,Female,voice,8,12,6,23,21,88
+40,3,13,12,Solo,Score,Instructor,30,11,19,Female,voice,8,12,6,23,21,88
+41,3,14,13,Small Ensemble,Score,Public Performance,33,13,19,Female,voice,8,12,6,23,21,88
+42,3,15,14,Large Ensemble,Memory,Public Performance,35,12,19,Female,voice,8,12,6,23,21,88
+43,5,1,0,Solo,Unspecified,Instructor,31,18,19,Female,orchestral instrument,14,28,12,54,40,42
+44,5,2,1,Solo,Score,Instructor,28,22,19,Female,orchestral instrument,14,28,12,54,40,42
+45,5,3,2,Small Ensemble,Score,Student(s),33,14,19,Female,orchestral instrument,14,28,12,54,40,42
+46,5,4,3,Small Ensemble,Score,Public Performance,33,13,19,Female,orchestral instrument,14,28,12,54,40,42
+47,5,5,4,Solo,Unspecified,Instructor,25,14,19,Female,orchestral instrument,14,28,12,54,40,42
+48,5,6,5,Solo,Score,Student(s),29,15,19,Female,orchestral instrument,14,28,12,54,40,42
+49,5,7,6,Small Ensemble,Score,Student(s),25,15,19,Female,orchestral instrument,14,28,12,54,40,42
+50,5,8,7,Small Ensemble,Score,Instructor,37,16,19,Female,orchestral instrument,14,28,12,54,40,42
+51,5,9,8,Solo,Score,Student(s),31,23,19,Female,orchestral instrument,14,28,12,54,40,42
+52,5,10,9,Solo,Score,Public Performance,32,20,19,Female,orchestral instrument,14,28,12,54,40,42
+53,5,11,10,Large Ensemble,Score,Public Performance,36,20,19,Female,orchestral instrument,14,28,12,54,40,42
+54,5,12,11,Solo,Unspecified,Instructor,28,26,19,Female,orchestral instrument,14,28,12,54,40,42
+55,6,1,0,Solo,Memory,Student(s),31,21,19,Female,voice,5,27,8,58,26,62
+56,6,2,1,Solo,Score,Public Performance,36,12,19,Female,voice,5,27,8,58,26,62
+57,6,3,2,Large Ensemble,Memory,Public Performance,47,15,19,Female,voice,5,27,8,58,26,62
+58,6,4,3,Large Ensemble,Memory,Public Performance,42,11,19,Female,voice,5,27,8,58,26,62
+59,6,5,4,Large Ensemble,Memory,Public Performance,47,10,19,Female,voice,5,27,8,58,26,62
+60,6,6,5,Large Ensemble,Memory,Public Performance,49,11,19,Female,voice,5,27,8,58,26,62
+61,6,7,6,Solo,Memory,Juried Recital,33,18,19,Female,voice,5,27,8,58,26,62
+62,6,8,7,Solo,Score,Public Performance,42,11,19,Female,voice,5,27,8,58,26,62
+63,6,9,8,Solo,Score,Public Performance,30,10,19,Female,voice,5,27,8,58,26,62
+64,6,10,9,Solo,Score,Public Performance,41,12,19,Female,voice,5,27,8,58,26,62
+65,6,11,10,Solo,Score,Public Performance,35,13,19,Female,voice,5,27,8,58,26,62
+66,6,12,11,Solo,Score,Public Performance,32,15,19,Female,voice,5,27,8,58,26,62
+67,6,13,12,Solo,Score,Public Performance,37,10,19,Female,voice,5,27,8,58,26,62
+68,6,14,13,Solo,Score,Public Performance,35,11,19,Female,voice,5,27,8,58,26,62
+69,6,15,14,Solo,Score,Instructor,38,10,19,Female,voice,5,27,8,58,26,62
+70,7,1,0,Solo,Score,Instructor,13,20,21,Female,orchestral instrument,12,11,15,41,44,50
+71,7,2,1,Large Ensemble,Score,Student(s),17,18,21,Female,orchestral instrument,12,11,15,41,44,50
+72,7,3,2,Large Ensemble,Score,Public Performance,15,26,21,Female,orchestral instrument,12,11,15,41,44,50
+73,7,4,3,Solo,Score,Instructor,11,22,21,Female,orchestral instrument,12,11,15,41,44,50
+74,7,5,4,Large Ensemble,Score,Public Performance,26,12,21,Female,orchestral instrument,12,11,15,41,44,50
+75,7,6,5,Large Ensemble,Score,Public Performance,26,11,21,Female,orchestral instrument,12,11,15,41,44,50
+76,7,7,6,Large Ensemble,Score,Public Performance,27,14,21,Female,orchestral instrument,12,11,15,41,44,50
+77,7,8,7,Solo,Score,Instructor,17,13,21,Female,orchestral instrument,12,11,15,41,44,50
+78,7,9,8,Large Ensemble,Score,Student(s),26,27,21,Female,orchestral instrument,12,11,15,41,44,50
+79,7,10,9,Solo,Score,Juried Recital,28,24,21,Female,orchestral instrument,12,11,15,41,44,50
+80,7,11,10,Solo,Score,Juried Recital,25,19,21,Female,orchestral instrument,12,11,15,41,44,50
+81,7,12,11,Large Ensemble,Score,Student(s),31,13,21,Female,orchestral instrument,12,11,15,41,44,50
+82,7,13,12,Large Ensemble,Score,Student(s),28,19,21,Female,orchestral instrument,12,11,15,41,44,50
+83,7,14,13,Large Ensemble,Score,Student(s),20,10,21,Female,orchestral instrument,12,11,15,41,44,50
+84,7,15,14,Large Ensemble,Score,Student(s),20,14,21,Female,orchestral instrument,12,11,15,41,44,50
+85,8,2,1,Solo,Score,Instructor,39,20,20,Female,orchestral instrument,10,22,16,68,47,59
+86,8,3,2,Large Ensemble,Score,Public Performance,29,21,20,Female,orchestral instrument,10,22,16,68,47,59
+87,8,4,3,Large Ensemble,Score,Public Performance,40,15,20,Female,orchestral instrument,10,22,16,68,47,59
+88,8,5,4,Small Ensemble,Score,Public Performance,36,17,20,Female,orchestral instrument,10,22,16,68,47,59
+89,8,6,5,Solo,Score,Instructor,34,18,20,Female,orchestral instrument,10,22,16,68,47,59
+90,8,7,6,Large Ensemble,Memory,Public Performance,43,14,20,Female,orchestral instrument,10,22,16,68,47,59
+91,8,8,7,Large Ensemble,Score,Public Performance,43,13,20,Female,orchestral instrument,10,22,16,68,47,59
+92,8,9,8,Large Ensemble,Score,Public Performance,29,19,20,Female,orchestral instrument,10,22,16,68,47,59
+93,8,10,9,Large Ensemble,Score,Public Performance,44,13,20,Female,orchestral instrument,10,22,16,68,47,59
+94,8,11,10,Small Ensemble,Score,Public Performance,15,18,20,Female,orchestral instrument,10,22,16,68,47,59
+95,8,12,11,Solo,Unspecified,Instructor,37,12,20,Female,orchestral instrument,10,22,16,68,47,59
+96,8,13,12,Solo,Unspecified,Juried Recital,48,15,20,Female,orchestral instrument,10,22,16,68,47,59
+97,8,14,13,Solo,Score,Student(s),24,19,20,Female,orchestral instrument,10,22,16,68,47,59
+98,8,15,14,Solo,Score,Instructor,36,10,20,Female,orchestral instrument,10,22,16,68,47,59
+99,9,1,0,Small Ensemble,Score,Public Performance,24,12,21,Male,orchestral instrument,12,25,8,50,24,51
+100,9,2,1,Large Ensemble,Score,Public Performance,36,14,21,Male,orchestral instrument,12,25,8,50,24,51
+101,9,3,2,Large Ensemble,Score,Public Performance,31,14,21,Male,orchestral instrument,12,25,8,50,24,51
+102,9,4,3,Solo,Score,Student(s),24,28,21,Male,orchestral instrument,12,25,8,50,24,51
+103,9,5,4,Large Ensemble,Score,Public Performance,35,23,21,Male,orchestral instrument,12,25,8,50,24,51
+104,9,6,5,Large Ensemble,Score,Public Performance,33,20,21,Male,orchestral instrument,12,25,8,50,24,51
+105,9,7,6,Large Ensemble,Score,Public Performance,38,18,21,Male,orchestral instrument,12,25,8,50,24,51
+106,9,8,7,Large Ensemble,Score,Public Performance,32,15,21,Male,orchestral instrument,12,25,8,50,24,51
+107,9,9,8,Large Ensemble,Score,Public Performance,42,22,21,Male,orchestral instrument,12,25,8,50,24,51
+108,9,10,9,Solo,Memory,Juried Recital,41,16,21,Male,orchestral instrument,12,25,8,50,24,51
+109,9,11,10,Solo,Memory,Student(s),33,13,21,Male,orchestral instrument,12,25,8,50,24,51
+110,9,12,11,Solo,Memory,Juried Recital,43,13,21,Male,orchestral instrument,12,25,8,50,24,51
+111,9,13,12,Solo,Memory,Juried Recital,36,28,21,Male,orchestral instrument,12,25,8,50,24,51
+112,9,14,13,Small Ensemble,Score,Public Performance,29,11,21,Male,orchestral instrument,12,25,8,50,24,51
+113,9,15,14,Solo,Memory,Student(s),33,16,21,Male,orchestral instrument,12,25,8,50,24,51
+114,10,1,0,Solo,Memory,Juried Recital,42,14,19,Female,voice,5,17,13,52,27,39
+115,10,2,1,Solo,Score,Student(s),26,14,19,Female,voice,5,17,13,52,27,39
+116,10,3,2,Solo,Unspecified,Instructor,36,12,19,Female,voice,5,17,13,52,27,39
+117,10,4,3,Large Ensemble,Memory,Public Performance,27,11,19,Female,voice,5,17,13,52,27,39
+118,10,5,4,Solo,Memory,Student(s),35,13,19,Female,voice,5,17,13,52,27,39
+119,10,6,5,Large Ensemble,Memory,Public Performance,34,15,19,Female,voice,5,17,13,52,27,39
+120,10,7,6,Large Ensemble,Memory,Public Performance,37,13,19,Female,voice,5,17,13,52,27,39
+121,10,8,7,Solo,Score,Instructor,25,16,19,Female,voice,5,17,13,52,27,39
+122,10,9,8,Large Ensemble,Memory,Public Performance,30,15,19,Female,voice,5,17,13,52,27,39
+123,10,10,9,Large Ensemble,Memory,Public Performance,38,12,19,Female,voice,5,17,13,52,27,39
+124,10,11,10,Solo,Memory,Public Performance,29,17,19,Female,voice,5,17,13,52,27,39
+125,10,12,11,Solo,Unspecified,Instructor,22,15,19,Female,voice,5,17,13,52,27,39
+126,10,13,12,Solo,Unspecified,Student(s),20,16,19,Female,voice,5,17,13,52,27,39
+127,10,14,13,Solo,Score,Student(s),24,11,19,Female,voice,5,17,13,52,27,39
+128,10,15,14,Solo,Unspecified,Instructor,13,15,19,Female,voice,5,17,13,52,27,39
+129,12,1,0,Solo,Score,Student(s),31,23,19,Female,orchestral instrument,2,30,15,57,40,68
+130,12,2,1,Solo,Score,Instructor,39,17,19,Female,orchestral instrument,2,30,15,57,40,68
+131,12,3,2,Small Ensemble,Score,Public Performance,28,25,19,Female,orchestral instrument,2,30,15,57,40,68
+132,12,4,3,Solo,Score,Student(s),36,26,19,Female,orchestral instrument,2,30,15,57,40,68
+133,12,5,4,Small Ensemble,Score,Public Performance,24,12,19,Female,orchestral instrument,2,30,15,57,40,68
+134,12,6,5,Solo,Score,Juried Recital,48,29,19,Female,orchestral instrument,2,30,15,57,40,68
+135,12,7,6,Solo,Score,Instructor,44,18,19,Female,orchestral instrument,2,30,15,57,40,68
+136,12,8,7,Small Ensemble,Score,Public Performance,41,16,19,Female,orchestral instrument,2,30,15,57,40,68
+137,12,9,8,Small Ensemble,Score,Public Performance,24,12,19,Female,orchestral instrument,2,30,15,57,40,68
+138,12,10,9,Large Ensemble,Score,Public Performance,18,15,19,Female,orchestral instrument,2,30,15,57,40,68
+139,12,11,10,Large Ensemble,Score,Public Performance,37,13,19,Female,orchestral instrument,2,30,15,57,40,68
+140,12,12,11,Small Ensemble,Score,Public Performance,33,13,19,Female,orchestral instrument,2,30,15,57,40,68
+141,12,13,12,Large Ensemble,Score,Public Performance,14,16,19,Female,orchestral instrument,2,30,15,57,40,68
+142,13,1,0,Solo,Score,Student(s),30,19,20,Female,orchestral instrument,5,23,10,52,24,74
+143,13,2,1,Solo,Score,Instructor,31,11,20,Female,orchestral instrument,5,23,10,52,24,74
+144,13,3,2,Solo,Unspecified,Instructor,40,12,20,Female,orchestral instrument,5,23,10,52,24,74
+145,13,4,3,Large Ensemble,Score,Public Performance,39,15,20,Female,orchestral instrument,5,23,10,52,24,74
+146,13,5,4,Large Ensemble,Score,Public Performance,41,11,20,Female,orchestral instrument,5,23,10,52,24,74
+147,13,6,5,Large Ensemble,Score,Public Performance,34,10,20,Female,orchestral instrument,5,23,10,52,24,74
+148,13,7,6,Large Ensemble,Unspecified,Public Performance,39,12,20,Female,orchestral instrument,5,23,10,52,24,74
+149,13,8,7,Solo,Score,Instructor,26,12,20,Female,orchestral instrument,5,23,10,52,24,74
+150,13,9,8,Solo,Score,Instructor,24,11,20,Female,orchestral instrument,5,23,10,52,24,74
+151,13,10,9,Solo,Score,Student(s),33,11,20,Female,orchestral instrument,5,23,10,52,24,74
+152,13,11,10,Solo,Score,Juried Recital,33,18,20,Female,orchestral instrument,5,23,10,52,24,74
+153,13,12,11,Small Ensemble,Score,Public Performance,40,18,20,Female,orchestral instrument,5,23,10,52,24,74
+154,13,13,12,Solo,Score,Student(s),29,15,20,Female,orchestral instrument,5,23,10,52,24,74
+155,13,14,13,Solo,Unspecified,Public Performance,35,17,20,Female,orchestral instrument,5,23,10,52,24,74
+156,13,15,14,Small Ensemble,Memory,Public Performance,35,13,20,Female,orchestral instrument,5,23,10,52,24,74
+157,15,1,0,Small Ensemble,Memory,Student(s),36,18,21,Female,voice,11,28,17,64,32,43
+158,15,2,1,Solo,Score,Student(s),26,28,21,Female,voice,11,28,17,64,32,43
+159,15,3,2,Solo,Score,Instructor,19,24,21,Female,voice,11,28,17,64,32,43
+160,15,4,3,Solo,Memory,Student(s),22,11,21,Female,voice,11,28,17,64,32,43
+161,15,5,4,Solo,Unspecified,Instructor,14,28,21,Female,voice,11,28,17,64,32,43
+162,15,6,5,Large Ensemble,Memory,Public Performance,41,14,21,Female,voice,11,28,17,64,32,43
+163,15,7,6,Large Ensemble,Memory,Public Performance,30,13,21,Female,voice,11,28,17,64,32,43
+164,15,8,7,Large Ensemble,Memory,Public Performance,21,10,21,Female,voice,11,28,17,64,32,43
+165,15,9,8,Large Ensemble,Memory,Public Performance,32,12,21,Female,voice,11,28,17,64,32,43
+166,15,10,9,Small Ensemble,Memory,Student(s),28,14,21,Female,voice,11,28,17,64,32,43
+167,15,11,10,Solo,Score,Public Performance,24,11,21,Female,voice,11,28,17,64,32,43
+168,15,12,11,Small Ensemble,Memory,Student(s),32,13,21,Female,voice,11,28,17,64,32,43
+169,15,13,12,Small Ensemble,Memory,Public Performance,30,11,21,Female,voice,11,28,17,64,32,43
+170,15,14,13,Solo,Memory,Juried Recital,36,16,21,Female,voice,11,28,17,64,32,43
+171,15,15,14,Solo,Memory,Public Performance,26,10,21,Female,voice,11,28,17,64,32,43
+172,16,1,0,Large Ensemble,Unspecified,Public Performance,49,19,20,Female,voice,7,24,18,51,45,29
+173,16,2,1,Large Ensemble,Unspecified,Public Performance,35,15,20,Female,voice,7,24,18,51,45,29
+174,16,3,2,Large Ensemble,Unspecified,Public Performance,40,16,20,Female,voice,7,24,18,51,45,29
+175,16,4,3,Large Ensemble,Unspecified,Public Performance,41,12,20,Female,voice,7,24,18,51,45,29
+176,16,5,4,Solo,Memory,Juried Recital,38,25,20,Female,voice,7,24,18,51,45,29
+177,16,6,5,Solo,Memory,Juried Recital,42,20,20,Female,voice,7,24,18,51,45,29
+178,17,1,0,Large Ensemble,Unspecified,Public Performance,38,20,22,Male,orchestral instrument,13,29,5,57,27,23
+179,17,2,1,Solo,Unspecified,Instructor,41,18,22,Male,orchestral instrument,13,29,5,57,27,23
+180,17,3,2,Large Ensemble,Unspecified,Public Performance,31,15,22,Male,orchestral instrument,13,29,5,57,27,23
+181,17,4,3,Large Ensemble,Unspecified,Public Performance,23,11,22,Male,orchestral instrument,13,29,5,57,27,23
+182,17,5,4,Large Ensemble,Unspecified,Public Performance,43,21,22,Male,orchestral instrument,13,29,5,57,27,23
+183,17,6,5,Small Ensemble,Score,Student(s),39,19,22,Male,orchestral instrument,13,29,5,57,27,23
+184,17,7,6,Solo,Score,Juried Recital,22,18,22,Male,orchestral instrument,13,29,5,57,27,23
+185,17,8,7,Solo,Unspecified,Instructor,29,13,22,Male,orchestral instrument,13,29,5,57,27,23
+186,17,9,8,Solo,Memory,Student(s),39,25,22,Male,orchestral instrument,13,29,5,57,27,23
+187,17,10,9,Solo,Memory,Student(s),38,28,22,Male,orchestral instrument,13,29,5,57,27,23
+188,17,11,10,Large Ensemble,Memory,Public Performance,40,27,22,Male,orchestral instrument,13,29,5,57,27,23
+189,17,12,11,Large Ensemble,Memory,Public Performance,37,15,22,Male,orchestral instrument,13,29,5,57,27,23
+190,17,13,12,Large Ensemble,Memory,Public Performance,29,29,22,Male,orchestral instrument,13,29,5,57,27,23
+191,17,14,13,Large Ensemble,Memory,Public Performance,33,18,22,Male,orchestral instrument,13,29,5,57,27,23
+192,17,15,14,Large Ensemble,Memory,Public Performance,43,25,22,Male,orchestral instrument,13,29,5,57,27,23
+193,18,1,0,Solo,Unspecified,Instructor,43,15,19,Male,orchestral instrument,15,17,6,59,24,81
+194,18,2,1,Large Ensemble,Unspecified,Public Performance,48,11,19,Male,orchestral instrument,15,17,6,59,24,81
+195,18,3,2,Large Ensemble,Unspecified,Public Performance,48,13,19,Male,orchestral instrument,15,17,6,59,24,81
+196,18,4,3,Large Ensemble,Unspecified,Public Performance,47,12,19,Male,orchestral instrument,15,17,6,59,24,81
+197,18,5,4,Large Ensemble,Unspecified,Public Performance,50,10,19,Male,orchestral instrument,15,17,6,59,24,81
+198,18,6,5,Solo,Unspecified,Instructor,44,10,19,Male,orchestral instrument,15,17,6,59,24,81
+199,18,7,6,Solo,Score,Juried Recital,46,10,19,Male,orchestral instrument,15,17,6,59,24,81
+200,18,8,7,Solo,Unspecified,Instructor,41,16,19,Male,orchestral instrument,15,17,6,59,24,81
+201,18,9,8,Solo,Unspecified,Juried Recital,42,19,19,Male,orchestral instrument,15,17,6,59,24,81
+202,18,10,9,Solo,Memory,Public Performance,43,12,19,Male,orchestral instrument,15,17,6,59,24,81
+203,18,11,10,Large Ensemble,Score,Public Performance,45,15,19,Male,orchestral instrument,15,17,6,59,24,81
+204,18,12,11,Large Ensemble,Score,Public Performance,44,13,19,Male,orchestral instrument,15,17,6,59,24,81
+205,18,13,12,Large Ensemble,Score,Public Performance,46,11,19,Male,orchestral instrument,15,17,6,59,24,81
+206,18,14,13,Large Ensemble,Score,Public Performance,46,11,19,Male,orchestral instrument,15,17,6,59,24,81
+207,18,15,14,Large Ensemble,Score,Public Performance,44,12,19,Male,orchestral instrument,15,17,6,59,24,81
+208,19,1,0,Solo,Memory,Student(s),34,15,21,Female,voice,4,21,1,51,11,52
+209,19,2,1,Large Ensemble,Memory,Public Performance,31,12,21,Female,voice,4,21,1,51,11,52
+210,19,3,2,Small Ensemble,Memory,Student(s),25,13,21,Female,voice,4,21,1,51,11,52
+211,19,4,3,Solo,Unspecified,Instructor,30,10,21,Female,voice,4,21,1,51,11,52
+212,19,5,4,Solo,Unspecified,Student(s),31,10,21,Female,voice,4,21,1,51,11,52
+213,19,6,5,Solo,Unspecified,Instructor,38,11,21,Female,voice,4,21,1,51,11,52
+214,19,7,6,Solo,Unspecified,Instructor,34,13,21,Female,voice,4,21,1,51,11,52
+215,19,8,7,Solo,Score,Instructor,39,10,21,Female,voice,4,21,1,51,11,52
+216,19,9,8,Solo,Unspecified,Juried Recital,41,16,21,Female,voice,4,21,1,51,11,52
+217,19,10,9,Solo,Memory,Juried Recital,39,12,21,Female,voice,4,21,1,51,11,52
+218,19,11,10,Solo,Memory,Juried Recital,34,12,21,Female,voice,4,21,1,51,11,52
+219,19,12,11,Solo,Memory,Juried Recital,39,13,21,Female,voice,4,21,1,51,11,52
+220,19,13,12,Solo,Memory,Juried Recital,38,11,21,Female,voice,4,21,1,51,11,52
+221,19,14,13,Solo,Memory,Instructor,42,12,21,Female,voice,4,21,1,51,11,52
+222,19,15,14,Solo,Memory,Instructor,37,10,21,Female,voice,4,21,1,51,11,52
+223,20,1,0,Solo,Memory,Juried Recital,40,21,21,Female,voice,3,7,14,34,35,54
+224,20,2,1,Solo,Score,Instructor,31,16,21,Female,voice,3,7,14,34,35,54
+225,21,1,0,Solo,Score,Instructor,17,12,18,Female,orchestral instrument,7,26,20,57,40,74
+226,21,2,1,Solo,Score,Instructor,16,17,18,Female,orchestral instrument,7,26,20,57,40,74
+227,21,3,2,Large Ensemble,Score,Public Performance,37,22,18,Female,orchestral instrument,7,26,20,57,40,74
+228,21,4,3,Large Ensemble,Score,Public Performance,24,13,18,Female,orchestral instrument,7,26,20,57,40,74
+229,21,5,4,Small Ensemble,Score,Public Performance,24,11,18,Female,orchestral instrument,7,26,20,57,40,74
+230,21,6,5,Large Ensemble,Unspecified,Public Performance,27,12,18,Female,orchestral instrument,7,26,20,57,40,74
+231,21,7,6,Large Ensemble,Score,Public Performance,33,13,18,Female,orchestral instrument,7,26,20,57,40,74
+232,21,8,7,Solo,Unspecified,Public Performance,33,16,18,Female,orchestral instrument,7,26,20,57,40,74
+233,21,9,8,Solo,Score,Student(s),20,27,18,Female,orchestral instrument,7,26,20,57,40,74
+234,21,10,9,Small Ensemble,Score,Public Performance,30,18,18,Female,orchestral instrument,7,26,20,57,40,74
+235,21,11,10,Solo,Score,Juried Recital,22,26,18,Female,orchestral instrument,7,26,20,57,40,74
+236,21,12,11,Small Ensemble,Score,Public Performance,18,10,18,Female,orchestral instrument,7,26,20,57,40,74
+237,21,13,12,Small Ensemble,Memory,Public Performance,26,15,18,Female,orchestral instrument,7,26,20,57,40,74
+238,21,14,13,Small Ensemble,Memory,Public Performance,19,19,18,Female,orchestral instrument,7,26,20,57,40,74
+239,21,15,14,Large Ensemble,Score,Public Performance,41,13,18,Female,orchestral instrument,7,26,20,57,40,74
+240,22,1,0,Solo,Score,Instructor,35,24,18,Male,orchestral instrument,7,24,14,49,40,52
+241,22,2,1,Large Ensemble,Score,Public Performance,39,21,18,Male,orchestral instrument,7,24,14,49,40,52
+242,22,3,2,Large Ensemble,Score,Public Performance,41,14,18,Male,orchestral instrument,7,24,14,49,40,52
+243,22,4,3,Large Ensemble,Score,Public Performance,46,15,18,Male,orchestral instrument,7,24,14,49,40,52
+244,22,5,4,Large Ensemble,Score,Public Performance,50,10,18,Male,orchestral instrument,7,24,14,49,40,52
+245,22,6,5,Solo,Score,Instructor,38,24,18,Male,orchestral instrument,7,24,14,49,40,52
+246,22,7,6,Solo,Score,Student(s),40,24,18,Male,orchestral instrument,7,24,14,49,40,52
+247,22,8,7,Solo,Score,Instructor,33,16,18,Male,orchestral instrument,7,24,14,49,40,52
+248,22,9,8,Small Ensemble,Score,Public Performance,39,34,18,Male,orchestral instrument,7,24,14,49,40,52
+249,22,10,9,Large Ensemble,Score,Public Performance,44,22,18,Male,orchestral instrument,7,24,14,49,40,52
+250,22,11,10,Large Ensemble,Score,Public Performance,40,19,18,Male,orchestral instrument,7,24,14,49,40,52
+251,22,12,11,Large Ensemble,Score,Public Performance,48,18,18,Male,orchestral instrument,7,24,14,49,40,52
+252,22,13,12,Large Ensemble,Score,Public Performance,49,12,18,Male,orchestral instrument,7,24,14,49,40,52
+253,22,14,13,Large Ensemble,Score,Public Performance,47,19,18,Male,orchestral instrument,7,24,14,49,40,52
+254,22,15,14,Solo,Score,Instructor,32,25,18,Male,orchestral instrument,7,24,14,49,40,52
+255,24,1,0,Large Ensemble,Memory,Public Performance,33,18,20,Male,voice,7,25,7,60,39,43
+256,24,2,1,Large Ensemble,Memory,Public Performance,31,11,20,Male,voice,7,25,7,60,39,43
+257,24,3,2,Large Ensemble,Memory,Public Performance,29,13,20,Male,voice,7,25,7,60,39,43
+258,24,4,3,Large Ensemble,Memory,Public Performance,38,17,20,Male,voice,7,25,7,60,39,43
+259,24,5,4,Solo,Memory,Instructor,18,18,20,Male,voice,7,25,7,60,39,43
+260,24,6,5,Large Ensemble,Memory,Public Performance,38,20,20,Male,voice,7,25,7,60,39,43
+261,24,7,6,Large Ensemble,Memory,Public Performance,49,19,20,Male,voice,7,25,7,60,39,43
+262,24,8,7,Large Ensemble,Memory,Public Performance,43,14,20,Male,voice,7,25,7,60,39,43
+263,24,9,8,Solo,Memory,Instructor,39,19,20,Male,voice,7,25,7,60,39,43
+264,24,10,9,Solo,Memory,Public Performance,46,20,20,Male,voice,7,25,7,60,39,43
+265,24,11,10,Large Ensemble,Memory,Public Performance,20,23,20,Male,voice,7,25,7,60,39,43
+266,24,12,11,Large Ensemble,Memory,Public Performance,22,18,20,Male,voice,7,25,7,60,39,43
+267,24,13,12,Small Ensemble,Memory,Juried Recital,31,13,20,Male,voice,7,25,7,60,39,43
+268,24,14,13,Solo,Score,Student(s),30,18,20,Male,voice,7,25,7,60,39,43
+269,24,15,14,Solo,Score,Instructor,26,23,20,Male,voice,7,25,7,60,39,43
+270,25,1,0,Solo,Score,Student(s),30,24,18,Female,orchestral instrument,7,21,3,53,13,45
+271,25,2,1,Large Ensemble,Score,Public Performance,30,10,18,Female,orchestral instrument,7,21,3,53,13,45
+272,25,3,2,Large Ensemble,Score,Public Performance,31,10,18,Female,orchestral instrument,7,21,3,53,13,45
+273,25,4,3,Large Ensemble,Score,Public Performance,33,10,18,Female,orchestral instrument,7,21,3,53,13,45
+274,25,5,4,Large Ensemble,Score,Public Performance,29,11,18,Female,orchestral instrument,7,21,3,53,13,45
+275,25,6,5,Solo,Score,Instructor,25,11,18,Female,orchestral instrument,7,21,3,53,13,45
+276,25,7,6,Solo,Score,Public Performance,20,23,18,Female,orchestral instrument,7,21,3,53,13,45
+277,25,8,7,Solo,Score,Public Performance,31,19,18,Female,orchestral instrument,7,21,3,53,13,45
+278,25,9,8,Small Ensemble,Score,Student(s),29,25,18,Female,orchestral instrument,7,21,3,53,13,45
+279,25,10,9,Large Ensemble,Score,Public Performance,31,10,18,Female,orchestral instrument,7,21,3,53,13,45
+280,25,11,10,Small Ensemble,Score,Instructor,31,14,18,Female,orchestral instrument,7,21,3,53,13,45
+281,25,12,11,Small Ensemble,Score,Instructor,28,15,18,Female,orchestral instrument,7,21,3,53,13,45
+282,25,13,12,Large Ensemble,Score,Public Performance,36,11,18,Female,orchestral instrument,7,21,3,53,13,45
+283,25,14,13,Solo,Score,Student(s),21,19,18,Female,orchestral instrument,7,21,3,53,13,45
+284,25,15,14,Solo,Score,Instructor,24,14,18,Female,orchestral instrument,7,21,3,53,13,45
+285,27,1,0,Large Ensemble,Memory,Public Performance,36,19,21,Female,voice,8,15,22,23,45,64
+286,27,2,1,Small Ensemble,Score,Public Performance,27,20,21,Female,voice,8,15,22,23,45,64
+287,27,3,2,Large Ensemble,Memory,Public Performance,32,22,21,Female,voice,8,15,22,23,45,64
+288,27,4,3,Large Ensemble,Unspecified,Public Performance,39,26,21,Female,voice,8,15,22,23,45,64
+289,27,5,4,Large Ensemble,Memory,Public Performance,21,28,21,Female,voice,8,15,22,23,45,64
+290,27,6,5,Large Ensemble,Memory,Public Performance,39,12,21,Female,voice,8,15,22,23,45,64
+291,27,7,6,Large Ensemble,Memory,Public Performance,31,25,21,Female,voice,8,15,22,23,45,64
+292,27,8,7,Large Ensemble,Memory,Public Performance,26,20,21,Female,voice,8,15,22,23,45,64
+293,27,9,8,Large Ensemble,Memory,Public Performance,36,15,21,Female,voice,8,15,22,23,45,64
+294,27,10,9,Large Ensemble,Memory,Public Performance,35,15,21,Female,voice,8,15,22,23,45,64
+295,27,11,10,Large Ensemble,Memory,Public Performance,41,13,21,Female,voice,8,15,22,23,45,64
+296,27,12,11,Large Ensemble,Memory,Public Performance,32,16,21,Female,voice,8,15,22,23,45,64
+297,27,13,12,Large Ensemble,Memory,Public Performance,45,11,21,Female,voice,8,15,22,23,45,64
+298,27,14,13,Large Ensemble,Memory,Public Performance,28,10,21,Female,voice,8,15,22,23,45,64
+299,27,15,14,Large Ensemble,Memory,Public Performance,40,13,21,Female,voice,8,15,22,23,45,64
+300,28,1,0,Small Ensemble,Score,Public Performance,38,15,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+301,28,2,1,Solo,Score,Student(s),16,35,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+302,28,3,2,Solo,Unspecified,Instructor,34,13,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+303,28,4,3,Solo,Memory,Juried Recital,42,17,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+304,28,5,4,Solo,Memory,Juried Recital,33,16,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+305,28,6,5,Solo,Memory,Instructor,20,20,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+306,28,7,6,Solo,Unspecified,Instructor,41,11,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+307,28,8,7,Solo,Unspecified,Instructor,27,21,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+308,28,9,8,Solo,Score,Instructor,25,14,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+309,28,10,9,Solo,Memory,Student(s),24,16,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+310,28,11,10,Solo,Score,Student(s),31,13,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+311,28,12,11,Solo,Score,Instructor,30,10,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+312,28,13,12,Solo,Score,Instructor,19,14,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+313,28,14,13,Solo,Score,Instructor,17,17,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+314,28,15,14,Solo,Score,Instructor,23,16,22,Female,keyboard (piano or organ),17,11,9,54,35,53
+315,29,1,0,Solo,Memory,Student(s),24,31,18,Male,voice,6,29,7,33,26,24
+316,29,2,1,Solo,Memory,Instructor,36,18,18,Male,voice,6,29,7,33,26,24
+317,29,3,2,Solo,Memory,Juried Recital,33,21,18,Male,voice,6,29,7,33,26,24
+318,29,4,3,Large Ensemble,Memory,Student(s),38,16,18,Male,voice,6,29,7,33,26,24
+319,29,5,4,Solo,Score,Instructor,46,12,18,Male,voice,6,29,7,33,26,24
+320,29,6,5,Solo,Score,Instructor,40,10,18,Male,voice,6,29,7,33,26,24
+321,29,7,6,Solo,Score,Public Performance,33,11,18,Male,voice,6,29,7,33,26,24
+322,29,8,7,Solo,Score,Instructor,44,10,18,Male,voice,6,29,7,33,26,24
+323,29,9,8,Large Ensemble,Memory,Public Performance,39,12,18,Male,voice,6,29,7,33,26,24
+324,29,10,9,Small Ensemble,Score,Student(s),25,16,18,Male,voice,6,29,7,33,26,24
+325,29,11,10,Solo,Memory,Student(s),29,18,18,Male,voice,6,29,7,33,26,24
+326,29,12,11,Solo,Unspecified,Juried Recital,38,24,18,Male,voice,6,29,7,33,26,24
+327,29,13,12,Solo,Memory,Instructor,32,12,18,Male,voice,6,29,7,33,26,24
+328,29,14,13,Large Ensemble,Memory,Student(s),31,14,18,Male,voice,6,29,7,33,26,24
+329,29,15,14,Solo,Memory,Juried Recital,47,29,18,Male,voice,6,29,7,33,26,24
+330,30,1,0,Solo,Score,Instructor,26,19,22,Male,orchestral instrument,10,24,6,58,22,40
+331,30,2,1,Small Ensemble,Unspecified,Public Performance,31,16,22,Male,orchestral instrument,10,24,6,58,22,40
+332,30,3,2,Small Ensemble,Score,Student(s),39,13,22,Male,orchestral instrument,10,24,6,58,22,40
+333,30,4,3,Small Ensemble,Score,Public Performance,31,15,22,Male,orchestral instrument,10,24,6,58,22,40
+334,30,5,4,Solo,Score,Instructor,31,15,22,Male,orchestral instrument,10,24,6,58,22,40
+335,30,6,5,Small Ensemble,Score,Public Performance,35,15,22,Male,orchestral instrument,10,24,6,58,22,40
+336,30,7,6,Small Ensemble,Score,Public Performance,34,14,22,Male,orchestral instrument,10,24,6,58,22,40
+337,30,8,7,Solo,Score,Student(s),35,13,22,Male,orchestral instrument,10,24,6,58,22,40
+338,30,9,8,Small Ensemble,Score,Public Performance,40,13,22,Male,orchestral instrument,10,24,6,58,22,40
+339,30,10,9,Small Ensemble,Memory,Student(s),36,18,22,Male,orchestral instrument,10,24,6,58,22,40
+340,30,11,10,Small Ensemble,Score,Student(s),42,11,22,Male,orchestral instrument,10,24,6,58,22,40
+341,30,12,11,Small Ensemble,Score,Student(s),37,12,22,Male,orchestral instrument,10,24,6,58,22,40
+342,30,13,12,Solo,Memory,Student(s),34,17,22,Male,orchestral instrument,10,24,6,58,22,40
+343,30,14,13,Large Ensemble,Score,Public Performance,23,13,22,Male,orchestral instrument,10,24,6,58,22,40
+344,32,1,0,Solo,Unspecified,Instructor,31,32,20,Female,orchestral instrument,9,30,21,51,47,37
+345,32,2,1,Solo,Memory,Student(s),31,35,20,Female,orchestral instrument,9,30,21,51,47,37
+346,32,3,2,Solo,Memory,Student(s),29,24,20,Female,orchestral instrument,9,30,21,51,47,37
+347,32,4,3,Solo,Unspecified,Student(s),29,25,20,Female,orchestral instrument,9,30,21,51,47,37
+348,32,5,4,Solo,Unspecified,Juried Recital,39,22,20,Female,orchestral instrument,9,30,21,51,47,37
+349,32,6,5,Small Ensemble,Score,Instructor,32,17,20,Female,orchestral instrument,9,30,21,51,47,37
+350,32,7,6,Solo,Unspecified,Instructor,29,21,20,Female,orchestral instrument,9,30,21,51,47,37
+351,32,8,7,Small Ensemble,Score,Public Performance,29,28,20,Female,orchestral instrument,9,30,21,51,47,37
+352,32,9,8,Large Ensemble,Score,Public Performance,36,24,20,Female,orchestral instrument,9,30,21,51,47,37
+353,32,10,9,Large Ensemble,Score,Public Performance,39,22,20,Female,orchestral instrument,9,30,21,51,47,37
+354,32,11,10,Small Ensemble,Score,Instructor,28,14,20,Female,orchestral instrument,9,30,21,51,47,37
+355,32,12,11,Small Ensemble,Score,Student(s),23,21,20,Female,orchestral instrument,9,30,21,51,47,37
+356,32,13,12,Small Ensemble,Score,Public Performance,27,22,20,Female,orchestral instrument,9,30,21,51,47,37
+357,32,14,13,Small Ensemble,Score,Instructor,23,15,20,Female,orchestral instrument,9,30,21,51,47,37
+358,32,15,14,Solo,Score,Instructor,23,21,20,Female,orchestral instrument,9,30,21,51,47,37
+359,33,2,1,Solo,Score,Instructor,29,23,18,Female,orchestral instrument,8,28,12,62,33,39
+360,33,9,8,Solo,Score,Instructor,37,17,18,Female,orchestral instrument,8,28,12,62,33,39
+361,33,10,9,Solo,Score,Instructor,33,22,18,Female,orchestral instrument,8,28,12,62,33,39
+362,33,12,11,Solo,Memory,Instructor,36,20,18,Female,orchestral instrument,8,28,12,62,33,39
+363,33,13,12,Solo,Score,Instructor,41,15,18,Female,orchestral instrument,8,28,12,62,33,39
+364,33,15,14,Solo,Score,Instructor,41,15,18,Female,orchestral instrument,8,28,12,62,33,39
+365,34,1,0,Small Ensemble,Score,Public Performance,39,21,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+366,34,2,1,Solo,Score,Instructor,24,12,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+367,34,3,2,Solo,Unspecified,Instructor,27,20,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+368,34,4,3,Large Ensemble,Unspecified,Public Performance,47,20,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+369,34,5,4,Solo,Score,Instructor,27,10,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+370,34,6,5,Solo,Unspecified,Student(s),19,30,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+371,34,7,6,Solo,Unspecified,Instructor,27,10,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+372,34,8,7,Solo,Score,Student(s),28,11,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+373,34,9,8,Solo,Unspecified,Instructor,24,13,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+374,34,10,9,Solo,Score,Instructor,22,10,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+375,34,11,10,Solo,Score,Instructor,24,20,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+376,34,12,11,Solo,Score,Student(s),28,17,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+377,34,13,12,Solo,Memory,Student(s),31,13,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+378,34,14,13,Solo,Score,Instructor,27,16,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+379,34,15,14,Solo,Score,Juried Recital,34,18,18,Male,keyboard (piano or organ),3,24,10,45,28,62
+380,35,1,0,Small Ensemble,Score,Public Performance,29,19,21,Female,orchestral instrument,6,23,16,32,27,67
+381,35,2,1,Solo,Score,Instructor,31,11,21,Female,orchestral instrument,6,23,16,32,27,67
+382,35,3,2,Solo,Score,Instructor,45,13,21,Female,orchestral instrument,6,23,16,32,27,67
+383,35,4,3,Small Ensemble,Score,Juried Recital,40,30,21,Female,orchestral instrument,6,23,16,32,27,67
+384,35,5,4,Large Ensemble,Score,Public Performance,31,10,21,Female,orchestral instrument,6,23,16,32,27,67
+385,35,6,5,Solo,Score,Instructor,47,12,21,Female,orchestral instrument,6,23,16,32,27,67
+386,35,7,6,Solo,Score,Public Performance,47,30,21,Female,orchestral instrument,6,23,16,32,27,67
+387,35,8,7,Solo,Score,Instructor,33,12,21,Female,orchestral instrument,6,23,16,32,27,67
+388,35,9,8,Large Ensemble,Score,Public Performance,39,25,21,Female,orchestral instrument,6,23,16,32,27,67
+389,35,10,9,Large Ensemble,Score,Public Performance,28,17,21,Female,orchestral instrument,6,23,16,32,27,67
+390,35,11,10,Small Ensemble,Score,Public Performance,33,19,21,Female,orchestral instrument,6,23,16,32,27,67
+391,35,12,11,Solo,Score,Student(s),49,20,21,Female,orchestral instrument,6,23,16,32,27,67
+392,35,13,12,Large Ensemble,Score,Public Performance,31,15,21,Female,orchestral instrument,6,23,16,32,27,67
+393,35,14,13,Solo,Score,Juried Recital,47,19,21,Female,orchestral instrument,6,23,16,32,27,67
+394,35,15,14,Small Ensemble,Score,Juried Recital,35,19,21,Female,orchestral instrument,6,23,16,32,27,67
+395,36,1,0,Small Ensemble,Unspecified,Public Performance,23,20,20,Female,orchestral instrument,17,19,20,58,45,56
+396,36,2,1,Large Ensemble,Unspecified,Public Performance,44,12,20,Female,orchestral instrument,17,19,20,58,45,56
+397,36,3,2,Large Ensemble,Score,Student(s),31,12,20,Female,orchestral instrument,17,19,20,58,45,56
+398,36,4,3,Small Ensemble,Score,Instructor,31,11,20,Female,orchestral instrument,17,19,20,58,45,56
+399,36,5,4,Solo,Score,Instructor,25,12,20,Female,orchestral instrument,17,19,20,58,45,56
+400,36,6,5,Solo,Score,Student(s),21,22,20,Female,orchestral instrument,17,19,20,58,45,56
+401,36,7,6,Small Ensemble,Score,Student(s),19,18,20,Female,orchestral instrument,17,19,20,58,45,56
+402,36,8,7,Large Ensemble,Score,Student(s),23,10,20,Female,orchestral instrument,17,19,20,58,45,56
+403,36,9,8,Small Ensemble,Score,Student(s),13,16,20,Female,orchestral instrument,17,19,20,58,45,56
+404,36,10,9,Small Ensemble,Score,Student(s),31,10,20,Female,orchestral instrument,17,19,20,58,45,56
+405,36,11,10,Solo,Memory,Instructor,26,13,20,Female,orchestral instrument,17,19,20,58,45,56
+406,36,12,11,Large Ensemble,Score,Student(s),30,10,20,Female,orchestral instrument,17,19,20,58,45,56
+407,36,13,12,Small Ensemble,Score,Student(s),21,12,20,Female,orchestral instrument,17,19,20,58,45,56
+408,36,14,13,Large Ensemble,Score,Student(s),37,12,20,Female,orchestral instrument,17,19,20,58,45,56
+409,36,15,14,Large Ensemble,Score,Student(s),35,20,20,Female,orchestral instrument,17,19,20,58,45,56
+410,37,1,0,Small Ensemble,Score,Juried Recital,26,17,21,Female,voice,5,30,11,39,19,26
+411,37,2,1,Solo,Unspecified,Instructor,26,13,21,Female,voice,5,30,11,39,19,26
+412,37,3,2,Solo,Memory,Public Performance,38,19,21,Female,voice,5,30,11,39,19,26
+413,37,4,3,Solo,Score,Student(s),23,13,21,Female,voice,5,30,11,39,19,26
+414,37,5,4,Solo,Score,Juried Recital,40,15,21,Female,voice,5,30,11,39,19,26
+415,37,6,5,Solo,Score,Public Performance,35,11,21,Female,voice,5,30,11,39,19,26
+416,37,7,6,Solo,Score,Instructor,33,11,21,Female,voice,5,30,11,39,19,26
+417,37,8,7,Solo,Memory,Student(s),37,17,21,Female,voice,5,30,11,39,19,26
+418,37,9,8,Solo,Unspecified,Instructor,32,31,21,Female,voice,5,30,11,39,19,26
+419,37,10,9,Solo,Score,Public Performance,31,18,21,Female,voice,5,30,11,39,19,26
+420,37,11,10,Solo,Memory,Instructor,35,21,21,Female,voice,5,30,11,39,19,26
+421,37,12,11,Solo,Memory,Student(s),36,18,21,Female,voice,5,30,11,39,19,26
+422,37,13,12,Solo,Memory,Juried Recital,43,12,21,Female,voice,5,30,11,39,19,26
+423,37,14,13,Solo,Score,Public Performance,39,15,21,Female,voice,5,30,11,39,19,26
+424,37,15,14,Large Ensemble,Score,Public Performance,29,11,21,Female,voice,5,30,11,39,19,26
+425,38,1,0,Solo,Score,Public Performance,22,13,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+426,38,2,1,Solo,Memory,Student(s),27,17,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+427,38,3,2,Solo,Memory,Student(s),23,13,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+428,38,4,3,Solo,Memory,Public Performance,31,19,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+429,38,5,4,Small Ensemble,Score,Public Performance,24,13,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+430,38,6,5,Small Ensemble,Score,Student(s),27,15,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+431,38,7,6,Small Ensemble,Score,Public Performance,28,14,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+432,38,8,7,Small Ensemble,Score,Student(s),25,11,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+433,38,9,8,Solo,Memory,Student(s),33,17,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+434,38,10,9,Large Ensemble,Score,Public Performance,31,19,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+435,38,11,10,Solo,Memory,Public Performance,33,16,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+436,38,12,11,Solo,Score,Public Performance,31,14,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+437,38,13,12,Solo,Memory,Public Performance,34,15,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+438,38,14,13,Small Ensemble,Score,Student(s),31,14,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+439,38,15,14,Solo,Memory,Student(s),33,15,19,Male,keyboard (piano or organ),11,21,14,45,23,72
+440,39,1,0,Solo,Score,Instructor,37,16,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+441,39,2,1,Solo,Score,Instructor,38,22,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+442,39,3,2,Solo,Score,Instructor,33,19,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+443,39,4,3,Solo,Score,Instructor,24,25,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+444,39,5,4,Solo,Score,Public Performance,43,21,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+445,39,6,5,Solo,Score,Instructor,26,23,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+446,39,7,6,Solo,Score,Instructor,20,13,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+447,39,8,7,Solo,Score,Student(s),28,19,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+448,39,9,8,Solo,Score,Public Performance,34,27,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+449,39,10,9,Solo,Score,Instructor,33,18,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+450,39,11,10,Solo,Unspecified,Public Performance,25,15,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+451,39,12,11,Solo,Unspecified,Instructor,29,19,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+452,39,13,12,Solo,Unspecified,Instructor,23,22,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+453,39,14,13,Small Ensemble,Unspecified,Public Performance,27,23,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+454,39,15,14,Solo,Unspecified,Instructor,39,13,21,Female,keyboard (piano or organ),7,22,17,55,43,76
+455,40,1,0,Solo,Unspecified,Instructor,26,15,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+456,40,2,1,Solo,Unspecified,Student(s),29,17,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+457,40,3,2,Solo,Unspecified,Instructor,23,12,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+458,40,4,3,Solo,Score,Juried Recital,36,19,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+459,40,5,4,Solo,Unspecified,Student(s),21,21,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+460,40,6,5,Solo,Score,Instructor,18,10,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+461,40,7,6,Solo,Score,Public Performance,25,19,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+462,40,8,7,Solo,Score,Instructor,24,11,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+463,40,9,8,Solo,Score,Public Performance,16,29,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+464,40,10,9,Solo,Score,Student(s),24,24,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+465,40,11,10,Solo,Memory,Student(s),22,27,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+466,40,12,11,Solo,Unspecified,Instructor,23,18,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+467,40,13,12,Solo,Memory,Student(s),31,21,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+468,40,14,13,Solo,Score,Instructor,23,26,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+469,40,15,14,Solo,Score,Public Performance,31,29,20,Female,keyboard (piano or organ),4,17,17,24,50,45
+470,41,1,0,Solo,Score,Instructor,24,14,19,Male,orchestral instrument,14,10,17,29,40,28
+471,41,2,1,Solo,Score,Instructor,27,16,19,Male,orchestral instrument,14,10,17,29,40,28
+472,41,3,2,Solo,Score,Instructor,30,13,19,Male,orchestral instrument,14,10,17,29,40,28
+473,41,4,3,Solo,Score,Student(s),30,23,19,Male,orchestral instrument,14,10,17,29,40,28
+474,41,5,4,Small Ensemble,Score,Instructor,27,10,19,Male,orchestral instrument,14,10,17,29,40,28
+475,41,6,5,Solo,Score,Instructor,24,11,19,Male,orchestral instrument,14,10,17,29,40,28
+476,41,7,6,Small Ensemble,Score,Instructor,24,11,19,Male,orchestral instrument,14,10,17,29,40,28
+477,41,8,7,Solo,Score,Instructor,29,10,19,Male,orchestral instrument,14,10,17,29,40,28
+478,41,9,8,Small Ensemble,Score,Instructor,20,14,19,Male,orchestral instrument,14,10,17,29,40,28
+479,41,10,9,Small Ensemble,Score,Student(s),24,15,19,Male,orchestral instrument,14,10,17,29,40,28
+480,41,11,10,Solo,Score,Instructor,18,11,19,Male,orchestral instrument,14,10,17,29,40,28
+481,42,3,2,Solo,Score,Instructor,31,14,19,Male,voice,3,18,10,47,39,58
+482,42,4,3,Solo,Score,Instructor,24,13,19,Male,voice,3,18,10,47,39,58
+483,42,5,4,Large Ensemble,Memory,Public Performance,42,18,19,Male,voice,3,18,10,47,39,58
+484,42,6,5,Large Ensemble,Memory,Public Performance,44,14,19,Male,voice,3,18,10,47,39,58
+485,42,7,6,Large Ensemble,Memory,Public Performance,20,14,19,Male,voice,3,18,10,47,39,58
+486,42,8,7,Solo,Memory,Instructor,37,12,19,Male,voice,3,18,10,47,39,58
+487,42,9,8,Solo,Memory,Student(s),38,15,19,Male,voice,3,18,10,47,39,58
+488,42,10,9,Solo,Memory,Public Performance,47,35,19,Male,voice,3,18,10,47,39,58
+489,42,11,10,Solo,Memory,Instructor,30,11,19,Male,voice,3,18,10,47,39,58
+490,42,12,11,Solo,Memory,Instructor,37,12,19,Male,voice,3,18,10,47,39,58
+491,42,13,12,Solo,Memory,Instructor,33,11,19,Male,voice,3,18,10,47,39,58
+492,42,14,13,Solo,Memory,Instructor,37,18,19,Male,voice,3,18,10,47,39,58
+493,42,15,14,Solo,Memory,Instructor,33,10,19,Male,voice,3,18,10,47,39,58
+494,43,1,0,Solo,Memory,Juried Recital,41,19,21,Female,voice,6,31,7,64,17,22
+495,43,2,1,Solo,Score,Instructor,43,13,21,Female,voice,6,31,7,64,17,22
+496,43,3,2,Small Ensemble,Memory,Juried Recital,40,19,21,Female,voice,6,31,7,64,17,22
+497,43,4,3,Solo,Score,Instructor,37,11,21,Female,voice,6,31,7,64,17,22
