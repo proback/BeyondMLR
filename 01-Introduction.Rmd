@@ -446,6 +446,7 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 # updated code from tobiasgerstenberg on github
 library(rsample)
 library(purrr)
+library(broom)
 bootreg = derby.df %>% 
   bootstraps(1000) %>%
   pull(splits) %>% 
