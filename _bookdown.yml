@@ -1,0 +1,7 @@
+book_filename: "bookdown-bysh"
+chapter_name: "Chapter "
+output_dir: docs
+rmd_files: ["index.Rmd", 
+  "01-Introduction.Rmd",
+  "02-Beyond-Most-Least-Squares.Rmd"]
+clean: [packages.bib, bookdown.bbl]
