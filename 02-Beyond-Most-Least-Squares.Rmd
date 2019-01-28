@@ -138,7 +138,7 @@ BBGGGGdf <- data.frame(pb,lik2)
 BBGGGplot<- ggplot(data=BBGGGGdf,aes(x=pb, y=lik2)) + 
   geom_line(color="blue", size=2) + 
   xlab("possible values of pb") + ylab("Likelihood") + 
-  labs(title="Likelihood function for 2 families (GBB abd GGG)") +
+  labs(title="Likelihood function for 2 families (GBB and GGG)") +
   geom_vline(xintercept = .333) 
 ```
 
@@ -363,7 +363,7 @@ A couple of points are worth noting. First, there are 50 factors in the likeliho
 
 With calculus, we can take partial derivatives of the likelihood with respect to each parameter assuming the other parameters are fixed. As we saw in Section \@ref(calc-sec), differentiating the log of the likelihood often makes things easier. This same approach is recommended here. Set each partial derivative to 0 and solve for all parameters simultaneously.  
   
-Knowing that it is easier to work with log-likelihoods, let's take the log of the likelihood we constructed Equation \@ref(eq:lik50).
+Knowing that it is easier to work with log-likelihoods, let's take the log of the likelihood we constructed in Equation \@ref(eq:lik50).
   
 \begin{eqnarray*}
 \log (\lik(\neutral,\ \bbias,\ \gbias)) &= &
