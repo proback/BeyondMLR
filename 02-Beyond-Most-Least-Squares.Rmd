@@ -90,8 +90,10 @@ For the Sex Unconditional models, having children is modeled using coin flips.  
 You may want your model to allow for the probability of a boy, $p_B$, to be something different than 0.5.  With this version of the Sex Unconditional model,  $p_B>0.5$ or $p_B<0.5$ or $p_B=0.5$, in which case you expect to see more boys than girls or fewer boys than girls or equal numbers of boys and girls, respectively.  We would retain the assumption of independence; that is, the probability of a boy, $p_B$, is the same for each child. Seeing a boy for the first child will not lead you to change the probability that the second child is a boy; this would not imply that "sex runs in families."   
 
 ###What is a likelihood?
-`r if (knitr:::is_html_output()) '\\newcommand{\\lik}{\\operatorname{Lik}}'`
-
+$$
+\newcommand{\lik}{\mathrm{Lik}}
+\newcommand{\Lik}{\mathrm{Lik}}
+$$
 As is often the case in statistics, our objective is to find an estimate for a model parameter using our data; here, the parameter to estimate is the probability of a boy, $p_B$, and the data is the gender composition for each family. One way in which to interpret  probability is to imagine repeatedly producing children. The probability of a boy will be the overall proportion of boys as the number of children increases. 
 With likelihood methods, conceptually we consider different possible values for our parameter(s), $p_B$, and determine how likely we would be to see our observed data in each case, $\lik(p_B)$. We'll select as our estimate the value of $p_B$ for which  our data is most likely. A __likelihood__ is a function that tells us how likely we are to observe our data for a given parameter value, $p_B$. For a single family which has a girl followed by two boys, GBB,  the likelihood function looks like:
 
@@ -235,7 +237,7 @@ Figure \@ref(fig:lik4)(a) is the likelihood for the data set of 50 children. The
 
 ####Numerically approximating an MLE
 
-Here a grid search is used with the software package  R to  find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for $p_B$ and then the likelihood, $\lik(p_B)$, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for $p_B$ and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for $p_B$, which allows us to determine a better (more precise) approximation of the MLE.  In addition, most packages, like R, have an optimize function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.  
+Here a grid search is used with the software package  R to  find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for $p_B$ and then the likelihood, $\Lik(p_B)$, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for $p_B$ and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for $p_B$, which allows us to determine a better (more precise) approximation of the MLE.  In addition, most packages, like R, have an optimize function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.  
 
 ```{r}
 Lik.f <- function(nBoys,nGirls,nGrid){
@@ -303,11 +305,11 @@ In contrast, a likelihood is constructed using the data, say (3H,2T). It takes a
 Our first research question involves determining whether sex runs in the family.  Do families who already have boys tend to have more additional boys than expected by chance, and do families who already have girls tend to have more additional girls than expected by chance? What do you think? And how could we use a statistical model to investigate this phenomenon? There are a number of different ways to construct a model for this question.  Here's one possibility.
   
 ###Model Specification
-`r if (knitr:::is_html_output()) '\\newcommand{\\bbias}{p_{B|\\textrm{B Bias}}}'`
-`r if (knitr:::is_html_output()) '\\newcommand{\\gbias}{p_{B|\\textrm{G Bias}}}'`
-`r if (knitr:::is_html_output()) '\\newcommand{\\neutral}{p_{B|N}}'`
-
-
+$$
+\newcommand{\bbias}{p_{B|\textrm{B Bias}}}
+\newcommand{\neutral}{p_{B|N}}
+\newcommand{\gbias}{p_{B|\textrm{G Bias}}}
+$$
 Unlike the previous model, the $p_B$ in a Sex Conditional  Model *depends* on existing family compositions.  We introduce **conditional probabilities** and conditional notation to make the dependence explicit. One way to interpret the notation $P(A|B)$ is the "probability of A *given* B has occurred."  Another way to read this notation is the "probability of A *conditional* on B." Here, let $\neutral$ represent the probability the next child is a boy given that there are equal numbers of boys and girls (sex-neutral) in the existing family. Let $\bbias$ represent the probability the next child is a boy if the family is boy-biased; i.e., there are more boys than girls prior to this child. Similarly, let $\gbias$ represent the probability the next child is a boy if the family is girl-biased; i.e., there are more girls than boys prior to this child.  
   
 Before we are mired in notation and calculus, let's think about how these conditional probabilities can be used to describe sex running in families. While we only had one parameter, $p_B$, to estimate in the Sex Unconditional Model, here we have three parameters: $\neutral$, $\bbias$, and $\gbias$. Clearly if all three of these probabilities are equal, the probability a child is a boy does not depend upon the existing gender composition of the family and there is no evidence of sex running in families. A conditional probability $\bbias$ that is larger than $\neutral$  suggests families with more boys are more likely to produce additional boys in contrast to families with equal boys and girls. This finding would support the theory of "boys run in families." An analogous argument holds for girls. In addition, comparisons of $\bbias$ and $\gbias$ to the parameter estimate $p_B$ from the Sex Unconditional Model may be interesting and can be performed using likelihoods.  
@@ -350,6 +352,7 @@ We construct the likelihood using data from all 30 families assuming families ar
  \big[(\neutral)^{17}
  (1-\neutral)^{15}
  (\bbias)^{5} \\
+ 
  & & (1-\bbias)^{4}
  (\gbias)^{8}
  (1-\gbias) \big]
@@ -459,7 +462,7 @@ Families with different compositions will contribute different factors to the li
 
 Now we create the entire likelihood for our data under the Sex Unconditional Model.
 \begin{eqnarray*}
- \lik(p_B) &=& p_B^{930}p_G^{951}p_{BB}^{582} \cdots p_{BBG}^{177} \cdots p_{GGG}^{159} \\
+ \Lik(p_B) &=& p_B^{930}p_G^{951}p_{BB}^{582} \cdots p_{BBG}^{177} \cdots p_{GGG}^{159} \\
  &=& p_B^{930+2*582+666+666+\cdots+182}(1-p_B)^{951+666+666+2*530+\cdots+3*159} \\
  &=&  p_B^{5416}(1-p_B)^{5256} \\
  (\#eq:likSexUn)
@@ -547,12 +550,12 @@ Child3 <- c(" "," "," "," "," "," ",
 #Sex bias table
 table8chp2 <- data.frame(Famcomp3,NumFams1,SexUnc, Child1,Child2,Child3)
 colnames(table8chp2) <-c("Family composition","Number of families","Sex Unconditional", "Child1","Child 2","Child 3")
-kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in Sex Unconditional and Sex Conditional Models.") %>%
+kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in Sex Unconditional and Sex Conditional Models.", format="html") %>%
   add_header_above(c(" "," "," ", "Sex Conditional Model"=3))
 ```
     
 \begin{eqnarray}
- \lik(\neutral,  \bbias, \gbias)& =& \big[ \neutral^{930}(1-\neutral)^{951} ( \neutral\bbias)^{582}\\
+ \Lik(\neutral,  \bbias, \gbias)& =& \big[ \neutral^{930}(1-\neutral)^{951} ( \neutral\bbias)^{582}\\
 && \cdots  ((1-\neutral)(1-\gbias)(1-\gbias))^{159} \big]\\ 
 &=& \big[\neutral^{3161}(1-\neutral)^{3119}\bbias^{1131} \\
 & &   (1-\bbias)^{1164}\gbias^{1124}(1-\gbias)^{973} \big]\\
@@ -560,7 +563,7 @@ kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in S
 \end{eqnarray}
     
 \begin{eqnarray}
-\log(\lik(\neutral,  \bbias, \gbias)) &=& 3161\log(\neutral)+3119\log(1-\neutral)\\ 
+\log(\Lik(\neutral,  \bbias, \gbias)) &=& 3161\log(\neutral)+3119\log(1-\neutral)\\ 
  & &{}+1131\log(\bbias)+1164\log(1-\bbias)\\   
  & &{}+1124\log(\gbias)+ 973\log(1-\gbias)\\
 (\#eq:log-likall) 
@@ -608,14 +611,14 @@ We start with the idea of comparing the likelihoods or, equivalently, the log-li
 The maximum of the log-likelihood  for the reduced model can be found by replacing $p_{B}$ in the log-likelihood with the MLE of $p_{B}$, 0.5075.
     
 \begin{eqnarray*}
-\log(\lik(0.5075))& = &5416\log(.5075) + 5256\log(1-.5075)\\
+\log(\Lik(0.5075))& = &5416\log(.5075) + 5256\log(1-.5075)\\
 &=& -7396.067\\
 \end{eqnarray*}
     
 The maximum of the log-likelihood for the larger model can be found by replacing $\neutral,  \bbias, \gbias$ in the log-likelihood with 0.5033, 0.4928, and 0.5360, respectively.
     
 \begin{eqnarray*}
- \log(\lik(0.5033, 0.4928, 0.5360)) &= & 3161\log(.5033)+3119\log(1-.5033)\\
+ \log(\Lik(0.5033, 0.4928, 0.5360)) &= & 3161\log(.5033)+3119\log(1-.5033)\\
  & &{}+ 1131\log(.4928)+1164\log(1-.4928)\\
  & &{}+ 1124\log(.5360)+973\log(1-.5360)\\
  &=& -7391.448
@@ -628,8 +631,8 @@ A result from statistical theory states that, when the reduced model is the true
 Our test statistic is
 
 \begin{eqnarray}    
- \textrm{LRT} &=& 2[\max(\log(\lik(\textrm{larger model}))) - \max(\log(\lik(\textrm{reduced model})))] \\
-     &=& 2\log\left(\frac{\max(\lik(\textrm{larger  model}))}{\max(\lik(\textrm{reduced model}))} \right)
+ \textrm{LRT} &=& 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
+     &=& 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
 \end{eqnarray}
 
 Intuitively, when the likelihood for the larger model is much greater than it is for the reduced model, we have evidence that the larger model is more closely aligned with the observed data. This isn't really a fair comparison on the face of it.  We need to account for the fact that more parameters were estimated and used for the larger model. That is accomplished by taking into account the degrees of freedom for the $\chi^2$ distribution. The expected value of the $\chi^2$ distribution is its degrees of freedom.  Thus when the difference in the number of parameters is large, the test statistic will need to be much larger to convince us that it is not simply chance variation with two identical models. Here, under the reduced model we'd expect our test statistic to be 2, when in fact it is over 9.  The evidence favors our larger model. More precisely, the test statistic is $2(-7391.448+7396.073) = 9.238,\; (p=.0099)$.
@@ -646,8 +649,10 @@ We have convincing evidence that the Sex Conditional Model provides a significan
 
 For stopping models, two probabilities are recorded for each child: the probability of the sex and the conditional probability of stopping after that child.  As we have done in previous models, let $p_B$ = probability the child is  a boy. When conditioning, every possible condition must have a probability associated with it. Here the stopping conditions for Model 3 are: stop on first boy $(S|B1)$ or stopping on a child who is not the first boy $(S|N)$.
     
-`r if (knitr:::is_html_output()) '\\newcommand{\\bstop}{p_{S|B1}}'`
-`r if (knitr:::is_html_output()) '\\newcommand{\\nstop}{p_{S|N}}'`
+$$
+\newcommand{\bstop}{p_{S|B1}}
+\newcommand{\nstop}{p_{S|N}}
+$$
 
 __Additional Parameters for the First Boy Stopping Model__  
 
@@ -786,7 +791,7 @@ p_B= \frac{e^{\beta_0+\beta_1(\textrm{parental age})}}
 {1+e^{\beta_0+\beta_1(\textrm{parental age})}}
 \].  
     
-(We will give a good reason for this crazy-looking expression for $p_B$ in later chapters.) The next step would be to replace $p_B$ in the likelihood, $\lik(p_B)$, (Equation \@ref(eq:lik30)), with the complicated expression for $p_B$.  The result would be a function of $\beta_0$ and $\beta_1$.  We could then use calculus to find the MLEs for $\beta_0$ and $\beta_1$.  
+(We will give a good reason for this crazy-looking expression for $p_B$ in later chapters.) The next step would be to replace $p_B$ in the likelihood, $\Lik(p_B)$, (Equation \@ref(eq:lik30)), with the complicated expression for $p_B$.  The result would be a function of $\beta_0$ and $\beta_1$.  We could then use calculus to find the MLEs for $\beta_0$ and $\beta_1$.  
     
 Another compelling reason for likelihoods occurs when we encounter correlated data. For example, models with conditional probabilities do not conform to the independence assumption.  The Sex Conditional Model is an example of such a model.  We'll see that likelihoods can be  useful when the data has structure such as multilevel that induces a correlation. A good portion of the book addresses this.
     

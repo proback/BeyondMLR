@@ -7,16 +7,15 @@ output:
   html_document: default
 ---
 #Generalized Linear Models (GLMs): A Unifying Theory {#ch-glms}
-$$
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\SD}{\operatorname{SD}}
-\newcommand{\var}{\operatorname{Var}}
-$$
 
 ##Learning Objectives
 
 - Determine if a probability distribution can be expressed in one-parameter exponential family form.
 - Identify canonical links for distributions of one parameter exponential family form.
+
+`r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
 
 ##One parameter exponential families
 
@@ -60,11 +59,9 @@ There are other benefits of identifying a response as being from a one parameter
 \[\E(Y) =-\frac{c'(\theta)}{b'(\theta)} \quad \textrm{and} \quad \var(Y) =\frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}
 \]
 where differentiation is with respect to $\theta$.  Verifying these results for the Poisson response:
-\begin{equation*}
-\E(Y)=-\frac{-1}{1/\lambda}=\lambda \quad \textrm{and} \quad  \var(Y)=\frac{1/{{\lambda}^2}}
+\[\E(Y)=-\frac{-1}{1/\lambda}=\lambda \quad \textrm{and} \quad  \var(Y)=\frac{1/{{\lambda}^2}}
 {(1/{\lambda}^3)}=\lambda
-\end{equation*}
-
+\]
 We'll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we'll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean $\mu$ and standard deviation $\sigma$. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.  
 
 ###One parameter exponential family: Normal
