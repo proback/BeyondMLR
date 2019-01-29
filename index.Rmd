@@ -7,7 +7,7 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["bib/articles.bib", "bib/books.bib", "bib/misc.bib"]
 link-citations: yes
-description: "Test."
+description: "An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets."
 ---
 # Preface {-}
 
