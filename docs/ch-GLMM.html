@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 11 Generalized Linear Multilevel Models | Broadening Your Statistical Horizons</title>
+  <meta name="description" content="Test.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 11 Generalized Linear Multilevel Models | Broadening Your Statistical Horizons" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Test." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Generalized Linear Multilevel Models | Broadening Your Statistical Horizons" />
+  
+  <meta name="twitter:description" content="Test." />
+  
+
+<meta name="author" content="Julie Legler and Paul Roback">
+
+
+<meta name="date" content="2019-01-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ch-3level.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Broadening Your Statistical Horizons</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-broadening-your-statistical-horizons"><i class="fa fa-check"></i><b>1.2</b> Introduction to Broadening Your Statistical Horizons</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#ordinary-least-squares-ols-assumptions"><i class="fa fa-check"></i><b>1.3</b> Ordinary Least Squares (OLS) Assumptions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-the-ols-assumptions-for-inference"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate the OLS assumptions for inference</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-the-ols-assumptions-for-inference-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where the OLS assumptions for inference are violated</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#data-organization"><i class="fa fa-check"></i><b>1.5.1</b> Data Organization</a></li>
+<li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
+<li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#simple-linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Simple linear regression with a binary predictor</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
+<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
+<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
+<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
+<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview"><i class="fa fa-check"></i><b>1.7</b> Preview</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
+<li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
+<li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
+<li class="chapter" data-level="1.7.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#crime"><i class="fa fa-check"></i><b>1.7.4</b> Crime</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#conceptual-exercises"><i class="fa fa-check"></i><b>1.8.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="1.8.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#guided-exercises"><i class="fa fa-check"></i><b>1.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods to Fit and Compare Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does sex run in families?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#research-questions"><i class="fa fa-check"></i><b>2.2.1</b> Research Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-model-equal-probabilities-independence"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional Model (Equal probabilities, Independence)</a></li>
+<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional Model (Any Probability, Independence)</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What is a likelihood?</a></li>
+<li class="chapter" data-level="2.4.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#findMLE.sec"><i class="fa fa-check"></i><b>2.4.2</b> Finding MLEs</a></li>
+<li class="chapter" data-level="2.4.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary"><i class="fa fa-check"></i><b>2.4.3</b> Summary</a></li>
+<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a likelihood a probability function? (Optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional Model (Sex Bias)</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-specification"><i class="fa fa-check"></i><b>2.5.1</b> Model Specification</a></li>
+<li class="chapter" data-level="2.5.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#application-to-hypothetical-data"><i class="fa fa-check"></i><b>2.5.2</b> Application to Hypothetical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY data</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
+<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_cond_lik.sec"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#non-nested-models"><i class="fa fa-check"></i><b>2.7.1</b> Non-nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary-of-model-building"><i class="fa fa-check"></i><b>2.8</b> Summary of Model Building</a></li>
+<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-based Methods</a></li>
+<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
+<li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
+<li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercise"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch-distthry.html"><a href="ch-distthry.html"><i class="fa fa-check"></i><b>3</b> Distribution Theory</a><ul>
+<li class="chapter" data-level="3.1" data-path="ch-distthry.html"><a href="ch-distthry.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="ch-distthry.html"><a href="ch-distthry.html#introduction"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="ch-distthry.html"><a href="ch-distthry.html#discrete-random-variables"><i class="fa fa-check"></i><b>3.3</b> Discrete Random Variables</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="ch-distthry.html"><a href="ch-distthry.html#sec-binary"><i class="fa fa-check"></i><b>3.3.1</b> Binary Random Variable</a></li>
+<li class="chapter" data-level="3.3.2" data-path="ch-distthry.html"><a href="ch-distthry.html#sec-binomial"><i class="fa fa-check"></i><b>3.3.2</b> Binomial Random Variable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="ch-distthry.html"><a href="ch-distthry.html#geometric-random-variable"><i class="fa fa-check"></i><b>3.3.3</b> Geometric Random Variable</a></li>
+<li class="chapter" data-level="3.3.4" data-path="ch-distthry.html"><a href="ch-distthry.html#negative-binomial-random-variable"><i class="fa fa-check"></i><b>3.3.4</b> Negative Binomial Random Variable</a></li>
+<li class="chapter" data-level="3.3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#hypergeometric-random-variable"><i class="fa fa-check"></i><b>3.3.5</b> Hypergeometric Random Variable</a></li>
+<li class="chapter" data-level="3.3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#poisson-random-variable"><i class="fa fa-check"></i><b>3.3.6</b> Poisson Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch-distthry.html"><a href="ch-distthry.html#continuous-random-variables"><i class="fa fa-check"></i><b>3.4</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-distthry.html"><a href="ch-distthry.html#exponential-random-variable"><i class="fa fa-check"></i><b>3.4.1</b> Exponential Random Variable</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch-distthry.html"><a href="ch-distthry.html#gamma-random-variable"><i class="fa fa-check"></i><b>3.4.2</b> Gamma Random Variable</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch-distthry.html"><a href="ch-distthry.html#normal-gaussian-random-variable"><i class="fa fa-check"></i><b>3.4.3</b> Normal (Gaussian) Random Variable</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch-distthry.html"><a href="ch-distthry.html#beta-random-variable"><i class="fa fa-check"></i><b>3.4.4</b> Beta Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions used in Testing</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="ch-distthry.html"><a href="ch-distthry.html#chi2-distribution"><i class="fa fa-check"></i><b>3.5.1</b> <span class="math inline">\(\chi^2\)</span> Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-tdistribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>–Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#fdistribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>–Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
+<li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#execises"><i class="fa fa-check"></i><b>3.7</b> Execises</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-distthry.html"><a href="ch-distthry.html#conceptual-exercies"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual Exercies</a></li>
+<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-1"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html"><i class="fa fa-check"></i><b>4</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#introduction-to-poisson-regression"><i class="fa fa-check"></i><b>4.2</b> Introduction to Poisson Regression</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#poisson-regression-assumptions"><i class="fa fa-check"></i><b>4.2.1</b> Poisson Regression Assumptions</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#a-graphical-look-at-poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> A Graphical Look at Poisson Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-studies-overview"><i class="fa fa-check"></i><b>4.3</b> Case Studies Overview</a></li>
+<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.4.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
+<li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
+<li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
+<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
+<li class="chapter" data-level="4.4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#second-order-model"><i class="fa fa-check"></i><b>4.4.6</b> Second Order Model</a></li>
+<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a covariate</a></li>
+<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
+<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#least-squares-regression-vs.poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Least Squares Regression vs. Poisson Regression</a></li>
+<li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.6.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#accounting-for-enrollment"><i class="fa fa-check"></i><b>4.6.3</b> Accounting for Enrollment</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling-assumptions"><i class="fa fa-check"></i><b>4.7</b> Modeling Assumptions</a></li>
+<li class="chapter" data-level="4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#initial-models"><i class="fa fa-check"></i><b>4.8</b> Initial Models</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#tukeys-honestly-significant-differences"><i class="fa fa-check"></i><b>4.8.1</b> Tukey’s Honestly Significant Differences</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.2</b> Negative binomial modeling</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
+<li class="chapter" data-level="4.10.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-2"><i class="fa fa-check"></i><b>4.10.2</b> Data Organization</a></li>
+<li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
+<li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-2"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercise-1"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models (GLMs): A Unifying Theory</a><ul>
+<li class="chapter" data-level="5.1" data-path="ch-glms.html"><a href="ch-glms.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One parameter exponential families</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-possion"><i class="fa fa-check"></i><b>5.2.1</b> One Parameter Exponential Family: Possion</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One parameter exponential family: Normal</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ch-glms.html"><a href="ch-glms.html#generalized-linear-modeling"><i class="fa fa-check"></i><b>5.3</b> Generalized Linear Modeling</a></li>
+<li class="chapter" data-level="5.4" data-path="ch-glms.html"><a href="ch-glms.html#exercises-3"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch-logreg.html"><a href="ch-logreg.html"><i class="fa fa-check"></i><b>6</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="ch-logreg.html"><a href="ch-logreg.html#learning-objectives-5"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="ch-logreg.html"><a href="ch-logreg.html#introduction-to-logistic-regression"><i class="fa fa-check"></i><b>6.2</b> Introduction to Logistic Regression</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="ch-logreg.html"><a href="ch-logreg.html#logistic-regression-assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Logistic Regression Assumptions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="ch-logreg.html"><a href="ch-logreg.html#a-graphical-look-at-logistic-regression"><i class="fa fa-check"></i><b>6.2.2</b> A Graphical Look at Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="ch-logreg.html"><a href="ch-logreg.html#case-studies-overview-1"><i class="fa fa-check"></i><b>6.3</b> Case Studies Overview</a></li>
+<li class="chapter" data-level="6.4" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-soccer-goalkeepers"><i class="fa fa-check"></i><b>6.4</b> Case Study: Soccer Goalkeepers</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="ch-logreg.html"><a href="ch-logreg.html#modeling-odds"><i class="fa fa-check"></i><b>6.4.1</b> Modeling Odds</a></li>
+<li class="chapter" data-level="6.4.2" data-path="ch-logreg.html"><a href="ch-logreg.html#logistic-regression-models-for-binomial-responses"><i class="fa fa-check"></i><b>6.4.2</b> Logistic Regression Models for Binomial Responses</a></li>
+<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-for-logistic-regression-models-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical rationale for logistic regression models (Optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-reconstructing-alabama"><i class="fa fa-check"></i><b>6.5</b> Case Study: Reconstructing Alabama</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-3"><i class="fa fa-check"></i><b>6.5.1</b> Data Organization</a></li>
+<li class="chapter" data-level="6.5.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-analyses"><i class="fa fa-check"></i><b>6.5.2</b> Exploratory Analyses</a></li>
+<li class="chapter" data-level="6.5.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-1"><i class="fa fa-check"></i><b>6.5.3</b> Initial Models</a></li>
+<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for significance of model coefficients</a></li>
+<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence intervals for model coefficients</a></li>
+<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for goodness of fit</a></li>
+<li class="chapter" data-level="6.5.7" data-path="ch-logreg.html"><a href="ch-logreg.html#residuals-for-binomial-regression"><i class="fa fa-check"></i><b>6.5.7</b> Residuals for Binomial Regression</a></li>
+<li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
+<li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#least-squares-regression-vs.logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Least Squares Regression vs. Logistic Regression</a></li>
+<li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
+<li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="6.7.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-2"><i class="fa fa-check"></i><b>6.7.3</b> Initial Models</a></li>
+<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-deviance Tests</a></li>
+<li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-4"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-excersises"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Excersises:</a></li>
+<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-2"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-corrdata.html"><a href="ch-corrdata.html"><i class="fa fa-check"></i><b>7</b> Correlated Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#learning-objectives-6"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#introduction-1"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing correlation</a></li>
+<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and pups</a></li>
+<li class="chapter" data-level="7.5" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability"><i class="fa fa-check"></i><b>7.5</b> Sources of Variability</a></li>
+<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No covariates</a></li>
+<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose effect</a></li>
+<li class="chapter" data-level="7.8" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-tree-growth"><i class="fa fa-check"></i><b>7.8</b> Case Study: Tree Growth</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the data set</a></li>
+<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of variability</a></li>
+<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation-within-transect"><i class="fa fa-check"></i><b>7.8.3</b> Analysis preview: accounting for correlation within transect</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
+<li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-5"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
+<li class="chapter" data-level="7.10.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#conceptual-exercises-2"><i class="fa fa-check"></i><b>7.10.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-3"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="7.10.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#note-on-correlated-binary-outcomes"><i class="fa fa-check"></i><b>7.10.3</b> Note on Correlated Binary Outcomes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html"><i class="fa fa-check"></i><b>8</b> Introduction to Multilevel Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#learning-objectives-7"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#cs:music"><i class="fa fa-check"></i><b>8.2</b> Case Study: Music Performance Anxiety</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
+<li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two level modeling: preliminary considerations</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the two level structure (not recommended)</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A two-stage modeling approach (better but imperfect)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
+<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
+<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
+<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
+<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo <span class="math inline">\(R^2\)</span> values</a></li>
+<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a covariate at Level Two</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Additional covariates: model comparison and interpretability</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of parameter estimates</a></li>
+<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Center covariates</a></li>
+<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A potential final model for music performance anxiety</a></li>
+<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling the multilevel structure: is it really necessary?</a></li>
+<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-6"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
+<li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise-2"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two Level Longitudinal Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case study: Charter schools</a></li>
+<li class="chapter" data-level="9.3" data-path="ch-lon.html"><a href="ch-lon.html#exploratoryanalysis"><i class="fa fa-check"></i><b>9.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data organization</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing data</a></li>
+<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory analyses for general multilevel models</a></li>
+<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory analyses for longitudinal data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
+<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
+<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
+<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
+<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
+<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative covariance structures</a></li>
+<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#covariance-structure-in-non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Covariance structure in non-longitudinal multilevel models</a></li>
+<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final thoughts regarding covariance structures</a></li>
+<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of covariance structures (Optional)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-7"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-4"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-3"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch-3level.html"><a href="ch-3level.html"><i class="fa fa-check"></i><b>10</b> Multilevel Data With More Than Two Levels</a><ul>
+<li class="chapter" data-level="10.1" data-path="ch-3level.html"><a href="ch-3level.html#learning-objectives-9"><i class="fa fa-check"></i><b>10.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-3level.html"><a href="ch-3level.html#cs:seeds"><i class="fa fa-check"></i><b>10.2</b> Case Studies: Seed Germination</a></li>
+<li class="chapter" data-level="10.3" data-path="ch-3level.html"><a href="ch-3level.html#explore3"><i class="fa fa-check"></i><b>10.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="ch-3level.html"><a href="ch-3level.html#organizedata3"><i class="fa fa-check"></i><b>10.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="10.3.2" data-path="ch-3level.html"><a href="ch-3level.html#explore3v2"><i class="fa fa-check"></i><b>10.3.2</b> Exploratory Analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial models: unconditional means and unconditional growth</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering boundary constraints</a></li>
+<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric bootstrap testing</a></li>
+<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding variance components</a></li>
+<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a final model</a></li>
+<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance structure (Optional)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of covariance structures</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-8"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
+<li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-4"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Multilevel Models</a><ul>
+<li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
+<li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data organization</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two level Modeling with a Generalized Response</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM approach (correlation not accounted for)</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A two-stage modeling approach (provides the basic idea for multilevel modeling)</a></li>
+<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A unified multilevel approach (the framework we’ll use)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="ch-GLMM.html"><a href="ch-GLMM.html#crossedre"><i class="fa fa-check"></i><b>11.5</b> Crossed Random Effects</a></li>
+<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Model Comparisons Using the Parametric Bootstrap</a></li>
+<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Potential Final Model for Examining Referee Bias</a></li>
+<li class="chapter" data-level="11.8" data-path="ch-GLMM.html"><a href="ch-GLMM.html#estimatedRE"><i class="fa fa-check"></i><b>11.8</b> Estimated Random Effects</a></li>
+<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="11.10" data-path="ch-GLMM.html"><a href="ch-GLMM.html#exercises-9"><i class="fa fa-check"></i><b>11.10</b> Exercises</a><ul>
+<li class="chapter" data-level="11.10.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>11.10.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>11.10.2</b> Open-ended Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Broadening Your Statistical Horizons</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch-GLMM" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Generalized Linear Multilevel Models</h1>
+<div id="objectives" class="section level2">
+<h2><span class="header-section-number">11.1</span> Learning Objectives</h2>
+<p>After finishing this chapter, students should be able to:</p>
+<ul>
+<li>Recognize when generalized linear multilevel models (GLMMs) are appropriate.</li>
+<li>Understand how GLMMs essentially combine ideas from earlier chapters.</li>
+<li>Apply exploratory data analysis techniques to multilevel data with non-normal responses.</li>
+<li>Recognize when crossed random effects are appropriate and how they differ from nested random effects.</li>
+<li>Write out a generalized linear multilevel statistical model, including assumptions about variance components.</li>
+<li>Interpret model parameters (including fixed effects and variance components) from a GLMM.</li>
+<li>Generate and interpret random effect estimates.</li>
+</ul>
+</div>
+<div id="cs:refs" class="section level2">
+<h2><span class="header-section-number">11.2</span> Case Study: College Basketball Referees</h2>
+<p>An article by <span class="citation">K. J. Anderson and Pierce (<a href="#ref-Anderson2009">2009</a>)</span> describes empirical evidence that officials in NCAA men’s college basketball tend to “even out” foul calls over the course of a game, based on data collected in 2004-2005. Using logistic regression to model the effect of foul differential on the probability that the next foul called would be on the home team (controlling for score differential, conference, and whether or not the home team had the lead), Anderson and Pierce found that “the probability of the next foul being called on the visiting team can reach as high as 0.70.” More recently, Moskowitz and Wertheim, in their book <em>Scorecasting</em>, argue that the number one reason for the home field advantage in sports is referee bias. Specifically, in basketball, they demonstrate that calls over which referees have greater control—offensive fouls, loose ball fouls, ambiguous turnovers such as palming and traveling—were more likely to benefit the home team than more clearcut calls, especially in crucial situations <span class="citation">(Moskowitz and Wertheim <a href="#ref-Moskowitz2011">2011</a>)</span>.</p>
+<p>Data have been gathered from the 2009-2010 college basketball season for three major conferences to investigate the following questions <span class="citation">(Noecker and Roback <a href="#ref-Noecker2012">2012</a>)</span>:</p>
+<ul>
+<li>Does evidence that college basketball referees tend to “even out” calls still exist in 2010 as it did in 2005?</li>
+<li>How do results change if our analysis accounts for the correlation in calls from the same game and the same teams?</li>
+<li>Is the tendency to even out calls stronger for fouls over which the referee generally has greater control? Fouls are divided into offensive, personal, and shooting fouls, and one could argue that referees have the most control over offensive fouls (typically where the player with the ball knocks over a stationary defender) and the least control over shooting fouls (where an offensive player is fouled in the act of shooting).</li>
+<li>Are the actions of referees associated with the score of the game?</li>
+</ul>
+</div>
+<div id="explore-glmm" class="section level2">
+<h2><span class="header-section-number">11.3</span> Initial Exploratory Analyses</h2>
+<div id="data-organization-5" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> Data organization</h3>
+<p>Examination of data for Case Study <a href="ch-GLMM.html#cs:refs">11.2</a> reveals the following key variables in <code>basketball0910.csv</code>:</p>
+<ul>
+<li><code>game</code> = unique game identification number</li>
+<li><code>date</code> = date game was played (YYYYMMDD)</li>
+<li><code>visitor</code> = visiting team abbreviation</li>
+<li><code>hometeam</code> = home team abbreviation</li>
+<li><code>foul.num</code> = cumulative foul number within game</li>
+<li><code>foul.home</code> = indicator if foul was called on the home team</li>
+<li><code>foul.vis</code> = indicator if foul was called on the visiting team</li>
+<li><code>foul.diff</code> = the difference in fouls before the current foul was called (home - visitor)</li>
+<li><code>score.diff</code> = the score differential before the current foul was called (home - visitor)</li>
+<li><code>lead.vis</code> = indicator if visiting team has the lead</li>
+<li><code>lead.home</code> = indicator if home team has the lead</li>
+<li><code>previous.foul.home</code> = indicator if previous foul was called on the home team</li>
+<li><code>previous.foul.vis</code> = indicator if previous foul was called on the visiting team</li>
+<li><code>foul.type</code> = categorical variable if current foul was offensive, personal, or shooting</li>
+<li><code>shooting</code> = indicator if foul was a shooting foul</li>
+<li><code>personal</code> = indicator if foul was a personal foul</li>
+<li><code>offensive</code> = indicator if foul was an offensive foul</li>
+<li><code>time</code> = number of minutes left in the first half when foul called</li>
+</ul>
+<p>Data was collected for 4972 fouls over 340 games from the Big Ten, ACC, and Big East conference seasons during 2009-2010. We focus on fouls called during the first half to avoid the issue of intentional fouls by the trailing team at the end of games. Table <a href="ch-GLMM.html#tab:table1chp11">11.1</a> illustrates key variables from the first 10 rows of the data set.</p>
+<caption>
+<span id="tab:table1chp11">Table 11.1: </span> Key variables from the first 10 rows of data from the College Basketball Referees case study. Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+game
+</th>
+<th style="text-align:left;">
+visitor
+</th>
+<th style="text-align:left;">
+hometeam
+</th>
+<th style="text-align:right;">
+foul.num
+</th>
+<th style="text-align:right;">
+foul.home
+</th>
+<th style="text-align:right;">
+foul.diff
+</th>
+<th style="text-align:right;">
+score.diff
+</th>
+<th style="text-align:right;">
+lead.home
+</th>
+<th style="text-align:left;">
+foul.type
+</th>
+<th style="text-align:right;">
+time
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+14.166667
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+11.433333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+10.233333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+9.733333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+7.766667
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+5.566667
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-2
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+2.433333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+IA
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Offensive
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+MI
+</td>
+<td style="text-align:left;">
+MIST
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+18.983333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+MI
+</td>
+<td style="text-align:left;">
+MIST
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+17.200000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For our initial analysis, our primary response variable is <code>foul.home</code>, and our primary hypothesis concerns evening out foul calls. We hypothesize that the probability a foul is called on the home team is inversely related to the foul differential; that is, if more fouls have been called on the home team than the visiting team, the next foul is less likely to be on the home team.</p>
+<p>The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way. With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression). But, with covariates at multiple levels—some at the individual foul level and others at the game level—a multilevel model would also be sensible. So what we need is a multilevel model with a non-normal response; in other words, a <strong>generalized linear multilevel model (GLMM)</strong>. We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.</p>
+<p>As with other multilevel situations, we will begin with broad summaries across all 4972 foul calls from all 340 games. Most of the variables we have collected can vary with each foul called; these Level One variables include:</p>
+<ul>
+<li>whether or not the foul was called on the home team (our response variable),</li>
+<li>the game situation at the time the foul was called (the time remaining in the first half, who is leading and by how many points, the foul differential between the home and visiting team, and who the previous foul was called on), and</li>
+<li>the type of foul called (offensive, personal, or shooting).</li>
+</ul>
+<p>Level Two variables, those that remain unchanged for a particular game, then include only the home and visiting teams, although we might consider attributes such as attendance, team rankings, etc.</p>
+</div>
+<div id="glmm-eda" class="section level3">
+<h3><span class="header-section-number">11.3.2</span> Exploratory analyses</h3>
+<p>In Figure <a href="ch-GLMM.html#fig:gmu-histmat1">11.1</a>, we see histograms for the continuous Level One covariates (time remaining, foul differential, and score differential). These plots treat each foul within a game as independent even though we expect them to be correlated, but they provide a sense for the overall patterns. We see that time remaining is reasonably uniform. Score differential and foul differential are both bell-shaped, with a mean slightly favoring the home team in both cases – on average, the home team leads by 2.04 points (SD 7.24) and has 0.36 fewer previous fouls (SD 2.05) at the time a foul is called.</p>
+<div class="figure" style="text-align: center"><span id="fig:gmu-histmat1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-histmat1-1.png" alt="Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference." width="60%" />
+<p class="caption">
+Figure 11.1: Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference.
+</p>
+</div>
+<p>Summaries of the categorical response (whether the foul was called on the home team) and categorical Level One covariates (whether the home team has the lead and what type of foul was called) can be provided through tables of proportions. More fouls are called on visiting teams (52.1%) than home teams, the home team is more likely to hold a lead (57.1%), and personal fouls are most likely to be called (51.6%), followed by shooting fouls (38.7%) and then offensive fouls (9.7%).</p>
+<p>For an initial examination of Level Two covariates (the home and visiting teams), we can take the number of times, for instance, Minnesota (MN) appears in the long data set (with one row per foul called as illustrated in Table <a href="ch-GLMM.html#tab:table1chp11">11.1</a>) as the home team and divide by the number of unique games in which Minnesota is the home team. This ratio (12.1), found in Table <a href="ch-GLMM.html#tab:table2chp11">11.2</a>, shows that Minnesota is among the bottom three teams in the average total number of fouls in the first halves of games in which it is the home team. That is, games at Minnesota have few total fouls relative to games played elsewhere. Accounting for the effect of home and visiting team will likely be an important part of our model, since some teams tend to play in games with twice as many fouls called as others, and other teams see a noticeable disparity in the total number of fouls depending on if they are home or away.</p>
+<table>
+<caption>
+<span id="tab:table2chp11">Table 11.2: </span> Average total number of fouls in the first half over all games in which a particular team is home or visitor. The left columns show the top 3 and bottom 3 teams according to total number of fouls (on both teams) in first halves of games in which they are the home team. The middle columns correspond to games in which the listed teams are the visitors, and the right columns show the largest differences (in both directions) between total fouls in games in which a team is home or visitor.
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Home
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Visitor
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Difference
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Duke
+</td>
+<td style="text-align:left;">
+20.0
+</td>
+<td style="text-align:left;">
+WVa
+</td>
+<td style="text-align:left;">
+21.4
+</td>
+<td style="text-align:left;">
+Duke
+</td>
+<td style="text-align:left;">
+4.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Top 3
+</td>
+<td style="text-align:left;">
+VaTech
+</td>
+<td style="text-align:left;">
+19.4
+</td>
+<td style="text-align:left;">
+Nova
+</td>
+<td style="text-align:left;">
+19.0
+</td>
+<td style="text-align:left;">
+Wisc
+</td>
+<td style="text-align:left;">
+2.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Nova
+</td>
+<td style="text-align:left;">
+19.1
+</td>
+<td style="text-align:left;">
+Wake
+</td>
+<td style="text-align:left;">
+18.6
+</td>
+<td style="text-align:left;">
+Pitt
+</td>
+<td style="text-align:left;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Mich
+</td>
+<td style="text-align:left;">
+10.6
+</td>
+<td style="text-align:left;">
+Wisc
+</td>
+<td style="text-align:left;">
+10.4
+</td>
+<td style="text-align:left;">
+WVa
+</td>
+<td style="text-align:left;">
+-6.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bottom 3
+</td>
+<td style="text-align:left;">
+Ill
+</td>
+<td style="text-align:left;">
+11.6
+</td>
+<td style="text-align:left;">
+Mich
+</td>
+<td style="text-align:left;">
+11.1
+</td>
+<td style="text-align:left;">
+Mia
+</td>
+<td style="text-align:left;">
+-2.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+MN
+</td>
+<td style="text-align:left;">
+12.1
+</td>
+<td style="text-align:left;">
+PSU
+</td>
+<td style="text-align:left;">
+11.3
+</td>
+<td style="text-align:left;">
+Clem
+</td>
+<td style="text-align:left;">
+-2.6
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next, we inspect numerical and graphical summaries of relationships between Level One model covariates and our binary model response. As with other multilevel analyses, we will begin by observing broad trends involving all 4972 fouls called, even though fouls from the same game may be correlated. The conditional density plots in the first row of Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a> examine continuous Level One covariates. Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>a provides support for our primary hypothesis about evening out foul calls, indicating a very strong trend for fouls to be more often called on the home team at points in the game when more fouls had previously been called on the visiting team. Figures <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>b and <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>c then show that fouls were somewhat more likely to be called on the home team when the home team’s lead was greater and (very slightly) later in the half. Conclusions from the conditional density plots in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>a-c are supported with associated empirical logit plots in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>d-f. If a logistic link function is appropriate, these plots should be linear, and the stronger the linear association, the more promising the predictor. We see in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>d further confirmation of our primary hypothesis, with lower log-odds of a foul called on the home team the greater number of previous fouls the home team had accumulated compared to the visiting team. Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>e shows that game score may play a role in foul trends, as the log-odds of a foul on the home team grows as the home team accumulates a bigger lead on the scoreboard, and Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>f shows a very slight tendency for greater log-odds of a foul called on the home team as the half proceeds (since points on the right are closer to the beginning of the game).</p>
+<p>Conclusions about continuous Level One covariates are further supported by summary statistics calculated separately for fouls called on the home team and those called on the visiting team. For instance, when a foul is called on the home team, there is an average of 0.64 additional fouls on the visitors at that point in the game, compared to an average of 0.10 additional fouls on the visitors when a foul is called on the visiting team. Similarly, when a foul is called on the home team, they are in the lead by an average of 2.7 points, compared to an average home lead of 1.4 points when a foul is called on the visiting team. As expected, the average time remaining the half is very similar for home and visitor fouls (9.2 vs. 9.5 minutes, respectively).</p>
+<p>The mosaic plots in Figure <a href="ch-GLMM.html#fig:gmu-barmat1">11.3</a> examine categorical Level One covariates, indicating that fouls were more likely to be called on the home team when the home team was leading, when the previous foul was on the visiting team, and when the foul was a personal foul rather than a shooting foul or an offensive foul. 51.8% of calls go against the home team when it is leading the game, compared to only 42.9% of calls when the it is behind; 51.3% of calls go against the home team when the previous foul went against the visitors, compared to only 43.8% of calls when the previous foul went against the home team; and, 49.2% of personal fouls are called against the home team, compared to only 46.9% of shooting fouls and 45.7% of offensive fouls. Eventually we will want to examine the relationship between foul type (personal, shooting, or offensive) and foul differential, examining our hypothesis that the tendency to even out calls will be even stronger for calls over which the referees have greater control (personal fouls and especially offensive fouls).</p>
+<div class="figure" style="text-align: center"><span id="fig:gmu-cdelogitmat1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-cdelogitmat1-1.png" alt="Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval." width="60%" />
+<p class="caption">
+Figure 11.2: Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining). The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining. In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gmu-barmat1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-barmat1-1.png" alt="Mosaic plots of the binary model response (foul called on home or visitor) vs. the three categorical Level One covariates (foul type (a), team in the lead (b), and team called for the previous foul (c) ).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels." width="60%" />
+<p class="caption">
+Figure 11.3: Mosaic plots of the binary model response (foul called on home or visitor) vs. the three categorical Level One covariates (foul type (a), team in the lead (b), and team called for the previous foul (c) ). Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate. The bar width shows the proportion of fouls at each of the covariate levels.
+</p>
+</div>
+<p>The exploratory analyses presented above are an essential first step in understanding our data, seeing univariate trends, and noting bivariate relationships between variable pairs. However, our important research questions (a) involve the effect of foul differential after adjusting for other significant predictors of which team is called for a foul, (b) account for potential correlation between foul calls within a game (or within a particular home or visiting team), and (c) determine if the effect of foul differential is constant across game conditions. In order to address research questions such as these, we need to consider multilevel, multivariate statistical models for a binary response variable.</p>
+</div>
+</div>
+<div id="twolevelmodeling-glmm" class="section level2">
+<h2><span class="header-section-number">11.4</span> Two level Modeling with a Generalized Response</h2>
+<div id="multregr-glmm" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> A GLM approach (correlation not accounted for)</h3>
+<p>One quick and dirty approach to analysis might be to run a multiple logistic regression model on the entire long data set of 4972 fouls. In fact, Anderson and Pierce ran such a model in their 2009 paper, using the results of their multiple logistic regression model to support their primary conclusions, while justifying their approach by confirming a low level of correlation within games and the minimal impact on fixed effect estimates that accounting for clustering would have. Output from one potential multiple logistic regression model is shown below; this initial modeling attempt shows significant evidence that referees tend to even out calls (i.e., that the probability of a foul called on the home team decreases as total home fouls increase compared to total visiting team fouls—that is, as <code>foul.diff</code> increases) after accounting for score differential and time remaining (Z=-3.078, p=.002). The extent of the effect of foul differential also appears to grow (in a negative direction) as the first half goes on, based on an interaction between time remaining and foul differential (Z=-2.485, p=.013). We will compare this model with others that formally account for clustering and correlation patterns in our data.</p>
+<pre><code>glm(formula = foul.home ~ foul.diff + score.diff + lead.home + 
+    time + foul.diff:time + lead.home:time, family = binomial, 
+    data = refdata)
+
+Coefficients:
+                Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)    -0.103416   0.101056  -1.023  0.30614   
+foul.diff      -0.076599   0.024888  -3.078  0.00209 **
+score.diff      0.020062   0.006660   3.012  0.00259 **
+lead.home      -0.093227   0.160082  -0.582  0.56032   
+time           -0.013141   0.007948  -1.653  0.09827 . 
+foul.diff:time -0.007492   0.003014  -2.485  0.01294 * 
+lead.home:time  0.021837   0.011161   1.957  0.05040 . 
+---
+    Null deviance: 6884.3  on 4971  degrees of freedom
+Residual deviance: 6747.6  on 4965  degrees of freedom
+AIC: 6761.6</code></pre>
+</div>
+<div id="twostage-glmm" class="section level3">
+<h3><span class="header-section-number">11.4.2</span> A two-stage modeling approach (provides the basic idea for multilevel modeling)</h3>
+<p>As we saw in Section <a href="ch-multilevelintro.html#twostage">8.4.2</a>, to avoid clustering we could consider fitting a separate regression model to each unit of observation at Level Two (each game in this case). Since our primary response variable is binary (Was the foul called on the home team or not?), we would fit a logistic regression model to the data from each game. For example, consider the 14 fouls called during the first half of the March 3, 2010, game featuring Virginia at Boston College (Game 110).</p>
+<table>
+<caption>
+<span id="tab:table3chp11">Table 11.3: </span>Key variables from the March 3, 2010, game featuring Virginia at Boston College (Game 110).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+visitor
+</th>
+<th style="text-align:left;">
+hometeam
+</th>
+<th style="text-align:right;">
+foul.num
+</th>
+<th style="text-align:right;">
+foul.home
+</th>
+<th style="text-align:right;">
+foul.diff
+</th>
+<th style="text-align:right;">
+score.diff
+</th>
+<th style="text-align:left;">
+foul.type
+</th>
+<th style="text-align:right;">
+time
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+19.783333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+18.950000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+16.916667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-3
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+14.883333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-4
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+14.600000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-3
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Offensive
+</td>
+<td style="text-align:right;">
+9.750000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+9.366667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+9.200000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+7.666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-3
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+2.500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-4
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+2.083333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-3
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+1.966667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-2
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Shooting
+</td>
+<td style="text-align:right;">
+1.733333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VA
+</td>
+<td style="text-align:left;">
+BC
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-3
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+Personal
+</td>
+<td style="text-align:right;">
+0.700000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Is there evidence from this game that referees tend to “even out” foul calls when one team starts to accumulate more fouls? Is the score differential associated with the probability of a foul on the home team? Is the effect of foul differential constant across all foul types during this game? We can address these questions through multiple logistic regression applied to only data from Game 110.</p>
+First, notation must be defined. Let <span class="math inline">\(Y_{ij}\)</span> be an indicator variable recording if the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on the home team (1) or the visiting team (0). We can consider <span class="math inline">\(Y_{ij}\)</span> to be a Bernoulli random variable with parameter <span class="math inline">\(p_{ij}\)</span>, where <span class="math inline">\(p_{ij}\)</span> is the true probability that the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on the home team. As in Chapter <a href="ch-logreg.html#ch-logreg">6</a>, we will begin by modeling the logit function of <span class="math inline">\(p_{ij}\)</span> for Game <span class="math inline">\(i\)</span> as a linear function of Level One covariates. For instance, if we were to consider a simple model with foul differential as the sole predictor, we could model the probability of a foul on the home team in Game 110 with the model:
+<span class="math display" id="eq:lev1glmm">\[\begin{equation}
+\log\bigg(\frac{p_{110j}}{1-p_{110j}}\bigg)=a_{110}+b_{110}\mathrm{foul.diff}_{110j}
+\tag{11.1}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(i\)</span> is fixed at 110. Note that there is no separate error term or variance parameter, since the variance is a function of <span class="math inline">\(p_{ij}\)</span> with a Bernoulli random variable.</p>
+<p>Maximum likelihood estimators for the parameters in this model (<span class="math inline">\(a_{110}\)</span> and <span class="math inline">\(b_{110}\)</span>) can be obtained through statistical software. <span class="math inline">\(e^{a_{110}}\)</span> represents the odds that a foul is called on the home team when the foul totals in Game 110 are even, and <span class="math inline">\(e^{b_{110}}\)</span> represents the multiplicative change in the odds that a foul is called on the home team for each additional foul for the home team relative to the visiting team during the first half of Game 110. For example, if we compared the situation when the home team has been called for 3 more fouls than the visiting team to when the home team has been called for 4 more fouls than the visitors, we’d estimate <span class="math inline">\(e^{b_{110}}\)</span> to be the multiplicative difference in odds of a foul called on the home team (the odds should decrease from 3 to 4 additional home fouls).</p>
+<p>For Game 110, we estimate <span class="math inline">\(\hat{a}_{110}=-5.67\)</span> and <span class="math inline">\(\hat{b}_{110}=-2.11\)</span> (see output below). Thus, according to our simple logistic regression model, the odds that a foul is called on the home team when both teams have an equal number of fouls in Game 110 is <span class="math inline">\(e^{-5.67}=0.0035\)</span>; that is, the probability that a foul is called on the visiting team (0.9966) is <span class="math inline">\(1/0.0035 = 289\)</span> times higher than the probability a foul is called on the home team (0.0034) in that situation. While these parameter estimates seem quite extreme, reliable estimates are difficult to obtain with 14 observations and a binary response variable, especially in a case like this where the fouls were only even at the start of the game. Also, as the gap between home and visiting fouls increases by 1, the odds that a foul is called on the visiting team increases by a multiplicative factor of more than 8 (since <span class="math inline">\(1/e^{-2.11}=8.25\)</span>). In Game 110, this trend toward referees evening out foul calls is statistically significant at the 0.10 level (Z=-1.851, p=.0642).</p>
+<pre><code>glm(formula = foul.home ~ foul.diff, family = binomial, data = game110)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)   -5.668      3.131  -1.810   0.0703 .
+foul.diff     -2.110      1.140  -1.851   0.0642 .
+---
+    Null deviance: 19.121  on 13  degrees of freedom
+Residual deviance: 11.754  on 12  degrees of freedom
+AIC: 15.754</code></pre>
+<p>As in Section <a href="ch-multilevelintro.html#twostage">8.4.2</a>, we can proceed to fit similar logistic regression models for each of the 339 other games in our data set. Each model will yield a new estimate of the intercept and the slope from Equation <a href="ch-GLMM.html#eq:lev1glmm">(11.1)</a>. These estimates are summarized graphically in Figure <a href="ch-GLMM.html#fig:gmu-histmat2">11.4</a>. There is noticeable variability among the 340 games in the fitted intercepts and slopes, with an IQR for intercepts ranging from -1.45 to 0.70, and an IQR for slopes ranging from -1.81 to -0.51. The majority of intercepts are below 0 (median = -0.41), so that in most games a foul is less likely to be called on the home team when foul totals are even. In addition, almost all of the estimated slopes are below 0 (median = -0.89), indicating that as the home team’s foul total grows in relation to the visiting team’s foul total, the odds of a foul on the home team continues to decrease.</p>
+<div class="figure" style="text-align: center"><span id="fig:gmu-histmat2"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-histmat2-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by game.  Several extreme outliers have been cut off in these plots for illustration purposes." width="60%" />
+<p class="caption">
+Figure 11.4: Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by game. Several extreme outliers have been cut off in these plots for illustration purposes.
+</p>
+</div>
+<p>At this point, you might imagine expanding model building efforts in a couple of directions: (a) continue to improve the Level One model in Equation <a href="ch-GLMM.html#eq:lev1glmm">(11.1)</a> by controlling for covariates and adding potential interaction terms, or (b) build Level Two models to explain the game-to-game variability in intercepts or slopes using covariates which remain constant from foul to foul within a game (like the teams playing). While we could pursue these two directions independently, we can accomplish our modeling goals in a much cleaner and more powerful way by proceeding as in Chapter <a href="ch-multilevelintro.html#ch-multilevelintro">8</a> and building a unified multilevel framework under which all parameters are estimated simultaneously and we remain faithful to the correlation structure inherent in our data.</p>
+</div>
+<div id="unified-glmm" class="section level3">
+<h3><span class="header-section-number">11.4.3</span> A unified multilevel approach (the framework we’ll use)</h3>
+<p>As in Chapters <a href="ch-multilevelintro.html#ch-multilevelintro">8</a> and <a href="ch-lon.html#ch-lon">9</a>, we will write out a composite model after first expressing Level One and Level Two models. That is, we will create Level One and Level Two models as in Section <a href="ch-GLMM.html#twostage-glmm">11.4.2</a>, but we will then combine those models into a composite model and estimate all model parameters simultaneously. Once again <span class="math inline">\(Y_{ij}\)</span> is an indicator variable recording if the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on the home team (1) or the visiting team (0), and <span class="math inline">\(p_{ij}\)</span> is the true probability that the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on the home team. Our Level One model with foul differential as the sole predictor is given by Equation <a href="ch-GLMM.html#eq:lev1glmm">(11.1)</a>: <span class="math display">\[ \log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg)=a_i+b_i\mathrm{foul.diff}_{ij} \]</span> Then we include no fixed covariates at Level Two, but we include error terms to allow the intercept and slope from Level One to vary by game, and we allow these errors to be correlated:</p>
+<span class="math display">\[\begin{eqnarray*}
+a_i &amp; = &amp; \alpha_{0}+u_i \\
+b_i &amp; = &amp; \beta_{0}+v_i,
+\end{eqnarray*}\]</span>
+<p>where the error terms at Level Two can be assumed to follow a multivariate normal distribution:</p>
+<p><span class="math display">\[ \left[ \begin{array}{c}
+            a_i \\ b_i
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \sigma_{uv} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right) \]</span></p>
+<p>Our composite model then looks like:</p>
+<span class="math display">\[\begin{eqnarray*}
+\log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg) &amp; = &amp; a_i+b_i\mathrm{foul.diff}_{ij} \\
+ &amp; = &amp; (\alpha_{0}+u_i) + (\beta_{0}+v_i)\mathrm{foul.diff}_{ij} \\
+ &amp; = &amp; [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_i+v_i\mathrm{foul.diff}_{ij}]
+\end{eqnarray*}\]</span>
+<p>The major changes when moving from a normally distributed response to a binary response are the form of the response variable (a logit function) and the absence of an error term at Level One.</p>
+<p>Again, we can use statistical software to obtain parameter estimates for this unified multilevel model using all 4972 fouls recorded from the 340 games. For example, the <code>glmer()</code> function from the <code>lme4</code> package in R extends the <code>lmer()</code> function to handle generalized responses and to account for the fact that fouls are not independent within games. Results are given below for the two-level model with foul differential as the sole covariate and Game as the Level Two observational unit.</p>
+<pre><code>Formula: foul.home ~ foul.diff + (foul.diff | game)
+
+     AIC      BIC   logLik deviance df.resid 
+  6791.1   6823.6  -3390.5   6781.1     4967 
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr 
+ game   (Intercept) 0.294141 0.54235       
+        foul.diff   0.001235 0.03514  -1.00
+Number of obs: 4972, groups:  game, 340
+
+Fixed effects:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.15684    0.04637  -3.382 0.000719 ***
+foul.diff   -0.28532    0.03835  -7.440 1.01e-13 ***</code></pre>
+<p>When parameter estimates from the multilevel model above are compared with those from the naive logistic regression model assuming independence of all observations (below), there are noticeable differences. For instance, each additional foul for the visiting team is associated with a 33% increase (<span class="math inline">\(1/e^{-.285}\)</span>) in the odds of a foul called on the home team under the multilevel model, but the single level model estimates the same increase as only 14% (<span class="math inline">\(1/e^{-.130}\)</span>). Also, estimated standard errors for fixed effects are greater under generalized linear multilevel modeling, which is not unusual after accounting for correlated observations, which effectively reduces the sample size.</p>
+<pre><code>glm(formula = foul.home ~ foul.diff, family = binomial, data = refdata)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.13005    0.02912  -4.466 7.98e-06 ***
+foul.diff   -0.13047    0.01426  -9.148  &lt; 2e-16 ***
+---
+    Null deviance: 6884.3  on 4971  degrees of freedom
+Residual deviance: 6798.1  on 4970  degrees of freedom
+AIC: 6802.1</code></pre>
+</div>
+</div>
+<div id="crossedre" class="section level2">
+<h2><span class="header-section-number">11.5</span> Crossed Random Effects</h2>
+<p>In the College Basketball Referees case study, our two primary Level Two covariates are home team and visiting team. In Section <a href="ch-GLMM.html#glmm-eda">11.3.2</a> we showed evidence that the probability a foul is called on the home team changes if we know precisely who the home and visiting teams are. However, if we were to include an indicator variable for each distinct team, we would need 38 indicator variables for home teams and 38 more for visiting teams. That’s a lot of degrees of freedom to spend! And adding those indicator variables would complicate our model considerably, despite the fact that we’re not very interested in specific coefficient estimates for each team—we just want to control for teams playing to draw stronger conclusions about referee bias (focusing on the <code>foul.diff</code> variable). One way, then, of accounting for teams is by treating them as <strong>random effects</strong> rather than fixed effects. For instance, we can assume the effect that Minnesota being the home team has on the log odds of foul call on the home team is drawn from a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^{2}_{v}\)</span>. Maybe the estimated random effect for Minnesota as the home team is -0.5, so that Minnesota is slightly less likely that the typical home team to have fouls called on it, and the odds of a foul on the home team are somewhat correlated whenever Minnesota is the home team. In this way, we account for the complete range of team effects, while only having to estimate a single parameter (<span class="math inline">\(\sigma^{2}_{v}\)</span>) rather than coefficients for 38 indicator variables. The effect of visiting teams can be similarly modeled.</p>
+<p>How will treating home and visiting teams as random effects change our multilevel model? Another way we might view this situation is by considering that Game is not the only Level Two observational unit we might have selected. What if we instead decided to focus on Home Team as the Level Two observational unit? That is, what if we assumed that fouls called on the same home team across all games must be correlated? In this case, we could redefine our Level One model from Equation <a href="ch-GLMM.html#eq:lev1glmm">(11.1)</a>. Let <span class="math inline">\(Y_{hj}\)</span> be an indicator variable recording if the <span class="math inline">\(j^{th}\)</span> foul from Home Team <span class="math inline">\(h\)</span> was called on the home team (1) or the visiting team (0), and <span class="math inline">\(p_{hj}\)</span> be the true probability that the <span class="math inline">\(j^{th}\)</span> foul from Home Team <span class="math inline">\(h\)</span> was called on the home team. Now, if we were to consider a simple model with foul differential as the sole predictor, we could model the probability of a foul on the home team for Home Team <span class="math inline">\(h\)</span> with the model:</p>
+<span class="math display" id="eq:lev1bglmm">\[\begin{equation}
+\log\bigg(\frac{p_{hj}}{1-p_{hj}}\bigg)=a_h+b_h\mathrm{foul.diff}_{hj}
+\tag{11.2}
+\end{equation}\]</span>
+<p>In this case, <span class="math inline">\(e^{a_{h}}\)</span> represents the odds that a foul is called on the home team when total fouls are equal between both teams in a game involving Home Team <span class="math inline">\(h\)</span>, and <span class="math inline">\(e^{b_{h}}\)</span> represents the multiplicative change in the odds that a foul is called on the home team for every extra foul on the home team compared to the visitors in a game involving Home Team <span class="math inline">\(h\)</span>. After fitting logistic regression models for each of the 39 teams in our data set, we see in Figure <a href="ch-GLMM.html#fig:gmu-histmat3">11.5</a> variability in fitted intercepts (mean=-0.15, sd=0.33) and slopes (mean=-0.22, sd=0.12) among the 39 teams, although much less variability than we observed from game-to-game. Of course, each logistic regression model for a home team was based on about 10 times more foul calls than each model for a game, so observing less variability from team-to-team was not unexpected.</p>
+<div class="figure" style="text-align: center"><span id="fig:gmu-histmat3"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-histmat3-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team." width="60%" />
+<p class="caption">
+Figure 11.5: Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team.
+</p>
+</div>
+<p>From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered—can we handle random effects that are not nested? Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team). However, a specific home team is not associated with a single game; that home team appears in several games. Therefore, any effects of game, home team, and visiting team are considered <strong>crossed random effects</strong>.</p>
+<p>A two-level model which accounts for variability among games, home teams, and visiting teams would take on a slightly new look. First, the full subscripting would change a bit. Our primary response variable would now be written as <span class="math inline">\(Y_{i[gh]j}\)</span>, an indicator variable recording if the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on the home team (1) or the visiting team (0), where Game <span class="math inline">\(i\)</span> pitted Visiting Team <span class="math inline">\(g\)</span> against Home Team <span class="math inline">\(h\)</span>. Square brackets are introduced since <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are essentially at the same level as <span class="math inline">\(i\)</span>, whereas we have assumed (without stating so) throughout this book that subscripting without square brackets implies a movement to lower levels as the subscripts move left to right (e.g., <span class="math inline">\(ij\)</span> indicates <span class="math inline">\(i\)</span> units are at Level Two, while <span class="math inline">\(j\)</span> units are at Level One, nested inside Level Two units). We can then consider <span class="math inline">\(Y_{i[gh]j}\)</span> to be a Bernoulli random variable with parameter <span class="math inline">\(p_{i[gh]j}\)</span>, where <span class="math inline">\(p_{i[gh]j}\)</span> is the true probability that the <span class="math inline">\(j^{th}\)</span> foul from Game <span class="math inline">\(i\)</span> was called on Home Team <span class="math inline">\(h\)</span> rather than Visiting Team <span class="math inline">\(g\)</span>. We will include the crossed subscripting only where necessary.</p>
+<p>Typically, with the addition of crossed effects, the Level One model will remain familiar and changes will be seen at Level Two, especially in the equation for the intercept term. In the model formulation below we allow, as before, the slope and intercept to vary by game:</p>
+<ul>
+<li>Level One:
+<span class="math display" id="eq:lev1cross">\[\begin{equation}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg)=a_{i}+b_{i}\mathrm{foul.diff}_{ij}
+\tag{11.3} 
+\end{equation}\]</span></li>
+<li>Level Two:
+<span class="math display">\[\begin{eqnarray*}
+a_{i} &amp; = &amp; \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} &amp; = &amp; \beta_{0},
+\end{eqnarray*}\]</span></li>
+</ul>
+<p>Therefore, at Level Two, we assume that <span class="math inline">\(a_{i}\)</span>, the log odds of a foul on the home team when the home and visiting teams in Game <span class="math inline">\(i\)</span> have an equal number of fouls, depends on four components:</p>
+<ul>
+<li><span class="math inline">\(\alpha_{0}\)</span> is the population average log odds across all games and fouls (fixed)</li>
+<li><span class="math inline">\(u_{i}\)</span> is the effect of Game <span class="math inline">\(i\)</span> (random)</li>
+<li><span class="math inline">\(v_{h}\)</span> is the effect of Home Team <span class="math inline">\(h\)</span> (random)</li>
+<li><span class="math inline">\(w_{g}\)</span> is the effect of Visiting Team <span class="math inline">\(g\)</span> (random)</li>
+</ul>
+where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
+<span class="math display">\[\begin{eqnarray*}
+u_{i} &amp; \sim &amp; N \left( 0 , \sigma_{u}^{2} \right) \\
+v_{h} &amp; \sim &amp; N \left( 0 , \sigma_{v}^{2} \right) \\
+w_{g} &amp; \sim &amp; N \left( 0 , \sigma_{w}^{2} \right).
+\end{eqnarray*}\]</span>
+<p>We could include terms that vary by home or visiting team in other Level Two equations, but often adjusting for these random effects on the intercept is sufficient. The advantages to including additional random effects are three-fold. First, by accounting for additional sources of variability, we should obtain more precise estimate of other model parameters, including key fixed effects. Second, we obtain estimates of variance components, allowing us to compare the relative sizes of game-to-game and team-to-team variability. Third, as outlined in Section <a href="ch-GLMM.html#estimatedRE">11.8</a>, we can obtain estimated random effects which allow us to compare the effects on the log-odds of a home foul of individual home and visiting teams.</p>
+Our composite model then looks like:
+<span class="math display" id="eq:compmoda">\[\begin{equation}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) = [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_{i}+v_{h}+w_{g}].
+\tag{11.4}
+\end{equation}\]</span>
+<p>We will refer to this as Model A, where we look at the effect of foul differential on the odds a foul is called on the home team, while accounting for three crossed random effects at Level Two (game, home team, and visiting team). Parameter estimates for Model A are given below:</p>
+<pre><code>Formula: 
+   Data: refdata
+
+     AIC      BIC   logLik deviance df.resid 
+  6780.5   6813.0  -3385.2   6770.5     4967 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ game     (Intercept) 0.17164  0.4143  
+ hometeam (Intercept) 0.06809  0.2609  
+ visitor  (Intercept) 0.02323  0.1524  
+Number of obs: 4972, groups:  game, 340; hometeam, 39; visitor, 39
+
+Fixed effects:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.18780    0.06331  -2.967  0.00301 ** </code></pre>
+<p>From this output, we obtain estimates of our five model parameters:</p>
+<ul>
+<li><span class="math inline">\(\hat{\alpha}_{0}=-0.188=\)</span> the mean log odds of a home foul at the point where total fouls are equal between teams. In other words, when fouls are balanced between teams, the odds that a foul is called on the visiting team is 20.7% higher than the odds a foul is called on the home team (<span class="math inline">\(1/e^{-.188}=1.207\)</span>).</li>
+<li><span class="math inline">\(\hat{\beta}_{0}=-0.264=\)</span> the decrease in mean log odds of a home foul for each 1 foul increase in the foul differential. More specifically, the odds the next foul is called on the visiting team rather than the home team increases by 30.2% with each additional foul called on the home team (<span class="math inline">\(1/e^{-.264}=1.302\)</span>).</li>
+<li><span class="math inline">\(\hat{\sigma}_{u}^{2}=0.172=\)</span> the variance in intercepts from game-to-game.</li>
+<li><span class="math inline">\(\hat{\sigma}_{v}^{2}=0.068=\)</span> the variance in intercepts among different home teams.</li>
+<li><span class="math inline">\(\hat{\sigma}_{w}^{2}=0.023=\)</span> the variance in intercepts among different visiting teams.</li>
+</ul>
+<p>Based on the t-value (-6.80) and p-value (<span class="math inline">\(p&lt;.001\)</span>) associated with foul differential in this model, we have significant evidence of a negative association between foul differential and the odds of a home team foul. That is, we have significant evidence that the odds that a foul is called on the home team shrinks as the home team has more total fouls compared with the visiting team. Thus, there seems to be preliminary evidence in the 2009-10 data that college basketball referees tend to even out foul calls over the course of the first half. Of course, we have yet to adjust for other significant covariates.</p>
+</div>
+<div id="glmm-paraboot" class="section level2">
+<h2><span class="header-section-number">11.6</span> Model Comparisons Using the Parametric Bootstrap</h2>
+<p>Our estimates of variance components provide evidence of the relative variability in the different Level Two random effects. For example, an estimated 65.4% of variability in the intercepts is due to differences from game-to-game, while 25.9% is due to differences among home teams, and 8.7% is due to differences among visiting teams. At this point, we could reasonably ask: if we use a random effect to account for differences among games, does it really pay off to also account for which team is home and which is the visitor?</p>
+To answer this, we could compare models with and without the random effects for home and visiting teams (i.e., Model A, the full model, vs. Model A.0, the reduced model) using a likelihood ratio test. In Model A.0, Level Two now looks like:
+<span class="math display">\[\begin{eqnarray*}
+a_{i} &amp; = &amp; \alpha_{0}+u_{i} \\
+b_{i} &amp; = &amp; \beta_{0},
+\end{eqnarray*}\]</span>
+<p>The likelihood ratio test (see below) provides significant evidence (LRT=16.074, df=2, p=.0003) that accounting for variability among home teams and among visiting teams improves our model.</p>
+<pre><code>Data: refdata
+Models:
+model.0a: foul.home ~ foul.diff + (1 | game)
+model.a: foul.home ~ foul.diff + (1 | game) + (1 | hometeam) + (1 | visitor)
+         Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)    
+model.0a  3 6792.5 6812.1 -3393.3   6786.5                             
+model.a   5 6780.5 6813.0 -3385.2   6770.5 16.074      2  0.0003233 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>In Section <a href="ch-multilevelintro.html#multileveltechnical">8.5.4</a> we noted that REML estimation is typically used when comparing models that differ only in random effects for multilevel models with normal responses, but with generalized linear multilevel models, full maximum likelihood (ML) estimation procedures are typically used regardless of the situation (including in the function <code>glmer()</code> in R). So the likelihood ratio test above is based on ML methods—can we trust its accuracy? In Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> we introduced the parametric bootstrap as a more reliable method in many cases for conducting hypothesis tests compared to the likelihood ratio test, especially when comparing full and reduced models that differ in their variance components. What would a parametric bootstrap test say about testing <span class="math inline">\(H_{0}: \sigma_{v}^{2}=\sigma_{w}^{2}=0\)</span> vs. <span class="math inline">\(H_{A}:\)</span> at least one of <span class="math inline">\(\sigma_{v}^{2}\)</span> or <span class="math inline">\(\sigma_{w}^{2}\)</span> is not equal to 0? Under the null hypothesis, since the two variance terms are being set to a value (0) on the boundary constraint, we would not expect the chi-square distribution to adequately approximate the behavior of the likelihood ratio test statistic.</p>
+<p>Figure <a href="ch-GLMM.html#fig:gmu-lrt1">11.6</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure with 100 samples as compared to a chi-square distribution. As we observed in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a>, the parametric bootstrap provides a more reliable p-value in this case (<span class="math inline">\(p&lt;.001\)</span> from output below) because a chi-square distribution puts too much mass in the tail and not enough near 0. However, the parametric bootstrap is computationally intensive, and it can take a long time to run even with moderately complex models. With this data, we would select our full Model A based on a parametric bootstrap test.</p>
+<pre><code>## Data: refdata
+## Parametric bootstrap with 100 samples.
+## Models:
+## m0: foul.home ~ foul.diff + (1 | game)
+## mA: foul.home ~ foul.diff + (1 | game) + (1 | hometeam) + (1 | visitor)
+##    Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr_boot(&gt;Chisq)
+## m0  3 6792.5 6812.1 -3393.3   6786.5                              
+## mA  5 6780.5 6813.0 -3385.2   6770.5 16.074      2               0</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:gmu-lrt1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-lrt1-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A and A.0 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve)." width="60%" />
+<p class="caption">
+Figure 11.6: Null distribution of likelihood ratio test statistic comparing Models A and A.0 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).
+</p>
+</div>
+We might also reasonably ask: is it helpful to allow slopes (coefficients for foul differential) to vary by game, home team, and visiting team as well? Again, since we are comparing models that differ in random effects, and since the null hypothesis involves setting random effects at their boundaries, we use the parametric bootstrap. Formally, we are comparing Model A to Model A.1, which has the same Level One equation as Model A: <span class="math display">\[ \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg)=a_{i}+b_{i}\mathrm{foul.diff}_{ij} \]</span> but more variance components to estimate at Level Two:
+<span class="math display">\[\begin{eqnarray*}
+a_{i} &amp; = &amp; \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} &amp; = &amp; \beta_{0}+z_{i}+r_{h}+s_{g},
+\end{eqnarray*}\]</span>
+where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
+<span class="math display">\[\begin{eqnarray*}
+u_{i} &amp; \sim &amp; N \left( 0 , \sigma_{u}^{2} \right) \\
+z_{i} &amp; \sim &amp; N \left( 0 , \sigma_{z}^{2} \right) \\
+v_{h} &amp; \sim &amp; N \left( 0 , \sigma_{v}^{2} \right) \\
+r_{h} &amp; \sim &amp; N \left( 0 , \sigma_{r}^{2} \right) \\
+w_{g} &amp; \sim &amp; N \left( 0 , \sigma_{w}^{2} \right) \\
+s_{g} &amp; \sim &amp; N \left( 0 , \sigma_{s}^{2} \right).
+\end{eqnarray*}\]</span>
+<p>Thus our null hypothesis for comparing Model A vs. Model A.1 is <span class="math inline">\(H_{O}: \sigma_{z}^{2}=\sigma_{r}^{2}=\sigma_{s}^{2}=0\)</span>. We do not have significant evidence (LRT=0.349, df=3, p=.46 by parametric bootstrap) of variability among slopes, so we will only include random effects for game, home team, and visiting team for the intercept going forward. Figure <a href="ch-GLMM.html#fig:gmu-lrt3">11.7</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution, again showing that the tails are too heavy in the chi-square distribution.</p>
+<pre><code>## Data: refdata
+## Parametric bootstrap with 100 samples.
+## Models:
+## m0: foul.home ~ foul.diff + (1 | game) + (1 | hometeam) + (1 | visitor)
+## mA: foul.home ~ foul.diff + (1 | game) + (1 | hometeam) + (1 | visitor) + 
+## mA:     (0 + foul.diff | game) + (0 + foul.diff | hometeam) + (0 + 
+## mA:     foul.diff | visitor)
+##    Df    AIC    BIC  logLik deviance Chisq Chi Df Pr_boot(&gt;Chisq)
+## m0  5 6780.5 6813.0 -3385.2   6770.5                             
+## mA  8 6786.1 6838.2 -3385.1   6770.1 0.349      3            0.46</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:gmu-lrt3"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-lrt3-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A and A.1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve)." width="60%" />
+<p class="caption">
+Figure 11.7: Null distribution of likelihood ratio test statistic comparing Models A and A.1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve).
+</p>
+</div>
+<p>Note that we could have also allowed for a correlation between the error terms for the intercept and slope by game, home team, or visiting team – i.e., assume, for example: <span class="math display">\[ \left[ \begin{array}{c}
+            u_{i} \\ z_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \sigma_{uz} &amp; \sigma_{z}^{2}
+          \end{array} \right] \right) \]</span> while error terms by game, home team, or visiting team are still independent. Here, the new model would have 6 additional parameters when compared with Model A (3 variance terms and 3 covariance terms). By the parametric bootstrap, there is no significant evidence that the model with 6 additional parameters is necessary (LRT=6.49, df=6, p=.06 by parametric bootstrap). The associated p-value based on a likelihood ratio test with approximate chi-square distribution (and restricted maximum likelihood estimation) is .370, reflecting once again the overly heavy tails of the chi-square distribution.</p>
+</div>
+<div id="sec:finalmodel-glmm" class="section level2">
+<h2><span class="header-section-number">11.7</span> A Potential Final Model for Examining Referee Bias</h2>
+<p>In constructing a final model for this college basketball case study, we are guided by several considerations. First, we want to estimate the effect of foul differential on the odds of a home foul, after adjusting for important covariates. Second, we wish to find important interactions with foul differential, recognizing that the effect of foul differential might depend on the game situation and other covariates. Third, we want to account for random effects associated with game, home team, and visiting team. What follows is one potential final model that follows these guidelines:</p>
+<ul>
+<li>Level One:
+<span class="math display">\[\begin{eqnarray*}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) &amp; = &amp; a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} + f_{i}\mathrm{time}_{ij} \\
+ &amp; &amp;{} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} + m_{i}\mathrm{foul.diff:offensive}_{ij} \\
+ &amp; &amp;{} + n_{i}\mathrm{foul.diff:personal}_{ij} + o_{i}\mathrm{foul.diff:time}_{ij} \\
+ &amp; &amp;{} + q_{i}\mathrm{lead.home:time}_{ij}
+\end{eqnarray*}\]</span></li>
+<li>Level Two:
+<span class="math display">\[\begin{eqnarray*}
+a_{i} &amp; = &amp; \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} &amp; = &amp; \beta_{0} \\
+c_{i} &amp; = &amp; \gamma_{0} \\
+d_{i} &amp; = &amp; \delta_{0} \\
+f_{i} &amp; = &amp; \phi_{0} \\
+k_{i} &amp; = &amp; \kappa_{0} \\
+l_{i} &amp; = &amp; \lambda_{0} \\
+m_{i} &amp; = &amp; \mu_{0} \\
+n_{i} &amp; = &amp; \nu_{0} \\
+o_{i} &amp; = &amp; \omega_{0} \\
+q_{i} &amp; = &amp; \xi_{0},
+\end{eqnarray*}\]</span></li>
+</ul>
+where error terms at Level Two can be assumed to follow independent normal distributions:
+<span class="math display">\[\begin{eqnarray*}
+u_{i} &amp; \sim &amp; N \left( 0 , \sigma_{u}^{2} \right) \\
+v_{h} &amp; \sim &amp; N \left( 0 , \sigma_{v}^{2} \right) \\
+w_{g} &amp; \sim &amp; N \left( 0 , \sigma_{w}^{2} \right).
+\end{eqnarray*}\]</span>
+Our composite model then looks like:
+<span class="math display">\[\begin{eqnarray*}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) &amp; = &amp; [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} + \phi_{0}\mathrm{time}_{ij} \\
+ &amp; &amp;{} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} + \mu_{0}\mathrm{foul.diff:offensive}_{ij} \\
+ &amp; &amp;{} + \nu_{0}\mathrm{foul.diff:personal}_{ij} + \omega_{0}\mathrm{foul.diff:time}_{ij} \\
+ &amp; &amp;{} + \xi_{0}\mathrm{lead.home:time}_{ij}] + [u_{i}+v_{h}+w_{g}].
+\end{eqnarray*}\]</span>
+<p>Using the composite form of this generalized linear multilevel model, the parameter estimates for our 11 fixed effects and 3 variance components are given in the output below:</p>
+<pre><code>Formula: 
+foul.home ~ foul.diff + score.diff + lead.home + time + offensive +  
+    personal + foul.diff:offensive + foul.diff:personal + foul.diff:time +  
+   Data: refdata
+
+     AIC      BIC   logLik deviance df.resid 
+  6731.0   6822.2  -3351.5   6703.0     4958 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ game     (Intercept) 0.18460  0.4297  
+ hometeam (Intercept) 0.07831  0.2798  
+ visitor  (Intercept) 0.04313  0.2077  
+Number of obs: 4972, groups:  game, 340; hometeam, 39; visitor, 39
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)         -0.246486   0.133961  -1.840 0.065771 .  
+foul.diff           -0.171462   0.045364  -3.780 0.000157 ***
+score.diff           0.033521   0.008236   4.070  4.7e-05 ***
+lead.home           -0.150620   0.177214  -0.850 0.395360    
+time                -0.008746   0.008560  -1.022 0.306920    
+offensive           -0.080791   0.111234  -0.726 0.467648    
+personal             0.067203   0.065397   1.028 0.304132    
+foul.diff:offensive -0.103578   0.053869  -1.923 0.054509 .  
+foul.diff:personal  -0.055638   0.031948  -1.742 0.081590 .  
+foul.diff:time      -0.008689   0.003274  -2.654 0.007953 ** 
+lead.home:time       0.026007   0.012172   2.137 0.032624 *  </code></pre>
+<p>In general, we see a highly significant negative effect of foul differential—a strong tendency for referees to even out foul calls when one team starts amassing more fouls than the other. Important covariates to control for (because of their effects on the odds of a home foul) include score differential, whether the home team held the lead, time left in the first half, and the type of foul called.</p>
+<p>Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half—the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls. The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don’t affect a player’s shot, and thus a referee can choose to let them go uncalled). Evidence like this can be considered <strong>dose response</strong>, since higher “doses” of referee control are associated with a greater effect of foul differential on their calls. A dose response effect provides even stronger indication of referee bias.</p>
+<p>Analyses of data from 2004-05 <span class="citation">(Noecker and Roback <a href="#ref-Noecker2012">2012</a>)</span> showed that the tendency to even out foul calls was stronger when one team had a large lead, but we found no evidence of a foul differential by score differential interaction in the 2009-10 data, although home team fouls are more likely when the home team has a large lead, regardless of the foul differential.</p>
+<p>Here are specific interpretations of key model parameters:</p>
+<ul>
+<li><span class="math inline">\(\exp(\hat{\alpha}_{0})=\exp(-0.247)=0.781\)</span>. The odds of a foul on the home team is 0.781 at the end of the first half when the score is tied, the fouls are even, and the referee has just called a shooting foul. In other words, only 43.9% of shooting fouls in those situations will be called on the home team.</li>
+<li><span class="math inline">\(\exp(\hat{\beta}_{0})=\exp(-0.172)=0.842\)</span>. Also, <span class="math inline">\(0.842^{-1}=1.188\)</span>. As the foul differential decreases by 1 (the visiting team accumulates another foul relative to the home team), the odds of a home foul increase by 18.8%. This interpretation applies to shooting fouls at the end of the half, after controlling for the effects of score differential and whether the home team has the lead.</li>
+<li><span class="math inline">\(\exp(\hat{\gamma}_{0})=\exp(0.034)=1.034\)</span>. As the score differential increases by 1 (the home team accumulates another point relative to the visiting team), the odds of a home foul increase by 3.4%, after controlling for foul differential, type of foul, whether or not the home team has the lead, and time remaining in the half. Referees are more likely to call fouls on the home team when the home team is leading, and vice versa. Note that a change in the score differential could result in the home team gaining the lead, so that the effect of score differential experiences a non-linear “bump” at 0, where the size of the bump depends on the time remaining (this would involve the interpretation for <span class="math inline">\(\hat{\xi}_{0}\)</span>).</li>
+<li><span class="math inline">\(\exp(\hat{\mu}_{0})=\exp(-0.103)=0.902\)</span>. Also, <span class="math inline">\(0.902^{-1}=1.109\)</span>. The effect of foul differential increases by 10.9% if a foul is an offensive foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining. As hypothesized, the effect of foul differential is greater for offensive fouls, over which referees have more control when compared with shooting fouls. For example, midway through the half (<code>time=10</code>), the odds that a shooting foul is on the home team increase by 29.6% for each extra foul on the visiting team, while the odds that an offensive foul is on the home team increase by 43.6%.</li>
+<li><span class="math inline">\(\exp(\hat{\nu}_{0})=\exp(-0.056)=0.946\)</span>. Also, <span class="math inline">\(0.946^{-1}=1.057\)</span>. The effect of foul differential increases by 5.7% if a foul is a personal foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.</li>
+<li><span class="math inline">\(\exp(\hat{\omega}_{0})=\exp(-0.0087)=0.991\)</span>. Also, <span class="math inline">\(0.991^{-1}=1.009\)</span>. The effect of foul differential increases by 0.9% for each extra minute that is remaining in the half, after controlling for foul differential, score differential, whether the home team has the lead, and type of foul. Thus, the tendency to even out foul calls is strongest earlier in the game. For example, midway through the half (<code>time=10</code>), the odds that a shooting foul is on the home team increase by 29.6% for each extra foul on the visiting team, while at the end of the half (<code>time=0</code>) the odds increase by 18.8% for each extra visiting foul.</li>
+<li><span class="math inline">\(\hat{\sigma}_{u}^{2}=0.185=\)</span> the variance in log-odds intercepts from game-to-game after controlling for all other covariates in the model.</li>
+</ul>
+</div>
+<div id="estimatedRE" class="section level2">
+<h2><span class="header-section-number">11.8</span> Estimated Random Effects</h2>
+<p>Our final model includes random effects for game, home team, and visiting team, and thus our model accounts for variability due to these three factors without estimating fixed effects to represent specific teams or games. However, we may be interested in examining the relative level of the random effects used for different teams or games. The presence of random effects allows different teams or games to begin with different baseline odds of a home foul. In other words, the intercept—the log odds of a home foul at the end of the first half when the score is tied, the fouls are even, and a shooting foul has been called—is adjusted by a random effect specific to the two teams playing and to the game itself. Together, the estimated random effects for, say, home team, should follow a normal distribution as we assumed: centered at 0 and with variance given by <span class="math inline">\(\sigma_{v}^{2}\)</span>. It is sometimes interesting to know, then, which teams are typical (with estimated random effects near 0) and which fall in the upper and lower tails of the normal distribution.</p>
+<p>Figure <a href="ch-GLMM.html#fig:gmu-hist1">11.8</a> shows the 39 estimated random effects associated with each home team (see the discussion on Empirical Bayes estimates in Chapter <a href="ch-multilevelintro.html#ch-multilevelintro">8</a>). As expected, the distribution is normal with standard deviation near <span class="math inline">\(\hat{\sigma}_{v}=0.28\)</span>. To compare individual home teams, Figure <a href="ch-GLMM.html#fig:gmu-cis1">11.9</a> shows the estimated random effect and associated prediction interval for each of the 39 home teams. Although there is a great deal of uncertainty surrounding each estimate, we see that, for instance, DePaul and Seton Hall have higher baseline odds of home fouls than Purdue or Syracuse. Similar histograms and prediction intervals plots can be generated for random effects due to visiting teams and specific games.</p>
+<div class="figure" style="text-align: center"><span id="fig:gmu-hist1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-hist1-1.png" alt="Histogram of estimated random effects for 39 home teams in Model F." width="60%" />
+<p class="caption">
+Figure 11.8: Histogram of estimated random effects for 39 home teams in Model F.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gmu-cis1"></span>
+<img src="bookdown-bysh_files/figure-html/gmu-cis1-1.png" alt="Estimated random effects and associated prediction intervals for 39 home teams in Model F." width="60%" />
+<p class="caption">
+Figure 11.9: Estimated random effects and associated prediction intervals for 39 home teams in Model F.
+</p>
+</div>
+</div>
+<div id="usingR-glmm" class="section level2">
+<h2><span class="header-section-number">11.9</span> Notes on Using R (Optional)</h2>
+<p>The R code below fits Model A.1 from Section <a href="ch-GLMM.html#glmm-paraboot">11.6</a>. Note that, in <code>glmer()</code> or <code>lmer()</code>, if you have two equations at Level Two and want to fit a model with an error term for each equation, but you also want to assume that the two error terms are independent, the error terms must be requested separately. For example, “(1<span class="math inline">\(|\)</span>hometeam)” allows the Level One intercept to vary by home team, while “(0+foul.dff<span class="math inline">\(|\)</span>hometeam)” allows the Level One effect of <code>foul.diff</code> to vary by home team. Under this formulation, the correlation between those two error terms is assumed to be 0; a non-zero correlation could have been specified with “(1+foul.diff<span class="math inline">\(|\)</span>hometeam)”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lme4)
+
+<span class="co"># Model A.1 (Multilevel model with only foul.diff and all 3 random effects</span>
+<span class="co">#             applied to both intercepts and slopes but no correlations)</span>
+model.a3 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home<span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game)<span class="op">+</span>
+<span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>hometeam)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>visitor) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span><span class="op">+</span>foul.diff<span class="op">|</span>game)<span class="op">+</span>(<span class="dv">0</span><span class="op">+</span>foul.diff<span class="op">|</span>hometeam)<span class="op">+</span>
+<span class="st">  </span>(<span class="dv">0</span><span class="op">+</span>foul.diff<span class="op">|</span>visitor),<span class="dt">family=</span>binomial,<span class="dt">data=</span>refdata)</code></pre></div>
+<p>The R code below shows how <code>fixef()</code> can be used to extract the estimated fixed effects from a multilevel model. Even more, it shows how <code>ranef()</code> can be used to illustrate estimated random effects by Game, Home Team, and Visiting Team, along with prediction intervals for those random effects. These estimated random effects are sometimes called Empirical Bayes estimators. In this case, random effects are placed only on the “[[“(Intercept)”]]” term; the phrase “Intercept” could be replaced with other Level One covariates whose values are allowed to vary by game, home team, or visiting team in our model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Model F - final model?</span>
+model.f=<span class="kw">glmer</span>(foul.home<span class="op">~</span>foul.diff<span class="op">+</span>score.diff<span class="op">+</span>lead.home<span class="op">+</span>time<span class="op">+</span>offensive<span class="op">+</span>
+<span class="st">  </span>personal<span class="op">+</span>foul.diff<span class="op">:</span>offensive<span class="op">+</span>foul.diff<span class="op">:</span>personal<span class="op">+</span>foul.diff<span class="op">:</span>time<span class="op">+</span>
+<span class="st">  </span>lead.home<span class="op">:</span>time<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>game)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>hometeam)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>visitor),<span class="dt">family=</span>binomial,
+  <span class="dt">data=</span>refdata)
+<span class="kw">summary</span>(model.f)
+<span class="kw">exp</span>(<span class="kw">fixef</span>(model.f))
+
+<span class="co"># Get estimated random effects based on Model F</span>
+re.int =<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">game</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]
+<span class="kw">hist</span>(re.int,<span class="dt">xlab=</span><span class="st">&quot;Random Effect&quot;</span>,<span class="dt">main=</span><span class="st">&quot;Random Effects for Game&quot;</span>)
+Home.re=<span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">hometeam</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]
+<span class="kw">hist</span>(Home.re,<span class="dt">xlab=</span><span class="st">&quot;Random Effect&quot;</span>,<span class="dt">main=</span><span class="st">&quot;Random Effects for Home Team&quot;</span>)
+Visiting.re=<span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">visitor</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]
+<span class="kw">hist</span>(Visiting.re,<span class="dt">xlab=</span><span class="st">&quot;Random Effect&quot;</span>,
+  <span class="dt">main=</span><span class="st">&quot;Random Effects for the Visiting Team&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>))
+<span class="kw">cbind</span>(Home.re,Visiting.re)   <span class="co"># 39x2 matrix of REs by team</span>
+
+<span class="co"># Prediction intervals for random effects based on Model F</span>
+ranef1=<span class="kw">dotplot</span>(<span class="kw">ranef</span>(model.f, <span class="dt">postVar =</span> <span class="ot">TRUE</span>), <span class="dt">strip =</span> <span class="ot">FALSE</span>)
+<span class="kw">print</span>(ranef1[[<span class="dv">3</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) ##HOME
+<span class="kw">print</span>(ranef1[[<span class="dv">2</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) ##VIS
+<span class="kw">print</span>(ranef1[[<span class="dv">1</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+<div id="exercises-9" class="section level2">
+<h2><span class="header-section-number">11.10</span> Exercises</h2>
+<div id="conceptual-exercises-6" class="section level3">
+<h3><span class="header-section-number">11.10.1</span> Conceptual Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Give an example of a data set and an associated research question that would best be addressed with a multilevel model for a Poisson response.</p></li>
+<li><p><strong>College Basketball Referees.</strong> Explain to someone unfamiliar with the plots in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a> how to read both a conditional density plot and an empirical logit plot. For example, explain what the dark region in a conditional density plot represents, what each point in an empirical logit plot represents, etc.</p></li>
+<li><p>With the strength of the evidence found in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>, plots (a) and (d), is there any need to run statistical models to convince someone that referee tendencies are related to the foul differential?</p></li>
+<li><p>In Section <a href="ch-GLMM.html#twostage-glmm">11.4.2</a>, why don’t we simply run a logistic regression model for each of the 340 games, collect the 340 intercepts and slopes, and fit a model to those intercepts and slopes?</p></li>
+<li><p>Explain in your own words the difference between crossed and nested random effects (Section <a href="ch-GLMM.html#crossedre">11.5</a>).</p></li>
+<li><p>In the context of Case Study <a href="ch-lon.html#cs:charter">9.2</a>, describe a situation in which crossed random effects would be needed.</p></li>
+<li><p>Assume that we added <span class="math inline">\(z_{i}\)</span>, <span class="math inline">\(r_{h}\)</span>, and <span class="math inline">\(s_{g}\)</span> to the Level Two equation for <span class="math inline">\(b_{i}\)</span> in Equations <a href="ch-GLMM.html#eq:lev1cross">(11.3)</a>. (a) Give interpretations for those 3 new random effects. (b) How many additional parameters would need to be estimated (and name the new model parameters)?</p></li>
+<li><p>In Section <a href="ch-GLMM.html#glmm-paraboot">11.6</a>, could we use a likelihood ratio test to determine if it would be better to add either a random effect for home team or a random effect for visiting team to the model with a random effect for game (assuming we’re going to add one or the other)? Why or why not?</p></li>
+<li><p>Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure <a href="ch-GLMM.html#fig:gmu-lrt1">11.6</a>.</p></li>
+<li><p>In Figure <a href="ch-GLMM.html#fig:gmu-lrt1">11.6</a>, why is it a problem that “a chi-square distribution puts too much mass in the tail” when using a likelihood ratio test to compare models?</p></li>
+<li><p>What would be the implications of using the R expression “(foul.diff <span class="math inline">\(\mid\)</span> game) + (foul.diff <span class="math inline">\(\mid\)</span> hometeam) + (foul.diff <span class="math inline">\(\mid\)</span> visitor)” in Model A.1 (Section <a href="ch-GLMM.html#glmm-paraboot">11.6</a>) to obtain our variance components?</p></li>
+<li><p>Explain the implications of having no error terms in any Level Two equations in Section <a href="ch-GLMM.html#sec:finalmodel-glmm">11.7</a> except the one for <span class="math inline">\(a_{i}\)</span>.</p></li>
+<li><p>In the interpretation of <span class="math inline">\(\hat{\beta}_{0}\)</span>, explain why this applies to “shooting fouls at the end of the half”. Couldn’t we just say that we controlled for type of foul and time elapsed?</p></li>
+<li><p>In the interpretation of <span class="math inline">\(\hat{\gamma}_{0}\)</span>, explain the idea that “the effect of score differential experiences a non-linear ‘bump’ at 0, where the size of the bump depends on time remaining.” Consider, for example, the effect of a point scored by the home team with 10 minutes left in the first half, depending on whether the score is tied or the home team is ahead by 2.</p></li>
+<li><p>In the interpretation of <span class="math inline">\(\hat{\mu}_{0}\)</span>, verify the odds increases of 29.6% for shooting fouls and 43.6% for offensive fouls. Where does the stated 10.9% increase factor in?</p></li>
+<li><p>We could also interpret the interaction between two quantitative variables described by <span class="math inline">\(\hat{\omega}_{0}\)</span> as “the effect of time remaining increases by 0.9% for each extra foul on the visiting team, after controlling for …” Numerically illustrate this interpretation by considering foul differentials of 2 (the home team has 2 more fouls than the visitors) and -2 (the visitors have 2 more fouls than the home team).</p></li>
+<li><p>Provide interpretations in context for <span class="math inline">\(\hat{\phi}_{0}\)</span>, <span class="math inline">\(\hat{\kappa}_{0}\)</span>, and <span class="math inline">\(\hat{\xi}_{0}\)</span>.</p></li>
+<li><p>In Section <a href="ch-GLMM.html#estimatedRE">11.8</a>, why isn’t the baseline odds of a home foul for DePaul considered a model parameter?</p></li>
+<li><p><strong>Heart attacks in Aboriginal Australians.</strong> Randall, et al., published a 2014 article in <em>Health and Place</em> entitled “Exploring disparities in acute myocardial infarction events between Aboriginal and non-Aboriginal Australians: Roles of age, gender, geography and area-level disadvantage.” They used multilevel Poisson models to compare rates of acute myocardial infarction (AMI) in the 199 Statistical Local Areas (SLAs) in New South Wales. Within SLA, AMI rates (number of events over population count) were summarized by subgroups determined by year (2002-2007), age (in 10-year groupings), sex, and Aboriginal status; these are then our Level One variables. Analyses also incorporated remoteness (classified by quartiles) and socio-economic status (classified by quintiles) assessed at the SLA level (Level Two) <span class="citation">(Randall et al. <a href="#ref-Randall2014">2014</a>)</span>. For this study, give the observational units at Levels One and Two.</p></li>
+<li><p>Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a> shows Table 2 from <span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span>. Let <span class="math inline">\(Y_{ij}\)</span> be the number of acute myocardial infarctions in subgroup <span class="math inline">\(j\)</span> from SLA <span class="math inline">\(i\)</span>; write out the multilevel model that likely produced Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a>. How many fixed effects and variance components must be estimated?</p></li>
+</ol>
+<caption>
+<p><span id="tab:table4chp11">Table 11.4: </span> Adjusted rate ratios for individual-level variables from the multilevel Poisson regression model with random intercept for area from Table 2 in <span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span>.</p>
+<table style="width:69%;">
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="22%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">RR</th>
+<th align="center">95% CI</th>
+<th align="center">p-Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aboriginal</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>No(ref)</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="odd">
+<td>Yes</td>
+<td align="center"><strong>2.1</strong></td>
+<td align="center"><strong>1.98-2.23</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Age Group</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>25-34 (ref)</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="even">
+<td>35-44</td>
+<td align="center">6.01</td>
+<td align="center"><strong>5.44-6.64</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>45-54</td>
+<td align="center">19.36</td>
+<td align="center">17.58-21.31</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>55-64</td>
+<td align="center">40.29</td>
+<td align="center">36.67-44.26</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>65-74</td>
+<td align="center">79.92</td>
+<td align="center">72.74-87.80</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>75-84</td>
+<td align="center">178.75</td>
+<td align="center">162.70-196.39</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>Sex</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Male (ref)</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="odd">
+<td>Female</td>
+<td align="center"><strong>0.45</strong></td>
+<td align="center">0.44-0.45</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Year</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>2002 (ref)</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="even">
+<td>2003</td>
+<td align="center">1</td>
+<td align="center">0.98-1.03</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>2004</td>
+<td align="center">0.97</td>
+<td align="center">0.95-0.99</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>2005</td>
+<td align="center">0.91</td>
+<td align="center">0.89-0.94</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>2006</td>
+<td align="center">0.88</td>
+<td align="center"><strong>0.86-0.91</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>2007</td>
+<td align="center">0.88</td>
+<td align="center"><strong>0.86-0.91</strong></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<ol start="21" style="list-style-type: decimal">
+<li><p>Provide interpretations in context for the bolded rate ratios, confidence intervals, and p-values in Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a>.</p></li>
+<li><p>Given the rate ratio and 95% confidence interval reported for Aboriginal Australians in Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a>, find the estimated model fixed effect for Aboriginal Australians from the multilevel model along with its standard error.</p></li>
+<li><p>How might the p-value for Age have been produced?</p></li>
+<li><p><span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span> report that “we identified a significant interaction between Aboriginal status and age group (<span class="math inline">\(p&lt;0.01\)</span>) and Aboriginal status and sex (<span class="math inline">\(p&lt;0.01\)</span>), but there was no significant interaction between Aboriginal status and year (p=0.94).” How would the multilevel model associated with Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a> need to have been adjusted to allow these interactions to be tested?</p></li>
+<li><p>Table <a href="ch-GLMM.html#tab:table5chp11">11.5</a> shows Table 3 from <span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span>. Describe the changes to the multilevel model for Table <a href="ch-GLMM.html#tab:table4chp11">11.4</a> that likely produced this new table.</p></li>
+<li><p>Provide interpretations in context for the bolded rate ratios, confidence intervals, and p-values in Table <a href="ch-GLMM.html#tab:table5chp11">11.5</a>.</p></li>
+</ol>
+<caption>
+<p><span id="tab:table5chp11">Table 11.5: </span> Adjusted rate ratios for area-level variables from the multilevel Poisson regression model with random intercept for area from Table 3 in <span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span>.</p>
+<table style="width:88%;">
+<colgroup>
+<col width="37%" />
+<col width="15%" />
+<col width="22%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">RR</th>
+<th align="center">95% CI</th>
+<th align="center">p-Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Remoteness of Residence*</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Major City</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="odd">
+<td>Inner Regional</td>
+<td align="center">1.16</td>
+<td align="center">1.04-1.28</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Outer Regional</td>
+<td align="center">1.11</td>
+<td align="center">1.01-1.23</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>Remote/very remote</td>
+<td align="center"><strong>1.22</strong></td>
+<td align="center">1.02-1.45</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>SES quintile*</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>1 least disadvantaged</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">&lt;0.01</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="center">1.26</td>
+<td align="center">1.11-1.43</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="center">1.4</td>
+<td align="center">1.24-1.58</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="center">1.46</td>
+<td align="center">1.30-1.64</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>5 most disadvantaged</td>
+<td align="center">1.7</td>
+<td align="center"><strong>1.52-1.91</strong></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Area-level factors added one at a time to the fully adjusted individual-level model (adjusted for Aboriginal status, age, sex and year) due to being highly associated.</li>
+</ul>
+<ol start="27" style="list-style-type: decimal">
+<li><p><span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span> also report the results of a single-level Poisson regression model: “After adjusting for age, sex and year of event, the rate of AMI events in Aboriginal people was 2.3 times higher than in non-Aboriginal people (95% CI: 2.17-2.44).” Compare this to the results of the multilevel Poisson model; what might explain any observed differences?</p></li>
+<li><p><span class="citation">Randall et al. (<a href="#ref-Randall2014">2014</a>)</span> claim that “our application of multilevel modelling techniques allowed us to account for clustering by area of residence and produce ‘shrunken’ small-area estimates, which are not as prone to random fluctuations as crude or standardised rates.” Explain what they mean by this statement.</p></li>
+</ol>
+</div>
+<div id="open-ended-exercises-5" class="section level3">
+<h3><span class="header-section-number">11.10.2</span> Open-ended Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Airbnb in Chicago.</strong> <span class="citation">Trinh and Ameri (<a href="#ref-Trinh2018">2018</a>)</span> collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located. We can examine traits that are associated with listings that achieve an overall satisfaction of 5 out of 5 vs. those that do not (i.e. treat satisfaction as a binary variable). Conduct an EDA, build a generalized multilevel model, and interpret model coefficients to answer questions such as: What are characteristics of a higher rated listing? Are the most influential traits associated with individual listings or entire neighborhoods? Are there intriguing interactions where the effect of one variable depends on levels of another?</li>
+</ol>
+<p>The following variables can be found in <code>airbnb.csv</code> or derived from the variables found there:</p>
+<ul>
+<li><code>overall_satisfaction</code> = rating on a 0-5 scale.<br />
+</li>
+<li><code>satisfaction</code> = 1 if <code>overall_satisfaction</code> is 5, 0 otherwise</li>
+<li><code>price</code> = price for one night (in dollars)</li>
+<li><code>reviews</code> = number of reviews posted</li>
+<li><code>room_type</code> = Entire home/apt, Private room, or Shared room</li>
+<li><code>accommodates</code> = number of people the unit can hold</li>
+<li><code>bedrooms</code> = number of bedrooms</li>
+<li><code>minstay</code> = minimum length of stay (in days)</li>
+<li><code>neighborhood</code> = neighborhood where unit is located (1 of 43)</li>
+<li><code>district</code> = district where unit is located (1 of 9)</li>
+<li><code>WalkScore</code> = quality of the neighborhood for walking (0-100)</li>
+<li><code>TransitScore</code> = quality of the neighborhood for public transit (0-100)</li>
+<li><code>BikeScore</code> = quality of the neighborhood for biking (0-100)</li>
+<li><code>PctBlack</code> = proportion of black residents in a neighborhood</li>
+<li><code>HighBlack</code> = 1 if <code>PctBlack</code> above .60, 0 otherwise</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>Seed Germination.</strong> We will return to the data from <span class="citation">Angell (<a href="#ref-Angell2010">2010</a>)</span> used in Case Study <a href="ch-3level.html#cs:seeds">10.2</a>, but whether or not a seed germinated will be considered the response variable rather than the heights of germinated plants. We will use the wide data set (one row per plant) <code>seeds2.csv</code> for this analysis as described in Section <a href="ch-3level.html#organizedata3">10.3.1</a>, although we will ignore plant heights over time and focus solely on if the plant germinated at any time. Use generalized linear multilevel models to determine the effects of soil type and sterilization on germination rates; perform separate analyses for coneflowers and leadplants, and describe differences between the two species. Support your conclusions with well-interpreted model coefficients and insightful graphical summaries.</p></li>
+<li><p><strong>Book Banning.</strong> The risk of literature censorship is constant, with provocative literature risking being challenged and subsequently being banned. Reasons for censorship have changed over time, with modern day challenges more likely to be for reasons relating to obscenity and child protection rather than overt political and religious objections <span class="citation">(Jenkins <a href="#ref-Jenkins2006">2008</a>)</span>. Many past studies have addressed chiefly the reasons listed by those who challenge a book, but few examine the overall context in which books are banned—for example, the characteristics of the states in which they occur.</p>
+<p>A team of students assembled a data set by starting with information on book challenges from the American Library Society <span class="citation">(Fast and Hegland <a href="#ref-Fast2011">2011</a>)</span>. These book challenges—an initiation of the formal procedure for book censorship—occurred in US States between January of 2000 and November of 2010. In addition, state-level demographic information was obtained from the US Census Bureau and the Political Value Index (PVI) was obtained from the Cook Political Report.</p>
+<p>We will consider a data set with 931 challenges and 18 variables. All book challenges over the nearly 11 year period are included except those from the State of Texas; Texas featured 683 challenges over this timeframe, nearly 5 times the number in the next largest state. Thus, the challenges from Texas have been removed and could be analyzed separately. Here, then, is a description of available variables in <code>bookbanningNoTex.csv</code>:</p>
+<ul>
+<li><code>book</code> = unique book ID number</li>
+<li><code>booktitle</code> = name of book</li>
+<li><code>author</code> = name of author</li>
+<li><code>state</code> = state where challenge made</li>
+<li><code>removed</code> = 1 if book was removed (challenge was successful); 0 otherwise</li>
+<li><code>pvi2</code> = state score on the Political Value Index, where positive indicates a Democratic leaning, negative indicates a Republican leaning, and 0 is neutral</li>
+<li><code>cperhs</code> = percentage of high school graduates in a state (grand mean centered)</li>
+<li><code>cmedin</code> = median state income (grand median centered)</li>
+<li><code>cperba</code> = percentage of college graduates in a state (grand mean centered)</li>
+<li><code>days2000</code> = date challenge was made, measured by number of days after January 1, 2000</li>
+<li><code>obama</code> = 1 if challenge was made while Barack Obama was President; 0 otherwise</li>
+<li><code>freqchal</code> = 1 if book was written by a frequently challenged author (10 or more challenges across the country); 0 otherwise</li>
+<li><code>sexexp</code> = 1 if reason for challenge was sexually explicit material; 0 otherwise</li>
+<li><code>antifamily</code> = 1 if reason for challenge was antifamily material; 0 otherwise</li>
+<li><code>occult</code> = 1 if reason for challenge was material about the occult; 0 otherwise</li>
+<li><code>language</code> = 1 if reason for challenge was inappropriate language; 0 otherwise</li>
+<li><code>homosexuality</code> = 1 if reason for challenge was material about homosexuality; 0 otherwise</li>
+<li><code>violence</code> = 1 if reason for challenge was violent material; 0 otherwise</li>
+</ul>
+<p>The primary response variable is <code>removed</code>. Certain potential predictors are measured at the state level (e.g., <code>pvi2</code> and <code>cperhs</code>), at least one is at the book level (<code>freqchal</code>), and several are specific to an individual challenge (e.g., <code>obama</code> and <code>sexexp</code>). In addition, note that the same book can be challenged for more than one reason, in different states, or even at different times in the same state.</p>
+<p>Perform exploratory analyses and then run multilevel models to examine significant determinants of successful challenges. Write a short report comparing specific reasons for the challenge to the greater context in which a challenge was made.</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Anderson2009">
+<p>Anderson, Kyle J., and David A. Pierce. 2009. “Officiating Bias: The Effect of Foul Differential on Foul Calls in Ncaa Basketball.” <em>Journal of Sports Sciences</em> 27 (7): 687–94. doi:<a href="https://doi.org/10.1080/02640410902729733">10.1080/02640410902729733</a>.</p>
+</div>
+<div id="ref-Moskowitz2011">
+<p>Moskowitz, Tobias J., and L. Jon Wertheim. 2011. <em>Scorecasting: The Hidden Influences Behind How Sports Are Played and Games Are Won</em>. New York: Crown Archetype.</p>
+</div>
+<div id="ref-Noecker2012">
+<p>Noecker, Cecilia A., and Paul Roback. 2012. “New Insights on the Tendency of Ncaa Basketball Officials to Even Out Foul Calls.” <em>Journal of Quantitative Analysis in Sports</em> 8 (3): 1–23.</p>
+</div>
+<div id="ref-Randall2014">
+<p>Randall, D.A., L.R. Jorm, S. Lujic, S.J. Eades, T.R. Churches, A.J. O’Loughlin, and A.H. Leyland. 2014. “Exploring Disparities in Acute Myocardial Infarction Events Between Aboriginal and Non-Aboriginal Australians: Roles of Age, Gender, Geography and Area-Level Disadvantage.” <em>Health &amp; Place</em> 28: 58–66. doi:<a href="https://doi.org/https://doi.org/10.1016/j.healthplace.2014.03.009">https://doi.org/10.1016/j.healthplace.2014.03.009</a>.</p>
+</div>
+<div id="ref-Trinh2018">
+<p>Trinh, Ly, and Pony Ameri. 2018. “Airbnb Price Determinants: A Multilevel Modeling Approach.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+</div>
+<div id="ref-Angell2010">
+<p>Angell, Diane. 2010. “Effects of Soil Type and Sterilization on the Growth of Coneflowers and Leadplants.” Class data for Biology 261-Ecological Principles, St. Olaf College.</p>
+</div>
+<div id="ref-Jenkins2006">
+<p>Jenkins, Christine A. 2008. “Book Challenges, Challenging Books, and Young Readers: The Research Picture.” <em>Language Arts</em> 85 (3): 228–36.</p>
+</div>
+<div id="ref-Fast2011">
+<p>Fast, Shannon, and Thomas Hegland. 2011. “Book Challenges: A Statistical Examination.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-3level.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-bysh.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
