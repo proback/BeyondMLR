@@ -525,12 +525,16 @@ Pearson residuals have the advantage that you are probably familiar with their m
 
 First, we define a __deviance residual__ for an observation from a Poisson regression,
 \begin{equation}
-\textrm{deviance residual}_i = sign(Y_i-\hat{\lambda}_i)
+\textrm{deviance residual}_i = \textrm{sign}(Y_i-\hat{\lambda}_i)
 \sqrt{
 2 \left[Y_i log\left(\frac{Y_i}{\hat{\lambda}_i}\right)
 -(Y_i - \hat{\lambda}_i) \right]}
 (\#eq:deviance)
 \end{equation}
+Where $\textrm{sign}(x)$ is defined such that:
+\[ \textrm{sign}(x) = \begin{cases} 1  & \textrm{if }\ x > 0 \\
+                                    -1 & \textrm{if }\ x < 0  \\
+                                    0  & \textrm{if }\ x = 0\end{cases}\]
 
 As its name implies, a deviance residual describes how the observed data deviates from the fitted model. Squaring and summing the deviances for all observations produces the __residual deviance__ $=\sum (\textrm{deviance residual})^2_i$. Relatively speaking, observations for good fitting models will have small deviances; that is, the predicted values will deviate little from the observed. However, you can see that the deviance for an observation does not easily translate to a difference in observed and predicted responses as is the case with OLS models.
 

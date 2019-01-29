@@ -660,8 +660,6 @@ if (knitr:::is_latex_output()) {
 ```
 
 
-A very cool schematic representing how probability distributions are related to one another can be found [here](http://www.johndcook.com/distribution_chart.html.)
-
 ##Execises
 ###Conceptual Exercies
 1. At what value of $p$ is the standard deviation of a binary random variable smallest? When is standard deviation largest?
@@ -688,10 +686,10 @@ A very cool schematic representing how probability distributions are related to 
 Note that all of the observations $y_i$ will be integer values from $0, 1, \ldots, n$.  With this in mind, use `rbinom()` to simulate 1,000 observations from a plain old vanilla binomial random variable with $n=10$ and $p=0.8$. Plot a histogram of these binomial observations.
 Then, do the following to generate a beta-binomial distribution:
 
-    a. Draw $p_i$ from the beta distribution with $\alpha=4$ and $\beta=1$.
-    b. Generate an observation $y_i$ from a binomial distribution with $n=10$ and $p = p_i$.
-    c. Repeat 1,000 times ($i=1,\ldots,1000$).
-    d. Plot a histogram of these beta-binomial observations.  
+a. Draw $p_i$ from the beta distribution with $\alpha=4$ and $\beta=1$.
+b. Generate an observation $y_i$ from a binomial distribution with $n=10$ and $p = p_i$.
+c. Repeat 1,000 times ($i=1,\ldots,1000$).
+d. Plot a histogram of these beta-binomial observations.  
     
 Compare the histograms of the "plain old" binomial and beta-binomial distributions.  How do their shapes, standard deviations, means, possible values, etc. compare?  
 

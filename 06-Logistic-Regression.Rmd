@@ -452,10 +452,6 @@ A deviance residual can be calculated for each observation using:
 (m_i - Y_i) \log\left(\frac{m_i - Y_i}{m_i - m_i \hat{p_i}}\right)]}
 (\#eq:devianceBinom)
 \end{equation}
-Where $\textrm{sign}(x)$ is defined such that:
-\[ \textrm{sign}(x) = \begin{cases} 1  & \textrm{if }\ x > 0 \\
-                                    -1 & \textrm{if }\ x < 0  \\
-                                    0  & \textrm{if }\ x = 0\end{cases}\]
 
 When the number of trials is large for all of the observations and the models are appropriate, both sets of residuals should follow a standard normal distribution.
 

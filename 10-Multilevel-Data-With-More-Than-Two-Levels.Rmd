@@ -902,7 +902,7 @@ ggplot(nullLRT.1) +
 
 Another way of testing whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95\% confidence intervals for both $\sigma_{\tilde{u}\tilde{v}} = 0$ and $\sigma_{\tilde{v}}^{2} = 0$.  From the output below, the confidence intervals for $\sigma_{\tilde{u}\tilde{v}}$ (Index 10) and $\sigma_{\tilde{v}}^{2}$ (Index 11) both contain 0, showing again that we do not have significant evidence to reject the reduced model in favor of the larger one.
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, message=FALSE}
 # Use lmeresampler to get bootstrapped CIs for var components
 
 ## running a parametric bootstrap (30 seconds or so if B=100)
@@ -1121,7 +1121,7 @@ tmp <- capture.output(summary(modelel0))
 cat(tmp[c(2, 10:23)], sep='\n')
 ```
 
-```{r, 10verbextra3, echo=FALSE, comment=NA, output.lines=-(1:5)}
+```{r, 10verbextra3, echo=FALSE, comment=NA, message=FALSE}
 anova(modelel0,modelfl0)  # go with Model F
 ```
 
