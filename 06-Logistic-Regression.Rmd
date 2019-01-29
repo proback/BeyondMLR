@@ -1002,7 +1002,7 @@ summary(model1a)
  - `region` = region of the country
 
 
-3. __NBA Data.__  Data in `NBA1718team.csv` looks at factors that are associated with a team's winning percentage. After a thorough exploratory data analyses, create the best model you can to predict a team's winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team's success.
+3. __NBA Data.__  Data in `NBA1718team.csv` [@rossotti] looks at factors that are associated with a team's winning percentage. After a thorough exploratory data analyses, create the best model you can to predict a team's winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team's success.
 
   - `win_pct` = Percentage of Wins,
   - `FT_pct` = Average Free Throw Percentage per game,
