@@ -836,7 +836,7 @@ Finally a limitation may be introduced as a result of the acknowledged variation
 
 ##Exercises
 
-###Conceptual Excersises:
+###Conceptual Exercises:
 1. List the explanatory and response variable(s) for each research question. 
   a. Are students with poor grades more likely to binge drink?
   b. What is the chance you are accepted into medical school given your GPA and MCAT scores? 

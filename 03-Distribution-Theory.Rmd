@@ -660,8 +660,8 @@ if (knitr:::is_latex_output()) {
 ```
 
 
-##Execises
-###Conceptual Exercies
+##Exercises
+###Conceptual Exercises
 1. At what value of $p$ is the standard deviation of a binary random variable smallest? When is standard deviation largest?
 
 1. How are hypergeometric and binomial random variables different? How are they similar?
