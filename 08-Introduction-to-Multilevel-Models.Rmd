@@ -47,11 +47,12 @@ Our examination of the data from @Miller2010 in `musicdata.csv` will focus on th
 Sample rows containing selected variables from our data set are illustrated in Table \@ref(tab:table1chp8); note that each subject (id) has one row for each unique diary entry.
 
 ```{r load_packages8, include=FALSE}
-library(ggplot2)    # enable ggplot 
+library(MASS)
 library(gridExtra)  # enable multiple plotting
 library(mnormt) # contour plot?
 library(lme4) #for models
 library(knitr) #for kable
+library(tidyverse)
 ```
 
 ```{r,include=FALSE}
@@ -102,29 +103,35 @@ head(music)       # examine first 6 rows
 
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
 #Getting started-2
-table(music$id)     # number of diary entries for each subject
-table(music$diary)  # number of subjects with diary entry of a given number
+music %>% count(id)     # number of diary entries for each subject
+music %>% count(diary)  # number of subjects with diary entry of a given number
 
-keydata = music[,c(2,3,5,6,7,9,11,12,14,16,17)]
-head(keydata)
-dim(keydata)   # 497x11
+select <- dplyr::select
+keydata <- music %>% 
+  dplyr::select(id, diary, perform_type, memory, audience, na, gender,
+                instrument, mpqab, mpqpem, mpqnem)
+keydata
 
 # Create Level2 data set by picking off one observation per subject,
 #   which would be easier if every subject had a diary entry labeled '1'
-music.lev2 = keydata[keydata$diary==2 | (keydata$id==42 & keydata$diary==3),
-  c(1,7,8,9,10,11)]
-dim(music.lev2)   # should be 37 rows and 6 columns (one per L2 variable)
+#  - should be 37 rows and 6 columns (one per L2 variable)
+music.lev2 <-  keydata %>%
+  group_by(id) %>%
+  filter(row_number() == 1) %>%
+  select(id, gender:mpqnem)
 
 # Add average across all performances for each subject for EDA plots
-meanbysubj = by(music$na,music$id,mean,na.rm=T)
-music.lev2 = data.frame(music.lev2,meanbysubj=as.numeric(meanbysubj))
+meanbysubj <- music %>% group_by(id) %>%
+  summarise(meanbysubj = mean(na, na.rm = TRUE))
+music.lev2 <- music.lev2 %>%
+  left_join(meanbysubj, by = "id")
 
 # Exploratory data analysis
 # Summarize Level 1 covariates (and responses) by ignoring within subject 
 #   correlation and pretending all observations are independent
-table(music$perform_type)   # gives number of performances of each type
-table(music$memory)
-table(music$audience)
+music %>% count(perform_type) 
+music %>% count(memory) 
+music %>% count(audience) 
 
 # create ggplot theme for plots
 # theme with grid, grey background 
@@ -137,12 +144,15 @@ theme1 <- theme(axis.line = element_line(size = .5, color = "black"),
   axis.title.x = element_text(size = 14),axis.title.y = element_text(size = 14),
   plot.title=element_text(hjust=.9,face="italic",size=12))
 
+## Histogram of negative affect frequencies
 na.all <- ggplot(data=music,aes(x=na)) + 
-  geom_histogram(binwidth = 2, fill = "white",color = "black") + theme.1 + 
-  xlab("Negative Affect") + ylab("Frequency") + labs(title="(a)") + xlim(10,35)
+  geom_histogram(binwidth = 2, fill = "white",color = "black") + 
+  theme.1 + xlim(10,35) +
+  xlab("Negative Affect") + ylab("Frequency") + labs(title="(a)") 
 na.mean <- ggplot(data=music.lev2,aes(x=meanbysubj)) + 
-  geom_histogram(binwidth = 2, fill = "white", color = "black") + theme.1 + 
-  xlab("Mean Negative Affect") + ylab("Frequency") + labs(title="(b)") + xlim(10,35)
+  geom_histogram(binwidth = 2, fill = "white", color = "black") + 
+  theme.1 + xlim(10,35) +
+  xlab("Mean Negative Affect") + ylab("Frequency") + labs(title="(b)") 
 mli.hist1 <- grid.arrange(na.all,na.mean,ncol=1)
 ```
 
@@ -155,6 +165,10 @@ We can also summarize categorical Level One covariates across all (possibly corr
 To generate an initial examination of Level Two covariates, we consider a data set with just one observation per subject, since Level Two variables are constant over all performances from the same subject. Then, we can proceed as we did with Level One covariates---using histograms to illustrate the distributions of continuous covariates (see Figure \@ref(fig:mli-histmat1)) and tables to summarize categorical covariates. For example, we learn that the majority of subjects have positive emotionality scores between 50 and 60, but that several subjects fall into a lengthy lower tail with scores between 20 and 50. A summary of categorical Level Two covariates reveals that among the 37 subjects (26 female and 11 male), 17 play an orchestral instrument, 15 are vocal performers, and 5 play a keyboard instrument.
 
 ```{r,include=FALSE}
+# Summarize Level 2 covariates using data set with one observation per subject,
+music.lev2 %>% ungroup(id) %>% count(gender)
+music.lev2 %>% ungroup(id) %>% count(instrument)
+
 nem1 <- ggplot(data=music.lev2,aes(x=mpqnem)) + 
   geom_histogram(binwidth = 5, fill = "white",color = "black") + theme.1 + 
   xlab("NEM") + ylab("Frequency") + labs(title="(a)")
@@ -164,6 +178,7 @@ pem1 <- ggplot(data=music.lev2,aes(x=mpqpem)) +
 abs <- ggplot(data=music.lev2,aes(x=mpqab)) + 
   geom_histogram(binwidth = 5, fill = "white", color = "black ") + theme.1 + 
   xlab("Absorption") + ylab("") + labs(title="(c)")
+mli.histmat1 <- grid.arrange(nem1,pem1,abs,ncol=3)
 ```
 
 ```{r mli-histmat1, fig.cap= "Histograms of the 3 continuous Level Two covariates (negative emotionality (NEM), positive emotionality (PEM), and absorption).  Each plot contains one observation per musician.", fig.align="center",out.width="60%", echo=FALSE}
@@ -178,6 +193,9 @@ As with individual variables, we will begin by treating all 497 performances rec
 To avoid the issue of dependent observations in our three plots from Figure \@ref(fig:mli-boxscatmat1), we could generate separate plots for each subject and examine trends within and across subjects. These "lattice plots" are illustrated in Figures \@ref(fig:mli-lattice1), \@ref(fig:mli-lattice2), and \@ref(fig:mli-lattice3); we discuss such plots more thoroughly in Chapter \@ref(ch-lon). While general trends are difficult to discern from these lattice plots, we can see the variety in subjects in sample size distributions and overall level of performance anxiety. In particular, in Figure \@ref(fig:mli-lattice3), we notice that linear fits for many subjects illustrate the same same slight downward trend displayed in the overall scatterplot in Figure \@ref(fig:mli-boxscatmat1), although some subjects experience increasing anxiety and others exhibit non-linear trends. Having an idea of the range of individual trends will be important when we begin to draw overall conclusions from this study.
 
 ```{r, include=FALSE}
+# Look at relationships among Level 1 covariates and primary response
+#   (again ignoring correlation).  Boxplots for categorical covariates and
+#   scatterplots and lattice plot for continuous covariates.
 # boxplot of negative affect by performance type
 box.perform <- ggplot(data=music,aes(factor(perform_type),na)) + geom_boxplot() + 
   theme.1 + coord_flip() + ylab("Negative affect") + xlab("") + labs(title="(a)")
@@ -189,6 +207,8 @@ box.audience <- ggplot(data=music,aes(factor(audience),na)) + geom_boxplot() +
 scatter.previous <- ggplot(data=music, aes(x=previous,y=na)) + geom_point() + 
   theme.1 + geom_smooth(method="lm",color="black") + ylab("Negative affect") + 
   xlab("Previous Performances") + labs(title="(c)")
+# all three together
+mli.boxscatmat1 <- grid.arrange(box.perform,box.audience,scatter.previous,ncol=2)
 ```
 
 ```{r mli-boxscatmat1,fig.align="center",out.width="60%",echo=FALSE, fig.cap='Boxplots of two categorical Level One covariates (performance type (a) and audience type (b)) vs. model response, and scatterplot of one continuous Level One covariate (number of previous diary entries (c)) vs. model response (negative affect).  Each plot contains one observation for each of the 497 performances.',warning=FALSE}
@@ -199,7 +219,8 @@ grid.arrange(box.perform,box.audience,scatter.previous,ncol=2)
 ```{r mli-lattice1, fig.align="center",out.width="60%", fig.cap='Lattice plot of performance type vs. negative affect, with separate dotplots by subject.', echo=FALSE, warning=FALSE}
 # Lattice plot for NA vs. Performance Type
 ggplot(music,aes(x=factor(perform_type),y=na)) + theme.1 + 
-  geom_dotplot(binaxis="y",stackdir="center",binwidth=25/30) + facet_wrap(~id,ncol=5) +   
+  geom_dotplot(binaxis="y",stackdir="center",binwidth=25/30) + 
+  facet_wrap(~id,ncol=5) +   
   theme(strip.text.x=element_blank()) + coord_flip() +
   labs(x="Performance Type",y="Negative Affect")
 ```
@@ -207,7 +228,8 @@ ggplot(music,aes(x=factor(perform_type),y=na)) + theme.1 +
 ```{r mli-lattice2,fig.align="center",out.width="60%", fig.cap='Lattice plot of audience type vs. negative affect, with separate dotplots by subject.',echo=FALSE,warning=FALSE}
 # Lattice plot for NA vs. Audience
 ggplot(music,aes(x=factor(audience),y=na)) + theme.1 + 
-  geom_dotplot(binaxis="y",stackdir="center",binwidth=25/30) + facet_wrap(~id,ncol=5) +   
+  geom_dotplot(binaxis="y",stackdir="center",binwidth=25/30) + 
+  facet_wrap(~id,ncol=5) +   
   theme(strip.text.x=element_blank()) + coord_flip() +
   labs(x="Audience",y="Negative Affect")
 ```
@@ -215,7 +237,8 @@ ggplot(music,aes(x=factor(audience),y=na)) + theme.1 +
 ```{r, mli-lattice3,fig.align="center",out.width="60%", fig.cap='Lattice plot of previous performances vs. negative affect, with separate scatterplots with fitted lines by subject.',echo=FALSE, warning=FALSE}
 # Lattice plot for NA vs. Previous Performances
 ggplot(music,aes(x=previous,y=na)) + theme.1 + 
-  geom_point() + geom_smooth(method="lm",color="black") + facet_wrap(~id,ncol=5) +   
+  geom_point() + geom_smooth(method="lm",color="black") + 
+  facet_wrap(~id,ncol=5) +   
   theme(strip.text.x=element_blank()) + ylim(10,35) +
   labs(x="Previous Performances",y="Negative Affect")
 ```
@@ -223,12 +246,15 @@ ggplot(music,aes(x=previous,y=na)) + theme.1 +
 In Figure \@ref(fig:mli-boxmat1), we use boxplots to examine the relationship between our primary categorical Level Two covariate (instrument) and our continuous model response. Plot (a) uses all 497 performances, while plot (b) uses one observation per subject (the mean performance anxiety across all performances) regardless of how many performances that subject had. Naturally, plot (b) has a more condensed range of values, but both plots seem to support the notion that performance anxiety is slightly lower for vocalists and maybe a bit higher for keyboardists
 
 ```{r, include=FALSE}
+# Look at relationships among Level 2 covariates and negative affect
+#   (again ignoring correlation)
 instr.all <- ggplot(data=music,aes(factor(instrument),na)) + geom_boxplot() + 
   coord_flip() + theme.1 + ylab("Negative Affect") + xlab("") + labs(title="(a)") +
   ylim(10,35)
 instr.mean <- ggplot(data=music.lev2,aes(factor(instrument),meanbysubj)) + 
-  geom_boxplot() + coord_flip() + theme.1 + ylab("Mean Negative Affect") + xlab("") + 
-  labs(title="(b)") + ylim(10,35)
+  geom_boxplot() + coord_flip() + theme.1 + ylab("Mean Negative Affect") + 
+  xlab("") + labs(title="(b)") + ylim(10,35)
+mli.boxmat1 <- grid.arrange(instr.all,instr.mean,ncol=1)
 ```
 
 ```{r mli-boxmat1,fig.align="center",out.width="60%",fig.cap= 'Boxplots of the categorical Level Two covariate (instrument) vs. model response (negative affect).  Plot (a) is based on all 497 observations from all 37 subjects, while plot (b) uses only one observation per subject.', echo=FALSE, warning=FALSE}
@@ -256,6 +282,8 @@ nem2.mean <- ggplot(data=music.lev2,aes(x=mpqnem,y=meanbysubj)) + geom_point() +
 abs2.mean <- ggplot(data=music.lev2,aes(x=mpqab,y=meanbysubj)) + geom_point() + 
   geom_smooth(method="lm",color="black") + theme.1 + ylab("") + 
   xlab("Absorption") + labs(title="(c2)")
+mli.scatmat1 <- grid.arrange(pem2.all,nem2.all,abs2.all,
+  pem2.mean,nem2.mean,abs2.mean,ncol=3)
 ```
 
 ```{r mli-scatmat1,fig.align="center",out.width="60%",fig.cap=' Scatterplots of continuous Level Two covariates (positive emotionality (PEM), negative emotionality (NEM), and absorption) vs. model response (negative affect).  The top plots (a1, b1, c1) are based on all 497 observations from all 37 subjects, while the bottom plots (a2, b2, c2) use only one observation per subject.', echo=FALSE, warning=FALSE}
@@ -301,16 +329,18 @@ knit_hooks$set(output = function(x, options) {
 ```
 
 ```{r verb1, echo=FALSE, comment=NA}
-#Code needed for making next graph
 # Try using multiple linear regression to analyze data even though 
 #   many assumptions are violated.
-# First generate indicator variables for two covariates used in section 3
-music$orch = ifelse(music$instrument=="orchestral instrument",1,0)
-music$large = ifelse(music$perform_type=="Large Ensemble",1,0)
+# First generate indicator variables for two covariates used in Section 3
+music <- music %>%
+  mutate(orch = ifelse(instrument=="orchestral instrument",1,0),
+         large = ifelse(perform_type=="Large Ensemble",1,0) )
 # Run the regression model, assuming linear, indep, normal, equal var
 modelc0 = lm(na ~ orch + large + orch:large, data=music)
 tmp <- capture.output(summary(modelc0))
 cat(tmp[c(3:4, 9:15, 18:20)], sep='\n')
+# residual diagnostic plots
+# plot(modelc0)
 ```
 
 Other than somewhat skewed residuals, residual plots (not shown) do not indicate any major problems with the OLS multiple regression model. However, another key assumption in these models is the independence of all observations. While we might reasonably conclude that responses from different study participants are independent (although possibly not if they are members of the same ensemble group), it is not likely that the 15 or so observations taken over multiple performances from a single subject are similarly independent. If a subject begins with a relatively high level of anxiety (compared to other subjects) before her first performance, chances are good that she will have relatively high anxiety levels before subsequent performances. Thus, OLS multiple linear regression using all 497 observations is not advisable for this study (or multilevel data sets in general).
@@ -343,17 +373,19 @@ For Subject 22, we estimate $\hat{a}_{22}=24.5$, $\hat{b}_{22}=-7.8$, and $\hat{
 
 ```{r, include=FALSE}
 # Add new indicators to music data set
-music$students = ifelse(music$audience=="Student(s)",1,0)
-music$juried = ifelse(music$audience=="Juried Recital",1,0)
-music$public = ifelse(music$audience=="Public Performance",1,0)
-music$solo = ifelse(music$perform_type=="Solo",1,0)
-music$memory1 = ifelse(music$memory=="Memory",1,0)
-music$female = ifelse(music$gender=="Female",1,0)
-music$vocal = ifelse(music$instrument=="voice",1,0)
+music <- music %>%
+  mutate(students = ifelse(audience=="Student(s)",1,0),
+         juried = ifelse(audience=="Juried Recital",1,0),
+         public = ifelse(audience=="Public Performance",1,0),
+         solo = ifelse(perform_type=="Solo",1,0),
+         memory1 = ifelse(memory=="Memory",1,0),
+         female = ifelse(gender=="Female",1,0),
+         vocal = ifelse(instrument=="voice",1,0) )
 
-#music[music$id==22,c("id","diary","perform_type","audience","na","instrument")]
-id22 = music[music$id==22,]   
-dim(id22)
+#Model id22 (for Musician #22 only)
+music %>% filter(id==22) %>% 
+  select(id, diary, perform_type, audience, na, instrument)
+id22 <- music %>% filter(id==22)   # pick off data for Musician 22
 ```
 
 ```{r verb2, echo=FALSE, comment=NA}
@@ -367,29 +399,43 @@ We could continue trying to build a better model for Subject 22, adding indicato
 For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \@ref(eq:level1a), with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the OLS regression model in Equation \@ref(eq:level1a) to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called __Level One models__. As displayed in Figure \@ref(fig:mli-histmat2), there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
 
 ```{r, include=FALSE}
-music.lev2$orch = ifelse(music.lev2$instrument=="orchestral instrument",1,0)
-last.visit=as.numeric(by(music$diary,music$id,max))
-lvcf.na=rep(0,37)
-for(i in 1:37)  {
-  lvcf.na[i]=music$na[music$id==music.lev2$id[i] & music$diary==last.visit[i]]  }
-lvcf.model=lm(lvcf.na~music.lev2$orch)
+# LVCF analysis (can't analyze large with only 1 obs per subject)
+lvcf.na <- music %>% 
+  group_by(id) %>%
+  filter(row_number() == n() ) %>%
+  select(id, na) %>%
+  rename (lvcf.na = na)
+music.lev2 <- music.lev2 %>%
+  left_join(lvcf.na, by = "id") %>%
+  mutate(orch = ifelse(instrument=="orchestral instrument",1,0) )
+lvcf.model=lm(lvcf.na ~ orch, data = music.lev2)
 summary(lvcf.model)
 
+# histogram for the intercepts by subject
+#  "by" line runs "coefficients" function for each subject
+#  "coefficients" puts int and slope from regression of na on large into list
+#  "[[1]]" picks off the first value from the list (the intercept)
 int <- by(music, music$id, function(data)
                   coefficients(lm(na ~ large, data = data))[[1]])
-summary(int)   
-music.lev2$int = int[1:37]
+summary(int)   # summary statistics for 37 intercepts
+music.lev2 <- music.lev2 %>%
+  ungroup(id) %>%
+  mutate(int = int[1:37])
 inthist <- ggplot(data=music.lev2,aes(x=int)) + 
   geom_histogram(color="black",fill="white",binwidth=2) + theme.1 + 
   xlab("Intercepts from 37 subjects") + ylab("Frequency") + labs(title="(a)")
 
+# histogram for fitted rate of change
+#   same as above, except second coefficient (slope) picked off
 rate <- by(music, music$id, function(data)
               coefficients(lm(na ~ large, data = data))[[2]])
 summary(rate)
-music.lev2$rate = rate[1:37]
+music.lev2 <- music.lev2 %>%
+  mutate(rate = rate[1:37])
 slopehist <- ggplot(data=music.lev2,aes(x=rate)) + 
   geom_histogram(color="black",fill="white",binwidth=2) + theme.1 + 
   xlab("Slopes from 37 subjects") + ylab("Frequency") + labs(title="(b)")
+mli.histmat2 <- grid.arrange(inthist,slopehist,ncol=1)
 ```
 
 ```{r mli-histmat2,fig.align="center",out.width="60%", fig.cap='Histograms of intercepts and slopes from fitting simple regression models by subject, where each model contained a single binary predictor indicating if a performance was part of a large ensemble.',echo=FALSE, warning=FALSE}
@@ -430,12 +476,15 @@ model.int = lm(int~music.lev2$orch)
 summary(model.int)
 model.rate = lm(rate~music.lev2$orch)
 summary(model.rate)
+
+# Plot the relationships between instrument and intercept and slope
 int.box <- ggplot(data=music.lev2,aes(factor(orch),int)) + geom_boxplot() + 
   theme.1 + coord_flip() + ylab("Fitted Intercepts") + xlab("Orchestral") + 
   labs(title="(a)")
 slope.box <- ggplot(data=music.lev2,aes(factor(orch),rate)) + geom_boxplot() + 
   theme.1 + coord_flip() + ylab("Fitted Slopes") + xlab("Orchestral") + 
   labs(title="(b)")
+mli.boxmat2 <- grid.arrange(int.box,slope.box,ncol=1)
 ```
 
 ```{r mli-boxmat2,fig.align="center",out.width="60%", fig.cap='Boxplots of fitted intercepts (plot (a)) and slopes (plot (b)) by orchestral instrument (1) vs. keyboard or vocalist (0).',echo=FALSE, warning=FALSE}
@@ -759,7 +808,6 @@ We see that, on average, subjects had a performance anxiety level of 16.7 before
 This random slopes and intercepts model is illustrated in Figure \@ref(fig:mli-spag1). The thicker black line shows the overall trends given by our estimated fixed effects: an intercept of 16.7 and a slope of -1.7. Then, each subject is represented by a gray line. Not only do the subjects' intercepts differ (with variance 6.3), but their slopes differ as well (with variance 0.7). Additionally, subjects' slopes and intercepts are negatively associated (with correlation -0.76), so that subjects with greater intercepts tend to have steeper negative slopes. We can compare this model with the random intercepts model from section \@ref(modela), pictured in Figure \@ref(fig:mli-spag0). With no effect of large ensembles, each subject is represented by a gray line with the identical slope (0), but with varying intercepts (with variance 5.0).
 
 ```{r, include=FALSE}
-#code needed for next couple graphs
 # Plot random intercepts model
 ints.a = fixef(model.a)[1] + ranef(model.a)[[1]][1]
 n = length(music.lev2$id)
@@ -974,7 +1022,9 @@ and replace baseline NEM in Model D with its centered version:
 ```{r verb10, echo=FALSE, comment=NA}
 # Model E (Center baseline NEM in Model D)
 #mean(music$mpqnem)
-music$cmpqnem = music$mpqnem - mean(music$mpqnem)
+mean(music$mpqnem)
+music <- music %>%
+  mutate(cmpqnem = mpqnem - mean(mpqnem))
 model.e <- lmer(na ~ orch + cmpqnem + large + orch:large + 
   cmpqnem:large + (large|id), REML=T, data=music)
 # print(summary(model.e), correlation=FALSE, show.resids=FALSE)
@@ -1118,70 +1168,18 @@ ggplot() + theme.1 +
 Figure \@ref(fig:mli-spag2) is based on a simulated data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting an OLS regression model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the OLS regression analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
 
 ```{r ch8simulations, include=FALSE, cache=TRUE}
-#Code needed for next graphs
-# Simulation 2 (take 1) - OLS SEs larger however and MLM better.  Try again.
-subject = c(rep(1,20),rep(2,20),rep(3,20),rep(4,20))
-b00 = 25
-b10 = -0.5
-e0i = rep(rnorm(4,0,20),each=20)  # no diff if sd=5
-lambda0 = b00 + e0i
-lambda1 = b10
-previj = c(1:20,1:20,1:20,1:20)
-eij = rnorm(80,0,4)
-yij = lambda0 + lambda1*previj + eij
-simdata = data.frame(subject=subject,lambda0=lambda0,lambda1=lambda1,
-  previj=previj,eij=eij,yij=yij)
-
-plot(yij~previj)
-olsreg.sim = lm(yij~previj)
-summary(olsreg.sim)
-AIC(olsreg.sim); BIC(olsreg.sim)
-mlm.sim = lmer(yij~previj + (1|subject), data=simdata)
-summary(mlm.sim)
-
-# Simulation 2 (take 2) - use estimated parameters from Model C
-#   - models on simulated data don't always match Model C results
+# Simulation 2 - use estimated parameters from Model C
 #   - SEs usually higher with OLS
-library(MASS)
 orch.sim = music$orch
 large.sim = music$large
 subj.sim = music$id
 reps.sim = as.numeric(table(music$id))
-b00 = 15.9297
-b01 = 1.6926
-b10 = -0.9106
-b11 = -1.4239
-sig01 = (-0.635)*2.3781*0.67236
-Sigma = matrix(c(2.3781^2,sig01,sig01,0.67236^2),2,2)
-e0e1 = mvrnorm(37,c(0,0),Sigma)
-e0i = rep(e0e1[,1],times=reps.sim)
-e1i = rep(e0e1[,2],times=reps.sim)
-lam0i = b00 + b01*orch.sim + e0i
-lam1i = b10 + b11*orch.sim + e1i
-Eij = rnorm(497,0,4.66984)
-Yij = lam0i + lam1i*large.sim + Eij
-data.sim = data.frame(subj.sim=subj.sim,orch.sim=orch.sim,large.sim=large.sim,
-  e0i=e0i,e1i=e1i,lam0i=lam0i,lam1i=lam1i,Eij=Eij,Yij=Yij)
-
-olsreg.sim = lm(Yij~orch.sim+large.sim+orch.sim:large.sim, data=data.sim)
-summary(olsreg.sim)
-AIC(olsreg.sim); BIC(olsreg.sim)
-mlm.sim = lmer(Yij ~ orch.sim + large.sim + orch.sim:large.sim +
-  (large.sim|subj.sim), REML=T, data=data.sim)
-summary(mlm.sim)
-
-# Simulation 2 (take 2) - run 1000 times and summarize results
-library(MASS)
-orch.sim = music$orch
-large.sim = music$large
-subj.sim = music$id
-reps.sim = as.numeric(table(music$id))
-b00 = 15.9297
-b01 = 1.6926
-b10 = -0.9106
-b11 = -1.4239
-sig01 = (-0.635)*2.3781*0.67236
-Sigma = matrix(c(2.3781^2,sig01,sig01,0.67236^2),2,2)
+a0 = 15.9297
+a1 = 1.6926
+b0 = -0.9106
+b1 = -1.4239
+siguv = (-0.635)*2.3781*0.67236
+Sigma = matrix(c(2.3781^2,siguv,siguv,0.67236^2),2,2)
 
 OLSest = matrix(NA,nrow=1000,ncol=4)
 OLSse = matrix(NA,nrow=1000,ncol=4)
@@ -1193,15 +1191,15 @@ MLMtval = matrix(NA,nrow=1000,ncol=4)
 MLMaic = rep(NA,1000); MLMbic = rep(NA,1000)
 
 for(k in 1:1000)  {
-  e0e1 = mvrnorm(37,c(0,0),Sigma)
-  e0i = rep(e0e1[,1],times=reps.sim)
-  e1i = rep(e0e1[,2],times=reps.sim)
-  lam0i = b00 + b01*orch.sim + e0i
-  lam1i = b10 + b11*orch.sim + e1i
-  Eij = rnorm(497,0,4.66984)
-  Yij = lam0i + lam1i*large.sim + Eij
+  uivi = mvrnorm(37,c(0,0),Sigma)
+  ui = rep(uivi[,1],times=reps.sim)
+  vi = rep(uivi[,2],times=reps.sim)
+  ai = a0 + a1*orch.sim + ui
+  bi = b0 + b1*orch.sim + vi
+  eij = rnorm(497,0,4.66984)
+  Yij = ai + bi*large.sim + eij
   data.sim = data.frame(subj.sim=subj.sim,orch.sim=orch.sim,large.sim=large.sim,
-    e0i=e0i,e1i=e1i,lam0i=lam0i,lam1i=lam1i,Eij=Eij,Yij=Yij)
+    ui=ui,vi=vi,ai=ai,bi=bi,eij=eij,Yij=Yij)
 
   olsreg.sim = lm(Yij~orch.sim+large.sim+orch.sim:large.sim, data=data.sim)
   OLSest[k,]=summary(olsreg.sim)$coefficients[,1]
@@ -1245,51 +1243,51 @@ plot(density(MLMtval[,2])); lines(density(OLStval[,2]),lty=2)
 plot(density(MLMtval[,3])); lines(density(OLStval[,3]),lty=2)
 plot(density(MLMtval[,4])); lines(density(OLStval[,4]),lty=2)
 
-est.data = data.frame(b00=c(MLMest[,1],OLSest[,1]),b01=c(MLMest[,2],OLSest[,2]),
-  b10=c(MLMest[,3],OLSest[,3]),b11=c(MLMest[,4],OLSest[,4]),
+est.data = data.frame(a0=c(MLMest[,1],OLSest[,1]),a1=c(MLMest[,2],OLSest[,2]),
+  b0=c(MLMest[,3],OLSest[,3]),b1=c(MLMest[,4],OLSest[,4]),
   model=c(rep("MLM",1000),rep("OLS",1000)))
-b00dens <- ggplot(data=est.data, aes(x=b00,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)["00"])) + 
+a0dens <- ggplot(data=est.data, aes(x=a0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(hat(alpha)["0"])) + 
   ylab("Density") + labs(title="(a)")
-b01dens <- ggplot(data=est.data, aes(x=b01,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)["01"])) + 
+a1dens <- ggplot(data=est.data, aes(x=a1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(hat(alpha)["1"])) + 
   ylab("Density") + labs(title="(b)")
-b10dens <- ggplot(data=est.data, aes(x=b10,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[10])) + 
+b0dens <- ggplot(data=est.data, aes(x=b0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[0])) + 
   ylab("Density") + labs(title="(c)")
-b11dens <- ggplot(data=est.data, aes(x=b11,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[11])) + 
+b1dens <- ggplot(data=est.data, aes(x=b1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[1])) + 
   ylab("Density") + labs(title="(d)")
 ```
 
 (ref:capmlidensity1) Density plots of parameter estimates for the four fixed effects of Model C under both a multilevel model and OLS regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) $\alpha_{0}$, (b) $\alpha_{1}$, (c) $\beta_{0}$, and (d) $\beta_{1}$ were obtained using both a multilevel and an OLS regression model. Each plot then shows a density plot for the 1000 estimates of the corresponding fixed effect using multilevel modeling vs. a similar density plot for the 1000 estimates using OLS regression.
 
 ```{r mli-density1,fig.align="center",out.width="60%", fig.cap='(ref:capmlidensity1)',echo=FALSE, warning=FALSE}
-grid.arrange(b00dens,b01dens,b10dens,b11dens,ncol=2)
+grid.arrange(a0dens,a1dens,b0dens,b1dens,ncol=2)
 ```
 
 ```{r, include=FALSE}
-se.data = data.frame(b00=c(MLMse[,1],OLSse[,1]),b01=c(MLMse[,2],OLSse[,2]),
-  b10=c(MLMse[,3],OLSse[,3]),b11=c(MLMse[,4],OLSse[,4]),
+se.data = data.frame(a0=c(MLMse[,1],OLSse[,1]),a1=c(MLMse[,2],OLSse[,2]),
+  b0=c(MLMse[,3],OLSse[,3]),b1=c(MLMse[,4],OLSse[,4]),
   model=c(rep("MLM",1000),rep("OLS",1000)))
-b00dens <- ggplot(data=se.data, aes(x=b00,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)["00"]))) + 
+a0dens <- ggplot(data=se.data, aes(x=a0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(alpha)["0"]))) + 
   ylab("Density") + labs(title="(a)")
-b01dens <- ggplot(data=se.data, aes(x=b01,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)["01"]))) + 
+a1dens <- ggplot(data=se.data, aes(x=a1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(alpha)["1"]))) + 
   ylab("Density") + labs(title="(b)")
-b10dens <- ggplot(data=se.data, aes(x=b10,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[10]))) + 
+b0dens <- ggplot(data=se.data, aes(x=b0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[0]))) + 
   ylab("Density") + labs(title="(c)")
-b11dens <- ggplot(data=se.data, aes(x=b11,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[11]))) + 
+b1dens <- ggplot(data=se.data, aes(x=b1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[1]))) + 
   ylab("Density") + labs(title="(d)")
 ```
 
 (ref:capmlidensity2) Density plots of standard errors of parameter estimates for the four fixed effects of Model C under both a multilevel model and OLS regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) SE($\alpha_{0}$), (b) SE($\alpha_{1}$), (c) SE($\beta_{0}$), and (d) SE($\beta_{1}$) were obtained using both a multilevel and an OLS regression model. Each plot then shows a density plot for the 1000 estimates of the corresponding standard error term using multilevel modeling vs. a similar density plot for the 1000 estimates using OLS regression.
 
 ```{r mli-density2,fig.align="center",out.width="60%", fig.cap='(ref:capmlidensity2)',echo=FALSE, warning=FALSE}
-grid.arrange(b00dens,b01dens,b10dens,b11dens,ncol=2)
+grid.arrange(a0dens,a1dens,b0dens,b1dens,ncol=2)
 ```
 
 Our second example is based upon Model C from section \@ref(modelc), with single binary predictors at both Level One and Level Two. Using the estimated fixed effects coefficients and variance components from random effects produced in Model C, we generated 1000 sets of simulated data. Each set of simulated data contained 497 observations from 37 subjects just like the original data, with relationships between negative affect and large ensembles and orchestral instruments (along with associated variability) governed by the estimated parameters from Model C. Each set of simulated data was used to fit both a multilevel model and an OLS regression model, and the estimated fixed effects ($\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\beta}_{0}$, and $\hat{\beta}_{1}$) and their standard errors were saved. Figure \@ref(fig:mli-density1) shows density plots comparing the 1000 estimated fixed effects for each fixed effect from the two modeling approaches; in general, estimates from multilevel modeling and OLS regression tend to agree pretty well, without noticeable bias. Based on coefficient estimates alone, there appears to be no reason to favor multilevel modeling over OLS regression in this example, but Figure \@ref(fig:mli-density2) tells a different story. Figure \@ref(fig:mli-density2) shows density plots comparing the 1000 estimated standard errors associated with each fixed effect from the two modeling approaches; in general, standard errors are markedly larger with multilevel modeling than OLS regression. This is not unusual, since OLS regression assumes all 497 observations are independent while multilevel modeling acknowledges that, with correlated data within subject, there are fewer than 497 independent pieces of data. Therefore, OLS regression can overstate precision, producing t-statistics for each fixed effect that tend to be larger than they should be; the number of significant results in OLS regression are then not reflective of the true structure of the data.
