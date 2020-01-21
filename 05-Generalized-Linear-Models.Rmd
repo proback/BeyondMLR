@@ -6,9 +6,14 @@ output:
     number_sections: yes
   html_document: default
 ---
-#Generalized Linear Models (GLMs): A Unifying Theory {#ch-glms}
 
-##Learning Objectives
+# Generalized Linear Models (GLMs): A Unifying Theory {#ch-glms}
+
+```{r,include=F}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
+## Learning Objectives
 
 - Determine if a probability distribution can be expressed in one-parameter exponential family form.
 - Identify canonical links for distributions of one parameter exponential family form.
@@ -17,7 +22,7 @@ output:
 `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
 `r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
 
-##One parameter exponential families
+## One parameter exponential families
 
 Thus far, we have expanded our repertoire of models from OLS to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model is a GLM, we consider the following properties.
 When a probability formula can be written in the form below
@@ -27,7 +32,7 @@ f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 \end{equation}
 and if the __support__ (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
 
-###One Parameter Exponential Family: Possion
+### One Parameter Exponential Family: Possion
 
 Recall we begin with
 \[
@@ -64,7 +69,7 @@ where differentiation is with respect to $\theta$.  Verifying these results for 
 \]
 We'll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we'll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean $\mu$ and standard deviation $\sigma$. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.  
 
-###One parameter exponential family: Normal
+### One parameter exponential family: Normal
 
 Here we determine whether a normal distribution is a one parameter exponential family member. First we will need to assume that $\sigma$ is known. Next, possible values for a normal random variable range from $-\infty$ to $\infty$, so the support does not depend on $\mu$. Finally, we'll need to write the probability density function (pdf) in the one parameter exponential family form. We start with the familiar form:
 \[
@@ -84,7 +89,7 @@ and $a(y)=y$, $b(\mu)=\mu$, $c(\mu)= -\frac{1}{2}\mu^2$, and $d(y) = - \frac{1}{
 From this result, we can see that the canonical link for a normal response is $\mu$ which is consistent with what we've been doing with OLS, since the simple linear regression model has the form:
 \[ \mu_{Y|X} = \beta_0 + \beta_1X. \]
 
-##Generalized Linear Modeling
+## Generalized Linear Modeling
 GLM theory suggests that the canonical link can be modeled as a linear combination of the explanatory variable(s). This approach unifies a number of modeling results used throughout the text. For example, likelihoods can be used to compare models in the same way for any member of the one-parameter exponential family.
 
 We have now __generalized__ our modeling to handle non-normal responses. In addition to normally distributed responses, we are able to handle Poisson responses, binomial responses, and more. Writing a pmf or pdf for a response in one parameter exponential family form reveals the canonical link which can be modeled as a linear function of the predictors. This linear function of the predictors is the last piece of the puzzle for performing generalized linear modeling. But, in fact, it is really nothing new. We already use linear combinations and the canonical link when modeling normally distributed data.
@@ -108,7 +113,7 @@ canlink <- c(" ","$\\text{logit}(p)$","$\\log(\\lambda)$","$\\mu$"," "," "," ")
 
 table1chp5 <- data.frame(Dist, Opeff, canlink)
 colnames(table1chp5) <- c("Distribution","One-parameter Exponential Family Form","Canonical Link")
-kable(table1chp5, booktabs=T,caption="One parameter exponential family form and canonical links.")
+kable(table1chp5, booktabs=T,caption="One parameter exponential family form and canonical links.",escape=F)
 ```
 
 Completing Table \@ref(tab:table1chp5) is left as an exercise.  
@@ -117,7 +122,7 @@ In the chapter on Poisson modeling, we provided heuristic rationale for using th
 
 [Note that __generalized linear models (GLMs)__ differs from __General Linear Models__.  The *general* linear model is a statistical linear model with multivariate vectors as responses. For example, each subject in a study may have their height, weight, and shoe size recorded and modeled as a function of age and sex. The response is a vector, $Y$ = (height, weight, shoe size), for each study participant. Age and sex are explanatory variables in the model. The residual is usually assumed to follow a multivariate normal distribution. If the residual is not a multivariate normal distribution, then generalized linear models may be used to relax assumptions about Y and the variance-covariance structure.]
 
-##Exercises
+## Exercises
 
 1. For each distribution,
 

@@ -6,9 +6,9 @@ output:
   pdf_document:
     number_sections: yes
 ---
-#Beyond Least Squares: Using Likelihoods to Fit and Compare Models {#ch-beyondmost}
+# Beyond Least Squares: Using Likelihoods to Fit and Compare Models {#ch-beyondmost}
 
-##Learning Objectives 
+## Learning Objectives 
 After finishing this chapter, you should be able to:
 
 - Describe the concept of a likelihood, in words.
@@ -19,6 +19,8 @@ After finishing this chapter, you should be able to:
 
 This text encourages you to broaden your statistical horizons by moving beyond independent, identically distributed, normal  responses (iidN).  This chapter on likelihood focuses on ways to fit models, determine estimates, and compare models for a wide range of types of responses, not just iidN data. In your earlier study of statistics, you  fit simple linear models using ordinary least squares (OLS). Fitting those models assumes that the mean value of a response, Y, is linearly related to some variable, X.  However, often responses are not normally distributed.  For example, a study in education may involve scoring responses on a test as correct or incorrect.   This binary response may be explained by the number of hours students spend studying.  However we do not expect a variable which takes on only 0 or 1 to  be a linear function of time spent studying.  
 
+`r if (knitr:::is_html_output()) {"\\newcommand{\\lik}{\\mathrm{Lik}} \\newcommand{\\Lik}{\\mathrm{Lik}} \\newcommand{\\bbias}{p_{B|\\textrm{B Bias}}} \\newcommand{\\neutral}{p_{B|N}} \\newcommand{\\gbias}{p_{B|\\textrm{G Bias}}} \\newcommand{\\bstop}{p_{S|B1}} \\newcommand{\\nstop}{p_{S|N}}"}`
+
 ```{r load_packageschp2, include=FALSE}
 library(dplyr)
 library(ggplot2)    # enable ggplot 
@@ -27,6 +29,8 @@ library(knitr) #for kable
 library(mosaic)
 library(xtable)
 library(kableExtra)
+
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
 ```{r, logistic1, fig.align="center",out.width="60%", fig.cap='An attempt to fit a linear regression model to a binary response variable.',echo=FALSE, warning=FALSE, message=FALSE}
@@ -41,7 +45,7 @@ testplot
 
 In this instance we'll use logistic regression instead of OLS.  Fitting a logistic regression requires the use of likelihood methods.  Another setting where likelihood methods come into play is when data is produced from a complex structure which may imply correlation among outcomes.  For example, test scores for students who have been taught by the same teacher may be correlated. We'll see that likelihood methods are  useful when modeling correlated data.   Likelihood methods not only provide a great deal of flexibility in the types of models we can fit, but they also provide ways in which to compare models as well.   You might find likelihood methods a bit more complicated, but  conceptually the approach is straightforward. As you go through the material here, worry less about calculus and computational details and focus on the concepts. You will have software to help you with computation, but model specification and interpretation will be up to you.  
 
-##Case Study: Does sex run in families?
+## Case Study: Does sex run in families?
 
 Doesn't it seem that some families tend to have lots of boys while others have more than their share of girls? Is it really the case that each child human couples produce is equally likely to be a male or female? Or does  sex run in families? It can be argued that these kinds of questions have implications for population demographics and sibling harmony. For example, a 2009 study at the University of Ulster found that growing up with sisters, as compared to brothers, can enhance the quality of life of an adult [@BBCNEWS1995].  
 
@@ -53,7 +57,7 @@ Most often, in practice, sex ratios differ from what Fisher predicted. From 1970
 
 To investigate this question and others, we look at the gender composition of 5,626 families  collected by the National Longitudinal Survey of Youth [@NLSY1997]. We fit models to explore whether there is evidence sex runs in families, a model we refer to as a Sex Conditional Model. We also consider a separate but related question about whether couples are "waiting for a boy." [@Rodgers2001]. 
 
-###Research Questions
+### Research Questions
 We specify several models related to gender balance in families. Our models liken having babies to flipping a coin (heads=boy, tails=girl), of course, recognizing that in truth there is a little more to having babies. The baseline model (Model 0) assumes that the probability of a boy is the same as a probability of a girl. The first model (Model 1) considers the situation that the coin is loaded and the probability of heads (a boy) is different than the probability of tails (a girl). Next, we consider a model (Model 2) that conditions on the previous number of boys or girls in a family to get at the question of whether sex runs in families. This data is also used for a different set of models that relate to couples' behavior. Specifically, we look to see if there is evidence that couples are waiting for a boy. Waiting for a girl, or waiting for both a boy and a girl, are left as exercises.  
 
 Models 0 and 1 assume that having children is like flipping a coin. The gender of each child is independent of the gender of other children and the probability of a boy is the same for each new child. Let $p_B$ be the probability a child is a boy.
@@ -82,18 +86,15 @@ colnames(table1chp2) <- c("Composition","Number of families", "Number of childre
 kable(table1chp2, booktabs=T, caption="The gender composition of 30 families in the hypothetical data set of n=50 children.")
 ```
 
-##Model 0: Sex Unconditional Model (Equal probabilities, Independence)
+## Model 0: Sex Unconditional Model (Equal probabilities, Independence)
 For the Sex Unconditional models, having children is modeled using coin flips.  With a coin flip model,  the result of each flip is independent of results of other flips.  With this version of the Sex Unconditional Model, the chance that a baby is a boy is specified to be $p_B=0.5$. It makes no difference if the first and third children are boys, the probability that the second child is a boy is 0.5; that is, the results for each child are __independent__ of the others.  Under this model  you expect to see equal numbers of boys and girls.  
  
-##Model 1: Sex Unconditional Model (Any Probability, Independence) {#sex_unconditional_model}
+## Model 1: Sex Unconditional Model (Any Probability, Independence) {#sex_unconditional_model}
 
 You may want your model to allow for the probability of a boy, $p_B$, to be something different than 0.5.  With this version of the Sex Unconditional model,  $p_B>0.5$ or $p_B<0.5$ or $p_B=0.5$, in which case you expect to see more boys than girls or fewer boys than girls or equal numbers of boys and girls, respectively.  We would retain the assumption of independence; that is, the probability of a boy, $p_B$, is the same for each child. Seeing a boy for the first child will not lead you to change the probability that the second child is a boy; this would not imply that "sex runs in families."   
 
-###What is a likelihood?
-$$
-\newcommand{\lik}{\mathrm{Lik}}
-\newcommand{\Lik}{\mathrm{Lik}}
-$$
+### What is a likelihood?
+
 As is often the case in statistics, our objective is to find an estimate for a model parameter using our data; here, the parameter to estimate is the probability of a boy, $p_B$, and the data is the gender composition for each family. One way in which to interpret  probability is to imagine repeatedly producing children. The probability of a boy will be the overall proportion of boys as the number of children increases. 
 With likelihood methods, conceptually we consider different possible values for our parameter(s), $p_B$, and determine how likely we would be to see our observed data in each case, $\lik(p_B)$. We'll select as our estimate the value of $p_B$ for which  our data is most likely. A __likelihood__ is a function that tells us how likely we are to observe our data for a given parameter value, $p_B$. For a single family which has a girl followed by two boys, GBB,  the likelihood function looks like:
 
@@ -173,7 +174,7 @@ Likcomp2 <- c("$p^6_B$",
 #lik50.tab
 table2chp2 <- data.frame(Comp,Likcomp1,Numfamis,Likcomp2)
 colnames(table2chp2) <- c("Composition","Likelihood contribution for one family","Number of families","Likelihood contribution for multiple families")
-kable(table2chp2, booktabs=T,caption="The likelihood factors for the hypothetical data set of n=50 children.")
+kable(table2chp2, booktabs=T,caption="The likelihood factors for the hypothetical data set of n=50 children.", escape=F)
 ```
 
 The likelihood function for the hypothetical data set can be found by taking the product of the entries in the last column of Table \@ref(tab:table2chp2) and simplifying.
@@ -192,9 +193,9 @@ It should be obvious that the likelihood for this Sex Unconditional Model (the c
 
 and as we asserted above, the MLE will be the (number of boys)/(number of kids) or 30/50 here.  Now, more formally, we demonstrate how we use the likelihood principle to approximate the MLE or determine it exactly.  
 
-###Finding MLEs {#findMLE.sec}
+### Finding MLEs {#findMLE.sec}
 
-####Graphically approximating an MLE {#MLEgph.sec}
+#### Graphically approximating an MLE {#MLEgph.sec}
 ```{r, include=FALSE}
 p = seq(0,1,.01)   # possible values for p
 #
@@ -235,7 +236,7 @@ grid.arrange(thirtytwenty.lik,sixhundred.lik,thirtytwenty.log,sixhundred.log,nco
 
 Figure \@ref(fig:lik4)(a) is the likelihood for the data set of 50 children. The height of each point is the likelihood and the possible values for $p_B$ appear across the  horizontal axis. It appears that our data is most likely when $p_B = 0.6$ as we would expect.  Note that the log of the likelihood function in Figure \@ref(fig:lik4)(b) is maximized at the same spot: $p_B = 0.6$.  Figures \@ref(fig:lik4)(c) and (d) are also maximized at $p_B = 0.6$, but they illustrate less variability and a sharper peak since there is more data.  
 
-####Numerically approximating an MLE
+#### Numerically approximating an MLE
 
 Here a grid search is used with the software package  R to  find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for $p_B$ and then the likelihood, $\Lik(p_B)$, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for $p_B$ and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for $p_B$, which allows us to determine a better (more precise) approximation of the MLE.  In addition, most packages, like R, have an optimize function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.  
 
@@ -257,7 +258,7 @@ oLik.f <- function(pb){
 optimize(oLik.f, interval=c(0,1), maximum=TRUE)
 ```
 
-####MLEs using calculus (Optional) {#calc-sec} 
+#### MLEs using calculus (Optional) {#calc-sec} 
 
 Calculus may provide another way to determine an MLE.  Here, we can ascertain the value of $p_B$ where the likelihood is a maximum by using the first derivative of the likelihood with respect to $p_B$. We obtain the first derivative using the Product Rule, set it to 0, solve for $p_B$, and verify a maximum occurs there.
 
@@ -276,7 +277,7 @@ This approach would produce $p_B = .60$ as we intuited earlier; however, we'll f
   
 It is now straightforward to determine that the log-likelihood is maximized when $p_B = 3/5.$ We say that the MLE is $\hat{p}_B = 0.6$. This is the exact estimate that was approximated above.
   
-####How does sample size affect the likelihood?
+#### How does sample size affect the likelihood?
   
 Consider two hypothetical cases under the Sex Unconditional Model:
   
@@ -286,7 +287,7 @@ __Hypothetical Case 2: $n = 1000$ children with 600 boys and 400 girls__  Our ea
 
 The graphs of the likelihoods and log-likelihoods for these two cases in Figure \@ref(fig:lik4) give us an idea of how the increase in the sample size affects the precision of our estimates. The likelihoods and log-likelihoods for the two sample sizes have similar forms; however, the graphs with the larger sample size are much narrower, reflecting the greater precision we have with more data.  With only 50 children there is a wide range of $p_B$ values that lead to values of the log-likelihood near its maximum, so it's less clear what the optimal $p_B$ is.  As we have seen in statistics courses before, a larger sample size will result in less variation in our estimates, thereby affecting the power of hypothesis tests and the width of the confidence intervals.
 
-###Summary
+### Summary
 
 Using likelihoods to find estimates of parameters is conceptually intuitive---select the estimate for your parameter where your data is most likely. Often MLEs make a lot of intuitive sense in the context of a problem as well; for example, here the MLE for the probability of a boy is the observed proportion of boys in the data. It may seem like a lot of work for such an obvious result, but MLEs have some nice, useful theoretical properties, and we'll see that many more complex models can be fit using the principle of maximum likelihood.
   
@@ -294,22 +295,18 @@ In summary, we constructed a likelihood that reflected features of our Sex Uncon
   
 Work to understand the *idea* of a likelihood. Likelihoods are the foundation upon which estimates are obtained and models compared for most of this course. Do not be overly concerned with calculus and computation at this point. 
   
-###Is a likelihood a probability function? (Optional)
+### Is a likelihood a probability function? (Optional)
   
 No. Even though we use probabilities to construct likelihoods, a likelihood is not a probability function.  A probability function takes outcomes as input and outputs a probability of a particular outcomes. For example, you flip a loaded coin which comes up heads 25\% of the time.  After 5 flips, you observe the outcome of three heads and two tails. A *probability function* provides the probability of observing (3H,2T) when $p_H=0.25$.  If you flip this same coin another 5 times and observe all tails (5T), the probability function provides the probability of (5T).
   
 In contrast, a likelihood is constructed using the data, say (3H,2T). It takes as input *possible parameter values* and returns the probability of seeing that data for the given parameter value.  For example, the likelihood will provide the chance of seeing the data (3H,2T) if $p_H=0.6$, the likelihood will provide the chance of seeing the data (3H,2T)  if $p_H=0.3$, and so on. With the likelihood we can find the value of $p_H$ where we are most likely to see our data.
   
-##Model 2: Sex Conditional Model (Sex Bias) {#sex_conditional.sec}
+## Model 2: Sex Conditional Model (Sex Bias) {#sex_conditional.sec}
   
 Our first research question involves determining whether sex runs in the family.  Do families who already have boys tend to have more additional boys than expected by chance, and do families who already have girls tend to have more additional girls than expected by chance? What do you think? And how could we use a statistical model to investigate this phenomenon? There are a number of different ways to construct a model for this question.  Here's one possibility.
   
-###Model Specification
-$$
-\newcommand{\bbias}{p_{B|\textrm{B Bias}}}
-\newcommand{\neutral}{p_{B|N}}
-\newcommand{\gbias}{p_{B|\textrm{G Bias}}}
-$$
+### Model Specification
+
 Unlike the previous model, the $p_B$ in a Sex Conditional  Model *depends* on existing family compositions.  We introduce **conditional probabilities** and conditional notation to make the dependence explicit. One way to interpret the notation $P(A|B)$ is the "probability of A *given* B has occurred."  Another way to read this notation is the "probability of A *conditional* on B." Here, let $\neutral$ represent the probability the next child is a boy given that there are equal numbers of boys and girls (sex-neutral) in the existing family. Let $\bbias$ represent the probability the next child is a boy if the family is boy-biased; i.e., there are more boys than girls prior to this child. Similarly, let $\gbias$ represent the probability the next child is a boy if the family is girl-biased; i.e., there are more girls than boys prior to this child.  
   
 Before we are mired in notation and calculus, let's think about how these conditional probabilities can be used to describe sex running in families. While we only had one parameter, $p_B$, to estimate in the Sex Unconditional Model, here we have three parameters: $\neutral$, $\bbias$, and $\gbias$. Clearly if all three of these probabilities are equal, the probability a child is a boy does not depend upon the existing gender composition of the family and there is no evidence of sex running in families. A conditional probability $\bbias$ that is larger than $\neutral$  suggests families with more boys are more likely to produce additional boys in contrast to families with equal boys and girls. This finding would support the theory of "boys run in families." An analogous argument holds for girls. In addition, comparisons of $\bbias$ and $\gbias$ to the parameter estimate $p_B$ from the Sex Unconditional Model may be interesting and can be performed using likelihoods.  
@@ -334,10 +331,10 @@ Numfamis2 <- c(6,7,5,4,5,1,2,30)
 #lik50_conditional.tab
 table3chp2 <- data.frame(Comp2,Likcont,Priorst,Numfamis2)
 colnames(table3chp2) <- c("Composition","Likelihood contribution","Prior Status","Number of families")
-kable(table3chp2, booktabs=T,caption="Family contributions to the likelihood for a Sex Conditional Model using a hypothetical data set  of n=50 children from 30 families.")
+kable(table3chp2, booktabs=T,caption="Family contributions to the likelihood for a Sex Conditional Model using a hypothetical data set  of n=50 children from 30 families.",escape=F)
 ```
 
-###Application to Hypothetical Data
+### Application to Hypothetical Data
   
 Using the family composition data for 50 children in the 30 families that appears in Table \@ref(tab:table3chp2), we construct a likelihood. The six singleton families with only one boy contribute  $\neutral^6$ to the likelihood and the seven families with only one girl contribute  $p_{G|N}^7$ or $(1-\neutral)^7$. [Why do we use $1-\neutral$ instead of $p_{G|N}$?]  There are five families with two boys each with probability $(\neutral)(\bbias)$ contributing:
   
@@ -352,7 +349,6 @@ We construct the likelihood using data from all 30 families assuming families ar
  \big[(\neutral)^{17}
  (1-\neutral)^{15}
  (\bbias)^{5} \\
- 
  & & (1-\bbias)^{4}
  (\gbias)^{8}
  (1-\gbias) \big]
@@ -389,12 +385,12 @@ This estimate follows naturally. First consider all of the children who enter in
     
 If we anticipate any "sex running in families" effect, we would expect  $\hat{p}_{B|\textrm{B Bias}}$ to be larger than the the probability of a boy in the neutral setting, $\neutral$. In our small hypothetical example, $\hat{p}_{B|\textrm{B Bias}}$ is slightly greater than 0.53  providing light support for the "sex runs in families" theory when it comes to boys. What about girls?  Do families with more girls than boys tend to have a greater probability of having a girl?  We found that the MLE for the probability of a girl in a girl biased setting is 1-0.89=0.11. [Note: A nice property of MLEs is demonstrated here. We have the MLE for $\gbias$, and we want the MLE of $p_{G|\textrm{G Bias}}=1-\gbias$. We can get it by replacing $\gbias$ with its MLE; i.e., $\hat{p}_{G|\textrm{G Bias}}=1-\hat{p}_{B|\textrm{G Bias}}$. In mathematical terms, you can get the MLE of a function by applying the function to the original MLE.]  This data does not provide evidence that girls run in families since $\hat{p}_{G|G_{bias}} = 0.11 < \hat{p}_{G|N}=0.47$; there is a markedly lower probability of a girl if the family is already girl biased. This data is, however, hypothetical. Let's take a look at some real data and see what we find.  
     
-##Case Study: Analysis of the NLSY data
-###Model Building Plan
+## Case Study: Analysis of the NLSY data
+### Model Building Plan
 
 You should now have a feel for using the Likelihood Principle to obtain estimates of parameters using family gender composition data. Next, these ideas will be applied to the NLSY data. In addition to considering the Sex Unconditional and Conditional Models, we investigate some models that incorporate choices couples may make about when to stop having more children.  
     
-###Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis {#EDA.sec}
+### Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis {#EDA.sec}
 
 We begin by performing an exploratory data analysis aimed at shedding some light on our research questions. We are looking for clues as to which of our models is most plausible. The first statistic of interest is the proportion of boys in the sample. There are 5,416 boys out of the 10,672 children or a proportion of 50.7\% boys.  While this proportion is very close to 50\%, it is worth noting that a difference of 0.7\% could be meaningful in population terms.
     
@@ -450,7 +446,7 @@ kable(table7chp2,booktabs=T, caption="Proportion of families with only one boy w
     
 There are many other ways to formulate and explore the idea that sex runs in families or that couples wait for a boy (or a girl). See @Rodgers2001 for other examples.
     
-###Likelihood for the Sex Unconditional Model: the NLSY data
+### Likelihood for the Sex Unconditional Model: the NLSY data
     
 We construct a likelihood for the Sex Unconditional Model for the one-, two- and three-child families from the NLSY. See Table \@ref(tab:table4chp2) for the frequencies of each gender composition.
     
@@ -477,7 +473,7 @@ This very simple likelihood implies that each child contributes a factor of the 
  (\#eq:MLESexUn)
 \end{eqnarray}
     
-###Likelihood for the Sex Conditional Model {#sex_cond_lik.sec}
+### Likelihood for the Sex Conditional Model {#sex_cond_lik.sec}
     
 The contribution to a Sex Conditional Model likelihood for the same family compositions we considered in the previous section appear here.
 
@@ -550,7 +546,7 @@ Child3 <- c(" "," "," "," "," "," ",
 #Sex bias table
 table8chp2 <- data.frame(Famcomp3,NumFams1,SexUnc, Child1,Child2,Child3)
 colnames(table8chp2) <-c("Family composition","Number of families","Sex Unconditional", "Child1","Child 2","Child 3")
-kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in Sex Unconditional and Sex Conditional Models.", format="html") %>%
+kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in Sex Unconditional and Sex Conditional Models.",escape=F) %>%
   add_header_above(c(" "," "," ", "Sex Conditional Model"=3))
 ```
     
@@ -591,8 +587,8 @@ Are these results consistent with the notion that boys or girls run in families?
     
 Even though initial estimates don't support the idea, let's formally take a look as to whether prior gender composition affects the probability of a boy. To do so, we'll see if the Sex Conditional Model is statistically significantly better than the Sex Unconditional Model. 
     
-###Comparing the Sex Unconditional to the Sex Conditional Model {#sec-lrtest}
-####Nested Models
+### Comparing the Sex Unconditional to the Sex Conditional Model {#sec-lrtest}
+#### Nested Models
     
 Likelihoods are not only useful for fitting models, but they are also useful when comparing models. If the parameters for a reduced model are a subset of parameters for a larger model, we say the models are __nested__ and the difference between their likelihoods can be incorporated into a statistical test to help judge the benefit of including additional parameters. Another way in which to think of nesting is to consider whether parameters in the larger model can be equated to obtain the simpler model or whether some parameters in the larger model can be set to constants.  Since $\bbias, \neutral$ and $\gbias$ in the Sex Conditional Model can be set to $p_B$ to obtain the Sex Unconditional Model, we can say the models are nested.
     
@@ -643,16 +639,11 @@ We have convincing evidence that the Sex Conditional Model provides a significan
     
 *Also note: * It might have been more logical to start by using Likelihood Ratio Test to determine whether the probability of having a boy differs significantly from 0.5.  We leave this as an exercise.
     
-##Model 3: Stopping Rule Model (Waiting for a boy)
+## Model 3: Stopping Rule Model (Waiting for a boy)
 
 @Rodgers2001 offer one reason to explain the contradictory results: waiting for a male child.  It has been noted by demographers that some parents are only interested in producing a male heir so that the appearance of a boy leads more often to the family ending childbearing.  Stopping models investigate questions like: Are couples more likely to stop childbearing once they have a boy? Or are some  parents waiting for a girl? Others might wish to have at least one boy and girl. The exploratory data analysis results in Table \@ref(tab:table7chp2) provide some insight but cannot definitively settle the question about couples' stopping once they have a boy.
 
 For stopping models, two probabilities are recorded for each child: the probability of the sex and the conditional probability of stopping after that child.  As we have done in previous models, let $p_B$ = probability the child is  a boy. When conditioning, every possible condition must have a probability associated with it. Here the stopping conditions for Model 3 are: stop on first boy $(S|B1)$ or stopping on a child who is not the first boy $(S|N)$.
-    
-$$
-\newcommand{\bstop}{p_{S|B1}}
-\newcommand{\nstop}{p_{S|N}}
-$$
 
 __Additional Parameters for the First Boy Stopping Model__  
 
@@ -704,7 +695,7 @@ Cont <- c("$\\bstop$",
 table9chp2 <- data.frame(Famcomp2,Numfamis3,Lik,Cont)
 colnames(table9chp2) <- c("Family Composition","Number of families",
                           "  Likelihood","Contribution")
-kable(table9chp2, booktabs=T,caption="Likelihood contributions for families in Model 3: Waiting for a boy.")
+kable(table9chp2, booktabs=T,caption="Likelihood contributions for families in Model 3: Waiting for a boy.",escape=F)
 ```
 
 ```{r, include=FALSE}
@@ -728,7 +719,7 @@ These results do, in fact, suggest that the probability a couple stops childbear
     
 Similarly, for girls, the MLEs are $\hat{p}_{S|G1}$ = 0.457 and $\hat{p}_{S|N}$ = 0.568.  Once again, the estimates do not provide evidence of waiting for a girl.
     
-###Non-nested Models
+### Non-nested Models
     
 How does the waiting for a boy model compare to the waiting for a girl model? Thus far we've seen how  nested models can be compared.  But these two models are not nested. Two measures referred to as information criteria, AIC and BIC, are useful when comparing non-nested models. Each measure can be calculated for a model using a  function of the model's maximum log-likelihood. You can find the log-likelihood in the output from most modeling software packages.   
     
@@ -753,7 +744,7 @@ Smaller AIC and BIC are preferred, so here the Waiting for a Boy Model is judged
     
 Other stopping rule models are possible. Another model could be that couples wait to stop until they have both a boy and a girl. We leave the consideration of this balance-preference model as an exercise.
     
-##Summary of Model Building
+## Summary of Model Building
     
 Using a Likelihood Ratio Test, we found statistical evidence that the Sex Conditional Model (Sex Bias) is preferred to the Sex Unconditional Models. However, the parameter estimates were not what we expected if we believe that sex runs in families. Quite to the contrary, the results suggested that if there were more of one sex in a family, the next child is likely to be of the other sex. The results may support the idea that gender composition tends to "even out" over time.  
 
@@ -765,7 +756,7 @@ Under a random model that assumes the probability of a boy is 50\%, the percenta
     
 We can perform a LRT to compare stopping at the first boy to a Random Stopping Model. The parameters for the first model (waiting for a boy) are $p_B, \bstop, \nstop$ and the parameters for the second model (random stopping) are $p_B$ and $p_S$. The results suggest that the Waiting for a Boy Model is significantly better than the Random Stopping Model.  The Random Stopping Model takes into account that the odds of stopping after a child are not 50-50, but may be closer to the MLE for $p_S$ of 52.7\%. We leave the derivation of this result as an exercise.  
     
-##Likelihood-based Methods
+## Likelihood-based Methods
     
 With likelihood methods, we are no longer restricted to independent, identically distributed normal responses (iidN).  Likelihood methods can accommodate non-normal responses and correlated data. Likelihood-based methods are useful for every model in this text, so that it is worth your time and effort to understand them. 
     
@@ -773,7 +764,7 @@ Models that in the past you would fit using ordinary least squares can also be f
     
 Beyond the intuitively appealing aspects of MLEs, they also have some very desirable statistical properties. You learn more about these features in a statistical theory course.  Here we briefly summarize the highlights in non-technical terms. MLEs are *consistent*; i.e., MLEs converge in probability to the true value of the parameter as the sample size increases.  MLEs are *asymptotically normal*; as the sample size increases, the distribution of MLEs is closer to normal. MLEs are *efficient* because no consistent estimator has a lower mean squared error. Of all the estimators that produce unbiased estimates of the true parameter value, no estimator will have a smaller mean square error than the MLE.  While likelihoods and powerful and flexible, there are times when likelihood-based methods fail: MLEs do not exist, likelihoods cannot be written down, or MLEs cannot be written explicitly.  It is also worth noting that other approaches to the likelihood, such as bootstrapping, can be employed.
     
-##Likelihoods and this Course
+## Likelihoods and this Course
 @Rodgers2001 noted that
     
 > Many factors have been identified that can potentially affect the human sex
@@ -797,8 +788,8 @@ Another compelling reason for likelihoods occurs when we encounter correlated da
     
 When the responses are are not normal such as in generalized linear models where we see binary responses and responses which are counts we'll find it difficult to use the linear models of the past and we'll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will significantly broaden your statistical horizons!
 
-##Exercises
-###Conceptual Exercises
+## Exercises
+### Conceptual Exercises
     
 1. Suppose we plan to use data to estimate one parameter, $p_B$. 
     - When using a likelihood to obtain an estimate for the parameter, which is preferred: a large or a small likelihood value? Why? 
@@ -809,7 +800,7 @@ When the responses are are not normal such as in generalized linear models where
 2. Suppose the families with an "only child" were excluded for the Sex Conditional Model. How might the estimates for the three parameters be affected?  Would it still be possible to perform a Likelihood Ratio Test to compare the Sex Unconditional and Sex Conditional Models?  Why or why not? 
 3. Come up with an alternative model to investigate whether "sex runs in families."
     
-###Guided Exercise
+### Guided Exercise
     
 1. Write out the likelihood for a model which assumes the probability of a girl equals the probability of a boy. Carry out a LRT to determine whether there is evidence that the two probabilities are not equal. Comment on the practical significance of this finding (there is not necessarily one correct answer).
 2. __Case 3__ In Case 1 we used hypothetical data with 30 boys and 20 girls. Case 2 was a much larger study with 600 boys and 400 girls. Consider Case 3, a hypothetical data set with 6000 boys and 4000 girls.  
@@ -826,7 +817,7 @@ When the responses are are not normal such as in generalized linear models where
       of $p_B$ given what we observed (our data)?
 4. Compare the Waiting for a Boy Model to a Random Stopping Model. The parameters for the first model (Waiting for a Boy) are $p_B$, $\bstop$, $\nstop$ and the parameters for the second model (Random Stopping) are $p_B$ and $p_S$. Use an intuitive approach to arrive at the MLEs for the parameters for each model. Perform a LRT to compare these two models. 
 
-###Open-ended Exercise
+### Open-ended Exercise
     
 1. __Another Stopping Rule Model: Balance-preference__ 
 Can you construct a model which suggests that childbearing is stopped when couples have a boy *and* a girl?  Define the parameter(s) for balance-preference stopping combined with the sex conditional model and write out likelihood contributions for the same family compositions that appear in Table \@ref(tab:table3chp2).

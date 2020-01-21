@@ -19,6 +19,8 @@ library(tibble)
 library(tidyr)
 library(forcats)
 #library(reshape2) #for melt function
+
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
 ```{r, ch3_ggplot_themes, include = FALSE}
@@ -50,15 +52,15 @@ After finishing this chapter, you should be able to:
 `r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
 `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
 
-##Introduction
+## Introduction
 
 What if it  is not plausible that a response is normally distributed? You may want to construct a model to predict whether a prospective student will enroll at a school or  model the lifetimes of patients following a particular surgery.  In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to  have very skewed data with many similar values and a few hardy souls with extremely long survival. These responses are not expected to be normally distributed; other distributions will be needed to describe and  model binary or lifetime data. Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. In this chapter we begin with some general definitions, terms, and notation for different types of distributions with some examples of applications. We then create new random variables using combinations of random variables (see Guided Exercises).  
 
 
-##Discrete Random Variables
+## Discrete Random Variables
 A discrete random variable has a countable number of possible values: for example, the number of people in a household or the number crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a __probability mass function__ (pmf). A pmf is a function that calculates $P(Y=y)$, given each variable's parameters.
 
-###Binary Random Variable {#sec-binary}
+### Binary Random Variable {#sec-binary}
 Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let's consider this a success and record $Y = 1$.
 A series of these events is a  __Bernoulli process__, independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
 Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, $p$. If we know this value, we can express $P(Y=1) = p$ and $P(Y=0) = 1-p$. In general, if we have a Bernoulli process with only one trial, we have a __binary distribution__ (also called a __Bernoulli distribution__) where
@@ -73,7 +75,7 @@ __Example 1:__ Your playlist of 200 songs has 5 which you cannot stand. What is 
 Assuming all songs have equal odds of playing, we can calculate $p = \frac{200-5}{200} = 0.975$, so there is a 97.5\% chance of a song you tolerate playing, since $P(Y=1)=.975^1*(1-.975)^0$.
 
 
-###Binomial Random Variable {#sec-binomial}
+### Binomial Random Variable {#sec-binomial}
 We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin $n$ times and recorded $Y$, the number of heads after $n$ flips. If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials, i.e. 4 consecutive failures. The probability of 4 consecutive failures is $P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4$. When we consider $P(Y = 1)$, we are interested in the probability of exactly 1 success _anywhere_ among the 4 trials. There are $\binom{4}{1} = 4$ ways to have exactly 1 success in 4 trials, so $P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. In general, if we carry out a sequence of $n$ Bernoulli trials (with probability of success $p$) and record $Y$, the total number of successes, then $Y$ follows a __binomial distribution__, where
 \begin{equation}
 P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots, n.
@@ -119,7 +121,7 @@ dbinom(2, size = 10, prob = .25)
 ```
 Therefore, there is a 28\% chance of exactly 2 correct answers out of 10.
 
-###Geometric Random Variable
+### Geometric Random Variable
 Suppose we are to perform independent, identical Bernoulli trials until the first success. If we wish to model $Y$, the number of failures before the first success, we can consider the following pmf
 \begin{equation}
 P(Y=y) = (1-p)^yp \quad \textrm{for}\quad y = 0, 1, \ldots, \infty.
@@ -158,7 +160,7 @@ dgeom(2, prob = 1/6)
 ```
 Thus, there is a 12\% chance of rolling the first five on the third roll.
 
-###Negative Binomial Random Variable
+### Negative Binomial Random Variable
 What if we were to carry out multiple independent and identical Bernoulli trails until the $r$^th^ success occurs?
 If we model $Y$, the number of failures before the $r$^th^ success, then $Y$ follows a __negative binomial distribution__ where
 \begin{equation}
@@ -227,7 +229,7 @@ sum(dnbinom(0:2, size = 10, prob = .9))  # or use pnbinom(2, 10, .9)
 ```
 Thus, there is a 89\% chance that she gets 10 correct responses before missing 3.
 
-###Hypergeometric Random Variable
+### Hypergeometric Random Variable
 In all previous random variables, we considered a Bernoulli process, where the probability of a success remained constant across all trials. What if this probability is dynamic? The __hypergeometric random variable__ helps us address some of these situations. Specifically, what if we wanted to select $n$ items _without replacement_ from a collection of $N$ objects, $m$ of which are considered successes? In that case, the probability of selecting a "success" depends on the previous selections. 
 If we model $Y$, the number of successes after $n$ selections, $Y$ follows a __hypergeometric distribution__ where
 \begin{equation}
@@ -265,7 +267,7 @@ dhyper(4, m = 4, n = 48, k = 10)
 So, there is a 0.08\% chance of all 4 queens being within the first 10 cards of a randomly shuffled deck of cards.
 
 
-###Poisson Random Variable
+### Poisson Random Variable
 Sometimes, random variables are based on a __Poisson process__. In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval. 
 We can then model $Y$, the number of events in one of these sections with the __Poisson distribution__, where
 \begin{equation}
@@ -312,7 +314,7 @@ sum(dpois(0:3, lambda = 5))   # or use ppois(3, 5)
 ```
 Therefore, there is a 27\% chance of 3 or fewer tickets being issued within one month.
 
-##Continuous Random Variables
+## Continuous Random Variables
 A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using __probability density functions__ (pdfs). Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, $f(y)$, we can compute
 \begin{align*}
 P(a \le Y \le b) = \int_a^b f(y)dy.
@@ -323,7 +325,7 @@ This hints at a few properties of continuous random variables:
 - For any value $y$, $P(Y = y) =  \int_y^y f(y)dy = 0$.  
 - Because of the above property, $P(y < Y) = P(y \le Y)$. We will typically use the first notation rather than the second, but both are equally valid.
 
-###Exponential Random Variable
+### Exponential Random Variable
 Suppose we have a Poisson process with rate $\lambda$, and we wish to model the wait time $Y$ until the first event. We could model $Y$ using an __exponential distribution__, where
 \begin{equation}
 f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
@@ -365,7 +367,7 @@ pexp(10, rate = 1/6)
 ```
 Hence, there is a 81\% chance of waiting fewer than 10 days between tickets.
 
-###Gamma Random Variable
+### Gamma Random Variable
 Once again consider a Poisson process. When discussing exponential random variables, we modeled the wait time before one event occurred. If $Y$ represents the wait time before $r$ events occur in a Poisson process with rate $\lambda$, $Y$ follows a __gamma distribution__ where
 \begin{equation}
 f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \quad y >0.
@@ -416,7 +418,7 @@ pgamma(3, shape = 5, rate = 1)
 ```
 There is a 18.5\% chance of catching 5 fish within the first 3 hours.
 
-###Normal (Gaussian) Random Variable
+### Normal (Gaussian) Random Variable
 You have already at least informally seen normal random variables when evaluating OLS assumptions. To recall, we required responses to be normally distributed at each level of $X$. Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on $\mu$, the population mean of the variable of interest, and $\sigma$ the population standard deviation. We find that
 \begin{equation}
 f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{for} \quad -\infty < y < \infty.
@@ -462,7 +464,7 @@ pnorm(15.5, mean = 15, sd = 0.5, lower.tail = FALSE)
 ```
 There is a 16\% chance of a randomly selected box weighing more than 15.5 ounces.
 
-###Beta Random Variable
+### Beta Random Variable
 So far, all of our continuous variables have had no upper bound. If we want to limit our possible values to a smaller interval, we may turn to a __beta random variable__. In fact, we often use beta random variables to model distributions of probabilities---bounded below by 0 and above by 1. The pdf is paramaterized by two values, $\alpha$ and $\beta$ ($\alpha, \beta > 0$). We can describe a beta random variable by the following pdf:
 \begin{equation}
 f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (1-y)^{\beta-1} \quad \textrm{for} \quad 0 < y < 1.
@@ -514,10 +516,10 @@ pbeta(0.8, shape1 = 4/3, shape2 = 2, lower.tail = FALSE)
 ```
 Hence, there is a 6\% chance that a randomly selected student has a probability of accepting an admission decision above 80\%.
 
-##Distributions used in Testing
+## Distributions used in Testing
 We have spent most of this chapter discussing probability distributions that may come in handy when modeling. The following distributions, while rarely used in modeling, prove useful in hypothesis testing as many test statistics follow these distributions. 
 
-###$\chi^2$ Distribution
+### $\chi^2$ Distribution
 You have probably already encountered $\chi^2$ tests before. For example, $\chi^2$ tests are used with  contingency tables to investigate the association between row and column variables.  $\chi^2$ tests are also used in goodness-of-fit testing  such as comparing counts expected according to Mendelian ratios to observed data. In those situations, $\chi^2$ tests compare observed counts to what would be expected under the null hypotheses and reject the null when these observed discrepancies are too large.
 
 In this course, we encounter $\chi^2$ distributions in several testing situations. In Section \@ref(sec-lrtest) we performed likelihood ratio tests (LRTs) to compare nested models. When a larger model provides no significant improvement over a reduced model, the LRT statistic (which is twice the difference in the log-likelihoods) follows a $\chi^2$ distribution with the degrees of freedom equal to the difference in the number of parameters. 
@@ -550,7 +552,7 @@ ggplot(data = chiDf, aes(x = x, y = value, color = `Degrees of Freedom`)) +
 
 In R, `pchisq(y, df)` outputs $P(Y < y)$ given $k$ degrees of freedom.
 
-###Student's $t$--Distribution
+### Student's $t$--Distribution
 You likely have seen Student's $t$--distribution in a previous statistics course, developed by William Sealy Gosset under the penname *Student*. You may have used it when drawing inferences about a normally distributed population with an unknown population standard deviation. $t$--distributions are parameterized by their degrees of freedom, $k$. 
 
 A $t$--distribution with $k$ degrees of freedom has mean $0$ and standard deviation $k/(k-2)$ (standard deviation is only defined for $k > 2$). As $k \rightarrow \infty$ the $t$-distribution approaches the standard normal distribution.
@@ -606,7 +608,7 @@ ggplot(data = fDf, aes(x = x, y = value, color = Distribution)) +
 ```
 
 
-##Additional Resources
+## Additional Resources
 Table \@ref(tab:distTable) briefly details most of the random variables discussed in this chapter. 
 ```{r, include = FALSE}
 distName <- c("Binomial","Geometric","Negative Binomial", "Hypergeometric", "Poisson", "Exponential", "Gamma", "Normal", "Beta")
@@ -660,8 +662,8 @@ if (knitr:::is_latex_output()) {
 ```
 
 
-##Exercises
-###Conceptual Exercises
+## Exercises
+### Conceptual Exercises
 1. At what value of $p$ is the standard deviation of a binary random variable smallest? When is standard deviation largest?
 
 1. How are hypergeometric and binomial random variables different? How are they similar?
@@ -680,7 +682,7 @@ if (knitr:::is_latex_output()) {
 
 1. Describe a scenario which could be modeled using a gamma distribution.
 
-###Guided Exercises
+### Guided Exercises
 1. __Beta-Biomial Distribution.__ We can generate more distributions by mixing two random variables. Beta-binomial random variables are binomial random variables with fixed $n$ whose parameter $p$ follows a beta distribution with fixed parameters $\alpha, \beta$. In more detail, we would first draw $p_1$ from our beta distribution, consider a binomial distribution with parameters $n, p_1$, and generate our first observation $y_1$, a random number of successes from a binomial ($n, p_1$) distribution. Then, we would generate a new $p_2$ from our beta distribution, and use a binomial distribution with parameters $n, p_2$ to generate our second observation $y_2$. We would continue this process until desired.
 
 Note that all of the observations $y_i$ will be integer values from $0, 1, \ldots, n$.  With this in mind, use `rbinom()` to simulate 1,000 observations from a plain old vanilla binomial random variable with $n=10$ and $p=0.8$. Plot a histogram of these binomial observations.

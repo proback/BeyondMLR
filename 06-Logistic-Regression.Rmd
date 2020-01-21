@@ -7,13 +7,15 @@ output:
   html_document: default
 ---
 
-#Logistic Regression {#ch-logreg}
-$$
-\newcommand{\lik}{\operatorname{Lik}}
-\newcommand{\Lik}{\operatorname{Lik}}
-$$
+# Logistic Regression {#ch-logreg}
 
-##Learning Objectives
+```{r,include=F}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
+`r if (knitr:::is_html_output()) {"\\newcommand{\\lik}{\\mathrm{Lik}} \\newcommand{\\Lik}{\\mathrm{Lik}}"}`
+
+## Learning Objectives
 
 - Identify a binomial random variable and assess the validity of the binomial assumptions.
 - Write a generalized linear model for binomial responses in two forms, one as a function of the logit and one as a function of $p$.
@@ -22,7 +24,7 @@ $$
 - Differentiate between logistic regression models with binary and binomial responses.
 - Use the residual deviance to compare models, to test for lack-of-fit when appropriate, and to check for unusual observations or needed transformations.
 
-##Introduction to Logistic Regression
+## Introduction to Logistic Regression
 
 Logistic regression is characterized by research questions with binary (yes/no or success/failure) or binomial (number of yesses or successes in $n$ trials) responses: 
 
@@ -50,7 +52,7 @@ library(readr) # for read_csv
 #library(foreign)
 ```
    
-###Logistic Regression Assumptions
+### Logistic Regression Assumptions
 
 Much like OLS, using logistic regression to make inferences requires model assumptions.
 
@@ -59,7 +61,7 @@ Much like OLS, using logistic regression to make inferences requires model assum
 3. __Variance Structure__ By definition, the variance of a binomial random variable is $np(1-p)$, so that variability is highest when $p=.5$.
 4. __Linearity__ The log of the odds ratio, log($\frac{p}{1-p}$), must be a linear function of x.  This will be explained further in the context of the first case study.
 
-###A Graphical Look at Logistic Regression
+### A Graphical Look at Logistic Regression
 ```{r, OLSlogistic, fig.align="center", out.width="60%", fig.cap='Linear vs. Logistic regression models for binary response data.', echo=FALSE, warning=FALSE, message=FALSE}
 
 set.seed(0)
@@ -86,7 +88,7 @@ log(\frac{p_i}{1-p_i})=\beta_0+\beta_1 x_i
 where the observed values $Y_i \sim$ binomial with $p=p_i$ for a given $x_i$ and $n=1$ for binary responses.
 
    
-##Case Studies Overview
+## Case Studies Overview
 We consider three case studies in this chapter.  The first two involve binomial responses (Soccer Goalkeepers and Reconstructing Alabama), while the last case uses a binary response (Trying to Lose Weight).  Even though binary responses are much more common, their models have a very similar form to binomial responses, so the first two case studies will illustrate important principles that also apply to the binary case.  Here are the statistical concepts you will encounter for each Case Study.
  
 The soccer goalkeeper data can be written in the form of a 2 $\times$ 2 table. This example is used to describe some of the underlying theory for logistic regression. We demonstrate how binomial probability mass functions (pmfs) can be written in one parameter exponential family form, from which we can identify the canonical link  as in Chapter \@ref(ch-glms). Using the canonical link, we write a Generalized Linear Model for binomial counts and determine corresponding MLEs for model coefficients. Interpretation of the estimated parameters involves a fundamental concept, the odds ratio.
@@ -95,7 +97,7 @@ The Reconstructing Alabama case study is another binomial example which introduc
  
 The last case study addresses why teens try to lose weight. Here the response is a binary variable which allows us to analyze individual level data. The analysis builds on concepts from the previous sections in the context of a random sample from CDC's Youth Risk Behavior Survey (YRBS).
  
-##Case Study: Soccer Goalkeepers
+## Case Study: Soccer Goalkeepers
 Does the probability of a save in a soccer match depend upon whether the goalkeeper's team is behind or not?  @Roskes2011 looked at penalty kicks in the men's World Cup soccer championships from 1982 - 2010, and they assembled data on 204 penalty kicks during shootouts. The data for this study is summarized in Table \@ref(tab:table1chp6).
 
 ```{r,include=FALSE}
@@ -112,7 +114,7 @@ colnames(table1chp6) <- c(" ","Saves","Scores","Total")
 kable(table1chp6, booktabs=T,caption="Soccer goalkeepers' saves when their team is and is not behind.  Source: Roskes et al. 2011 Psychological Science")
 ```
 
-###Modeling Odds
+### Modeling Odds
 Odds are one way to quantify a goalkeeper's performance. Here the odds that a goalkeeper makes a save when his team is behind is 2 to 22 or 0.09 to 1. Or equivalently, the odds that a goal is scored on a penalty kick is 22 to 2 or 11 to 1. An odds of 11 to 1 tells you that a shooter whose team is ahead will score 11 times for every 1 shot that the goalkeeper saves.  When the goalkeeper's team is not behind the odds a goal is scored is 141 to 39 or 3.61 to 1. We see that the odds of a goal scored on a penalty kick are better when the goalkeeper's team is behind than when it is not behind (i.e., better odds of scoring for the shooter when the shooter's team is ahead). We can compare these odds by calculating the __odds ratio__ \index{odds ratio} (OR), 11/3.61 or 3.05, which tells us that the *odds* of a successful penalty kick are 3.05 times higher when the shooter's team is leading.
 
 In our example, it is also possible to estimate the probability of a goal, $p$, for either circumstance. When the goalkeeper's team is behind, the probability of a successful penalty kick is $p$ = 22/24 or 0.833. We can see that the ratio of the probability of a goal scored divided by the probability of no goal is $(22/24)/(2/24)=22/2$ or 11, the odds we had calculated above. The same calculation can be made when the goalkeeper's team is not behind. In general, we now have several ways of finding the odds of success under certain circumstances: 
@@ -120,7 +122,7 @@ In our example, it is also possible to estimate the probability of a goal, $p$, 
 \frac{\# \textrm{successes}/n}{\# \textrm{failures}/n}=
 \frac{p}{1-p}.\] 
 
-###Logistic Regression Models for Binomial Responses
+### Logistic Regression Models for Binomial Responses
 
 We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log($\lambda$) in Poisson regression, which allowed the response to take on values from $-\infty$ to $\infty$, we will model the log(odds), the __logit__\index{logit}, in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:  
 \begin{equation}
@@ -210,7 +212,7 @@ Exponentiating $\hat{\beta_1}$ provides an estimate of the odds ratio (the odds 
 
 Before we go on, you may be curious as to why there is *no error term* in our model statements for logistic or Poisson regression. One way to look at it is to consider that all models describe how observed values are generated. With the logistic model we assume that the observations are generated as a binomial random variables. Each observation or realization of $Y$ = number of successes in $n$ independent and identical trials with a probability of success on any one trial of $p$ is produced by $Y \sim \textrm{Binomial}(n,p)$. So the randomness in this model is not introduced by an added error term but rather by appealing to a Binomial probability distribution, where variability depends only on $n$ and $p$ through $\textrm{Var}(Y)=np(1-p)$, and where $n$ is usually considered fixed and $p$ the parameter of interest.
 
-###Theoretical rationale for logistic regression models (Optional)
+### Theoretical rationale for logistic regression models (Optional)
 
 Recall from Chapter \@ref(ch-glms) that generalized linear models (GLMs) are a way in which to model a variety of different types of responses. In this chapter, we apply the general results of GLMs to the specific application of binomial responses. Let $Y$ = the number scored out of $n$ penalty kicks. The parameter, $p$, is the probability of a score on a single penalty kick.  Recall that the theory of GLM is based on the unifying notion of the one-parameter exponential family form:
 \begin{equation}
@@ -235,13 +237,13 @@ Don't forget to consider the support; we must make sure that the set of possible
 The one parameter exponential family form for binomial responses shows that the  canonical link is $\log\left(\frac{p}{1-p}\right)$. Thus, GLM theory suggests that constructing a model using the logit, the log odds of a score, as a linear function of covariates is a reasonable approach.   
 
 
-##Case Study: Reconstructing Alabama
+## Case Study: Reconstructing Alabama
 This case study demonstrates how wide ranging applications of statistics can be. Many would not associate statistics with historical research, but this case study shows that it can be done. US Census data from 1870 helped historian Michael Fitzgerald of St. Olaf College gain insight into important questions about how railroads were supported during the Reconstruction Era.
 
 In a paper entitled "Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research," Ben Bayer performs an analysis of data from 1870 to explain influences on voting on referendums related to railroad subsidies [@Bayer2011]. Positive votes are hypothesized to be inversely proportional to the distance a voter is from the proposed railroad, but the racial composition of a community (as measured by the percentage of blacks) is hypothesized to be associated with voting behavior as well. Separate analyses of three counties in Alabama---Hale, Clarke, and Dallas---were performed; we discuss Hale County here. This example differs from the soccer example in that it includes continuous covariates. Was voting on railroad referenda related to distance from the proposed railroad line and the racial composition of a community?
 
 
-###Data Organization
+### Data Organization
 The unit of observation for this data is a community in Hale County. We will focus on the following variables from `RR_Data_Hale.csv` collected for each community:
 
 - `YesVotes` = the number of "Yes" votes in favor of the proposed railroad line (our primary response variable)
@@ -287,7 +289,7 @@ sum(rrHale.df$YesVotes[rrHale.df$community!="Greensboro"]) /
   sum(rrHale.df$NumVotes[rrHale.df$community!="Greensboro"])
 ```
 
-###Exploratory Analyses
+### Exploratory Analyses
 
 We first look at a coded scatterplot to see our data. Figure \@ref(fig:coded) portrays the relationship between `distance` and `pctBlack` coded by the `InFavor` status (whether a community supported the referendum with over 50\% Yes votes). From this scatterplot, we can see that all of the communities in favor of the railroad referendum are over 55\% black, and all of those opposed are 7 miles or farther from the proposed line. The overall percentage of voters in Hale County in favor of the railroad is 87.9\%.
 
@@ -369,7 +371,7 @@ exp(coef(model.HaleBD))
 Despite the somewhat strong negative correlation between percent black and distance, the estimated odds ratio for distance remains approximately the same in this new model (OR $= e^{-0.29} = 0.747$); controlling for percent black does little to change our estimate of the effect of distance. For each additional mile from the proposed railroad, odds of a Yes vote declines by 25.3\% after adjusting for the racial composition of a community.  We also see that, for a fixed distance from the proposed railroad, the odds of a Yes vote declines by 1.3\% (OR $= e^{-.0132} = .987$) for each additional percent black in the community.
 
 
-###Tests for significance of model coefficients {#sec-logisticInf}
+### Tests for significance of model coefficients {#sec-logisticInf}
 
 Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(sec-PoisInference) with Poisson regression, there are two primary approaches to testing signficance of model coefficients: __Drop-in-deviance test to compare models__ and __Wald test for a single coefficient__.
 
@@ -383,13 +385,13 @@ The drop-in-deviance test statistic is $318.44 - 307.22 = 11.22$ on $9 - 8 = 1$ 
 
 A third approach to determining significance of $\beta_2$ would be to generate a 95\% confidence interval and then checking if 0 falls within the interval or, equivalently, if 1 falls within a 95\% confidence interval for $e^{\beta_2}.$ The next section describes two approaches to producing a confidence interval for coefficients in logistic regression models.
 
-###Confidence intervals for model coefficients
+### Confidence intervals for model coefficients
 
 Since the Wald statistic follows a normal distribution with $n$ large, we could generate a Wald-type (normal-based) confidence interval for $\beta_2$ using:
 \[\hat\beta_2 \pm 1.96\cdot\textrm{SE}(\hat\beta_2)\]
 and then exponentiating endpoints if we prefer a confidence interval for the odds ratio $e^{\beta_2}$.  In this case,
 \begin{eqnarray}
-95\% \textrm{ CI for } &\beta_2 & = & \hat\beta_2 \pm 1.96 \cdot \textrm{SE}(\hat\beta_2) \\
+95\% \textrm{ CI for } &\beta_2 & = & \hat{\beta}_2 \pm 1.96 \cdot \textrm{SE}(\hat{\beta}_2) \\
                        &        & = & -0.0132 \pm 1.96 \cdot 0.0039 \\
                        &        & = & -0.0132 \pm 0.00764 \\
                        &        & = & (-0.0208, -0.0056) \\
@@ -408,7 +410,7 @@ exp(confint(model.HaleBD))
 
 In the model with `distance` and `pctBlack`, the profile likelihood 95\% confidence interval for $e^{\beta_2}$ is (.979, .994), which is approximately equal to the Wald-based interval despite the small sample size.  We can also confirm the statistically significant association between percent black and odds of voting Yes (after controlling for distance), because 1 is not a plausible value of $e^{\beta_2}$ (where an odds ratio of 1 would imply that the odds of voting Yes do not change with percent black).
   
-###Testing for goodness of fit
+### Testing for goodness of fit
 
 As in Section \@ref(sec-PoisGOF), we can evaluate the goodness of fit for our model by comparing the residual deviance (307.22) to a $\chi^2$ distribution with $n-p$ (8) degrees of freedom. 
 ```{r, gof2, comment=NA}
@@ -435,7 +437,7 @@ To interpret the interaction coefficient in context, we will compare two cases: 
   
 Because our interaction model still exhibits lack of fit (residual deviance of 274.23 on just 7 df), and because we have used the covariates at our disposal, we will assess this model for potential outliers and overdispersion by examining the model's residuals.
 
-###Residuals for Binomial Regression
+### Residuals for Binomial Regression
 With OLS, residuals were used to assess model assumptions and identify outliers. For binomial regression, two different types of residuals are typically used. One residual, the **Pearson residual**, has a form similar to that used with OLS. Specifically, the Pearson residual is calculated using:
 \begin{equation}
 \textrm{Pearson residual}_i = \frac{\textrm{actual count}-\textrm{predicted count}}{\textrm{SD of count}} =
@@ -472,7 +474,7 @@ ggplot(rrHale.df, aes(x = fit.BxD, y = resid.BxD)) +
 
 From this residual plot, Greensboro does not stand out as an outlier.  If it did, we could remove Greensboro and refit our interaction model, checking to see if model coefficients changed in a noticeable way.  Instead, we will continue to include Greensboro in our modeling efforts. Because the large residual deviance cannot be explained by outliers, and given we have included all of the covariates at hand as well as an interaction term, the observed binomial counts are likely overdispersed. This means that they exhibit more variation than the model would suggest, and we must consider ways to handle this overdispersion. 
  
-###Overdispersion {#sec-logOverdispersion}
+### Overdispersion {#sec-logOverdispersion}
 Similarly to Poisson regression we can adjust for overdispersion in binomial regression. With overdispersion there is __extra-binomial variation__, so the actual variance will be greater than the variance of a binomial variable, $np(1-p)$. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), $\hat{\phi}$, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \@ref(sec-overdispPois), and we will use the same estimate here: $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$.
 
 When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasi-likelihood approach. Quasi-likelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood. R offers quasi-likelihood as an option when model fitting. The quasi-likelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming $\phi>1$). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using $\hat{\phi}$:
@@ -522,11 +524,11 @@ exp(confint(model.HaleBDq))
 ```
 While we previously found a 95\% confidence interval for the odds ratio of (.728, .766), our confidence interval is now much wider: (.609, .871).  Appropriately accounting for overdispersion has changed both the significance of certain terms and the precision of our coefficient estimates.
 
-###Summary
+### Summary
 We began by fitting a logistic regression model with `distance` alone. Then we added covariate `pctBlack`, and the Wald-type test and the drop-in-deviance provided strong support for the addition of `pctBlack` to the model. The model with `distance` and `pctBlack` had a large residual deviance suggesting an ill-fitted model. When we looked at the residuals, we saw that Greensboro is an extreme observation. Models without Greensboro were fitted and compared to our initial models. Seeing no appreciable improvement or differences with Greensboro removed, we left it in the model. There remained a large residual deviance so we attempted to account for it by using an estimated dispersion parameter similar to Section \@ref(sec-overdispPois) with Poisson regression. The final model included distance and percent black, although percent black was no longer significant after adjusting for overdispersion.
 
 
-##Least Squares Regression vs. Logistic Regression
+## Least Squares Regression vs. Logistic Regression
 
 \[
 \underline{\textrm{Response}} \\
@@ -554,7 +556,7 @@ We began by fitting a logistic regression model with `distance` alone. Then we a
 \mathbf{Binomial\ Regression:}\ e^{\beta_1}=\textrm{ percent change in odds for unit change in $X$} 
 \]
 
-##Case Study: Trying to Lose Weight
+## Case Study: Trying to Lose Weight
 The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.).  This type of problem---__binary logistic regression__---is exceedingly common in practice. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
 
 Sports have been implicated as a reason for young people wanting to shed pounds, but not all studies are consistent with this idea. For example, a study by @Martinsen2009 reported that, despite preconceptions to the contrary, there was a higher rate of self-reported eating disorders among controls (non-elite athletes) as opposed to elite athletes. Interestingly, the kind of sport was not found to be a factor, as participants in leanness sports (for example, distance running, swimming, gymnastics, dance, and diving) did not differ in the proportion with eating disorders when compared to those in non-leanness sports. So, in our analysis, we will not make a distinction between different sports.
@@ -565,7 +567,7 @@ We are interested in the following questions: Are the odds that young females re
 
 We have sample of 500 teens from data collected in 2009 through the U.S. Youth Risk Behavior Surveillance System (YRBSS) [@YRBS2009]. The YRBSS is an annual national school-based survey conducted by the Centers for Disease Control and Prevention (CDC) and state, territorial, and local education and health agencies and tribal governments. More information on this survey can be found [here](http://www.cdc.gov/HealthyYouth/yrbs/index.htm).
  
-###Data Organization
+### Data Organization
 Here are the three questions from the YRBSS we use for our investigation:
 
 Q66. Which of the following are you trying to do about your weight?
@@ -598,7 +600,7 @@ BMI is included in this study as the percentile for a given BMI for members of t
 
 With our sample, we use only the cases that include all of the data for these four questions. This is referred to as a __complete case analysis__. That brings our sample of 500 to 426. There are limitations of complete case analyses that we address in the Discussion.   
 
-###Exploratory Data Analysis
+### Exploratory Data Analysis
 
 ```{r, include=FALSE, comment=NA}
 risk2009.data = foreign::read.spss("data/yrbs09.sav", to.data.frame=TRUE)
@@ -743,7 +745,7 @@ ggplot(emplogit2, aes(x = media, y = emplogit, color = sex)) +
   xlab("TV hours per day") + ylab("Empirical logits")
 ```
 
-###Initial Models
+### Initial Models
 Our strategy for modeling is to use our questions of interest and what we have learned in the exploratory data analysis. For each model we interpret the coefficient of interest, look at the corresponding Wald test and, as a final step, compare the deviances for the different models we considered.
 
 We first use a model where sex is our only predictor.
@@ -812,7 +814,7 @@ cat(tmp[c(3:5, 10:16, 21:23)], sep='\n')
 Media is not a statistically significant term ($p=0.456$, $Z=-0.745$). However, because our interest centers on how media may affect attempts to lose weight and how its effect might be different for females and males, we fit a model with a media term and a sex by media interaction term (not shown). Neither term was statistically significant, so we have no support in our data that media exposure as measured by hours spent watching TV is associated with the odds a teen is trying to lose weight after accounting for sex and BMI.
 
 
-###Drop-in-deviance Tests
+### Drop-in-deviance Tests
 
 ```{r, 6model1to4, echo=FALSE, comment=NA}
 anova(model1, model2, model3, model4, test="Chisq")
@@ -823,7 +825,7 @@ Comparing models using differences in deviances requires that the models be __ne
 
 There is a large drop-in-deviance adding BMI to the model with sex (Model 1 to Model 2, 123.13), which is clearly statistically significant when compared to a $\chi^2$ distribution with 1 df. The drop-in-deviance for adding an indicator variable for sports to the model with sex and BMI is only 434.88 - 434.75 = 0.13. There is a difference of a single parameter, so the drop-in-deviance would be compared to a $\chi^2$ distribution with 1 df. The resulting $p$-value is very large (.7188) suggesting that adding an indicator for sports is not helpful once we've already accounted for BMI and sex. For comparing Models 3 and 4, one approach is to look at the AIC. In this case, the AIC is (barely) smaller for the model with media, providing evidence that the latter model is slightly preferable.
 
-###Model Discussion and Summary
+### Model Discussion and Summary
 We found that the odds of wanting to lose weight are considerably greater for females compared to males. In addition, respondents with greater BMI percentiles express a greater desire to lose weight for members of the same sex. Regardless of sex or BMI percentile, sports participation and TV watching are not associated with different odds for wanting to lose weight. 
 
 A limitation of this analysis is that we used complete cases in place of a method of imputing responses or modeling missingness. This reduced our sample from 500 to 429, and it may have introduced bias. For example, if respondents who watch a lot of TV were unwilling to reveal as much, and if they differed with respect to their desire to lose weight from those respondents who reported watching little TV, our inferences regarding the relationship between lots of TV and desire to lose weight may be biased.
@@ -834,9 +836,9 @@ It would be instructive to use data science methodologies to explore the entire 
 
 Finally a limitation may be introduced as a result of the acknowledged variation in the administration of the YRBSS. States and local authorities are allowed to administer the survey as they see fit, which at times results in significant variation in sample selection and response.
 
-##Exercises
+## Exercises
 
-###Conceptual Exercises:
+### Conceptual Exercises:
 1. List the explanatory and response variable(s) for each research question. 
   a. Are students with poor grades more likely to binge drink?
   b. What is the chance you are accepted into medical school given your GPA and MCAT scores? 
@@ -860,7 +862,7 @@ Finally a limitation may be introduced as a result of the acknowledged variation
 
 >The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3 percent chance that any given baby will have a birth defect.
 
-###Guided Exercises
+### Guided Exercises
 
 1. **Soccer goals on target.**  Data comes from an article in *Psychological Science* [@Roskes2011].  The authors report on the success rate of penalty kicks that were on-target, so that either the keeper saved the shot or the shot scored, for FIFA World Cup shootouts between 1982 and 2010.  They found that 18 out of 20 shots were scored when the goalkeeper's team was behind, 71 out of 90 shots were scored when the game was tied, and 55 out of 75 shots were scored with the goalkeeper's team ahead.  
 
@@ -972,7 +974,7 @@ summary(model1a)
   h. Is there any concern about the independence assumption in these models?  We will return to this question in later chapters.
   
  
-###Open-ended Exercises
+### Open-ended Exercises
 
 1. __2008 Presidential Voting in Minnesota counties.__  Data in `mn08.csv` contains results from the 2008 US Presidential election by county in Minnesota, focusing on the two primary candidates (Democrat Barack Obama and Republican John McCain).  You can consider the response to be either the percent of Obama votes in a county (binomial) or whether or not Obama had more votes than McCain (binary).  Then build a model for your response using county-level predictors listed below.  Interpret the results of your model.
 

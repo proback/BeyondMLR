@@ -6,9 +6,9 @@ output:
   pdf_document:
     number_sections: yes
 ---
-#Review of Multiple Linear Regression {#ch-MLRreview}
+# Review of Multiple Linear Regression {#ch-MLRreview}
 
-##Learning Objectives
+## Learning Objectives
   After finishing this chapter, you should be able to:
 
 - Identify cases where ordinary least squares (OLS) assumptions are violated.
@@ -17,7 +17,7 @@ output:
 - Interpret parameters and associated tests and intervals from multiple regression models.
 - Understand the basic ideas behind bootstrapped confidence intervals.
 
-##Introduction to Broadening Your Statistical Horizons
+## Introduction to Broadening Your Statistical Horizons
 
 Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets in to medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **ordinary least squares (OLS)** models.  
 
@@ -29,7 +29,7 @@ The **Generalized Linear Models** in the book's title extends OLS methods you ma
 
 In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with OLS  in the context of different studies. While linearity is sufficient for fitting an OLS model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with OLS modeling is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
 
-##Ordinary Least Squares (OLS) Assumptions
+## Ordinary Least Squares (OLS) Assumptions
 
 ```{r load_packages1, include=FALSE}
 library(tidyverse)    
@@ -37,6 +37,8 @@ library(knitr)
 library(gridExtra)
 library(GGally)
 library(grid)
+
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
 ```{r OLSassumptions, fig.align = "center", out.width = "60%", fig.cap = 'Ordinary least squares assumptions', echo=FALSE}
@@ -92,7 +94,7 @@ These assumptions are depicted in Figure \@ref(fig:OLSassumptions).
 - **N:** At each level of X, the values for Y are normally distributed.
 - **E:** The spread in the Y's for each level of X is the same.
 
-###Cases that do not violate the OLS assumptions for inference
+### Cases that do not violate the OLS assumptions for inference
 
 It can be argued that the following studies do not violate the OLS assumptions for inference. We begin by identifying the response and the explanatory variables followed by  describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.  
 
@@ -138,7 +140,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     
     Heights and other similar measurements are often normally distributed.  There would be a problem with the independence assumption if multiple sons from the same family were selected.  Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.  
 
-###Cases where the OLS assumptions for inference are violated
+### Cases where the OLS assumptions for inference are violated
 
 1) **Grades and studying.** Is the time spent studying predictive of success on an exam? The time spent studying for an exam, in hours, and success, measured as Pass or Fail, are recorded for  randomly selected students.  
   
@@ -174,14 +176,14 @@ It can be argued that the following studies do not violate the OLS assumptions f
 
 While we identified possible violations of  OLS assumptions for inference for each of the examples in this section, there may be  violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.   
 
-##Review of Multiple Linear Regression
+## Review of Multiple Linear Regression
 
-###Case Study: Kentucky Derby {#cs:derby}
+### Case Study: Kentucky Derby {#cs:derby}
 
 Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use OLS linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
-##Initial Exploratory Analyses {#explore}
-###Data Organization
+## Initial Exploratory Analyses {#explore}
+### Data Organization
 
 The first five and last five rows from our data set are illustrated in Table \@ref(tab:introtable1).  Note that, in certain cases, we created new variables from existing ones:
 
@@ -202,7 +204,7 @@ table1 <- derby.df %>%
 kable(table1, booktabs=T,caption="The first five and the last five observations from the Kentucky Derby case study.")
 ```
 
-###Univariate Summaries
+### Univariate Summaries
 
 With any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables.  This should *always* be done *before* any model fitting!  We must understand our data thoroughly before doing anything else.  
 
@@ -223,7 +225,7 @@ In Figure \@ref(fig:twohist)(a), we see that the primary response, winning speed
 
 The primary categorical explanatory variable is track condition, where 88 (72\%) of the 122 races were run under fast conditions, 10 (8\%) under good conditions, and 24 (20\%) under slow conditions.  
 
-###Bivariate Summaries
+### Bivariate Summaries
 
 The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses.  Figure \@ref(fig:bivariate) is densely packed with illustrations of bivariate relationships.  The relationship between two continuous variables is depicted with scatterplots below the diagonal and correlation coefficients above the diagonal.  Here, we see that higher winning speeds are associated with more recent years, while the relationship between winning speed and number of starters is less clear cut.  We also see a somewhat strong correlation between year and number of starters---we should be aware of highly correlated explanatory variables whose contributions might overlap too much.  
 
@@ -259,8 +261,8 @@ Of course, any graphical analysis is exploratory, and any notable trends at this
 
 As you might expect, answers to these questions will arise from proper consideration of variability and properly identified statistical models.  
 
-##Multiple linear regression modeling {#multreg}
-###Simple linear regression with a continuous predictor {#SLRcontinuous}
+## Multiple linear regression modeling {#multreg}
+### Simple linear regression with a continuous predictor {#SLRcontinuous}
 
 We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896?  For this initial model, let $Y_{i}$ be the speed of the winning horse in year $i$.  Then, we might consider Model 1: 
 \begin{equation}
@@ -355,7 +357,7 @@ plot(model2q)
 par(mfrow=c(1,1))
 ```
 
-###Simple linear regression with a binary predictor
+###  linear regression with a binary predictor
 
 We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable**---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
 \begin{equation}
@@ -386,7 +388,7 @@ cat(tmp[c(3:4, 9:13, 16:17)], sep='\n')
 
 You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test?  The answer is: we did!  The t-test corresponding to $\beta_{1}$ is equivalent to an independent-samples t-test with under equal variances.  Convince yourself that this is true, and that the equal variance assumption is needed.
 
-###Multiple linear regression with two predictors
+### Multiple linear regression with two predictors
 
 The beauty of the linear regression framework is that we can add additional explanatory variables in order to explain more variability in our response, obtain better and more precise predictions, and control for certain covariates while evaluating the effect of others.  For example, we could consider adding `yearnew` to Model 3, which has the indicator variable `fast` as its only predictor.  In this way, we would estimate the difference between winning speeds under fast and non-fast conditions *after accounting for the effect of time*.  As we observed in Figure \@ref(fig:bivariate), recent years have tended to have more races under fast conditions, so Model 3 might overstate the effect of fast conditions because winning speeds have also increased over time.  A model with terms for both year and track condition will estimate the difference between winning speeds under fast and non-fast conditions *for a fixed year*; for example, if it had rained in 2016 and turned the track muddy, how much would we have expected the winning speed to decrease?  
 
@@ -404,7 +406,7 @@ cat(tmp[c(3:4, 9:14, 17:18)], sep='\n')
 
 Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time.  It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time.  Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition.  This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition.  Based on the $R^2$ value, Model 4 explains 68.7\% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.  
 
-###Inference in multiple linear regression: normal theory {#multreg-inference}
+### Inference in multiple linear regression: normal theory {#multreg-inference}
 
 So far we have been using linear regression for descriptive purposes, which is an important task.  We are often interested in issues of statistical inference as well---determining if effects are statistically significant, quantifying uncertainty in effect size estimates with confidence intervals, and quantifying uncertainty in model predictions with prediction intervals.  Under LINE assumptions, all of these inferential tasks can be completed with the help of the t-distribution and estimated standard errors.  
 
@@ -420,7 +422,7 @@ new.data <- data.frame(yearnew = 2017 - 1896, fast = 1)
 predict(model4, new = new.data, interval = "prediction")
 ```
 
-###Inference in multiple linear regression: bootstrapping {#multreg-boot}
+### Inference in multiple linear regression: bootstrapping {#multreg-boot}
 
 Remember that you must check LINE assumptions using the same residual plots as in Figure \@ref(fig:resid2) to ensure that the inferential statements in the previous section are valid.  In cases when model assumptions are shaky, one alternative approach to statistical inference is **bootstrapping**; in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility.  In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates.  Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.  
 
@@ -468,7 +470,7 @@ In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\b
 
 There are many variations on this bootstrap procedure.  For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution.  In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated (@Hesterberg2015; @Efron1993; @Davison1997).  We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.  
 
-###Multiple linear regression with an interaction term
+### Multiple linear regression with an interaction term
 
 Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates.  One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions.  To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider **interaction terms**.  Amazingly, if we create a new variable by taking the product of `yearnew` and `fast` (i.e., the **interaction** between `yearnew` and `fast`), adding that variable into our model will have the desired effect.  
 
@@ -508,7 +510,7 @@ leading to the following interpretations for estimated model coefficients:
 
 In fact, using interaction allows us to model the relationships we noticed in Figure \@ref(fig:codeds), where both the intercept and slope describing the relationships between `speed` and `year` differ depending on whether track conditions were fast or not.  Note that we interpret the coefficient for the interaction term by comparing slopes under fast and non-fast conditions; this produces a much more understandable interpretation for a reader than attempting to interpret the -0.011 directly.  
 
-###Building a multiple linear regression model {#multreg_build}
+### Building a multiple linear regression model {#multreg_build}
 
 We now begin iterating toward a "final model" for these data, on which we will base conclusions.  Typical features of a "final multiple linear regression model" include:
 
@@ -550,11 +552,11 @@ cat(tmp[c(1:7)], sep='\n')
 ```
 This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses).  The model explains 82.7\% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions.  We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.
 
-##Preview
+## Preview
 
 Having reviewed key ideas from multiple linear regression, you are now ready to extend those ideas, especially to handle non-normal responses and lack of independence.  This section provides a preview of the type of problems you will encounter in the book. For each journal article cited, we provide an abstract in the authors' words, a description of the type of response and, when applicable, the structure of the data. Each of these examples appears later as an exercise, where you can play with the actual data or evaluate the analyses detailed in the articles.    
 
-###Soccer
+### Soccer
 
 @Roskes2011 .  The right side? Under time pressure, approach motivation leads to right-oriented bias.  *Psychological Science* [Online] **22(11)**:1403-7. DOI: 10.1177/0956797611418677, October 2011.   
 
@@ -562,7 +564,7 @@ Having reviewed key ideas from multiple linear regression, you are now ready to 
 
 The response for this analysis is the direction of the goalkeeper dive, a binary variable.  For example, you could let Y=1 if the dive is to the right and Y=0 if the dive is to the left.  This response is clearly not normally distributed. One approach to the analysis is logistic regression as described in Chapter \@ref(ch-logreg).  A binomial random variable could also be created for this application by summing the binary variables for each game so that Y= the number of dives right out of the number of dives the goalkeeper makes during a game.  [Thought question: Do you buy the last line of the abstract?]
 
-###Elephant Mating
+### Elephant Mating
 
 @Poole1989 .  Mate guarding, reproductive success and female choice in African elephants.  *Animal Behavior* **37**:842-49.   
 
@@ -570,7 +572,7 @@ The response for this analysis is the direction of the goalkeeper dive, a binary
 
 Poole and her colleagues recorded, for each male elephant, his age (in years) and the number of matings for a given year.  The researchers were interested in how age affects the males' mating patterns. Specifically, questions concern whether there is a steady increase in mating success as an elephant ages or if there is an optimal age after which the number of matings decline.  Because the responses of interest are counts (number of matings for each elephant for a given year), we will consider a Poisson regression (see Chapter \@ref(ch-poissonreg)).  The general form for Poisson responses is the number of events for a specified time, volume, or space.    
 
-###Parenting and Gang Activity
+### Parenting and Gang Activity
 
 @Walker-Barnes2001 .  Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective.  *Child Development* **72(6)**:1814-31.  
 
@@ -578,7 +580,7 @@ Poole and her colleagues recorded, for each male elephant, his age (in years) an
 
 The response for this study is a gang activity measure which ranges from 1 to 100.  While it may be reasonable to assume this measure is approximately normal, the structure of this data implies that it is not a simple regression problem. Individual students have measurements made at 8 different points in time.  We cannot assume that we have 2400 independent observations because the same measurements on one individual are more likely to be similar than a measurement of another student.  Multilevel modeling as discussed in Chapter \@ref(ch-lon) can often be used in these situations.
 
-###Crime
+### Crime
 
 @Gelman2007 .  An analysis of the NYPD's stop-and-frisk policy in the context of claims of racial bias.  *Journal of the American Statistical Association* **102(479)**:813-823.  
 
@@ -586,8 +588,8 @@ The response for this study is a gang activity measure which ranges from 1 to 10
 
 This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, generalized linear multilevel modeling, as addressed in Chapter \@ref(ch-GLMM).
 
-##Exercises
-###Conceptual Exercises
+## Exercises
+### Conceptual Exercises
 
 1. **Applications that do not violate the OLS assumptions for inference**.  Identify the response and explanatory variable(s) for each problem.  Write the OLS assumptions for inference in the context of each study.  
 
@@ -629,7 +631,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     e. In Table 4, Model 1 has a higher adjusted $R^2$ than Model 2, yet the extra term in Model 1 (an indicator value for the National League) is not significant at the 5\% level.  Explain how this is possible.
     f. What limits does this paper have on providing guidance to baseball decision makers?
 
-###Guided Exercises
+### Guided Exercises
 
 1. **Gender discrimination in bank salaries**.  In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees.  One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975.  The following variables, which can be found in `banksalary.csv`, were collected for each worker [@Ramsey2002]:  
     - `bsal` = beginning salary (annual salary at time of hire)
@@ -703,7 +705,7 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     m. Are OLS assumptions satisfied in Model 4? Why or why not?
     n. Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted $R^2$ value. Interpret the coefficient of this added variable.
     
-###Open-ended Exercises
+### Open-ended Exercises
 1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article [The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women](https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/) [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
     - there are at least two named women in the picture
     - they have a conversation with each other at some point

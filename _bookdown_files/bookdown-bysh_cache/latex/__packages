@@ -1,10 +1,4 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 bookdown
 tidyverse
 ggplot2
@@ -18,7 +12,6 @@ forcats
 knitr
 gridExtra
 GGally
-grid
 bindrcpp
 rsample
 lattice
