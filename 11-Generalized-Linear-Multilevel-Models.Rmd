@@ -5,9 +5,11 @@ output:
   pdf_document:
     number_sections: yes
   html_document: default
+editor_options: 
+  chunk_output_type: console
 ---
-#Generalized Linear Multilevel Models {#ch-GLMM}
-##Learning Objectives {#objectives}
+# Generalized Linear Multilevel Models {#ch-GLMM}
+## Learning Objectives {#objectives}
 After finishing this chapter, students should be able to:
 
 - Recognize when generalized linear multilevel models (GLMMs) are appropriate.
@@ -18,7 +20,7 @@ After finishing this chapter, students should be able to:
 - Interpret model parameters (including fixed effects and variance components) from a GLMM.
 - Generate and interpret random effect estimates.
 
-##Case Study: College Basketball Referees {#cs:refs}
+## Case Study: College Basketball Referees {#cs:refs}
 
 An article by @Anderson2009 describes empirical evidence that officials in NCAA men's college basketball tend to "even out" foul calls over the course of a game, based on data collected in 2004-2005.  Using logistic regression to model the effect of foul differential on the probability that the next foul called would be on the home team (controlling for score differential, conference, and whether or not the home team had the lead), Anderson and Pierce found that "the probability of the next foul being called on the visiting team can reach as high as 0.70."  More recently, Moskowitz and Wertheim, in their book *Scorecasting*, argue that the number one reason for the home field advantage in sports is referee bias. Specifically, in basketball, they demonstrate that calls over which referees have greater control---offensive fouls, loose ball fouls, ambiguous turnovers such as palming and traveling---were more likely to benefit the home team than more clearcut calls, especially in crucial situations [@Moskowitz2011].
 
@@ -29,8 +31,8 @@ An article by @Anderson2009 describes empirical evidence that officials in NCAA 
 - Is the tendency to even out calls stronger for fouls over which the referee generally has greater control?  Fouls are divided into offensive, personal, and shooting fouls, and one could argue that referees have the most control over offensive fouls (typically where the player with the ball knocks over a stationary defender) and the least control over shooting fouls (where an offensive player is fouled in the act of shooting).
 - Are the actions of referees associated with the score of the game?
 
-##Initial Exploratory Analyses {#explore-glmm}
-###Data organization
+## Initial Exploratory Analyses {#explore-glmm}
+### Data organization
 
 Examination of data for Case Study \@ref(cs:refs) reveals the following key variables in `basketball0910.csv`:
 
@@ -65,6 +67,9 @@ library(pander)
 library(ggmosaic)
 library(kableExtra)
 library(knitr)
+library(kableExtra)
+
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
 ```{r, include=FALSE}
@@ -85,9 +90,15 @@ head(refdata)       # examine first 6 rows
 # Illustrate long data
 table1chp11 <- data.frame(refdata %>% slice(1:10) %>%
   dplyr::select(., 2, 4, 5, 6, 7, 9, 10, 12, 15, 19))
-kable(table1chp11, format = "html") %>%
-  kable_styling(bootstrap_options = c("striped")) %>%
-  scroll_box(width = "100%")
+
+if(knitr::is_html_output()){
+  kable(table1chp11) %>%
+    kable_styling(bootstrap_options = c("striped")) %>%
+    scroll_box(width = "100%")
+} else{
+  kable(table1chp11) %>%
+    kable_styling(bootstrap_options = c("striped")) 
+}
 ```
 
 For our initial analysis, our primary response variable is `foul.home`, and our primary hypothesis concerns evening out foul calls.  We hypothesize that the probability a foul is called on the home team is inversely related to the foul differential; that is, if more fouls have been called on the home team than the visiting team, the next foul is less likely to be on the home team.
@@ -102,7 +113,7 @@ As with other multilevel situations, we will begin with broad summaries across a
 
 Level Two variables, those that remain unchanged for a particular game, then include only the home and visiting teams, although we might consider attributes such as attendance, team rankings, etc. 
 
-###Exploratory analyses {#glmm-eda}
+### Exploratory analyses {#glmm-eda}
 
 In Figure \@ref(fig:gmu-histmat1), we see histograms for the continuous Level One covariates (time remaining, foul differential, and score differential).  These plots treat each foul within a game as independent even though we expect them to be correlated, but they provide a sense for the overall patterns.  We see that time remaining is reasonably uniform.  Score differential and foul differential are both bell-shaped, with a mean slightly favoring the home team in both cases -- on average, the home team leads by 2.04 points (SD 7.24) and has 0.36 fewer previous fouls (SD 2.05) at the time a foul is called.
 
@@ -138,7 +149,7 @@ Difft <- c("Duke","Wisc","Pitt"," ","WVa","Mia","Clem")
 Diffs <- c("4.0","2.6","2.3"," ","-6.9","-2.7","-2.6")
 table2chp11 <- data.frame(three,homet,homes,visitt,visits,Difft,Diffs)
 colnames(table2chp11) <- c(" "," "," "," "," "," "," ")
-kable(table2chp11, booktabs=T, caption=" Average total number of fouls in the first half over all games in which a particular team is home or visitor.  The left columns show the top 3 and bottom 3 teams according to total number of fouls (on both teams) in first halves of games in which they are the home team.  The middle columns correspond to games in which the listed teams are the visitors, and the right columns show the largest differences (in both directions) between total fouls in games in which a team is home or visitor.", format = "html") %>%
+kable(table2chp11, booktabs=T, caption=" Average total number of fouls in the first half over all games in which a particular team is home or visitor.  The left columns show the top 3 and bottom 3 teams according to total number of fouls (on both teams) in first halves of games in which they are the home team.  The middle columns correspond to games in which the listed teams are the visitors, and the right columns show the largest differences (in both directions) between total fouls in games in which a team is home or visitor.") %>%
   add_header_above(c(" ","Home"=2,"Visitor"=2, "Difference"=2))
 ```
 
@@ -367,9 +378,9 @@ grid.arrange(barplot1, barplot2, barplot3, ncol = 2, nrow = 2)
 
 The exploratory analyses presented above are an essential first step in understanding our data, seeing univariate trends, and noting bivariate relationships between variable pairs.  However, our important research questions (a) involve the effect of foul differential after adjusting for other significant predictors of which team is called for a foul, (b) account for potential correlation between foul calls within a game (or within a particular home or visiting team), and (c) determine if the effect of foul differential is constant across game conditions.  In order to address research questions such as these, we need to consider multilevel, multivariate statistical models for a binary response variable.
 
-##Two level Modeling with a Generalized Response {#twolevelmodeling-glmm}
+## Two level Modeling with a Generalized Response {#twolevelmodeling-glmm}
 
-###A GLM approach (correlation not accounted for) {#multregr-glmm}
+### A GLM approach (correlation not accounted for) {#multregr-glmm}
 
 One quick and dirty approach to analysis might be to run a multiple logistic regression model on the entire long data set of 4972 fouls.  In fact, Anderson and Pierce ran such a model in their 2009 paper, using the results of their multiple logistic regression model to support their primary conclusions, while justifying their approach by confirming a low level of correlation within games and the minimal impact on fixed effect estimates that accounting for clustering would have.  Output from one potential multiple logistic regression model is shown below; this initial modeling attempt shows significant evidence that referees tend to even out calls (i.e., that the probability of a foul called on the home team decreases as total home fouls increase compared to total visiting team fouls---that is, as `foul.diff` increases) after accounting for score differential and time remaining (Z=-3.078, p=.002).  The extent of the effect of foul differential also appears to grow (in a negative direction) as the first half goes on, based on an interaction between time remaining and foul differential (Z=-2.485, p=.013).  We will compare this model with others that formally account for clustering and correlation patterns in our data.
 
@@ -381,7 +392,7 @@ tmp <- capture.output(summary(mod0))
 cat(tmp[c(3:6, 11:20, 25:27)], sep='\n')
 ```
 
-###A two-stage modeling approach (provides the basic idea for multilevel modeling) {#twostage-glmm}
+### A two-stage modeling approach (provides the basic idea for multilevel modeling) {#twostage-glmm}
 
 As we saw in Section \@ref(twostage), to avoid clustering we could consider fitting a separate regression model to each unit of observation at Level Two (each game in this case).  Since our primary response variable is binary (Was the foul called on the home team or not?), we would fit a logistic regression model to the data from each game.  For example, consider the 14 fouls called during the first half of the March 3, 2010, game featuring Virginia at Boston College (Game 110). 
 
@@ -459,7 +470,7 @@ grid.arrange(int.hist2, rate.hist2, ncol = 1)
 
 At this point, you might imagine expanding model building efforts in a couple of directions:  (a) continue to improve the Level One model in Equation \@ref(eq:lev1glmm) by controlling for covariates and adding potential interaction terms, or (b) build Level Two models to explain the game-to-game variability in intercepts or slopes using covariates which remain constant from foul to foul within a game (like the teams playing).  While we could pursue these two directions independently, we can accomplish our modeling goals in a much cleaner and more powerful way by proceeding as in Chapter \@ref(ch-multilevelintro) and building a unified multilevel framework under which all parameters are estimated simultaneously and we remain faithful to the correlation structure inherent in our data.
 
-###A unified multilevel approach (the framework we'll use) {#unified-glmm}
+### A unified multilevel approach (the framework we'll use) {#unified-glmm}
 
 As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a composite model after first expressing Level One and Level Two models.  That is, we will create Level One and Level Two models as in Section \@ref(twostage-glmm), but we will then combine those models into a composite model and estimate all model parameters simultaneously.  Once again $Y_{ij}$ is an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), and $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  Our Level One model with foul differential as the sole predictor is given by Equation \@ref(eq:lev1glmm):
   \[ \log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg)=a_i+b_i\mathrm{foul.diff}_{ij} \]
@@ -547,7 +558,7 @@ tmp <- capture.output(summary(mod0a))
 cat(tmp[c(3:4, 9:13, 18:20)], sep='\n')
 ```
 
-##Crossed Random Effects {#crossedre}
+## Crossed Random Effects {#crossedre}
 
 In the College Basketball Referees case study, our two primary Level Two covariates are home team and visiting team.  In Section \@ref(glmm-eda) we showed evidence that the probability a foul is called on the home team changes if we know precisely who the home and visiting teams are.  However, if we were to include an indicator variable for each distinct team, we would need 38 indicator variables for home teams and 38 more for visiting teams.  That's a lot of degrees of freedom to spend!  And adding those indicator variables would complicate our model considerably, despite the fact that we're not very interested in specific coefficient estimates for each team---we just want to control for teams playing to draw stronger conclusions about referee bias (focusing on the `foul.diff` variable).  One way, then, of accounting for teams is by treating them as __random effects__ rather than fixed effects.  For instance, we can assume the effect that Minnesota being the home team has on the log odds of foul call on the home team is drawn from a normal distribution with mean 0 and variance $\sigma^{2}_{v}$.  Maybe the estimated random effect for Minnesota as the home team is -0.5, so that Minnesota is slightly less likely that the typical home team to have fouls called on it, and the odds of a foul on the home team are somewhat correlated whenever Minnesota is the home team.  In this way, we account for the complete range of team effects, while only having to estimate a single parameter ($\sigma^{2}_{v}$) rather than coefficients for 38 indicator variables.  The effect of visiting teams can be similarly modeled.  
 
@@ -649,7 +660,7 @@ From this output, we obtain estimates of our five model parameters:
 
 Based on the t-value (-6.80) and p-value ($p<.001$) associated with foul differential in this model, we have significant evidence of a negative association between foul differential and the odds of a home team foul.  That is, we have significant evidence that the odds that a foul is called on the home team shrinks as the home team has more total fouls compared with the visiting team.  Thus, there seems to be preliminary evidence in the 2009-10 data that college basketball referees tend to even out foul calls over the course of the first half.  Of course, we have yet to adjust for other significant covariates.
 
-##Model Comparisons Using the Parametric Bootstrap {#glmm-paraboot}
+## Model Comparisons Using the Parametric Bootstrap {#glmm-paraboot}
 
 Our estimates of variance components provide evidence of the relative variability in the different Level Two random effects.  For example, an estimated 65.4\% of variability in the intercepts is due to differences from game-to-game, while 25.9\% is due to differences among home teams, and 8.7\% is due to differences among visiting teams.  At this point, we could reasonably ask: if we use a random effect to account for differences among games, does it really pay off to also account for which team is home and which is the visitor?
 
@@ -819,7 +830,7 @@ ggplot(nullLRT.1) +
 # sum(nullLRT>=6.49)/100   # parametric bootstrap p-value
 ```
 
-##A Potential Final Model for Examining Referee Bias {#sec:finalmodel-glmm}
+## A Potential Final Model for Examining Referee Bias {#sec:finalmodel-glmm}
 
 In constructing a final model for this college basketball case study, we are guided by several considerations.  First, we want to estimate the effect of foul differential on the odds of a home foul, after adjusting for important covariates.  Second, we wish to find important interactions with foul differential, recognizing that the effect of foul differential might depend on the game situation and other covariates.  Third, we want to account for random effects associated with game, home team, and visiting team.  What follows is one potential final model that follows these guidelines:
 
@@ -886,7 +897,7 @@ Here are specific interpretations of key model parameters:
 - $\exp(\hat{\omega}_{0})=\exp(-0.0087)=0.991$.  Also, $0.991^{-1}=1.009$.  The effect of foul differential increases by 0.9\% for each extra minute that is remaining in the half, after controlling for foul differential, score differential, whether the home team has the lead, and type of foul.  Thus, the tendency to even out foul calls is strongest earlier in the game.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while at the end of the half (`time=0`) the odds increase by 18.8\% for each extra visiting foul.
 - $\hat{\sigma}_{u}^{2}=0.185=$ the variance in log-odds intercepts from game-to-game after controlling for all other covariates in the model.
 
-##Estimated Random Effects {#estimatedRE}
+## Estimated Random Effects {#estimatedRE}
 
 Our final model includes random effects for game, home team, and visiting team, and thus our model accounts for variability due to these three factors without estimating fixed effects to represent specific teams or games.  However, we may be interested in examining the relative level of the random effects used for different teams or games.  The presence of random effects allows different teams or games to begin with different baseline odds of a home foul.  In other words, the intercept---the log odds of a home foul at the end of the first half when the score is tied, the fouls are even, and a shooting foul has been called---is adjusted by a random effect specific to the two teams playing and to the game itself.  Together, the estimated random effects for, say, home team, should follow a normal distribution as we assumed: centered at 0 and with variance given by $\sigma_{v}^{2}$. It is sometimes interesting to know, then, which teams are typical (with estimated random effects near 0) and which fall in the upper and lower tails of the normal distribution.
 
@@ -940,7 +951,7 @@ p <- p+ coord_flip() + labs(y="Estimated Random Effects",x="Home Teams")
 print(p)
 ```
 
-##Notes on Using R (Optional) {#usingR-glmm}
+## Notes on Using R (Optional) {#usingR-glmm}
 
 The R code below fits Model A.1 from Section \@ref(glmm-paraboot).  Note that, in `glmer()` or `lmer()`, if you have two equations at Level Two and want to fit a model with an error term for each equation, but you also want to assume that the two error terms are independent, the error terms must be requested separately.  For example, "(1$|$hometeam)" allows the Level One intercept to vary by home team, while "(0+foul.dff$|$hometeam)" allows the Level One effect of `foul.diff` to vary by home team.  Under this formulation, the correlation between those two error terms is assumed to be 0; a non-zero correlation could have been specified with "(1+foul.diff$|$hometeam)".
 
@@ -982,8 +993,8 @@ print(ranef1[[2]], more = TRUE) ##VIS
 print(ranef1[[1]], more = TRUE)
 ```
 
-##Exercises
-###Conceptual Exercises
+## Exercises
+### Conceptual Exercises
 
 1. Give an example of a data set and an associated research question that would best be addressed with a multilevel model for a Poisson response.
 
@@ -1075,7 +1086,7 @@ pander(table5chp11)
 
 28. @Randall2014 claim that "our application of multilevel modelling techniques allowed us to account for clustering by area of residence and produce 'shrunken' small-area estimates, which are not as prone to random fluctuations as crude or standardised rates."  Explain what they mean by this statement.
 
-###Open-ended Exercises
+### Open-ended Exercises
 
 1. **Airbnb in Chicago.**  @Trinh2018 collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located.  We can examine traits that are associated with listings that achieve an overall satisfaction of 5 out of 5 vs. those that do not (i.e. treat satisfaction as a binary variable).  Conduct an EDA, build a generalized multilevel model, and interpret model coefficients to answer questions such as: What are characteristics of a higher rated listing?  Are the most influential traits associated with individual listings or entire neighborhoods?  Are there intriguing interactions where the effect of one variable depends on levels of another?
 
