@@ -5,9 +5,16 @@ output:
   pdf_document:
     number_sections: yes
   html_document: default
+editor_options: 
+  chunk_output_type: console
 ---
-#Two Level Longitudinal Data {#ch-lon}
-##Learning objectives
+
+```{r,include=F}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
+# Two Level Longitudinal Data {#ch-lon}
+## Learning objectives
   After finishing this chapter, you should be able to:
 
 - Recognize longitudinal data as a special case of multilevel data, with time at Level One.
@@ -18,7 +25,7 @@ output:
 - Compare models, both nested and not, with appropriate statistical tests and summary statistics.
 - Consider different ways of modeling the variance-covariance structure in longitudinal data.
 
-##Case study: Charter schools {#cs:charter}
+## Case study: Charter schools {#cs:charter}
 
 Charter schools were first introduced in the state of Minnesota in 1991 [@CharterSchools]. Since then, charter schools have begun appearing all over the United States. While publicly funded, a unique feature of charter schools is their independence from many of the regulations that are present in the public school systems of their respective city or state. Thus, charters will often extend the school days or year and tend to offer non-traditional techniques and styles of instruction and learning.
 
@@ -32,8 +39,8 @@ As described in @Green2003, it is very challenging to compare charter and public
 - How do the average math MCA-II scores for 6th graders enrolled in charter schools differ from scores for students who attend non-charter public schools? Do these differences persist after accounting for differences in student populations?
 - Are there differences in yearly improvement between charter and non-charter public schools?
 
-##Initial Exploratory Analyses {#exploratoryanalysis}
-###Data organization {#data}
+## Initial Exploratory Analyses {#exploratoryanalysis}
+### Data organization {#data}
 
 Key variables in `chart_wide_condense.csv` which we will examine to address the research questions above are:
 
@@ -78,15 +85,17 @@ chart.wide = read_csv("data/chart_wide_condense.csv")
 
 ```{r table1ch9, echo=FALSE, warning=TRUE}
 table1chp9 <- head(chart.wide[2:11])
-kable(table1chp9, format = "html") %>%
+
+kab1chp9 <- kable(table1chp9) %>%
   kable_styling(bootstrap_options = c("striped")) %>%
-  column_spec(column = 1:2, width = "18em; min-width: 15em;") %>%
-  scroll_box(width = "100%")
+  column_spec(column = 1:2, width = "18em; min-width: 15em;")
+
+ifelse(knitr::is_html_output(),kab1chp9 %>% scroll_box(width="100%"),kab1chp9)
 ```
   
 For most statistical analyses, it will be advantageous to convert WIDE format to LONG format, with one row per year per school.  To make this conversion, we will have to create a time variable, which under the LONG format is very flexible---each school can have a different number of and differently-spaced time points, and they can even have predictors which vary over time.  Details for making this conversion in R can be found in Section \@ref(notesr9), and the form of the LONG data in this study is exhibited in the next section.
 
-###Missing data {#missing}
+### Missing data {#missing}
 
 In this case, before we convert our data to LONG form, we should first address problems with missing data.  Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
 
@@ -113,10 +122,11 @@ Now, we are ready to create our LONG data set. Fortunately, many packages (inclu
 #Getting started-2
 # Create data frame in LONG form (one obs per school-year)
 #   chart.long is 1854x10 with 121 NAs for MathAvgScore
+select <- dplyr::select
 chart.long <- chart.wide %>%
   gather(key = "key", value = "MathAvgScore", MathAvgScore.0:MathAvgScore.2) %>%
   separate(key, into = c("name", "year08"), sep = "\\.") %>%
-  select(-c(X1, name)) %>%
+  select(-c("X1", "name")) %>%
   arrange(schoolid, year08) %>%
   mutate(year08 = as.numeric(year08))
 head(chart.long)
@@ -133,7 +143,7 @@ table3chp9 <- head(smallchart.long[,c(2,4,6,7,8,9)])
 kable(table3chp9, caption= "The first six observations in the long data set for the Charter Schools case study; these lines correspond to the first two observations from the wide data set illustrated in Table (ref:caplontable3chp9).")
 ```
 
-###Exploratory analyses for general multilevel models {#generalanalyses}
+### Exploratory analyses for general multilevel models {#generalanalyses}
 
 Notice the **longitudinal** structure of our data---we have up to three measurements of test scores at different time points for each of our 618 schools. With this structure, we can address questions at two levels:
 
@@ -254,7 +264,7 @@ lon.scat1 <- grid.arrange(PctFree.school,PctSped.school,PctNonw.school,ncol=2)
 grid.arrange(PctFree.school,PctSped.school,PctNonw.school,ncol=2)
 ```
 
-###Exploratory analyses for longitudinal data {#longitudinalanalyses}
+### Exploratory analyses for longitudinal data {#longitudinalanalyses}
 
 In addition to the initial exploratory analyses above, longitudinal data---multilevel data with time at Level One---calls for further plots and summaries that describe time trends within and across individuals. For example, we can examine trends over time within individual schools. Figure \@ref(fig:lon-lat1) provides a **lattice plot** illustrating trends over time for the first 24 schools in the data set. We note differences among schools in starting point (test scores in 2008), slope (change in test scores over the three year period), and form of the relationship. These differences among schools are nicely illustrated in so-called **spaghetti plots** such as Figure \@ref(fig:lon-spag1), which overlays the individual schools' time trends (for the math test scores) from Figure \@ref(fig:lon-lat1) on a single set of axes.  In order to illustrate the overall time trend without making global assumptions about the form of the relationship, we overlaid in bold a nonparametric fitted curve through a **loess smoother**. LOESS comes from "locally weighted scatterplot smoother", in which a low-degree polynomial is fit to each data point using weighted regression techniques, where nearby points receive greater weight. LOESS is a computationally intensive method which performs especially well with larger sets of data, although ideally there would be a greater diversity of x-values than the three time points we have. In this case, the loess smoother follows very closely to a linear trend, indicating that assuming a linear increase in test scores over the three year period is probably a reasonable simplifying assumption.  To further examine the hypothesis that linearity would provide a reasonable approximation to the form of the individual time trends in most cases, Figure \@ref(fig:lon-lat2) shows a lattice plot containing linear fits through ordinary least squares rather than connected time points as in Figure \@ref(fig:lon-lat1).
 
@@ -320,8 +330,8 @@ ggplot(newsampdata.l,aes(x=year08,y=MathAvgScore)) +
 
 Just as we explored the relationship between our response (average math scores) and important covariates in Section \@ref(generalanalyses), we can now examine the relationships between time trends by school and important covariates. For instance, Figure \@ref(fig:lon-spag3) shows that charter schools had math scores that were lower on average than public non-charter schools and more variable.  This type of plot is sometimes called a **trellis graph**, since it displays a grid of smaller charts with consistent scales, where each smaller chart represents a condition--an item in a category. Trends over time by school type are denoted by bold loess curves.  Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools. Exploratory analyses like this can be repeated for other covariates, such as percent free and reduced lunch in Figure \@ref(fig:lon-spagmat1). The trellis plot automatically divides schools into four groups based on quartiles of their percent free and reduced lunch, and we see that schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.
 
-##Preliminary two-stage modeling {#twostage9}
-###Linear trends within schools {#lineartwostage}
+## Preliminary two-stage modeling {#twostage9}
+### Linear trends within schools {#lineartwostage}
 
 Even though we know that every school's math test scores were not strictly linearly increasing or decreasing over the observation period, a linear model for individual time trends is often a simple but reasonable way to model data. One advantage of using a linear model within school is that each school's data points can be summarized with two summary statistics---an intercept and a slope (obviously, this is an even bigger advantage when there are more observations over time per school).  For instance, we see in Figure \@ref(fig:lon-lat2) that sixth graders from the school depicted in the top right slot slowly increased math scores over the three year observation period, while students from the school depicted in the fourth column of the top row generally experienced decreasing math scores over the same period. As a whole, the linear model fits individual trends pretty well, and many schools appear to have slowly increasing math scores over time, as researchers in this study may have hypothesized.
 
@@ -457,7 +467,7 @@ ggplot(data = lm_info, aes(x = int, y = rate)) +
   ylab("Fitted Slopes") + geom_smooth(se=FALSE, method="lm", color="black")
 ```
 
-###Effects of level two covariates on linear time trends {#lineartwostageL2effects}
+### Effects of level two covariates on linear time trends {#lineartwostageL2effects}
 
 Summarizing trends over time within schools is typically only a start, however. Most of the primary research questions from this study involve comparisons among schools, such as: (a) are there significant differences between charter schools and public non-charter schools, and (b) do any differences between charter schools and public schools change with percent free and reduced lunch, percent special education, or location?  These are Level Two questions, and we can begin to explore these questions by graphically examining the effects of school-level variables on schools' linear time trends. By school-level variables, we are referring to those covariates that differ by school but are not dependent on time. For example school type (charter or public non-charter), urban or rural location, percent non-white, percent special education, and percent free and reduced lunch are all variables which differ by school but which don't change over time, at least as they were assessed in this study. Variables which would be time-dependent include quantities such as per pupil funding and reading scores.
 	
@@ -550,7 +560,7 @@ grid.arrange(int.box,rate.box,ncol=2)
 
 The effect of other confounding variables (e.g., percent non-white, percent special education, urban or rural location) can be investigated in a similar fashion to free and reduced lunch percentage, both in terms of main effect (variability in outcomes such as slope and intercept which can be explained by the confounding variable) and interaction with school type (ability of the confounding variable to explain differences between charter and public non-charter schools).  We leave these explorations as an exercise.
 
-###Error structure within schools {#lineartwostageerror}
+### Error structure within schools {#lineartwostageerror}
 
 Finally, with longitudinal data it is important to investigate the error variance-covariance structure of data collected within a school (the Level Two observational unit). In multilevel data, as in the examples we introduced in Chapter \@ref(ch-corrdata), we suspect observations within group (like a school) to be correlated, and we strive to model that correlation. When the data within group is collected over time, we often see distinct patterns in the residuals that can be modeled---correlations which decrease systematically as the time interval increases, variances that change over time, correlation structure that depends on a covariate, etc. A first step in modeling the error variance-covariance structure is the production of an exploratory plot such as Figure \@ref(fig:lon-cor1). To generate this plot, we begin by modeling MCA math score as a linear function of time using all 1733 observations and ignoring the school variable.  This population (marginal) trend is illustrated in Figure \@ref(fig:lon-spag1) and is given by:
 \begin{equation}
@@ -580,7 +590,7 @@ ggpairs(hgtwm[,c(2:4)],upper=list(),lower=list(continuous="smooth"),
   axisLabels="show")
 ```
 
-##Initial models {#lineartwostageerror}
+## Initial models {#lineartwostageerror}
 
 Throughout the exploratory analysis phase, our original research questions have guided our work, and now with modeling we return to familiar questions such as:
 
@@ -591,7 +601,7 @@ Throughout the exploratory analysis phase, our original research questions have 
 As you might expect, answers to these questions will arise from proper consideration of variability and properly identified statistical models.
 As in Chapter \@ref(ch-multilevelintro), we will begin model fitting with some simple, preliminary models, in part to establish a baseline for evaluating larger models. Then, we can build toward a final model for inference by attempting to add important covariates, centering certain variables, and checking assumptions. 
 
-###Unconditional means model {#modela}
+### Unconditional means model {#modela}
 
 In the multilevel context, we almost always begin with the **unconditional means model**, in which there are no predictors at any level. The purpose of the unconditional means model is to assess the amount of variation at each level, and to compare variability within school to variability between schools. Define $Y_{ij}$ as the MCA-II math score from school $i$ and year $j$. Using the composite model specification from Chapter \@ref(ch-multilevelintro):
 
@@ -623,7 +633,7 @@ Based on the intraclass correlation coefficient:
 \end{equation}
 79.8 percent of the total variation in math scores is attributable to difference among schools rather than changes over time within schools.  We can also say that the average correlation for any pair of responses from the same school is 0.798.
 
-###Unconditional growth model {#modelb}
+### Unconditional growth model {#modelb}
 
 The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \@ref(ch-multilevelintro)). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the **unconditional growth model**. The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
 
@@ -713,7 +723,7 @@ The estimated within-school variance $\hat{\sigma}^2$ decreased by about 17\% fr
 \textrm{Pseudo }R^2_{L1} = \frac{\hat{\sigma}^2(\textrm{uncond means}) - \hat{\sigma}^2(\textrm{uncond growth})}{\hat{\sigma^2}(\textrm{uncond means})} = \frac{10.571-8.820}{10.571}= 0.17
 \end{equation}
 
-###Modeling other trends over time {#othertimetrends}
+### Modeling other trends over time {#othertimetrends}
 
 While modeling linear trends over time is often a good approximation of reality, it is by no means the only way to model the effect of time. One alternative is to model the quadratic effect of time, which implies adding terms for both time and the square of time. Typically, to reduce the correlation between the linear and quadratic components of the time effect, the time variable is often centered first; we have already "centered" on 2008. Modifying Model B to produce an **unconditional quadratic growth model** would take the following form:
 
@@ -814,8 +824,8 @@ The performance of this model is very similar to the quadratic growth model by A
 
 Despite the good performances of the quadratic growth and piecewise linear models on our three-year window of data, we will continue to use linear growth assumptions in the remainder of this chapter.  Not only is a linear model easier to interpret and explain, but it's probably a more reasonable assumption in years beyond 2010.  Predicting future performance is more risky by assuming a steep one year rise or a non-linear rise will continue, rather than by using the average increase over two years.
 
-##Building to a final model {#finalmodel}
-###Uncontrolled effects of school type {#sec:modelc9}
+## Building to a final model {#finalmodel}
+### Uncontrolled effects of school type {#sec:modelc9}
 
 Initially, we can consider whether or not there are significant differences in individual school growth parameters (intercepts and slopes) based on school type. From a modeling perspective, we would build a system of two Level Two models:
 
@@ -1156,7 +1166,7 @@ toep.lme=lme(MathAvgScore ~ year08 * charter, chart.long,
 summary(toep.lme)
 ```
 
-###Add percent free and reduced lunch as a covariate {#modeld}
+### Add percent free and reduced lunch as a covariate {#modeld}
 
 Although we will still be primarily interested in the effect of school type on both 2008 test scores and rate of change in test scores (as we observed in Model C), we can try to improve our estimates of school type effects through the introduction of meaningful covariates. In this study, we are particularly interested in Level Two covariates---those variables which differ by school but which remain basically constant for a given school over time---such as urban or rural location, percentage of special education students, and percentage of students with free and reduced lunch. In Section \@ref(twostage9), we investigated the relationship between percent free and reduced lunch and a school's test score in 2008 and their rate of change from 2008 to 2010.
 
@@ -1175,10 +1185,10 @@ b_{i} & = & \beta_{0} + \beta_{1}Charter_i + \beta_{2}schpctfree_i + v_{i}
 
 The composite model is then:
 
-\begin{equation}
-Y_{ij}= [\alpha_{0}+\alpha_{1}Charter_i +\alpha_{2}schpctfree_i + \beta_{0}Year08_{ij} + \beta_{1}Charter_iYear08_{ij} + \\ \beta_{2}schpctfree_iYear08_{ij}] + 
+\begin{eqnarray}
+Y_{ij}= [\alpha_{0}&+&\alpha_{1}Charter_i +\alpha_{2}schpctfree_i + \beta_{0}Year08_{ij} + \beta_{1}Charter_iYear08_{ij}  \\ &+& \beta_{2}schpctfree_iYear08_{ij}] + 
 [u_{i} + v_{i}Year08_{ij} + \epsilon_{ij}]
-\end{equation}
+\end{eqnarray}
 where error terms are defined as in Model C.
 
 ```{r 9verb7, echo=FALSE, comment=NA}
@@ -1206,7 +1216,7 @@ Compared to Model C, the introduction of school-level poverty based on percentag
 
 - $\hat{\beta}_{2}= -0.010.$ Each 10\% increase in the percentage of students at a school receiving free and reduced lunch is associated with a 0.10 point decrease in rate of change over the three years of observation, after controlling for school type.
 
-###A potential final model with three Level Two covariates {#modelf9}
+### A potential final model with three Level Two covariates {#modelf9}
 
 We now begin iterating toward a "final model" for these data, on which we will base conclusions. Being cognizant of typical features of a "final model" as outlined in Chapter \@ref(ch-multilevelintro), we offer one possible final model for this data---Model F:
 
@@ -1248,7 +1258,7 @@ From this model, we again see that 2008 sixth grade math test scores from charte
 
 As we demonstrated in this case study, applying multilevel methods to two-level longitudinal data yields valuable insights about our original research questions while properly accounting for the structure of the data.
 
-##Covariance structure among observations {#errorcovariance}
+## Covariance structure among observations {#errorcovariance}
 
 Part of our motivation for framing our model for multilevel data was to account for the correlation among observations made on the same school (the Level Two observational unit). Our two-level model, through error terms on both Level One and Level Two variables, actually implies a specific within-school covariance structure among observations, yet we have not (until now) focused on this imposed structure; for example:
 
@@ -1257,7 +1267,7 @@ Part of our motivation for framing our model for multilevel data was to account 
 
 In this section, we will describe the within-school covariance structure imposed by our two-level model and offer alternative covariance structures that we might consider, especially in the context of longitudinal data.  In short, we will discuss how we might decide if our implicit covariance structure in our two-level model is satisfactory for the data at hand.  Then, in the succeeding optional section, we provide derivations of the imposed within-school covariance structure for our standard two-level model using results from probability theory.
 
-###Standard covariance structure {#standarderror}
+### Standard covariance structure {#standarderror}
 
 We will use Model C (uncontrolled effects of school type) to illustrate covariance structure within subjects. Recall that, in composite form, Model C is:
 \begin{eqnarray*}
@@ -1342,7 +1352,7 @@ A couple of features of these two matrices can be highlighted that offer insight
 - Our two-level model actually imposes a quadratic structure on the relationship between variance and time; note that the equation for $Var(Y_{j})$ contains both $t^{2}_{j}$ and $t_{j}$.  The variance is therefore minimized at $t=\frac{-\sigma_{uv}}{\sigma^{2}_{v}}$.  With the charter school data, the variance in test scores is minimized when $t=\frac{-\sigma_{uv}}{\sigma^{2}_{v}}=\frac{-1.81}{0.23}=-8.0$; that is, the smallest within-school variance in test scores is expected 8.0 years prior to 2008 (i.e., in 2000), and the variance increases parabolically from there.  In general, cases in which $\sigma^{2}_{v}$ and $\sigma_{uv}$ are relatively small have little curvature and fairly consistent variability over time.
 - There is no requirement that time points within school need to be evenly spaced or even that each school has an equal number of measurements over time, which makes the two-level model structure nicely flexible.
 
-###Alternative covariance structures {#alternateerror}
+### Alternative covariance structures {#alternateerror}
 
 The standard covariance structure that's implied by our multilevel modeling structure provides a useful model in a wide variety of situations---it provides a reasonable model for Level One variability with a relatively small number of parameters, and it has sufficient flexibility to accommodate irregular time intervals as well as subjects with different number of observations over time.  However, there may be cases in which a better fitting model requires additional parameters, or when a simpler model with fewer parameters still provides a good fit to the data.  Here is an outline of a few alternative error structures:
 
@@ -1354,7 +1364,7 @@ The standard covariance structure that's implied by our multilevel modeling stru
 
 When the focus of an analysis is on stochastic parameters (variance components) rather than fixed effects, parameter estimates are typically based on restricted maximum likelihood (REML) methods; model performance statistics then reflect only the stochastic portion of the model. Models with the same fixed effects but different covariance structures can be compared as usual---with AIC and BIC measures when models are not nested and with likelihood ratio tests when models are nested.  However, using a chi-square distribution to conduct a likelihood ratio test in these cases can often produce a conservative test, with p-values that are too large and not rejected enough (@Bryk2002; @Singer2003; @Faraway2005). In Section \@ref(threelevel-paraboot), we introduce the parametric bootstrap as a potentially better way of testing models nested in their random effects.
 
-###Covariance structure in non-longitudinal multilevel models
+### Covariance structure in non-longitudinal multilevel models
 
 Careful modeling and estimation of the Level One covariance matrix is especially important and valuable for longitudinal data (with time at Level One) and as we've seen, our standard two-level model has several nice properties for this purpose.  The standard model is also often appropriate for non-longitudinal multilevel models as discussed in Chapter \@ref(ch-multilevelintro), although we must remain aware of the covariance structure implicitly imposed.  In other words, the ideas in this section generalize even if time isn't a Level One covariate.
 
@@ -1380,11 +1390,11 @@ Cov(Y_{ij},Y_{ik}) & = & \sigma_{u}^{2} + \textstyle{Large}_{ij}\textstyle{Large
 \end{eqnarray*}
 Note that, in the Music Performance Anxiety case study, each subject will have a unique Level One variance-covariance structure, since each subject has a different number of performances and a different mix of large ensemble and small ensemble or solo performances.
 
-###Final thoughts regarding covariance structures
+### Final thoughts regarding covariance structures
 
 In the charter school example, as is often true in multilevel models, the choice of covariance matrix does not greatly affect estimates of fixed effects.  The choice of covariance structure could potentially impact the standard errors of fixed effects, and thus the associated test statistics, but the impact appears minimal in this particular case study.  In fact, the standard model typically works very well.  So is it worth the time and effort to accurately model the covariance structure?  If primary interest is in inference regarding fixed effects, and if the standard errors for the fixed effects appear robust to choice of covariance structure, then extensive time spent modeling the covariance structure is not advised.  However, if researchers are interested in predicted random effects and estimated variance components in addition to estimated fixed effects, then choice of covariance structure can make a big difference.  For instance, if researchers are interested in drawing conclusions about particular schools rather than charter schools in general, they may more carefully model the covariance structure in this study.
 
-###Details of covariance structures (Optional) {#optionalcov}
+### Details of covariance structures (Optional) {#optionalcov}
 
 Using Model C as specified in Section \@ref(standarderror), we specified the general covariance structure for School $i$ as:
 \[ Cov(\mathbf{Y}_i) =  \left[
@@ -1427,7 +1437,7 @@ and this covariance matrix can be converted into a within-subject correlation ma
             .815 & .827 & 1
           \end{array} \right] \]
 
-##Notes on Using R (Optional) {#notesr9}
+## Notes on Using R (Optional) {#notesr9}
 
 The model below is our final model with $\sigma_{uv}$ set to 0---i.e., we have added the restriction that Level Two error terms are uncorrelated.  Motivation for this restriction came from repeated estimates of correlation in different versions of the final model near 1, when empirically a slightly negative correlation might be expected.  As we will describe in Chapter \@ref(ch-3level), inclusion of the Level Two correlation as a model parameter appears to lead to boundary constraints---maximum likelihood parameter estimates near the maximum or minimum allowable value for a parameter. A likelihood ratio test using full maximum likelihood estimates confirms that the inclusion of a correlation term does not lead to an improved model (LRT test statistic = .223 on 1 df, $p=.637$).  Estimates of fixed effects and their standard errors are extremely consistent with the full model in Section \@ref(modelf9); only the estimates of the variability in $\sigma_{1}$ is noticeably higher.
 
@@ -1450,8 +1460,8 @@ cat(" AIC = ", AIC(model.f2a), '\n', "BIC = ", BIC(model.f2a))
 anova(model.f2ml,model.f2aml)
 ```
 
-##Exercises
-###Conceptual Exercises
+## Exercises
+### Conceptual Exercises
 
 1. __Parenting and Gang Activity.__  @Walker-Barnes2001 describe "Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective".  In this study, 300 ninth graders from one high school in an urban southeastern city were assessed at the beginning of the school year about their gang activity, the gang activity of their peers, behavior of their parents, and their ethnic and cultural heritage.  Then, information about their gang activity was collected at 7 additional occasions during the school year. For this study: (a) give the observational units at Level One and Level Two, and (b) list potential explanatory variables at both Level One and Level Two.
 
@@ -1516,7 +1526,7 @@ kable(table4chp9, booktabs=T, caption="A portion of Table 2: Results of Hierarch
           \end{array} \right] \]
     Explain why this matrix cannot represent an estimated covariance matrix with a compound symmetry, autoregressive, or Toeplitz structure.  Also explain why it cannot represent our standard two-level model.
 
-###Guided Exercise
+### Guided Exercise
 
 1. __Teen Alcohol Use.__ @Curran1997 collected data on 82 adolescents at three time points starting at age 14 to assess factors that affect teen drinking behavior.  Key variables in the data set `alcohol.csv` (accessed via @Singer2003) are as follows:
     - `id` = numerical identifier for subject
@@ -1545,7 +1555,7 @@ kable(table4chp9, booktabs=T, caption="A portion of Table 2: Results of Hierarch
     10. (Model C) Build upon the unconditional growth model by adding the effects of having an alcoholic parent and peer alcohol use in both Level Two equations.  Report and interpret all estimated fixed effects, using proper notation.
     11. (Model D) Remove the child of an alcoholic indicator variable as a predictor of slope in Model C (it will still be a predictor of intercept).  Write out Model D as both a two-level and a composite model using proper notation (including error distributions); how many parameters (fixed effects and variance components) must be estimated?  Compare Model D to Model C using an appropriate method and state a conclusion.
 
-###Open-ended Exercises
+### Open-ended Exercises
 
 1. __UCLA Nurse Blood Pressure Study.__ A study by @Goldstein2000 collected information from 203 registered nurses in the Los Angeles area between 24 and 50 years of age on blood pressure and potential factors that contribute to hypertension.  This information includes family history, including whether the subject had one or two hypertensive parents, as well as a wide range of measures of the physical and emotional condition of each nurse throughout the day.  Researchers sought to study the links between blood pressure and family history, personality, mood changes, working status, and menstrual phase.  
 
