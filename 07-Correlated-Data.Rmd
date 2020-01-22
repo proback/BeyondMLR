@@ -171,10 +171,13 @@ If we were to model the number of deformed pups per dam in Scenario 1a, we could
   (\#eq:mod1aBinomial)
 \end{equation}
 which produces an estimated odds of deformity $\widehat{p}/(1-\widehat{p}) = e^{0.067} = 1.069$ and estimated probability $\widehat{p} = 0.517$. Creating 95\% confidence intervals using a profile likelihood approach, we get:
-\begin{eqnarray}
-  &\textrm{95% CI for}&\; p/(1-p) &=& (0.830, 1.378) \\
-  &\textrm{95% CI for}&\; p       &=& (0.454, 0.579)
-\end{eqnarray}
+
+\[
+\begin{alignedat}{2}
+  &\textrm{95\% CI for } p/(1-p) &&= (0.830, 1.378) \\
+  &\textrm{95\% CI for } p       &&= (0.454, 0.579)
+\end{alignedat}
+\]
 
 ```{r scenario1aBinom, include=FALSE}
 fit_1a_binom <- glm(phat_1a ~ 1, family=binomial, weight=rep(10,24), data = scenario_1)
@@ -199,10 +202,13 @@ exp(confint(fit_1a_quasi)) / (1 + exp(confint(fit_1a_quasi)))
 ```
 
 However, we can account for potential overdispersion with a __quasibinomial model__, just as we did in Section \@ref(sec-logOverdispersion), in case the observed variance is larger than the variance under a binomial model.  Quasibinomial regression yields the same estimate for $\beta_0$ as the binomial regression model ($\hat{\beta}_0 = 0.067$), but we now have overdispersion paramater $\widehat{\phi} = 0.894$.  This gives us the following 95\% profile likelihood-based confidence intervals:
-\begin{eqnarray}
-  &\textrm{95% CI for}&\; p/(1-p) &=& (0.841, 1.359) \\
-  &\textrm{95% CI for}&\; p       &=& (0.457, 0.576)
-\end{eqnarray}
+
+\[
+\begin{alignedat}{2}
+  &\textrm{95\% CI for } p/(1-p) &&= (0.841, 1.359) \\
+  &\textrm{95\% CI for } p       &&= (0.457, 0.576)
+\end{alignedat}
+\]
 
 Turning to Scenario 1b, where each dam has a unique probability of producing a pup with a deformity based on a beta distribution, we can fit binomial and quasibinomial models as well.
 
@@ -223,10 +229,13 @@ A binomial model gives regression equation
   (\#eq:mod1bBinom)
 \end{equation}
 with associated profile likelihood 95\% confidence intervals:
-\begin{eqnarray}
-  &\textrm{95% CI for}&\; p/(1-p) &=& (1.014, 1.691) \\
-  &\textrm{95% CI for}&\; p    &=& (0.504, 0.628)
-\end{eqnarray}
+
+\[
+\begin{alignedat}{2}
+  &\textrm{95\% CI for } p/(1-p) &&= (1.014, 1.691) \\
+  &\textrm{95\% CI for } p       &&= (0.504, 0.628)
+\end{alignedat}
+\]
 
 ```{r scenario1bQuasi, include=FALSE}
 fit_1b_quasi = glm(phat_1b ~ 1, family=quasibinomial, weight=rep(10,24), data=scenario_1)
@@ -240,10 +249,13 @@ exp(confint(fit_1b_quasi)) / (1 + exp(confint(fit_1b_quasi)))
 ```
 
 We could compare this to a quasibinomial model. With overdispersion paramater $\widehat{\phi} = 6.858$, we now have profile likelihood-based intervals:
-\begin{eqnarray}
-  &\textrm{95% CI for}&\; p/(1-p) &=& (0.673, 2.594) \\
-  &\textrm{95% CI for}&\; p    &=& (0.402, 0.722)
-\end{eqnarray}
+
+\[
+\begin{alignedat}{2}
+  &\textrm{95\% CI for } p/(1-p) &&= (0.673, 2.594) \\
+  &\textrm{95\% CI for } p       &&= (0.402, 0.722)
+\end{alignedat}
+\]
 
 **Thought Questions**
 

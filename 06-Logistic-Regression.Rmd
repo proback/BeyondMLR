@@ -390,16 +390,16 @@ A third approach to determining significance of $\beta_2$ would be to generate a
 Since the Wald statistic follows a normal distribution with $n$ large, we could generate a Wald-type (normal-based) confidence interval for $\beta_2$ using:
 \[\hat\beta_2 \pm 1.96\cdot\textrm{SE}(\hat\beta_2)\]
 and then exponentiating endpoints if we prefer a confidence interval for the odds ratio $e^{\beta_2}$.  In this case,
-\begin{eqnarray}
-95\% \textrm{ CI for } &\beta_2 & = & \hat{\beta}_2 \pm 1.96 \cdot \textrm{SE}(\hat{\beta}_2) \\
-                       &        & = & -0.0132 \pm 1.96 \cdot 0.0039 \\
-                       &        & = & -0.0132 \pm 0.00764 \\
-                       &        & = & (-0.0208, -0.0056) \\
-95\% \textrm{ CI for } &e^{\beta_2} & = & (e^{-0.0208}, e^{-0.0056}) \\
-                       &            & = & (.979, .994) \\
-95\% \textrm{ CI for } &e^{10\beta_2} & = & (e^{-0.208}, e^{-0.056}) \\
-                       &               & = & (.812, .946)
-\end{eqnarray}
+\begin{align}
+95\% \textrm{ CI for } \beta_2 &= \hat{\beta}_2 \pm 1.96 \cdot \textrm{SE}(\hat{\beta}_2) \\
+                               &= -0.0132 \pm 1.96 \cdot 0.0039 \\
+                               &= -0.0132 \pm 0.00764 \\
+                               &= (-0.0208, -0.0056) \\
+95\% \textrm{ CI for } e^{\beta_2} &= (e^{-0.0208}, e^{-0.0056}) \\
+                                   &= (.979, .994) \\
+95\% \textrm{ CI for } e^{10\beta_2} &= (e^{-0.208}, e^{-0.056}) \\
+                                      &= (.812, .946)
+\end{align}
 Thus, we can be 95\% confident that a 10\% increase in the proportion of black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum.  This same relationship could be expressed as between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the black population, or between a 5.7\% ($1/e^{-.056}$) and a 23.1\% ($1/e^{-.208}$) increase in odds for each 10\% decrease in the black population, after adjusting for distance.  Of course, with $n=11$, we should be cautious about relying on a Wald-type interval in this example.
 
 Another approach available in R is the **profile likelihood method**, similar to Chapter \@ref(ch-poissonreg).

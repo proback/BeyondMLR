@@ -366,11 +366,13 @@ Let $Y_{j}$ be the performance anxiety score of Musician \#22 before performance
 Y_{22j}=a_{22}+b_{22}\textstyle{LargeEns}_{22j}+\epsilon_{22j} \textrm{ where } \epsilon_{22j}\sim N(0,\sigma^2) \textrm{ and }
 (\#eq:level1a)
 \end{equation}
-\[ \textstyle{LargeEns}_{j} = \left\{ \begin{array}{ll}
-                                1 & \textrm{if perf_type = Large Ensemble}\\
-                                0 & \textrm{if perf_type = Solo or Small Ensemble.}
-                                        \end{array}
-                                \right.  \]
+\[ \textstyle{LargeEns}_{j} =
+\left\lbrace
+\begin{tabular}{l l} 
+1 & if `perf\_type` = Large Ensemble \\
+0 & if `perf\_type` = Solo or Small Ensemble. 
+\end{tabular}\right.
+\]
 The parameters in this model ($a_{22}$, $b_{22}$, and $\sigma^2$) can be estimated through OLS methods. $a_{22}$ represents the true intercept for Musician \#22---the expected anxiety score for Musician \#22 when performance type is a Solo or Small Ensemble ($\textstyle{LargeEns}=0$), or the true average anxiety for Musician \#22 over all Solo or Small Ensemble performances he may conceivably give.  $b_{22}$ represents the true slope for Musician \#22---the expected increase in performance anxiety for Musician \#22 when performing as part of a Large Ensemble rather than in a Small Ensemble or as a Solo, or the true average difference in anxiety scores for Musician \#22 between Large Ensemble performances and other types. Finally, the $\epsilon_{22j}$ terms represent the deviations of Musician \#22's actual performance anxiety scores from the expected scores under this model---the part of Musician \#22's anxiety before performance $j$ that is not explained by performance type. The variability in these deviations from the regression model is denoted by $\sigma^2$.
 
 For Subject 22, we estimate $\hat{a}_{22}=24.5$, $\hat{b}_{22}=-7.8$, and $\hat{\sigma}=4.8$.  Thus, according to our simple linear regression model, Subject 22 had an estimated anxiety score of 24.5 before Solo and Small Ensemble performances, and 16.7 (7.8 points lower) before Large Ensemble performances. With an $R^2$ of 0.425, the regression model explains a moderate amount (42.5\%) of the performance-to-performance variability in anxiety scores for Subject 22, and the trend toward lower scores for large ensemble performances is statistically significant at the 0.05 level (t(13)=-3.10, p=.009).
@@ -749,11 +751,13 @@ Thus, 18.2\% of the total variability in performance anxiety scores are attribut
 ### Random slopes and intercepts model {#randomslopeandint}
 
 The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual. In this case, mirroring our model from section \@ref(twolevelmodeling), we will include a binary covariate for performance type:
-\[ \textstyle{LargeEns}_{ij} = \left\{ \begin{array}{ll}
-                                1 & \textrm{if `perf_type` = Large Ensemble} \\
-                                0 & \textrm{if `perf_type` = Solo or Small Ensemble.}
-                                        \end{array}
-                                \right.  \]
+\[ \textstyle{LargeEns}_{ij} =
+\left\lbrace
+\begin{tabular}{l l} 
+1 & if `perf\_type` = Large Ensemble \\
+0 & if `perf\_type` = Solo or Small Ensemble. 
+\end{tabular}\right.
+\]
 and no other Level One covariates (for now). (Note that we may later also want to include an indicator variable for "Small Ensemble" to separate the effects of `Solo` performances and `Small Ensemble` performances.) The resulting model, which we will denote as Model B, can be specified either using formulations at both levels:
 
 - Level One:
