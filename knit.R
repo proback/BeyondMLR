@@ -10,7 +10,7 @@ render_book("index.Rmd", output_format = 'bookdown::pdf_book')
 preview_chapter("08-Introduction-to-Multilevel-Models.Rmd", output_format = 'bookdown::pdf_book')
 
 #preview chapter as html
-preview_chapter("02-Beyond-Most-Least-Squares.Rmd", output_format = 'bookdown::gitbook')
+preview_chapter("07-Correlated-Data.Rmd", output_format = 'bookdown::gitbook')
 
 #remove the file if knitting went wrong
 bd <- "bookdown-bysh.Rmd"
@@ -25,14 +25,16 @@ if(file.exists(bd)) file.remove(bd)
 ## - eqnarray shouldn't have empty lines in them
 ## - escape = F in tex tables
 ## - Can't have math expressions in \textrm (e.g. \textrm{age^2} should be changed to \textrm{age}^2)
+## - Can't have line breaks in equation environments, should convert to eqnarray or align or some other
 
 ##ISSUES
 ## - Current undiagnosable issue in Chapter 6
-##   - extnormal{ CI for } &\beta_2 & = & \hat ...
+##   - Got it to work, was an issue with the eqnarray environment, so I switched to align
 ## - A different issue with Chapter 7
-##   - ! File ended while scanning use of \mbox . <inserted text> \par
-##   - Unrelated to \;, though error occurs near first one. 
-## - Chapter 8 also had issues with \mbox, I tried replacing all \mbox with \textrm in chapters 7 and 8, which did not help.
+##   - Fixed issue, it was with & in eqnarray, switched to alignedat for best results
+##   - Current issue with \% needed for pdf, but then \ showing up in LaTeX
+## - Chapter 8 also had issues with equation array for a cases.
+##   - Resolved by changing from array environment to tabular environment. Note that cases environment from amsmath did not work here. 
 
 
 ##Notes on knitting:
