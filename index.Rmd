@@ -28,6 +28,8 @@ lapply(c('tidyverse','kableExtra','knitr','gridExtra','GGally','grid'), function
 })
 ```
 
+\mainmatter
+
 # Preface {-}
 
 ```{r, cover, out.width='75%', fig.show='hold', echo=FALSE}
