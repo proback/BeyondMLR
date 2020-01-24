@@ -12,3 +12,8 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+/* THIS COMMENT WILL SPACE BLOCK QUOTES FURTHER IN IN HTML OUTPUT, DOESN'T WORK FOR PDF
+pre.numberSource a.sourceLine {
+  left: -2em;
+}*/
