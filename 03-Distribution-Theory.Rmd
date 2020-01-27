@@ -7,7 +7,7 @@ output:
   html_document: default
 ---
 
-#Distribution Theory {#ch-distthry}
+# Distribution Theory {#ch-distthry}
 
 ```{r, load_packages3, include=FALSE}
 library(ggplot2)    # enable ggplot 
