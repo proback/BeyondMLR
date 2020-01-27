@@ -1118,31 +1118,28 @@ Identify and describe the following quantities which appear in the description o
   c. Consider a campus with an average of 5 burglaries per year.  Use `dpois()` to sketch a plot of the distribution of $Y$ for this campus.  Use `rpois()` to verify that both the mean and variance of $Y$ are given by $\lambda=5$.
   d. Consider a campus with an average of 20 burglaries per year and repeat (c).
 
-2. __Elephant Mating__
-How does age affect male elephant mating patterns? An article by @Poole1989 investigated whether mating success in male elephants increases with age and whether there is a peak age for mating success. To address this question, the research team followed 41 elephants for one year and recorded both their ages and their number of matings. The data is found in `elephant.csv`, and the variables are:
-
-- `MATINGS` = the number of matings in a given year
-- `AGE` = the age of the elephant in years.
-
-  a. Create a histogram of MATINGS. Is there preliminary evidence that number of matings could be modeled as a Poisson response? Explain.
-  b. Plot MATINGS by AGE. Add a least squares line. Is there evidence that modeling matings using a linear regression with age might not be appropriate? Explain.  (Hints: fit a smoother; check residual plots)
-  c. For each age, calculate the mean number of matings. Take the log of each mean and plot it by AGE.
-    i. What assumption can be assessed with this plot?
-    ii. Is there evidence of a quadratic trend on this plot?
-  d. Fit a Poisson regression model with a linear term for AGE. Exponentiate and then interpret the coefficient for AGE. 
-  e. Construct a 95\% confidence interval for the slope and interpret in context (you may want to exponentiate endpoints).
-  f. Are the number of matings significantly related to age? Test with
-    i. a Wald test and
-    ii. a drop in deviance test.
-  g. Add a quadratic term in AGE to determine whether there is a maximum age for the number of matings for  elephants. Is a quadratic model preferred to a linear model? To investigate this question, use
-    i. a Wald test and
-    ii. a drop in deviance test.
-  h. What can we say about the goodness of fit of the model with age as the sole predictor? Compare the residual deviance for the linear model to a $\chi^2$ distribution with the residual model degrees of freedom.
-  i. Fit the linear model using a quasilikelihood. (Why?)
-    i. How do the estimated coefficients change?
-    ii. How do the standard errors change?
-    iii. What is the estimated dispersion parameter?
-    iv. An estimated dispersion parameter greater than one suggests overdispersion. When adjusting for overdispersion, are you more or less likely to obtain a significant result when testing coefficients? Why?
+2. __Elephant Mating__ How does age affect male elephant mating patterns? An article by @Poole1989 investigated whether mating success in male elephants increases with age and whether there is a peak age for mating success. To address this question, the research team followed 41 elephants for one year and recorded both their ages and their number of matings. The data is found in `elephant.csv`, and the variables are:
+    - `MATINGS` = the number of matings in a given year
+    - `AGE` = the age of the elephant in years.
+    a. Create a histogram of MATINGS. Is there preliminary evidence that number of matings could be modeled as a Poisson response? Explain.
+    b. Plot MATINGS by AGE. Add a least squares line. Is there evidence that modeling matings using a linear regression with age might not be appropriate? Explain.  (Hints: fit a smoother; check residual plots)
+    c. For each age, calculate the mean number of matings. Take the log of each mean and plot it by AGE.
+        i. What assumption can be assessed with this plot?
+        ii. Is there evidence of a quadratic trend on this plot?
+    d. Fit a Poisson regression model with a linear term for AGE. Exponentiate and then interpret the coefficient for AGE. 
+    e. Construct a 95\% confidence interval for the slope and interpret in context (you may want to exponentiate endpoints).
+    f. Are the number of matings significantly related to age? Test with
+        i. a Wald test and
+        ii. a drop in deviance test.
+    g. Add a quadratic term in AGE to determine whether there is a maximum age for the number of matings for  elephants. Is a quadratic model preferred to a linear model? To investigate this question, use
+        i. a Wald test and
+        ii. a drop in deviance test.
+    h. What can we say about the goodness of fit of the model with age as the sole predictor? Compare the residual deviance for the linear model to a $\chi^2$ distribution with the residual model degrees of freedom.
+        i. Fit the linear model using a quasilikelihood. (Why?)
+        ii. How do the estimated coefficients change?
+        iii. How do the standard errors change?
+        iv. What is the estimated dispersion parameter?
+        v. An estimated dispersion parameter greater than one suggests overdispersion. When adjusting for overdispersion, are you more or less likely to obtain a significant result when testing coefficients? Why?
 
 Source: [@Ramsey2002].
 
