@@ -386,7 +386,9 @@ int.ci <- ggplot(lm_info, aes(y=rate, x=1:22)) + geom_point() + theme.1 +
 lon.cis1 <- grid.arrange(slope.ci, int.ci, ncol=2)
 ```
 
-```{r, lon-cis1, fig.align="center",out.width="60%",fig.cap='Point estimates and 95% confidence intervals for (a) intercepts and (b) slopes by school, for the first 24 schools in the data set.',echo=FALSE, warning=FALSE}
+(ref:lon-cis1-cap) Point estimates and 95% confidence intervals for (a) intercepts and (b) slopes by school, for the first 24 schools in the data set.
+
+```{r, lon-cis1, fig.align="center",out.width="60%",fig.cap="(ref:lon-cis1-cap)",echo=FALSE, warning=FALSE}
 grid.arrange(slope.ci,int.ci,ncol=2)
 ```
 
