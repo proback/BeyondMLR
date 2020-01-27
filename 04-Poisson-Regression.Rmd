@@ -572,7 +572,7 @@ There are several reasons why lack-of-fit may be observed. We may be missing imp
 
 ## Least Squares Regression vs. Poisson Regression
 
-\[
+\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{OLS:}\textrm{ Normal} \\
 \mathbf{Poisson Regression:}\textrm{ counts} \\
@@ -596,7 +596,7 @@ There are several reasons why lack-of-fit may be observed. We may be missing imp
 \underline{\textrm{Interpreting Coefficients}} \\
 \mathbf{OLS:}\ \beta_1=\textrm{ change in }\mu_y\textrm{ for unit change in X} \\
 \mathbf{Poisson Regression:}\ e^{\beta_1}=\textrm{ percent change in }\lambda\textrm{ for unit change in X} 
-\]
+\end{gather*}
 
 
 ## Case Study: Campus Crime

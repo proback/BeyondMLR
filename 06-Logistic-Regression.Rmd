@@ -530,7 +530,7 @@ We began by fitting a logistic regression model with `distance` alone. Then we a
 
 ## Least Squares Regression vs. Logistic Regression
 
-\[
+\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{OLS:}\textrm{ normal} \\
 \mathbf{Binomial\ Regression:}\textrm{ number of successes in n trials} \\
@@ -554,7 +554,7 @@ We began by fitting a logistic regression model with `distance` alone. Then we a
 \underline{\textrm{Interpreting Coefficients}} \\
 \mathbf{OLS:}\ \beta_1=\textrm{ change in }\mu_y\textrm{ for unit change in $X$} \\
 \mathbf{Binomial\ Regression:}\ e^{\beta_1}=\textrm{ percent change in odds for unit change in $X$} 
-\]
+\end{gather*}
 
 ## Case Study: Trying to Lose Weight
 The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.).  This type of problem---__binary logistic regression__---is exceedingly common in practice. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
