@@ -41,7 +41,7 @@ library(grid)
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
-```{r OLSassumptions, fig.align = "center", out.width = "100%", fig.cap = 'Ordinary least squares assumptions', echo=FALSE}
+```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Ordinary least squares assumptions', echo=FALSE}
 ## Sample data for graph of OLS normality assumption
 ##   Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
 
@@ -201,7 +201,8 @@ derby.df <- derby.df %>%
           fastfactor = ifelse(fast == 0, "not fast", "fast"))
 table1 <- derby.df %>%
   filter(row_number() < 6 | row_number() > 117)
-kable(table1, booktabs=T,caption="The first five and the last five observations from the Kentucky Derby case study.")
+kable(table1, booktabs=T,caption="The first five and the last five observations from the Kentucky Derby case study.") %>%
+  kable_styling(latex_options = "scale_down")
 ```
 
 ### Univariate Summaries
@@ -210,7 +211,7 @@ With any statistical analysis, our first task is to explore the data, examining 
 
 First, we will examine each response variable and potential covariate individually.  Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.  
 
-```{r twohist, fig.align = "center", out.width="100%", fig.cap = 'Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters.', echo=FALSE, message=FALSE}
+```{r twohist, fig.align = "center", out.width="90%", fig.cap = 'Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters.', echo=FALSE, message=FALSE}
 # EDA graphs
 speed_hist <- ggplot(data = derby.df, aes(x = speed)) + 
   geom_histogram(binwidth = 0.5, fill = "white",color = "black") + 
@@ -229,7 +230,7 @@ The primary categorical explanatory variable is track condition, where 88 (72\%)
 
 The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses.  Figure \@ref(fig:bivariate) is densely packed with illustrations of bivariate relationships.  The relationship between two continuous variables is depicted with scatterplots below the diagonal and correlation coefficients above the diagonal.  Here, we see that higher winning speeds are associated with more recent years, while the relationship between winning speed and number of starters is less clear cut.  We also see a somewhat strong correlation between year and number of starters---we should be aware of highly correlated explanatory variables whose contributions might overlap too much.  
 
-```{r bivariate, fig.align = "center", out.width = "100%", fig.cap = 'Relationships between pairs of variables in the Kentucky Derby data set', echo=FALSE, warning=FALSE, message = FALSE}
+```{r bivariate, fig.align = "center", out.width = "90%", fig.cap = 'Relationships between pairs of variables in the Kentucky Derby data set', echo=FALSE, warning=FALSE, message = FALSE}
 gg <- ggpairs(data = derby.df, 
               columns = c("condition", "year", "starters", "speed"))
 gg[4,1] <- gg[4,1] + geom_histogram( binwidth = 0.75)
@@ -244,7 +245,7 @@ Finally, notice that the diagonal illustrates the distribution of individual var
 
 By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure  \@ref(fig:bivariate).  For example, in the **coded scatterplot** of Figure \@ref(fig:codeds) we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.  
 
-```{r codeds, fig.align = "center", out.width = "100%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE}
+```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE}
 # Coded scatterplot
 ggplot(derby.df, aes(x = year, y = speed, colour = fastfactor)) +
   geom_point() +
@@ -300,7 +301,7 @@ tmp <- capture.output(summary(model2))
 cat(tmp[c(3:4, 9:13, 16:17)], sep='\n')
 ```
 
-```{r center, fig.align = "center", out.width = "100%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE}
+```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE}
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() + xlim(0,2020) + ylim(0,55) +
   geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
@@ -317,7 +318,7 @@ We should also attempt to verify that our LINE linear regression model assumptio
 - The lower left plot, Scale-Location, can be used to check the Equal Variance assumption.  Positive or negative trends across the fitted values indicate variability that is not constant.
 - The lower right plot, Residuals vs. Leverage, can be used to check for influential points.  Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.  
 
-```{r resid2, fig.align = "center", out.width = "100%", fig.cap = 'Residual plots for Model 2', echo=FALSE, warning=FALSE}
+```{r resid2, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2', echo=FALSE, warning=FALSE}
 # Residual diagnostics for Model 2
 par(mfrow=c(2,2))
 plot(model2)
@@ -335,7 +336,7 @@ Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i}
 \end{equation}
 This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time.  In fact, there is evidence that the quadratic model improves upon the linear model (see Figure \@ref(fig:models2and2q)).  $R^2$, the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3\% to 64.1\%, and the pattern in the Residuals vs. Fitted plot of Figure \@ref(fig:resid2) has disappeared in Figure \@ref(fig:resid2q), although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability.  The significantly negative coefficient for $\beta_{2}$ suggests that the rate of increase is indeed slowing in more recent years.  
 
-```{r models2and2q, fig.align = "center", out.width = "100%", fig.cap = 'Linear vs. quadratic fit', echo=FALSE, warning=FALSE}
+```{r models2and2q, fig.align = "center", out.width = "90%", fig.cap = 'Linear vs. quadratic fit', echo=FALSE, warning=FALSE}
 # Fitted models for Model 2 and Model 2Q
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() +
@@ -350,7 +351,7 @@ tmp <- capture.output(summary(model2q))
 cat(tmp[c(3:4, 9:14, 17:18)], sep='\n')
 ```
 
-```{r resid2q, fig.align = "center", out.width = "100%", fig.cap = 'Residual plots for Model 2Q', echo=FALSE, warning=FALSE}
+```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q', echo=FALSE, warning=FALSE}
 # Residual diagnostics for Model 2
 par(mfrow=c(2,2))
 plot(model2q)
@@ -445,23 +446,23 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 ```
 
 ```{r model4boot, comment=NA}
-# updated code from tobiasgerstenberg on github
-library(rsample)
-library(purrr)
-library(broom)
-bootreg = derby.df %>% 
-  bootstraps(1000) %>%
-  pull(splits) %>% 
-  map_dfr(~lm(speed ~ yearnew + fast, data = .) %>% 
-            tidy())
-summarize = dplyr::summarize
-bootreg %>% 
-  group_by(term) %>% 
-  summarize(low=quantile(estimate, .025),
+    # updated code from tobiasgerstenberg on github
+    library(rsample)
+    library(purrr)
+    library(broom)
+    bootreg = derby.df %>% 
+      bootstraps(1000) %>%
+      pull(splits) %>% 
+      map_dfr(~lm(speed ~ yearnew + fast, data = .) %>% 
+                tidy())
+    summarize = dplyr::summarize
+    bootreg %>% 
+      group_by(term) %>% 
+      summarize(low=quantile(estimate, .025),
             high=quantile(estimate, .975))
 ```
 
-```{r boot4, fig.align = "center", out.width = "100%", fig.cap = 'Bootstrapped distributions for Model 4 coefficients', echo=FALSE, warning=FALSE}
+```{r boot4, fig.align = "center", out.width = "90%", fig.cap = 'Bootstrapped distributions for Model 4 coefficients', echo=FALSE, warning=FALSE}
 ggplot(bootreg, aes(estimate)) + 
   geom_histogram(bins = 10) + facet_wrap(~ term, scales="free")
 ```

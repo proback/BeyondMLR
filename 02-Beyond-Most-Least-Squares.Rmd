@@ -33,7 +33,7 @@ library(kableExtra)
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
-```{r, logistic1, fig.align="center",out.width="60%", fig.cap='An attempt to fit a linear regression model to a binary response variable.',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, logistic1, fig.align="center",out.width="90%", fig.cap='An attempt to fit a linear regression model to a binary response variable.',echo=FALSE, warning=FALSE, message=FALSE}
 time <- c(2,2,3,3,4,5,5,6,6,7,7,7,8,9,10,11,11,12,12,14)
 correct <- c(0,0,1,0,1,0,0,1,1,0,0,1,1,1,0,1,1,1,0,1)
 testdf <- data.frame(time, correct)
@@ -103,7 +103,7 @@ With likelihood methods, conceptually we consider different possible values for 
  (\#eq:GBBlik)
 \end{equation}
 
-```{r, lik1, fig.align="center",out.width="60%", fig.cap='Likehood function for GBB.',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, lik1, fig.align="center",out.width="90%", fig.cap='Likehood function for GBB.',echo=FALSE, warning=FALSE, message=FALSE}
 pb=seq(0,1,length=1001)   # possible values for prob a boy is born
 lik=pb^2 * (1-pb)       # likelihood of getting observed data
 GBBdf <- data.frame(pb,lik)
@@ -143,7 +143,7 @@ BBGGGplot<- ggplot(data=BBGGGGdf,aes(x=pb, y=lik2)) +
   geom_vline(xintercept = .333) 
 ```
 
-```{r, lik2, fig.align="center",out.width="60%", fig.cap='Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, lik2, fig.align="center",out.width="90%", fig.cap='Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$',echo=FALSE, warning=FALSE, message=FALSE}
 BBGGGplot
 ```
 
@@ -174,7 +174,7 @@ Likcomp2 <- c("$p^6_B$",
 #lik50.tab
 table2chp2 <- data.frame(Comp,Likcomp1,Numfamis,Likcomp2)
 colnames(table2chp2) <- c("Composition","Likelihood contribution for one family","Number of families","Likelihood contribution for multiple families")
-kable(table2chp2, booktabs=T,caption="The likelihood factors for the hypothetical data set of n=50 children.", escape=F)
+kable(table2chp2, booktabs=T,caption="The likelihood factors for the hypothetical data set of n=50 children.", escape=F) %>% kable_styling(latex_options = "scale_down")
 ```
 
 The likelihood function for the hypothetical data set can be found by taking the product of the entries in the last column of Table \@ref(tab:table2chp2) and simplifying.
@@ -229,7 +229,7 @@ sixhundred.log <- ggplot(sixhundred.frame,aes(x=p,y=logLik)) + geom_line() +
  theme(axis.ticks = element_blank(), axis.text.y = element_blank())
 ```
 
-```{r, lik4, fig.align="center",out.width="60%", fig.cap='Likelihood and log-likelihood functions for 50 children (30 boys and 20 girls) and for 1000 children (600 boys and 400 girls).',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, lik4, fig.align="center",out.width="90%", fig.cap='Likelihood and log-likelihood functions for 50 children (30 boys and 20 girls) and for 1000 children (600 boys and 400 girls).',echo=FALSE, warning=FALSE, message=FALSE}
 #not sure if this is even needed or referenced at all?
 grid.arrange(thirtytwenty.lik,sixhundred.lik,thirtytwenty.log,sixhundred.log,ncol=2)
 ```
@@ -331,7 +331,7 @@ Numfamis2 <- c(6,7,5,4,5,1,2,30)
 #lik50_conditional.tab
 table3chp2 <- data.frame(Comp2,Likcont,Priorst,Numfamis2)
 colnames(table3chp2) <- c("Composition","Likelihood contribution","Prior Status","Number of families")
-kable(table3chp2, booktabs=T,caption="Family contributions to the likelihood for a Sex Conditional Model using a hypothetical data set  of n=50 children from 30 families.",escape=F)
+kable(table3chp2, booktabs=T,caption="Family contributions to the likelihood for a Sex Conditional Model using a hypothetical data set  of n=50 children from 30 families.",escape=F) %>% kable_styling(latex_options = "scale_down")
 ```
 
 ### Application to Hypothetical Data
@@ -405,8 +405,8 @@ PB <- c("0.494", " ","0.511"," "," "," ","0.510"," "," "," "," "," "," "," ")
 ```{r, table4chp2, echo=FALSE}
 #Family comp data table
 table5chp2 <- data.frame(Famcomp,Numfams,Numchild,Malesfemales,PB)
-colnames(table5chp2) <- c("Family Composition","Number of families", "Number of children","males:females","$p_B$")
-kable(table5chp2, booktabs=T, caption="Number of families and children in families with given composition. Sex ratio and proportion males are given by family size.")
+colnames(table5chp2) <- c("Family Composition","Number of families", "Number of children","males:females","p_B")
+kable(table5chp2, booktabs=T, caption="Number of families and children in families with given composition. Sex ratio and proportion males are given by family size.") %>% kable_styling(latex_options = "scale_down")
 ```
     
 Table \@ref(tab:table4chp2) displays family composition data for the 5,626 families with one, two, or three children in the data set. This dataset includes 10,672 children. Because our interest centers on the proportion of males, let's calculate sex ratios and proportions of males for each family size. For one-child families the male to female ratio is less than one (97 males:100 females) whereas both two- and three-child families have ratios of 104 boys to 100 girls, what we may expect in a population which favors males. While our research questions do not specifically call for these measures stratified by family size, it  still provides us with an idea of gender imbalance in the data.
@@ -425,7 +425,7 @@ Percsame <- c("45%", "27%")
 #All same sex table
 table6chp2 <- data.frame(NumKids,NumFams,Numsame,Percsame)
 colnames(table6chp2) <- c("Number of children","Number of families", "Number with all same sex","Percent with same sex")
-kable(table6chp2, booktabs=T, caption="Proportion of families with all the same sex by number of children in the family. Note that 1-child families are all homogeneous with respect to sex so we look at 2- and 3- child families.")
+kable(table6chp2, booktabs=T, caption="Proportion of families with all the same sex by number of children in the family. Note that 1-child families are all homogeneous with respect to sex so we look at 2- and 3- child families.") %>% kable_styling(latex_options = "scale_down")
 ```
     
 Table \@ref(tab:table7chp2) contains the number of families by size and the percentage of those which are families with one boy who is last. It appears that these families "waited" for a boy and then quit childbearing after a boy was born. We see the proportion of one child families with a boy is slightly less than the 50\% expected. We'd expect one out of four, or 25\%, of 2-child family configurations to have one boy last and there is 27\% in our dataset. Only 8.6\% 3-child families  has one boy last, but in theory we would expect one out of eight or 12.5\% 3-child families to have one boy last. So if, in fact, the probability of a boy is 50\%, there does not appear to be evidence supporting the notion that families wait for a boy. 
@@ -441,7 +441,7 @@ Percboylst <- c("49.4%","27.2%","8.6%")
 #one boy table
 table7chp2 <- data.frame(Numkid,Numfam,Numboylst,Percboylst)
 colnames(table7chp2) <-c("Number of children","Number of families","Number with one boy last","Percent with boy last")
-kable(table7chp2,booktabs=T, caption="Proportion of families with only one boy who is born last.")
+kable(table7chp2,booktabs=T, caption="Proportion of families with only one boy who is born last.") %>% kable_styling(latex_options = "scale_down")
 ```
     
 There are many other ways to formulate and explore the idea that sex runs in families or that couples wait for a boy (or a girl). See @Rodgers2001 for other examples.
@@ -547,7 +547,7 @@ Child3 <- c(" "," "," "," "," "," ",
 table8chp2 <- data.frame(Famcomp3,NumFams1,SexUnc, Child1,Child2,Child3)
 colnames(table8chp2) <-c("Family composition","Number of families","Sex Unconditional", "Child1","Child 2","Child 3")
 kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in Sex Unconditional and Sex Conditional Models.",escape=F) %>%
-  add_header_above(c(" "," "," ", "Sex Conditional Model"=3))
+  add_header_above(c(" "," "," ", "Sex Conditional Model"=3)) %>% kable_styling(latex_options = "scale_down")
 ```
     
 \begin{eqnarray}
@@ -695,7 +695,7 @@ Cont <- c("$\\bstop$",
 table9chp2 <- data.frame(Famcomp2,Numfamis3,Lik,Cont)
 colnames(table9chp2) <- c("Family Composition","Number of families",
                           "  Likelihood","Contribution")
-kable(table9chp2, booktabs=T,caption="Likelihood contributions for families in Model 3: Waiting for a boy.",escape=F)
+kable(table9chp2, booktabs=T,caption="Likelihood contributions for families in Model 3: Waiting for a boy.",escape=F)%>% kable_styling(latex_options = "scale_down")
 ```
 
 ```{r, include=FALSE}
