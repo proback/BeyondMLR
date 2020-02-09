@@ -1,7 +1,7 @@
 --- 
 title: "Broadening Your Statistical Horizons"
 subtitle: "Generalized Linear Models and Multilevel Models"
-author: "Julie Legler and Paul Roback"
+author: "Paul Roback and Julie Legler"
 date: "`r Sys.Date()`"
 documentclass: krantz
 bibliography: ["bib/articles.bib", "bib/books.bib", "bib/misc.bib"]

@@ -37,6 +37,7 @@ library(knitr)
 library(gridExtra)
 library(GGally)
 library(grid)
+library(kableExtra)
 
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
@@ -266,10 +267,12 @@ As you might expect, answers to these questions will arise from proper considera
 ### Simple linear regression with a continuous predictor {#SLRcontinuous}
 
 We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896?  For this initial model, let $Y_{i}$ be the speed of the winning horse in year $i$.  Then, we might consider Model 1: 
+
 \begin{equation}
  Y_{i}=\beta_{0}+\beta_{1}(\textrm{Year}_{i})+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model1)
 \end{equation}
+
 In this case, $\beta_{0}$ represents the true intercept---the expected winning speed during Year 0.  $\beta_{1}$ represents the true slope---the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896).  Finally, the **error** ($\epsilon_{i}$) terms represent the deviations of the actual winning speed in Year $i$ ($Y_i$) from the expected scores under this model ($\beta_{0}+\beta_{1}(\textrm{Year}_{i})$)---the part of a horse's winning speed that is not explained by a linear trend over time.  The variability in these deviations from the regression model is denoted by $\sigma^2$.  
 
 The parameters in this model ($\beta_{0}$, $\beta_{1}$, and $\sigma^2$) can be estimated through OLS methods; we will use hats to denote estimates of population parameters based on empirical data.  Values for $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ are selected to minimize the sum of squared residuals, where a **residual** is simply the observed prediction error---the actual winning speed for a given year minus the winning speed predicted by the model.  In the notation of this section, 
@@ -361,6 +364,7 @@ par(mfrow=c(1,1))
 ###  linear regression with a binary predictor
 
 We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable**---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
+
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model3)
@@ -394,10 +398,12 @@ You might be asking at this point: If we simply wanted to compare mean winning s
 The beauty of the linear regression framework is that we can add additional explanatory variables in order to explain more variability in our response, obtain better and more precise predictions, and control for certain covariates while evaluating the effect of others.  For example, we could consider adding `yearnew` to Model 3, which has the indicator variable `fast` as its only predictor.  In this way, we would estimate the difference between winning speeds under fast and non-fast conditions *after accounting for the effect of time*.  As we observed in Figure \@ref(fig:bivariate), recent years have tended to have more races under fast conditions, so Model 3 might overstate the effect of fast conditions because winning speeds have also increased over time.  A model with terms for both year and track condition will estimate the difference between winning speeds under fast and non-fast conditions *for a fixed year*; for example, if it had rained in 2016 and turned the track muddy, how much would we have expected the winning speed to decrease?  
 
 Our new model (Model 4) can be written:
+
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model4)
 \end{equation}
+
 and OLS provides the following parameter estimates:
 ```{r model4, echo=FALSE, comment=NA}
 model4 = lm(speed~yearnew+fast, data=derby.df)
@@ -476,6 +482,7 @@ There are many variations on this bootstrap procedure.  For example, you could s
 Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates.  One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions.  To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider **interaction terms**.  Amazingly, if we create a new variable by taking the product of `yearnew` and `fast` (i.e., the **interaction** between `yearnew` and `fast`), adding that variable into our model will have the desired effect.  
 
 Thus, consider Model 5:
+
 \begin{equation}
 \begin{split}
  Y_{i}&= \beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i}) \notag \\
@@ -483,6 +490,7 @@ Thus, consider Model 5:
 \end{split}
 (\#eq:model5)
 \end{equation}
+
 where OLS provides the following parameter estimates:
 ```{r model5, echo=FALSE, comment=NA}
 model5 = lm(speed~yearnew+fast+yearnew:fast, data=derby.df)
@@ -491,17 +499,21 @@ cat(tmp[c(3:4, 9:15, 18:19)], sep='\n')
 ```
 
 According to OLS estimates, estimated winning speeds can be found by:
+
 \begin{equation}
  \hat{Y}_{i}=50.53+0.031(\textrm{Yearnew}_{i})+1.83(\textrm{Fast}_{i})-0.011(\textrm{Yearnew}\times\textrm{Fast}_{i}).
 (\#eq:model5est)
 \end{equation}
+
 Interpretations of model coefficients are most easily seen by writing out separate equations for fast and non-fast track conditions:
+
 \begin{align*}
  \textrm{Fast}=0: & \\
  \hat{Y}_{i} &= 50.53+0.031(\textrm{Yearnew}_{i}) \\
  \textrm{Fast}=1: & \\
  \hat{Y}_{i} &= (50.53+1.83)+(0.031-0.011)(\textrm{Yearnew}_{i})
  \end{align*}
+ 
 leading to the following interpretations for estimated model coefficients:
 
 - $\hat{\beta}_{0} = 50.53$.  The expected winning speed in 1896 under non-fast conditions was 50.53 ft/s.
@@ -533,6 +545,7 @@ Several tests and measures of model performance can be used when comparing diffe
 - extra sum of squares F test.  This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on **nested models**, where one model is a reduced version of the other.  For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level).  Our null hypothesis is then $\beta_{3}=\beta_{4}=0$.  We have statistically significant evidence (F = 57.2 on 2 and 116 df, p < .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.  
 
 One potential final model for predicting winning speeds of Kentucky Derby races is:
+
 \begin{equation}
 \begin{split}
  Y_{i}&=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\beta_{3}(\textrm{Fast}_{i})\\
@@ -541,6 +554,7 @@ One potential final model for predicting winning speeds of Kentucky Derby races 
 \end{split}
 (\#eq:model0)
 \end{equation}
+
 and OLS provides the following parameter estimates:
 ```{r model0, echo=FALSE, comment=NA}
 model0 = lm(speed~yearnew+yearnew2+fast+good+starters, data=derby.df)
