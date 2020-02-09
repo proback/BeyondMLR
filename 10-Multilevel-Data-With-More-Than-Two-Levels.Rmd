@@ -1491,7 +1491,7 @@ t3 <- c("t","7.24","1.12","-3.49","-5.95")
 #sampson4
 table4chp10 <- data.frame(Variable2, Coefficient2, SE3 ,t2, Coefficient3, SE4, t3)
 colnames(table4chp10) <- c(" "," "," ", " ", " "," ", " ")
-kable(table4chp10, booktabs=T, caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).", format = "html") %>%
+kable(table4chp10, booktabs=T, caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).") %>%
   add_header_above(c(" ","Model 1:social composition"=3, "Model 2:social composition and collective efficacy"=3))
 ```
 
