@@ -509,15 +509,15 @@ Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 (\#eq:timewithplnt)
 \end{equation}
 - Level Two (plant within pot):
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+u_{ij} \\
-b_{ij} & = & b_{i}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+u_{ij} \\
+b_{ij} & = b_{i}+v_{ij}
+\end{align*}
 - Level Three (pot):
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+\tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\tilde{v}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\tilde{v}_{i}
+\end{align*}
 
 or as a composite model:
 \begin{equation}
@@ -579,27 +579,27 @@ Typically, with models consisting of three or more levels, the next step after a
 
 Our Level One and Level Two models will look identical to those from Model B; our Level Three models will contain the new covariates for soil type (`cult` and `rem`) and sterilization (`strl`):
 
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}
+\end{align*}
 
 where the error terms at Level Three follow the same multivariate normal distribution as in Model B. In our case, the composite model can be written as:
 
-\begin{eqnarray*}
-Y_{ijk} & = & (\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i}+u_{ij}) + \\
- & & (\beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}+
+\begin{align*}
+Y_{ijk} & = (\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i}+u_{ij}) + \\
+ & (\beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}+
  v_{ij})\textstyle{time}_{ijk}+\epsilon_{ijk} \\
-\end{eqnarray*}
+\end{align*}
 
 which, after combining fixed effects and random effects, can be rewritten as:
 
-\begin{eqnarray*}
-Y_{ijk} & = & [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
+\begin{align*}
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
  \beta_{0}\textstyle{time}_{ijk} + \\
- & & \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + \\
- & & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+\tilde{v}_{i}\textstyle{time}_{ijk}+v_{ij}\textstyle{time}_{ijk}]
-\end{eqnarray*}
+ & \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + \\
+ & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+\tilde{v}_{i}\textstyle{time}_{ijk}+v_{ij}\textstyle{time}_{ijk}]
+\end{align*}
 
 From the output below, the addition of Level Three covariates in Model C (`cult`, `rem`, `strl`, and their interactions with `time`) appears to provide a significant improvement (likelihood ratio test statistic = 32.2 on 6 df, $p<.001$) to the unconditional growth model (Model B).
 
@@ -692,15 +692,15 @@ However, when removing boundary constraints through reasonable model reparameter
 Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 - Level Two (plant within pot):
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+u_{ij} \\
-b_{ij} & = & b_{i}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+u_{ij} \\
+b_{ij} & = b_{i}+v_{ij}
+\end{align*}
 - Level Three (pot):
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
+\end{align*}
 
 Note that there is no longer an error term associated with the model for mean growth rate $b_{i}$ at the pot level. The growth rate for pot $i$ is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal:  $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$. By removing one of our two Level Three error terms ($\tilde{v}_{i}$), we effectively removed two parameters -- the variance for $\tilde{v}_{i}$ and the correlation between $\tilde{u}_{i}$ and $\tilde{v}_{i}$.  Fixed effects remain similar, as can be seen in the output below:
 
@@ -746,19 +746,19 @@ __Level Three__
 
 One way to see the data generation process under the null model (Model C.1) is to start with Level Three and work backwards to Level One. Recall that our Level Three models for $a_{i}$ and $b_{i}$, the true intercept and slope from Pot $i$, in Model C.1 are:
 
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
+\end{align*}
 
 All the $\alpha$ and $\beta$ terms will be fixed at their estimated values, so the one term that will change for each bootstrapped data set is $\tilde{u}_{i}$. As we obtain a numeric value for $\tilde{u}_{i}$ for each pot, we will fix the subscript. For example, if $\tilde{u}_{i}$ is set to -.192 for Pot \#1, then we would denote this by $\tilde{u}_{1}=-.192$. Similarly, in the context of Model C.1, $a_{1}$ represents the mean height at Day 13 across all plants in Pot \#1, where $\tilde{u}_{1}$ quantifies how Pot \#1's Day 13 height relates to other pots with the same sterilization and soil type.
 
 According to Model C.1, each $\tilde{u}_{i}$ is sampled from a normal distribution with mean 0 and standard deviation .240 (note that the standard deviation $\sigma^2_{u}$ is also fixed at its estimated value from Model C.1, given in Section \@ref(sec:boundary)). That is, a random component to the intercept for Pot \#1 ($\tilde{u}_{1}$) would be sampled from a normal distribution with mean 0 and SD .240; say, for instance, $\tilde{u}_{1}=-.192$. We would sample $\tilde{u}_{2},...,\tilde{u}_{72}$ in a similar manner.  Then we can produce a model-based intercept and slope for Pot \#1:
 
-\begin{eqnarray*}
-a_{1} & = & 1.512-.088(1)+.133(0)+.107(0)-.192 = 1.232 \\
-b_{1} & = & .101+.059(1)-.031(0)-.036(0) = .160
-\end{eqnarray*}
+\begin{align*}
+a_{1} & = 1.512-.088(1)+.133(0)+.107(0)-.192 = 1.232 \\
+b_{1} & = .101+.059(1)-.031(0)-.036(0) = .160
+\end{align*}
 
 Notice a couple of features of the above derivations. First, all of the coefficients from the above equations ($\alpha_{0}=1.512$, $\alpha_{1}=-.088$, etc.) come from the estimated fixed effects from Model C.1 reported in Section \@ref(sec:boundary). Second, "restored prairie" is the reference level for soil type, so that indicators for "cultivated land" and "remnant prairie" are both 0. Third, the mean intercept (Day 13 height) for observations from sterilized restored prairie soil is 1.512 - 0.088 = 1.424 mm across all pots, while the mean daily growth is .160 mm.  Pot \#1 therefore has mean Day 13 height that is .192 mm below the mean for all pots with sterilized restored prairie soil, but every such pot is assumed to have the same growth rate of .160 mm/day because of our assumption that there is no pot-to-pot variability in growth rate (i.e., $\tilde{v}_{i}=0$).
 
@@ -766,18 +766,18 @@ __Level Two__
 
 We next proceed to Level Two, where our equations for Model C.1 are:
 
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+u_{ij} \\
-b_{ij} & = & b_{i}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+u_{ij} \\
+b_{ij} & = b_{i}+v_{ij}
+\end{align*}
 
 We will initially focus on Plant \#11 from Pot \#1. Notice that the intercept (Day 13 height = $a_{11}$) for Plant \#11 has two components: the mean Day 13 height for Pot \#1 ($a_{1}$) which we specified at Level Three, and an error term ($u_{11}$) which indicates how the Day 13 height for Plant \#11 differs from the overall average for all plants from Pot \#1. The slope (daily growth rate = $b_{11}$) for Plant \#11 similarly has two components. Since both $a_{1}$ and $b_{1}$ were determined at Level Three, at this point we need to find the two error terms for Plant \#11: $u_{11}$ and $v_{11}$. According to our multilevel model, we can sample $u_{11}$ and $v_{11}$ from a bivariate normal distribution with means both equal to 0, standard deviation for the intercept of .543, standard deviation for the slope of .036, and correlation between the intercept and slope of .194.
 
 For instance, suppose we sample $u_{11}=.336$ and $v_{11}=.029$. Then we can produce a model-based intercept and slope for Plant \#11:
-\begin{eqnarray*}
-a_{11} & = & 1.232+.336 = 1.568 \\
-b_{11} & = & .160+.029 = .189
-\end{eqnarray*}
+\begin{align*}
+a_{11} & = 1.232+.336 = 1.568 \\
+b_{11} & = .160+.029 = .189
+\end{align*}
 Although plants from Pot \#1 have a mean Day 13 height of 1.232 mm, Plant \#11's mean Day 13 height is .336 mm above that. Similarly, although plants from Pot \#1 have a mean growth rate of .160 mm/day (just like every other pot with sterilized restored prairie soil), Plant \#11's growth rate is .029 mm/day faster.
 
 __Level One__
@@ -934,28 +934,28 @@ Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 (\#eq:lev1timemodcp)
 \end{equation}
 - Level Two (plant within pot):
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
-b_{ij} & = & b_{i}+d_{i}\textstyle{seedsize}_{ij}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
+b_{ij} & = b_{i}+d_{i}\textstyle{seedsize}_{ij}+v_{ij}
+\end{align*}
 - Level Three (pot):
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+ \tilde{u}_{i}\\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+ \tilde{v}_{i} \\
-c_{i} & = & \gamma_{0}+\gamma_{1}\textstyle{strl}_{i}+\gamma_{2}\textstyle{cult}_{i}+\gamma_{3}\textstyle{rem}_{i}+ \tilde{w}_{i} \\
-d_{i} & = & \delta_{0}+\delta_{1}\textstyle{strl}_{i}+\delta_{2}\textstyle{cult}_{i}+\delta_{3}\textstyle{rem}_{i}+ \tilde{z}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+ \tilde{u}_{i}\\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+ \tilde{v}_{i} \\
+c_{i} & = \gamma_{0}+\gamma_{1}\textstyle{strl}_{i}+\gamma_{2}\textstyle{cult}_{i}+\gamma_{3}\textstyle{rem}_{i}+ \tilde{w}_{i} \\
+d_{i} & = \delta_{0}+\delta_{1}\textstyle{strl}_{i}+\delta_{2}\textstyle{cult}_{i}+\delta_{3}\textstyle{rem}_{i}+ \tilde{z}_{i}
+\end{align*}
 
 or as a composite model:
-\begin{eqnarray*}
-Y_{ijk} & = & [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
+\begin{align*}
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
  \gamma_{0}\textstyle{seedsize}_{ij} + \\
- & & \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk} + \\
- & & \gamma_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}+\gamma_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}+ \gamma_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij} + \\
- & & \delta_{0}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \\
- & & \delta_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk}] + \\
- & & [\tilde{u}_{i} + u_{ij} + \epsilon_{ijk} + \tilde{w}_{i}\textstyle{seedsize}_{ij} + \tilde{v}_{i}\textstyle{time}_{ijk} + v_{ij}\textstyle{time}_{ijk} + \tilde{z}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} ]
-\end{eqnarray*}
+ & \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk} + \\
+ & \gamma_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}+\gamma_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}+ \gamma_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij} + \\
+ & \delta_{0}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \\
+ & \delta_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk}] + \\
+ & [\tilde{u}_{i} + u_{ij} + \epsilon_{ijk} + \tilde{w}_{i}\textstyle{seedsize}_{ij} + \tilde{v}_{i}\textstyle{time}_{ijk} + v_{ij}\textstyle{time}_{ijk} + \tilde{z}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} ]
+\end{align*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
 \[ \left[ \begin{array}{c}
@@ -997,24 +997,24 @@ By following the options above, our potential 30-parameter model can be simplifi
 Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 -  Level Two:
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
-b_{ij} & = & b_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
+b_{ij} & = b_{i}
+\end{align*}
 - Level Three:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \tilde{u}_{i} \\
-b_{i} & = & \beta_{0} \\
-c_{i} & = & \gamma_{0}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \tilde{u}_{i} \\
+b_{i} & = \beta_{0} \\
+c_{i} & = \gamma_{0}
+\end{align*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$, $u_{ij}\sim N(0,\sigma_{u}^{2})$, and $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$.  Or, in terms of a composite model:
 
-\begin{eqnarray*}
-Y_{ijk} & = & [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
+\begin{align*}
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
  \gamma_{0}\textstyle{seedsize}_{ij} + \beta_{0}\textstyle{time}_{ijk}] + \\
- & & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}]
-\end{eqnarray*}
+ &  [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}]
+\end{align*}
 
 According to the second option, we have built a random intercepts model with error terms only at the first (intercept) equation at each level. Not only does this eliminate variance terms associated with the missing error terms, but it also eliminates correlation terms between errors (as suggested by Option 1) since there are no pairs of error terms that can be formed at any level. In addition, as suggested by Option 3, we have eliminated predictors (and their fixed effects coefficients) at every equation other than the intercept at each level.
 
@@ -1028,15 +1028,15 @@ In Model C we considered the main effects of soil type and sterilization on lead
 Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 - Level Two:
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+u_{ij} \\
-b_{ij} & = & b_{i}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+u_{ij} \\
+b_{ij} & = b_{i}+v_{ij}
+\end{align*}
 - Level Three:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \alpha_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \alpha_{5}\textstyle{strl}_{i}\textstyle{cult}_{i} + \tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i} + \beta_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \beta_{5}\textstyle{strl}_{i}\textstyle{cult}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \alpha_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \alpha_{5}\textstyle{strl}_{i}\textstyle{cult}_{i} + \tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i} + \beta_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \beta_{5}\textstyle{strl}_{i}\textstyle{cult}_{i}
+\end{align*}
 
 where error terms are defined as in Model C.1.
 
@@ -1132,15 +1132,15 @@ Our final model (Model F), with its constraints on Level Three error terms, can 
 Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 - Level Two:
-\begin{eqnarray*}
-a_{ij} & = & a_{i}+u_{ij} \\
-b_{ij} & = & b_{i}+v_{ij}
-\end{eqnarray*}
+\begin{align*}
+a_{ij} & = a_{i}+u_{ij} \\
+b_{ij} & = b_{i}+v_{ij}
+\end{align*}
 - Level Three:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0} + \tilde{u}_{i} \\
-b_{i} & = & \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{rem}_{i} + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0} + \tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{rem}_{i} + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}
+\end{align*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
 \[ \left[ \begin{array}{c}
@@ -1157,10 +1157,10 @@ and $\tilde{{u}_{i}}\sim N(0,\sigma_{\tilde{u}}^{2})$.
 
 In composite form, we have:
 
-\begin{eqnarray*}
-Y_{ijk} & = & [\alpha_{0}+ \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk} + \beta_{2}\textstyle{rem}_{i}\textstyle{time}_{ijk} + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + \\
- & & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+v_{ij}\textstyle{time}_{ijk}]
-\end{eqnarray*}
+\begin{align*}
+Y_{ijk} & = [\alpha_{0}+ \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk} + \beta_{2}\textstyle{rem}_{i}\textstyle{time}_{ijk} + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + \\
+ & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+v_{ij}\textstyle{time}_{ijk}]
+\end{align*}
 
 Estimates of model parameters can be interpreted in the following manner:
 
@@ -1307,24 +1307,24 @@ In this section, we present additional details regarding implications of our sta
 
 The variance for an individual observation can be derived as:
 
-\begin{eqnarray*}
-Var(Y_{ijk}) & = & Var(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})\textstyle{time}_{ijk}) \\
- & = & (\sigma^{2} + \sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + 2(\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})t_k + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}^{2}
-\end{eqnarray*}
+\begin{align*}
+Var(Y_{ijk}) & = Var(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})\textstyle{time}_{ijk}) \\
+ & = (\sigma^{2} + \sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + 2(\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})t_k + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}^{2}
+\end{align*}
 
 The covariance between observations taken at different timepoints from the same plant is:
 
-\begin{eqnarray*}
-Cov(Y_{ijk},Y_{ijk'}) & = & Cov(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k}, \epsilon_{ijk'}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k'}) \\
- & = & (\sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + (\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})(t_{k}+t_{k'}) + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}t_{k'}
-\end{eqnarray*}
+\begin{align*}
+Cov(Y_{ijk},Y_{ijk'}) & = Cov(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k}, \epsilon_{ijk'}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k'}) \\
+ & = (\sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + (\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})(t_{k}+t_{k'}) + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}t_{k'}
+\end{align*}
 
 The covariance between observations taken from different plants from the same pot is:
 
-\begin{eqnarray*}
-Cov(Y_{ijk},Y_{ij'k'}) & = & Cov(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k}, \epsilon_{ij'k'}+u_{ij'}+\tilde{u}_{i}+(v_{ij'}+\tilde{v}_{i})t_{k'}) \\
- & = & \sigma_{\tilde{u}}^{2} + \sigma_{\tilde{u}\tilde{v}}(t_{k}+t_{k'}) + \sigma_{\tilde{v}}^{2}t_{k}t_{k'}
-\end{eqnarray*}
+\begin{align*}
+Cov(Y_{ijk},Y_{ij'k'}) & = Cov(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})t_{k}, \epsilon_{ij'k'}+u_{ij'}+\tilde{u}_{i}+(v_{ij'}+\tilde{v}_{i})t_{k'}) \\
+ & = \sigma_{\tilde{u}}^{2} + \sigma_{\tilde{u}\tilde{v}}(t_{k}+t_{k'}) + \sigma_{\tilde{v}}^{2}t_{k}t_{k'}
+\end{align*}
 
 Based on these variances and covariances and the expressions for $Cov(\textbf{Y}_{ij})$ and $Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})$ in Section \@ref(error-3level), the complete covariance matrix for observations from pot $i$ can be expressed as the following 24x24 matrix (assuming 4 observations over time for each of 6 plants):
 

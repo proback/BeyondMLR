@@ -476,10 +476,10 @@ As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a 
   \[ \log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg)=a_i+b_i\mathrm{foul.diff}_{ij} \]
 Then we include no fixed covariates at Level Two, but we include error terms to allow the intercept and slope from Level One to vary by game, and we allow these errors to be correlated:
 
-\begin{eqnarray*}
-a_i & = & \alpha_{0}+u_i \\
-b_i & = & \beta_{0}+v_i,
-\end{eqnarray*}
+\begin{align*}
+a_i & = \alpha_{0}+u_i \\
+b_i & = \beta_{0}+v_i,
+\end{align*}
 where the error terms at Level Two can be assumed to follow a multivariate normal distribution:
 
 \[ \left[ \begin{array}{c}
@@ -495,11 +495,11 @@ where the error terms at Level Two can be assumed to follow a multivariate norma
 
 Our composite model then looks like:
 
-\begin{eqnarray*}
-\log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg) & = & a_i+b_i\mathrm{foul.diff}_{ij} \\
- & = & (\alpha_{0}+u_i) + (\beta_{0}+v_i)\mathrm{foul.diff}_{ij} \\
- & = & [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_i+v_i\mathrm{foul.diff}_{ij}]
-\end{eqnarray*}
+\begin{align*}
+\log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg) & = a_i+b_i\mathrm{foul.diff}_{ij} \\
+ & = (\alpha_{0}+u_i) + (\beta_{0}+v_i)\mathrm{foul.diff}_{ij} \\
+ & = [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_i+v_i\mathrm{foul.diff}_{ij}]
+\end{align*}
 The major changes when moving from a normally distributed response to a binary response are the form of the response variable (a logit function) and the absence of an error term at Level One.
 
 Again, we can use statistical software to obtain parameter estimates for this unified multilevel model using all 4972 fouls recorded from the 340 games.  For example, the `glmer()` function from the `lme4` package in R extends the `lmer()` function to handle generalized responses and to account for the fact that fouls are not independent within games.  Results are given below for the two-level model with foul differential as the sole covariate and Game as the Level Two observational unit.
@@ -597,10 +597,10 @@ Typically, with the addition of crossed effects, the Level One model will remain
 (\#eq:lev1cross) 
 \end{equation}
 - Level Two:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+u_{i}+v_{h}+w_{g} \\
-b_{i} & = & \beta_{0},
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} & = \beta_{0},
+\end{align*}
 
 Therefore, at Level Two, we assume that $a_{i}$, the log odds of a foul on the home team when the home and visiting teams in Game $i$ have an equal number of fouls, depends on four components:
 
@@ -610,11 +610,11 @@ Therefore, at Level Two, we assume that $a_{i}$, the log odds of a foul on the h
 - $w_{g}$ is the effect of Visiting Team $g$ (random)
 
 where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
-\begin{eqnarray*}
-u_{i} & \sim & N \left( 0 , \sigma_{u}^{2} \right) \\
-v_{h} & \sim & N \left( 0 , \sigma_{v}^{2} \right) \\
-w_{g} & \sim & N \left( 0 , \sigma_{w}^{2} \right).
-\end{eqnarray*}
+\begin{align*}
+u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
+v_{h} & \sim N \left( 0 , \sigma_{v}^{2} \right) \\
+w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right).
+\end{align*}
 
 We could include terms that vary by home or visiting team in other Level Two equations, but often adjusting for these random effects on the intercept is sufficient.  The advantages to including additional random effects are three-fold.  First, by accounting for additional sources of variability, we should obtain more precise estimate of other model parameters, including key fixed effects.  Second, we obtain estimates of variance components, allowing us to compare the relative sizes of game-to-game and team-to-team variability.  Third, as outlined in Section \@ref(estimatedRE), we can obtain estimated random effects which allow us to compare the effects on the log-odds of a home foul of individual home and visiting teams.
 
@@ -665,10 +665,10 @@ Based on the t-value (-6.80) and p-value ($p<.001$) associated with foul differe
 Our estimates of variance components provide evidence of the relative variability in the different Level Two random effects.  For example, an estimated 65.4\% of variability in the intercepts is due to differences from game-to-game, while 25.9\% is due to differences among home teams, and 8.7\% is due to differences among visiting teams.  At this point, we could reasonably ask: if we use a random effect to account for differences among games, does it really pay off to also account for which team is home and which is the visitor?
 
 To answer this, we could compare models with and without the random effects for home and visiting teams (i.e., Model A, the full model, vs. Model A.0, the reduced model) using a likelihood ratio test.  In Model A.0, Level Two now looks like:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+u_{i} \\
-b_{i} & = & \beta_{0},
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+u_{i} \\
+b_{i} & = \beta_{0},
+\end{align*}
 The likelihood ratio test (see below) provides significant evidence (LRT=16.074, df=2, p=.0003) that accounting for variability among home teams and among visiting teams improves our model.
 
 ```{r, 11verb6, echo=FALSE, comment=NA}
@@ -737,19 +737,19 @@ ggplot(nullLRT.1) +
 We might also reasonably ask: is it helpful to allow slopes (coefficients for foul differential) to vary by game, home team, and visiting team as well? Again, since we are comparing models that differ in random effects, and since the null hypothesis involves setting random effects at their boundaries, we use the parametric bootstrap.  Formally, we are comparing Model A to Model A.1, which has the same Level One equation as Model A:
 \[ \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg)=a_{i}+b_{i}\mathrm{foul.diff}_{ij} \]
 but more variance components to estimate at Level Two:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+u_{i}+v_{h}+w_{g} \\
-b_{i} & = & \beta_{0}+z_{i}+r_{h}+s_{g},
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} & = \beta_{0}+z_{i}+r_{h}+s_{g},
+\end{align*}
 where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
-\begin{eqnarray*}
-u_{i} & \sim & N \left( 0 , \sigma_{u}^{2} \right) \\
-z_{i} & \sim & N \left( 0 , \sigma_{z}^{2} \right) \\
-v_{h} & \sim & N \left( 0 , \sigma_{v}^{2} \right) \\
-r_{h} & \sim & N \left( 0 , \sigma_{r}^{2} \right) \\
-w_{g} & \sim & N \left( 0 , \sigma_{w}^{2} \right) \\
-s_{g} & \sim & N \left( 0 , \sigma_{s}^{2} \right).
-\end{eqnarray*}
+\begin{align*}
+u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
+z_{i} & \sim N \left( 0 , \sigma_{z}^{2} \right) \\
+v_{h} & \sim N \left( 0 , \sigma_{v}^{2} \right) \\
+r_{h} & \sim N \left( 0 , \sigma_{r}^{2} \right) \\
+w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right) \\
+s_{g} & \sim N \left( 0 , \sigma_{s}^{2} \right).
+\end{align*}
 
 Thus our null hypothesis for comparing Model A vs. Model A.1 is $H_{O}: \sigma_{z}^{2}=\sigma_{r}^{2}=\sigma_{s}^{2}=0$.  We do not have significant evidence (LRT=0.349, df=3, p=.46 by parametric bootstrap) of variability among slopes, so we will only include random effects for game, home team, and visiting team for the intercept going forward.  Figure \@ref(fig:gmu-lrt3) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution, again showing that the tails are too heavy in the chi-square distribution.
 
@@ -835,41 +835,41 @@ ggplot(nullLRT.1) +
 In constructing a final model for this college basketball case study, we are guided by several considerations.  First, we want to estimate the effect of foul differential on the odds of a home foul, after adjusting for important covariates.  Second, we wish to find important interactions with foul differential, recognizing that the effect of foul differential might depend on the game situation and other covariates.  Third, we want to account for random effects associated with game, home team, and visiting team.  What follows is one potential final model that follows these guidelines:
 
 - Level One:
-\begin{eqnarray*}
-\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = & a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} + f_{i}\mathrm{time}_{ij} \\
- & &{} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} + m_{i}\mathrm{foul.diff:offensive}_{ij} \\
- & &{} + n_{i}\mathrm{foul.diff:personal}_{ij} + o_{i}\mathrm{foul.diff:time}_{ij} \\
- & &{} + q_{i}\mathrm{lead.home:time}_{ij}
-\end{eqnarray*}
+\begin{align*}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} + f_{i}\mathrm{time}_{ij} \\
+ &{} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} + m_{i}\mathrm{foul.diff:offensive}_{ij} \\
+ &{} + n_{i}\mathrm{foul.diff:personal}_{ij} + o_{i}\mathrm{foul.diff:time}_{ij} \\
+ &{} + q_{i}\mathrm{lead.home:time}_{ij}
+\end{align*}
 - Level Two:
-\begin{eqnarray*}
-a_{i} & = & \alpha_{0}+u_{i}+v_{h}+w_{g} \\
-b_{i} & = & \beta_{0} \\
-c_{i} & = & \gamma_{0} \\
-d_{i} & = & \delta_{0} \\
-f_{i} & = & \phi_{0} \\
-k_{i} & = & \kappa_{0} \\
-l_{i} & = & \lambda_{0} \\
-m_{i} & = & \mu_{0} \\
-n_{i} & = & \nu_{0} \\
-o_{i} & = & \omega_{0} \\
-q_{i} & = & \xi_{0},
-\end{eqnarray*}
+\begin{align*}
+a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
+b_{i} & = \beta_{0} \\
+c_{i} & = \gamma_{0} \\
+d_{i} & = \delta_{0} \\
+f_{i} & = \phi_{0} \\
+k_{i} & = \kappa_{0} \\
+l_{i} & = \lambda_{0} \\
+m_{i} & = \mu_{0} \\
+n_{i} & = \nu_{0} \\
+o_{i} & = \omega_{0} \\
+q_{i} & = \xi_{0},
+\end{align*}
 
 where error terms at Level Two can be assumed to follow independent normal distributions:
-\begin{eqnarray*}
-u_{i} & \sim & N \left( 0 , \sigma_{u}^{2} \right) \\
-v_{h} & \sim & N \left( 0 , \sigma_{v}^{2} \right) \\
-w_{g} & \sim & N \left( 0 , \sigma_{w}^{2} \right).
-\end{eqnarray*}
+\begin{align*}
+u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
+v_{h} & \sim N \left( 0 , \sigma_{v}^{2} \right) \\
+w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right).
+\end{align*}
 
 Our composite model then looks like:
-\begin{eqnarray*}
-\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = & [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} + \phi_{0}\mathrm{time}_{ij} \\
- & &{} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} + \mu_{0}\mathrm{foul.diff:offensive}_{ij} \\
- & &{} + \nu_{0}\mathrm{foul.diff:personal}_{ij} + \omega_{0}\mathrm{foul.diff:time}_{ij} \\
- & &{} + \xi_{0}\mathrm{lead.home:time}_{ij}] + [u_{i}+v_{h}+w_{g}].
-\end{eqnarray*}
+\begin{align*}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} + \phi_{0}\mathrm{time}_{ij} \\
+ &{} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} + \mu_{0}\mathrm{foul.diff:offensive}_{ij} \\
+ &{} + \nu_{0}\mathrm{foul.diff:personal}_{ij} + \omega_{0}\mathrm{foul.diff:time}_{ij} \\
+ &{} + \xi_{0}\mathrm{lead.home:time}_{ij}] + [u_{i}+v_{h}+w_{g}].
+\end{align*}
 
 Using the composite form of this generalized linear multilevel model, the parameter estimates for our 11 fixed effects and 3 variance components are given in the output below:
 ```{r, 11verb10, echo=FALSE, comment=NA}

@@ -222,11 +222,11 @@ f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 To see that we can apply the general approach of GLMs to binomial responses, we first write an expression for the probability of a binomial response and then use a little algebra to rewrite it until we can demonstrate that it, too, can be written in one-parameter exponential family form with $\theta = p$. This will provide a way in which to specify the canonical link and the form for the model. Additional theory allows us to deduce the mean, standard deviation, and more from this form.
 
 If $Y$ follows a binomial distribution with $n$ trials and probability of success $p$, we can write:
-\begin{eqnarray}
-P(Y=y)&=& \binom{n}{y}p^y(1-p)^{(n-y)} \\
-      &=&e^{y\log(p) + (n-y)\log(1-p) + \log\binom{n}{y}}
+\begin{align}
+P(Y=y)&= \binom{n}{y}p^y(1-p)^{(n-y)} \\
+      &=e^{y\log(p) + (n-y)\log(1-p) + \log\binom{n}{y}}
 (\#eq:canlink)
-\end{eqnarray}
+\end{align}
 However, this probability mass function is not quite in one parameter exponential family form.  Note that there are two terms in the exponent which consist of a product of functions of $y$ and $p$. So more simplification is in order:
 \begin{equation}
 P(Y=y) = e^{y\log\left(\frac{p}{1-p}\right) + n\log(1-p)+ \log\binom{n}{y}}
