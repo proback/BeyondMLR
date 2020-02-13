@@ -291,14 +291,14 @@ cat(tmp[c(3:4, 9:13, 16:20)], sep='\n')
 ```
 
 How can the coefficient estimates be interpreted in terms of this example? As done when interpreting slopes in the OLS models, we consider how the estimated mean number in the house, $\lambda$, changes as the age of the household head increases by an additional year. But in place of looking at change in the mean number in the house, with a Poisson regression we consider the log of the mean number in the house and then convert back to original units. For example, consider a comparison of two models---one for a given age ($x$) and one after increasing age by 1 ($x+1$)
-\begin{eqnarray}
-log(\lambda_X) &=& \beta_0 + \beta_1X \\
-log(\lambda_{X+1}) &=& \beta_0 + \beta_1(X+1) \\
-log(\lambda_{X+1})-log(\lambda_X) &= & \beta_1 \\
-log \left(\frac{\lambda_{X+1}}{\lambda_X}\right)   &= &\beta_1\\
-\frac{\lambda_{X+1}}{\lambda_X} &=& e^{\beta_1}
+\begin{align}
+log(\lambda_X) &= \beta_0 + \beta_1X \\
+log(\lambda_{X+1}) &= \beta_0 + \beta_1(X+1) \\
+log(\lambda_{X+1})-log(\lambda_X) &=  \beta_1 \\
+log \left(\frac{\lambda_{X+1}}{\lambda_X}\right)   &= \beta_1\\
+\frac{\lambda_{X+1}}{\lambda_X} &= e^{\beta_1}
 (\#eq:rateRatio)
-\end{eqnarray}
+\end{align}
 
 These results suggest that by exponentiating the coefficient on age we obtain the multiplicative factor by which the mean count changes. In this case, the mean number in the house changes by a factor of $e^{-0.0047}=0.995$ or decreases by 0.5\% with each additional year older the household head is; or, we predict a 0.47\% increase in mean household size for a 1 year decrease in age of the household head ($1/.995=1.0047$). The quantity on the left hand side of Equation \@ref(eq:rateRatio) is referred to as a __rate ratio__  or __relative risk__, and it represents a percent change in the response for a unit change in X.  In fact, for regression models in general, whenever a variable (response or explanatory) is logged, we make interpretations about multiplicative effects on that variable, while with unlogged variables we can reach our usual interpretations about additive effects.  
 
@@ -374,19 +374,19 @@ The likelihood for n *independent* observations is the product of the probabilit
 Recall that the probability of a Poisson response can be written
 \[P(Y=y)=\frac{e^{-\lambda}\lambda^y}{y!}\] for $y = 0, 1, 2, ...$
 So the likelihood can be written as
-\begin{eqnarray*}
- Likelihood&= &\frac{ e^{-\lambda_1}\lambda_1^4 }{ 4! }*
+\begin{align*}
+ Likelihood&= \frac{ e^{-\lambda_1}\lambda_1^4 }{ 4! }*
  \frac{ e^{-\lambda_2}\lambda_2^2 }{ 2! } *\frac{e^{-\lambda_3}\lambda_3^8}{8!}*
  \frac{e^{-\lambda_4}\lambda_4^6}{6!}*\frac{e^{-\lambda_5}\lambda_5^1}{1!}\\
- \end{eqnarray*}
+ \end{align*}
 where each $\lambda_i$ can differ for each household depending on a particular $x_i$.  As in chapter \@ref(ch-beyondmost), it will be easier to find a maximum if we take the log of the likelihood and ignore the constant term resulting from the sum of the factorials:
 
-\begin{eqnarray}
- -logL& \propto& \lambda_{1}-4log(\lambda_{1})+\lambda_{2}-2log(\lambda_{2}) \nonumber \\
- & &+\lambda_{3}-8log(\lambda_{3})+\lambda_{4}-6log(\lambda_{4}) \nonumber \\
- & &+\lambda_{5}-log(\lambda_{5})
+\begin{align}
+ -logL& \propto \lambda_{1}-4log(\lambda_{1})+\lambda_{2}-2log(\lambda_{2}) \nonumber \\
+ & +\lambda_{3}-8log(\lambda_{3})+\lambda_{4}-6log(\lambda_{4}) \nonumber \\
+ & +\lambda_{5}-log(\lambda_{5})
  (\#eq:poisLoglik)
-\end{eqnarray}
+\end{align}
 
 Now if we had the age of the head of the household for each house (X), we consider the Poisson regression model:
 \[
@@ -397,14 +397,14 @@ This implies that $\lambda$ differs for each age and can be determined using
 
  If the ages are $X=c(32,21,55,44,28)$ years, our loglikelihood can be written:
 
-\begin{eqnarray}
- logL & \propto &[-e^{\beta_0+\beta_132}+4({\beta_0+\beta_132})]+
+\begin{align}
+ logL & \propto [-e^{\beta_0+\beta_132}+4({\beta_0+\beta_132})]+
 [-e^{\beta_0+\beta_121}+2({\beta_0+\beta_121})]+ \nonumber \\ 
-& & [-e^{\beta_0+\beta_155}+8({\beta_0+\beta_155})]+
+&  [-e^{\beta_0+\beta_155}+8({\beta_0+\beta_155})]+
 [-e^{\beta_0+\beta_144}+6({\beta_0+\beta_144})]+ \nonumber \\
-  & & [-e^{\beta_0+\beta_128}+({\beta_0+\beta_128})]
+  &  [-e^{\beta_0+\beta_128}+({\beta_0+\beta_128})]
 (\#eq:poisLoglik2)
-\end{eqnarray}
+\end{align}
 
 To see this, match the terms in Equation \@ref(eq:poisLoglik) with those in Equation \@ref(eq:poisLoglik2) noting that $\lambda_i$ has been replaced with $e^{\beta_0+\beta_1x_i}$. It is Equation \@ref(eq:poisLoglik2) that will be used to estimate the coefficients $\beta_0$ and $\beta_1$. Although this looks a little more complicated than the loglikelihoods we saw in Chapter \@ref(ch-beyondmost), the fundamental ideas are the same. In theory, we try out different possible values of $\beta_0$ and $\beta_1$ until we find the two for which the loglikelihood is largest.  Most statistical software packages have automated search algorithms to find those values for $\beta_0$ and $\beta_1$ that maximize the loglikelihood.
 
@@ -458,12 +458,12 @@ optimize(estLogNumHouse.f, interval=c(20,70), maximum=TRUE)
 
 As shown in the following, with calculus we can determine that the maximum estimated additional number in the house is $e^{1.608} = 4.996$ when the head of the household is 50.328 years old.
 
-\begin{eqnarray}
-\textrm{log(total)} & = & -0.333 + 0.071(\textrm{age}) - 0.00071 (\textrm{age}^2) \\
-\frac{d}{d\textrm{age}}\textrm{log(total)} & = & 0 + 0.071 - 0.0014 (\textrm{age}) = 0 \\
-(\textrm{age}) & = & 50.04 \\
-\textrm{max[log(total)]} & = & -0.333 + 0.071 \times 50.04 - 0.00071 \times (50.04)^2 = 1.608
-\end{eqnarray}
+\begin{align}
+\textrm{log(total)} & = -0.333 + 0.071(\textrm{age}) - 0.00071 (\textrm{age}^2) \\
+\frac{d}{d\textrm{age}}\textrm{log(total)} & = 0 + 0.071 - 0.0014 (\textrm{age}) = 0 \\
+(\textrm{age}) & = 50.04 \\
+\textrm{max[log(total)]} & = -0.333 + 0.071 \times 50.04 - 0.00071 \times (50.04)^2 = 1.608
+\end{align}
 
 
 ### Adding a covariate
@@ -488,10 +488,10 @@ diff.in.df <- modela2$df.residual - modela2L$df.residual; diff.in.df
 ```
 
 Our Poisson regression model now looks like:
-\begin{eqnarray}
-\textrm{log(total)} & = & -0.384 + 0.070 \cdot \textrm{age} - 0.00070 \cdot \textrm{age}^2 +0.061 \cdot \textrm{IlocosRegion} + \\ 
- & & 0.054 \cdot\textrm{MetroManila}  +0.112 \cdot\textrm{Visayas} - 0.019 \cdot \textrm{DavaoRegion}
-\end{eqnarray}
+\begin{align}
+\textrm{log(total)} & = -0.384 + 0.070 \cdot \textrm{age} - 0.00070 \cdot \textrm{age}^2 +0.061 \cdot \textrm{IlocosRegion} + \\ 
+ & 0.054 \cdot\textrm{MetroManila}  +0.112 \cdot\textrm{Visayas} - 0.019 \cdot \textrm{DavaoRegion}
+\end{align}
 Notice that because there are 5 different locations, we must represent the effects of different locations through 4 indicator variables.  For example, $\hat{\beta}_6=-0.0194$ indicates that, after controlling for the age of the head of household, the log mean household size is 0.0194 lower for households in the Davao Region than for households in the reference location of Central Luzon. In more interpretable terms, mean household size is $e^{-0.0194}=0.98$ times "higher" (i.e., 2\% lower) in the Davao Region than in Central Luzon, when holding age constant.  
 
 ```{r}
@@ -511,12 +511,12 @@ summary(modela4)
 Residual plots may provide some insight into Poisson regression models, especially linearity and outliers, although the plots are not quite as useful here as they are for OLS. There are a few options for computing residuals and predicted values. Residuals may have the form of residuals for OLS models or the form of deviance residuals which, when squared, sum to the total deviance for the model. Predicted values can be estimates of the counts, $e^{\beta_0+\beta_1X}$, or log counts, $\beta_0+\beta_1X$. We will typically use the deviance residuals and predicted counts. 
 
 The residuals for OLS in simple linear regression have the form:
- \begin{eqnarray}
- OLS\hspace{2mm}residual_i  &= &obs_i - fit_i \nonumber \\
-&=&{Y_i-\hat{\mu}_i} \nonumber \\
- &= &Y_i-(\hat{\beta}_0 +\hat{\beta}_1 X_i)
+ \begin{align}
+ OLS\hspace{2mm}residual_i  &= obs_i - fit_i \nonumber \\
+&={Y_i-\hat{\mu}_i} \nonumber \\
+ &= Y_i-(\hat{\beta}_0 +\hat{\beta}_1 X_i)
 (\#eq:OLSresid)
- \end{eqnarray}
+ \end{align}
 Residual sum of squares (RSS) are formed by squaring and adding these residuals, and we generally seek to minimize RSS in model building. We have several options for creating residuals for Poisson regression models. One is to create residuals in much the same way as we do in OLS. For Poisson residuals, the predicted values are denoted by $\hat{\lambda}_i$ (in place of $\hat{\mu}_i$ in Equation \@ref(eq:OLSresid)); they are then standardized by dividing by the standard error, $\sqrt{\hat{\lambda}_i}$.  These kinds of residuals are referred to as __Pearson residuals__. 
 \begin{equation}
 \textrm{Pearson residual}_i = \frac{Y_i-\hat{\lambda}_i}{\sqrt{\hat{\lambda}_i}}
@@ -697,11 +697,11 @@ Table \@ref(tab:table4ch4) and Figure \@ref(fig:boxtyperegion) display mean viol
 
 Although working with the observed rates (per 1000 students) is useful during the exploratory data analysis, we do not use these rates explicitly in the model. The counts (per year) are the Poisson responses when modeling, so we must take into account the enrollment in a different way. Our approach is to include  a term on the right side of the model called an __offset__, which is the log of the enrollment, in thousands. There is an intuitive heuristic for the form of the offset. If we think of $\lambda$ as the mean number of violent crimes per year, then $\lambda/1000$ represents the number per 1000 students, so that the yearly count is adjusted to be comparable across schools of different sizes. Adjusting the yearly count by enrollment is equivalent to adding $log(\textrm{enroll1000})$ to the right hand side of the Poisson regression equation---essentially as a predictor with a fixed coefficient of 1:
 
-\begin{eqnarray} 
+\begin{align} 
 log(\frac{\lambda}{\textrm{enroll1000}} )= \beta_0 + \beta_1(\textrm{type}) \nonumber \\
 log(\lambda)-log(\textrm{enroll1000}) = \beta_0 + \beta_1(\textrm{type}) \nonumber \\
 log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
-\end{eqnarray}
+\end{align}
 
 While this heuristic is helpful, it is important to note that it is *not* $\frac{\lambda}{ \textrm{enroll1000}}$ that we are modeling.  We are still modeling $log(\lambda)$, but we're adding an offset to adjust for differing enrollments, where the offset has the unusual feature that the coefficient is fixed at 1.0. As a result, no estimated coefficient for `enroll1000` will appear in the output. 
 
