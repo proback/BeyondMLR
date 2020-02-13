@@ -126,10 +126,10 @@ From the likelihood in Figure \@ref(fig:lik1), when $p_B$ = 0.3 we see a family 
 If the choice was between 0.3 and 0.6 for an estimate of $p_B$, we'd choose 0.6. The "best" estimate of $p_B$ would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the __maximum likelihood estimate__ or MLE. We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
 
 Suppose another family consisting of three girls is added to our data set. We've already seen that the Sex Unconditional Model multiplies probabilities to construct a likelihood because children are independent of one another. Extending this idea, families can be assumed to be independent of one another so that the likelihood for both families can be obtained by multiplication.  With two families (GBB and GGG) our likelihood is now:
-\begin{eqnarray}
- \lik (p_B) &=& [(1-p_B)p_B^2][(1-p_B)^3] \\
-                    &=& (1-p_B)^4p_B^2
-\end{eqnarray}
+\begin{align}
+ \lik (p_B) &= [(1-p_B)p_B^2][(1-p_B)^3] \\
+                    &= (1-p_B)^4p_B^2
+\end{align}
 
 A plot of this likelihood appears below. It is right skewed with an MLE at approximately 0.3. Using calculus, we can show that the MLE is precisely 1/3 which is consistent with intuition given the 2 boys and 4 girls in our data. 
 ```{r, include=FALSE}
@@ -268,12 +268,12 @@ Calculus may provide another way to determine an MLE.  Here, we can ascertain th
 
 This approach would produce $p_B = .60$ as we intuited earlier; however, we'll find that likelihoods can get a lot more complicated than this one and there is a simpler way to proceed.  This simpler approach is based on the fact that the log of a likelihood is maximized at the same value of $p_B$ as the likelihood.  Likelihoods are typically products which require the application of the Product Rule when differentiating, whereas log-likelihoods are sums which are much easier to differentiate.  In addition, likelihoods can become tiny with large data sets.  So we can take the log of the likelihood, differentiate it, and find the value of $p_B$ where the log-likelihood is a maximum and have the MLE for $p_B$.  We observed this visually in Figure \@ref(fig:lik4), where (a) and (b) are maximized at the same $p_B$ (as are (c) and (d)).  For the data set with 50 children:
 
-\begin{eqnarray*}
- \lik(p_B)                      &=& p_B^{30}(1-p_B)^{20} \\
- \log(\lik(p_B))                &=& 30\log(p_B)+20\log(1-p_B) \\
- \frac{d}{dp_B} \log(\lik(p_B)) &=& \frac{30}{p_B} - \frac{20}{1-p_B} = 0
+\begin{align*}
+ \lik(p_B)                      &= p_B^{30}(1-p_B)^{20} \\
+ \log(\lik(p_B))                &= 30\log(p_B)+20\log(1-p_B) \\
+ \frac{d}{dp_B} \log(\lik(p_B)) &= \frac{30}{p_B} - \frac{20}{1-p_B} = 0
  (\#eq:dlogLik50)
-\end{eqnarray*}
+\end{align*}
   
 It is now straightforward to determine that the log-likelihood is maximized when $p_B = 3/5.$ We say that the MLE is $\hat{p}_B = 0.6$. This is the exact estimate that was approximated above.
   
@@ -344,16 +344,16 @@ Using the family composition data for 50 children in the 30 families that appear
   
 We construct the likelihood using data from all 30 families assuming families are independent to get:
   
-\begin{eqnarray}
- \lik(\neutral,\ \bbias,\ \gbias) &=& 
+\begin{align}
+ \lik(\neutral,\ \bbias,\ \gbias) &= 
  \big[(\neutral)^{17}
  (1-\neutral)^{15}
  (\bbias)^{5} \\
- & & (1-\bbias)^{4}
+ & (1-\bbias)^{4}
  (\gbias)^{8}
  (1-\gbias) \big]
 (\#eq:lik50)
-\end{eqnarray}
+\end{align}
   
 A couple of points are worth noting. First, there are 50 factors in the likelihood corresponding to the 50 children in these 30 families. Second, in the Sex Unconditional example we only had one parameter, $p_{B}$; here we have three parameters. This likelihood does not simplify like the Sex Unconditional Model to one as a product of only two powers: one of $p_B$ and the other of $1-p_B$. Yet, the basic idea we discussed regarding using a likelihood to find parameter estimates is the same. To obtain the MLEs, we need to find the combination of values for our three parameters where the data is most likely to be observed. Conceptually, we are trying different combinations of possible values for these three parameters, one after another, until we find *the* combination where the likelihood is a maximum. It will not be as easy to graph this likelihood and we will need multivariable calculus to locate the optimal combination of parameter values where the likelihood is a maximum. In this text, we do not assume you know multivariable calculus, but we do want you to retain the concepts associated with maximum likelihood estimates. In practice, we use software to obtain MLEs.  
 
@@ -361,27 +361,27 @@ With calculus, we can take partial derivatives of the likelihood with respect to
   
 Knowing that it is easier to work with log-likelihoods, let's take the log of the likelihood we constructed in Equation \@ref(eq:lik50).
   
-\begin{eqnarray*}
-\log (\lik(\neutral,\ \bbias,\ \gbias)) &= &
+\begin{align*}
+\log (\lik(\neutral,\ \bbias,\ \gbias)) &= 
         17\log(\neutral)+15\log(1-\neutral)+5\log(\bbias) \\
-    &  &+4\log(1-\bbias) +8\log(\gbias) +1\log(1-\gbias) \\
-\end{eqnarray*}
+    & +4\log(1-\bbias) +8\log(\gbias) +1\log(1-\gbias) \\
+\end{align*}
     
 Taking a partial derivative with respect to $\neutral$
     
-\begin{eqnarray*}
-\frac{17}{\neutral}  - \frac{15}{1-\neutral}&=&0 \\
-\hat{p}_{B|N}&=& \frac{17}{32} \\
-&=&0.53 \\
-\end{eqnarray*}
+\begin{align*}
+\frac{17}{\neutral}  - \frac{15}{1-\neutral}&=0 \\
+\hat{p}_{B|N}&= \frac{17}{32} \\
+&=0.53 \\
+\end{align*}
     
 This estimate follows naturally. First consider all of the children who enter into a family with an equal number of boys and girls. From Table \@ref(tab:table3chp2), we can see there are 32 such children (30 are first kids and 2 are third kids in families with 1 boy and 1 girl). Of those children, 17 are boys. So, given that a child joins a sex neutral family, the chance they are a boy is 17/32. Similar calculations for $\bbias$ and $\gbias$ yield:
       
-\begin{eqnarray*}
- \hat{p}_{B|N} &=& 0.53  \\  %17/32
- \hat{p}_{B|\textrm{B Bias}} &=& 0.56  \\% 5/9
- \hat{p}_{B|\textrm{G Bias}} &=& 0.89  \\  
-\end{eqnarray*}
+\begin{align*}
+ \hat{p}_{B|N} &= 0.53  \\  %17/32
+ \hat{p}_{B|\textrm{B Bias}} &= 0.56  \\% 5/9
+ \hat{p}_{B|\textrm{G Bias}} &= 0.89  \\  
+\end{align*}
     
 If we anticipate any "sex running in families" effect, we would expect  $\hat{p}_{B|\textrm{B Bias}}$ to be larger than the the probability of a boy in the neutral setting, $\neutral$. In our small hypothetical example, $\hat{p}_{B|\textrm{B Bias}}$ is slightly greater than 0.53  providing light support for the "sex runs in families" theory when it comes to boys. What about girls?  Do families with more girls than boys tend to have a greater probability of having a girl?  We found that the MLE for the probability of a girl in a girl biased setting is 1-0.89=0.11. [Note: A nice property of MLEs is demonstrated here. We have the MLE for $\gbias$, and we want the MLE of $p_{G|\textrm{G Bias}}=1-\gbias$. We can get it by replacing $\gbias$ with its MLE; i.e., $\hat{p}_{G|\textrm{G Bias}}=1-\hat{p}_{B|\textrm{G Bias}}$. In mathematical terms, you can get the MLE of a function by applying the function to the original MLE.]  This data does not provide evidence that girls run in families since $\hat{p}_{G|G_{bias}} = 0.11 < \hat{p}_{G|N}=0.47$; there is a markedly lower probability of a girl if the family is already girl biased. This data is, however, hypothetical. Let's take a look at some real data and see what we find.  
     
@@ -457,21 +457,21 @@ Families with different compositions will contribute different factors to the li
 > BGB  $p_B^{2*148}(1-p_B)^{148}$  
 
 Now we create the entire likelihood for our data under the Sex Unconditional Model.
-\begin{eqnarray*}
- \Lik(p_B) &=& p_B^{930}p_G^{951}p_{BB}^{582} \cdots p_{BBG}^{177} \cdots p_{GGG}^{159} \\
- &=& p_B^{930+2*582+666+666+\cdots+182}(1-p_B)^{951+666+666+2*530+\cdots+3*159} \\
- &=&  p_B^{5416}(1-p_B)^{5256} \\
+\begin{align*}
+ \Lik(p_B) &= p_B^{930}p_G^{951}p_{BB}^{582} \cdots p_{BBG}^{177} \cdots p_{GGG}^{159} \\
+ &= p_B^{930+2*582+666+666+\cdots+182}(1-p_B)^{951+666+666+2*530+\cdots+3*159} \\
+ &=  p_B^{5416}(1-p_B)^{5256} \\
  (\#eq:likSexUn)
-\end{eqnarray*}
+\end{align*}
     
 This very simple likelihood implies that each child contributes a factor of the form $p_B$ or $1-p_B$. Given that there are 10,672 children, what would be your best guess of the estimated probability of a boy for this model? We can determine the MLE for $p_B$ using our previous work.  
     
-\begin{eqnarray}
- \hat{p_B} &=& \frac{nBoys}{nBoys + nGirls} \\
- & = & \frac{5416}{5416+5256} \\
- &=& 0.507
+\begin{align}
+ \hat{p_B} &= \frac{nBoys}{nBoys + nGirls} \\
+ & =  \frac{5416}{5416+5256} \\
+ &= 0.507
  (\#eq:MLESexUn)
-\end{eqnarray}
+\end{align}
     
 ### Likelihood for the Sex Conditional Model {#sex_cond_lik.sec}
     
@@ -550,38 +550,38 @@ kable(table8chp2,booktabs=T, caption="Likelihood contributions for families in S
   add_header_above(c(" "," "," ", "Sex Conditional Model"=3)) %>% kable_styling(latex_options = "scale_down")
 ```
     
-\begin{eqnarray}
- \Lik(\neutral,  \bbias, \gbias)& =& \big[ \neutral^{930}(1-\neutral)^{951} ( \neutral\bbias)^{582}\\
-&& \cdots  ((1-\neutral)(1-\gbias)(1-\gbias))^{159} \big]\\ 
-&=& \big[\neutral^{3161}(1-\neutral)^{3119}\bbias^{1131} \\
-& &   (1-\bbias)^{1164}\gbias^{1124}(1-\gbias)^{973} \big]\\
+\begin{align}
+ \Lik(\neutral,  \bbias, \gbias)& = \big[ \neutral^{930}(1-\neutral)^{951} ( \neutral\bbias)^{582}\\
+& \cdots  ((1-\neutral)(1-\gbias)(1-\gbias))^{159} \big]\\ 
+&= \big[\neutral^{3161}(1-\neutral)^{3119}\bbias^{1131} \\
+&    (1-\bbias)^{1164}\gbias^{1124}(1-\gbias)^{973} \big]\\
 (\#eq:likall)
-\end{eqnarray}
+\end{align}
     
-\begin{eqnarray}
-\log(\Lik(\neutral,  \bbias, \gbias)) &=& 3161\log(\neutral)+3119\log(1-\neutral)\\ 
- & &{}+1131\log(\bbias)+1164\log(1-\bbias)\\   
- & &{}+1124\log(\gbias)+ 973\log(1-\gbias)\\
+\begin{align}
+\log(\Lik(\neutral,  \bbias, \gbias)) &= 3161\log(\neutral)+3119\log(1-\neutral)\\ 
+ & {}+1131\log(\bbias)+1164\log(1-\bbias)\\   
+ & {}+1124\log(\gbias)+ 973\log(1-\gbias)\\
 (\#eq:log-likall) 
-\end{eqnarray}
+\end{align}
     
 To use calculus to estimate the probability of a boy entering a neutral family (a family with equal boys and girls), $\neutral$, we begin with the  logarithm of the likelihood in equation \@ref(eq:log-likall). Differentiating the log-likelihood with respect to $\neutral$ holding all other parameters constant yields an intuitive estimate.
     
-\begin{eqnarray*}
- \hat{p}_{B|N}&=&\frac{3161}{3161+3119} \\
- &=&0.5033
-\end{eqnarray*}
+\begin{align*}
+ \hat{p}_{B|N}&=\frac{3161}{3161+3119} \\
+ &=0.5033
+\end{align*}
     
 There are 6,280 times when a child is joining a neutral family and of those times 3,161 are boys. Thus the MLE of the probability of a boy joining a family where the number of boys and girls are equal (including when there are no children) is 0.5033.
     
 Similarly, MLEs for $\bbias$ and $\gbias$ can be obtained:
-\begin{eqnarray*}
- \hat{p}_{B|\textrm{B Bias}}&=& \frac{1131}{1131+1164}\\
- & = & 0.4928 \\
- & & \\
- \hat{p}_{B|\textrm{G Bias}}&=&\frac{1124}{1124+973}\\
-&=& 0.5360
-\end{eqnarray*}
+\begin{align*}
+ \hat{p}_{B|\textrm{B Bias}}&= \frac{1131}{1131+1164}\\
+ & =  0.4928 \\
+ &  \\
+ \hat{p}_{B|\textrm{G Bias}}&=\frac{1124}{1124+973}\\
+&= 0.5360
+\end{align*}
     
 Are these results consistent with the notion that boys or girls run in families?  We consider the Sex Conditional Model because we hypothesized there would be a higher probability of boys among children born into families with a boy bias. However, we found that if there is a boy bias the probability of a subsequent boy was estimated to be actually less, 0.493. Similarly, girls join families with more girls than boys approximately 46.4\% of the time so that there is little support for the idea that either "girls or boys run in families." 
     
@@ -606,19 +606,19 @@ We start with the idea of comparing the likelihoods or, equivalently, the log-li
     
 The maximum of the log-likelihood  for the reduced model can be found by replacing $p_{B}$ in the log-likelihood with the MLE of $p_{B}$, 0.5075.
     
-\begin{eqnarray*}
-\log(\Lik(0.5075))& = &5416\log(.5075) + 5256\log(1-.5075)\\
-&=& -7396.067\\
-\end{eqnarray*}
+\begin{align*}
+\log(\Lik(0.5075))& = 5416\log(.5075) + 5256\log(1-.5075)\\
+&= -7396.067\\
+\end{align*}
     
 The maximum of the log-likelihood for the larger model can be found by replacing $\neutral,  \bbias, \gbias$ in the log-likelihood with 0.5033, 0.4928, and 0.5360, respectively.
     
-\begin{eqnarray*}
- \log(\Lik(0.5033, 0.4928, 0.5360)) &= & 3161\log(.5033)+3119\log(1-.5033)\\
- & &{}+ 1131\log(.4928)+1164\log(1-.4928)\\
- & &{}+ 1124\log(.5360)+973\log(1-.5360)\\
- &=& -7391.448
-\end{eqnarray*}
+\begin{align*}
+ \log(\Lik(0.5033, 0.4928, 0.5360)) &=  3161\log(.5033)+3119\log(1-.5033)\\
+ & {}+ 1131\log(.4928)+1164\log(1-.4928)\\
+ & {}+ 1124\log(.5360)+973\log(1-.5360)\\
+ &= -7391.448
+\end{align*}
     
 Take a look at the log-likelihoods---the maximum log-likelihood for the larger model is indeed larger (less negative). The maximum log-likelihood for the larger model is guaranteed to be at least as large as the maximum log-likelihood for the reduced model, so we'll be interested in whether this observed difference in maximum log-likelihoods, -7391.448 -(-7396.067) = 4.619, is significant. 
     
@@ -626,10 +626,10 @@ A result from statistical theory states that, when the reduced model is the true
     
 Our test statistic is
 
-\begin{eqnarray}    
- \textrm{LRT} &=& 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
-     &=& 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
-\end{eqnarray}
+\begin{align}    
+ \textrm{LRT} &= 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
+     &= 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
+\end{align}
 
 Intuitively, when the likelihood for the larger model is much greater than it is for the reduced model, we have evidence that the larger model is more closely aligned with the observed data. This isn't really a fair comparison on the face of it.  We need to account for the fact that more parameters were estimated and used for the larger model. That is accomplished by taking into account the degrees of freedom for the $\chi^2$ distribution. The expected value of the $\chi^2$ distribution is its degrees of freedom.  Thus when the difference in the number of parameters is large, the test statistic will need to be much larger to convince us that it is not simply chance variation with two identical models. Here, under the reduced model we'd expect our test statistic to be 2, when in fact it is over 9.  The evidence favors our larger model. More precisely, the test statistic is $2(-7391.448+7396.073) = 9.238,\; (p=.0099)$.
     
