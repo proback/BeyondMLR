@@ -1221,7 +1221,6 @@ Var(Y_{ijk}) = (\sigma^{2} + \sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + 2(\sigma
 and the covariance between observations taken at different timepoints ($k$ and $k^{'}$) from the same plant ($j$) is:
 
 \begin{equation}
-
 Cov(Y_{ijk},Y_{ijk^{'}}) = (\sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + (\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})(t_{k}+t_{k^{'}}) + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}t_{k^{'}},
 (\#eq:cov1)
 \end{equation}
