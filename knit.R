@@ -1,7 +1,7 @@
 library(tidyverse)
 library(bookdown)
 
-setwd("~/BYSH PDF/")
+setwd("~/BYSH/")
 
 #render entire book
 render_book("index.Rmd", output_format = 'bookdown::pdf_book')
