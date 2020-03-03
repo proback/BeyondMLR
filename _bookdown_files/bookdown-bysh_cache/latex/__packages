@@ -42,3 +42,5 @@ boot
 HLMdiag
 broom
 ggmosaic
+data.table
+reshape2
