@@ -19,30 +19,30 @@ output:
 
 ## Introduction to Broadening Your Statistical Horizons
 
-Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets in to medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **linear least squares regression** models.  
+Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **linear least squares regression (LLSR)** models.  
 
-When models are fit to data using OLS, inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples.  While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of  linearity between Y and X need to be plausible.  
+When models are fit to data using linear least squares regression (LLSR), inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples.  While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of  linearity between Y and X need to be plausible.  
 
-However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for OLS or GLM inference.  
+However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
 
-The **Generalized Linear Models** in the book's title extends OLS methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Methods** will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will *broaden your statistical horizons*.
+The **GLMs (Generalized Linear Models)** in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will *broaden your statistical horizons*.
 
-In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with OLS  in the context of different studies. While linearity is sufficient for fitting an OLS model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with OLS modeling is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
+In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
 
-## Ordinary Least Squares (OLS) Assumptions
+## Assumptions for Linear Least Squares Regression (LLSR)
 
 ```{r load_packages1, include=FALSE}
 library(tidyverse)    
 library(knitr) 
 library(gridExtra)
 library(GGally)
-library(grid)
 library(kableExtra)
+library(jtools)
 
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
-```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Ordinary least squares assumptions', echo=FALSE}
+```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR)', echo=FALSE}
 ## Sample data for graph of OLS normality assumption
 ##   Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
 
@@ -73,15 +73,15 @@ dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
 dens$section <- rep(levels(dat$section), each=10000)
 
 ggplot(dat, aes(x, y)) +
-  geom_point(size = 0.1) +
+  geom_point(size = 0.1, alpha = 0.25) +
   geom_smooth(method="lm", fill=NA, lwd=2) +
-  geom_path(data=dens[dens$type=="normal",], aes(x, y, group=section), 
-            color="salmon", lwd=1.1) +
+  geom_path(data=dens[dens$type=="normal",], 
+            aes(x, y, group=section), color="salmon", lwd=1.1) +
   theme_bw() +
   geom_vline(xintercept=breaks, lty=2)
 ```
 
-Recall that making inferences or predictions with models fit using ordinary least squares (OLS) requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on OLS.  If we consider a simple linear regression with just a single predictor X, then:
+Recall that making inferences or predictions with models fit using linear least squares regression requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on LLSR.  If we consider a simple linear regression with just a single predictor X, then:
 
 - **L:** there is a linear relationship between the mean response (Y) and the explanatory variable (X),
 - **I:** the errors are independent---there's no connection between how far any two points lie from the regression line, 
@@ -95,9 +95,9 @@ These assumptions are depicted in Figure \@ref(fig:OLSassumptions).
 - **N:** At each level of X, the values for Y are normally distributed.
 - **E:** The spread in the Y's for each level of X is the same.
 
-### Cases that do not violate the OLS assumptions for inference
+### Cases that do not violate assumptions for inference in LLSR
 
-It can be argued that the following studies do not violate the OLS assumptions for inference. We begin by identifying the response and the explanatory variables followed by  describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.  
+It can be argued that the following studies do not violate assumptions for inference in linear least squares regression. We begin by identifying the response and the explanatory variables followed by  describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.  
 
 1) **Reaction times and car radios.** A researcher suspects that loud music can affect how quickly drivers react.  She randomly selects drivers to drive the same stretch of road with varying levels of music volume. Stopping distances for each driver are  measured along with the decibel level of the music on their car radio.  
 
@@ -105,7 +105,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - *Explanatory variable:* Decibel level of music  
     <br>
     
-    The OLS assumptions for inference would apply if:
+    The assumptions for inference in LLSR would apply if:
     
     - **L:** The mean reaction time is linearly related to decibel level of the music.
     - **I:** Stopping distances are independent.  The random selection of drivers should assure independence.
@@ -113,7 +113,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - **E:** The variation in stopping distances should be approximately the same for each decibel level of music.  
     <br>
     
-    There are potential problems with the linearity and equal standard deviation assumptions.  For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be  a linear function of music.  Another problem may occur if a few subjects at each decibel level took a really long time to react.  In this case, reaction times would be right skewed and the normality assumption would be violated.  Often we can think of circumstances where the OLS assumptions may be suspect.  Later in this chapter we will describe plots which can help diagnose issues with OLS assumptions.  
+    There are potential problems with the linearity and equal standard deviation assumptions.  For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be  a linear function of music.  Another problem may occur if a few subjects at each decibel level took a really long time to react.  In this case, reaction times would be right skewed and the normality assumption would be violated.  Often we can think of circumstances where the LLSR assumptions may be suspect.  Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.  
 
 2) **Crop yield and rainfall.** The yield of wheat per acre for the month of July is thought to be related to the rainfall. A researcher randomly selects acres of wheat and records the rainfall and bushels of wheat per acre.  
 
@@ -135,13 +135,13 @@ It can be argued that the following studies do not violate the OLS assumptions f
       
       - **L:** The mean height of firstborn sons is linearly related to heights of fathers.
       - **I:** The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.
-      - **N:** The heights of firstborn sons for a given fathers' height are normally distributed.
+      - **N:** The heights of firstborn sons for a given father's height are normally distributed.
       - **E:** The standard deviation of firstborn sons' heights at a given father's height are the same.  
     <br>
     
     Heights and other similar measurements are often normally distributed.  There would be a problem with the independence assumption if multiple sons from the same family were selected.  Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.  
 
-### Cases where the OLS assumptions for inference are violated
+### Cases where assumptions for inference in LLSR are violated
 
 1) **Grades and studying.** Is the time spent studying predictive of success on an exam? The time spent studying for an exam, in hours, and success, measured as Pass or Fail, are recorded for  randomly selected students.  
   
@@ -149,7 +149,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - *Explanatory variable:* Time spent studying (in hours)  
     <br>
     
-    Here the response is a binary outcome which violates the OLS assumption of a normally distributed response at each level of X. In Chapter \@ref(ch-logreg), we will see logistic regression which is more suitable for models with binary responses.  
+    Here the response is a binary outcome which violates the assumption of a normally distributed response at each level of X. In Chapter \@ref(ch-logreg), we will see logistic regression, which is more suitable for models with binary responses.  
 
 2) **Income and family size.** Do wealthy families tend to have fewer children compared to lower income families?  Annual income and family size are recorded for a random sample of families.  
 
@@ -157,7 +157,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - *Explanatory variable:* Annual income, in dollars  
     <br>
     
-    Family size is a count taking on integer values from 0 to (technically) no upper bound.  The  normality assumption  may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number  of children.  Both of these concerns lead us to question the validity of the normality assumption. Study design should also specify that families are done adding children to their family.  
+    Family size is a count taking on integer values from 0 to (technically) no upper bound.  The  normality assumption  may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number  of children.  Both of these concerns, along with the discrete nature of the response, lead us to question the validity of the normality assumption. In fact, we might consider Poisson models discussed in Chapter \@ref(ch-poissonreg).  Study design should also specify that families are done adding children to their family.  
 
 3) **Exercise, weight, and sex.** Investigators collected the weight, sex,  and amount of exercise for a random sample of college students.  
 
@@ -165,7 +165,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - *Explanatory variables:* Sex and hours spent exercising in a typical week  
     <br>
     
-    With two predictors, the assumptions now apply to the combination of sex and exercise.  For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females.  This data may not be appropriate for OLS modeling because the standard deviation in weight for students who do not exercise  for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime.  We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected.  There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.  
+    With two predictors, the assumptions now apply to the combination of sex and exercise.  For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females.  This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise  for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime.  We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected.  There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.  
 
 4) **Surgery Outcome and Patient Age.** Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest.  Patients were randomly selected for each surgeon at each hospital.  The surgery outcome was recorded on a scale of one to ten.  
  
@@ -173,15 +173,15 @@ It can be argued that the following studies do not violate the OLS assumptions f
     - *Explanatory variable:* Patient age, in years  
     <br>
     
-    Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons' skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon.  Furthermore, outcomes at one hospital may be more similar possibly due to  factors associated with different patient populations.  The very structure of this data suggests that the independence assumption will be violated. Multilevel models will explicitly take this structure into account for a proper analysis of this study's results.  
+    Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons' skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon.  Furthermore, outcomes at one hospital may be more similar, possibly due to  factors associated with different patient populations.  The very structure of this data suggests that the independence assumption will be violated. Multilevel models, which we begin discussing in Chapter \@ref(ch-multilevelintro), will explicitly take this structure into account for a proper analysis of this study's results.  
 
-While we identified possible violations of  OLS assumptions for inference for each of the examples in this section, there may be  violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.   
+While we identified possible violations of assumptions for inference in LLSR for each of the examples in this section, there may be  violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.   
 
 ## Review of Multiple Linear Regression
 
 ### Case Study: Kentucky Derby {#cs:derby}
 
-Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use OLS linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
+Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
 ## Initial Exploratory Analyses {#explore}
 ### Data Organization
@@ -210,7 +210,7 @@ kable(table1, booktabs=T,caption="The first five and the last five observations 
 
 With any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables.  This should *always* be done *before* any model fitting!  We must understand our data thoroughly before doing anything else.  
 
-First, we will examine each response variable and potential covariate individually.  Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.  
+First, we will examine the response variable and each potential covariate individually.  Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.  
 
 ```{r twohist, fig.align = "center", out.width="90%", fig.cap = 'Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters.', echo=FALSE, message=FALSE}
 # EDA graphs
@@ -249,8 +249,8 @@ By using shape or color or other attributes, we can incorporate the effect of a 
 ```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE}
 # Coded scatterplot
 ggplot(derby.df, aes(x = year, y = speed, colour = fastfactor)) +
-  geom_point() +
-  geom_smooth(method = lm, se = FALSE)
+  geom_point(aes(shape = fastfactor)) +
+  geom_smooth(aes(linetype = fastfactor), method = lm, se = FALSE)
 ```
 
 Of course, any graphical analysis is exploratory, and any notable trends at this stage should be checked through formal modeling.  At this point, a statistician begins to ask familiar questions such as:
@@ -269,39 +269,39 @@ As you might expect, answers to these questions will arise from proper considera
 We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896?  For this initial model, let $Y_{i}$ be the speed of the winning horse in year $i$.  Then, we might consider Model 1: 
 
 \begin{equation}
- Y_{i}=\beta_{0}+\beta_{1}(\textrm{Year}_{i})+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+ Y_{i}=\beta_{0}+\beta_{1}\textrm{Year}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model1)
 \end{equation}
 
-In this case, $\beta_{0}$ represents the true intercept---the expected winning speed during Year 0.  $\beta_{1}$ represents the true slope---the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896).  Finally, the **error** ($\epsilon_{i}$) terms represent the deviations of the actual winning speed in Year $i$ ($Y_i$) from the expected scores under this model ($\beta_{0}+\beta_{1}(\textrm{Year}_{i})$)---the part of a horse's winning speed that is not explained by a linear trend over time.  The variability in these deviations from the regression model is denoted by $\sigma^2$.  
+In this case, $\beta_{0}$ represents the true intercept---the expected winning speed during Year 0.  $\beta_{1}$ represents the true slope---the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896).  Finally, the **error** ($\epsilon_{i}$) terms represent the deviations of the actual winning speed in Year $i$ ($Y_i$) from the expected speeds under this model ($\beta_{0}+\beta_{1}\textrm{Year}_{i}$)---the part of a horse's winning speed that is not explained by a linear trend over time.  The variability in these deviations from the regression model is denoted by $\sigma^2$.  
 
-The parameters in this model ($\beta_{0}$, $\beta_{1}$, and $\sigma^2$) can be estimated through OLS methods; we will use hats to denote estimates of population parameters based on empirical data.  Values for $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ are selected to minimize the sum of squared residuals, where a **residual** is simply the observed prediction error---the actual winning speed for a given year minus the winning speed predicted by the model.  In the notation of this section, 
+The parameters in this model ($\beta_{0}$, $\beta_{1}$, and $\sigma^2$) can be estimated through ordinary least squares methods; we will use hats to denote estimates of population parameters based on empirical data.  Values for $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ are selected to minimize the sum of squared residuals, where a **residual** is simply the observed prediction error---the actual winning speed for a given year minus the winning speed predicted by the model.  In the notation of this section, 
 
-- Predicted speed: $\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}(\textrm{Year}_{i})$
+- Predicted speed: $\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}\textrm{Year}_{i}$
 - Residual (estimated error):  $\hat{\epsilon}_{i}=Y_{i} - \hat{Y}_{i}$
 - Estimated variance of points around the line: $\hat{\sigma}^2 = \sum \hat{\epsilon}^2_{i} / (n-2)$  
   
 Using Kentucky Derby data, we estimate $\hat{\beta}_{0}=2.05$, $\hat{\beta}_{1}=0.026$, and $\hat{\sigma}=0.90$.  Thus, according to our simple linear regression model, winning horses of the Kentucky Derby have an estimated winning speed of 2.05 ft/s in Year 0 (more than 2000 years ago!), and the winning speed improves by an estimated 0.026 ft/s every year.  With an $R^2$ of 0.513, the regression model explains a moderate amount (51.3\%) of the year-to-year variability in winning speeds, and the trend toward a linear rate of improvement each year is statistically significant at the 0.05 level (t(120) = 11.251, p < .001).  
 
-```{r model11, echo=FALSE, comment=NA}
-model1 = lm(speed~year, data=derby.df)
-tmp <- capture.output(summary(model1))
-cat(tmp[c(3:4, 9:13, 16:17)], sep='\n')
+```{r model11, comment=NA}
+model1 <- lm(speed ~ year, data = derby.df)
+summ(model1, digits = 3, model.info = FALSE)
 ```
 
 You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896.  One way to create more meaningful parameters is through **centering**.  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
+
 \begin{equation}
 \begin{split}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\epsilon_{i}\quad &\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
     &\textrm{and} \quad \textrm{Yearnew}=\textrm{Year}-1896.
 \end{split}
 (\#eq:model2)
 \end{equation}
+
 Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; $\hat{\beta}_{1}$, $R^2$, and $\hat{\sigma}$ all remain exactly the same.  Now $\hat{\beta}_{0}$ tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same.  As Figure \@ref(fig:center) shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes.   
-```{r model2, echo=FALSE, comment=NA}
-model2 = lm(speed~yearnew, data=derby.df)
-tmp <- capture.output(summary(model2))
-cat(tmp[c(3:4, 9:13, 16:17)], sep='\n')
+```{r model2, comment=NA}
+model2 <- lm(speed ~ yearnew, data = derby.df)
+summ(model2, digits = 3, model.info = FALSE)
 ```
 
 ```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE}
@@ -333,25 +333,28 @@ In this case, the Residuals vs. Fitted plot indicates that a quadratic fit might
 We recommend relying on graphical evidence for identifying regression model assumption violations, looking for highly obvious violations of assumptions before trying corrective actions.  While some numerical tests have been devised for issues such as normality and influence, most of these tests are not very reliable, highly influenced by sample size and other factors.  There is typically no residual plot, however, to evaluate the Independence assumption; evidence for lack of independence comes from knowing about the study design and methods of data collection.  In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.  
 
 Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.  
+
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model2Q)
 \end{equation}
+
 This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time.  In fact, there is evidence that the quadratic model improves upon the linear model (see Figure \@ref(fig:models2and2q)).  $R^2$, the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3\% to 64.1\%, and the pattern in the Residuals vs. Fitted plot of Figure \@ref(fig:resid2) has disappeared in Figure \@ref(fig:resid2q), although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability.  The significantly negative coefficient for $\beta_{2}$ suggests that the rate of increase is indeed slowing in more recent years.  
 
-```{r models2and2q, fig.align = "center", out.width = "90%", fig.cap = 'Linear vs. quadratic fit', echo=FALSE, warning=FALSE}
+```{r models2and2q, fig.align = "center", out.width = "90%", fig.cap = 'Linear (solid) vs. quadratic (dashed) fit', echo=FALSE, warning=FALSE}
 # Fitted models for Model 2 and Model 2Q
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x, se = FALSE, linetype = 1) +
-  stat_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE, linetype = 2)
+  stat_smooth(method = "lm", formula = y ~ x, 
+              se = FALSE, linetype = 1) +
+  stat_smooth(method = "lm", formula = y ~ x + I(x^2), 
+              se = FALSE, linetype = 2)
 ```
 
-```{r model2Q, echo=FALSE, comment=NA}
+```{r model2Q, comment=NA}
 derby.df <- mutate(derby.df, yearnew2 = yearnew^2)
-model2q = lm(speed ~ yearnew + yearnew2, data=derby.df)
-tmp <- capture.output(summary(model2q))
-cat(tmp[c(3:4, 9:14, 17:18)], sep='\n')
+model2q <- lm(speed ~ yearnew + yearnew2, data = derby.df)
+summ(model2q, digits = 4, model.info = FALSE)
 ```
 
 ```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q', echo=FALSE, warning=FALSE}
@@ -361,12 +364,12 @@ plot(model2q)
 par(mfrow=c(1,1))
 ```
 
-###  linear regression with a binary predictor
+### Linear regression with a binary predictor
 
 We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable**---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
 
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model3)
 \end{equation}
 
@@ -384,14 +387,14 @@ Y_{i} = \beta_{0}+\epsilon_{i}
 Y_{i} = (\beta_{0}+\beta_{1})+\epsilon_{i}
 \end{equation}
 
-$\beta_{0}$ is the expected winning speed under good or slow conditions, while $\beta_{1}$ is the difference between expected winning speeds under fast conditions vs. non-fast conditions.  According to our fitted Model 3, the estimated winning speed under non-fast conditions is 52.0 ft/s, while mean winning speeds under fast conditions are estimated to be 1.6 ft/s higher.  
-```{r model3, echo=FALSE, comment=NA}
-model3 = lm(speed~fast, data=derby.df)
-tmp <- capture.output(summary(model3))
-cat(tmp[c(3:4, 9:13, 16:17)], sep='\n')
+$\beta_{0}$ is the expected winning speed under good or slow conditions, while $\beta_{1}$ is the difference between expected winning speeds under fast conditions vs. non-fast conditions.  According to our fitted Model 3, the estimated winning speed under non-fast conditions is 52.0 ft/s, while mean winning speeds under fast conditions are estimated to be 1.6 ft/s higher. 
+
+```{r model3, comment=NA}
+model3 <- lm(speed ~ fast, data = derby.df)
+summ(model3, digits = 3, model.info = FALSE)
 ```
 
-You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test?  The answer is: we did!  The t-test corresponding to $\beta_{1}$ is equivalent to an independent-samples t-test with under equal variances.  Convince yourself that this is true, and that the equal variance assumption is needed.
+You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test?  The answer is: we did!  The t-test corresponding to $\beta_{1}$ is equivalent to an independent-samples t-test under equal variances.  Convince yourself that this is true, and that the equal variance assumption is needed.
 
 ### Multiple linear regression with two predictors
 
@@ -400,15 +403,15 @@ The beauty of the linear regression framework is that we can add additional expl
 Our new model (Model 4) can be written:
 
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 (\#eq:model4)
 \end{equation}
 
-and OLS provides the following parameter estimates:
-```{r model4, echo=FALSE, comment=NA}
-model4 = lm(speed~yearnew+fast, data=derby.df)
-tmp <- capture.output(summary(model4))
-cat(tmp[c(3:4, 9:14, 17:18)], sep='\n')
+and ordinary least squares (OLS) provides the following parameter estimates:
+
+```{r model4, comment=NA}
+model4 <- lm(speed ~ yearnew + fast, data = derby.df)
+summ(model4, digits = 3, model.info = FALSE)
 ```
 
 Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time.  It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time.  Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition.  This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition.  Based on the $R^2$ value, Model 4 explains 68.7\% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.  
