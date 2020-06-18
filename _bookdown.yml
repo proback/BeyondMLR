@@ -2,16 +2,5 @@ book_filename: "bookdown-bysh"
 chapter_name: "Chapter "
 output_dir: docs
 rmd_files: ["index.Rmd", 
-  "01-Introduction.Rmd",
-  "02-Beyond-Most-Least-Squares.Rmd",
-  "03-Distribution-Theory.Rmd",
-  "04-Poisson-Regression.Rmd",
-  "05-Generalized-Linear-Models.Rmd",
-  "06-Logistic-Regression.Rmd",
-  "07-Correlated-Data.Rmd",
-  "08-Introduction-to-Multilevel-Models.Rmd",
-  "09-Two-Level-Longitudinal-Data.Rmd",
-  "10-Multilevel-Data-With-More-Than-Two-Levels.Rmd",
-  "11-Generalized-Linear-Multilevel-Models.Rmd",
-  "99-References.Rmd"]
+  "02-Beyond-Most-Least-Squares.Rmd"]
 clean: [packages.bib, bookdown.bbl]
