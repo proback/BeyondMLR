@@ -6,14 +6,15 @@ output:
   pdf_document:
     number_sections: yes
 ---
+
 # Review of Multiple Linear Regression {#ch-MLRreview}
 
 ## Learning Objectives
   After finishing this chapter, you should be able to:
 
-- Identify cases where ordinary least squares (OLS) assumptions are violated.
+- Identify cases where linear least squares regression (LLSR) assumptions are violated.
 - Generate exploratory data analysis plots and summary statistics.
-- Use residual diagnostics to examine OLS assumptions.
+- Use residual diagnostics to examine LLSR assumptions.
 - Interpret parameters and associated tests and intervals from multiple regression models.
 - Understand the basic ideas behind bootstrapped confidence intervals.
 
@@ -31,18 +32,24 @@ In order to understand the motivation for handling violations of assumptions, it
 
 ## Assumptions for Linear Least Squares Regression (LLSR)
 
-```{r load_packages1, include=FALSE}
-library(tidyverse)    
+```{r load_packages1, message = FALSE}
+# Packages required for Chapter 1
 library(knitr) 
 library(gridExtra)
 library(GGally)
 library(kableExtra)
 library(jtools)
+library(rsample)
+library(purrr)
+library(broom)
+library(tidyverse)    
+```
 
+```{r include=FALSE}
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
-```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR)', echo=FALSE}
+```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR)', echo=FALSE, message = FALSE}
 ## Sample data for graph of OLS normality assumption
 ##   Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
 
@@ -103,16 +110,14 @@ It can be argued that the following studies do not violate assumptions for infer
 
     - *Response variable:* Reaction time
     - *Explanatory variable:* Decibel level of music  
-    <br>
-    
+
     The assumptions for inference in LLSR would apply if:
     
     - **L:** The mean reaction time is linearly related to decibel level of the music.
     - **I:** Stopping distances are independent.  The random selection of drivers should assure independence.
     - **N:** The stopping distances for a given decibel level of music vary and are normally distributed.
     - **E:** The variation in stopping distances should be approximately the same for each decibel level of music.  
-    <br>
-    
+
     There are potential problems with the linearity and equal standard deviation assumptions.  For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be  a linear function of music.  Another problem may occur if a few subjects at each decibel level took a really long time to react.  In this case, reaction times would be right skewed and the normality assumption would be violated.  Often we can think of circumstances where the LLSR assumptions may be suspect.  Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.  
 
 2) **Crop yield and rainfall.** The yield of wheat per acre for the month of July is thought to be related to the rainfall. A researcher randomly selects acres of wheat and records the rainfall and bushels of wheat per acre.  
@@ -124,8 +129,7 @@ It can be argued that the following studies do not violate assumptions for infer
     - **I:** Fields' yields are independent; knowing one (X, Y) pair does not provide information about another.
     - **N:** The yields for a given amount of  rainfall are normally distributed.
     - **E:**  The standard deviation of yields is approximately the same for each rainfall level.  
-    <br>
-    
+
     Again we may encounter problems with the linearity assumption if mean yields increase initially as the amount of rainfall increases after which excess rainfall begins to ruin crop yield.  The random selection of fields should assure independence if fields are not close to one another.  
 
 3) **Heights of sons and fathers.** Sir Francis Galton suspected that a son's height could be predicted using the father's height. He collected observations on heights of fathers and their firstborn sons [@Stigler2002].  
@@ -137,8 +141,7 @@ It can be argued that the following studies do not violate assumptions for infer
       - **I:** The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.
       - **N:** The heights of firstborn sons for a given father's height are normally distributed.
       - **E:** The standard deviation of firstborn sons' heights at a given father's height are the same.  
-    <br>
-    
+
     Heights and other similar measurements are often normally distributed.  There would be a problem with the independence assumption if multiple sons from the same family were selected.  Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.  
 
 ### Cases where assumptions for inference in LLSR are violated
@@ -147,32 +150,28 @@ It can be argued that the following studies do not violate assumptions for infer
   
     - *Response variable:* Exam outcome (Pass or Fail)
     - *Explanatory variable:* Time spent studying (in hours)  
-    <br>
-    
+
     Here the response is a binary outcome which violates the assumption of a normally distributed response at each level of X. In Chapter \@ref(ch-logreg), we will see logistic regression, which is more suitable for models with binary responses.  
 
 2) **Income and family size.** Do wealthy families tend to have fewer children compared to lower income families?  Annual income and family size are recorded for a random sample of families.  
 
     - *Response variable:* Family size, number of children
     - *Explanatory variable:* Annual income, in dollars  
-    <br>
-    
+
     Family size is a count taking on integer values from 0 to (technically) no upper bound.  The  normality assumption  may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number  of children.  Both of these concerns, along with the discrete nature of the response, lead us to question the validity of the normality assumption. In fact, we might consider Poisson models discussed in Chapter \@ref(ch-poissonreg).  Study design should also specify that families are done adding children to their family.  
 
 3) **Exercise, weight, and sex.** Investigators collected the weight, sex,  and amount of exercise for a random sample of college students.  
 
     - *Response variable:* Weight
     - *Explanatory variables:* Sex and hours spent exercising in a typical week  
-    <br>
-    
+
     With two predictors, the assumptions now apply to the combination of sex and exercise.  For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females.  This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise  for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime.  We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected.  There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.  
 
 4) **Surgery Outcome and Patient Age.** Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest.  Patients were randomly selected for each surgeon at each hospital.  The surgery outcome was recorded on a scale of one to ten.  
  
     - *Response variable:* Surgery outcome, scale 1-10
     - *Explanatory variable:* Patient age, in years  
-    <br>
-    
+
     Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons' skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon.  Furthermore, outcomes at one hospital may be more similar, possibly due to  factors associated with different patient populations.  The very structure of this data suggests that the independence assumption will be violated. Multilevel models, which we begin discussing in Chapter \@ref(ch-multilevelintro), will explicitly take this structure into account for a proper analysis of this study's results.  
 
 While we identified possible violations of assumptions for inference in LLSR for each of the examples in this section, there may be  violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.   
@@ -246,7 +245,7 @@ Finally, notice that the diagonal illustrates the distribution of individual var
 
 By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure  \@ref(fig:bivariate).  For example, in the **coded scatterplot** of Figure \@ref(fig:codeds) we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.  
 
-```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE}
+```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE, message=FALSE}
 # Coded scatterplot
 ggplot(derby.df, aes(x = year, y = speed, colour = fastfactor)) +
   geom_point(aes(shape = fastfactor)) +
@@ -285,7 +284,12 @@ Using Kentucky Derby data, we estimate $\hat{\beta}_{0}=2.05$, $\hat{\beta}_{1}=
 
 ```{r model11, comment=NA}
 model1 <- lm(speed ~ year, data = derby.df)
-summ(model1, digits = 3, model.info = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model1))
+cat(" R squared = ", summary(model1)$r.squared, "\n", 
+    "Residual standard error = ", summary(model1)$sigma)
 ```
 
 You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896.  One way to create more meaningful parameters is through **centering**.  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
@@ -298,13 +302,19 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &\textrm{where} 
 (\#eq:model2)
 \end{equation}
 
-Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; $\hat{\beta}_{1}$, $R^2$, and $\hat{\sigma}$ all remain exactly the same.  Now $\hat{\beta}_{0}$ tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same.  As Figure \@ref(fig:center) shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes.   
+Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; $\hat{\beta}_{1}$, $R^2$, and $\hat{\sigma}$ all remain exactly the same.  Now $\hat{\beta}_{0}$ tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same.  As Figure \@ref(fig:center) shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes. 
+
 ```{r model2, comment=NA}
 model2 <- lm(speed ~ yearnew, data = derby.df)
-summ(model2, digits = 3, model.info = FALSE)
 ```
 
-```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model2))
+cat(" R squared = ", summary(model2)$r.squared, "\n", 
+    "Residual standard error = ", summary(model2)$sigma)
+```
+
+```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() + xlim(0,2020) + ylim(0,55) +
   geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
@@ -354,7 +364,12 @@ ggplot(derby.df, aes(x = year, y = speed)) +
 ```{r model2Q, comment=NA}
 derby.df <- mutate(derby.df, yearnew2 = yearnew^2)
 model2q <- lm(speed ~ yearnew + yearnew2, data = derby.df)
-summ(model2q, digits = 4, model.info = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model2q))
+cat(" R squared = ", summary(model2q)$r.squared, "\n", 
+    "Residual standard error = ", summary(model2q)$sigma)
 ```
 
 ```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q', echo=FALSE, warning=FALSE}
@@ -391,7 +406,12 @@ $\beta_{0}$ is the expected winning speed under good or slow conditions, while $
 
 ```{r model3, comment=NA}
 model3 <- lm(speed ~ fast, data = derby.df)
-summ(model3, digits = 3, model.info = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model3))
+cat(" R squared = ", summary(model3)$r.squared, "\n", 
+    "Residual standard error = ", summary(model3)$sigma)
 ```
 
 You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test?  The answer is: we did!  The t-test corresponding to $\beta_{1}$ is equivalent to an independent-samples t-test under equal variances.  Convince yourself that this is true, and that the equal variance assumption is needed.
@@ -411,7 +431,12 @@ and ordinary least squares (OLS) provides the following parameter estimates:
 
 ```{r model4, comment=NA}
 model4 <- lm(speed ~ yearnew + fast, data = derby.df)
-summ(model4, digits = 3, model.info = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model4))
+cat(" R squared = ", summary(model4)$r.squared, "\n", 
+    "Residual standard error = ", summary(model4)$sigma)
 ```
 
 Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time.  It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time.  Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition.  This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition.  Based on the $R^2$ value, Model 4 explains 68.7\% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.  
@@ -444,30 +469,16 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 - the 1000 bootstrap estimates for each parameter can be plotted to show the **bootstrap distribution** (see Figure \@ref(fig:boot4))
 - a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles.  This is called the **percentile method**.
 
-```{r, include=FALSE}
-#Old code - boostrap deprecated
-#library(broom)
-#bootregr <- derby.df %>% bootstrap(1000) %>%
-#  do(tidy(lm(speed ~ yearnew + fast, .)))
-#bootregr %>% group_by(term) %>% 
-#  dplyr::summarize(low=quantile(estimate, .025),
-#            high=quantile(estimate, .975))
-```
-
-```{r model4boot, comment=NA}
-    # updated code from tobiasgerstenberg on github
-    library(rsample)
-    library(purrr)
-    library(broom)
-    bootreg = derby.df %>% 
-      bootstraps(1000) %>%
-      pull(splits) %>% 
-      map_dfr(~lm(speed ~ yearnew + fast, data = .) %>% 
-                tidy())
-    summarize = dplyr::summarize
-    bootreg %>% 
-      group_by(term) %>% 
-      summarize(low=quantile(estimate, .025),
+```{r model4boot, comment=NA, message=FALSE}
+# updated code from tobiasgerstenberg on github
+bootreg <- derby.df %>% 
+  bootstraps(1000) %>%
+  pull(splits) %>% 
+  map_dfr(~lm(speed ~ yearnew + fast, data = .) %>% 
+            tidy())
+bootreg %>% 
+  group_by(term) %>% 
+  summarize(low=quantile(estimate, .025),
             high=quantile(estimate, .975))
 ```
 
@@ -478,7 +489,7 @@ ggplot(bootreg, aes(estimate)) +
 
 In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\beta_1$, and $\beta_2$ are very similar to the normal-theory confidence intervals we found earlier.  For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.89 to 1.55 ft/s.  
 
-There are many variations on this bootstrap procedure.  For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution.  In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated (@Hesterberg2015; @Efron1993; @Davison1997).  We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.  
+There are many variations on this bootstrap procedure.  For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution.  In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated methods (@Hesterberg2015; @Efron1993; @Davison1997).  We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.  
 
 ### Multiple linear regression with an interaction term
 
@@ -488,23 +499,29 @@ Thus, consider Model 5:
 
 \begin{equation}
 \begin{split}
- Y_{i}&= \beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i}) \notag \\
-      &{}+\beta_{3}(\textrm{Yearnew}\times\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}&= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
+      &{}+\beta_{3}\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 (\#eq:model5)
 \end{equation}
 
 where OLS provides the following parameter estimates:
-```{r model5, echo=FALSE, comment=NA}
-model5 = lm(speed~yearnew+fast+yearnew:fast, data=derby.df)
-tmp <- capture.output(summary(model5))
-cat(tmp[c(3:4, 9:15, 18:19)], sep='\n')
+
+```{r model5, comment=NA}
+model5 <- lm(speed ~ yearnew + fast + yearnew:fast, 
+             data=derby.df)
 ```
 
-According to OLS estimates, estimated winning speeds can be found by:
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model5))
+cat(" R squared = ", summary(model5)$r.squared, "\n", 
+    "Residual standard error = ", summary(model5)$sigma)
+```
+
+According to our model, estimated winning speeds can be found by:
 
 \begin{equation}
- \hat{Y}_{i}=50.53+0.031(\textrm{Yearnew}_{i})+1.83(\textrm{Fast}_{i})-0.011(\textrm{Yearnew}\times\textrm{Fast}_{i}).
+ \hat{Y}_{i}=50.53+0.031\textrm{Yearnew}_{i}+1.83\textrm{Fast}_{i}-0.011\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}.
 (\#eq:model5est)
 \end{equation}
 
@@ -512,9 +529,9 @@ Interpretations of model coefficients are most easily seen by writing out separa
 
 \begin{align*}
  \textrm{Fast}=0: & \\
- \hat{Y}_{i} &= 50.53+0.031(\textrm{Yearnew}_{i}) \\
+ \hat{Y}_{i} &= 50.53+0.031\textrm{Yearnew}_{i} \\
  \textrm{Fast}=1: & \\
- \hat{Y}_{i} &= (50.53+1.83)+(0.031-0.011)(\textrm{Yearnew}_{i})
+ \hat{Y}_{i} &= (50.53+1.83)+(0.031-0.011)\textrm{Yearnew}_{i}
  \end{align*}
  
 leading to the following interpretations for estimated model coefficients:
@@ -551,26 +568,37 @@ One potential final model for predicting winning speeds of Kentucky Derby races 
 
 \begin{equation}
 \begin{split}
- Y_{i}&=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\beta_{3}(\textrm{Fast}_{i})\\
-      &{}+\beta_{4}(\textrm{Good}_{i})+\beta_{5}(\textrm{Starters}_{i})+\epsilon_{i}\quad 
-      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+ Y_{i}&=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\beta_{3}\textrm{Fast}_{i}\\
+      &{}+\beta_{4}\textrm{Good}_{i}+\beta_{5}\textrm{Starters}_{i}+\epsilon_{i}\quad 
+      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 (\#eq:model0)
 \end{equation}
 
 and OLS provides the following parameter estimates:
-```{r model0, echo=FALSE, comment=NA}
-model0 = lm(speed~yearnew+yearnew2+fast+good+starters, data=derby.df)
-tmp <- capture.output(summary(model0))
-cat(tmp[c(3:5, 10:18, 21:22)], sep='\n')
-# Compare models with and without terms for track condition
-model0_reduced = lm(speed~yearnew+yearnew2+starters, data=derby.df)
-tmp <- capture.output(anova(model0_reduced, model0))
-cat(tmp[c(1:7)], sep='\n')
+
+```{r model0, comment=NA}
+model0 <- lm(speed ~ yearnew + yearnew2 + fast + good +
+               starters, data = derby.df)
 ```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(model0))
+cat(" R squared = ", summary(model0)$r.squared, "\n", 
+    "Residual standard error = ", summary(model0)$sigma)
+```
+
+```{r}
+# Compare models with and without terms for track condition
+model0_reduced <- lm(speed ~ yearnew + yearnew2 + 
+                       starters, data = derby.df)
+nested_f <- anova(model0_reduced, model0)
+print(nested_f, signif.stars = FALSE)
+```
+
 This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses).  The model explains 82.7\% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions.  We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.
 
-## Preview
+## Preview of remaining chapters
 
 Having reviewed key ideas from multiple linear regression, you are now ready to extend those ideas, especially to handle non-normal responses and lack of independence.  This section provides a preview of the type of problems you will encounter in the book. For each journal article cited, we provide an abstract in the authors' words, a description of the type of response and, when applicable, the structure of the data. Each of these examples appears later as an exercise, where you can play with the actual data or evaluate the analyses detailed in the articles.    
 
@@ -586,7 +614,7 @@ The response for this analysis is the direction of the goalkeeper dive, a binary
 
 @Poole1989 .  Mate guarding, reproductive success and female choice in African elephants.  *Animal Behavior* **37**:842-49.   
 
-> **Abstract:**  Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, Loxodonta africana. Males were not able to compete successfully for access to oestrous female until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants...  
+> **Abstract:**  Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, *Loxodonta africana*. Males were not able to compete successfully for access to oestrous females until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants...  
 
 Poole and her colleagues recorded, for each male elephant, his age (in years) and the number of matings for a given year.  The researchers were interested in how age affects the males' mating patterns. Specifically, questions concern whether there is a steady increase in mating success as an elephant ages or if there is an optimal age after which the number of matings decline.  Because the responses of interest are counts (number of matings for each elephant for a given year), we will consider a Poisson regression (see Chapter \@ref(ch-poissonreg)).  The general form for Poisson responses is the number of events for a specified time, volume, or space.    
 
@@ -604,24 +632,23 @@ The response for this study is a gang activity measure which ranges from 1 to 10
 
 > **Abstract:** Recent studies by police departments and researchers confirm that police stop racial and ethnic minority citizens more often than whites, relative to their proportions in the population. However, it has been argued stop rates more accurately reflect rates of crimes committed by each ethnic group, or that stop rates reflect elevated rates in specific social areas such as neighborhoods or precincts. Most of the research on stop rates and police-citizen interactions has focused on traffic stops, and analyses of pedestrian stops are rare. In this paper, we analyze data from 175,000 pedestrian stops by the New York Police Department over a fifteen-month period. We disaggregate stops by police precinct, and compare stop rates by racial and ethnic group controlling for previous race-specific arrest rates. We use hierarchical multilevel models to adjust for precinct-level variability, thus directly addressing the question of geographic heterogeneity that arises in the analysis of pedestrian stops. We find that persons of African and Hispanic descent were stopped more frequently than whites, even after controlling for precinct variability and race-specific estimates of crime participation.  
 
-This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, generalized linear multilevel modeling, as addressed in Chapter \@ref(ch-GLMM).
+This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, multilevel generalized linear modeling, as addressed in Chapter \@ref(ch-GLMM).
 
 ## Exercises
 ### Conceptual Exercises
 
-1. **Applications that do not violate the OLS assumptions for inference**.  Identify the response and explanatory variable(s) for each problem.  Write the OLS assumptions for inference in the context of each study.  
+1. **Applications that do not violate assumptions for inference in LLSR**.  Identify the response and explanatory variable(s) for each problem.  Write the LLSR assumptions for inference in the context of each study.  
 
     a. **Cricket Chirps.** Researchers record the number of cricket chirps per minute and temperature during that time to investigate whether the number of chirps varies with the temperature.
     b. **Women's Heights.** A random selection of women aged 20-24 years are selected and their shoe size is used to predict their height  
     <br>
 
-1. **Applications that do violate the OLS assumptions for inference**.  All of the examples in this section have at least one violation of the OLS assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which OLS assumption(s) are violated. 
+1. **Applications that do violate assumptions for inference in LLSR**.  All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated. 
 
     a. **Low Birthweights.** Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight.  They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.
     a. **Clinical Trial I.** A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.
-    a. **Canoes and zip codes.** For each of over 27,000 overnight permits for the Boundary Water Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data.  This data is used to create a model for the number of trips made per zip code.
+    a. **Canoes and zip codes.** For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data.  This data is used to create a model for the number of trips made per zip code.
     a. **Clinical Trial II.** A randomized clinical trial  investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.
-    a. **Elephant mating.** Researchers are interested in how elephant age affects mating patterns among males.  In particular, do older elephants have greater mating success, and is there an optimal age for mating among males?  Data collected includes, for each elephant, age and number of matings in a given year.  
     <br>
 
 1. **Kentucky Derby.**  The next set of questions is related to the Kentucky Derby case study from this chapter.   
@@ -640,7 +667,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     l. Interpret (in context) the OLS estimates for $\beta_3$ and $\beta_5$ in Equation \@ref(eq:model0).  
     <br>
     
-1. **Moneyball.**  In a 2011 [article](http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/) in *The Sport Journal*, Farrar and Bruggink attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 *Moneyball* book [@Lewis2003].  They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out.  Two regression models are described: a Team Run Production Model and a Player Salary Model. [@Farrar2011]  
+1. **Moneyball.**  In a 2011 article in *The Sport Journal*, Farrar and Bruggink [-@Farrar2011] attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 *Moneyball* book [@Lewis2003].  They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out.  Two regression models are described: a Team Run Production Model and a Player Salary Model.   
 
     a. Discuss potential concerns (if any) with the LINE assumptions for linear regression in each model.
     b. In Table 3, the authors contend that Model 1 is better than Model 3.  Could you argue that Model 3 is actually better?  How could you run a formal hypothesis test comparing Model 1 to Model 3?
@@ -658,15 +685,15 @@ This application involves both non-normal data (number of stops by ethnic group 
     - `senior` = months since hired
     - `age` = age in months
     - `educ` = years of education
-    - `exper` = months of prior work experience </ul>  
+    - `exper` = months of prior work experience </ul>
     Creating an indicator variable based on `sex` could be helpful.  
     a. Identify observational units, the response variable, and explanatory variables.
     b. The mean starting salary of male workers (\$5957) was 16\% higher than the mean starting salary of female workers (\$5139).  Confirm these mean salaries.  Is this enough evidence to conclude gender discrimination exists?  If not, what further evidence would you need?
     c. How would you expect age, experience, and education to be related to starting salary?  Generate appropriate exploratory plots; are the relationships as you expected?  What implications does this have for modeling?
     d. Why might it be important to control for seniority (number of years with the bank) if we are only concerned with the salary when the worker started?
     e. By referring to exploratory plots and summary statistics, are any explanatory variables (including sex) closely related to each other?  What implications does this have for modeling?
-    f. Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1).  Interpret the intercept and slope of this model; also interpret the R-squared value.  Is there a significant relationship between experience and starting salary?  
-    g. Does Model 1 meet all linear regression assumptions?  List each assumption and how you decided if it was met or not.
+    f. Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1).  Interpret the intercept and slope of this model; also interpret the R-squared value.  Is there a significant relationship between experience and starting salary?
+    g. Does Model 1 meet all linear least squares regression assumptions?  List each assumption and how you decided if it was met or not.
     h. Is a model with all 4 confounding variables (Model 2, with `senior`, `educ`, `exper`, and `age`) better than a model with just experience (Model 1)?  Justify with an appropriate significance test in addition to summary statistics of model performance.
     i. You should have noticed that the term for age was not significant in Model 2.  What does this imply about age and about future modeling steps?
     j. Generate an appropriate coded scatterplot to examine a potential age-by-experience interaction.  How would you describe the nature of this interaction?
@@ -677,7 +704,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     o. Build your own final model for this study and justify the selection of your final model.  You might consider interactions with gender, since those terms could show that discrimination is stronger among certain workers.  Based on your final model, do you find evidence of gender discrimination at Harris Trust?  
 <br>
 
-1. **Sitting and MTL Thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of participant's medial temporal lobe (MTL) in their paper, [Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0195549).  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
+1. **Sitting and MTL Thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of participant's medial temporal lobe (MTL) in a 2018 paper entitled "Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults".  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
     - `MTL` = Medial temporal lobe thickness in mm 
     - `sitting` =  Reported hours/day spent sitting
     - `MET` =  Reported metabolic equivalent unit minutes per week
@@ -685,13 +712,13 @@ This application involves both non-normal data (number of stops by ethnic group 
     - `sex` = Sex (`M` = Male, `F` = Female)
     - `education` = Years of education completed
     </ul>
-    a. In their article's introduction, @Siddarth2018 differentiate their analysis on sedentary behavior from analysis on active behavior by citing evidence supporting the claim that "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your explanatory and response variables, respectively. Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
+    a. In their article's introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your explanatory and response variables, respectively. Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
     b. In the paper's section, "Statistical analysis", the authors report that "Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures."  Generate both a histogram of `MET` values and log--transformed `MET` values. Do you agree with the paper's decision to use a log-transformation here?
     c. Fit a preliminary model with `MTL` as the response and `sitting` as the sole explanatory variable.  Are OLS conditions satisfied?
     d. Expand on your previous model by including a centered version of `age` as a covariate. Interpret all three coefficients in this model.
-    e. One model fit in @Siddarth2018 includes `sitting`, log--transformed `MET`, and `age` as explanatory variables. They report an estimate $\widehat{\beta_1} = -0.02$ with confidence interval $(-0.04,-0.002)$ for the coefficient corresponding to `sitting`, and $\widehat{\beta_2} = 0.007$ with confidence interval $(-0.07, 0.08)$ for the coefficient corresponding to `MET`. Verify these intervals and estimates on your own.  
+    e. One model fit in @Siddarth2018 includes `sitting`, log--transformed `MET`, and `age` as explanatory variables. They report an estimate $\hat{\beta}_{1} = -0.02$ with confidence interval $(-0.04,-0.002)$ for the coefficient corresponding to `sitting`, and $\hat{\beta}_{2} = 0.007$ with confidence interval $(-0.07, 0.08)$ for the coefficient corresponding to `MET`. Verify these intervals and estimates on your own.
     f. Based on your confidence intervals from the previous part, do you support the paper's claim that "it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]"? Why or why not?
-    g. A [New York Times Article](https://www.nytimes.com/2018/04/19/opinion/standing-up-at-your-desk-could-make-you-smarter.html) was published discussing @Siddarth2018 with the title "Standing Up at Your Desk Could Make You Smarter" [@Friedman2018]. Do you agree with this headline choice? Why or why not?  
+    g. A *New York Times* article was published discussing @Siddarth2018 with the title "Standing Up at Your Desk Could Make You Smarter" [@Friedman2018]. Do you agree with this headline choice? Why or why not?  
 <br>
 
 1. **Housing Prices and log Transformations.** The dataset `kingCountyHouses.csv` contains data on over 20,000 houses sold in King County,
@@ -707,14 +734,13 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     - `yr_renovated` = 0 if the house was never renovated, the year the house was renovated if else </ul>
     
     We wish to create a linear model to predict a house's selling price.  
-    a. Generate appropriate graphs and summary statistics detailing both `price`
-       and `sqft` individually and then together. What do you notice?
+    a. Generate appropriate graphs and summary statistics detailing both `price` and `sqft` individually and then together. What do you notice?
     b. Fit a simple linear regression model with `price` as the response variable and `sqft` as the explanatory variable (Model 1). Interpret the slope coefficient $\beta_1$. Are all conditions met for linear regression?
     c. Create a new variable, `logprice`, the natural log of `price`. Fit Model 2, where `logprice` is now the response variable and `sqft` is still the explanatory variable. Write out the regression line equation.
     d. How does `logprice` change when `sqft` increases by 1.
     e. Recall that $\log(a) - \log(b) = \log\big(\frac{a}{b}\big)$, and use this to derive how `price` changes as `sqft` increases by 1.
     f. Are OLS assumptions satisfied in Model 2? Why or why not?
-    g. Create a new variable, `logsqft`, the natural log of `sqft`. Fit Model 3 where `price` and `logsqft` are the explanatory and response variables, respectively. Write out the regression line equation.
+    g. Create a new variable, `logsqft`, the natural log of `sqft`. Fit Model 3 where `price` and `logsqft` are the response and explanatory variables, respectively. Write out the regression line equation.
     h. How does predicted `price` change as `logsqft` increases by 1 in Model 3?
     i. How does predicted `price` change as `sqft` increases by 1\%? As a hint, this is the same as multiplying `sqft` by 1.01.
     j. Are OLS assumptions satisfied in Model 3? Why or why not?
@@ -724,7 +750,7 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     n. Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted $R^2$ value. Interpret the coefficient of this added variable.
     
 ### Open-ended Exercises
-1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article [The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women](https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/) [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
+1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article "The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women" [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
     - there are at least two named women in the picture
     - they have a conversation with each other at some point
     - that conversation isn’t about a male character </ul>

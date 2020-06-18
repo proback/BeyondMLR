@@ -21,9 +21,9 @@ options(
 
 # install the packages needed by this book; you fill out c(), e.g. c('ggplot2', 'dplyr')
 # update this &&&
-lapply(c('tidyverse','kableExtra','knitr','gridExtra','GGally','grid'), function(pkg) {
-  if (system.file(package = pkg) == '') install.packages(pkg)
-})
+#lapply(c('tidyverse','kableExtra','knitr','gridExtra','GGally','grid'), function(pkg) {
+#  if (system.file(package = pkg) == '') install.packages(pkg)
+#})
 ```
 
 \mainmatter

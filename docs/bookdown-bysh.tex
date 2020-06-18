@@ -37,7 +37,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Broadening Your Statistical Horizons},
+  pdftitle={GLMs and Multilevel Models},
   pdfauthor={Paul Roback and Julie Legler},
   colorlinks=true,
   linkcolor=Maroon,
@@ -199,16 +199,16 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{Broadening Your Statistical Horizons}
+\title{GLMs and Multilevel Models}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Generalized Linear Models and Multilevel Models}
+\subtitle{Broadening Your Statistical Horizons with Applications using R}
 \author{Paul Roback and Julie Legler}
-\date{2020-06-01}
+\date{2020-06-18}
 
 \begin{document}
 \maketitle
@@ -228,11 +228,19 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\mainmatter
+
 \hypertarget{preface}{%
 \chapter*{Preface}\label{preface}}
 
 
-Placeholder
+\includegraphics[width=0.75\linewidth]{data/cover}
+
+\textbf{GLMs and Multilevel Models: Broadening Your Statistical Horizons (BYSH) with Applications using R} is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like \emph{Stat2} \citep{Cannon2019}. We started teaching this course at St.~Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St.~Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook and \href{https://github.com/proback/BYSH}{available at our GitHub repo} arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will not necessarily be expert in these methods and associated theory, but that they will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+\textbf{Acknowledgements.} We would like to thank students of Stat 316 at St.~Olaf College since 2010 for their patience as this book has taken shape with their feedback. We would especially like to thank these St.~Olaf students for their summer research efforts which significantly improved aspects of this book: Cecilia Noecker, Anna Johanson, Nicole Bettes, Kiegan Rice, Anna Wall, Jack Wolf, Josh Pelayo, Spencer Eanes, and Emily Patterson. Early editions of this book also benefitted greatly from feedback from instructors who used these materials in their classes, including Matt Beckman, Laura Boehm Vock, Beth Chance, Laura Chihara, Mine Dogucu, and Katie Ziegler-Graham. Finally, we have appreciated the support of two NSF grants (\#DMS-1045015 and \#DMS-0354308) and of our colleagues in Mathematics, Statistics, and Computer Science at St.~Olaf.
 
 \hypertarget{ch-MLRreview}{%
 \chapter{Review of Multiple Linear Regression}\label{ch-MLRreview}}
@@ -245,11 +253,11 @@ After finishing this chapter, you should be able to:
 \begin{itemize}
 \tightlist
 \item
-  Identify cases where ordinary least squares (OLS) assumptions are violated.
+  Identify cases where linear least squares regression (LLSR) assumptions are violated.
 \item
   Generate exploratory data analysis plots and summary statistics.
 \item
-  Use residual diagnostics to examine OLS assumptions.
+  Use residual diagnostics to examine LLSR assumptions.
 \item
   Interpret parameters and associated tests and intervals from multiple regression models.
 \item
@@ -259,18 +267,33 @@ After finishing this chapter, you should be able to:
 \hypertarget{introduction-to-broadening-your-statistical-horizons}{%
 \section{Introduction to Broadening Your Statistical Horizons}\label{introduction-to-broadening-your-statistical-horizons}}
 
-Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets in to medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting \textbf{generalized linear models (GLMs)} as opposed to using to \textbf{linear least squares regression} models.
+Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting \textbf{generalized linear models (GLMs)} as opposed to using to \textbf{linear least squares regression (LLSR)} models.
 
-When models are fit to data using OLS, inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.
+When models are fit to data using linear least squares regression (LLSR), inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.
 
-However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for OLS or GLM inference.
+However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.
 
-The \textbf{Generalized Linear Models} in the book's title extends OLS methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Methods} will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will \emph{broaden your statistical horizons}.
+The \textbf{GLMs (Generalized Linear Models)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Models} in the book's title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will \emph{broaden your statistical horizons}.
 
-In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with OLS in the context of different studies. While linearity is sufficient for fitting an OLS model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with OLS modeling is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We've kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.
+In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We've kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.
 
-\hypertarget{ordinary-least-squares-ols-assumptions}{%
-\section{Ordinary Least Squares (OLS) Assumptions}\label{ordinary-least-squares-ols-assumptions}}
+\hypertarget{assumptions-for-linear-least-squares-regression-llsr}{%
+\section{Assumptions for Linear Least Squares Regression (LLSR)}\label{assumptions-for-linear-least-squares-regression-llsr}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Packages required for Chapter 1}
+\KeywordTok{library}\NormalTok{(knitr) }
+\KeywordTok{library}\NormalTok{(gridExtra)}
+\KeywordTok{library}\NormalTok{(GGally)}
+\KeywordTok{library}\NormalTok{(kableExtra)}
+\KeywordTok{library}\NormalTok{(jtools)}
+\KeywordTok{library}\NormalTok{(rsample)}
+\KeywordTok{library}\NormalTok{(purrr)}
+\KeywordTok{library}\NormalTok{(broom)}
+\KeywordTok{library}\NormalTok{(tidyverse)    }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -278,10 +301,10 @@ In order to understand the motivation for handling violations of assumptions, it
 
 }
 
-\caption{Ordinary least squares assumptions}\label{fig:OLSassumptions}
+\caption{Assumptions for linear least squares regression (LLSR)}\label{fig:OLSassumptions}
 \end{figure}
 
-Recall that making inferences or predictions with models fit using ordinary least squares (OLS) requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on OLS. If we consider a simple linear regression with just a single predictor X, then:
+Recall that making inferences or predictions with models fit using linear least squares regression requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on LLSR. If we consider a simple linear regression with just a single predictor X, then:
 
 \begin{itemize}
 \tightlist
@@ -309,10 +332,10 @@ These assumptions are depicted in Figure \ref{fig:OLSassumptions}.
   \textbf{E:} The spread in the Y's for each level of X is the same.
 \end{itemize}
 
-\hypertarget{cases-that-do-not-violate-the-ols-assumptions-for-inference}{%
-\subsection{Cases that do not violate the OLS assumptions for inference}\label{cases-that-do-not-violate-the-ols-assumptions-for-inference}}
+\hypertarget{cases-that-do-not-violate-assumptions-for-inference-in-llsr}{%
+\subsection{Cases that do not violate assumptions for inference in LLSR}\label{cases-that-do-not-violate-assumptions-for-inference-in-llsr}}
 
-It can be argued that the following studies do not violate the OLS assumptions for inference. We begin by identifying the response and the explanatory variables followed by describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.
+It can be argued that the following studies do not violate assumptions for inference in linear least squares regression. We begin by identifying the response and the explanatory variables followed by describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -327,7 +350,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     \emph{Explanatory variable:} Decibel level of music\\
   \end{itemize}
 
-  The OLS assumptions for inference would apply if:
+  The assumptions for inference in LLSR would apply if:
 
   \begin{itemize}
   \tightlist
@@ -341,7 +364,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     \textbf{E:} The variation in stopping distances should be approximately the same for each decibel level of music.\\
   \end{itemize}
 
-  There are potential problems with the linearity and equal standard deviation assumptions. For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be a linear function of music. Another problem may occur if a few subjects at each decibel level took a really long time to react. In this case, reaction times would be right skewed and the normality assumption would be violated. Often we can think of circumstances where the OLS assumptions may be suspect. Later in this chapter we will describe plots which can help diagnose issues with OLS assumptions.
+  There are potential problems with the linearity and equal standard deviation assumptions. For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be a linear function of music. Another problem may occur if a few subjects at each decibel level took a really long time to react. In this case, reaction times would be right skewed and the normality assumption would be violated. Often we can think of circumstances where the LLSR assumptions may be suspect. Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.
 \item
   \textbf{Crop yield and rainfall.} The yield of wheat per acre for the month of July is thought to be related to the rainfall. A researcher randomly selects acres of wheat and records the rainfall and bushels of wheat per acre.
 
@@ -374,7 +397,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
   \item
     \textbf{I:} The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.
   \item
-    \textbf{N:} The heights of firstborn sons for a given fathers' height are normally distributed.
+    \textbf{N:} The heights of firstborn sons for a given father's height are normally distributed.
   \item
     \textbf{E:} The standard deviation of firstborn sons' heights at a given father's height are the same.\\
   \end{itemize}
@@ -382,8 +405,8 @@ It can be argued that the following studies do not violate the OLS assumptions f
   Heights and other similar measurements are often normally distributed. There would be a problem with the independence assumption if multiple sons from the same family were selected. Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.
 \end{enumerate}
 
-\hypertarget{cases-where-the-ols-assumptions-for-inference-are-violated}{%
-\subsection{Cases where the OLS assumptions for inference are violated}\label{cases-where-the-ols-assumptions-for-inference-are-violated}}
+\hypertarget{cases-where-assumptions-for-inference-in-llsr-are-violated}{%
+\subsection{Cases where assumptions for inference in LLSR are violated}\label{cases-where-assumptions-for-inference-in-llsr-are-violated}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -395,10 +418,10 @@ It can be argued that the following studies do not violate the OLS assumptions f
   \item
     \emph{Response variable:} Exam outcome (Pass or Fail)
   \item
-    \emph{Explanatory variable:} Time spent studying (in hours)\\
+    \emph{Explanatory variable:} Time spent studying (in hours)
   \end{itemize}
 
-  Here the response is a binary outcome which violates the OLS assumption of a normally distributed response at each level of X. In Chapter \ref{ch-logreg}, we will see logistic regression which is more suitable for models with binary responses.
+  Here the response is a binary outcome which violates the assumption of a normally distributed response at each level of X. In Chapter \ref{ch-logreg}, we will see logistic regression, which is more suitable for models with binary responses.
 \item
   \textbf{Income and family size.} Do wealthy families tend to have fewer children compared to lower income families? Annual income and family size are recorded for a random sample of families.
 
@@ -410,7 +433,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     \emph{Explanatory variable:} Annual income, in dollars\\
   \end{itemize}
 
-  Family size is a count taking on integer values from 0 to (technically) no upper bound. The normality assumption may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number of children. Both of these concerns lead us to question the validity of the normality assumption. Study design should also specify that families are done adding children to their family.
+  Family size is a count taking on integer values from 0 to (technically) no upper bound. The normality assumption may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number of children. Both of these concerns, along with the discrete nature of the response, lead us to question the validity of the normality assumption. In fact, we might consider Poisson models discussed in Chapter \ref{ch-poissonreg}. Study design should also specify that families are done adding children to their family.
 \item
   \textbf{Exercise, weight, and sex.} Investigators collected the weight, sex, and amount of exercise for a random sample of college students.
 
@@ -422,7 +445,7 @@ It can be argued that the following studies do not violate the OLS assumptions f
     \emph{Explanatory variables:} Sex and hours spent exercising in a typical week\\
   \end{itemize}
 
-  With two predictors, the assumptions now apply to the combination of sex and exercise. For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females. This data may not be appropriate for OLS modeling because the standard deviation in weight for students who do not exercise for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime. We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected. There may be subgroups of subjects likely to be more similar, e.g.~selecting students at a gym and others in a TV lounge.
+  With two predictors, the assumptions now apply to the combination of sex and exercise. For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females. This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime. We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected. There may be subgroups of subjects likely to be more similar, e.g.~selecting students at a gym and others in a TV lounge.
 \item
   \textbf{Surgery Outcome and Patient Age.} Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest. Patients were randomly selected for each surgeon at each hospital. The surgery outcome was recorded on a scale of one to ten.
 
@@ -434,10 +457,10 @@ It can be argued that the following studies do not violate the OLS assumptions f
     \emph{Explanatory variable:} Patient age, in years\\
   \end{itemize}
 
-  Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons' skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon. Furthermore, outcomes at one hospital may be more similar possibly due to factors associated with different patient populations. The very structure of this data suggests that the independence assumption will be violated. Multilevel models will explicitly take this structure into account for a proper analysis of this study's results.
+  Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons' skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon. Furthermore, outcomes at one hospital may be more similar, possibly due to factors associated with different patient populations. The very structure of this data suggests that the independence assumption will be violated. Multilevel models, which we begin discussing in Chapter \ref{ch-multilevelintro}, will explicitly take this structure into account for a proper analysis of this study's results.
 \end{enumerate}
 
-While we identified possible violations of OLS assumptions for inference for each of the examples in this section, there may be violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.
+While we identified possible violations of assumptions for inference in LLSR for each of the examples in this section, there may be violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.
 
 \hypertarget{review-of-multiple-linear-regression}{%
 \section{Review of Multiple Linear Regression}\label{review-of-multiple-linear-regression}}
@@ -445,7 +468,7 @@ While we identified possible violations of OLS assumptions for inference for eac
 \hypertarget{cs:derby}{%
 \subsection{Case Study: Kentucky Derby}\label{cs:derby}}
 
-Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing. The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky. Our data set \texttt{derbyplus.csv} contains the \texttt{year} of the race, the winning horse (\texttt{winner}), the \texttt{condition} of the track, the average \texttt{speed} (in feet per second) of the winner, and the number of \texttt{starters} (field size, or horses who raced) for the years 1896-2017 \citep{KentuckyDerby}. The track \texttt{condition} has been grouped into three categories: fast, good (which includes the official designations ``good'' and ``dusty''), and slow (which includes the designations ``slow'', ``heavy'', ``muddy'', and ``sloppy''). We would like to use OLS linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.
+Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing. The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky. Our data set \texttt{derbyplus.csv} contains the \texttt{year} of the race, the winning horse (\texttt{winner}), the \texttt{condition} of the track, the average \texttt{speed} (in feet per second) of the winner, and the number of \texttt{starters} (field size, or horses who raced) for the years 1896-2017 \citep{KentuckyDerby}. The track \texttt{condition} has been grouped into three categories: fast, good (which includes the official designations ``good'' and ``dusty''), and slow (which includes the designations ``slow'', ``heavy'', ``muddy'', and ``sloppy''). We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.
 
 \hypertarget{explore}{%
 \section{Initial Exploratory Analyses}\label{explore}}
@@ -467,12 +490,12 @@ The first five and last five rows from our data set are illustrated in Table \re
   \texttt{fastfactor} replaces \texttt{fast} = 0 with the description ``not fast'', and \texttt{fast} = 1 with the description ``fast''. Changing a numeric categorical variable to descriptive phrases can make plot legends more meaningful.
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:introtable1}The first five and the last five observations from the Kentucky Derby case study.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}{rllrrrrrl}
+\begin{tabular}[t]{rllrrrrrl}
 \toprule
 year & winner & condition & speed & starters & fast & good & yearnew & fastfactor\\
 \midrule
@@ -496,7 +519,7 @@ year & winner & condition & speed & starters & fast & good & yearnew & fastfacto
 
 With any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables. This should \emph{always} be done \emph{before} any model fitting! We must understand our data thoroughly before doing anything else.
 
-First, we will examine each response variable and potential covariate individually. Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.
+First, we will examine the response variable and each potential covariate individually. Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.
 
 \begin{figure}
 
@@ -567,18 +590,18 @@ As you might expect, answers to these questions will arise from proper considera
 We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896? For this initial model, let \(Y_{i}\) be the speed of the winning horse in year \(i\). Then, we might consider Model 1:
 
 \begin{equation}
- Y_{i}=\beta_{0}+\beta_{1}(\textrm{Year}_{i})+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+ Y_{i}=\beta_{0}+\beta_{1}\textrm{Year}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \label{eq:model1}
 \end{equation}
 
-In this case, \(\beta_{0}\) represents the true intercept---the expected winning speed during Year 0. \(\beta_{1}\) represents the true slope---the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896). Finally, the \textbf{error} (\(\epsilon_{i}\)) terms represent the deviations of the actual winning speed in Year \(i\) (\(Y_i\)) from the expected scores under this model (\(\beta_{0}+\beta_{1}(\textrm{Year}_{i})\))---the part of a horse's winning speed that is not explained by a linear trend over time. The variability in these deviations from the regression model is denoted by \(\sigma^2\).
+In this case, \(\beta_{0}\) represents the true intercept---the expected winning speed during Year 0. \(\beta_{1}\) represents the true slope---the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896). Finally, the \textbf{error} (\(\epsilon_{i}\)) terms represent the deviations of the actual winning speed in Year \(i\) (\(Y_i\)) from the expected speeds under this model (\(\beta_{0}+\beta_{1}\textrm{Year}_{i}\))---the part of a horse's winning speed that is not explained by a linear trend over time. The variability in these deviations from the regression model is denoted by \(\sigma^2\).
 
-The parameters in this model (\(\beta_{0}\), \(\beta_{1}\), and \(\sigma^2\)) can be estimated through OLS methods; we will use hats to denote estimates of population parameters based on empirical data. Values for \(\hat{\beta}_{0}\) and \(\hat{\beta}_{1}\) are selected to minimize the sum of squared residuals, where a \textbf{residual} is simply the observed prediction error---the actual winning speed for a given year minus the winning speed predicted by the model. In the notation of this section,
+The parameters in this model (\(\beta_{0}\), \(\beta_{1}\), and \(\sigma^2\)) can be estimated through ordinary least squares methods; we will use hats to denote estimates of population parameters based on empirical data. Values for \(\hat{\beta}_{0}\) and \(\hat{\beta}_{1}\) are selected to minimize the sum of squared residuals, where a \textbf{residual} is simply the observed prediction error---the actual winning speed for a given year minus the winning speed predicted by the model. In the notation of this section,
 
 \begin{itemize}
 \tightlist
 \item
-  Predicted speed: \(\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}(\textrm{Year}_{i})\)
+  Predicted speed: \(\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}\textrm{Year}_{i}\)
 \item
   Residual (estimated error): \(\hat{\epsilon}_{i}=Y_{i} - \hat{Y}_{i}\)
 \item
@@ -587,38 +610,50 @@ The parameters in this model (\(\beta_{0}\), \(\beta_{1}\), and \(\sigma^2\)) ca
 
 Using Kentucky Derby data, we estimate \(\hat{\beta}_{0}=2.05\), \(\hat{\beta}_{1}=0.026\), and \(\hat{\sigma}=0.90\). Thus, according to our simple linear regression model, winning horses of the Kentucky Derby have an estimated winning speed of 2.05 ft/s in Year 0 (more than 2000 years ago!), and the winning speed improves by an estimated 0.026 ft/s every year. With an \(R^2\) of 0.513, the regression model explains a moderate amount (51.3\%) of the year-to-year variability in winning speeds, and the trend toward a linear rate of improvement each year is statistically significant at the 0.05 level (t(120) = 11.251, p \textless{} .001).
 
-\begin{verbatim}
-lm(formula = speed ~ year, data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{year, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 2.053473   4.543754   0.452    0.652    
-year        0.026126   0.002322  11.251   <2e-16 ***
----
-Residual standard error: 0.9032 on 120 degrees of freedom
-Multiple R-squared:  0.5134,    Adjusted R-squared:  0.5093 
+\begin{verbatim}
+##             Estimate Std. Error t value  Pr(>|t|)
+## (Intercept)  2.05347   4.543754  0.4519 6.521e-01
+## year         0.02613   0.002322 11.2515 1.717e-20
+\end{verbatim}
+
+\begin{verbatim}
+##  R squared =  0.5134 
+##  Residual standard error =  0.9032
 \end{verbatim}
 
 You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896. One way to create more meaningful parameters is through \textbf{centering}. In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
+
 \begin{equation}
 \begin{split}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\epsilon_{i}\quad &\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
     &\textrm{and} \quad \textrm{Yearnew}=\textrm{Year}-1896.
 \end{split}
 \label{eq:model2}
 \end{equation}
+
 Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; \(\hat{\beta}_{1}\), \(R^2\), and \(\hat{\sigma}\) all remain exactly the same. Now \(\hat{\beta}_{0}\) tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same. As Figure \ref{fig:center} shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes.
 
-\begin{verbatim}
-lm(formula = speed ~ yearnew, data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-             Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 51.588393   0.162549  317.37   <2e-16 ***
-yearnew      0.026126   0.002322   11.25   <2e-16 ***
----
-Residual standard error: 0.9032 on 120 degrees of freedom
-Multiple R-squared:  0.5134,    Adjusted R-squared:  0.5093 
+\begin{verbatim}
+##             Estimate Std. Error t value   Pr(>|t|)
+## (Intercept) 51.58839   0.162549  317.37 2.475e-177
+## yearnew      0.02613   0.002322   11.25  1.717e-20
+\end{verbatim}
+
+\begin{verbatim}
+##  R squared =  0.5134 
+##  Residual standard error =  0.9032
 \end{verbatim}
 
 \begin{figure}
@@ -657,11 +692,13 @@ In this case, the Residuals vs.~Fitted plot indicates that a quadratic fit might
 
 We recommend relying on graphical evidence for identifying regression model assumption violations, looking for highly obvious violations of assumptions before trying corrective actions. While some numerical tests have been devised for issues such as normality and influence, most of these tests are not very reliable, highly influenced by sample size and other factors. There is typically no residual plot, however, to evaluate the Independence assumption; evidence for lack of independence comes from knowing about the study design and methods of data collection. In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.
 
-Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.\\
+Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.
+
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \label{eq:model2Q}
 \end{equation}
+
 This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time. In fact, there is evidence that the quadratic model improves upon the linear model (see Figure \ref{fig:models2and2q}). \(R^2\), the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3\% to 64.1\%, and the pattern in the Residuals vs.~Fitted plot of Figure \ref{fig:resid2} has disappeared in Figure \ref{fig:resid2q}, although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability. The significantly negative coefficient for \(\beta_{2}\) suggests that the rate of increase is indeed slowing in more recent years.
 
 \begin{figure}
@@ -670,20 +707,26 @@ This model could suggest, for example, that the rate of increase in winning spee
 
 }
 
-\caption{Linear vs. quadratic fit}\label{fig:models2and2q}
+\caption{Linear (solid) vs. quadratic (dashed) fit}\label{fig:models2and2q}
 \end{figure}
 
-\begin{verbatim}
-lm(formula = speed ~ yearnew + yearnew2, data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{derby.df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(derby.df, }\DataTypeTok{yearnew2 =}\NormalTok{ yearnew}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{model2q <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{yearnew2, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  5.059e+01  2.082e-01 243.010  < 2e-16 ***
-yearnew      7.617e-02  7.950e-03   9.581  < 2e-16 ***
-yearnew2    -4.136e-04  6.359e-05  -6.505 1.92e-09 ***
----
-Residual standard error: 0.779 on 119 degrees of freedom
-Multiple R-squared:  0.641, Adjusted R-squared:  0.635 
+\begin{verbatim}
+##               Estimate Std. Error t value   Pr(>|t|)
+## (Intercept) 50.5874566  2.082e-01 243.010 2.615e-162
+## yearnew      0.0761728  7.950e-03   9.581  1.839e-16
+## yearnew2    -0.0004136  6.359e-05  -6.505  1.921e-09
+\end{verbatim}
+
+\begin{verbatim}
+##  R squared =  0.641 
+##  Residual standard error =  0.779
 \end{verbatim}
 
 \begin{figure}
@@ -696,12 +739,12 @@ Multiple R-squared:  0.641, Adjusted R-squared:  0.635
 \end{figure}
 
 \hypertarget{linear-regression-with-a-binary-predictor}{%
-\subsection{linear regression with a binary predictor}\label{linear-regression-with-a-binary-predictor}}
+\subsection{Linear regression with a binary predictor}\label{linear-regression-with-a-binary-predictor}}
 
 We also may want to include track condition as an explanatory variable. We could start by using \texttt{fast} as the lone predictor: Do winning speeds differ for fast and non-fast conditions? \texttt{fast} is considered an \textbf{indicator variable}---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions). Since \texttt{fast} is numeric, we can use simple linear regression techniques to fit Model 3:
 
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \label{eq:model3}
 \end{equation}
 
@@ -729,19 +772,24 @@ Y_{i} = (\beta_{0}+\beta_{1})+\epsilon_{i}
 
 \(\beta_{0}\) is the expected winning speed under good or slow conditions, while \(\beta_{1}\) is the difference between expected winning speeds under fast conditions vs.~non-fast conditions. According to our fitted Model 3, the estimated winning speed under non-fast conditions is 52.0 ft/s, while mean winning speeds under fast conditions are estimated to be 1.6 ft/s higher.
 
-\begin{verbatim}
-lm(formula = speed ~ fast, data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{fast, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  51.9938     0.1826 284.698  < 2e-16 ***
-fast          1.6292     0.2150   7.577 8.17e-12 ***
----
-Residual standard error: 1.065 on 120 degrees of freedom
-Multiple R-squared:  0.3236,    Adjusted R-squared:  0.318 
+\begin{verbatim}
+##             Estimate Std. Error t value   Pr(>|t|)
+## (Intercept)   51.994     0.1826 284.698 1.117e-171
+## fast           1.629     0.2150   7.577  8.166e-12
 \end{verbatim}
 
-You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test? The answer is: we did! The t-test corresponding to \(\beta_{1}\) is equivalent to an independent-samples t-test with under equal variances. Convince yourself that this is true, and that the equal variance assumption is needed.
+\begin{verbatim}
+##  R squared =  0.3236 
+##  Residual standard error =  1.065
+\end{verbatim}
+
+You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test? The answer is: we did! The t-test corresponding to \(\beta_{1}\) is equivalent to an independent-samples t-test under equal variances. Convince yourself that this is true, and that the equal variance assumption is needed.
 
 \hypertarget{multiple-linear-regression-with-two-predictors}{%
 \subsection{Multiple linear regression with two predictors}\label{multiple-linear-regression-with-two-predictors}}
@@ -751,23 +799,28 @@ The beauty of the linear regression framework is that we can add additional expl
 Our new model (Model 4) can be written:
 
 \begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \label{eq:model4}
 \end{equation}
 
-and OLS provides the following parameter estimates:
+and ordinary least squares (OLS) provides the following parameter estimates:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model4 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{fast, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
-lm(formula = speed ~ yearnew + fast, data = derby.df)
+##             Estimate Std. Error t value   Pr(>|t|)
+## (Intercept) 50.91782   0.154602  329.35 5.360e-178
+## yearnew      0.02258   0.001919   11.77  1.117e-21
+## fast         1.22685   0.150721    8.14  4.393e-13
+\end{verbatim}
 
-Coefficients:
-             Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 50.917822   0.154602  329.35  < 2e-16 ***
-yearnew      0.022583   0.001919   11.77  < 2e-16 ***
-fast         1.226846   0.150721    8.14 4.39e-13 ***
----
-Residual standard error: 0.7269 on 119 degrees of freedom
-Multiple R-squared:  0.6874,    Adjusted R-squared:  0.6822 
+\begin{verbatim}
+##  R squared =  0.6874 
+##  Residual standard error =  0.7269
 \end{verbatim}
 
 Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time. It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time. Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition. This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition. Based on the \(R^2\) value, Model 4 explains 68.7\% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.
@@ -796,10 +849,10 @@ Here are examples of inferential statements based on Model 4:
 \end{Shaded}
 
 \begin{verbatim}
-                  2.5 %      97.5 %
-(Intercept) 50.61169473 51.22394836
-yearnew      0.01878324  0.02638227
-fast         0.92840273  1.52528902
+               2.5 %   97.5 %
+(Intercept) 50.61169 51.22395
+yearnew      0.01878  0.02638
+fast         0.92840  1.52529
 \end{verbatim}
 
 \begin{Shaded}
@@ -810,8 +863,8 @@ fast         0.92840273  1.52528902
 \end{Shaded}
 
 \begin{verbatim}
-       fit     lwr      upr
-1 54.87718 53.4143 56.34006
+    fit   lwr   upr
+1 54.88 53.41 56.34
 \end{verbatim}
 
 \hypertarget{multreg-boot}{%
@@ -837,30 +890,30 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 
 \begin{Shaded}
 \begin{Highlighting}[]
-    \CommentTok{# updated code from tobiasgerstenberg on github}
-    \KeywordTok{library}\NormalTok{(rsample)}
-    \KeywordTok{library}\NormalTok{(purrr)}
-    \KeywordTok{library}\NormalTok{(broom)}
-\NormalTok{    bootreg =}\StringTok{ }\NormalTok{derby.df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{bootstraps}\NormalTok{(}\DecValTok{1000}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{      }\KeywordTok{pull}\NormalTok{(splits) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{map_dfr}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{fast, }\DataTypeTok{data =}\NormalTok{ .) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{                }\KeywordTok{tidy}\NormalTok{())}
-\NormalTok{    summarize =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\NormalTok{summarize}
-\NormalTok{    bootreg }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{group_by}\NormalTok{(term) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{low=}\KeywordTok{quantile}\NormalTok{(estimate, }\FloatTok{.025}\NormalTok{),}
+\CommentTok{# updated code from tobiasgerstenberg on github}
+\NormalTok{bootreg <-}\StringTok{ }\NormalTok{derby.df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{bootstraps}\NormalTok{(}\DecValTok{1000}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pull}\NormalTok{(splits) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map_dfr}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{fast, }\DataTypeTok{data =}\NormalTok{ .) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{            }\KeywordTok{tidy}\NormalTok{())}
+\NormalTok{bootreg }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(term) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{low=}\KeywordTok{quantile}\NormalTok{(estimate, }\FloatTok{.025}\NormalTok{),}
             \DataTypeTok{high=}\KeywordTok{quantile}\NormalTok{(estimate, }\FloatTok{.975}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
+`summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{verbatim}
 # A tibble: 3 x 3
   term            low    high
   <chr>         <dbl>   <dbl>
-1 (Intercept) 50.6    51.3   
-2 fast         0.929   1.56  
-3 yearnew      0.0183  0.0268
+1 (Intercept) 50.5    51.3   
+2 fast         0.933   1.55  
+3 yearnew      0.0181  0.0266
 \end{verbatim}
 
 \begin{figure}
@@ -874,7 +927,7 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 
 In this case, we see that 95\% bootstrap confidence intervals for \(\beta_0\), \(\beta_1\), and \(\beta_2\) are very similar to the normal-theory confidence intervals we found earlier. For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.89 to 1.55 ft/s.
 
-There are many variations on this bootstrap procedure. For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution. In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated (\citet{Hesterberg2015}; \citet{Efron1993}; \citet{Davison1997}). We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.
+There are many variations on this bootstrap procedure. For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution. In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated methods (\citet{Hesterberg2015}; \citet{Efron1993}; \citet{Davison1997}). We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.
 
 \hypertarget{multiple-linear-regression-with-an-interaction-term}{%
 \subsection{Multiple linear regression with an interaction term}\label{multiple-linear-regression-with-an-interaction-term}}
@@ -885,32 +938,38 @@ Thus, consider Model 5:
 
 \begin{equation}
 \begin{split}
- Y_{i}&= \beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i}) \notag \\
-      &{}+\beta_{3}(\textrm{Yearnew}\times\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}&= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
+      &{}+\beta_{3}\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 \label{eq:model5}
 \end{equation}
 
 where OLS provides the following parameter estimates:
 
-\begin{verbatim}
-lm(formula = speed ~ yearnew + fast + yearnew:fast, data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model5 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{fast }\OperatorTok{+}\StringTok{ }\NormalTok{yearnew}\OperatorTok{:}\NormalTok{fast, }
+             \DataTypeTok{data=}\NormalTok{derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  50.528629   0.205072 246.394  < 2e-16 ***
-yearnew       0.030751   0.003471   8.859 9.84e-15 ***
-fast          1.833523   0.262175   6.994 1.73e-10 ***
-yearnew:fast -0.011490   0.004117  -2.791  0.00613 ** 
----
-Residual standard error: 0.7071 on 118 degrees of freedom
-Multiple R-squared:  0.7068,    Adjusted R-squared:  0.6993 
+\begin{verbatim}
+##              Estimate Std. Error t value   Pr(>|t|)
+## (Intercept)  50.52863   0.205072 246.394 6.989e-162
+## yearnew       0.03075   0.003471   8.859  9.839e-15
+## fast          1.83352   0.262175   6.994  1.730e-10
+## yearnew:fast -0.01149   0.004117  -2.791  6.128e-03
 \end{verbatim}
 
-According to OLS estimates, estimated winning speeds can be found by:
+\begin{verbatim}
+##  R squared =  0.7068 
+##  Residual standard error =  0.7071
+\end{verbatim}
+
+According to our model, estimated winning speeds can be found by:
 
 \begin{equation}
- \hat{Y}_{i}=50.53+0.031(\textrm{Yearnew}_{i})+1.83(\textrm{Fast}_{i})-0.011(\textrm{Yearnew}\times\textrm{Fast}_{i}).
+ \hat{Y}_{i}=50.53+0.031\textrm{Yearnew}_{i}+1.83\textrm{Fast}_{i}-0.011\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}.
 \label{eq:model5est}
 \end{equation}
 
@@ -918,9 +977,9 @@ Interpretations of model coefficients are most easily seen by writing out separa
 
 \begin{align*}
  \textrm{Fast}=0: & \\
- \hat{Y}_{i} &= 50.53+0.031(\textrm{Yearnew}_{i}) \\
+ \hat{Y}_{i} &= 50.53+0.031\textrm{Yearnew}_{i} \\
  \textrm{Fast}=1: & \\
- \hat{Y}_{i} &= (50.53+1.83)+(0.031-0.011)(\textrm{Yearnew}_{i})
+ \hat{Y}_{i} &= (50.53+1.83)+(0.031-0.011)\textrm{Yearnew}_{i}
  \end{align*}
 
 leading to the following interpretations for estimated model coefficients:
@@ -982,46 +1041,61 @@ One potential final model for predicting winning speeds of Kentucky Derby races 
 
 \begin{equation}
 \begin{split}
- Y_{i}&=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\beta_{3}(\textrm{Fast}_{i})\\
-      &{}+\beta_{4}(\textrm{Good}_{i})+\beta_{5}(\textrm{Starters}_{i})+\epsilon_{i}\quad 
-      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+ Y_{i}&=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\beta_{3}\textrm{Fast}_{i}\\
+      &{}+\beta_{4}\textrm{Good}_{i}+\beta_{5}\textrm{Starters}_{i}+\epsilon_{i}\quad 
+      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 \label{eq:model0}
 \end{equation}
 
 and OLS provides the following parameter estimates:
 
-\begin{verbatim}
-lm(formula = speed ~ yearnew + yearnew2 + fast + good + starters, 
-    data = derby.df)
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model0 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{yearnew2 }\OperatorTok{+}\StringTok{ }\NormalTok{fast }\OperatorTok{+}\StringTok{ }\NormalTok{good }\OperatorTok{+}
+\StringTok{               }\NormalTok{starters, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\end{Highlighting}
+\end{Shaded}
 
-Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  5.002e+01  1.946e-01 256.980  < 2e-16 ***
-yearnew      7.003e-02  6.130e-03  11.424  < 2e-16 ***
-yearnew2    -3.697e-04  4.598e-05  -8.041 8.44e-13 ***
-fast         1.393e+00  1.305e-01  10.670  < 2e-16 ***
-good         9.157e-01  2.077e-01   4.409 2.33e-05 ***
-starters    -2.528e-02  1.360e-02  -1.859   0.0656 .  
----
-Residual standard error: 0.5483 on 116 degrees of freedom
-Multiple R-squared:  0.8267,    Adjusted R-squared:  0.8192 
+\begin{verbatim}
+##               Estimate Std. Error t value   Pr(>|t|)
+## (Intercept) 50.0203151  1.946e-01 256.980 1.035e-161
+## yearnew      0.0700341  6.130e-03  11.424  1.038e-20
+## yearnew2    -0.0003697  4.598e-05  -8.041  8.435e-13
+## fast         1.3926656  1.305e-01  10.670  6.199e-19
+## good         0.9156982  2.077e-01   4.409  2.331e-05
+## starters    -0.0252836  1.360e-02  -1.859  6.559e-02
 \end{verbatim}
 
 \begin{verbatim}
-Analysis of Variance Table
+##  R squared =  0.8267 
+##  Residual standard error =  0.5483
+\end{verbatim}
 
-Model 1: speed ~ yearnew + yearnew2 + starters
-Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
-  Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
-1    118 69.257                                  
-2    116 34.870  2    34.386 57.196 < 2.2e-16 ***
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Compare models with and without terms for track condition}
+\NormalTok{model0_reduced <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(speed }\OperatorTok{~}\StringTok{ }\NormalTok{yearnew }\OperatorTok{+}\StringTok{ }\NormalTok{yearnew2 }\OperatorTok{+}\StringTok{ }
+\StringTok{                       }\NormalTok{starters, }\DataTypeTok{data =}\NormalTok{ derby.df)}
+\NormalTok{nested_f <-}\StringTok{ }\KeywordTok{anova}\NormalTok{(model0_reduced, model0)}
+\KeywordTok{print}\NormalTok{(nested_f, }\DataTypeTok{signif.stars =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Model 1: speed ~ yearnew + yearnew2 + starters
+## Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
+##   Res.Df  RSS Df Sum of Sq    F Pr(>F)
+## 1    118 69.3                         
+## 2    116 34.9  2      34.4 57.2 <2e-16
 \end{verbatim}
 
 This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses). The model explains 82.7\% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions. We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.
 
-\hypertarget{preview}{%
-\section{Preview}\label{preview}}
+\hypertarget{preview-of-remaining-chapters}{%
+\section{Preview of remaining chapters}\label{preview-of-remaining-chapters}}
 
 Having reviewed key ideas from multiple linear regression, you are now ready to extend those ideas, especially to handle non-normal responses and lack of independence. This section provides a preview of the type of problems you will encounter in the book. For each journal article cited, we provide an abstract in the authors' words, a description of the type of response and, when applicable, the structure of the data. Each of these examples appears later as an exercise, where you can play with the actual data or evaluate the analyses detailed in the articles.
 
@@ -1042,7 +1116,7 @@ The response for this analysis is the direction of the goalkeeper dive, a binary
 \citet{Poole1989} . Mate guarding, reproductive success and female choice in African elephants. \emph{Animal Behavior} \textbf{37}:842-49.
 
 \begin{quote}
-\textbf{Abstract:} Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, Loxodonta africana. Males were not able to compete successfully for access to oestrous female until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants\ldots{}
+\textbf{Abstract:} Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, \emph{Loxodonta africana}. Males were not able to compete successfully for access to oestrous females until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants\ldots{}
 \end{quote}
 
 Poole and her colleagues recorded, for each male elephant, his age (in years) and the number of matings for a given year. The researchers were interested in how age affects the males' mating patterns. Specifically, questions concern whether there is a steady increase in mating success as an elephant ages or if there is an optimal age after which the number of matings decline. Because the responses of interest are counts (number of matings for each elephant for a given year), we will consider a Poisson regression (see Chapter \ref{ch-poissonreg}). The general form for Poisson responses is the number of events for a specified time, volume, or space.
@@ -1067,7 +1141,7 @@ The response for this study is a gang activity measure which ranges from 1 to 10
 \textbf{Abstract:} Recent studies by police departments and researchers confirm that police stop racial and ethnic minority citizens more often than whites, relative to their proportions in the population. However, it has been argued stop rates more accurately reflect rates of crimes committed by each ethnic group, or that stop rates reflect elevated rates in specific social areas such as neighborhoods or precincts. Most of the research on stop rates and police-citizen interactions has focused on traffic stops, and analyses of pedestrian stops are rare. In this paper, we analyze data from 175,000 pedestrian stops by the New York Police Department over a fifteen-month period. We disaggregate stops by police precinct, and compare stop rates by racial and ethnic group controlling for previous race-specific arrest rates. We use hierarchical multilevel models to adjust for precinct-level variability, thus directly addressing the question of geographic heterogeneity that arises in the analysis of pedestrian stops. We find that persons of African and Hispanic descent were stopped more frequently than whites, even after controlling for precinct variability and race-specific estimates of crime participation.
 \end{quote}
 
-This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, generalized linear multilevel modeling, as addressed in Chapter \ref{ch-GLMM}.
+This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, multilevel generalized linear modeling, as addressed in Chapter \ref{ch-GLMM}.
 
 \hypertarget{exercises}{%
 \section{Exercises}\label{exercises}}
@@ -1078,7 +1152,7 @@ This application involves both non-normal data (number of stops by ethnic group 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Applications that do not violate the OLS assumptions for inference}. Identify the response and explanatory variable(s) for each problem. Write the OLS assumptions for inference in the context of each study.
+  \textbf{Applications that do not violate assumptions for inference in LLSR}. Identify the response and explanatory variable(s) for each problem. Write the LLSR assumptions for inference in the context of each study.
 
   \begin{enumerate}
   \def\labelenumii{\alph{enumii}.}
@@ -1089,7 +1163,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     \textbf{Women's Heights.} A random selection of women aged 20-24 years are selected and their shoe size is used to predict their height\\
   \end{enumerate}
 \item
-  \textbf{Applications that do violate the OLS assumptions for inference}. All of the examples in this section have at least one violation of the OLS assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which OLS assumption(s) are violated.
+  \textbf{Applications that do violate assumptions for inference in LLSR}. All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.
 
   \begin{enumerate}
   \def\labelenumii{\alph{enumii}.}
@@ -1099,11 +1173,9 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     \textbf{Clinical Trial I.} A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.
   \item
-    \textbf{Canoes and zip codes.} For each of over 27,000 overnight permits for the Boundary Water Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. This data is used to create a model for the number of trips made per zip code.
+    \textbf{Canoes and zip codes.} For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. This data is used to create a model for the number of trips made per zip code.
   \item
     \textbf{Clinical Trial II.} A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.
-  \item
-    \textbf{Elephant mating.} Researchers are interested in how elephant age affects mating patterns among males. In particular, do older elephants have greater mating success, and is there an optimal age for mating among males? Data collected includes, for each elephant, age and number of matings in a given year.\\
   \end{enumerate}
 \item
   \textbf{Kentucky Derby.} The next set of questions is related to the Kentucky Derby case study from this chapter.
@@ -1137,7 +1209,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     Interpret (in context) the OLS estimates for \(\beta_3\) and \(\beta_5\) in Equation \eqref{eq:model0}.\\
   \end{enumerate}
 \item
-  \textbf{Moneyball.} In a 2011 \href{http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/}{article} in \emph{The Sport Journal}, Farrar and Bruggink attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 \emph{Moneyball} book \citep{Lewis2003}. They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model. \citep{Farrar2011}
+  \textbf{Moneyball.} In a 2011 article in \emph{The Sport Journal}, Farrar and Bruggink \citeyearpar{Farrar2011} attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 \emph{Moneyball} book \citep{Lewis2003}. They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model.
 
   \begin{enumerate}
   \def\labelenumii{\alph{enumii}.}
@@ -1200,9 +1272,9 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     By referring to exploratory plots and summary statistics, are any explanatory variables (including sex) closely related to each other? What implications does this have for modeling?
   \item
-    Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1). Interpret the intercept and slope of this model; also interpret the R-squared value. Is there a significant relationship between experience and starting salary?\\
+    Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1). Interpret the intercept and slope of this model; also interpret the R-squared value. Is there a significant relationship between experience and starting salary?
   \item
-    Does Model 1 meet all linear regression assumptions? List each assumption and how you decided if it was met or not.
+    Does Model 1 meet all linear least squares regression assumptions? List each assumption and how you decided if it was met or not.
   \item
     Is a model with all 4 confounding variables (Model 2, with \texttt{senior}, \texttt{educ}, \texttt{exper}, and \texttt{age}) better than a model with just experience (Model 1)? Justify with an appropriate significance test in addition to summary statistics of model performance.
   \item
@@ -1221,7 +1293,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     Build your own final model for this study and justify the selection of your final model. You might consider interactions with gender, since those terms could show that discrimination is stronger among certain workers. Based on your final model, do you find evidence of gender discrimination at Harris Trust?\\
   \end{enumerate}
 \item
-  \textbf{Sitting and MTL Thickness.} \citet{Siddarth2018} researched relations between time spent sitting (sedentary behavior) and the thickness of participant's medial temporal lobe (MTL) in their paper, \href{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0195549}{Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults}. MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in \texttt{sitting.csv}. Key variables include:
+  \textbf{Sitting and MTL Thickness.} \citet{Siddarth2018} researched relations between time spent sitting (sedentary behavior) and the thickness of participant's medial temporal lobe (MTL) in a 2018 paper entitled ``Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults''. MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in \texttt{sitting.csv}. Key variables include:
 
   \begin{itemize}
   \tightlist
@@ -1243,7 +1315,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \def\labelenumii{\alph{enumii}.}
   \tightlist
   \item
-    In their article's introduction, \citet{Siddarth2018} differentiate their analysis on sedentary behavior from analysis on active behavior by citing evidence supporting the claim that ``one can be highly active yet still be sedentary for most of the day.'' Fit your own linear model with \texttt{MET} and \texttt{sitting} as your explanatory and response variables, respectively. Using \(R^2\), how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
+    In their article's introduction, Siddarth et al.~differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that ``one can be highly active yet still be sedentary for most of the day.'' Fit your own linear model with \texttt{MET} and \texttt{sitting} as your explanatory and response variables, respectively. Using \(R^2\), how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
   \item
     In the paper's section, ``Statistical analysis'', the authors report that ``Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures.'' Generate both a histogram of \texttt{MET} values and log--transformed \texttt{MET} values. Do you agree with the paper's decision to use a log-transformation here?
   \item
@@ -1251,11 +1323,11 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     Expand on your previous model by including a centered version of \texttt{age} as a covariate. Interpret all three coefficients in this model.
   \item
-    One model fit in \citet{Siddarth2018} includes \texttt{sitting}, log--transformed \texttt{MET}, and \texttt{age} as explanatory variables. They report an estimate \(\widehat{\beta_1} = -0.02\) with confidence interval \((-0.04,-0.002)\) for the coefficient corresponding to \texttt{sitting}, and \(\widehat{\beta_2} = 0.007\) with confidence interval \((-0.07, 0.08)\) for the coefficient corresponding to \texttt{MET}. Verify these intervals and estimates on your own.\\
+    One model fit in \citet{Siddarth2018} includes \texttt{sitting}, log--transformed \texttt{MET}, and \texttt{age} as explanatory variables. They report an estimate \(\hat{\beta}_{1} = -0.02\) with confidence interval \((-0.04,-0.002)\) for the coefficient corresponding to \texttt{sitting}, and \(\hat{\beta}_{2} = 0.007\) with confidence interval \((-0.07, 0.08)\) for the coefficient corresponding to \texttt{MET}. Verify these intervals and estimates on your own.
   \item
     Based on your confidence intervals from the previous part, do you support the paper's claim that ``it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness {[}than physical activity{]}''? Why or why not?
   \item
-    A \href{https://www.nytimes.com/2018/04/19/opinion/standing-up-at-your-desk-could-make-you-smarter.html}{New York Times Article} was published discussing \citet{Siddarth2018} with the title ``Standing Up at Your Desk Could Make You Smarter'' \citep{Friedman2018}. Do you agree with this headline choice? Why or why not?\\
+    A \emph{New York Times} article was published discussing \citet{Siddarth2018} with the title ``Standing Up at Your Desk Could Make You Smarter'' \citep{Friedman2018}. Do you agree with this headline choice? Why or why not?\\
   \end{enumerate}
 \item
   \textbf{Housing Prices and log Transformations.} The dataset \texttt{kingCountyHouses.csv} contains data on over 20,000 houses sold in King County,
@@ -1289,8 +1361,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \def\labelenumii{\alph{enumii}.}
   \tightlist
   \item
-    Generate appropriate graphs and summary statistics detailing both \texttt{price}
-    and \texttt{sqft} individually and then together. What do you notice?
+    Generate appropriate graphs and summary statistics detailing both \texttt{price} and \texttt{sqft} individually and then together. What do you notice?
   \item
     Fit a simple linear regression model with \texttt{price} as the response variable and \texttt{sqft} as the explanatory variable (Model 1). Interpret the slope coefficient \(\beta_1\). Are all conditions met for linear regression?
   \item
@@ -1302,7 +1373,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     Are OLS assumptions satisfied in Model 2? Why or why not?
   \item
-    Create a new variable, \texttt{logsqft}, the natural log of \texttt{sqft}. Fit Model 3 where \texttt{price} and \texttt{logsqft} are the explanatory and response variables, respectively. Write out the regression line equation.
+    Create a new variable, \texttt{logsqft}, the natural log of \texttt{sqft}. Fit Model 3 where \texttt{price} and \texttt{logsqft} are the response and explanatory variables, respectively. Write out the regression line equation.
   \item
     How does predicted \texttt{price} change as \texttt{logsqft} increases by 1 in Model 3?
   \item
@@ -1326,7 +1397,7 @@ This application involves both non-normal data (number of stops by ethnic group 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{The Bechdel Test.} In April, 2014, website FiveThirtyEight published the article \href{https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/}{The Dollar-And-Cents Case Against Hollywood's Exclusion of Women} \citep{Hickey2014}. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
+  \textbf{The Bechdel Test.} In April, 2014, website FiveThirtyEight published the article ``The Dollar-And-Cents Case Against Hollywood's Exclusion of Women'' \citep{Hickey2014}. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
 
   \begin{itemize}
   \tightlist
@@ -1396,723 +1467,6 @@ This application involves both non-normal data (number of stops by ethnic group 
     \texttt{Tip.Percentage} = proportion of the bill represented by the tip
   \end{itemize}
 \end{enumerate}
-
-\hypertarget{ch-beyondmost}{%
-\chapter{Beyond Least Squares: Using Likelihoods to Fit and Compare Models}\label{ch-beyondmost}}
-
-Placeholder
-
-\hypertarget{learning-objectives-1}{%
-\section{Learning Objectives}\label{learning-objectives-1}}
-
-\hypertarget{case-study-does-sex-run-in-families}{%
-\section{Case Study: Does sex run in families?}\label{case-study-does-sex-run-in-families}}
-
-\hypertarget{research-questions}{%
-\subsection{Research Questions}\label{research-questions}}
-
-\hypertarget{model-0-sex-unconditional-model-equal-probabilities-independence}{%
-\section{Model 0: Sex Unconditional Model (Equal probabilities, Independence)}\label{model-0-sex-unconditional-model-equal-probabilities-independence}}
-
-\hypertarget{sex_unconditional_model}{%
-\section{Model 1: Sex Unconditional Model (Any Probability, Independence)}\label{sex_unconditional_model}}
-
-\hypertarget{what-is-a-likelihood}{%
-\subsection{What is a likelihood?}\label{what-is-a-likelihood}}
-
-\hypertarget{findMLE.sec}{%
-\subsection{Finding MLEs}\label{findMLE.sec}}
-
-\hypertarget{MLEgph.sec}{%
-\subsubsection{Graphically approximating an MLE}\label{MLEgph.sec}}
-
-\hypertarget{numerically-approximating-an-mle}{%
-\subsubsection{Numerically approximating an MLE}\label{numerically-approximating-an-mle}}
-
-\hypertarget{calc-sec}{%
-\subsubsection{MLEs using calculus (Optional)}\label{calc-sec}}
-
-\hypertarget{how-does-sample-size-affect-the-likelihood}{%
-\subsubsection{How does sample size affect the likelihood?}\label{how-does-sample-size-affect-the-likelihood}}
-
-\hypertarget{summary}{%
-\subsection{Summary}\label{summary}}
-
-\hypertarget{is-a-likelihood-a-probability-function-optional}{%
-\subsection{Is a likelihood a probability function? (Optional)}\label{is-a-likelihood-a-probability-function-optional}}
-
-\hypertarget{sex_conditional.sec}{%
-\section{Model 2: Sex Conditional Model (Sex Bias)}\label{sex_conditional.sec}}
-
-\hypertarget{model-specification}{%
-\subsection{Model Specification}\label{model-specification}}
-
-\hypertarget{application-to-hypothetical-data}{%
-\subsection{Application to Hypothetical Data}\label{application-to-hypothetical-data}}
-
-\hypertarget{case-study-analysis-of-the-nlsy-data}{%
-\section{Case Study: Analysis of the NLSY data}\label{case-study-analysis-of-the-nlsy-data}}
-
-\hypertarget{model-building-plan}{%
-\subsection{Model Building Plan}\label{model-building-plan}}
-
-\hypertarget{EDA.sec}{%
-\subsection{Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis}\label{EDA.sec}}
-
-\hypertarget{likelihood-for-the-sex-unconditional-model-the-nlsy-data}{%
-\subsection{Likelihood for the Sex Unconditional Model: the NLSY data}\label{likelihood-for-the-sex-unconditional-model-the-nlsy-data}}
-
-\hypertarget{sex_cond_lik.sec}{%
-\subsection{Likelihood for the Sex Conditional Model}\label{sex_cond_lik.sec}}
-
-\hypertarget{sec-lrtest}{%
-\subsection{Comparing the Sex Unconditional to the Sex Conditional Model}\label{sec-lrtest}}
-
-\hypertarget{nested-models}{%
-\subsubsection{Nested Models}\label{nested-models}}
-
-\hypertarget{model-3-stopping-rule-model-waiting-for-a-boy}{%
-\section{Model 3: Stopping Rule Model (Waiting for a boy)}\label{model-3-stopping-rule-model-waiting-for-a-boy}}
-
-\hypertarget{non-nested-models}{%
-\subsection{Non-nested Models}\label{non-nested-models}}
-
-\hypertarget{summary-of-model-building}{%
-\section{Summary of Model Building}\label{summary-of-model-building}}
-
-\hypertarget{likelihood-based-methods}{%
-\section{Likelihood-based Methods}\label{likelihood-based-methods}}
-
-\hypertarget{likelihoods-and-this-course}{%
-\section{Likelihoods and this Course}\label{likelihoods-and-this-course}}
-
-\hypertarget{exercises-1}{%
-\section{Exercises}\label{exercises-1}}
-
-\hypertarget{conceptual-exercises-1}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-1}}
-
-\hypertarget{guided-exercise}{%
-\subsection{Guided Exercise}\label{guided-exercise}}
-
-\hypertarget{open-ended-exercise}{%
-\subsection{Open-ended Exercise}\label{open-ended-exercise}}
-
-\hypertarget{ch-distthry}{%
-\chapter{Distribution Theory}\label{ch-distthry}}
-
-Placeholder
-
-\hypertarget{learning-objectives-2}{%
-\section{Learning Objectives}\label{learning-objectives-2}}
-
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
-
-\hypertarget{discrete-random-variables}{%
-\section{Discrete Random Variables}\label{discrete-random-variables}}
-
-\hypertarget{sec-binary}{%
-\subsection{Binary Random Variable}\label{sec-binary}}
-
-\hypertarget{sec-binomial}{%
-\subsection{Binomial Random Variable}\label{sec-binomial}}
-
-\hypertarget{geometric-random-variable}{%
-\subsection{Geometric Random Variable}\label{geometric-random-variable}}
-
-\hypertarget{negative-binomial-random-variable}{%
-\subsection{Negative Binomial Random Variable}\label{negative-binomial-random-variable}}
-
-\hypertarget{hypergeometric-random-variable}{%
-\subsection{Hypergeometric Random Variable}\label{hypergeometric-random-variable}}
-
-\hypertarget{poisson-random-variable}{%
-\subsection{Poisson Random Variable}\label{poisson-random-variable}}
-
-\hypertarget{continuous-random-variables}{%
-\section{Continuous Random Variables}\label{continuous-random-variables}}
-
-\hypertarget{exponential-random-variable}{%
-\subsection{Exponential Random Variable}\label{exponential-random-variable}}
-
-\hypertarget{gamma-random-variable}{%
-\subsection{Gamma Random Variable}\label{gamma-random-variable}}
-
-\hypertarget{normal-gaussian-random-variable}{%
-\subsection{Normal (Gaussian) Random Variable}\label{normal-gaussian-random-variable}}
-
-\hypertarget{beta-random-variable}{%
-\subsection{Beta Random Variable}\label{beta-random-variable}}
-
-\hypertarget{distributions-used-in-testing}{%
-\section{Distributions used in Testing}\label{distributions-used-in-testing}}
-
-\hypertarget{chi2-distribution}{%
-\subsection{\texorpdfstring{\(\chi^2\) Distribution}{\textbackslash chi\^{}2 Distribution}}\label{chi2-distribution}}
-
-\hypertarget{students-tdistribution}{%
-\subsection{\texorpdfstring{Student's \(t\)--Distribution}{Student's t--Distribution}}\label{students-tdistribution}}
-
-\hypertarget{additional-resources}{%
-\section{Additional Resources}\label{additional-resources}}
-
-\hypertarget{exercises-2}{%
-\section{Exercises}\label{exercises-2}}
-
-\hypertarget{conceptual-exercises-2}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-2}}
-
-\hypertarget{guided-exercises-1}{%
-\subsection{Guided Exercises}\label{guided-exercises-1}}
-
-\hypertarget{ch-poissonreg}{%
-\chapter{Poisson Regression}\label{ch-poissonreg}}
-
-Placeholder
-
-\hypertarget{learning-objectives-3}{%
-\section{Learning Objectives}\label{learning-objectives-3}}
-
-\hypertarget{introduction-to-poisson-regression}{%
-\section{Introduction to Poisson Regression}\label{introduction-to-poisson-regression}}
-
-\hypertarget{poisson-regression-assumptions}{%
-\subsection{Poisson Regression Assumptions}\label{poisson-regression-assumptions}}
-
-\hypertarget{a-graphical-look-at-poisson-regression}{%
-\subsection{A Graphical Look at Poisson Regression}\label{a-graphical-look-at-poisson-regression}}
-
-\hypertarget{case-studies-overview}{%
-\section{Case Studies Overview}\label{case-studies-overview}}
-
-\hypertarget{case-study-household-size-in-the-philippines}{%
-\section{Case Study: Household Size in the Philippines}\label{case-study-household-size-in-the-philippines}}
-
-\hypertarget{organizedata1}{%
-\subsection{Data Organization}\label{organizedata1}}
-
-\hypertarget{explore}{%
-\subsection{Exploratory Data Analyses}\label{explore}}
-
-\hypertarget{sec-PoisInference}{%
-\subsection{Estimation and Inference}\label{sec-PoisInference}}
-
-\hypertarget{sec-Devtocompare}{%
-\subsection{Using Deviances to Compare Models}\label{sec-Devtocompare}}
-
-\hypertarget{likelihood.sec}{%
-\subsection{Using Likelihoods to fit Poisson Regression Models (Optional)}\label{likelihood.sec}}
-
-\hypertarget{second-order-model}{%
-\subsection{Second Order Model}\label{second-order-model}}
-
-\hypertarget{adding-a-covariate}{%
-\subsection{Adding a covariate}\label{adding-a-covariate}}
-
-\hypertarget{sec-PoisResid}{%
-\subsection{Residuals for Poisson Models (Optional)}\label{sec-PoisResid}}
-
-\hypertarget{sec-PoisGOF}{%
-\subsection{Goodness-of-fit}\label{sec-PoisGOF}}
-
-\hypertarget{least-squares-regression-vs.-poisson-regression}{%
-\section{Least Squares Regression vs.~Poisson Regression}\label{least-squares-regression-vs.-poisson-regression}}
-
-\hypertarget{case-study-campus-crime}{%
-\section{Case Study: Campus Crime}\label{case-study-campus-crime}}
-
-\hypertarget{data-organization-1}{%
-\subsection{Data Organization}\label{data-organization-1}}
-
-\hypertarget{exploratory-data-analysis}{%
-\subsection{Exploratory Data Analysis}\label{exploratory-data-analysis}}
-
-\hypertarget{accounting-for-enrollment}{%
-\subsection{Accounting for Enrollment}\label{accounting-for-enrollment}}
-
-\hypertarget{modeling-assumptions}{%
-\section{Modeling Assumptions}\label{modeling-assumptions}}
-
-\hypertarget{initial-models}{%
-\section{Initial Models}\label{initial-models}}
-
-\hypertarget{tukeys-honestly-significant-differences}{%
-\subsection{Tukey's Honestly Significant Differences}\label{tukeys-honestly-significant-differences}}
-
-\hypertarget{sec-overdispPois}{%
-\section{Overdispersion}\label{sec-overdispPois}}
-
-\hypertarget{dispersion-parameter-adjustment}{%
-\subsection{Dispersion parameter adjustment}\label{dispersion-parameter-adjustment}}
-
-\hypertarget{negative-binomial-modeling}{%
-\subsection{Negative binomial modeling}\label{negative-binomial-modeling}}
-
-\hypertarget{cs:drinking}{%
-\section{Case Study: Weekend drinking}\label{cs:drinking}}
-
-\hypertarget{research-question}{%
-\subsection{Research Question}\label{research-question}}
-
-\hypertarget{data-organization-2}{%
-\subsection{Data Organization}\label{data-organization-2}}
-
-\hypertarget{exploratory-data-analysis-1}{%
-\subsection{Exploratory Data Analysis}\label{exploratory-data-analysis-1}}
-
-\hypertarget{modeling}{%
-\subsection{Modeling}\label{modeling}}
-
-\hypertarget{fitting-a-zip-model}{%
-\subsection{Fitting a ZIP Model}\label{fitting-a-zip-model}}
-
-\hypertarget{comparing-zip-to-ordinary-poisson-with-vuong-test-optional}{%
-\subsection{Comparing ZIP to ordinary Poisson with Vuong Test (Optional)}\label{comparing-zip-to-ordinary-poisson-with-vuong-test-optional}}
-
-\hypertarget{residual-plot}{%
-\subsection{Residual Plot}\label{residual-plot}}
-
-\hypertarget{limitations}{%
-\subsection{Limitations}\label{limitations}}
-
-\hypertarget{exercises-3}{%
-\section{Exercises}\label{exercises-3}}
-
-\hypertarget{exer:concept}{%
-\subsection{Conceptual Exercises}\label{exer:concept}}
-
-\hypertarget{guided-exercises-2}{%
-\subsection{Guided Exercises}\label{guided-exercises-2}}
-
-\hypertarget{open-ended-exercises-1}{%
-\subsection{Open-ended Exercises}\label{open-ended-exercises-1}}
-
-\hypertarget{ch-glms}{%
-\chapter{Generalized Linear Models (GLMs): A Unifying Theory}\label{ch-glms}}
-
-Placeholder
-
-\hypertarget{learning-objectives-4}{%
-\section{Learning Objectives}\label{learning-objectives-4}}
-
-\hypertarget{one-parameter-exponential-families}{%
-\section{One parameter exponential families}\label{one-parameter-exponential-families}}
-
-\hypertarget{one-parameter-exponential-family-possion}{%
-\subsection{One Parameter Exponential Family: Possion}\label{one-parameter-exponential-family-possion}}
-
-\hypertarget{one-parameter-exponential-family-normal}{%
-\subsection{One parameter exponential family: Normal}\label{one-parameter-exponential-family-normal}}
-
-\hypertarget{generalized-linear-modeling}{%
-\section{Generalized Linear Modeling}\label{generalized-linear-modeling}}
-
-\hypertarget{exercises-4}{%
-\section{Exercises}\label{exercises-4}}
-
-\hypertarget{ch-logreg}{%
-\chapter{Logistic Regression}\label{ch-logreg}}
-
-Placeholder
-
-\hypertarget{learning-objectives-5}{%
-\section{Learning Objectives}\label{learning-objectives-5}}
-
-\hypertarget{introduction-to-logistic-regression}{%
-\section{Introduction to Logistic Regression}\label{introduction-to-logistic-regression}}
-
-\hypertarget{logistic-regression-assumptions}{%
-\subsection{Logistic Regression Assumptions}\label{logistic-regression-assumptions}}
-
-\hypertarget{a-graphical-look-at-logistic-regression}{%
-\subsection{A Graphical Look at Logistic Regression}\label{a-graphical-look-at-logistic-regression}}
-
-\hypertarget{case-studies-overview-1}{%
-\section{Case Studies Overview}\label{case-studies-overview-1}}
-
-\hypertarget{case-study-soccer-goalkeepers}{%
-\section{Case Study: Soccer Goalkeepers}\label{case-study-soccer-goalkeepers}}
-
-\hypertarget{modeling-odds}{%
-\subsection{Modeling Odds}\label{modeling-odds}}
-
-\hypertarget{logistic-regression-models-for-binomial-responses}{%
-\subsection{Logistic Regression Models for Binomial Responses}\label{logistic-regression-models-for-binomial-responses}}
-
-\hypertarget{theoretical-rationale-for-logistic-regression-models-optional}{%
-\subsection{Theoretical rationale for logistic regression models (Optional)}\label{theoretical-rationale-for-logistic-regression-models-optional}}
-
-\hypertarget{case-study-reconstructing-alabama}{%
-\section{Case Study: Reconstructing Alabama}\label{case-study-reconstructing-alabama}}
-
-\hypertarget{data-organization-3}{%
-\subsection{Data Organization}\label{data-organization-3}}
-
-\hypertarget{exploratory-analyses}{%
-\subsection{Exploratory Analyses}\label{exploratory-analyses}}
-
-\hypertarget{initial-models-1}{%
-\subsection{Initial Models}\label{initial-models-1}}
-
-\hypertarget{sec-logisticInf}{%
-\subsection{Tests for significance of model coefficients}\label{sec-logisticInf}}
-
-\hypertarget{confidence-intervals-for-model-coefficients}{%
-\subsection{Confidence intervals for model coefficients}\label{confidence-intervals-for-model-coefficients}}
-
-\hypertarget{testing-for-goodness-of-fit}{%
-\subsection{Testing for goodness of fit}\label{testing-for-goodness-of-fit}}
-
-\hypertarget{residuals-for-binomial-regression}{%
-\subsection{Residuals for Binomial Regression}\label{residuals-for-binomial-regression}}
-
-\hypertarget{sec-logOverdispersion}{%
-\subsection{Overdispersion}\label{sec-logOverdispersion}}
-
-\hypertarget{summary-1}{%
-\subsection{Summary}\label{summary-1}}
-
-\hypertarget{least-squares-regression-vs.-logistic-regression}{%
-\section{Least Squares Regression vs.~Logistic Regression}\label{least-squares-regression-vs.-logistic-regression}}
-
-\hypertarget{case-study-trying-to-lose-weight}{%
-\section{Case Study: Trying to Lose Weight}\label{case-study-trying-to-lose-weight}}
-
-\hypertarget{data-organization-4}{%
-\subsection{Data Organization}\label{data-organization-4}}
-
-\hypertarget{exploratory-data-analysis-2}{%
-\subsection{Exploratory Data Analysis}\label{exploratory-data-analysis-2}}
-
-\hypertarget{initial-models-2}{%
-\subsection{Initial Models}\label{initial-models-2}}
-
-\hypertarget{drop-in-deviance-tests}{%
-\subsection{Drop-in-deviance Tests}\label{drop-in-deviance-tests}}
-
-\hypertarget{model-discussion-and-summary}{%
-\subsection{Model Discussion and Summary}\label{model-discussion-and-summary}}
-
-\hypertarget{exercises-5}{%
-\section{Exercises}\label{exercises-5}}
-
-\hypertarget{conceptual-exercises-3}{%
-\subsection{Conceptual Exercises:}\label{conceptual-exercises-3}}
-
-\hypertarget{guided-exercises-3}{%
-\subsection{Guided Exercises}\label{guided-exercises-3}}
-
-\hypertarget{open-ended-exercises-2}{%
-\subsection{Open-ended Exercises}\label{open-ended-exercises-2}}
-
-\hypertarget{ch-corrdata}{%
-\chapter{Correlated Data}\label{ch-corrdata}}
-
-Placeholder
-
-\hypertarget{learning-objectives-6}{%
-\section{Learning Objectives}\label{learning-objectives-6}}
-
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
-
-\hypertarget{recognizing-correlation}{%
-\section{Recognizing correlation}\label{recognizing-correlation}}
-
-\hypertarget{case-study-dams-and-pups}{%
-\section{Case Study: Dams and pups}\label{case-study-dams-and-pups}}
-
-\hypertarget{sources-of-variability}{%
-\section{Sources of Variability}\label{sources-of-variability}}
-
-\hypertarget{scenario-1-no-covariates}{%
-\section{Scenario 1: No covariates}\label{scenario-1-no-covariates}}
-
-\hypertarget{scenario-2-dose-effect}{%
-\section{Scenario 2: Dose effect}\label{scenario-2-dose-effect}}
-
-\hypertarget{case-study-tree-growth}{%
-\section{Case Study: Tree Growth}\label{case-study-tree-growth}}
-
-\hypertarget{format-of-the-data-set}{%
-\subsection{Format of the data set}\label{format-of-the-data-set}}
-
-\hypertarget{sources-of-variability-1}{%
-\subsection{Sources of variability}\label{sources-of-variability-1}}
-
-\hypertarget{analysis-preview-accounting-for-correlation-within-transect}{%
-\subsection{Analysis preview: accounting for correlation within transect}\label{analysis-preview-accounting-for-correlation-within-transect}}
-
-\hypertarget{summary-2}{%
-\section{Summary}\label{summary-2}}
-
-\hypertarget{exercises-6}{%
-\section{Exercises}\label{exercises-6}}
-
-\hypertarget{conceptual-exercises-4}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-4}}
-
-\hypertarget{guided-exercises-4}{%
-\subsection{Guided Exercises}\label{guided-exercises-4}}
-
-\hypertarget{note-on-correlated-binary-outcomes}{%
-\subsection{Note on Correlated Binary Outcomes}\label{note-on-correlated-binary-outcomes}}
-
-\hypertarget{ch-multilevelintro}{%
-\chapter{Introduction to Multilevel Models}\label{ch-multilevelintro}}
-
-Placeholder
-
-\hypertarget{learning-objectives-7}{%
-\section{Learning Objectives}\label{learning-objectives-7}}
-
-\hypertarget{cs:music}{%
-\section{Case Study: Music Performance Anxiety}\label{cs:music}}
-
-\hypertarget{explore}{%
-\section{Initial Exploratory Analyses}\label{explore}}
-
-\hypertarget{organizedata1}{%
-\subsection{Data Organization}\label{organizedata1}}
-
-\hypertarget{explore1}{%
-\subsection{Exploratory Analyses: Univariate Summaries}\label{explore1}}
-
-\hypertarget{explore2}{%
-\subsection{Exploratory Analyses: Bivariate Summaries}\label{explore2}}
-
-\hypertarget{twolevelmodeling}{%
-\section{Two level modeling: preliminary considerations}\label{twolevelmodeling}}
-
-\hypertarget{multregr}{%
-\subsection{Ignoring the two level structure (not recommended)}\label{multregr}}
-
-\hypertarget{twostage}{%
-\subsection{A two-stage modeling approach (better but imperfect)}\label{twostage}}
-
-\hypertarget{twolevelmodelingunified}{%
-\section{Two level modeling: a unified approach}\label{twolevelmodelingunified}}
-
-\hypertarget{ourframework}{%
-\subsection{Our framework}\label{ourframework}}
-
-\hypertarget{random-vs.-fixed-effects}{%
-\subsection{Random vs.~fixed effects}\label{random-vs.-fixed-effects}}
-
-\hypertarget{MVN}{%
-\subsection{Distribution of errors: the multivariate normal distribution}\label{MVN}}
-
-\hypertarget{multileveltechnical}{%
-\subsection{Technical issues when estimating and testing parameters (Optional)}\label{multileveltechnical}}
-
-\hypertarget{initialmodel}{%
-\subsection{An initial model with parameter interpretations}\label{initialmodel}}
-
-\hypertarget{sec:buildmodel}{%
-\section{Building a multilevel model}\label{sec:buildmodel}}
-
-\hypertarget{buildstrategy}{%
-\subsection{Model building strategy}\label{buildstrategy}}
-
-\hypertarget{modela}{%
-\subsection{An initial model: unconditional means or random intercepts}\label{modela}}
-
-\hypertarget{modelb}{%
-\section{Binary covariates at Level One and Level Two}\label{modelb}}
-
-\hypertarget{randomslopeandint}{%
-\subsection{Random slopes and intercepts model}\label{randomslopeandint}}
-
-\hypertarget{pseudoR2}{%
-\subsection{\texorpdfstring{Pseudo \(R^2\) values}{Pseudo R\^{}2 values}}\label{pseudoR2}}
-
-\hypertarget{modelc}{%
-\subsection{Adding a covariate at Level Two}\label{modelc}}
-
-\hypertarget{sec:modeld}{%
-\section{Additional covariates: model comparison and interpretability}\label{sec:modeld}}
-
-\hypertarget{interp:modeld}{%
-\subsection{Interpretation of parameter estimates}\label{interp:modeld}}
-
-\hypertarget{compare:modeld}{%
-\subsection{Model comparisons}\label{compare:modeld}}
-
-\hypertarget{sec:modele}{%
-\section{Center covariates}\label{sec:modele}}
-
-\hypertarget{modelf}{%
-\section{A potential final model for music performance anxiety}\label{modelf}}
-
-\hypertarget{multinecessary}{%
-\section{Modeling the multilevel structure: is it really necessary?}\label{multinecessary}}
-
-\hypertarget{notesr8}{%
-\section{Notes on Using R (Optional)}\label{notesr8}}
-
-\hypertarget{exercises-7}{%
-\section{Exercises}\label{exercises-7}}
-
-\hypertarget{conceptual-exercises-5}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-5}}
-
-\hypertarget{guided-exercise-1}{%
-\subsection{Guided Exercise}\label{guided-exercise-1}}
-
-\hypertarget{open-ended-exercises-3}{%
-\subsection{Open-ended Exercises}\label{open-ended-exercises-3}}
-
-\hypertarget{ch-lon}{%
-\chapter{Two Level Longitudinal Data}\label{ch-lon}}
-
-Placeholder
-
-\hypertarget{learning-objectives-8}{%
-\section{Learning objectives}\label{learning-objectives-8}}
-
-\hypertarget{cs:charter}{%
-\section{Case study: Charter schools}\label{cs:charter}}
-
-\hypertarget{exploratoryanalysis}{%
-\section{Initial Exploratory Analyses}\label{exploratoryanalysis}}
-
-\hypertarget{data}{%
-\subsection{Data organization}\label{data}}
-
-\hypertarget{missing}{%
-\subsection{Missing data}\label{missing}}
-
-\hypertarget{generalanalyses}{%
-\subsection{Exploratory analyses for general multilevel models}\label{generalanalyses}}
-
-\hypertarget{longitudinalanalyses}{%
-\subsection{Exploratory analyses for longitudinal data}\label{longitudinalanalyses}}
-
-\hypertarget{twostage9}{%
-\section{Preliminary two-stage modeling}\label{twostage9}}
-
-\hypertarget{lineartwostage}{%
-\subsection{Linear trends within schools}\label{lineartwostage}}
-
-\hypertarget{lineartwostageL2effects}{%
-\subsection{Effects of level two covariates on linear time trends}\label{lineartwostageL2effects}}
-
-\hypertarget{lineartwostageerror}{%
-\subsection{Error structure within schools}\label{lineartwostageerror}}
-
-\hypertarget{lineartwostageerror}{%
-\section{Initial models}\label{lineartwostageerror}}
-
-\hypertarget{modela}{%
-\subsection{Unconditional means model}\label{modela}}
-
-\hypertarget{modelb}{%
-\subsection{Unconditional growth model}\label{modelb}}
-
-\hypertarget{othertimetrends}{%
-\subsection{Modeling other trends over time}\label{othertimetrends}}
-
-\hypertarget{finalmodel}{%
-\section{Building to a final model}\label{finalmodel}}
-
-\hypertarget{sec:modelc9}{%
-\subsection{Uncontrolled effects of school type}\label{sec:modelc9}}
-
-\hypertarget{modeld}{%
-\subsection{Add percent free and reduced lunch as a covariate}\label{modeld}}
-
-\hypertarget{modelf9}{%
-\subsection{A potential final model with three Level Two covariates}\label{modelf9}}
-
-\hypertarget{errorcovariance}{%
-\section{Covariance structure among observations}\label{errorcovariance}}
-
-\hypertarget{standarderror}{%
-\subsection{Standard covariance structure}\label{standarderror}}
-
-\hypertarget{alternateerror}{%
-\subsection{Alternative covariance structures}\label{alternateerror}}
-
-\hypertarget{covariance-structure-in-non-longitudinal-multilevel-models}{%
-\subsection{Covariance structure in non-longitudinal multilevel models}\label{covariance-structure-in-non-longitudinal-multilevel-models}}
-
-\hypertarget{final-thoughts-regarding-covariance-structures}{%
-\subsection{Final thoughts regarding covariance structures}\label{final-thoughts-regarding-covariance-structures}}
-
-\hypertarget{optionalcov}{%
-\subsection{Details of covariance structures (Optional)}\label{optionalcov}}
-
-\hypertarget{notesr9}{%
-\section{Notes on Using R (Optional)}\label{notesr9}}
-
-\hypertarget{exercises-8}{%
-\section{Exercises}\label{exercises-8}}
-
-\hypertarget{conceptual-exercises-6}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-6}}
-
-\hypertarget{guided-exercise-2}{%
-\subsection{Guided Exercise}\label{guided-exercise-2}}
-
-\hypertarget{open-ended-exercises-4}{%
-\subsection{Open-ended Exercises}\label{open-ended-exercises-4}}
-
-\hypertarget{ch-GLMM}{%
-\chapter{Generalized Linear Multilevel Models}\label{ch-GLMM}}
-
-Placeholder
-
-\hypertarget{objectives}{%
-\section{Learning Objectives}\label{objectives}}
-
-\hypertarget{cs:refs}{%
-\section{Case Study: College Basketball Referees}\label{cs:refs}}
-
-\hypertarget{explore-glmm}{%
-\section{Initial Exploratory Analyses}\label{explore-glmm}}
-
-\hypertarget{data-organization-5}{%
-\subsection{Data organization}\label{data-organization-5}}
-
-\hypertarget{glmm-eda}{%
-\subsection{Exploratory analyses}\label{glmm-eda}}
-
-\hypertarget{twolevelmodeling-glmm}{%
-\section{Two level Modeling with a Generalized Response}\label{twolevelmodeling-glmm}}
-
-\hypertarget{multregr-glmm}{%
-\subsection{A GLM approach (correlation not accounted for)}\label{multregr-glmm}}
-
-\hypertarget{twostage-glmm}{%
-\subsection{A two-stage modeling approach (provides the basic idea for multilevel modeling)}\label{twostage-glmm}}
-
-\hypertarget{unified-glmm}{%
-\subsection{A unified multilevel approach (the framework we'll use)}\label{unified-glmm}}
-
-\hypertarget{crossedre}{%
-\section{Crossed Random Effects}\label{crossedre}}
-
-\hypertarget{glmm-paraboot}{%
-\section{Model Comparisons Using the Parametric Bootstrap}\label{glmm-paraboot}}
-
-\hypertarget{sec:finalmodel-glmm}{%
-\section{A Potential Final Model for Examining Referee Bias}\label{sec:finalmodel-glmm}}
-
-\hypertarget{estimatedRE}{%
-\section{Estimated Random Effects}\label{estimatedRE}}
-
-\hypertarget{usingR-glmm}{%
-\section{Notes on Using R (Optional)}\label{usingR-glmm}}
-
-\hypertarget{exercises-9}{%
-\section{Exercises}\label{exercises-9}}
-
-\hypertarget{conceptual-exercises-7}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises-7}}
-
-\hypertarget{open-ended-exercises-5}{%
-\subsection{Open-ended Exercises}\label{open-ended-exercises-5}}
 
   \bibliography{bib/articles.bib,bib/books.bib,bib/misc.bib}
 
