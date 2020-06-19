@@ -493,7 +493,7 @@ Contribs <- c('$(1-p_B)^{951}$', '$(1-p_B)^{666}p_B^{666}$',
     
 ```{r sexuncondmodel, echo=FALSE}
 #one boy table
-sex_uncond_model <- data.frame(Comps, Contribs)
+sex_uncond_model <- data.frame(Comps, Contribs) 
 colnames(sex_uncond_model) <-c("Family composition",
                                "Likelihood contribution")
 kable(sex_uncond_model, booktabs = T, escape = F,
