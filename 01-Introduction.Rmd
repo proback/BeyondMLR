@@ -40,7 +40,6 @@ library(GGally)
 library(kableExtra)
 library(jtools)
 library(rsample)
-library(purrr)
 library(broom)
 library(tidyverse)    
 ```

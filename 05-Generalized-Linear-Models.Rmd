@@ -22,87 +22,102 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
 `r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
 
+```{r load_packages5, message = FALSE}
+# Packages required for Chapter 5
+library(knitr)
+```
+
 ## One parameter exponential families
 
-Thus far, we have expanded our repertoire of models from OLS to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model is a GLM, we consider the following properties.
+Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter $\theta$ is a GLM, we consider the following properties.
 When a probability formula can be written in the form below
+
 \begin{equation}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 (\#eq:1expForm)
 \end{equation}
-and if the __support__ (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
+and if the support (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
 
 ### One Parameter Exponential Family: Possion
 
 Recall we begin with
+
 \[
 P(Y=y)=\frac{e^{-\lambda}{\lambda}^y}{y!}\quad \textrm{where}\quad y=0,1,2\ldots\infty
 \]
 and consider the following useful identities for establishing exponential form:
+
   \[a=e^{\log(a)} \]
   \[a^x = e^{x\log(a)}\]
   \[\log(ab)=\log(a)+\log(b)\]
   \[\log\Big(\frac{a}{b}\Big)=\log(a)-\log(b)\]
   
 Determining whether the Poisson model is a member of the one-parameter exponential family is a matter of writing the Poisson pmf in the form of Equation \@ref(eq:1expForm) and checking that the support does not depend upon $\lambda$. First, consider the condition concerning the support of the distribution. The set of possible values for any Poisson random variable is $y=0,1,2\ldots\infty$ which does not depend on $\lambda$. The support condition is met. Now we see if we can rewrite the probability mass function in one-parameter exponential family form.
+
  \begin{align}
  P(Y=y)&= {e^{-\lambda}e^{y\log \lambda}e^{-\log (y!)}} \nonumber \\
        &= e^{y\log \lambda-\lambda-\log (y!)}
  (\#eq:opeff)
  \end{align}
 The first term in the exponent for Equation \@ref(eq:1expForm) must be the product of two factors, one solely a function of y, $a(y)$, and another, $b(\lambda)$, a function of $\lambda$ only.  The middle term in the exponent must be a function of $\lambda$ only; no $y's$ should appear.  The last term has only $y's$ and no $\lambda$. Since this appears to be the case here, we can identify the different functions in this form:
-\begin{align}
+
+\begin{align*}
 a(y)&=y \\
 b(\lambda)&=\log(\lambda) \\
-c(\lambda)&=-\lambda \nonumber \\
-d(y)&=-\log (y!) \\
+c(\lambda)&=-\lambda \\
+d(y)&=-\log (y!)
 (\#eq:diffunc)
-\end{align}
+\end{align*}
 These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function $b(\lambda)$, or more generally $b(\theta)$, will be particularly helpful in GLMs. The function $b(\theta)$ is referred to as the __canonical link__. The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as $\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots$.  In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of $\theta$, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.  
 
 There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS).  In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of $Y$. With statistical theory you can show that
+
 \[\E(Y) =-\frac{c'(\theta)}{b'(\theta)} \quad \textrm{and} \quad \var(Y) =\frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}
 \]
 where differentiation is with respect to $\theta$.  Verifying these results for the Poisson response:
+
 \[\E(Y)=-\frac{-1}{1/\lambda}=\lambda \quad \textrm{and} \quad  \var(Y)=\frac{1/{{\lambda}^2}}
 {(1/{\lambda}^3)}=\lambda
 \]
+
 We'll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we'll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean $\mu$ and standard deviation $\sigma$. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.  
 
 ### One parameter exponential family: Normal
 
 Here we determine whether a normal distribution is a one parameter exponential family member. First we will need to assume that $\sigma$ is known. Next, possible values for a normal random variable range from $-\infty$ to $\infty$, so the support does not depend on $\mu$. Finally, we'll need to write the probability density function (pdf) in the one parameter exponential family form. We start with the familiar form:
+
 \[
 f(y)=\frac{1}{{\sqrt{2\pi\sigma^2}}}{e^{-{(y-\mu)^2}/{(2\sigma^2)}}}
 \]
 Even writing ${1/{\sqrt{2\pi\sigma^2}}}$ as $e^{-\log{\sigma}-\log(2\pi)/2}$ we still do not have the pdf written in one parameter exponential family form. We will first need to expand the exponent so that we have
+
 \[
 f(y)=e^{[-\log{\sigma}-\log(2\pi)/2]}{e^{[-{(y^2-2y\mu +\mu^2)}/{(2\sigma^2)}]}}
 \]
+Without loss of generality, we can assume $\sigma=1$, so that
 
-Without loss of generality, we can assume $\sigma=1$, so that 
 \[
 f(y) \propto e^{y\mu - \frac{1}{2} \mu^2 - \frac{1}{2} y^2}
 \]
 and $a(y)=y$, $b(\mu)=\mu$, $c(\mu)= -\frac{1}{2}\mu^2$, and $d(y) = - \frac{1}{2} y^2$.
 
-From this result, we can see that the canonical link for a normal response is $\mu$ which is consistent with what we've been doing with OLS, since the simple linear regression model has the form:
+From this result, we can see that the canonical link for a normal response is $\mu$ which is consistent with what we've been doing with LLSR, since the simple linear regression model has the form:
+
 \[ \mu_{Y|X} = \beta_0 + \beta_1X. \]
 
+
 ## Generalized Linear Modeling
+
 GLM theory suggests that the canonical link can be modeled as a linear combination of the explanatory variable(s). This approach unifies a number of modeling results used throughout the text. For example, likelihoods can be used to compare models in the same way for any member of the one-parameter exponential family.
 
 We have now __generalized__ our modeling to handle non-normal responses. In addition to normally distributed responses, we are able to handle Poisson responses, binomial responses, and more. Writing a pmf or pdf for a response in one parameter exponential family form reveals the canonical link which can be modeled as a linear function of the predictors. This linear function of the predictors is the last piece of the puzzle for performing generalized linear modeling. But, in fact, it is really nothing new. We already use linear combinations and the canonical link when modeling normally distributed data.
 
-<p align="center">  __Three Components of a GLM__ </p>
-> 1. Distribution of $Y$ (e.g., Poisson)
-> 2. Link Function (a function of the parameter, e.g., $\log(\lambda)$ for Poisson)
-> 3. Linear Predictor (choice of predictors, 
-e.g., $\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots$)
+__Three Components of a GLM__
 
-```{r, load_packages5, include=FALSE}
-library(knitr) #for kable
-```
+1. Distribution of $Y$ (e.g., Poisson)
+2. Link Function (a function of the parameter, e.g., $\log(\lambda)$ for Poisson)
+3. Linear Predictor (choice of predictors, 
+e.g., $\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots$)
 
 ```{r, table1chp5, echo=FALSE}
 #{tab:1exp}
@@ -112,7 +127,7 @@ Opeff <- c(" "," ","$P(Y=y) = e^{y\\log\\lambda - \\lambda - y!}$","$f(y) \\prop
 canlink <- c(" ","$\\text{logit}(p)$","$\\log(\\lambda)$","$\\mu$"," "," "," ")
 
 table1chp5 <- data.frame(Dist, Opeff, canlink)
-colnames(table1chp5) <- c("Distribution","One-parameter Exponential Family Form","Canonical Link")
+colnames(table1chp5) <- c("Distribution","One-parameter exponential family form","Canonical link")
 kable(table1chp5, booktabs=T,caption="One parameter exponential family form and canonical links.",escape=F)
 ```
 
@@ -120,31 +135,31 @@ Completing Table \@ref(tab:table1chp5) is left as an exercise.
 
 In the chapter on Poisson modeling, we provided heuristic rationale for using the $\log()$ function as our link. That is, counts would be non-negative but a linear function inevitably goes negative. By taking the logarithm of our parameter $\lambda$ we could use a linear predictor and not worry that it can take on negative values. Now we have theoretical justification for this choice, as the log is the canonical link for Poisson data. In the next chapter we encounter yet another type of response, a binary response, which calls for a different link function. Our work here suggests that we will model $\text{logit}(p)=\log\left(\frac{p}{1-p}\right)$ using a linear predictor.
 
-[Note that __generalized linear models (GLMs)__ differs from __General Linear Models__.  The *general* linear model is a statistical linear model with multivariate vectors as responses. For example, each subject in a study may have their height, weight, and shoe size recorded and modeled as a function of age and sex. The response is a vector, $Y$ = (height, weight, shoe size), for each study participant. Age and sex are explanatory variables in the model. The residual is usually assumed to follow a multivariate normal distribution. If the residual is not a multivariate normal distribution, then generalized linear models may be used to relax assumptions about Y and the variance-covariance structure.]
+[Note that __generalized linear models (GLMs)__ differs from General Linear Models.  The *general* linear model is a statistical linear model with multivariate vectors as responses. For example, each subject in a study may have their height, weight, and shoe size recorded and modeled as a function of age and sex. The response is a vector, $Y$ = (height, weight, shoe size), for each study participant. Age and sex are explanatory variables in the model. The residual is usually assumed to follow a multivariate normal distribution. If the residual is not a multivariate normal distribution, then generalized linear models may be used to relax assumptions about Y and the variance-covariance structure.]
 
 ## Exercises
 
-1. For each distribution,
+1. For each distribution below,
 
-- Write the pdf in one parameter exponential form, if possible.
+- Write the pmf or pdf in one parameter exponential form, if possible.
 - Describe an example of a setting where this random variable might be used.
 - Identify the canonical link function, and
 - Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
 
 a) Binary: Y = 1 for a success, 0 for a failure
 
-  \[p(y)=p^{y}(1-p)^{(1-y)}
+  \[P(Y=y;p)=p^{y}(1-p)^{(1-y)}
   \]
   
 b) Binomial (for fixed $n$): Y = number of successes in $n$ independent, identical trials
 
-  \[p(y)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}
+  \[P(Y=y;p)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}
   \]
   
 c) Poisson: Y = number of events occurring in a given time (or space) when the average event rate is $\lambda$ per unit of time (or space)
 
   \[
-  P(Y=y)=\frac{e^{-\lambda}\lambda^y}{y!}
+  P(Y=y; \lambda)=\frac{e^{-\lambda}\lambda^y}{y!}
   \]
   
 d) Normal (with fixed $\sigma$ -- could set $\sigma=1$ without loss of generality)
@@ -157,7 +172,7 @@ e) Normal (with fixed $\mu$ -- could set $\mu=0$ without loss of generality)
 
 f) Exponential: Y = time spent waiting for the first event in a Poisson process with an average rate of $\lambda$ events per unit of time
 
-  \[f(y)=\lambda e^{-\lambda y}\]
+  \[f(y; \lambda)=\lambda e^{-\lambda y}\]
 
 g) Gamma (for fixed $r$): Y = time spent waiting for the $r^{th}$ event in a Poisson process with an average rate of $\lambda$ events per unit of time
 
@@ -165,12 +180,12 @@ g) Gamma (for fixed $r$): Y = time spent waiting for the $r^{th}$ event in a Poi
 
 h) Geometric: Y = number of failures before the first success in a Bernoulli process
 
-  \[p(y)=(1-p)^{y}p\]
+  \[P(Y=y;p)=(1-p)^{y}p\]
 
 i) Negative Binomial (for fixed $r$): Y = number of failures prior to the $r^{th}$ success in a Bernoulli process
 
 \begin{align}
-p(y; r) & =  \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-p)^{y}p^r \nonumber \\
+P(Y=y; p) & =  \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-p)^{y}p^r \nonumber \\
  & =  \frac{\Gamma(y+r)}{\Gamma(r)y!} (1-p)^{y}p^r  \\
 \end{align}
 

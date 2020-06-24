@@ -1,0 +1,446 @@
+lose.wt,lose.wt.01,sex,sport,sport_fac,sport_num,media,bmipct
+Lose weight,1,Male,No sports,0 teams,0,3,98
+No weight loss,0,Female,No sports,0 teams,0,1,41
+No weight loss,0,Male,Sports,1 team,1,3,6
+No weight loss,0,Male,No sports,0 teams,0,3,41
+Lose weight,1,Male,No sports,0 teams,0,3,99
+No weight loss,0,Male,No sports,0 teams,0,2,97
+Lose weight,1,Male,No sports,0 teams,0,0,0
+Lose weight,1,Male,Sports,1 team,1,0.5,100
+No weight loss,0,Male,Sports,1 team,1,1,3
+No weight loss,0,Male,Sports,3 or more teams,3,1,8
+Lose weight,1,Female,No sports,0 teams,0,5,99
+No weight loss,0,Male,No sports,0 teams,0,2,13
+Lose weight,1,Female,Sports,1 team,1,1,87
+No weight loss,0,Female,Sports,1 team,1,3,71
+No weight loss,0,Male,Sports,3 or more teams,3,0,93
+No weight loss,0,Female,Sports,1 team,1,0,97
+Lose weight,1,Female,Sports,1 team,1,2,15
+No weight loss,0,Female,Sports,1 team,1,0.5,33
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,28
+No weight loss,0,Female,Sports,1 team,1,1,25
+Lose weight,1,Female,Sports,1 team,1,2,24
+No weight loss,0,Male,Sports,2 teams,2,2,56
+Lose weight,1,Female,No sports,0 teams,0,0,96
+No weight loss,0,Female,No sports,0 teams,0,4,78
+Lose weight,1,Female,Sports,2 teams,2,2,98
+No weight loss,0,Female,No sports,0 teams,0,0,24
+Lose weight,1,Male,Sports,1 team,1,5,81
+Lose weight,1,Female,No sports,0 teams,0,5,96
+Lose weight,1,Female,Sports,3 or more teams,3,5,97
+Lose weight,1,Male,Sports,3 or more teams,3,2,90
+Lose weight,1,Female,No sports,0 teams,0,2,89
+Lose weight,1,Male,Sports,1 team,1,4,67
+Lose weight,1,Female,No sports,0 teams,0,3,97
+Lose weight,1,Male,No sports,0 teams,0,4,97
+No weight loss,0,Male,No sports,0 teams,0,0.5,88
+No weight loss,0,Male,Sports,3 or more teams,3,3,67
+No weight loss,0,Female,Sports,1 team,1,4,62
+No weight loss,0,Male,Sports,1 team,1,3,36
+No weight loss,0,Female,Sports,1 team,1,0.5,15
+Lose weight,1,Female,Sports,2 teams,2,3,75
+Lose weight,1,Female,No sports,0 teams,0,2,93
+No weight loss,0,Female,Sports,1 team,1,1,5
+Lose weight,1,Male,Sports,2 teams,2,0.5,97
+Lose weight,1,Female,Sports,2 teams,2,0.5,85
+No weight loss,0,Male,Sports,2 teams,2,4,64
+Lose weight,1,Female,Sports,2 teams,2,0,52
+No weight loss,0,Female,No sports,0 teams,0,3,34
+No weight loss,0,Male,Sports,3 or more teams,3,1,85
+No weight loss,0,Male,No sports,0 teams,0,1,15
+No weight loss,0,Male,Sports,1 team,1,5,93
+Lose weight,1,Female,No sports,0 teams,0,3,96
+No weight loss,0,Male,No sports,0 teams,0,5,33
+No weight loss,0,Male,No sports,0 teams,0,0,25
+No weight loss,0,Male,Sports,1 team,1,5,68
+No weight loss,0,Male,No sports,0 teams,0,4,74
+No weight loss,0,Male,Sports,1 team,1,1,79
+Lose weight,1,Male,Sports,1 team,1,5,96
+Lose weight,1,Female,No sports,0 teams,0,2,35
+No weight loss,0,Male,Sports,1 team,1,5,84
+No weight loss,0,Female,No sports,0 teams,0,0.5,53
+No weight loss,0,Male,Sports,2 teams,2,3,36
+Lose weight,1,Male,Sports,1 team,1,0.5,92
+No weight loss,0,Female,No sports,0 teams,0,4,52
+Lose weight,1,Male,Sports,1 team,1,1,98
+Lose weight,1,Female,Sports,2 teams,2,0,79
+No weight loss,0,Male,Sports,2 teams,2,3,92
+Lose weight,1,Female,Sports,3 or more teams,3,0.5,97
+Lose weight,1,Male,Sports,3 or more teams,3,0.5,92
+No weight loss,0,Female,No sports,0 teams,0,0,28
+No weight loss,0,Female,Sports,3 or more teams,3,4,51
+Lose weight,1,Female,No sports,0 teams,0,5,37
+Lose weight,1,Female,No sports,0 teams,0,2,87
+No weight loss,0,Female,Sports,3 or more teams,3,5,19
+Lose weight,1,Female,Sports,2 teams,2,4,89
+Lose weight,1,Male,Sports,1 team,1,5,94
+No weight loss,0,Female,Sports,1 team,1,2,44
+Lose weight,1,Female,No sports,0 teams,0,2,72
+Lose weight,1,Male,No sports,0 teams,0,3,97
+Lose weight,1,Female,No sports,0 teams,0,4,57
+Lose weight,1,Female,No sports,0 teams,0,3,96
+No weight loss,0,Female,Sports,1 team,1,1,30
+Lose weight,1,Female,Sports,1 team,1,2,41
+Lose weight,1,Female,Sports,2 teams,2,4,65
+No weight loss,0,Female,Sports,3 or more teams,3,3,41
+No weight loss,0,Male,Sports,1 team,1,3,92
+No weight loss,0,Male,No sports,0 teams,0,3,17
+Lose weight,1,Female,Sports,2 teams,2,4,98
+No weight loss,0,Male,No sports,0 teams,0,2,46
+Lose weight,1,Male,Sports,3 or more teams,3,2,99
+No weight loss,0,Male,Sports,1 team,1,0.5,82
+No weight loss,0,Male,Sports,2 teams,2,5,96
+Lose weight,1,Female,Sports,1 team,1,2,47
+Lose weight,1,Female,Sports,1 team,1,0.5,95
+Lose weight,1,Female,Sports,2 teams,2,1,48
+No weight loss,0,Male,No sports,0 teams,0,3,65
+Lose weight,1,Male,Sports,2 teams,2,1,87
+No weight loss,0,Female,Sports,1 team,1,1,38
+No weight loss,0,Male,Sports,3 or more teams,3,4,94
+Lose weight,1,Female,Sports,2 teams,2,1,74
+No weight loss,0,Female,No sports,0 teams,0,1,12
+Lose weight,1,Female,Sports,3 or more teams,3,2,93
+Lose weight,1,Female,No sports,0 teams,0,0.5,63
+No weight loss,0,Male,Sports,3 or more teams,3,2,66
+No weight loss,0,Male,Sports,3 or more teams,3,1,54
+No weight loss,0,Female,Sports,2 teams,2,2,14
+No weight loss,0,Male,Sports,1 team,1,2,12
+No weight loss,0,Female,Sports,1 team,1,5,92
+No weight loss,0,Male,Sports,3 or more teams,3,3,50
+Lose weight,1,Male,No sports,0 teams,0,3,95
+Lose weight,1,Female,Sports,1 team,1,0.5,55
+Lose weight,1,Male,Sports,1 team,1,0,92
+No weight loss,0,Male,No sports,0 teams,0,0.5,26
+Lose weight,1,Female,Sports,3 or more teams,3,2,71
+Lose weight,1,Male,Sports,2 teams,2,3,70
+No weight loss,0,Male,Sports,2 teams,2,3,71
+Lose weight,1,Female,No sports,0 teams,0,0,93
+Lose weight,1,Male,Sports,1 team,1,3,97
+Lose weight,1,Male,No sports,0 teams,0,0,64
+Lose weight,1,Female,Sports,1 team,1,1,72
+Lose weight,1,Female,No sports,0 teams,0,2,97
+Lose weight,1,Female,Sports,3 or more teams,3,0.5,88
+Lose weight,1,Female,No sports,0 teams,0,0.5,99
+No weight loss,0,Female,Sports,1 team,1,3,18
+No weight loss,0,Male,Sports,2 teams,2,2,66
+Lose weight,1,Female,No sports,0 teams,0,0,40
+No weight loss,0,Female,No sports,0 teams,0,2,51
+No weight loss,0,Male,Sports,2 teams,2,1,67
+Lose weight,1,Female,Sports,1 team,1,0.5,25
+No weight loss,0,Female,No sports,0 teams,0,4,28
+No weight loss,0,Male,Sports,2 teams,2,1,81
+No weight loss,0,Female,No sports,0 teams,0,5,90
+No weight loss,0,Male,Sports,2 teams,2,0.5,98
+No weight loss,0,Male,Sports,2 teams,2,0.5,24
+No weight loss,0,Female,Sports,3 or more teams,3,0.5,21
+Lose weight,1,Female,No sports,0 teams,0,2,87
+Lose weight,1,Female,No sports,0 teams,0,5,30
+No weight loss,0,Female,Sports,1 team,1,0,35
+No weight loss,0,Female,Sports,1 team,1,1,55
+No weight loss,0,Male,Sports,2 teams,2,2,44
+Lose weight,1,Female,No sports,0 teams,0,0.5,88
+Lose weight,1,Male,Sports,1 team,1,2,99
+No weight loss,0,Male,No sports,0 teams,0,1,85
+No weight loss,0,Male,Sports,1 team,1,5,92
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,90
+No weight loss,0,Male,Sports,1 team,1,3,61
+No weight loss,0,Female,No sports,0 teams,0,0.5,55
+Lose weight,1,Female,No sports,0 teams,0,2,83
+Lose weight,1,Male,Sports,1 team,1,3,87
+No weight loss,0,Male,Sports,2 teams,2,2,69
+Lose weight,1,Female,No sports,0 teams,0,3,92
+No weight loss,0,Female,No sports,0 teams,0,2,58
+No weight loss,0,Female,Sports,1 team,1,0,63
+No weight loss,0,Female,No sports,0 teams,0,5,57
+No weight loss,0,Female,Sports,1 team,1,1,6
+No weight loss,0,Male,Sports,2 teams,2,3,48
+No weight loss,0,Male,No sports,0 teams,0,2,44
+No weight loss,0,Female,No sports,0 teams,0,3,98
+Lose weight,1,Female,Sports,1 team,1,5,87
+No weight loss,0,Male,No sports,0 teams,0,1,66
+No weight loss,0,Female,No sports,0 teams,0,3,88
+No weight loss,0,Female,No sports,0 teams,0,0,21
+No weight loss,0,Male,Sports,1 team,1,1,48
+No weight loss,0,Male,No sports,0 teams,0,0.5,26
+No weight loss,0,Female,No sports,0 teams,0,1,17
+Lose weight,1,Female,Sports,2 teams,2,5,83
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,85
+No weight loss,0,Male,Sports,2 teams,2,1,99
+Lose weight,1,Female,No sports,0 teams,0,0.5,98
+No weight loss,0,Female,No sports,0 teams,0,0.5,71
+No weight loss,0,Male,No sports,0 teams,0,3,92
+No weight loss,0,Male,No sports,0 teams,0,2,29
+Lose weight,1,Female,No sports,0 teams,0,0.5,28
+Lose weight,1,Male,No sports,0 teams,0,3,67
+No weight loss,0,Male,No sports,0 teams,0,0,45
+No weight loss,0,Male,No sports,0 teams,0,4,83
+No weight loss,0,Male,Sports,3 or more teams,3,5,95
+No weight loss,0,Female,Sports,2 teams,2,0.5,61
+Lose weight,1,Male,No sports,0 teams,0,1,99
+Lose weight,1,Male,Sports,3 or more teams,3,3,96
+Lose weight,1,Female,Sports,1 team,1,2,44
+Lose weight,1,Male,Sports,1 team,1,2,94
+Lose weight,1,Female,No sports,0 teams,0,5,55
+Lose weight,1,Male,No sports,0 teams,0,5,98
+No weight loss,0,Male,No sports,0 teams,0,4,86
+No weight loss,0,Female,No sports,0 teams,0,1,2
+No weight loss,0,Male,Sports,2 teams,2,2,52
+Lose weight,1,Female,Sports,1 team,1,1,80
+Lose weight,1,Female,No sports,0 teams,0,0,63
+Lose weight,1,Male,No sports,0 teams,0,3,96
+No weight loss,0,Male,No sports,0 teams,0,1,68
+Lose weight,1,Female,No sports,0 teams,0,0.5,76
+No weight loss,0,Female,Sports,1 team,1,2,16
+No weight loss,0,Female,Sports,3 or more teams,3,5,70
+No weight loss,0,Male,No sports,0 teams,0,4,42
+Lose weight,1,Female,No sports,0 teams,0,0,20
+Lose weight,1,Female,Sports,1 team,1,2,75
+No weight loss,0,Male,Sports,2 teams,2,2,98
+No weight loss,0,Male,No sports,0 teams,0,0.5,83
+No weight loss,0,Male,No sports,0 teams,0,4,78
+No weight loss,0,Male,Sports,2 teams,2,5,72
+No weight loss,0,Female,No sports,0 teams,0,5,14
+No weight loss,0,Female,Sports,1 team,1,1,39
+No weight loss,0,Female,Sports,2 teams,2,3,65
+No weight loss,0,Male,Sports,2 teams,2,0.5,91
+No weight loss,0,Male,Sports,2 teams,2,5,7
+No weight loss,0,Female,Sports,2 teams,2,0.5,20
+Lose weight,1,Female,Sports,3 or more teams,3,0.5,30
+No weight loss,0,Female,No sports,0 teams,0,1,5
+No weight loss,0,Male,Sports,3 or more teams,3,3,61
+No weight loss,0,Male,No sports,0 teams,0,5,68
+Lose weight,1,Female,Sports,3 or more teams,3,0,93
+Lose weight,1,Female,Sports,1 team,1,0.5,61
+Lose weight,1,Female,No sports,0 teams,0,0.5,76
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,32
+No weight loss,0,Female,Sports,1 team,1,1,10
+Lose weight,1,Male,Sports,2 teams,2,3,100
+Lose weight,1,Female,Sports,1 team,1,1,75
+Lose weight,1,Female,Sports,1 team,1,1,27
+No weight loss,0,Male,No sports,0 teams,0,2,25
+No weight loss,0,Male,No sports,0 teams,0,2,68
+Lose weight,1,Female,No sports,0 teams,0,1,37
+Lose weight,1,Female,Sports,1 team,1,4,44
+Lose weight,1,Female,Sports,1 team,1,3,78
+Lose weight,1,Female,No sports,0 teams,0,1,40
+No weight loss,0,Female,No sports,0 teams,0,3,52
+Lose weight,1,Male,Sports,1 team,1,0.5,95
+Lose weight,1,Male,Sports,2 teams,2,2,68
+No weight loss,0,Male,Sports,3 or more teams,3,1,74
+Lose weight,1,Female,Sports,1 team,1,0,93
+No weight loss,0,Female,No sports,0 teams,0,5,71
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,72
+Lose weight,1,Female,Sports,3 or more teams,3,1,84
+No weight loss,0,Male,No sports,0 teams,0,5,8
+Lose weight,1,Male,Sports,2 teams,2,0.5,80
+Lose weight,1,Male,No sports,0 teams,0,0,93
+Lose weight,1,Male,No sports,0 teams,0,1,81
+No weight loss,0,Male,Sports,3 or more teams,3,2,60
+Lose weight,1,Female,No sports,0 teams,0,3,64
+No weight loss,0,Male,Sports,1 team,1,1,84
+Lose weight,1,Female,Sports,2 teams,2,0.5,86
+Lose weight,1,Female,No sports,0 teams,0,3,90
+No weight loss,0,Male,Sports,1 team,1,2,99
+Lose weight,1,Male,Sports,2 teams,2,5,94
+No weight loss,0,Male,Sports,2 teams,2,0.5,29
+Lose weight,1,Female,Sports,3 or more teams,3,1,65
+No weight loss,0,Male,No sports,0 teams,0,0,7
+No weight loss,0,Male,Sports,1 team,1,4,58
+No weight loss,0,Female,No sports,0 teams,0,5,0
+Lose weight,1,Male,No sports,0 teams,0,3,55
+No weight loss,0,Male,Sports,1 team,1,0.5,46
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,82
+No weight loss,0,Male,Sports,1 team,1,5,49
+Lose weight,1,Male,No sports,0 teams,0,1,59
+Lose weight,1,Male,Sports,1 team,1,2,99
+Lose weight,1,Male,No sports,0 teams,0,0.5,97
+No weight loss,0,Female,No sports,0 teams,0,2,23
+No weight loss,0,Female,Sports,2 teams,2,3,49
+No weight loss,0,Male,No sports,0 teams,0,5,83
+Lose weight,1,Male,Sports,2 teams,2,3,90
+Lose weight,1,Female,Sports,1 team,1,0,74
+Lose weight,1,Male,No sports,0 teams,0,2,59
+Lose weight,1,Male,Sports,3 or more teams,3,3,79
+Lose weight,1,Male,Sports,1 team,1,4,95
+Lose weight,1,Female,No sports,0 teams,0,2,85
+Lose weight,1,Male,Sports,3 or more teams,3,3,82
+No weight loss,0,Male,Sports,3 or more teams,3,1,57
+Lose weight,1,Male,Sports,3 or more teams,3,0.5,92
+No weight loss,0,Male,Sports,2 teams,2,0,72
+No weight loss,0,Male,No sports,0 teams,0,3,98
+No weight loss,0,Female,No sports,0 teams,0,5,21
+No weight loss,0,Male,Sports,1 team,1,5,54
+Lose weight,1,Male,Sports,2 teams,2,1,98
+No weight loss,0,Male,Sports,3 or more teams,3,1,66
+Lose weight,1,Female,No sports,0 teams,0,2,99
+No weight loss,0,Male,Sports,1 team,1,4,100
+Lose weight,1,Male,No sports,0 teams,0,0.5,34
+Lose weight,1,Female,No sports,0 teams,0,2,99
+Lose weight,1,Female,Sports,3 or more teams,3,2,92
+Lose weight,1,Female,No sports,0 teams,0,2,97
+No weight loss,0,Male,No sports,0 teams,0,0.5,29
+No weight loss,0,Male,Sports,1 team,1,2,43
+Lose weight,1,Female,Sports,2 teams,2,4,63
+No weight loss,0,Female,Sports,2 teams,2,3,23
+No weight loss,0,Female,No sports,0 teams,0,1,62
+No weight loss,0,Male,No sports,0 teams,0,3,36
+Lose weight,1,Male,No sports,0 teams,0,0.5,67
+Lose weight,1,Female,No sports,0 teams,0,4,53
+Lose weight,1,Male,Sports,2 teams,2,0.5,97
+No weight loss,0,Male,Sports,2 teams,2,1,31
+Lose weight,1,Female,No sports,0 teams,0,1,90
+Lose weight,1,Female,Sports,1 team,1,1,70
+Lose weight,1,Female,Sports,1 team,1,0.5,86
+No weight loss,0,Male,No sports,0 teams,0,5,41
+No weight loss,0,Female,No sports,0 teams,0,2,51
+No weight loss,0,Male,Sports,1 team,1,0.5,97
+No weight loss,0,Male,Sports,2 teams,2,0.5,27
+No weight loss,0,Male,Sports,2 teams,2,5,23
+No weight loss,0,Male,No sports,0 teams,0,0.5,0
+Lose weight,1,Female,No sports,0 teams,0,1,46
+No weight loss,0,Male,Sports,2 teams,2,2,95
+No weight loss,0,Male,No sports,0 teams,0,2,95
+Lose weight,1,Female,No sports,0 teams,0,0.5,83
+Lose weight,1,Female,Sports,3 or more teams,3,3,71
+No weight loss,0,Male,Sports,1 team,1,4,92
+No weight loss,0,Female,No sports,0 teams,0,1,68
+Lose weight,1,Male,Sports,1 team,1,3,99
+No weight loss,0,Female,Sports,3 or more teams,3,0.5,82
+Lose weight,1,Female,No sports,0 teams,0,0,90
+No weight loss,0,Male,No sports,0 teams,0,1,90
+Lose weight,1,Female,Sports,1 team,1,2,68
+No weight loss,0,Female,Sports,1 team,1,0.5,65
+Lose weight,1,Female,Sports,2 teams,2,1,47
+No weight loss,0,Male,Sports,2 teams,2,1,35
+Lose weight,1,Female,No sports,0 teams,0,0,83
+Lose weight,1,Female,Sports,2 teams,2,0,65
+Lose weight,1,Male,Sports,3 or more teams,3,2,31
+No weight loss,0,Female,Sports,1 team,1,1,24
+Lose weight,1,Female,No sports,0 teams,0,1,99
+No weight loss,0,Male,Sports,1 team,1,0.5,81
+Lose weight,1,Male,Sports,1 team,1,2,92
+Lose weight,1,Female,No sports,0 teams,0,3,49
+Lose weight,1,Female,Sports,1 team,1,4,67
+No weight loss,0,Male,No sports,0 teams,0,1,63
+Lose weight,1,Male,Sports,1 team,1,3,100
+No weight loss,0,Female,Sports,1 team,1,2,10
+No weight loss,0,Male,Sports,3 or more teams,3,3,85
+No weight loss,0,Male,Sports,3 or more teams,3,2,62
+No weight loss,0,Female,Sports,3 or more teams,3,0.5,22
+No weight loss,0,Male,No sports,0 teams,0,0,26
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,29
+Lose weight,1,Female,Sports,2 teams,2,0.5,61
+No weight loss,0,Male,No sports,0 teams,0,2,17
+No weight loss,0,Female,No sports,0 teams,0,3,30
+No weight loss,0,Male,Sports,2 teams,2,0.5,40
+Lose weight,1,Female,No sports,0 teams,0,2,59
+No weight loss,0,Male,Sports,2 teams,2,0,80
+No weight loss,0,Female,No sports,0 teams,0,3,33
+No weight loss,0,Male,Sports,2 teams,2,5,86
+No weight loss,0,Female,Sports,1 team,1,1,36
+Lose weight,1,Female,No sports,0 teams,0,2,44
+Lose weight,1,Female,Sports,2 teams,2,2,58
+Lose weight,1,Female,Sports,1 team,1,1,44
+No weight loss,0,Male,Sports,1 team,1,4,18
+No weight loss,0,Male,No sports,0 teams,0,0.5,45
+No weight loss,0,Male,Sports,3 or more teams,3,5,94
+No weight loss,0,Male,No sports,0 teams,0,1,49
+No weight loss,0,Female,No sports,0 teams,0,0,42
+No weight loss,0,Female,Sports,1 team,1,1,26
+Lose weight,1,Female,No sports,0 teams,0,2,51
+No weight loss,0,Male,Sports,2 teams,2,5,76
+No weight loss,0,Male,No sports,0 teams,0,3,95
+Lose weight,1,Female,Sports,2 teams,2,0,66
+Lose weight,1,Female,Sports,1 team,1,2,93
+No weight loss,0,Male,Sports,1 team,1,4,61
+Lose weight,1,Female,Sports,2 teams,2,0.5,97
+No weight loss,0,Male,No sports,0 teams,0,1,79
+Lose weight,1,Female,Sports,1 team,1,0.5,83
+No weight loss,0,Female,No sports,0 teams,0,0,10
+No weight loss,0,Male,Sports,1 team,1,0,68
+No weight loss,0,Male,Sports,3 or more teams,3,1,43
+Lose weight,1,Male,Sports,2 teams,2,3,100
+Lose weight,1,Male,No sports,0 teams,0,2,99
+Lose weight,1,Female,Sports,3 or more teams,3,5,67
+Lose weight,1,Female,No sports,0 teams,0,3,96
+No weight loss,0,Male,Sports,3 or more teams,3,2,42
+Lose weight,1,Male,No sports,0 teams,0,4,83
+No weight loss,0,Male,No sports,0 teams,0,0,10
+Lose weight,1,Female,Sports,1 team,1,5,88
+No weight loss,0,Female,Sports,3 or more teams,3,2,88
+Lose weight,1,Male,No sports,0 teams,0,3,100
+Lose weight,1,Male,Sports,1 team,1,0,74
+Lose weight,1,Male,Sports,3 or more teams,3,2,83
+No weight loss,0,Female,Sports,1 team,1,3,53
+Lose weight,1,Female,Sports,3 or more teams,3,1,70
+No weight loss,0,Male,No sports,0 teams,0,1,88
+No weight loss,0,Male,No sports,0 teams,0,2,19
+No weight loss,0,Female,Sports,2 teams,2,0.5,23
+Lose weight,1,Male,No sports,0 teams,0,2,92
+No weight loss,0,Female,No sports,0 teams,0,0.5,31
+No weight loss,0,Male,Sports,1 team,1,2,61
+Lose weight,1,Male,No sports,0 teams,0,1,74
+Lose weight,1,Female,No sports,0 teams,0,0.5,83
+No weight loss,0,Female,No sports,0 teams,0,2,38
+Lose weight,1,Male,Sports,2 teams,2,2,92
+Lose weight,1,Female,Sports,2 teams,2,2,79
+Lose weight,1,Male,No sports,0 teams,0,5,83
+No weight loss,0,Male,Sports,2 teams,2,0.5,88
+Lose weight,1,Male,Sports,1 team,1,5,94
+Lose weight,1,Female,No sports,0 teams,0,1,98
+No weight loss,0,Male,Sports,1 team,1,2,96
+No weight loss,0,Female,Sports,1 team,1,5,43
+No weight loss,0,Male,Sports,2 teams,2,4,64
+Lose weight,1,Male,Sports,2 teams,2,2,98
+No weight loss,0,Male,No sports,0 teams,0,4,64
+No weight loss,0,Male,Sports,1 team,1,3,76
+No weight loss,0,Male,No sports,0 teams,0,2,84
+No weight loss,0,Male,Sports,2 teams,2,0.5,91
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,61
+Lose weight,1,Female,Sports,1 team,1,0.5,85
+No weight loss,0,Female,Sports,1 team,1,0.5,73
+Lose weight,1,Male,Sports,1 team,1,5,67
+Lose weight,1,Female,Sports,2 teams,2,5,8
+Lose weight,1,Male,Sports,3 or more teams,3,5,81
+No weight loss,0,Male,No sports,0 teams,0,3,27
+Lose weight,1,Female,Sports,1 team,1,2,94
+Lose weight,1,Male,No sports,0 teams,0,3,88
+Lose weight,1,Female,Sports,1 team,1,4,78
+No weight loss,0,Female,Sports,1 team,1,1,24
+No weight loss,0,Male,No sports,0 teams,0,3,67
+No weight loss,0,Female,No sports,0 teams,0,0.5,96
+Lose weight,1,Male,Sports,3 or more teams,3,1,97
+Lose weight,1,Male,No sports,0 teams,0,0.5,97
+No weight loss,0,Male,Sports,1 team,1,5,0
+No weight loss,0,Female,Sports,1 team,1,2,44
+Lose weight,1,Female,No sports,0 teams,0,2,96
+No weight loss,0,Female,Sports,1 team,1,5,90
+No weight loss,0,Female,No sports,0 teams,0,3,15
+No weight loss,0,Male,No sports,0 teams,0,5,93
+No weight loss,0,Female,Sports,1 team,1,5,59
+Lose weight,1,Male,Sports,1 team,1,0,87
+No weight loss,0,Female,Sports,1 team,1,5,98
+Lose weight,1,Male,No sports,0 teams,0,3,79
+No weight loss,0,Male,No sports,0 teams,0,3,98
+No weight loss,0,Male,Sports,2 teams,2,0.5,77
+No weight loss,0,Male,No sports,0 teams,0,5,19
+Lose weight,1,Female,No sports,0 teams,0,3,99
+Lose weight,1,Female,No sports,0 teams,0,2,53
+No weight loss,0,Male,Sports,3 or more teams,3,5,54
+Lose weight,1,Female,Sports,1 team,1,4,99
+Lose weight,1,Female,No sports,0 teams,0,5,91
+No weight loss,0,Female,Sports,3 or more teams,3,3,38
+No weight loss,0,Female,Sports,2 teams,2,3,49
+No weight loss,0,Male,Sports,2 teams,2,0,61
+No weight loss,0,Male,Sports,3 or more teams,3,3,25
+Lose weight,1,Female,Sports,2 teams,2,2,94
+No weight loss,0,Male,Sports,3 or more teams,3,0.5,45
+No weight loss,0,Female,No sports,0 teams,0,0.5,45
+No weight loss,0,Male,No sports,0 teams,0,0,1
+No weight loss,0,Male,Sports,2 teams,2,1,67
+Lose weight,1,Female,Sports,1 team,1,5,52
+No weight loss,0,Male,Sports,1 team,1,3,33
+No weight loss,0,Female,No sports,0 teams,0,0.5,43
+No weight loss,0,Male,Sports,2 teams,2,3,40
+Lose weight,1,Female,Sports,2 teams,2,1,39
+No weight loss,0,Male,No sports,0 teams,0,2,34

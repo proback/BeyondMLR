@@ -2,5 +2,5 @@ book_filename: "bookdown-bysh"
 chapter_name: "Chapter "
 output_dir: docs
 rmd_files: ["index.Rmd", 
-  "02-Beyond-Most-Least-Squares.Rmd"]
+  "08-Introduction-to-Multilevel-Models.Rmd"]
 clean: [packages.bib, bookdown.bbl]

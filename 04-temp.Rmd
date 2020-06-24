@@ -1,0 +1,70 @@
+---
+title: "Chapter 4"
+subtitle: "Poisson Regression"
+output:
+  pdf_document:
+    number_sections: yes
+  html_document: default
+---
+# Poisson Regression {#ch-poissonreg}
+
+## Learning Objectives
+
+After finishing this chapter, you should be able to:  
+
+- Describe why  simple linear regression is not ideal for Poisson data.
+- Write out a Poisson regression model and identify the assumptions for inference.
+- Write out the likelihood for a Poisson regression and describe how it could be used to estimate coefficients for a model.
+- Interpret estimated coefficients from a Poisson regression and construct confidence intervals for them.
+- Use deviances for Poisson regression models to compare and assess models.
+- Use an offset to account for varying effort in data collection.
+- Fit and use a zero-inflated Poisson (ZIP) model.
+
+```{r load_packages4, message = FALSE}
+# Packages required for Chapter 4
+library(gridExtra)
+library(knitr)
+library(kableExtra)
+library(mosaic)
+library(xtable)
+library(pscl) 
+library(multcomp)
+library(pander)
+library(MASS)
+library(tidyverse)
+```
+
+```{r include=FALSE}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
+### No dispersion vs. overdispersion
+
+Table \@ref(tab:compTable) summarizes the comparison between Poisson inference (tests and confidence intervals assuming no overdispersion) and quasi-Poisson inference (tests and confidence intervals after accounting for overdispersion). 
+
+```{r, include = FALSE}
+label1 <- c("Estimate","Std error","Wald-type test stat", "Confidence interval", "Drop in deviance test")
+poisson1 <- c("$\\hat{\\beta}$", 
+         "$SE(\\hat{\\beta})$", 
+         "$Z = \\hat{\\beta} / SE(\\hat{\\beta})$",
+         "$\\hat{\\beta} \\pm z^{'} SE(\\hat{\\beta})$", 
+         "$\\chi^2 = \\textrm{resid dev(reduced) - resid dev(full)}$")
+quasi1 <- c("$\\hat{\\beta}$", 
+         "$SE_Q(\\hat{\\beta}) = \\sqrt{\\hat{\\phi}} SE(\\hat{\\beta})$", 
+         "$t = \\hat{\\beta} / SE_Q(\\hat{\\beta})$",
+         "$\\hat{\\beta} \\pm t^{'} SE_Q(\\hat{\\beta})$", 
+         "$F = (\\chi^2 / \\textrm{difference in df}) / \\hat{\\phi}$")
+```
+
+```{r, compTable, echo = FALSE}
+table1chp4 <- data.frame(label1, poisson1, quasi1)
+colnames(table1chp4) <- c(" ","Poisson", "quasi-Poisson")
+if (knitr:::is_latex_output()) {
+  kable(table1chp4, booktabs = T, escape = F,
+        caption="Comparison of Poisson and quasi-Poisson inference") %>%
+#  column_spec(1:3, width = "20em") %>%
+  kable_styling(latex_options = "scale_down")
+} else {
+  kable(table1chp4, "html", booktabs = T, caption="Comparison of Poisson and quasi-Poisson inference")
+}
+```
