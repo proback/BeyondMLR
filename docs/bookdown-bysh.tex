@@ -208,7 +208,7 @@
 \makeatother
 \subtitle{Broadening Your Statistical Horizons with Applications using R}
 \author{Paul Roback and Julie Legler}
-\date{2020-06-23}
+\date{2020-06-24}
 
 \begin{document}
 \maketitle
@@ -242,8 +242,8 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 
 \textbf{Acknowledgements.} We would like to thank students of Stat 316 at St.~Olaf College since 2010 for their patience as this book has taken shape with their feedback. We would especially like to thank these St.~Olaf students for their summer research efforts which significantly improved aspects of this book: Cecilia Noecker, Anna Johanson, Nicole Bettes, Kiegan Rice, Anna Wall, Jack Wolf, Josh Pelayo, Spencer Eanes, and Emily Patterson. Early editions of this book also benefitted greatly from feedback from instructors who used these materials in their classes, including Matt Beckman, Laura Boehm Vock, Beth Chance, Laura Chihara, Mine Dogucu, and Katie Ziegler-Graham. Finally, we have appreciated the support of two NSF grants (\#DMS-1045015 and \#DMS-0354308) and of our colleagues in Mathematics, Statistics, and Computer Science at St.~Olaf.
 
-\hypertarget{ch-corrdata}{%
-\chapter{Correlated Data}\label{ch-corrdata}}
+\hypertarget{ch-multilevelintro}{%
+\chapter{Introduction to Multilevel Models}\label{ch-multilevelintro}}
 
 \hypertarget{learning-objectives}{%
 \section{Learning Objectives}\label{learning-objectives}}
@@ -253,599 +253,719 @@ After finishing this chapter, you should be able to:
 \begin{itemize}
 \tightlist
 \item
-  Given a data structure, recognize when there is potential for correlation.
+  Recognize when response variables and covariates have been collected at multiple (nested) levels.
 \item
-  Identify observational units at varying levels.
+  Apply exploratory data analysis techniques to multilevel data.
 \item
-  Provide reasons why correlated observations may cause problems when modeling if they are not addressed.
+  Write out a multilevel statistical model, including assumptions about variance components, in both by-level and composite forms.
 \item
-  Describe overdispersion and why it might occur.
+  Interpret model parameters (including fixed effects and variance components) from a multilevel model, including cases in which covariates are continuous, categorical, or centered.
 \item
-  Understand how correlation in data can be taken into account using random effects models.
+  Understand the taxonomy of models, including why we start with an unconditional means model.
 \item
-  Describe differences in the kind of inferences that can be made using fixed versus random effects models.
-\item
-  Use software to fit a model taking correlation into account.
+  Select a final model, using criteria such as AIC, BIC, and deviance.
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Packages required for Chapter 7}
-\KeywordTok{library}\NormalTok{(gridExtra)}
-\KeywordTok{library}\NormalTok{(knitr)}
-\KeywordTok{library}\NormalTok{(kableExtra)}
-\KeywordTok{library}\NormalTok{(lme4)}
-\KeywordTok{library}\NormalTok{(ICC)}
-\KeywordTok{library}\NormalTok{(knitr)}
+\CommentTok{# Packages required for Chapter 8}
+\KeywordTok{library}\NormalTok{(MASS)}
+\KeywordTok{library}\NormalTok{(gridExtra)  }
+\KeywordTok{library}\NormalTok{(mnormt) }
+\KeywordTok{library}\NormalTok{(lme4) }
+\KeywordTok{library}\NormalTok{(knitr) }
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\hypertarget{cs:music}{%
+\section{Case Study: Music Performance Anxiety}\label{cs:music}}
 
-Introductory statistics courses typically require responses which are approximately normal and independent of one another. We saw from the first chapters in this book that there are models for non-normal responses, so we have already broadened the types of applications we can handle. In this chapter, we relax an additional assumption from introductory statistics, that of independence. Here we introduce methods that allow correlation to be taken into account. When modeling, correlation can be considered for normal and non-normal responses. Taken together, we can handle many more applications than the average introductory student.
+Stage fright can be a serious problem for performers, and understanding the personality underpinnings of performance anxiety is an important step in determining how to minimize its impact. \citet{Miller2010} studied the emotional state of musicians before performances and factors which may affect their emotional state. Data was collected by having 37 undergraduate music majors from a competitive undergraduate music program fill out diaries prior to performances over the course of an academic year. In particular, study participants completed a Positive Affect Negative Affect Schedule (PANAS) before each performance. The PANAS instrument provided two key outcome measures: negative affect (a state measure of anxiety) and positive affect (a state measure of happiness). We will focus on negative affect as our primary response measuring performance anxiety.
 
-In this chapter, we first focus on recognizing data structures that may imply correlation, introducing new terminology for discussing correlated data and its effects. Next, we consider potential problems correlated outcomes may cause and why we need to take correlation into account when modeling. Models which take correlation into account are then described and fit with the help of R.
+Factors which were examined for their potential relationships with performance anxiety included: performance type (solo, large ensemble, or small ensemble); audience (instructor, public, students, or juried); if the piece was played from memory; age; gender; instrument (voice, orchestral, or keyboard); and, years studying the instrument. In addition, the personalities of study participants were assessed at baseline through the Multidimensional Personality Questionnaire (MPQ). The MPQ provided scores for one lower-order factor (absorption) and three higher-order factors: positive emotionality (PEM---a composite of well-being, social potency, achievement, and social closeness); negative emotionality (NEM---a composite of stress reaction, alienation, and aggression); and, constraint (a composite of control, harm avoidance, and traditionalism).
 
-This chapter will feel different than other chapters in this book. In order to understand correlated data and contrast it with independent observations, we will be exploring several simulations and associated thought questions. In that way, you should develop a feel for correlated data which will carry through into the remaining chapters to this book. In addition, as you proceed through the simulations, fill out Table \ref{tab:simulationTableCh7}; this will help you see patterns as you compare analyses which account for correlation with those that do not.
-
-\begin{table}
-
-\caption{\label{tab:simulationTableCh7}Summary of simulations for Dams and Pups case study}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}}
-\toprule
-Scenario & Model & Model Name & $\beta_0$ & SE $\beta_0$ & $t$ & p value & $\phi$ & Est prob & CI prob & Mean count & SD count & GOF p value\\
-\midrule
-1a & Binomial & fit\_1a\_binom &  &  &  &  &  &  &  &  &  & \\
- & Quasibinomial & fit\_1a\_quasi &  &  &  &  &  &  &  & X & X & X\\
-1b & Binomial & fit\_1b\_binom &  &  &  &  &  &  &  &  &  & \\
- & Quasibinomial & fit\_1b\_quasi &  &  &  &  &  &  &  & X & X & X\\
- &  &  &  &  &  &  &  &  &  &  &  & \\
-\addlinespace
-\textbf{Scenario} & \textbf{Model} & \textbf{Model Name} & \textbf{$\beta_1$} & \textbf{SE $\beta_1$} & \textbf{$t$} & \textbf{p value} & \textbf{$\phi$} & \textbf{Est odds ratio} & \textbf{CI odds ratio} & \textbf{Mean count Dose=1} & \textbf{SD count Dose=1} & \textbf{GOF p value}\\
-2a & Binomial & fit\_2a\_binom &  &  &  &  &  &  &  &  &  & \\
- & Quasibinomial & fit\_2a\_quasi &  &  &  &  &  &  &  & X & X & X\\
-2b & Binomial & fit\_2b\_binom &  &  &  &  &  &  &  &  &  & \\
- & Quasibinomial & fit\_2b\_quasi &  &  &  &  &  &  &  & X & X & X\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{recognizing-correlation}{%
-\section{Recognizing correlation}\label{recognizing-correlation}}
-
-Correlated data is encountered in nearly every field. In education, student scores from a particular teacher are typically more similar than scores of other students who have had a different teacher. During a study measuring depression indices weekly over the course of a month, we usually find that four measures for the same patient tend to be more similar than depression indices from other patients. In political polling, opinions from members of the same household are usually more similar than opinions of members from other randomly selected households. The structure of these data sets suggest inherent patterns of similarities or correlation among outcomes. This kind of correlation specifically concerns correlation of observations \emph{within the same teacher or patient or household} and is referred to as \textbf{intraclass correlation}.
-
-Correlated data often takes on a multilevel structure. That is, population elements are grouped into aggregates, and we often have information on both the individual elements and the aggregated groups. For instance, students are grouped by teacher, weekly depression measures are grouped by patient, and survey respondents are grouped by household. In these cases, we refer to \textbf{levels} of measurement and observational units at each level. For example, students might represent \textbf{level one observational units} while teachers represent \textbf{level two observational units}, where \textbf{level one} is the most basic level of observation, and level one observations are aggregated to form \textbf{level two} observations. Then, if we are modeling a response such as test score, we may want to examine the effects of student characteristics such as sex and ethnicity, and teacher characteristics such as years of experience. Student characteristics would be considered \textbf{level one covariates}, while teacher characteristics would be \textbf{level two covariates}.
-
-\hypertarget{case-study-dams-and-pups}{%
-\section{Case Study: Dams and pups}\label{case-study-dams-and-pups}}
-
-A \textbf{teratogen} is a substance or exposure that can result in harm to a developing fetus. An experiment can be conducted to determine whether increasing levels of a potential teratogen results in increasing probability of defects in rat pups. We will simulate the results of an experiment in which 24 dams (mother rats) are randomized to four groups: 3 groups of 6 dams each are administered a potential teratogen in high (3mg), medium (2mg), or low (1mg) doses, and the fourth group serves as the control. Each of the 24 dams produces 10 rat pups, and each pup is examined for the presence of an anomaly or deformity.
-
-\hypertarget{sources-of-variability}{%
-\section{Sources of Variability}\label{sources-of-variability}}
-
-Before we analyze data from our simulated experiment, let's step back and look at the big picture. Statistics is all about analyzing and explaining variability, so let's consider what sources of variability we have in the dams and pups example. There are several reasons why the counts of the number of defective pups might differ from dam to dam, and it is helpful to explicitly identify these reasons in order to determine how the dose levels affect the pups while also accommodating correlation.
-
-\textbf{Dose Effect} The dams and pups experiment is being carried out to determine whether different dose levels affect the development of defects differently. Of particular interest is determining whether a \textbf{dose-response} effect is present. A dose-response effect is evident when dams receiving higher dose levels produce higher proportions of pups with defects. Knowing defect rates at specific dose levels is typically of interest within this experiment and beyond. Publishing the defect rates for each dose level in a journal paper, for example, would be of interest to other teratologists. For that reason, we refer to dose level effects as \textbf{fixed effects}.
-
-\textbf{Dams (Litter) Effect} In many settings like this, there is a litter effect as well. For example, some dams may exhibit a propensity to produce pups with defects while others rarely produce litters with defective pups. That is, observations on pups within the same litter are likely to be similar or correlated. Unlike the dose effect, teratologists reading experiment results are not interested in the estimated probability of defect for each dam in the study, and we would not report these estimated probabilities in a paper. However, there may be interest in the \emph{variability} in litter-specific defect probabilities; accounting for dam-to-dam variability reduces the amount of unexplained variability and leads to more precise estimates of fixed effects like dose. Often this kind of effect is modeled using the idea that randomly selected dams produce \textbf{random effects}. This provides one way in which to model correlated data, in this case the correlation between pups from the same dam. We elaborate on this idea throughout the remainder of the text.
-
-\textbf{Pup-to-pup variability} The within litter pup-to-pup differences reflect random, unexplained variation in the model.
-
-\hypertarget{scenario-1-no-covariates}{%
-\section{Scenario 1: No covariates}\label{scenario-1-no-covariates}}
-
-In Scenario 1, we will ignore dose and assume that dose has no effect on the probability of a deformed pup. You can follow along with the simulation (and modify it as desired) in the \emph{Rmd} file for this chapter (note that some lines of code are run but not printed in the chapter text), and fill out Table \ref{tab:simulationTableCh7}.
-
-First, we will consider Scenario 1a where each dam's probability of producing a deformed pup is \(p = 0.5\); thus, each dam's log odds are 0. We then will compare this to Scenario 1b, where dams' probabilities of producing a deformed pup follow a beta distribution where \(\alpha = \beta = 0.5\) (which has expected value \(0.5\)). So, in Scenario 1b, each dam has a different probability of producing a deformed pup, but the probabilities average out to 0.5, whereas in Scenario 1a each dam has an identical probability of producing a deformed pup (0.5). Figure \ref{fig:scenario1ProbabilityPlot} illustrates these two scenarios; every dam in Scenario 1a has a probability of 0.5 (at the red line), while probabilities in Scenario 1b are selected from the black dashed distribution, so that probabilities near 0 and 1 are more likely than probabilities near 0.5. The histogram shows 24 randomly generated probabilities under one run of Scenario 1b.
-
-The R code below produces a simulated number of deformed pups for each of the 24 dams under Scenario 1a and Scenario 1b, and Figure \ref{fig:scenario1Plot} displays distributions of counts of deformed pups per dam for the two simulations. In Scenario 1a, the mean number of deformed pups is 5.17 with standard deviation 1.49. In Scenario 1b, the mean number of deformed pups is 5.67 with standard deviation 4.10.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pi_1a <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{24}\NormalTok{)}
-\NormalTok{count_1a <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{10}\NormalTok{, pi_1a)}
-
-\NormalTok{pi_1b <-}\StringTok{ }\KeywordTok{rbeta}\NormalTok{(}\DecValTok{24}\NormalTok{,.}\DecValTok{5}\NormalTok{,.}\DecValTok{5}\NormalTok{)  }
-\NormalTok{count_1b <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{10}\NormalTok{, pi_1b)  }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/scenario1ProbabilityPlot-1} 
-
-}
-
-\caption{Dam Probabilities in Scenario 1}\label{fig:scenario1ProbabilityPlot}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/scenario1Plot-1} 
-
-}
-
-\caption{Counts of deformed pups per dam under Scenarios 1a and 1b}\label{fig:scenario1Plot}
-\end{figure}
-
-\textbf{Thought Questions}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Will the counts of deformed pups for dams in Scenario 1a behave like a binomial distribution with \(n=10\) and \(p=0.5\) (that is, like counting heads in 10 flips of a fair coin)? Why or why not?
-\item
-  Will the counts of deformed pups for dams in Scenario 1b behave like a binomial distribution with \(n=10\) and \(p=0.5\) (that is, like counting heads in 10 flips of a fair coin)? If not, extend the coin flipping analogy to Scenario 1b.
-\item
-  Is Scenario 1b realistic? Why might some dams have higher probabilities than others?
-\end{enumerate}
-
-If we were to model the number of deformed pups per dam in Scenario 1a, we could ignore the potential of a dam effect (since all dams behave the same) and proceed with regular binomial regression as in Chapter \ref{ch-logreg}. Since we have no predictors, we would start with the model:
-
-\begin{equation*}
-  \log \bigg( \frac{\hat{p}}{1-\hat{p}} \bigg) = \hat{\beta}_0, \textrm{ where } \hat{\beta}_0 = 0.067
-\end{equation*}
-which produces an estimated odds of deformity \(\widehat{p}/(1-\widehat{p}) = e^{0.067} = 1.069\) and estimated probability \(\widehat{p} = 0.517\). Creating 95\% confidence intervals using a profile likelihood approach, we get:
-
-
-
-\[
-\begin{alignedat}{2}
-  &\textrm{95\% CI for } p/(1-p) &&= (0.830, 1.378) \\
-  &\textrm{95\% CI for } p       &&= (0.454, 0.579)
-\end{alignedat}
-\]
-
-However, we can account for potential overdispersion with a \textbf{quasibinomial model}, just as we did in Section \ref{sec-logOverdispersion}, in case the observed variance is larger than the variance under a binomial model. Quasibinomial regression yields the same estimate for \(\beta_0\) as the binomial regression model (\(\hat{\beta}_0 = 0.067\)), but we now have overdispersion paramater \(\widehat{\phi} = 0.894\). This gives us the following 95\% profile likelihood-based confidence intervals:
-
-\[
-\begin{alignedat}{2}
-  &\textrm{95\% CI for } p/(1-p) &&= (0.841, 1.359) \\
-  &\textrm{95\% CI for } p       &&= (0.457, 0.576)
-\end{alignedat}
-\]
-
-Turning to Scenario 1b, where each dam has a unique probability of producing a pup with a deformity based on a beta distribution, we can fit binomial and quasibinomial models as well.
-
-A binomial model gives regression equation
-
-\begin{equation*}
-  \log\bigg(\frac{\hat{p}}{1-\hat{p}}\bigg) = 0.268,
-\end{equation*}
-with associated profile likelihood 95\% confidence intervals:
-
-\[
-\begin{alignedat}{2}
-  &\textrm{95\% CI for } p/(1-p) &&= (1.014, 1.691) \\
-  &\textrm{95\% CI for } p       &&= (0.504, 0.628)
-\end{alignedat}
-\]
-
-We could compare this to a quasibinomial model. With overdispersion paramater \(\widehat{\phi} = 6.858\), we now have profile likelihood-based intervals:
-
-\[
-\begin{alignedat}{2}
-  &\textrm{95\% CI for } p/(1-p) &&= (0.673, 2.594) \\
-  &\textrm{95\% CI for } p       &&= (0.402, 0.722)
-\end{alignedat}
-\]
-
-\textbf{Thought Questions}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
-\item
-  Describe how the quasibinomial analysis of Scenario 1b differs from the binomial analysis of the same simulated data. Refer to Table \ref{tab:simulationTableCh7} when answering this question; you will need to run the R code in the R markdown file for this chapter to completely fill out the table. Do confidence intervals contain the true model parameters?
-\item
-  Why are differences between quasibinomial and binomial models of Scenario 1a less noticeable than the differences in Scenario 1b?
-\end{enumerate}
-
-\hypertarget{scenario-2-dose-effect}{%
-\section{Scenario 2: Dose effect}\label{scenario-2-dose-effect}}
-
-In Scenario 1, each dam's probability of producing a deformed pup was independent of their dosage of the teratogen. In Scenario 2 we allow for a dose effect. To recall, in this hypothetical experiment we have 24 total dams evenly split into 4 groups recieving either no dose (coded as \texttt{dose\ =\ 0} mg), a low dose (\texttt{dose\ =\ 1}), a medium dose (\texttt{dose\ =\ 2}), or a high dose (\texttt{dose\ =\ 3}) of the teratogen.
-
-We will suppose that true probability that a dam's pup has a deformity is related to the dose the dam received through this model:
-
-\[ \log \bigg(\frac{p}{1-p} \bigg) = -2 + 1.33\; \textrm{dose} \]
-That is, we assume that the log odds of a deformity is linearly related to dose through the equation above, and the odds of a deformity are 3.79 times greater (\(e^{1.33}\)) for each 1mg increase in dose.
-
-In Scenario 2a, a dam who received a dose of \(x\) would have probability
-
-\[p = P(\textrm{deformity}\mid \textrm{dose} = x) = e^{-2+1.33x}/(1+e^{-2+1.33x}). \]
-Thus, dams who received doses of 0, 1, 2, and 3 mg would have probabilities 0.12, 0.34, 0.66, and 0.88, respectively, under Scenario 2a.
-
-In Scenario 2b, each dam who received a dose of \(x\) has probability of deformity randomly chosen from a beta distribution where \(\alpha = 2p/(1-p)\) and \(\beta = 2\). These beta distribution parameters ensure that, on average, dams with a dose \(x\) in Scenario 2b have the same probability of a deformed pup as dams with dose \(x\) in Scenario 2a. For example, dams receiving the 1mg dosage under Scenario 2b would have probabilities following a beta distribution with \(\alpha = 2(0.34)/(1-0.34) = 1.03\) and \(\beta = 2\), which has mean \(\frac{\alpha}{\alpha + \beta}=0.34\). The big difference is that \emph{all} dams receiving the 1mg dosage in Scenario 2a have probability 0.34 of a deformed pup, whereas dams receiving the 1mg dosage in Scenario 2b each have a unique probability of a deformed pup, but those probabilities average out to 0.34.
-
-Figure \ref{fig:scenario2bPlot} displays histograms for each dosage group of each dam's probability of producing deformed pups under Scenario 2b as well as theoretical distributions of probabilities. A vertical line is displayed at each hypothetical distribution's mean; the vertical line represents the fixed probability of a deformed pup for all dams under Scenario 2a.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-
-\NormalTok{dose <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{6}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{6}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{))}
-
-\NormalTok{pi_2a <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\OperatorTok{+}\DecValTok{4}\OperatorTok{/}\DecValTok{3}\OperatorTok{*}\NormalTok{dose)}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\OperatorTok{+}\DecValTok{4}\OperatorTok{/}\DecValTok{3}\OperatorTok{*}\NormalTok{dose))}
-\NormalTok{count_2a <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{10}\NormalTok{, pi_2a)}
-
-\NormalTok{b <-}\StringTok{ }\DecValTok{2}
-\NormalTok{a <-}\StringTok{ }\NormalTok{b}\OperatorTok{*}\NormalTok{pi_2a }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pi_2a)}
-\NormalTok{pi_2b <-}\StringTok{ }\KeywordTok{rbeta}\NormalTok{(}\DecValTok{24}\NormalTok{, a, b)}
-\NormalTok{count_2b <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{10}\NormalTok{, pi_2b)  }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/scenario2bPlot-1} 
-
-}
-
-\caption{Observed (histograms) and theoretical (density curves) distributions of dams' probabilities of producing deformed pups by dose group in Scenario 2b.  The red vertical line represents the fixed probability of a deformed pup by dose group in Scenario 2a.}\label{fig:scenario2bPlot}
-\end{figure}
-
-\begin{table}
-
-\caption{\label{tab:scenario2Tab}Summary Statistics of Scenario 2 by Dose}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{rrr>{\raggedleft\arraybackslash}p{1cm}>{\raggedleft\arraybackslash}p{1cm}rr>{\raggedleft\arraybackslash}p{1cm}>{\raggedleft\arraybackslash}p{1cm}}
-\toprule
-\multicolumn{1}{c}{ } & \multicolumn{4}{c}{Scenario 2a} & \multicolumn{4}{c}{Scenario 2b} \\
-\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
-Dosage & Mean p & SD p & Mean Count & SD Count & Mean p & SD p & Mean Count & SD Count\\
-\midrule
-0 & 0.119 & 0 & 1.333 & 1.366 & 0.061 & 0.069 & 0.500 & 0.837\\
-1 & 0.339 & 0 & 3.167 & 1.835 & 0.239 & 0.208 & 3.500 & 2.881\\
-2 & 0.661 & 0 & 5.833 & 1.472 & 0.615 & 0.195 & 5.833 & 1.941\\
-3 & 0.881 & 0 & 8.833 & 1.169 & 0.872 & 0.079 & 8.833 & 1.169\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\textbf{Thought Questions}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{5}
-\item
-  Compare and contrast the probabilities associated with the 24 dams under Scenarios 1a and 1b to the probabilities under Scenarios 2a and 2b.
-\item
-  In Scenario 2a, dams produced 4.79 deformed pups on average, with standard deviation 3.20. Scenario 2b saw an average of 4.67 with standard deviation 3.58. Explain why comparisons by dose are more meaningful than these overall comparisons. You might refer to the results in Table \ref{tab:scenario2Tab}.
-\item
-  In Table \ref{tab:simulationTableCh7}, predict what you'll see in the column headed ``CI\_odds\_ratio''. Among the 4 entries: What can you say about the center and the width of the confidence intervals? Which will be similar and why? Which will be different and how?
-\end{enumerate}
-
-We first model Scenario 2a without adjusting for potential overdispersion. Binomial regression gives us the model:
-
-\begin{equation}
-  \log\bigg( \frac{\hat{p}}{1-\hat{p}} \bigg) = -2.02 + 1.26\;\textrm{dose}
-  \label{eq:mod2aBinom}
-\end{equation}
-Equation \eqref{eq:mod2aBinom} has associated odds ratio corresponding to a 1mg dose increase of \(e^{\beta_1} = 3.54\) with 95\% profile likelihood confidence interval \((2.61, 4.96)\). We can be 95\% confident that odds of deformity are between 2.61 and 4.96 times higher for each 1 mg increase in dose.
-
-Alternatively, we can use a quasibinomial model to account for any overdispersion in the binomial model. With \(\widehat{\phi} = 1.27\), we have the 95\% profile likelihood confidence interval for \(e^\beta_1\): \((2.51, 5.19)\).
-
-Turning to Scenario 2b, where probabilities were different between dams recieving the same dosage, we have the binomial model
-
-\begin{equation}
-  \log\bigg( \frac{\hat{p}}{1-\hat{p}} \bigg) = -2.41 + 1.46\;\textrm{dose}
-  \label{eq:mod2bBinom}
-\end{equation}
-Generating a 95\% confidence interval for \(e^{\beta_1}\), we have: \((3.09, 6.27)\).
-
-If we use a quasibinomial model, we find overdispersion paramater \(\widehat{\phi} = 1.93\), yielding 95\% confidence interval for \(e^{\beta_1}\): \((2.74, 7.35)\).
-
-\textbf{Thought Questions}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{8}
-\item
-  Describe how the quasibinomial analysis of Scenario 2b differs from the binomial analysis of the same simulated data. Refer to Table \ref{tab:simulationTableCh7} when answering this question; you will need to run the R code in the R markdown file for this chapter to completely fill out the table. Do confidence intervals contain the true model parameters?
-\item
-  Why are differences between quasibinomial and binomial models of Scenario 2a less noticeable than the differences in Scenario 2b?
-\item
-  Why does Scenario 2b contain correlated data that we must account for, while Scenario 2a does not?
-\end{enumerate}
-
-\hypertarget{case-study-tree-growth}{%
-\section{Case Study: Tree Growth}\label{case-study-tree-growth}}
-
-A student research team at St.~Olaf College contributed to the efforts of biologist Kathy Shea to investigate a rich data set concerning forestation in the surrounding land. \citep{Eisinger2011} Here is a paragraph from the introduction to their project report:
-
-\begin{quote}
-Much of south-central Minnesota was comprised of maple-basswood forest prior to agricultural development and settlement. Currently, the forests that remain are highly fragmented and disturbed by human activities. Original land surveys describe the forest, also known as the Big Woods ecosystem, as dominated by elm, maple, oak, and basswood. In order to recover the loss of ecosystem services that forests provide, many new forested areas have been established through restoration.
-\end{quote}
-
-Tubes were placed on trees in some locations or \emph{transects} but not in others. One research question is whether tree growth in the first year is affected by the presence of tubes. This analysis has a structure similar to the dams and pups; the two study designs are depicted below.
-
-\begin{figure}
-\centering
-\includegraphics{data/DamsTreesStructure.png}
-\caption{Data structures in the Dams and Pups (left) and Tree Growth (right) case studies}
-\end{figure}
-
-Some transects were assigned to have tubes on all of their trees and other transects had no tubes on all of their trees, just as every dam assigned to a certain group received the same dose. Within a transect, each tree's first year of growth was measured, much like the presence or absence of a defect was noted for every pup within a dam. Although the response in the tree tube study is continuous (and somewhat normally distributed) rather than binary as in the dams and pups study, we can use methods to account for correlation of trees within a transect, just as we accounted for correlation of pups within dams.
-
-\hypertarget{format-of-the-data-set}{%
-\subsection{Format of the data set}\label{format-of-the-data-set}}
-
-We will consider a subset of the full data set in \texttt{treetube.csv} for illustration purposes here: the 382 trees with heights recorded in both 1990 and 1991. Thus, we will consider the following variables:
+Primary scientific hypotheses of the researchers included:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{id} = a unique identifier for each tree
+  Lower music performance anxiety will be associated with lower levels of a subject's negative emotionality.
 \item
-  \texttt{transect} = a unique identifier for each transect containing several trees
+  Lower music performance anxiety will be associated with lower levels of a subject's stress reaction.
 \item
-  \texttt{species} = tree species
-\item
-  \texttt{tubes} = an indicator variable for the presence or absence of tubes for a given transect
-\item
-  \texttt{height91} = first year height for each tree in meters
-\item
-  \texttt{height90} = baseline height for each tree in meters
-\item
-  \texttt{growth\_yr1} = height91 - height90, in meters
+  Lower music performance anxiety will be associated with greater number of years of study.
 \end{itemize}
 
-A sample of 10 observations are displayed in Table \ref{tab:treeTubeTab}.
+\hypertarget{explore}{%
+\section{Initial Exploratory Analyses}\label{explore}}
+
+\hypertarget{organizedata1}{%
+\subsection{Data Organization}\label{organizedata1}}
+
+Our examination of the data from \citet{Miller2010} in \texttt{musicdata.csv} will focus on the following key variables:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{id} = unique musician identification number
+\item
+  \texttt{diary} = cumulative total of diaries filled out by musician
+\item
+  \texttt{perf\_type} = type of performance (Solo, Large Ensemble, or Small Ensemble)
+\item
+  \texttt{audience} = who attended (Instructor, Public, Students, or Juried)
+\item
+  \texttt{memory} = performed from Memory, using Score, or Unspecified
+\item
+  \texttt{na} = negative affect score from PANAS
+\item
+  \texttt{gender} = musician gender
+\item
+  \texttt{instrument} = Voice, Orchestral, or Piano
+\item
+  \texttt{mpqab} = absorption subscale from MPQ
+\item
+  \texttt{mpqpem} = positive emotionality (PEM) composite scale from MPQ
+\item
+  \texttt{mpqnem} = negative emotionality (NEM) composite scale from MPQ
+\end{itemize}
+
+Sample rows containing selected variables from our data set are illustrated in Table \ref{tab:table1chp8}; note that each subject (id) has one row for each unique diary entry.
 
 \begin{table}
 
-\caption{\label{tab:treeTubeTab}A sample of 10 trees and their growth from 1990 to 1991}
+\caption{\label{tab:table1chp8}A snapshot of selected variables from the first three and the last three observations in the Music Performance Anxiety case study.}
 \centering
-\begin{tabular}[t]{rrlrrrr}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{rrrllrllrrr}
 \toprule
-id & transect & species & tubes & height91 & height90 & growth\_yr1\\
+Obs & id & diary & perf\_type & memory & na & gender & instrument & mpqab & mpqpem & mpqnem\\
 \midrule
-398 & 14 & Black Walnut & 0 & 0.332 & 0.200 & 0.132\\
-402 & 14 & Black Walnut & 0 & 0.354 & 0.330 & 0.024\\
-450 & 18 & Black Walnut & 1 & 0.214 & 0.174 & 0.040\\
-451 & 18 & Black Walnut & 1 & 0.342 & 0.289 & 0.053\\
-453 & 18 & Black Walnut & 1 & 0.395 & 0.205 & 0.190\\
+1 & 1 & 1 & Solo & Unspecified & 11 & Female & voice & 16 & 52 & 16\\
+2 & 1 & 2 & Large Ensemble & Memory & 19 & Female & voice & 16 & 52 & 16\\
+3 & 1 & 3 & Large Ensemble & Memory & 14 & Female & voice & 16 & 52 & 16\\
+495 & 43 & 2 & Solo & Score & 13 & Female & voice & 31 & 64 & 17\\
+496 & 43 & 3 & Small Ensemble & Memory & 19 & Female & voice & 31 & 64 & 17\\
 \addlinespace
-458 & 18 & Black Walnut & 1 & 0.420 & 0.290 & 0.130\\
-560 & 22 & Black Walnut & 0 & 0.400 & 0.295 & 0.105\\
-564 & 22 & Black Walnut & 0 & 0.549 & 0.390 & 0.159\\
-569 & 22 & Black Walnut & 0 & 0.340 & 0.270 & 0.070\\
-571 & 22 & Black Walnut & 0 & 0.394 & 0.271 & 0.123\\
+497 & 43 & 4 & Solo & Score & 11 & Female & voice & 31 & 64 & 17\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
-This portion of the data indicates that the four trees in transect 18 have tubes, while the other six trees listed do not. The concern with this kind of data structure is that trees from the same transect may be more similar or correlated with one another in contrast to trees from other transects. This could be true for a variety of reasons: some transects may receive less sun than others, or irrigation of the soil may differ from transect to transect. These unmeasured but possibly influential factors may imply a correlation among trees within transects. In that case, we would not have independent pieces of information, so that the number of trees within a transect would overstate the amount of independent information. To prepare for an analysis of this potentially correlated data, we examine the sources of variability in first-year tree growth.
+As with any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables. With multilevel models, exploratory analyses must eventually account for the level at which each variable is measured. In a two-level study such as this one, \textbf{Level One} will refer to variables measured at the most frequently occurring observational unit, while \textbf{Level Two} will refer to variables measured on larger observational units. For example, in our study on music performance anxiety, many variables are measured at every performance. These ``Level One'' variables include:
 
-\hypertarget{sources-of-variability-1}{%
-\subsection{Sources of variability}\label{sources-of-variability-1}}
+\begin{itemize}
+\tightlist
+\item
+  negative affect (our response variable)
+\item
+  performance characteristics (type, audience, if music was performed from memory)
+\item
+  number of previous performances with a diary entry
+\end{itemize}
 
-First year tree growth may vary because of:
+However, other variables measure characteristics of study participants that remain constant over all performances for a particular musician; these are considered ``Level Two'' variables and include:
 
-\textbf{Tube effects} A purpose of this analysis is to determine whether tubes affect first year tube growth. Differences in mean growth based on the presence or absence of tubes would be of interest to researchers, and they would be included in a publication for this analysis. For this reason, tube effects are referred to as \textbf{fixed effects}. This is analogous to the dose effect in the dams and pups example.
+\begin{itemize}
+\tightlist
+\item
+  demographics (age and gender of musician)
+\item
+  instrument used and number of previous years spent studying that instrument
+\item
+  baseline personality assessment (MPQ measures of positive emotionality, negative emotionality, constraint, stress reaction, and absorption)
+\end{itemize}
 
-\textbf{Transect effects} For some of the factors previously mentioned such as sun exposure or water availability, first year growth may vary by transect. Knowing which specific transects produce greater growth is not of interest and would not appear in a publication of this study. These \textbf{random effects} are analogous to dam effects which were not of inherent interest, but which we nevertheless wished to account for.
+\hypertarget{explore1}{%
+\subsection{Exploratory Analyses: Univariate Summaries}\label{explore1}}
 
-\textbf{Tree-to-tree variability within transects} There is inherent variability in tree growth even when they are subject to the same transect and treatment effects. This variability remains unexplained in our model, although we will attempt to explain some of it with covariates such as species.
+Because of this data structure---the assessment of some variables on a performance-by-performance basis and others on a subject-by-subject basis---we cannot treat our data set as consisting of 497 independent observations. Although negative affect measures from different subjects can reasonably be assumed to be independent (unless, perhaps, the subjects frequently perform in the same ensemble group), negative affect measures from different performances by the same subject are not likely to be independent. For example, some subjects tend to have relatively high performance anxiety across all performances, so that knowing their score for Performance 3 was 20 makes it more likely that their score for Performance 5 is somewhere near 20 as well. Thus, we must carefully consider our exploratory data analysis, recognizing that certain plots and summary statistics may be useful but imperfect in light of the correlated observations.
 
-Data sets with this kind of structure are often referred to as \textbf{multilevel data}, and the remaining chapters delve into models for multilevel data in gory detail. With a continuous response variable, we will actually add random effects for transects to a more traditional linear least squares regression model rather than estimate an overdispersion parameter as with a binary response. Either way, if observations are really correlated, proper accounting will lead to larger standard errors for model coefficients and larger (but more appropriate) p-values for testing the significance of those coefficients.
+First, we will examine each response variable and potential covariate individually. Continuous variables can be summarized using histograms and summaries of center and spread; categorical variables can be summarized with tables and possibly bar charts. When examining Level One covariates and responses, we will begin by considering all 497 observations, essentially treating each performance by each subject as independent even though we expect observations from the same musician to be correlated. Although these plots will contain dependent points, since each musician provides data for up to 15 performances, general patterns exhibited in these plots tend to be real. Alternatively, we can calculate mean scores across all performances for each of the 37 musicians so that we can more easily consider each plotted point to be independent. The disadvantage of this approach would be lost information which, in a study such as this with a relatively small number of musicians each being observed over many performances, could be considerable. In addition, if the sample sizes varied greatly by subject, a mean based on 1 observation would be given equal weight to a mean based on 15 observations. Nevertheless, both types of exploratory plots typically illustrate similar relationships.
 
-\hypertarget{analysis-preview-accounting-for-correlation-within-transect}{%
-\subsection{Analysis preview: accounting for correlation within transect}\label{analysis-preview-accounting-for-correlation-within-transect}}
+In Figure \ref{fig:mli-hist1} we see histograms for the primary response (negative affect); plot (a) shows all 497 (dependent) observations, while plot (b) shows the mean negative affect for each of the 37 musicians across all their performances. Through plot (a), we see that performance anxiety (negative affect) across all performances follows a right skewed distribution with a lower bound of 10 (achieved when all 10 questions are answered with a 1). Plot (b) shows that mean negative affect is also right-skewed (although not as smoothly decreasing in frequency), with range 12 to 23.
 
-Attempting to model the effects of tubes on tree growth, we could use LLSR which yields the model:
+\begin{figure}
 
-\begin{equation}
-  \hat{\textrm{Growth}} = 0.106 - 0.040\; \textrm{Tube}
-\end{equation}
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-hist1-1} 
+
+}
+
+\caption{Histogram of the continuous Level One response (negative effect). Plot (a) contains all 497 performances across the 37 musicians, while plot (b) contains one observation per musician (the mean negative affect across all performances).}\label{fig:mli-hist1}
+\end{figure}
+
+We can also summarize categorical Level One covariates across all (possibly correlated) observations to get a rough relative comparison of trends. 56.1\% of the 497 performances in our data set were solos, while 27.3\% were large ensembles and 16.5\% were small ensembles. The most common audience type was a public performance (41.0\%), followed by instructors (30.0\%), students (20.1\%), and finally juried recitals (8.9\%). In 30.0\% of performances, the musician played by memory, while 55.1\% used the score and 14.9\% of performances were unspecified.
+
+To generate an initial examination of Level Two covariates, we consider a data set with just one observation per subject, since Level Two variables are constant over all performances from the same subject. Then, we can proceed as we did with Level One covariates---using histograms to illustrate the distributions of continuous covariates (see Figure \ref{fig:mli-histmat1}) and tables to summarize categorical covariates. For example, we learn that the majority of subjects have positive emotionality scores between 50 and 60, but that several subjects fall into a lengthy lower tail with scores between 20 and 50. A summary of categorical Level Two covariates reveals that among the 37 subjects (26 female and 11 male), 17 play an orchestral instrument, 15 are vocal performers, and 5 play a keyboard instrument.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-histmat1-1} 
+
+}
+
+\caption{Histograms of the 3 continuous Level Two covariates (negative emotionality (NEM), positive emotionality (PEM), and absorption).  Each plot contains one observation per musician.}\label{fig:mli-histmat1}
+\end{figure}
+
+\hypertarget{explore2}{%
+\subsection{Exploratory Analyses: Bivariate Summaries}\label{explore2}}
+
+The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses. In examining these bivariate relationships, we hope to learn: (1) if there is a general trend suggesting that as the covariate increases the response either increases or decreases, (2) if subjects at certain levels of the covariate tend to have similar mean responses (low variability), and (3) if the variation in the response differs at different levels of the covariate (unequal variability).
+
+As with individual variables, we will begin by treating all 497 performances recorded as independent observations, even though blocks of 15 or so performances were performed by the same musician. For categorical Level One covariates, we can generate boxplots against negative affect as in Figure \ref{fig:mli-boxscatmat1}, plots (a) and (b). From these boxplots, we see that lower levels of performance anxiety seem to be associated with playing in large ensembles and playing in front of an instructor. For our lone continuous Level One covariate (number of previous performances), we can generate a scatterplot against negative affect as in plot (c) from Figure \ref{fig:mli-boxscatmat1}, adding a fitted line to illustrate general trends upward or downward. From this scatterplot, we see that negative affect seems to decrease slightly as a subject has more experience.
+
+To avoid the issue of dependent observations in our three plots from Figure \ref{fig:mli-boxscatmat1}, we could generate separate plots for each subject and examine trends within and across subjects. These ``lattice plots'' are illustrated in Figures \ref{fig:mli-lattice1}, \ref{fig:mli-lattice2}, and \ref{fig:mli-lattice3}; we discuss such plots more thoroughly in Chapter \ref{ch-lon}. While general trends are difficult to discern from these lattice plots, we can see the variety in subjects in sample size distributions and overall level of performance anxiety. In particular, in Figure \ref{fig:mli-lattice3}, we notice that linear fits for many subjects illustrate the same same slight downward trend displayed in the overall scatterplot in Figure \ref{fig:mli-boxscatmat1}, although some subjects experience increasing anxiety and others exhibit non-linear trends. Having an idea of the range of individual trends will be important when we begin to draw overall conclusions from this study.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-boxscatmat1-1} 
+
+}
+
+\caption{Boxplots of two categorical Level One covariates (performance type (a) and audience type (b)) vs. model response, and scatterplot of one continuous Level One covariate (number of previous diary entries (c)) vs. model response (negative affect).  Each plot contains one observation for each of the 497 performances.}\label{fig:mli-boxscatmat1}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-lattice1-1} 
+
+}
+
+\caption{Lattice plot of performance type vs. negative affect, with separate dotplots by subject.}\label{fig:mli-lattice1}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-lattice2-1} 
+
+}
+
+\caption{Lattice plot of audience type vs. negative affect, with separate dotplots by subject.}\label{fig:mli-lattice2}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-lattice3-1} 
+
+}
+
+\caption{Lattice plot of previous performances vs. negative affect, with separate scatterplots with fitted lines by subject.}\label{fig:mli-lattice3}
+\end{figure}
+
+In Figure \ref{fig:mli-boxmat1}, we use boxplots to examine the relationship between our primary categorical Level Two covariate (instrument) and our continuous model response. Plot (a) uses all 497 performances, while plot (b) uses one observation per subject (the mean performance anxiety across all performances) regardless of how many performances that subject had. Naturally, plot (b) has a more condensed range of values, but both plots seem to support the notion that performance anxiety is slightly lower for vocalists and maybe a bit higher for keyboardists
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-boxmat1-1} 
+
+}
+
+\caption{Boxplots of the categorical Level Two covariate (instrument) vs. model response (negative affect).  Plot (a) is based on all 497 observations from all 37 subjects, while plot (b) uses only one observation per subject.}\label{fig:mli-boxmat1}
+\end{figure}
+
+In Figure \ref{fig:mli-scatmat1}, we use scatterplots to examine the relationships between continuous Level Two covariates and our model response. Performance anxiety appears to vary little with a subject's positive emotionality, but there is some evidence to suggest that performance anxiety increases with increasing negative emotionality and absorption level. Plots based on mean negative affect, with one observation per subject, support conclusions based on plots with all observations from all subjects; indeed the overall relationships are in the same direction and of the same magnitude.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-scatmat1-1} 
+
+}
+
+\caption{ Scatterplots of continuous Level Two covariates (positive emotionality (PEM), negative emotionality (NEM), and absorption) vs. model response (negative affect).  The top plots (a1, b1, c1) are based on all 497 observations from all 37 subjects, while the bottom plots (a2, b2, c2) use only one observation per subject.}\label{fig:mli-scatmat1}
+\end{figure}
+
+Of course, any graphical analysis is exploratory, and any notable trends at this stage should be checked through formal modeling. At this point, a statistician begins to ask familiar questions such as:
+
+\begin{itemize}
+\tightlist
+\item
+  which characteristics of individual performances are most associated with performance anxiety?
+\item
+  which characteristics of study participants are most associated with performance anxiety?
+\item
+  are any of these associations statistically significant?
+\item
+  does the significance remain after controlling for other covariates?
+\item
+  how do we account for the lack of independence in performances by the same musician?
+\end{itemize}
+
+As you might expect, answers to these questions will arise from proper consideration of variability and properly identified statistical models.
+
+\hypertarget{twolevelmodeling}{%
+\section{Two level modeling: preliminary considerations}\label{twolevelmodeling}}
+
+\hypertarget{multregr}{%
+\subsection{Ignoring the two level structure (not recommended)}\label{multregr}}
+
+Armed with any statistical software package, it would be relatively simple to take our complete data set of 497 observations and run a multiple linear least squares regression model seeking to explain variability in negative affect with a number of performance-level or musician-level covariates. As an example, output from a model with two binary covariates (Does the subject play an orchestral instrument? and, Was the performance a large ensemble?) is presented below. Do you see any problems with this approach?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tube_linear <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(growth_yr1 }\OperatorTok{~}\StringTok{ }\NormalTok{tubes, }\DataTypeTok{data =}\NormalTok{ treetubes_yr1)}
+\CommentTok{# Linear least square regression model with LINE conditions}
+\NormalTok{modelc0 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(na }\OperatorTok{~}\StringTok{ }\NormalTok{orch }\OperatorTok{+}\StringTok{ }\NormalTok{large }\OperatorTok{+}\StringTok{ }\NormalTok{orch}\OperatorTok{:}\NormalTok{large, }\DataTypeTok{data =}\NormalTok{ music)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Estimate Std. Error t value   Pr(>|t|)
+## (Intercept)  15.7212     0.3591 43.7785 5.548e-172
+## orch          1.7887     0.5516  3.2426  1.265e-03
+## large        -0.2767     0.7910 -0.3498  7.266e-01
+## orch:large   -1.7087     1.0621 -1.6088  1.083e-01
+\end{verbatim}
+
+\begin{verbatim}
+##  R squared =  0.02782 
+##  Residual standard error =  5.179
+\end{verbatim}
+
+Other than somewhat skewed residuals, residual plots (not shown) do not indicate any major problems with the LLSR model. However, another key assumption in these models is the independence of all observations. While we might reasonably conclude that responses from different study participants are independent (although possibly not if they are members of the same ensemble group), it is not likely that the 15 or so observations taken over multiple performances from a single subject are similarly independent. If a subject begins with a relatively high level of anxiety (compared to other subjects) before their first performance, chances are good that they will have relatively high anxiety levels before subsequent performances. Thus, multiple linear least squares regression using all 497 observations is not advisable for this study (or multilevel data sets in general).
+
+\hypertarget{twostage}{%
+\subsection{A two-stage modeling approach (better but imperfect)}\label{twostage}}
+
+If we assume that the 37 study participants can reasonably be considered to be independent, we could use traditional linear least squares regression techniques to analyze data from this study if we could condense each subject's set of responses to a single meaningful outcome. Candidates for this meaningful outcome include a subject's last performance anxiety measurement, average performance anxiety, minimum anxiety level, etc. For example, in clinical trials, data is often collected over many weekly or monthly visits for each patient, except that many patients will drop out early for many reasons (e.g., lack of efficacy, side effects, personal reasons). In these cases, treatments are frequently compared using ``last-value-carried-forward'' methods---the final visit of each patient is used as the primary outcome measure, regardless of how long they remained in the study. However, ``last-value-carried-forward'' and other summary measures feel inadequate, since we end up ignoring much of the information contained in the multiple measures for each individual. A more powerful solution is to model performance anxiety at multiple levels.
+
+We will begin by considering all performances by a single individual. For instance, consider the 15 performances for which Musician \#22 recorded a diary, illustrated in Table \ref{tab:table2chp8}.
+
+\begin{table}
+
+\caption{\label{tab:table2chp8}Data from the 15 performances of Musician 22}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrllrl}
+\toprule
+  & id & diary & perform\_type & audience & na & instrument\\
+\midrule
+240 & 22 & 1 & Solo & Instructor & 24 & orchestral instrument\\
+241 & 22 & 2 & Large Ensemble & Public Performance & 21 & orchestral instrument\\
+242 & 22 & 3 & Large Ensemble & Public Performance & 14 & orchestral instrument\\
+243 & 22 & 4 & Large Ensemble & Public Performance & 15 & orchestral instrument\\
+244 & 22 & 5 & Large Ensemble & Public Performance & 10 & orchestral instrument\\
+\addlinespace
+245 & 22 & 6 & Solo & Instructor & 24 & orchestral instrument\\
+246 & 22 & 7 & Solo & Student(s) & 24 & orchestral instrument\\
+247 & 22 & 8 & Solo & Instructor & 16 & orchestral instrument\\
+248 & 22 & 9 & Small Ensemble & Public Performance & 34 & orchestral instrument\\
+249 & 22 & 10 & Large Ensemble & Public Performance & 22 & orchestral instrument\\
+\addlinespace
+250 & 22 & 11 & Large Ensemble & Public Performance & 19 & orchestral instrument\\
+251 & 22 & 12 & Large Ensemble & Public Performance & 18 & orchestral instrument\\
+252 & 22 & 13 & Large Ensemble & Public Performance & 12 & orchestral instrument\\
+253 & 22 & 14 & Large Ensemble & Public Performance & 19 & orchestral instrument\\
+254 & 22 & 15 & Solo & Instructor & 25 & orchestral instrument\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Does this musician tend to have higher anxiety levels when he is playing in a large ensemble or playing in front of fellow students? Which factor is the biggest determinant of anxiety for a performance by Musician \#22? We can address these questions through multiple LLSR applied to only Musician \#22's data, using appropriate indicator variables for factors of interest.
+
+Let \(Y_{22j}\) be the performance anxiety score of Musician \#22 before performance \(j\). Consider the observed performances for Musician \#22 to be a random sample of all conceivable performances by that subject. If we are initially interested in examining the effect of playing in a large ensemble, we can model the performance anxiety for Musician \#22 according to the model:
+
+\begin{equation}
+Y_{22j}=a_{22}+b_{22}\textstyle{LargeEns}_{22j}+\epsilon_{22j} \textrm{ where } \epsilon_{22j}\sim N(0,\sigma^2) \textrm{ and }
+\label{eq:level1a}
+\end{equation}
+\[ \textstyle{LargeEns}_{j} =
+\left\lbrace
+\begin{tabular}{l l} 
+1 & if `perf\_type` = Large Ensemble \\
+0 & if `perf\_type` = Solo or Small Ensemble. 
+\end{tabular}\right.
+\]
+The parameters in this model (\(a_{22}\), \(b_{22}\), and \(\sigma^2\)) can be estimated through least squares methods. \(a_{22}\) represents the true intercept for Musician \#22---the expected anxiety score for Musician \#22 when performance type is a Solo or Small Ensemble (\(\textstyle{LargeEns}=0\)), or the true average anxiety for Musician \#22 over all Solo or Small Ensemble performances he may conceivably give. \(b_{22}\) represents the true slope for Musician \#22---the expected increase in performance anxiety for Musician \#22 when performing as part of a Large Ensemble rather than in a Small Ensemble or as a Solo, or the true average difference in anxiety scores for Musician \#22 between Large Ensemble performances and other types. Finally, the \(\epsilon_{22j}\) terms represent the deviations of Musician \#22's actual performance anxiety scores from the expected scores under this model---the part of Musician \#22's anxiety before performance \(j\) that is not explained by performance type. The variability in these deviations from the regression model is denoted by \(\sigma^2\).
+
+For Subject 22, we estimate \(\hat{a}_{22}=24.5\), \(\hat{b}_{22}=-7.8\), and \(\hat{\sigma}=4.8\). Thus, according to our simple linear regression model, Subject 22 had an estimated anxiety score of 24.5 before Solo and Small Ensemble performances, and 16.7 (7.8 points lower) before Large Ensemble performances. With an \(R^2\) of 0.425, the regression model explains a moderate amount (42.5\%) of the performance-to-performance variability in anxiety scores for Subject 22, and the trend toward lower scores for large ensemble performances is statistically significant at the 0.05 level (t(13)=-3.10, p=.009).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{regr.id22 =}\StringTok{ }\KeywordTok{lm}\NormalTok{(na }\OperatorTok{~}\StringTok{ }\NormalTok{large, }\DataTypeTok{data =}\NormalTok{ id22)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##             Estimate Std. Error t value  Pr(>|t|)
-## (Intercept)  0.10585   0.005665  18.685 9.931e-56
-## tubes       -0.04013   0.041848  -0.959 3.382e-01
+## (Intercept)   24.500       1.96  12.503 1.275e-08
+## large         -7.833       2.53  -3.097 8.504e-03
 \end{verbatim}
 
 \begin{verbatim}
-##  R squared =  0.002414 
-##  Residual standard error =  0.1097
+##  R squared =  0.4245 
+##  Residual standard error =  4.8
 \end{verbatim}
 
-However, the LLSR model assumes that all observations are independent, including trees in the same transect. One way to account for potential correlation is to estimate an additional parameter for the transect-to-transect variance. In other words, we are allowing for a random effect that each transect contributes to the overall variability. The multilevel model below does just that.
+We could continue trying to build a better model for Subject 22, adding indicators for audience and memory, and even adding a continuous variable representing the number of previous performance where a diary was kept. As our model R-square value increased, we would be explaining a larger proportion of Subject 22's performance-to-performance variability in anxiety. It would not, however, improve our model to incorporate predictors for age, gender, or even negative emotionality based on the MPQ---why is that?
+
+For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \eqref{eq:level1a}, with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the LLSR model in Equation \eqref{eq:level1a} to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called \textbf{Level One models}. As displayed in Figure \ref{fig:mli-histmat2}, there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-histmat2-1} 
+
+}
+
+\caption{Histograms of intercepts and slopes from fitting simple regression models by subject, where each model contained a single binary predictor indicating if a performance was part of a large ensemble.}\label{fig:mli-histmat2}
+\end{figure}
+
+As an illustration, we can consider whether or not there are significant relationships between individual regression parameters (intercepts and slopes) and instrument played. From a modeling perspective, we would build a system of two \textbf{Level Two models} to predict the fitted intercept (\(a_{i}\)) and fitted slopes (\(b_{i}\)) for Subject \(i\):
+
+\begin{align}
+a_{i} & =  \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i}
+\label{eq:level2s0}  \\
+b_{i} & =  \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+v_{i}
+\label{eq:level2s1}
+\end{align}
+where \(\textstyle{Orch}_{i}=1\) if Subject \(i\) plays an orchestral instrument and \(\textstyle{Orch}_{i}=0\) if Subject \(i\) plays keyboard or is a vocalist. Note that, at Level Two, our response variables are not observed measurements such as performance anxiety scores, but rather the fitted regression coefficients from the Level One models fit to each subject. (Well, in our theoretical model, the responses are actually the true intercepts and slopes from Level One models for each subject, but in reality, we have to use our estimated slopes and intercepts.)
+
+Exploratory data analysis (see boxplots by instrument in Figure \ref{fig:mli-boxmat2}) suggests that subjects playing orchestral instruments have higher intercepts than vocalists or keyboardists, and that orchestral instruments are associated with slight lower (more negative) slopes, although with less variability that the slopes of vocalists and keyboardists. These trends are borne out in regression modeling. If we fit Equations \eqref{eq:level2s0} and \eqref{eq:level2s1} using fitted intercepts and slopes as our response variables, we obtain the following estimated parameters: \(\hat{\alpha}_{0}=16.3\), \(\hat{\alpha}_{1}=1.4\), \(\hat{\beta}_{0}=-0.8\), and \(\hat{\beta}_{1}=-1.4\). Thus, the intercept (\(a_{i}\)) and slope (\(b_{i}\)) for Subject \(i\) can be modeled as:
+
+\begin{align}
+\hat{a}_{i} & = 16.3+1.4\textstyle{Orch}_{i}+u_{i}
+\label{eq:level2s0hat}  \\
+\hat{b}_{i} & = -0.8-1.4\textstyle{Orch}_{i}+v_{i}
+\label{eq:level2s1hat}
+\end{align}
+where \(a_{i}\) is the true mean negative affect when Subject \(i\) is playing solos or small ensembles, and \(b_{i}\) is the true mean difference in negative affect for Subject \(i\) between large ensembles and other performance types. Based on these models, average performance anxiety before solos and small ensembles is 16.3 for vocalists and keyboardists, but 17.7 (1.4 points higher) for orchestral instrumentalists. Before playing in large ensembles, vocalists and instrumentalists have performance anxiety (15.5) which is 0.8 points lower, on average, than before solos and small ensembles, while subjects playing orchestral instruments experience an average difference of 2.2 points, producing an average performance anxiety of 15.5 before playing in large ensembles just like subjects playing other instruments. However, the difference between orchestral instruments and others does not appear to be statistically significant for either intercepts (t=1.424, p=0.163) or slopes (t=-1.168, p=0.253).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-boxmat2-1} 
+
+}
+
+\caption{Boxplots of fitted intercepts (plot (a)) and slopes (plot (b)) by orchestral instrument (1) vs. keyboard or vocalist (0).}\label{fig:mli-boxmat2}
+\end{figure}
+
+This two stage modeling process does have some drawbacks. Among other things, (1) it weights every subject the same regardless of the number of diary entries we have, (2) it responds to missing individual slopes (from 7 subjects who never performed in a large ensemble) by simply dropping those subjects, and (3) it does not share strength effectively across individuals. These issues can be better handled through a unified multilevel modeling framework which we will develop over the remainder of this section.
+
+\hypertarget{twolevelmodelingunified}{%
+\section{Two level modeling: a unified approach}\label{twolevelmodelingunified}}
+
+\hypertarget{ourframework}{%
+\subsection{Our framework}\label{ourframework}}
+
+For the unified approach, we will still envision two levels of models as in section \ref{twostage}, but we will use likelihood-based methods for parameter estimation rather than ordinary least squares to address the drawbacks associated with the two-stage approach. To illustrate the unified approach, we will first generalize the models presented in section \ref{twostage}. Let \(Y_{ij}\) be the performance anxiety score of the \(i^{th}\) subject before performance \(j\). If we are initially interested in examining the effects of playing in a large ensemble and playing an orchestral instrument, then we can model the performance anxiety for Subject \(i\) in performance \(j\) with the following system of equations:
+
+\begin{itemize}
+\tightlist
+\item
+  Level One:
+  \begin{equation}
+  Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+  \label{eq:level1large}
+  \end{equation}
+\item
+  Level Two:
+  \begin{align*}
+  a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i} \\
+  b_{i} & = \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+v_{i},
+  \end{align*}
+\end{itemize}
+
+In this system, there are 4 key \textbf{fixed effects} to estimate: \(\alpha_{0}\), \(\alpha_{1}\), \(\beta_{0}\) and \(\beta_{1}\). Fixed effects are the fixed but unknown population effects associated with certain covariates. The intercepts and slopes for each subject from Level One, \(a_{i}\) and \(b_{i}\), don't need to be formally estimated as we did in section \ref{twostage}; they serve to conceptually connect Level One with Level Two. In fact, by substituting the two Level Two equations into the Level One equation, we can view this two-level system of models as a single \textbf{Composite Model} without \(a_{i}\) and \(b_{i}\):
+
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+\beta_{0}\textstyle{LargeEns}_{ij}+\beta_{1}\textstyle{Orch}_{i}\textstyle{LargeEns}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}]
+\end{align*}
+
+From this point forward, when building multilevel models, we will use Greek letters (such as \(\alpha_{0}\)) to denote final fixed effects model parameters to be estimated empirically, and Roman letters (such as \(a_{0}\)) to denote preliminary fixed effects parameters at lower levels. Variance components that will be estimated empirically will be denoted with \(\sigma\) or \(\rho\), while terms such as \(\epsilon\) and \(u_{i}\) represent error terms. In our framework, we can estimate final parameters directly without first estimating preliminary parameters, which can be seen with the Composite Model formulation (although we can obtain estimates of preliminary parameters in those occasional cases when they are of interest to us). Note that when we model a slope term like \(b_{i}\) from Level One using Level Two covariates like \(\textstyle{Orch}_{i}\), the resulting Composite Model contains a \textbf{cross-level interaction term}, denoting that the effect of \(\textstyle{LargeEns}_{ij}\) depends on the instrument played.
+
+Furthermore, with a binary predictor at Level Two such as instrument, we can write out what our Level Two model looks like for those who play keyboard or are vocalists (\(\textstyle{Orch}_{i}=0\)) and those who play orchestral instruments (\(\textstyle{Orch}_{i}=1\)):
+
+\begin{itemize}
+\tightlist
+\item
+  Keyboardists and Vocalists (\(\textstyle{Orch}_{i}=0\))
+\end{itemize}
+
+\begin{align*}
+a_{i} & = \alpha_{0}+u_{i} \\
+b_{i} & = \beta_{0}+v_{i}
+\end{align*}
+- Orchestral instrumentalists (\(\textstyle{Orch}_{i}=1\))
+
+\begin{align*}
+a_{i} & = (\alpha_{0}+\alpha_{1})+u_{i} \\
+b_{i} & = (\beta_{0}+\beta_{1})+v_{i}
+\label{eq:level2byorch}
+\end{align*}
+
+Writing the Level Two model in this manner helps us interpret the model parameters from our two-level model. In this case, even the Level One covariate is binary, so that we can write out expressions for mean performance anxiety based on our model for four different combinations of instrument played and performance type:
+
+\begin{itemize}
+\tightlist
+\item
+  Keyboardists or vocalists playing solos or small ensembles: \(\alpha_{0}\)
+\item
+  Keyboardists or vocalists playing large ensembles: \(\alpha_{0}+\beta_{0}\)
+\item
+  Orchestral instrumentalists playing solos or small ensembles: \(\alpha_{0}+\alpha_{1}\)
+\item
+  Orchestral instrumentalists playing large ensembles: \(\alpha_{0}+\alpha_{1}+\beta_{0}+\beta_{1}\)
+\end{itemize}
+
+\hypertarget{random-vs.-fixed-effects}{%
+\subsection{Random vs.~fixed effects}\label{random-vs.-fixed-effects}}
+
+Before we can use likelihood-based methods to estimate our model parameters, we still must define the distributions of our error terms. The error terms \(\epsilon_{ij}\), \(u_{i}\), and \(v_{i}\) represent random effects in our model. In multilevel models, it is important to distinguish between fixed and random effects. Typically, \textbf{fixed effects} describe levels of a factor that we are specifically interested in drawing inferences about, and which would not change in replications of the study. For example, in our music performance anxiety case study, the levels of performance type will most likely remain as solos, small ensembles, and large ensembles even in replications of the study, and we wish to draw specific conclusions about differences between these three types of performances. Thus, performance type would be considered a fixed effect. On the other hand, \textbf{random effects} describe levels of a factor which can be thought of as a sample from a larger population of factor levels; we are not typically interested in drawing conclusions about specific levels of a random effect, although we are interested in accounting for the influence of the random effect in our model. For example, in our case study the different musicians included can be thought of as a random sample from a population of performing musicians. Although our goal is not to make specific conclusions about differences between any two musicians, we do want to account for inherent differences among musicians in our model, and by doing so, we will be able to draw more precise conclusions about our fixed effects of interest. Thus, musician would be considered a random effect.
+
+\hypertarget{MVN}{%
+\subsection{Distribution of errors: the multivariate normal distribution}\label{MVN}}
+
+As part of our multilevel model, we must provide probability distributions to describe the behavior of random effects. Typically, we assume that random effects follow a normal distribution with mean 0 and a variance parameter which must be estimated from the data. For example, at Level One, we will assume that the errors associated with each performance of a particular musician can be described as: \(\epsilon_{ij}\sim N(0,\sigma^2)\). At Level Two, we have one error term (\(u_{i}\)) associated with subject-to-subject differences in intercepts, and one error term (\(v_{i}\)) associated with subject-to-subject differences in slopes. That is, \(u_{i}\) represents the deviation of Subject \(i\) from the mean performance anxiety before solos and small ensembles after accounting for their instrument, and \(v_{i}\) represents the deviation of Subject \(i\) from the mean difference in performance anxiety between large ensembles and other performance types after accounting for their instrument.
+
+In modeling the random behavior of \(u_{i}\) and \(v_{i}\), we must also account for the possibility that random effects at the same level might be correlated. Subjects with higher baseline performance anxiety have a greater capacity for showing decreased anxiety in large ensembles as compared to solos and small ensembles, so we might expect that subjects with larger intercepts (performance anxiety before solos and small ensembles) would have smaller slopes (indicating greater decreases in anxiety before large ensembles). In fact, our fitted Level One intercepts and slopes in this example actually show evidence of a fairly strong negative correlation (\(r=-0.525\), see Figure \ref{fig:mli-scat1}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/mli-scat1-1} 
+
+}
+
+\caption{Scatterplot with fitted regression line for estimated intercepts and slopes (one point per subject).}\label{fig:mli-scat1}
+\end{figure}
+
+To allow for this correlation, the error terms at Level Two can be assumed to follow a multivariate normal distribution in our unified multilevel model. Mathematically, we can express this as:
+
+\begin{equation} 
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\label{eq:mvnormal}
+\end{equation}
+where \(\sigma_{u}^{2}\) is the variance of the \(u_{i}\) terms, \(\sigma_{v}^{2}\) is the variance of the \(v_{i}\) terms, and \(\sigma_{uv} = \rho_{uv}\sigma_{u}\sigma_v\) is the covariance between the \(u_{i}\) and the \(v_{i}\) terms (i.e., how those two terms vary together).
+
+Note that the correlation \(\rho_{uv}\) between the error terms is simply the covariance \(\sigma_{uv}=\rho_{uv}\sigma_{u}\sigma_{v}\) converted to a \([-1,1]\) scale through the relationship:
+
+\begin{equation}
+\rho_{uv} = \frac{\sigma_{uv}}{\sigma_{u}\sigma_{v}}
+\label{eq:cor}
+\end{equation}
+
+With this expression, we are allowing each error term to have its own variance (around a mean of 0) and each pair of error terms to have its own covariance (or correlation). Thus, if there are \(n\) equations at Level Two, we can have \(n\) variance terms and \(n(n-1)/2\) covariance terms for a total of \(n + n(n-1)/2\) variance components. These variance components are organized in matrix form, with variance terms along the diagonal and covariance terms in the off-diagonal. In our small example, we have \(n=2\) equations at Level Two, so we have 3 variance components to estimate---2 variance terms (\(\sigma_{u}^{2}\) and \(\sigma_{v}^{2}\)) and 1 correlation (\(\rho_{uv}\)).
+
+The multivariate normal distribution with \(n=2\) is illustrated in Figure \ref{fig:contour-boundary} for two cases: (a) the error terms are uncorrelated (\(\sigma_{uv}=\rho_{uv}=0\)), and (b) the error terms are positively correlated (\(\sigma_{uv}>0\) and \(\rho_{uv} > 0\)). In general, if the errors in intercepts (\(u_{i}\)) are placed on the x-axis and the errors in slopes (\(v_{i}\)) are placed on the y-axis, then \(\sigma_{u}^{2}\) measures spread in the x-direction and \(\sigma_{v}^{2}\) measures spread in the y-direction, while \(\sigma_{uv}\) measures tilt. Positive tilt (\(\sigma_{uv}>0\)) indicates a tendency for errors from the same subject to both be positive or both be negative, while negative tilt (\(\sigma_{uv}<0\)) indicates a tendency for one error from a subject to be positive and the other to be negative. In Figure \ref{fig:contour-boundary}, \(\sigma_{u}^{2}=4\) and \(\sigma_{v}^{2}=1\), so both contour plots show a greater range of errors in the x-direction than the y-direction. Ellipses near the center of the contour plot indicate pairs of \(u_{i}\) and \(v_{i}\) that are more likely. In Figure \ref{fig:contour-boundary} (a) \(\sigma_{uv}=\rho_{uv}=0\), so the axes of the contour plot correspond to the x- and y-axes, but in Figure \ref{fig:contour-boundary} (b) \(\sigma_{uv}=1.5\), so the contour plot tilts up, reflecting a tendency for high values of \(u_{i}\) to be associated with high values of \(v_{i}\).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{bookdown-bysh_files/figure-latex/contour-boundary-1} 
+
+}
+
+\caption{Contour plots illustrating a multivariate normal density with (a) no correlation between error terms, and (b) positive correlation between error terms.}\label{fig:contour-boundary}
+\end{figure}
+
+\hypertarget{multileveltechnical}{%
+\subsection{Technical issues when estimating and testing parameters (Optional)}\label{multileveltechnical}}
+
+Now, our relatively simple two-level model has 8 parameters that need to be estimated: 4 fixed effects (\(\alpha_{0}\), \(\alpha_{1}\), \(\beta_{0}\), and \(\beta_{1}\)), and 4 variance components (\(\sigma^{2}\), \(\sigma_{u}^{2}\), \(\sigma_{v}^{2}\), and \(\sigma_{uv}\)). Note that we use the term \textbf{variance components} to signify model parameters that describe the behavior of random effects. We can use statistical software, such as the lmer() function from the lme4 package in R, to obtain parameter estimates using our 497 observations. The most common methods for estimating model parameters---both fixed effects and variance components---are maximum likelihood (ML) and restricted maximum likelihood (REML). The method of maximum likelihood (ML) was introduced in Chapter \ref{ch-beyondmost}, where parameter estimates are chosen to maximize the value of the likelihood function based on observed data. Restricted maximum likelihood (REML) is conditional on the fixed effects, so that the part of the data used for estimating variance components is separated from that used for estimating fixed effects. Thus REML, by accounting for the loss in degrees of freedom from estimating the fixed effects, provides an unbiased estimate of variance components, while ML estimators for variance components are biased under assumptions of normality, since they use estimated fixed effects rather than the true values. REML is preferable when the number of parameters is large or the primary interest is obtaining estimates of model parameters, either fixed effects or variance components associated with random effects. ML should be used if nested fixed effects models are being compared using a likelihood ratio test, although REML is fine for nested models of random effects (with the same fixed effects model). In this text, we will typically report REML estimates unless we are specifically comparing nested models with the same random effects. In most case studies and most models we consider, there is very little difference between ML and REML parameter estimates. Additional details are beyond the scope of this book \citep{Singer2003}.
+
+Note that the multilevel output shown beginning in the next section contains no p-values for performing hypothesis tests. This is primarily because the exact distribution of the test statistics under the null hypothesis (no fixed effect) is unknown, primarily because the exact degrees of freedom is not known \citep{Bates2015}. Finding good approximate distributions for test statistics (and thus good approximate p-values) in multilevel models is an area of active research. In most cases, we can simply conclude that t-values (ratios of parameter estimates to estimated standard errors) with absolute value above 2 indicate significant evidence that a particular model parameter is different than 0. Certain software packages will report p-values corresponding to hypothesis tests for parameters of fixed effects; these packages are typically using conservative assumptions, large-sample results, or approximate degrees of freedom for a t-distribution. In section \ref{multreg-boot}, we introduced the bootstrap as a non-parametric, computational approach for producing confidence intervals for model parameters. In addition, in section \ref{threelevel-paraboot}, we will introduce a method called the parametric bootstrap which is being used more frequently by researchers to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis \citep{Efron2012}.
+
+\hypertarget{initialmodel}{%
+\subsection{An initial model with parameter interpretations}\label{initialmodel}}
+
+The output below contains likelihood-based estimates of our 8 parameters from a two-level model applied to the music performance anxiety data:
+
+\begin{verbatim}
+    Linear mixed model fit by REML ['lmerMod'] 
+ A)  Formula: na ~ orch + large + orch:large + (large | id) 
+        Data: music 
+ B)  REML criterion at convergence: 2987 
+      
+ B2)      AIC      BIC   logLik deviance df.resid  
+         3007     3041    -1496     2991      489  
+      
+     Random effects: 
+      Groups   Name        Variance Std.Dev. Corr  
+ C)   id       (Intercept)  5.655   2.378          
+ D)            large        0.452   0.672    -0.63 
+ E)   Residual             21.807   4.670          
+ F)  Number of obs: 497, groups:  id, 37 
+      
+     Fixed effects: 
+                 Estimate Std. Error t value 
+ G)  (Intercept)   15.930      0.641   24.83 
+ H)  orch           1.693      0.945    1.79 
+ I)  large         -0.911      0.845   -1.08 
+ J)  orch:large    -1.424      1.099   -1.30
+\end{verbatim}
+
+This output (except for the capital letters along the left column) was specifically generated by the lmer() function in R; multilevel modeling results from other packages will contain similar elements. Because we will use lmer() output to summarize analyses of case studies in this and following sections, we will spend a little time now orienting ourselves to the most important features in this output.
+
+\begin{itemize}
+\tightlist
+\item
+  A: How our multilevel model is written in R, based on the composite model formulation. For more details, see section \ref{notesr8}.
+\item
+  B: Measures of model performance. Since this model was fit using REML, this line only contains the REML criterion.
+\item
+  B2: If the model is fit with ML instead of REML, the measures of performance will contain AIC, BIC, deviance, and the log-likelihood.
+\item
+  C: Estimated variance components (\(\hat{\sigma}_{u}^2\) and \(\hat{\sigma}_{u}\)) associated with the intercept equation in Level Two.
+\item
+  D: Estimated variance components (\(\hat{\sigma}_{v}^2\) and \(\hat{\sigma}_{v}\)) associated with the large ensemble effect equation in Level Two, along with the estimated correlation (\(\hat{\rho}_{uv}\)) between the two Level Two error terms.
+\item
+  E: Estimated variance components (\(\hat{\sigma}^2\) and \(\hat{\sigma}\)) associated with the Level One equation.
+\item
+  F: Total number of performances where data was collected (Level One observations = 497) and total number of subjects (Level Two observations = 37).
+\item
+  G: Estimated fixed effect (\(\hat{\alpha}_{0}\)) for the intercept term, along with its standard error and t-value (which is the ratio of the estimated coefficient to its standard error). As described in section \ref{multileveltechnical}, no p-value testing the significance of the coefficient is provided because the exact null distribution of the t-value is unknown.
+\item
+  H: Estimated fixed effect (\(\hat{\alpha}_{1}\)) for the orchestral instrument effect, along with its standard error and t-value .
+\item
+  I: Estimated fixed effect (\(\hat{\beta}_{0}\)) for the large ensemble effect, along with its standard error and t-value.
+\item
+  J: Estimated fixed effect (\(\hat{\beta}_{1}\)) for the interaction between orchestral instruments and large ensembles, along with its standard error and t-value.
+\end{itemize}
+
+Assuming the 37 musicians in this study are representative of a larger population of musicians, parameter interpretations for our 8 model parameters are given below:
+
+\begin{itemize}
+\tightlist
+\item
+  Fixed effects:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\hat{\alpha}_{0} = 15.9\). The estimated mean performance anxiety for solos and small ensembles (Large=0) for keyboard players and vocalists (Orch=0) is 15.9.
+  \item
+    \(\hat{\alpha}_{1} = 1.7\). Orchestral instrumentalists have an estimated mean performance anxiety for solos and small ensembles which is 1.7 points higher than keyboard players and vocalists.
+  \item
+    \(\hat{\beta}_{0} = -0.9\). Keyboard players and vocalists have an estimated mean decrease in performance anxiety of 0.9 points when playing in large ensembles instead of solos or small ensembles.
+  \item
+    \(\hat{\beta}_{1} = -1.4\). Orchestral instrumentalists have an estimated mean decrease in performance anxiety of 2.3 points when playing in large ensembles instead of solos or small ensembles, 1.4 points greater than the mean decrease among keyboard players and vocalists.
+  \end{itemize}
+\item
+  Variance components
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\hat{\sigma}_{u} = 2.4\). The estimated standard deviation of performance anxiety levels for solos and small ensembles is 2.4 points, after controlling for instrument played.
+  \item
+    \(\hat{\sigma}_{v} = 0.7\). The estimated standard deviation of differences in performance anxiety levels between large ensembles and other performance types is 0.7 points, after controlling for instrument played.
+  \item
+    \(\hat{\rho}_{uv} = -0.64\). The estimated correlation between performance anxiety scores for solos and small ensembles and increases in performance anxiety for large ensembles is -0.64, after controlling for instrument played. Those subjects with higher performance anxiety scores for solos and small ensembles tend to have greater decreases in performance anxiety for large ensemble performances.
+  \item
+    \(\hat{\sigma} = 4.7.\) The estimated standard deviation in residuals for the individual regression models is 4.7 points.
+  \end{itemize}
+\end{itemize}
+
+Table \ref{tab:table3chp8} shows a side-by-side comparison of estimated coefficients from the approaches described to this point. Underlying assumptions, especially regarding the error and correlation structure, differ, and differences in estimated effects are potentially meaningful. Note that some standard errors are greatly \emph{underestimated} under independence, and that no Level One covariates (such as performance type) can be analyzed under a method such as last-visit-carried-forward which uses one observation per subject. Moving forward, we will employ the unified multilevel approach to maximize the information being used to estimate model parameters and to remain faithful to the structure of the data.
+
+\begin{table}
+
+\caption{\label{tab:table3chp8}Comparison of estimated coefficients and standard errors from the approaches mentioned in this section.}
+\centering
+\begin{tabular}[t]{lllll}
+\toprule
+Variable & Independence & TwoStage & LVCF & Multilevel\\
+\midrule
+Intercept & 15.72(0.36) & 16.28(0.67) & 15.20(1.25) & 15.93(0.64)\\
+Orch & 1.79(0.55) & 1.41(0.99) & 1.45(1.84) & 1.69(0.95)\\
+Large & -0.28(0.79) & -0.77(0.85) & - & -0.91(0.85)\\
+Orch*Large & -1.71(1.06) & -1.41(1.20) & - & -1.42(1.10)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two level modeling as done with the music performance anxiety data usually involves fitting a number of models. Subsequent sections will describe a process of starting with the simplest two-level models and building toward a final model which addresses the research questions of interest.
+
+\hypertarget{sec:buildmodel}{%
+\section{Building a multilevel model}\label{sec:buildmodel}}
+
+\hypertarget{buildstrategy}{%
+\subsection{Model building strategy}\label{buildstrategy}}
+
+Initially, it is advisable to first fit some simple, preliminary models, in part to establish a baseline for evaluating larger models. Then, we can build toward a final model for description and inference by attempting to add important covariates, centering certain variables, and checking model assumptions. In this study, we are particularly interested in Level Two covariates---those subject-specific variables that provide insight into why individuals react differently in anxiety-inducing situations. To get more precise estimates of the effect of Level Two covariates, we also want to control for Level One covariates that describe differences in individual performances.
+
+Our strategy for building multilevel models will begin with extensive exploratory data analysis at each level. Then, after examining models with no predictors to assess variability at each level, we will first focus on creating a Level One model, starting simple and adding terms as necessary. Next, we will move to Level Two models, again starting simple and adding terms as necessary, beginning with the equation for the intercept term. Finally, we will examine the random effects and variance components, beginning with a full set of error terms and then removing covariance terms and variance terms where advisable (for instance, when parameter estimates are failing to converge or producing impossible or unlikely values). This strategy follows closely with that described by \citet{Bryk2002} and used by \citet{Singer2003}. Singer and Willett further find that the modeled error structure rarely matters in practical contexts. Other model building approaches are certainly possible. \citet{Diggle2002}, for example, begins with a saturated fixed effects model, determines variance components based on that, and then simplifies the fixed part of the model after fixing the random part.
+
+\hypertarget{modela}{%
+\subsection{An initial model: unconditional means or random intercepts}\label{modela}}
+
+The first model fit in almost any multilevel context should be the \textbf{unconditional means model}, also called a \textbf{random intercepts model}. In this model, there are no predictors at either level; rather, the purpose of the unconditional means model is to assess the amount of variation at each level---to compare variability within subject to variability between subjects. Expanded models will then attempt to explain sources of between and within subject variability.
+
+The unconditional means (random intercepts) model, which we will denote as Model A, can be specified either using formulations at both levels:
+
+\begin{itemize}
+\tightlist
+\item
+  Level One:
+  \begin{equation}
+  Y_{ij} = a_{i}+\epsilon_{ij} \textrm{ where } \epsilon_{ij}\sim N(0,\sigma^2)
+  \label{eq:level1uncmean}
+  \end{equation}
+\item
+  Level Two:
+  \begin{equation}
+  a_{i} = \alpha_{0}+u_{i} \textrm{ where } u_{i}\sim N(0,\sigma_{u}^{2})
+  \label{eq:level2uncmean}
+  \end{equation}
+\end{itemize}
+
+or as a composite model:
+\begin{equation}
+Y_{ij}=\alpha_{0}+u_{i}+\epsilon_{ij}
+\label{eq:compuncmean}
+\end{equation}
+In this model, the performance anxiety scores of subject \(i\) are not a function of performance type or any other Level One covariate, so that \(a_{i}\) is the true mean response of all observations for subject \(i\). On the other hand, \(\alpha_{0}\) is the grand mean -- the true mean of all observations across the entire population. Our primary interest in the unconditional means model is the variance components -- \(\sigma^2\) is the within-person variability, while \(\sigma_{u}^{2}\) is the between-person variability. The name \textbf{random intercepts model} then arises from the Level Two equation for \(a_{i}\): each subject's intercept is assumed to be a random value from a normal distribution centered at \(\alpha_{0}\) with variance \(\sigma_{u}^{2}\).
+
+Using the composite model specification, the unconditional means model can be fit to the music performance anxiety data using statistical software:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tube_multi1 <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{(growth_yr1 }\OperatorTok{~}\StringTok{ }\NormalTok{tubes }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{transect), }
-                    \DataTypeTok{data =}\NormalTok{ treetubes_yr1)}
+\CommentTok{#Model A (Unconditional means model)}
+\NormalTok{model.a <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{(na }\OperatorTok{~}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{id), }\DataTypeTok{REML =}\NormalTok{ T, }\DataTypeTok{data =}\NormalTok{ music)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##             Estimate Std. Error t value
-## (Intercept)  0.10636    0.01329   8.005
-## tubes       -0.04065    0.05165  -0.787
-\end{verbatim}
 
 \begin{verbatim}
 ##  Groups   Name        Variance Std.Dev.
-##  transect (Intercept) 0.00084  0.029   
-##  Residual             0.01155  0.107
+##  id       (Intercept)  4.95    2.22    
+##  Residual             22.46    4.74
 \end{verbatim}
 
-Like we saw in the case of the binary outcomes, the standard error for the coefficients is larger when we take correlation into account. The t-statistic for tubes is smaller, reducing our enthusisam for the tubes effect. This conservative approach occurs because the observations within a transect are correlated and therefore not independent as assumed in the naive model. We will study these models in depth in the remaining chapters.
+\begin{verbatim}
+##  Number of Level Two groups =  37
+\end{verbatim}
 
-\hypertarget{summary}{%
-\section{Summary}\label{summary}}
+\begin{verbatim}
+##             Estimate Std. Error t value
+## (Intercept)    16.24     0.4279   37.94
+\end{verbatim}
 
-The most important idea from this chapter is that structures of data sets may imply that outcomes are correlated. Correlated outcomes provide less information than independent outcomes, resulting in effective sample sizes that are less than the total number of observations. Neglecting to take into account correlation may lead to underestimating standard errors of coefficients, overstating significance and precision. Correlation is likely and should be accounted for if basic observational units (e.g., pups, trees) are aggregated in ways that would lead us to expect units within groups to be similar.
+From this output, we obtain estimates of our three model parameters:
 
-We have mentioned two ways to account for correlation: incorporate a dispersion parameter or include random effects. In the following chapters we will primarily focus on models with random effects. In fact, there are even more ways to account for correlation, including inflating the variance using Huber-White estimators (aka Sandwich estimators), and producing corrected variances using bootstrapping. These are beyond the scope of this text.
-
-\hypertarget{exercises}{%
-\section{Exercises}\label{exercises}}
-
-\hypertarget{conceptual-exercises}{%
-\subsection{Conceptual Exercises}\label{conceptual-exercises}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \tightlist
 \item
-  \textbf{Examples with Correlated Data} For each of the following studies:
+  \(\hat{\alpha}_{0}=16.2=\) the estimated mean performance anxiety score across all performances and all subjects.
+\item
+  \(\hat{\sigma}^2=22.5=\) the estimated variance in within-person deviations.
+\item
+  \(\hat{\sigma}_{u}^{2}=5.0=\) the estimated variance in between-person deviations.
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Identify the most basic observational units
-  \item
-    Identify the grouping units (could be multiple levels of grouping)
-  \item
-    State the response(s) measured and variable type (normal, binary, Poisson, etc.)
-  \item
-    Write a sentence describing the within-group correlation.
-  \item
-    Identify fixed and random effects
-  \end{itemize}
-\end{enumerate}
+The relative levels of between- and within-person variabilities can be compared through the \textbf{intraclass correlation coefficient}:
 
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\item
-  \emph{Nurse Stress Study.} Four wards were randomly selected at each of 25 hospitals and randomly assigned to offer a stress reduction program for nurses on the ward or to serve as a control. At the conclusion of the study period, a random sample of 10 nurses from each ward completed a test to measure job-related stress. Factors assumed to be related include nurse experience, age, hospital size and type of ward.
-\item
-  \emph{Epilepsy Study.} Researchers conducted a randomized controlled study where patients were randomly assigned to either an anti-epileptic drug or a placebo. For each patient, the number of seizures at baseline was measured over a 2 week period. For four consecutive visits the number of seizures were determined over the past 2 week period. Patient age and sex along with visit number were recorded.
-\item
-  \emph{Cockroaches!} For a study of cockroach infestation, traps were set up in the kitchen, bathroom, and bedroom in a random sample of 100 New York City apartments. The goal is to estimate cockroach infestation levels given tenant income and age of the building.
-\item
-  \emph{Prairie Restoration.} Researchers at a small Midwestern college decided to experimentally explore the underlying causes of variation in soil reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect weekly data on plants in pots containing soil samples. Data will be examined to compare:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    germination and growth of two species of prairie plants-----leadplants (\emph{Amorpha canescens}) and coneflowers (\emph{Ratibida pinnata})
-  \item
-    soil from a cultivated (agricultural) field, a natural prairie, and a restored (reconstructed) prairie.
-  \item
-    the effect of sterilization, since half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation.
-  \end{itemize}
-\item
-  \emph{Radon in Minnesota.} Radon is a carcinogen -- a naturally occurring radioactive gas whose decay products are also radioactive -- known to cause lung cancer in high concentrations. The EPA sampled more than 80,000 homes across the US. Each house came from a randomly selected county and measurements were made on each level of each home. Uranium measurements at the county level were included to improve the radon estimates.
-\item
-  \emph{Teen Alcohol Use.} \citet{Curran1997} collected data on 82 adolescents at three time points starting at age 14 to assess factors that affect teen drinking behavior. Key variables in the data set \texttt{alcohol.csv} (source: \citet{Singer2003}) are as follows:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \texttt{id} = numerical identifier for subject
-  \item
-    \texttt{age} = 14, 15, or 16
-  \item
-    \texttt{coa} = 1 if the teen is a child of an alcoholic parent; 0 otherwise
-  \item
-    \texttt{male} = 1 if male; 0 if female
-  \item
-    \texttt{peer} = a measure of peer alcohol use, taken when each subject was 14. This is the square root of the sum of two 6-point items about the proportion of friends who drink occasionally or regularly.
-  \item
-    \texttt{alcuse} = the primary response. Four items---(a) drank beer or wine, (b) drank hard liquor, (c) 5 or more drinks in a row, and (d) got drunk---were each scored on an 8-point scale, from 0=''not at all'' to 7=''every day''. Then \texttt{alcuse} is the square root of the sum of these four items.
-  \end{itemize}
-\end{enumerate}
-
-Primary research questions included:
-- do trajectories of alcohol use differ by parental alcoholism?
-- do trajectories of alcohol use differ by peer alcohol use?
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  \textbf{More dams and pups} Describe how to generalize the pup and dam example by allowing for different size litters.
-\end{enumerate}
-
-\hypertarget{guided-exercises}{%
-\subsection{Guided Exercises}\label{guided-exercises}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Exploring Beta Distributions.} In the Dams and Pups Case Study, we use the beta distribution to randomly select the probability that a dam produces a defective pup. While the beta distribution is described in Chapter \ref{ch-distthry}, it can be valuable to play with the parameters \(\alpha\) and \(\beta\) to see what distribution ranges and shapes are possible. Here is some basic code for plotting a beta density curve:
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# inputs for the beta distribution must be between 0 and 1}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{by=}\NormalTok{.}\DecValTok{05}\NormalTok{)  }
-
-\CommentTok{# To plot a beta density use dbeta; here I selected a=5, b=1}
-\NormalTok{density <-}\StringTok{ }\KeywordTok{dbeta}\NormalTok{(p,}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(p, density, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  What values do beta random variables take on?
-\item
-  What do these values represent for the dams and pups simulation?
-\item
-  Do the possible values depend on \(\alpha\) or \(\beta\)?
-\item
-  What is a feature of the beta density when \(\alpha=\beta\)?
-\item
-  What happens to the density when \(\alpha \neq \beta\)?
-\item
-  How does the magnitude of \(\alpha\) or \(\beta\) affect the density?
-\item
-  How does the difference between \(\alpha\) and \(\beta\) affect the density?
-\item
-  If you wanted to simulate dams with mostly low probabilities of defects and a few with very high probabilities, how would you do it?
-\item
-  If you wanted to simulate dams with mostly high probabilities of defects and a few with very low probabilities, how would you do it?
-\item
-  If you wanted to simulate a population of dams where half of the probabilities of defects are very high and half are very low, how would you do it?
-\item
-  How might you decide on values for \(\alpha\) and \(\beta\) if you have run a preliminary experiment and gathered data on the number of dams with deformed pups?
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  \textbf{Dams and Pups (continued)}. Modify the dams and pups simulation in the following ways. In each case, produce plots and describe the results of your modified simulation.
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  Pick a different beta distribution for Scenario 1b.
-\item
-  Center the beta distributions in Scenarios 1a and 1b somewhere other than 0.5.
-\item
-  Repeat Scenario 2a with 3 doses and an underlying logistic model of your own choosing. Then create beta distributions as in Scenario 2b to match your 3 doses.
-\end{enumerate}
-
-\hypertarget{note-on-correlated-binary-outcomes}{%
-\subsection{Note on Correlated Binary Outcomes}\label{note-on-correlated-binary-outcomes}}
-
-The correlated binomial counts simulated in the Dams and Pups Case Study are in fact beta-binomial random variables like those simulated in the Guided Exercises from Chapter \ref{ch-distthry}. In fact, we could use the form of a beta-binomial pdf to model overdispersed binomial variables. Unlike the more generic form of accounting for correlation using dispersion parameter estimates, beta-binomial models are more specific and highly parameterized. This approach involves more assumptions but may also yield more information than the quasi-likelihood approach. If the beta-binomial model is incorrect, however, our results may be misleading. That said, the beta-binomial structure is quite flexible and conforms to many situations.
+\begin{equation}
+\hat{\rho}=\frac{\textrm{Between-person variability}}{\textrm{Total variability}} = \frac{\hat{\sigma}_{u}^{2}}{\hat{\sigma}_{u}^{2}+\hat{\sigma}^2} = \frac{5.0}{5.0+22.5} = .182.
+\label{eq:intracc}
+\end{equation}
+Thus, 18.2\% of the total variability in performance anxiety scores are attributable to differences among subjects. In this particular model, we can also say that the average correlation for any pair of responses from the same individual is a moderately low .182. As \(\rho\) approaches 0, responses from an individual are essentially independent and accounting for the multilevel structure of the data becomes less crucial. However, as \(\rho\) approaches 1, repeated observations from the same individual essentially provide no additional information and accounting for the multilevel structure becomes very important. With \(\rho\) near 0, the \textbf{effective sample size} (the number of independent pieces of information we have for modeling) approaches the total number of observations, while with \(\rho\) near 1, the effective sample size approaches the number of subjects in the study.
 
   \bibliography{bib/articles.bib,bib/books.bib,bib/misc.bib}
 
