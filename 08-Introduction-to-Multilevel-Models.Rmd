@@ -630,6 +630,7 @@ Furthermore, with a binary predictor at Level Two such as instrument, we can wri
 a_{i} & = \alpha_{0}+u_{i} \\
 b_{i} & = \beta_{0}+v_{i}
 \end{align*}
+
 - Orchestral instrumentalists ($\textstyle{Orch}_{i}=1$)
 
 \begin{align*}
@@ -1153,6 +1154,7 @@ Compared to Model C, the directions of the effects of instrument and performance
 Some of the detail in these parameter interpretations can be tricky---describing interaction terms, deciding if a covariate must be fixed at 0 or merely held constant, etc. Often it helps to write out models for special cases to isolate the effects of specific fixed effects. We will consider a few parameter estimates from above and see why the interpretations are written as they are.
 
 - $\hat{\alpha}_{1}$. For solos and small ensembles (`LargeEns=0`), the following equations describe the fixed effects portion of the composite model for negative affect score for vocalists and keyboardsists (`Orch=0`) and orchestral instrumentalists (`Orch=1`):
+
 \begin{align*}
 \textstyle{Orch}=0: & \\
 Y_{ij} & = \alpha_{0}+\alpha_{2}\textstyle{MPQnem}_{i} \\
@@ -1178,39 +1180,73 @@ As long as baseline negative emotionality is held constant (at any level, not ju
 
 At this point, we might ask: do the two extra fixed effects terms in Model D provide a significant improvement over Model C? Nested models such as these can be tested using a **likelihood ratio test** (drop in deviance test), as we've used in Sections \@ref(sec-PoisInference) and \@ref(sec-logisticInf) with certain generalized linear models. Since we are comparing models nested in their fixed effects, we use full maximum likelihood methods to estimate model parameters, as discussed in section \@ref(multileveltechnical). As expected, the likelihood is larger (and the log-likelihood is less negative) under the larger model (Model D); our test statistic (14.734) is then -2 times the difference in log-likelihood between Models C and D. Comparing the test statistic to a chi-square distribution with 2 degrees of freedom (signifying the number of additional terms in Model D), we obtain a p-value of .0006. Thus, Model D significantly outperforms Model C.
 
-```{r verb8, comment=NA, message=FALSE}
+```{r comment=NA, message=FALSE}
 # anova() automatically uses ML for LRT tests
-anova(model.d,model.c)
+drop_in_dev <- anova(model.d, model.c, test = "Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(npar=drop_in_dev$npar,
+    AIC=drop_in_dev$AIC, BIC=drop_in_dev$BIC, 
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
 ```
 
 Two models, whether they are nested or not, can be compared using AIC and BIC measures, which were first seen in Chapter \@ref(ch-MLRreview) and later used in evaluating generalized linear models. In this case, the AIC clearly favors Model D (2996.7) over Model C (3007.3), whereas the BIC favors Model D (3038.8) only slightly over Model C (3041.0) since the BIC imposes a stiffer penalty on additional terms and additional model complexity. However, the likelihood ratio test is a more reliable method for comparing nested models.
 
 Finally, we note that Model D could be further improved by dropping the negative emotionality by large ensemble interaction term. Not only is the t-value (-0.575) associated with this term of low magnitude, but a likelihood ratio test comparing Model D to a model without `mpqnem:large` produces an insignificant p-value of 0.5534.
 
-```{r verb9, comment=NA, message=FALSE}
+```{r, include=FALSE}
 model.d1 <- lmer(na ~ orch + mpqnem + large + orch:large + 
   (large|id), data=music)
-anova(model.d,model.d1)
+```
+
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(model.d, model.d1, test = "Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(npar=drop_in_dev$npar,
+    AIC=drop_in_dev$AIC, BIC=drop_in_dev$BIC, 
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
 ```
 
 ## Center covariates {#sec:modele}
-As we observed above, the addition of baseline negative emotionality in Model D did not always produce sensible interpretations of fixed effects. It makes no sense to draw conclusions about performance anxiety levels for subjects with MPQNEM scores of 0 at baseline (as in $\hat{\beta}_{0}$), since the minimum NEM composite score among subjects in this study was 11. In order to produce more meaningful interpretations of parameter estimates and often more stable parameter estimates, it is often wise to __center__ explanatory variables. Centering involves subtracting a fixed value from each observation, where the fixed value represents a meaningful anchor value (e.g., last grade completed = 12; GPA = 3.0). Often, when there's no pre-defined anchor value, the mean is used to represent a typical case. With this in mind, we can create a new variable
-\begin{align*}
-\textstyle{centeredbaselineNEM} = \textstyle{cmpqnem} = \textstyle{mpqnem - mean(mpqnem)} = \textstyle{mpqnem} - 31.63
-\end{align*}
-and replace baseline NEM in Model D with its centered version:
 
-```{r verb10, echo=FALSE, comment=NA}
-# Model E (Center baseline NEM in Model D)
-#mean(music$mpqnem)
+As we observed above, the addition of baseline negative emotionality in Model D did not always produce sensible interpretations of fixed effects. It makes no sense to draw conclusions about performance anxiety levels for subjects with MPQNEM scores of 0 at baseline (as in $\hat{\beta}_{0}$), since the minimum NEM composite score among subjects in this study was 11. In order to produce more meaningful interpretations of parameter estimates and often more stable parameter estimates, it is often wise to __center__ explanatory variables. Centering involves subtracting a fixed value from each observation, where the fixed value represents a meaningful anchor value (e.g., last grade completed is 12; GPA is 3.0). Often, when there's no pre-defined anchor value, the mean is used to represent a typical case. With this in mind, we can create a new variable
+
+\begin{align*}
+\textstyle{centeredbaselineNEM} & = \textstyle{cmpqnem} \\
+ & = \textstyle{mpqnem - mean(mpqnem)} \\
+ & = \textstyle{mpqnem} - 31.63
+\end{align*}
+and replace baseline NEM in Model D with its centered version to create Model E:
+
+```{r verb10, include=FALSE}
 mean(music$mpqnem)
 music <- music %>%
   mutate(cmpqnem = mpqnem - mean(mpqnem))
+```
+
+```{r, comment=NA}
+# Model E (Center baseline NEM in Model D)
 model.e <- lmer(na ~ orch + cmpqnem + large + orch:large + 
-  cmpqnem:large + (large|id), REML=T, data=music)
-# print(summary(model.e), correlation=FALSE, show.resids=FALSE)
-tmp <- capture.output(summary(model.e))
-cat(tmp[c(2:3, 11:25)], sep='\n')
+  cmpqnem:large + (large | id), REML = T, data = music)
+```
+
+```{r, echo=FALSE, message=FALSE}
+VCrandom <- VarCorr(model.e)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of Level Two groups = ",
+    summary(model.e)$ngrps)
+coef(summary(model.e))
 ```
 
 As you compare Model D to Model E, you should notice that only two things change -- $\hat{\alpha}_{0}$ and $\hat{\beta}_{0}$. All other parameter estimates---both fixed effects and variance components---remain identical; the basic model is essentially unchanged as well as the amount of variability in anxiety levels explained by the model. $\hat{\alpha}_{0}$ and $\hat{\beta}_{0}$ are the only two parameter estimates whose interpretations in Model D refer to a specific level of baseline NEM. In fact, the interpretations that held true where `NEM=0` (which isn't possible) now hold true for `cmpqnem=0` or when NEM is at its average value of 31.63, which is possible and quite meaningful. Now, parameter estimates using centered baseline NEM in Model E change in value from Model D and produce more useful interpretations:
@@ -1219,6 +1255,7 @@ As you compare Model D to Model E, you should notice that only two things change
 - $\hat{\beta}_{0} = -1.23$. Keyboard players and vocalists (`orch=0`) with an average level of baseline negative emotionality levels (`mpqnem=31.63`) have an estimated mean decrease in anxiety level of 1.23 points before large ensemble performances compared to other performance types.
 
 ## A potential final model for music performance anxiety {#modelf}
+
 We now begin iterating toward a "final model" for these data, on which we will base conclusions. Typical features of a "final multilevel model" include:
 
 - fixed effects allow one to address primary research questions
@@ -1234,12 +1271,15 @@ Although the process of reporting and writing up research results often demands 
 As we've done in previous sections, we can use (a) t-statistics for individual fixed effects when considering adding a single term to an existing model, (b) likelihood ratio tests for comparing nested models which differ by more than one parameter, and (c) model performance measures such as AIC and BIC to compare non-nested models. Below we offer one possible final model for this data---Model F:
 
 - Level One:
+
 \begin{equation}
 Y_{ij} = a_{i}+b_{i}\textstyle{previous}_{ij}+c_{i}\textstyle{students}_{ij}+
 d_{i}\textstyle{juried}_{ij}+e_{i}\textstyle{public}_{ij}+f_{i}\textstyle{solo}_{ij}+\epsilon_{ij}
 (\#eq:level1modelf)
 \end{equation}
+
 - Level Two:
+
 \begin{align*}
 a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{mpqpem}_{i}+\alpha_{2}\textstyle{mpqab}_{i} + \alpha_{3}\textstyle{orch}_{i}+\alpha_{4}\textstyle{mpqnem}_{i}+u_{i} \\
 b_{i} & = \beta_{0}+v_{i}, \\
@@ -1277,19 +1317,26 @@ Here are how a couple of key fixed effects would be interpreted in this final mo
 - $\hat{\alpha}_{4} = 0.11$. A one point increase in baseline level of negative emotionality is associated with an estimated 0.11 mean increase in performance anxiety for musicians performing in an ensemble group (`solo=0`), after controlling for previous diary entries, audience, positive emotionality, absorption, and instrument.
 - $\hat{\zeta}_{1} = 0.08$. When musicians play solos, a one point increase in baseline level of negative emotionality is associated with an estimated 0.19 mean increase in performance anxiety, 0.08 points (73\%) higher than musicians playing in ensemble groups, controlling for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument.
 
-```{r verb11, echo=FALSE, comment=NA, warning=FALSE, message = FALSE}
+```{r, comment=NA, warning=FALSE}
 # Model F (One - of many - reasonable final models)
-model.f <- lmer(na ~ previous + students + juried + public + solo +
-  mpqpem + mpqab + orch + mpqnem + mpqnem:solo + 
- (previous + students + juried + public + solo|id), 
-  REML=T, data=music)
-# print(summary(model.f), correlation=FALSE, show.resids=FALSE)
-tmp <- capture.output(summary(model.f))
-cat(tmp[c(2:4, 12:36)], sep='\n')
+model.f <- lmer(na ~ previous + students + juried + 
+    public + solo + mpqpem + mpqab + orch + mpqnem + 
+    mpqnem:solo + (previous + students + juried + 
+    public + solo | id), REML = T, data = music)
+```
+
+```{r, echo=FALSE, message=FALSE}
+# control = lmerControl(optCtrl = list(maxfun=20000) )
+VCrandom <- VarCorr(model.f)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of Level Two groups = ",
+    summary(model.f)$ngrps)
+coef(summary(model.f))
 ```
 
 ## Modeling the multilevel structure: is it really necessary? {#multinecessary}
-Before going too much further, we should really consider if this multilevel structure has gained us anything over ordinary least squares regression. Sure, multilevel modeling seems more faithful to the inherent structure of the data---performances from the same musician should be more highly correlated than performances from different musicians---but do our conclusions change in a practical sense? Some authors have expressed doubts. For instance Robert Bickel, in his 2007 book, states, "When comparing OLS and multilevel regression results, we may find that differences among coefficient values are inconsequential, and tests of significance may lead to the same decisions. A great deal of effort seems to have yielded precious little gain" [@Bickel2007].  Others, especially economists, advocate simply accounting for the effect of different Level Two observational units (like `musicians`) with a sequence of indicator variables for those observational units. We contend that (1) fitting multilevel models is a small extension of OLS regression that is not that difficult to conceptualize and fit, especially with the software available today, and (2) using multilevel models to remain faithful to the data structure can lead to different coefficient estimates and often leads to different (and larger) standard error estimates and thus smaller test statistics. Hopefully you've seen evidence of (1) in this section already; the rest of this section introduces two small examples to help illustrate (2).
+
+Before going too much further, we should really consider if this multilevel structure has gained us anything over linear least squares regression. Sure, multilevel modeling seems more faithful to the inherent structure of the data---performances from the same musician should be more highly correlated than performances from different musicians---but do our conclusions change in a practical sense? Some authors have expressed doubts. For instance Robert Bickel, in his 2007 book, states, "When comparing OLS and multilevel regression results, we may find that differences among coefficient values are inconsequential, and tests of significance may lead to the same decisions. A great deal of effort seems to have yielded precious little gain" [@Bickel2007].  Others, especially economists, advocate simply accounting for the effect of different Level Two observational units (like `musicians`) with a sequence of indicator variables for those observational units. We contend that (1) fitting multilevel models is a small extension of LLSR regression that is not that difficult to conceptualize and fit, especially with the software available today, and (2) using multilevel models to remain faithful to the data structure *can* lead to different coefficient estimates and *often* leads to different (and larger) standard error estimates and thus smaller test statistics. Hopefully you've seen evidence of (1) in this chapter already; the rest of this section introduces two small examples to help illustrate (2).
 
 ```{r, include=FALSE}
 # Compare Model D to Model C (they differ by 2 df)
@@ -1305,8 +1352,9 @@ model.d1.ml <- lmer(na ~ orch + mpqnem + large + orch:large +
   (large|id), REML=F, data=music)
 anova(model.d.ml,model.d1.ml)
 
-# Create data where multilevel model gives different result than OLS regression
-#   Hopefully see differences in both coefficients and SEs
+# Create data where multilevel model gives different result 
+# than OLS regression.  Hopefully see differences in both
+# coefficients and SEs
 
 # Simulation 1 - OLS coefficient is wrong direction
 subject = c(rep(1,10),rep(2,10),rep(3,10),rep(4,10))
@@ -1315,8 +1363,8 @@ lambda1 = rep(-0.5,40)
 previj = c(1:10,4:13,7:16,10:19)
 eij = rnorm(40,0,1)
 yij = lambda0 + lambda1*previj + eij
-simdata = data.frame(subject=subject,lambda0=lambda0,lambda1=lambda1,
-  previj=previj,eij=eij,yij=yij)
+simdata = data.frame(subject=subject,lambda0=lambda0,
+  lambda1=lambda1,previj=previj,eij=eij,yij=yij)
 
 plot(yij~previj)
 olsreg.sim = lm(yij~previj)
@@ -1328,25 +1376,32 @@ summary(mlm.sim)
 # ggplot for first simulation
 ints.sim = fixef(mlm.sim)[1] + ranef(mlm.sim)[[1]][1]
 slopes.sim = rep(fixef(mlm.sim)[2],4)
-subj.sim = c("Subject 1", "Subject 2", "Subject 3", "Subject 4")
-sim1.plot = data.frame(id=subj.sim,ints.sim=ints.sim[[1]],slopes.sim=slopes.sim)
-sim1.plot2 = data.frame(model=c("MLM","OLS"), int2=c(fixef(mlm.sim)[1],
-  summary(olsreg.sim)$coefficients[1,1]), slp2=c(fixef(mlm.sim)[2],
+subj.sim = c("Subject 1", "Subject 2", 
+             "Subject 3", "Subject 4")
+sim1.plot = data.frame(id=subj.sim,
+  ints.sim=ints.sim[[1]],slopes.sim=slopes.sim)
+sim1.plot2 = data.frame(model=c("MLM","LLSR"),
+  int2=c(fixef(mlm.sim)[1],
+  summary(olsreg.sim)$coefficients[1,1]),
+  slp2=c(fixef(mlm.sim)[2],
   summary(olsreg.sim)$coefficients[2,1]))
 ```
 
-```{r mli-spag2,fig.align="center",out.width="60%",fig.cap='Hypothetical data from 4 subjects relating number of previous performances to negative affect.  The solid black line depicts the overall relationship between previous performances and negative affect as determined by a multilevel model, while the dashed black line depicts the overall relationship as determined by an OLS regression model.',echo=FALSE, warning=FALSE}
-ggplot() + theme.1 + 
-  scale_x_continuous(name="Previous Performances", limits=c(0,20)) +
-  scale_y_continuous(name="Negative Affect", limits=c(0,40)) + 
+```{r mli-spag2,fig.align="center",out.width="60%",fig.cap='Hypothetical data from 4 subjects relating number of previous performances to negative affect.  The solid black line depicts the overall relationship between previous performances and negative affect as determined by a multilevel model, while the dashed black line depicts the overall relationship as determined by an LLSR regression model.',echo=FALSE, warning=FALSE}
+ggplot() +  
   geom_point(data=simdata, aes(x=previj,y=yij)) + 
-  geom_abline(data=sim1.plot, aes(intercept=ints.sim, slope=slopes.sim, 
-    linetype=id, group=id), color="dark gray", show_guide=TRUE) +
+  geom_abline(data=sim1.plot, aes(intercept=ints.sim,
+    slope=slopes.sim, linetype=id, group=id), 
+    color="dark gray", show.legend=TRUE) +
   geom_abline(data=sim1.plot2, aes(intercept=int2, slope=slp2, 
-    linetype=model, group=model), size=1, show_guide=TRUE)
+    linetype=model, group=model), size=1, show.legend=TRUE) +
+  theme.1 + theme(legend.title = element_blank()) +
+  scale_x_continuous(name="Previous Performances",
+                     limits=c(0,20)) +
+  scale_y_continuous(name="Negative Affect", limits=c(0,40)) 
 ```
 
-Figure \@ref(fig:mli-spag2) is based on a simulated data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting an OLS regression model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the OLS regression analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
+Figure \@ref(fig:mli-spag2) is based on a synthetic data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting a LLSR model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the LLSR analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
 
 ```{r ch8simulations, include=FALSE, cache=TRUE}
 # Simulation 2 - use estimated parameters from Model C
@@ -1379,18 +1434,21 @@ for(k in 1:1000)  {
   bi = b0 + b1*orch.sim + vi
   eij = rnorm(497,0,4.66984)
   Yij = ai + bi*large.sim + eij
-  data.sim = data.frame(subj.sim=subj.sim,orch.sim=orch.sim,large.sim=large.sim,
-    ui=ui,vi=vi,ai=ai,bi=bi,eij=eij,Yij=Yij)
+  data.sim = data.frame(subj.sim=subj.sim,orch.sim=orch.sim,
+    large.sim=large.sim,ui=ui,vi=vi,ai=ai,bi=bi,eij=eij,
+    Yij=Yij)
 
-  olsreg.sim = lm(Yij~orch.sim+large.sim+orch.sim:large.sim, data=data.sim)
+  olsreg.sim = lm(Yij ~ orch.sim + large.sim +
+                    orch.sim:large.sim, data = data.sim)
   OLSest[k,]=summary(olsreg.sim)$coefficients[,1]
   OLSse[k,]=summary(olsreg.sim)$coefficients[,2]
   OLStval[k,]=summary(olsreg.sim)$coefficients[,3]
   OLSaic[k]=AIC(olsreg.sim)
   OLSbic[k]=BIC(olsreg.sim)
 
-  mlm.sim = lmer(Yij ~ orch.sim + large.sim + orch.sim:large.sim +
-    (large.sim|subj.sim), REML=T, data=data.sim)
+  mlm.sim = lmer(Yij ~ orch.sim + large.sim + 
+    orch.sim:large.sim + (large.sim|subj.sim), 
+    REML=T, data=data.sim)
   MLMest[k,]=fixef(mlm.sim)
 #  MLMse[k,]=sqrt(diag(vcov(mlm.sim)))
   MLMse[k,]=sqrt(diag(as.matrix(vcov(mlm.sim))))
@@ -1408,84 +1466,88 @@ apply(MLMtval,2,summary)
 #summary(as.numeric(MLMaic))
 #summary(as.numeric(MLMbic))
 
-par(mfrow=c(2,2))
-plot(density(MLMest[,1])); lines(density(OLSest[,1]),lty=2)
-plot(density(MLMest[,2])); lines(density(OLSest[,2]),lty=2)
-plot(density(MLMest[,3])); lines(density(OLSest[,3]),lty=2)
-plot(density(MLMest[,4])); lines(density(OLSest[,4]),lty=2)
-par(mfrow=c(2,2))
-plot(density(MLMse[,1])); lines(density(OLSse[,1]),lty=2)
-plot(density(MLMse[,2])); lines(density(OLSse[,2]),lty=2)
-plot(density(MLMse[,3])); lines(density(OLSse[,3]),lty=2)
-plot(density(MLMse[,4])); lines(density(OLSse[,4]),lty=2)
-par(mfrow=c(2,2))
-plot(density(MLMtval[,1])); lines(density(OLStval[,1]),lty=2)
-plot(density(MLMtval[,2])); lines(density(OLStval[,2]),lty=2)
-plot(density(MLMtval[,3])); lines(density(OLStval[,3]),lty=2)
-plot(density(MLMtval[,4])); lines(density(OLStval[,4]),lty=2)
-
-est.data = data.frame(a0=c(MLMest[,1],OLSest[,1]),a1=c(MLMest[,2],OLSest[,2]),
+est.data = data.frame(a0=c(MLMest[,1],OLSest[,1]),
+  a1=c(MLMest[,2],OLSest[,2]),
   b0=c(MLMest[,3],OLSest[,3]),b1=c(MLMest[,4],OLSest[,4]),
-  model=c(rep("MLM",1000),rep("OLS",1000)))
-a0dens <- ggplot(data=est.data, aes(x=a0,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(alpha)["0"])) + 
+  model=c(rep("MLM",1000),rep("LLSR",1000)))
+a0dens <- ggplot(data=est.data,
+                 aes(x=a0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(hat(alpha)["0"])) + 
   ylab("Density") + labs(title="(a)")
-a1dens <- ggplot(data=est.data, aes(x=a1,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(alpha)["1"])) + 
+a1dens <- ggplot(data=est.data,
+                 aes(x=a1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(hat(alpha)["1"])) + 
   ylab("Density") + labs(title="(b)")
-b0dens <- ggplot(data=est.data, aes(x=b0,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[0])) + 
+b0dens <- ggplot(data=est.data,
+                 aes(x=b0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(hat(Beta)[0])) + 
   ylab("Density") + labs(title="(c)")
-b1dens <- ggplot(data=est.data, aes(x=b1,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(hat(Beta)[1])) + 
+b1dens <- ggplot(data=est.data,
+                 aes(x=b1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(hat(Beta)[1])) + 
   ylab("Density") + labs(title="(d)")
 ```
 
-(ref:capmlidensity1) Density plots of parameter estimates for the four fixed effects of Model C under both a multilevel model and OLS regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) $\alpha_{0}$, (b) $\alpha_{1}$, (c) $\beta_{0}$, and (d) $\beta_{1}$ were obtained using both a multilevel and an OLS regression model. Each plot then shows a density plot for the 1000 estimates of the corresponding fixed effect using multilevel modeling vs. a similar density plot for the 1000 estimates using OLS regression.
+(ref:capmlidensity1) Density plots of parameter estimates for the four fixed effects of Model C under both a multilevel model and linear least squares regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) $\alpha_{0}$, (b) $\alpha_{1}$, (c) $\beta_{0}$, and (d) $\beta_{1}$ were obtained using both a multilevel and an LLSR model. Each plot then shows a density plot for the 1000 estimates of the corresponding fixed effect using multilevel modeling vs. a similar density plot for the 1000 estimates using LLSR.
 
 ```{r mli-density1,fig.align="center",out.width="60%", fig.cap='(ref:capmlidensity1)',echo=FALSE, warning=FALSE}
 grid.arrange(a0dens,a1dens,b0dens,b1dens,ncol=2)
 ```
 
 ```{r, include=FALSE}
-se.data = data.frame(a0=c(MLMse[,1],OLSse[,1]),a1=c(MLMse[,2],OLSse[,2]),
+se.data = data.frame(a0=c(MLMse[,1],OLSse[,1]),
+  a1=c(MLMse[,2],OLSse[,2]),
   b0=c(MLMse[,3],OLSse[,3]),b1=c(MLMse[,4],OLSse[,4]),
-  model=c(rep("MLM",1000),rep("OLS",1000)))
-a0dens <- ggplot(data=se.data, aes(x=a0,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(alpha)["0"]))) + 
+  model=c(rep("MLM",1000),rep("LLSR",1000)))
+a0dens <- ggplot(data=se.data,
+                 aes(x=a0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(SE(hat(alpha)["0"]))) + 
   ylab("Density") + labs(title="(a)")
-a1dens <- ggplot(data=se.data, aes(x=a1,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(alpha)["1"]))) + 
+a1dens <- ggplot(data=se.data,
+                 aes(x=a1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(SE(hat(alpha)["1"]))) + 
   ylab("Density") + labs(title="(b)")
-b0dens <- ggplot(data=se.data, aes(x=b0,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[0]))) + 
+b0dens <- ggplot(data=se.data,
+                 aes(x=b0,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(SE(hat(Beta)[0]))) + 
   ylab("Density") + labs(title="(c)")
-b1dens <- ggplot(data=se.data, aes(x=b1,linetype=model,group=model)) + 
-  geom_density(fill=NA) + theme.1 + xlab(expression(SE(hat(Beta)[1]))) + 
+b1dens <- ggplot(data=se.data,
+                 aes(x=b1,linetype=model,group=model)) + 
+  geom_density(fill=NA) + theme.1 +
+  xlab(expression(SE(hat(Beta)[1]))) + 
   ylab("Density") + labs(title="(d)")
 ```
 
-(ref:capmlidensity2) Density plots of standard errors of parameter estimates for the four fixed effects of Model C under both a multilevel model and OLS regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) SE($\alpha_{0}$), (b) SE($\alpha_{1}$), (c) SE($\beta_{0}$), and (d) SE($\beta_{1}$) were obtained using both a multilevel and an OLS regression model. Each plot then shows a density plot for the 1000 estimates of the corresponding standard error term using multilevel modeling vs. a similar density plot for the 1000 estimates using OLS regression.
+(ref:capmlidensity2) Density plots of standard errors of parameter estimates for the four fixed effects of Model C under both a multilevel model and linear least squares regression. 1000 sets of simulated data for the 37 subjects in our study were produced using estimated fixed and random effects from Model C. For each set of simulated data, estimates of (a) SE($\alpha_{0}$), (b) SE($\alpha_{1}$), (c) SE($\beta_{0}$), and (d) SE($\beta_{1}$) were obtained using both a multilevel and an LLSR model. Each plot then shows a density plot for the 1000 estimates of the corresponding standard error term using multilevel modeling vs. a similar density plot for the 1000 estimates using LLSR.
 
 ```{r mli-density2,fig.align="center",out.width="60%", fig.cap='(ref:capmlidensity2)',echo=FALSE, warning=FALSE}
 grid.arrange(a0dens,a1dens,b0dens,b1dens,ncol=2)
 ```
 
-Our second example is based upon Model C from section \@ref(modelc), with single binary predictors at both Level One and Level Two. Using the estimated fixed effects coefficients and variance components from random effects produced in Model C, we generated 1000 sets of simulated data. Each set of simulated data contained 497 observations from 37 subjects just like the original data, with relationships between negative affect and large ensembles and orchestral instruments (along with associated variability) governed by the estimated parameters from Model C. Each set of simulated data was used to fit both a multilevel model and an OLS regression model, and the estimated fixed effects ($\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\beta}_{0}$, and $\hat{\beta}_{1}$) and their standard errors were saved. Figure \@ref(fig:mli-density1) shows density plots comparing the 1000 estimated fixed effects for each fixed effect from the two modeling approaches; in general, estimates from multilevel modeling and OLS regression tend to agree pretty well, without noticeable bias. Based on coefficient estimates alone, there appears to be no reason to favor multilevel modeling over OLS regression in this example, but Figure \@ref(fig:mli-density2) tells a different story. Figure \@ref(fig:mli-density2) shows density plots comparing the 1000 estimated standard errors associated with each fixed effect from the two modeling approaches; in general, standard errors are markedly larger with multilevel modeling than OLS regression. This is not unusual, since OLS regression assumes all 497 observations are independent while multilevel modeling acknowledges that, with correlated data within subject, there are fewer than 497 independent pieces of data. Therefore, OLS regression can overstate precision, producing t-statistics for each fixed effect that tend to be larger than they should be; the number of significant results in OLS regression are then not reflective of the true structure of the data.
+Our second example is based upon Model C from section \@ref(modelc), with single binary predictors at both Level One and Level Two. Using the estimated fixed effects coefficients and variance components from random effects produced in Model C, we generated 1000 sets of simulated data. Each set of simulated data contained 497 observations from 37 subjects just like the original data, with relationships between negative affect and large ensembles and orchestral instruments (along with associated variability) governed by the estimated parameters from Model C. Each set of simulated data was used to fit both a multilevel model and a linear least squares regression model, and the estimated fixed effects ($\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\beta}_{0}$, and $\hat{\beta}_{1}$) and their standard errors were saved. Figure \@ref(fig:mli-density1) shows density plots comparing the 1000 estimated values for each fixed effect from the two modeling approaches; in general, estimates from multilevel modeling and LLSR tend to agree pretty well, without noticeable bias. Based on coefficient estimates alone, there appears to be no reason to favor multilevel modeling over LLSR in this example, but Figure \@ref(fig:mli-density2) tells a different story. Figure \@ref(fig:mli-density2) shows density plots comparing the 1000 estimated standard errors associated with each fixed effect from the two modeling approaches; in general, standard errors are markedly larger with multilevel modeling than LLSR. This is not unusual, since LLSR assumes all 497 observations are independent while multilevel modeling acknowledges that, with correlated data within subject, there are fewer than 497 independent pieces of data. Therefore, linear least squares regression can overstate precision, producing t-statistics for each fixed effect that tend to be larger than they should be; the number of significant results in LLSR are then too great and not reflective of the true structure of the data.
 
 ## Notes on Using R (Optional){#notesr8}
+
 Initial examination of the data for Case Study \@ref(cs:music) shows a couple of features that must be noted. First, there are 37 unique study participants, but they are not numbered successively from 1 to 43. The majority of participants filled out 15 diaries, but several filled out fewer (with a minimum of 2); as with participant IDs, diary numbers within participant are not always successively numbered. Finally, missing data is not an issue in this data set, since researchers had already removed participants with only 1 diary entry and performances for which the type was not recorded (of which there were 11).  
 
 The R code below runs the initial multilevel model in section \@ref(initialmodel). Multilevel model notation in R is based on the composite model formulation. Here, the response variable is `na`, while `orch`, `large`, and `orch:large` represent the fixed effects $\alpha_{1}$, $\beta_{0}$, and $\beta_{1}$, along with the intercept $\alpha_{0}$ which is included automatically. Note that a colon is used to denote an interaction between two variables. Error terms and their associated variance components are specified in `(large|id)`, which is equivalent to `(1+large|id)`. This specifies two error terms at Level Two (the `id` level): one corresponding to the intercept ($u_{i}$) and one corresponding to the large ensemble effect ($v_{i}$); the multilevel model will then automatically include a variance for each error term in addition to the covariance between the two error terms. A variance associated with a Level One error term is also automatically included in the multilevel model. Note that there are ways to override the automatic inclusion of certain variance components; for example, `(0+large|id)` would not include an error term for the intercept (and therefore no covariance term at Level Two either).
 
 ```{r verb13, eval=FALSE}
 model0 <- lmer(na ~ orch + large + orch:large +
-  (large|id), REML=T, data=music)
+  (large | id), REML = T, data = music)
 summary(model0)
 ```
 
 
 ## Exercises
+
 ### Conceptual Exercises
 
 1. __Housing Prices.__ @Brown2004 describe "A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices". Based on the title of their paper: (a) give the observational units at Level One and Level Two, and (b) list potential explanatory variables at both Level One and Level Two.
@@ -1530,7 +1592,7 @@ summary(model0)
 
 14. Interpret other estimated parameters from Model F beyond those interpreted in Section \@ref(modelf): $\hat{\alpha}_{0}$, $\hat{\alpha}_{2}$, $\hat{\alpha}_{3}$, $\hat{\beta}_{0}$, $\hat{\gamma}_{0}$, $\hat{\zeta}_{0}$, $\hat{\rho}_{wx}$, $\hat{\sigma}^{2}$, $\hat{\sigma}_{u}^{2}$, and $\hat{\sigma}_{z}^{2}$.
 
-15. Explain Figure \@ref(fig:mli-spag2) in your own words. Why would OLS regression produce a misleading analysis in this case, but multilevel models would not?
+15. Explain Figure \@ref(fig:mli-spag2) in your own words. Why would LLSR produce a misleading analysis in this case, but multilevel models would not?
 
 16. Summarize Figures \@ref(fig:mli-density1) and \@ref(fig:mli-density2) in your own words.
 
@@ -1549,62 +1611,59 @@ summary(model0)
       centered MPQ absorption subscale and a male indicator as Level Two predictors for intercept and all slope terms </ul>
 <br>
     1. Perform an exploratory data analysis by comparing positive affect (happiness) to Level One and Level Two covariates using appropriate graphs. Comment on interesting trends, supporting your comments with appropriate summary statistics.
-    2. Report estimated fixed effects and variance components from Model A, using proper notation from this section (no interpretations required). Also report and interpret an intraclass correlation coefficient.
-    3. Report estimated fixed effects and variance components from Model B, using proper notation from this section. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo-Rsquare value.
+    2. Report estimated fixed effects and variance components from Model A, using proper notation from this chapter (no interpretations required). Also report and interpret an intraclass correlation coefficient.
+    3. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo-Rsquare value.
     4. Write out Model C, using both separate Level One and Level Two models as well as a composite model. Be sure to express distributions for error terms. How many parameters must be estimated in Model C?
     5. Report and interpret the following parameter estimates from Model C: $\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\gamma}_{0}$, $\hat{\beta}_{1}$, $\hat{\sigma}_{u}$, $\hat{\sigma}_{v}$, and $\hat{\rho}_{uv}$. Interpretations for variance components should be done in terms of standard deviations and correlation coefficients.
     6. Report and interpret the same parameter estimates listed above from Model D. In each case, the new interpretation should involve a small modification of your interpretation from Model C.  Use underlines or highlights to denote the part of the Model D interpretation that differs from the Model C interpretation.
     7. Also report and interpret the following parameter estimates from Model D: $\hat{\alpha}_{2}$ and $\hat{\beta}_{2}$.
-    8. Use a deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo-Rsquare value(s) and with AIC and BIC statistics.
+    8. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo-Rsquare value(s) and with AIC and BIC statistics.
 
 ### Open-ended Exercises
+
 1. __Political Ambiguity.__ @Chapp2018 explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. 2014 websites were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model of candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
-    - "when incumbents do hazard issue statements, these statements will be marked by a higher degree of clarity." (Hypothesis 1b)  
-    - "ideological distance will be associated with greater ambiguity." (Hypothesis 2a)  
-    - "controlling for ideological distance, ideological extremity should correspond to less ambiguity." (Hypothesis 2b)
-    - "more variance in attitudes will correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3a)
-    - "a more heterogeneous mix of subgroups will also correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3b)
+    - "when incumbents do hazard issue statements, these statements will be marked by a higher degree of clarity." (Hypothesis 1b)
+    - "ideological distance [from district residents] will be associated with greater ambiguity." (Hypothesis 2a)
+    - "controlling for ideological distance, ideological extremity [of the candidate] should correspond to less ambiguity." (Hypothesis 2b)
+    - "more variance in attitudes [among district residents] will correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3a)
+    - "a more heterogeneous mix of subgroups [among district residents] will also correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3b)
     
     Their data can be found in `ambiguity.csv`. Variables of interest include:
-    
-    - `ambiguity` = assigned ambiguity score.  Higher scores indicate greater clarity (less ambiguity)  
+    - `ambiguity` = assigned ambiguity score.  Higher scores indicate greater clarity (less ambiguity)
     - `democrat` = 1 if a Democrat, 0 otherwise (Republican)
     - `incumbent` = 1 if an incumbent, 0 otherwise
-    - `ideology` = a measure of the candidate's left-right orientation. Higher (positive) scores indicate more conservative candidates and lower (negative) scores indiciate more liberal candidates.
+    - `ideology` = a measure of the candidate's left-right orientation. Higher (positive) scores indicate more conservative candidates and lower (negative) scores indicate more liberal candidates.
     - `mismatch` = the distance between the candidate's ideology and the district's ideology (candidate ideology scores were regressed against district ideology scores; mismatch values represent the absolute value of the residual associated with each candidate)
     - `distID` = the congressional district's unique ID
     - `distLean` = the district's political leaning. Higher scores imply more conservative districts.
     - `attHeterogeneity` = a measure of the variability of ideologies within the district. Higher scores imply more attitidunal heterogeneity among voters.
-    - `demHeterogeneity` = a measure of the demographic variability within the district. Higher scores imply more demographic heterogeneity among voters. 
-    </ul>
-    <br>
-    With this in mind, fit your own models to address these hypotheses from @Chapp2018. Be sure to use a two level structure to account for variables at both the candidate and district levels.  
-    <br>
+    - `demHeterogeneity` = a measure of the demographic variability within the district. Higher scores imply more demographic heterogeneity among voters.
     
+    With this in mind, fit your own models to address these hypotheses from @Chapp2018. Be sure to use a two level structure to account for variables at both the candidate and district levels.  
+
 2. **Airbnb in Chicago.**  @Trinh2018 collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located.  We can examine traits that are associated with listings that command a higher price.  Conduct an EDA, build a multilevel model, and interpret model coefficients to answer questions such as: What are characteristics of a higher priced listing?  Are the most influential traits associated with individual listings or entire neighborhoods?  Are there intriguing interactions where the effect of one variable depends on levels of another?
 
-The following variables can be found in `airbnb.csv` or derived from the variables found there:
+    The following variables can be found in `airbnb.csv` or derived from the variables found there:
 
-- `overall_satisfaction` = rating on a 0-5 scale.  
-- `satisfaction` = 1 if `overall_satisfaction` is 5, 0 otherwise
-- `price` = price for one night (in dollars)
-- `reviews` = number of reviews posted
-- `room_type` = Entire home/apt, Private room, or Shared room
-- `accommodates` = number of people the unit can hold
-- `bedrooms` = number of bedrooms
-- `minstay` = minimum length of stay (in days)
-- `neighborhood` = neighborhood where unit is located (1 of 43)
-- `district` = district where unit is located (1 of 9)
-- `WalkScore` = quality of the neighborhood for walking (0-100)
-- `TransitScore` = quality of the neighborhood for public transit (0-100)
-- `BikeScore` = quality of the neighborhood for biking (0-100)
-- `PctBlack` = proportion of black residents in a neighborhood
-- `HighBlack` = 1 if `PctBlack` above .60, 0 otherwise
-    <br>
-    
+    - `overall_satisfaction` = rating on a 0-5 scale.
+    - `satisfaction` = 1 if `overall_satisfaction` is 5, 0 otherwise
+    - `price` = price for one night (in dollars)
+    - `reviews` = number of reviews posted
+    - `room_type` = Entire home/apt, Private room, or Shared room
+    - `accommodates` = number of people the unit can hold
+    - `bedrooms` = number of bedrooms
+    - `minstay` = minimum length of stay (in days)
+    - `neighborhood` = neighborhood where unit is located (1 of 43)
+    - `district` = district where unit is located (1 of 9)
+    - `WalkScore` = quality of the neighborhood for walking (0-100)
+    - `TransitScore` = quality of the neighborhood for public transit (0-100)
+    - `BikeScore` = quality of the neighborhood for biking (0-100)
+    - `PctBlack` = proportion of black residents in a neighborhood
+    - `HighBlack` = 1 if `PctBlack` above .60, 0 otherwise
+
 3. __Project 5183.__ The Colorado Rockies, a Major League Baseball team, instigated a radical experiment on June 20th, 2012. Hopelessly out of contention for the playoffs and struggling again with their pitching, the Rockies decided to limit their starting pitchers to 75 pitches from June 20th until the end of the year with the hope of improving a struggling starting rotation, teaching pitchers how to pitch to contact (which results in low pitch counts), and at the same time trying to conserve young arms. Data has shown that, as a game progresses, fatigue becomes a big factor in a pitcher's performance; if a pitcher has to tweak his mechanics to try to make up for a fatigued body, injuries can often occur. In addition, pitchers often struggle as they begin facing the same batters over again later in games. The Rockies called their experiment "Project 5183" to acknowledge the altitude at Coors Field, their home ballpark, and the havoc that high altitude can wreak on pitchers.  
 
-    A team of students collected 2012 data on Rockies pitchers from FanGraphs to evaluate Project 5183. [@Strutz2013] In a successful experiment, Colorado pitchers on a strict limit of 75 pitches would throw more strikes and yet record fewer strikeouts (pitching to contact rather than taking more pitches to attempt to strike batters out). Different theories explain whether these pitchers would throw harder (since they don't have to save themselves) or throw slower (in order to throw more strikes). But the end result the Rockies hoped to observe was that their pitchers pitch better (allow fewer runs to the opponent) with a pitch limit.
+    A team of students collected 2012 data on Rockies pitchers from FanGraphs to evaluate Project 5183. [@Strutz2013] In a successful experiment, Colorado pitchers on a strict limit of 75 pitches would throw more strikes and yet record fewer strikeouts (pitching to contact rather than throwing more pitches to attempt to strike batters out). Different theories explain whether these pitchers would throw harder (since they don't have to save themselves) or throw slower (in order to throw more strikes). But the end result the Rockies hoped to observe was that their pitchers pitch better (allow fewer runs to the opponent) with a pitch limit.
 
     The data set `FinalRockiesdata.csv` contains information for 7 starting pitchers who started at least one game before June 20th (without a pitch limit) and at least one game after June 20th (with a limit of 75 pitches). Key response variables include:  
     - `vFA` = average fastball velocity
