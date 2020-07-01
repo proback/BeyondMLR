@@ -26,6 +26,7 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 - Interpret model parameters in multilevel models with time at Level One.
 - Compare models, both nested and not, with appropriate statistical tests and summary statistics.
 - Consider different ways of modeling the variance-covariance structure in longitudinal data.
+- Understand how a parametric bootstrap test of significance works and when it might be useful.
 
 ```{r load_packages9, message = FALSE}
 # Packages required for Chapter 9
@@ -256,7 +257,7 @@ lon.box1 <- grid.arrange(charter.school, urban.school,
 grid.arrange(charter.school,urban.school,ncol=1,nrow=2)
 ```
 
-```{r, include=FALSE, warning=FALSE}
+```{r, include=FALSE, warning=FALSE, message=FALSE}
 #Changing percentage scale to 0 to 100
 chart.long <- chart.long %>%
   mutate(SchPctFree = schPctfree*100, 
@@ -360,7 +361,7 @@ newsampdata.l <- newsampdata.l %>%
                          as.numeric(cut2(schPctfree, g=4))))
 ```
 
-```{r,lon-spagmat1, fig.align="center",out.width="60%",fig.cap='Spaghetti plots showing time trends for each school by quartiles of percent free and reduced lunch, with loess fits.',echo=FALSE, warning=FALSE}
+```{r,lon-spagmat1, fig.align="center",out.width="60%",fig.cap='Spaghetti plots showing time trends for each school by quartiles of percent free and reduced lunch, with loess fits.', message=FALSE, echo=FALSE, warning=FALSE}
 ggplot(newsampdata.l,aes(x=year08,y=MathAvgScore)) + 
   geom_line(aes(group=schoolid),color="dark grey") + 
   geom_smooth(method="loess",color="black",se=FALSE,size=.75) +
@@ -1410,6 +1411,252 @@ cat(" AIC = ", AIC(model.f2), ";  BIC = ", BIC(model.f2))
 From this model, we again see that 2008 sixth grade math test scores from charter schools were significantly lower than similar scores from public non-charter schools, after controlling for school location and demographics.  However, charter schools showed significantly greater improvement between 2008 and 2010 compared to public non-charter schools, although charter school test scores were still lower than public school scores in 2010, on average.  We also tested several interactions between Level Two covariates and charter schools and found none to be significant, indicating that the 2008 gap between charter schools and public non-charter schools was consistent across demographic subgroups.  The faster improvement between 2008 and 2010 for charter schools was also consistent across demographic subgroups (found by testing three-way interactions). Controlling for school location and demographic variables provided more reliable and nuanced estimates of the effects of charter schools, while also providing interesting insights.  For example, schools in rural areas not only had higher test scores than schools in urban areas in 2008, but the gap grew larger over the study period given fixed levels of percent special education, percent free and reduced lunch, and school type.  In addition, schools with higher levels of poverty lagged behind other schools and showed no signs of closing the gap, and schools with higher levels of special education students had both lower test scores in 2008 and slower rates of improvement during the study period, again given fixed levels of other covariates.
 
 As we demonstrated in this case study, applying multilevel methods to two-level longitudinal data yields valuable insights about our original research questions while properly accounting for the structure of the data.
+
+### Parametric bootstrap testing {#longitudinal-paraboot}
+
+We could further examine whether or not a simplified version of Model F, with fewer random effects, might be preferable.  For instance, consider testing whether we could remove $v_i$ in Model F in Section \@ref(modelf9), to create Model F0.  Removing $v_i$ is equivalent to setting $\sigma_{v}^{2} = 0$ and $\rho_{uv} = 0$.  We begin by comparing Model F (full model) to Model F0 (reduced model) using a likelihood ratio test:
+
+```{r, comment=NA}
+#Model F0 (remove 2 variance components from Model F)
+model.f0 <- lmer(MathAvgScore ~ charter + urban + SchPctFree + 
+  SchPctSped + charter:year08 + urban:year08 + 
+  SchPctSped:year08 + year08 +
+  (1|schoolid), REML=T, data=chart.long)
+```
+
+```{r, echo=FALSE, message=FALSE}
+VCrandom <- VarCorr(model.f0)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of Level Two groups = ",
+    summary(model.f0)$ngrps)
+coef(summary(model.f0))
+cat(" AIC = ", AIC(model.f0), ";  BIC = ", BIC(model.f0))
+```
+
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(model.f2, model.f0, test = "Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(npar=drop_in_dev$npar,
+    AIC=drop_in_dev$AIC, BIC=drop_in_dev$BIC, 
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+When testing random effects at the boundary (such as $\sigma_{v}^{2} = 0$) or those with restricted ranges (such as $\rho_{uv} = 0$), using a chi-square distribution to conduct a likelihood ratio test is not appropriate. In fact, this will produce a conservative test, with p-values that are too large and not rejected enough (@Bryk2002, @Singer2003, @Faraway2005). For example, we should suspect that the p-value (.8447) produced by the likelihood ratio test comparing Models F and F0 is too large, that the real probability of getting a likelihood ratio test statistic of 0.3376 or greater when Model F0 is true is smaller than .8447. 
+
+Researchers often use methods like the __parametric bootstrap__ to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis.  Here are the basic steps for running a parametric bootstrap procedure to compare Model F0 with Model F (see associated diagram below):
+
+- Fit Model F0 (the null model) to obtain estimated fixed effects and variance components (this is the "parametric" part.)
+- Use the estimated fixed effects and variance components from the null model to regenerate a new set of math test scores with the same sample size ($n=1733$) and associated covariates for each observation as the original data (this is the "bootstrap" part.)
+- Fit both Model F0 (the reduced model) and Model F (the full model) to the new data
+- Compute a likelihood ratio statistic comparing Models F0 and F
+- Repeat the previous 3 steps many times (e.g., 1000)
+- Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true
+- Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
+
+These steps are outlined in Figure \@ref(fig:parabootdiagram). 
+
+```{r, parabootdiagram, out.width='80%', fig.show='hold', fig.cap="The steps in conducting a parametric bootstrap test comparing Models F and F0.", echo=FALSE}
+knitr::include_graphics("data/ParametricBootstrapDiagram.PNG")
+
+# Can also put these lines outside of R chunk
+# ![The steps in conducting a parametric bootstrap test comparing # Models C and C.1.](data/ParametricBootstrapDiagram.PNG)
+```
+
+Let's see how new test scores are generated under the parametric bootstrap. Consider, for instance, $i=1$ and $j=1,2,3$; that is, consider test scores for School #1 (Rippleside Elementary) across all three years (2008, 2009, and 2010).  Table \@ref(tab:rippleside) shows the original data for Rippleside Elementary.
+
+```{r rippleside, echo=FALSE}
+school1 <- chart.long[1:3, c(2:4,6:9)]
+kable(school1, booktabs=T, 
+      caption = "Original data for Rippleside Elementary (School 1)") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+__Level Two__
+
+One way to see the data generation process under the null model (Model F0) is to start with Level Two and work backwards to Level One. Recall that our Level Two models for $a_{i}$ and $b_{i}$, the true intercept and slope for school $i$, in Model F0 are:
+
+\begin{align*}
+a_{i} & = \alpha_{0} + \alpha_{1}Charter_i + \alpha_{2}urban_i + \alpha_{3}schpctsped_i + \alpha_{4}schpctfree_i + u_{i} \\
+b_{i} & = \beta_{0} + \beta_{1}Charter_i + \beta_{2}urban_i + \beta_{3}schpctsped_i
+\end{align*}
+
+All the $\alpha$ and $\beta$ terms will be fixed at their estimated values, so the one term that will change for each bootstrapped data set is $u_{i}$. As we obtain a numeric value for $u_{i}$ for each school, we will fix the subscript. For example, if $u_{i}$ is set to -5.92 for School \#1, then we would denote this by $u_{1}=-5.92$. Similarly, in the context of Model F0, $a_{1}$ represents the 2008 math test score for School \#1, where $u_{1}$ quantifies how School \#1's 2008 score differs from the average 2008 score across all schools with the same attributes: charter status, urban or rural location, percent of special education students, and percent of free and reduced lunch students.
+
+According to Model F0, each $u_{i}$ is sampled from a normal distribution with mean 0 and standard deviation 4.18. That is, a random component to the intercept for School \#1 ($u_{1}$) would be sampled from a normal distribution with mean 0 and SD 4.18; say, for instance, $u_{1}=-5.92$. We would sample $u_{2},...,u_{618}$ in a similar manner for all 618 schools.  Then we can produce a model-based intercept and slope for School \#1:
+
+\begin{align*}
+a_{1} & = 661.03-3.22(0)-1.12(0)-0.12(11.8)-0.15(36.3)-5.92 = 648.2 \\
+b_{1} & = 2.14+1.03(0)-0.52(0)-.046(11.8) = 1.60
+\end{align*}
+
+Notice a couple of features of the above derivations. First, all of the coefficients from the above equations ($\alpha_{0}=661.03$, $\alpha_{1}=-3.22$, etc.) come from the estimated fixed effects from Model F0. Second, "public non-charter" is the reference level for `charter` and "rural" is the reference level for `urban`, so both of those predictors are 0 for Rippleside Elementary. Third, the mean intercept (2008 test scores) for schools like Rippleside that are rural and public non-charter, with 11.8\% special education students and 36.3\% free and reduced lunch students, is 661.03 - 0.12(11.8) - 0.15(36.3) = 654.2.  The mean yearly improvement in test scores for rural, public non-charter schools with 11.8\% special education students is then 1.60 points per year (2.14 - .046*11.8).  School \#1 (Rippleside) therefore has a 2008 test score that is 5.92 points below the mean for all similar schools, but every such school is assumed to have the same improvement rate in test scores of 1.60 points per year because of our assumption that there is no school-to-school variability in yearly rate of change (i.e., $v_{i}=0$).
+
+__Level One__
+
+We next proceed to Level One, where the scores from Rippleside are modeled as a linear function of year ($654.2 + 1.60Year08_{ij}$) with a normally distributed residual $\epsilon_{1k}$ at each time point $k$. Three residuals (one for each year) are sampled independently from a normal distribution with mean 0 and standard deviation 2.97 -- the standard deviation again coming from parameter estimates from fitting Model F0 to the actual data. Suppose we obtain residuals of $\epsilon_{11}=-3.11$, $\epsilon_{12}=1.19$, and $\epsilon_{13}=2.41$.  In that case, our parametrically generated data for Rippleside Elementary (School \#1) would look like:
+
+\[ \begin{array}{rcccl}
+   Y_{11} & = & 654.2+1.60(0)-3.11 & = & 651.1 \\
+   Y_{12} & = & 654.2+1.60(1)+1.19 & = & 657.0 \\
+   Y_{13} & = & 654.2+1.60(2)+2.41 & = & 659.8 \\
+   \end{array} \]
+
+We would next turn to School \#2 ($i=2$)---Wrenshall Elementary. Fixed effects would remain the same but covariates would change, as Wrenshall has 15.2\% special education students and 42.4\% free and reduced lunch students. We would, however, sample a new residual $u_{2}$ at Level Two, producing a different intercept $a_{2}$ than observed for School \#1. Three new independent residuals $\epsilon_{2k}$ would also be selected at Level One, from the same normal distribution as before with mean 0 and standard deviation 2.97.
+
+Once an entire set of simulated scores for every school and year have been generated based on Model F0, two models are fit to this data:
+
+- Model F0 -- the correct (null) model that was actually used to generate the responses
+- Model F -- the incorrect (full) model that contains two extra variance components -- $\sigma_{v}^{2}$ and $\sigma_{uv}$ -- that were not actually used when generating the responses
+
+```{r, echo=FALSE, comment=NA, message=FALSE, warning=FALSE}
+# run bootstrapAnova function, then line below takes about 
+#  15 minutes (much quicker with B=100 rather than B=1000)
+
+# Parametric bootstrap code for lme4-models
+#   from Fabian Scheipl on stack exchange
+
+#m0 is the lmer model under the null hypothesis 
+#  (i.e. the smaller model)
+#mA is the lmer model under the alternative
+
+bootstrapAnova <- function(mA, m0, B=1000){
+  oneBootstrap <- function(m0, mA){
+    d <- drop(simulate(m0))
+    m2 <-refit(mA, newresp=d)
+    m1 <-refit(m0, newresp=d)
+    return(anova(m2,m1)$Chisq[2])
+  }  
+  nulldist <- replicate(B, oneBootstrap(m0, mA))
+  ret <- anova(mA, m0)
+  ret$"Pr(>Chisq)"[2] <- mean(ret$Chisq[2] < nulldist)
+  names(ret)[8] <- "Pr_boot(>Chisq)"
+  attr(ret, "heading") <- c(attr(ret, "heading")[1], 
+    paste("Parametric bootstrap with", B,"samples."),
+    attr(ret, "heading")[-1])
+  attr(ret, "nulldist") <- nulldist
+  return(ret)
+}
+
+# Run models with ML instead of REML to try to speed up,
+#   since LRT refits with ML
+model.f2ml <- lmer(MathAvgScore ~ charter + urban + SchPctFree + 
+  SchPctSped + charter:year08 + urban:year08 + 
+  SchPctSped:year08 + year08 +
+  (year08|schoolid), REML=F, data=chart.long)
+
+model.f0ml <- lmer(MathAvgScore ~ charter + urban + SchPctFree + 
+  SchPctSped + charter:year08 + urban:year08 + 
+  SchPctSped:year08 + year08 +
+  (1|schoolid), REML=F, data=chart.long)
+
+#use like this (and increase B for more believeability):
+# bRLRT <- bootstrapAnova(mA=<BIG MODEL>, m0=<SMALLER MODEL>)
+
+# Since this takes a while, it was run once and results
+#   stored in the data folder
+#set.seed(33)
+#bRLRT = bootstrapAnova(mA=model.f2ml, m0=model.f0ml, B=1000)
+#bRLRT
+#save(bRLRT, file = "data/modelFvsF0.rda")
+
+#an adaptation of the bootstrapAnova function 
+#  with parallel computing
+#bootstrapAnova.par <- function(mA, m0, B=1000, cores = 1){
+#  library(parallel)
+#  oneBootstrap <- function(m0, mA){
+#    d <- drop(simulate(m0))
+#    m2 <-refit(mA, newresp=d)
+#    m1 <-refit(m0, newresp=d)
+#    return(anova(m2,m1)$Chisq[2])
+#  } 
+#  if(cores>1){
+#    cl <- makeCluster(cores)
+#    clusterEvalQ(cl, library(lme4))
+#    clusterExport(cl,c("mA", "m0"), envir = environment())
+#    nulldist <- parSapply(cl, 1:B, function(i, ...) {oneBootstrap(m0, mA)})
+#    stopCluster(cl)
+#  } else {
+#    nulldist <- replicate(B, oneBootstrap(m0, mA))
+#  }
+#  ret <- anova(mA, m0)
+#  ret$"Pr(>Chisq)"[2] <- mean(ret$Chisq[2] < nulldist)
+#  names(ret)[8] <- "Pr_boot(>Chisq)"
+#  attr(ret, "heading") <- c(attr(ret, "heading")[1], 
+#                            paste("Parametric bootstrap with", B,"samples."),
+#                            attr(ret, "heading")[-1])
+#  attr(ret, "nulldist") <- nulldist
+#  return(ret)
+#}
+```
+
+```{r, comment = NA, message=FALSE}
+# Generate 1 set of bootstrapped data and run chi-square test
+#  (will also work if use REML models, but may take longer)
+set.seed(3333)
+d <- drop(simulate(model.f0ml))
+m2 <-refit(model.f2ml, newresp=d)
+m1 <-refit(model.f0ml, newresp=d)
+drop_in_dev <- anova(m2, m1, test = "Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(npar=drop_in_dev$npar,
+    AIC=drop_in_dev$AIC, BIC=drop_in_dev$BIC, 
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+A likelihood ratio test statistic is calculated comparing Model F0 to Model F. For example, after continuing as above to generate new $Y_{ij}$ values corresponding to all 1733 score observations, we fit both models to the "bootstrapped" data.  Since the data was generated using Model F0, we would expect the two extra terms in Model F ($\sigma^2_{v}$ and $\sigma_{uv}$) to contribute very little to the quality of the fit; Model F will have a slightly larger likelihood and loglikelihood since it contains every parameter from Model F0 plus two more, but the difference in the likelihoods should be due to chance. In fact, that is what the output above shows. Model F does have a larger loglikelihood than Model F0 (-4932 vs. -4935), but this small difference is not statistically significant based on a chi-square test with 2 degrees of freedom (p=.1012).
+
+However, we are really only interested in saving the likelihood ratio test statistic from this bootstrapped sample ($2*(-4932 - (-4935) = 4.581$). By generating ("bootstrapping") many sets of responses based on estimated parameters from Model F0 and calculating many likelihood ratio test statistics, we can observe how this test statistic behaves under the null hypothesis of $\sigma_{v}^{2} = \sigma_{uv} = 0$, rather than making the (dubious) assumption that its behavior is described by a chi-square distribution with 2 degrees of freedom.  Figure \@ref(fig:paraboot9) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution. A p-value for comparing our full and reduced models can be approximated by finding the proportion of likelihood ratio test statistics generated under the null model which exceed our observed likelihood ratio test (0.3376). The parametric bootstrap provides a more reliable p-value in this case (.578 from table below); a chi-square distribution puts too much mass in the tail and not enough near 0, leading to overestimation of the p-value. Based on this test, we would still choose our simpler Model F0.
+
+```{r, eval=FALSE}
+bootstrapAnova(mA=model.f2ml, m0=model.f0ml, B=1000)
+```
+
+```{r comment=NA, message=F, echo=F}
+load(file = "data/modelFvsF0.rda")
+drop_in_dev <- bRLRT
+did_print <- data.frame(npar=drop_in_dev$npar,
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval_boot=drop_in_dev$`Pr_boot(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+```{r, paraboot9, fig.align="center", out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic.', echo=FALSE, warning=FALSE}
+#thr-hist-lrt
+nullLRT = attr(bRLRT,"nulldist")
+x=seq(0,max(nullLRT),length=100)
+y=dchisq(x,2)
+nullLRT.1 <- as.data.frame(cbind(nullLRT=nullLRT,x=x,y=y))
+ggplot(nullLRT.1) + 
+  geom_histogram(aes(x = nullLRT, y = ..density..),
+                 bins=25,color="black",fill="white") +   geom_vline(xintercept = 0.3376, size = 1) + 
+  geom_line(aes(x = x, y = y)) +
+  theme.1 + xlim(c(-.5,10)) +
+  labs(y="Density",
+x="Likelihood Ratio Test Statistics from Null Distribution")
+# sum(nullLRT>=0.3376)/1000   # parametric bootstrap p-value
+```
+
+Another way of examining whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95\% confidence intervals for both $\rho_{uv}$ and $\sigma_{v}$.  From the output below, the 95\% bootstrapped confidence interval for $\rho_{uv}$ (-1, 1) contains 0, and the interval for $\sigma_{v}$ (.0113, .9260) nearly contains 0, providing further evidence that the larger model is not needed.
+
+```{r, warning=F, message=F, cache=T}
+confint(model.f2, method="boot", oldNames=F)
+```
+
+In this section, we have offered the parametric bootstrap as a noticeable improvement over the likelihood ratio test with an approximate chi-square distribution for testing random effects, especially those near a boundary. Typically when we conduct hypothesis tests involving variance terms we are testing at the boundary, since we are asking if the variance term is really necessary (i.e., $H_0: \sigma^2=0$ vs. $H_A: \sigma^2 > 0$). However, what if we are conducting a hypothesis test about a fixed effect? For the typical test of whether or not a fixed effect is significant -- e.g., $H_0: \alpha_i=0$ vs. $H_A: \alpha_i \neq 0$ -- we are *not* testing at the boundary, since most fixed effects have no bounds on allowable values. We have often used a likelihood ratio test with an approximate chi-square distribution in these settings -- does that provide accurate p-values? Although some research (e.g., @Faraway2005) shows that p-values of fixed effects from likelihood ratio tests can tend to be anti-conservative (too low), in general the approximation is not bad. We will continue to use the likelihood ratio test with a chi-square distribution for fixed effects, but you could always check your p-values using a parametric bootstrap approach.
 
 ## Covariance structure among observations {#errorcovariance}
 

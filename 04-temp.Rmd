@@ -43,76 +43,87 @@ library(kableExtra)
 library(tidyverse)
 ```
 
-## Case study: Charter schools {#cs:charter}
-
-Charter schools were first introduced in the state of Minnesota in 1991 [@CharterSchools]. Since then, charter schools have begun appearing all over the United States. While publicly funded, a unique feature of charter schools is their independence from many of the regulations that are present in the public school systems of their respective city or state. Thus, charters will often extend the school days or year and tend to offer non-traditional techniques and styles of instruction and learning.
-
-One example of this unique schedule structure is the KIPP (Knowledge is Power Program) Stand Academy in Minneapolis, MN. KIPP stresses longer days and better partnerships with parents, and they claim that 80\% of their students go to college from a population where 87\% qualify for free and reduced lunch and 95\% are African-American or Latino [@KIPP]. However, the larger question is whether or not charter schools are out-performing non-charter public schools in general.  Because of the relative youthfulness of charter schools, data has just begun to be collected to evaluate the performance of charter versus non-charter schools and some of the factors that influence a school's performance. Along these lines, we will examine data collected by the Minnesota Department of Education for all Minnesota schools during the years 2008-2010.
-
-Comparisons of student performance in charter schools versus public schools have produced conflicting results, potentially as a result of the strong differences in the structure and population of the student bodies that represent the two types of schools. A study by the Policy and Program Studies Service of five states found that charter schools are less likely to meet state performance standards than conventional public schools [@DepartmentOfEducation2004]. However, @Witte2007 performed a statistical analysis comparing Wisconsin charter and non-charter schools and found that average achievement test scores were significantly higher in charter schools compared to non-charter schools, after controlling for demographic variables such as the percentage of white students. In addition, a study of California students who took the Stanford 9 exam from 1998 through 2002 found that charter schools, on average, were performing at the same level as conventional public schools [@Buddin2005]. Although school performance is difficult to quantify with a single measure, for illustration purposes in this chapter we will focus on that aspect of school performance measured by the math portion of the Minnesota Comprehensive Assessment (MCA-II) data for 6th grade students enrolled in 618 different Minnesota schools during the years 2008, 2009, and 2010 [@MNDepartmentOfEducation]. Similar comparisons could obviously be conducted for other grade levels or modes of assessment.
-
-As described in @Green2003, it is very challenging to compare charter and public non-charter schools, as charter schools are often designed to target or attract specific populations of students. Without accounting for differences in student populations, comparisons lose meaning. With the assistance of multiple school-specific predictors, we will attempt to model sixth grade math MCA-II scores of Minnesota schools, focusing on the differences between charter and public non-charter school performances. In the process, we hope to answer the following research questions:
-
-- Which factors most influence a school's performance in MCA testing?
-- How do the average math MCA-II scores for 6th graders enrolled in charter schools differ from scores for students who attend non-charter public schools? Do these differences persist after accounting for differences in student populations?
-- Are there differences in yearly improvement between charter and non-charter public schools?
-
-## Initial Exploratory Analyses {#exploratoryanalysis}
-
-### Data organization {#data}
-
-Key variables in `chart_wide_condense.csv` which we will examine to address the research questions above are:
-
-- `schoolid` = includes district type, district number, and school number
-- `schoolName` = name of school
-- `urban` = is the school in an urban (1) or rural (0) location?
-- `charter` = is the school a charter school (1) or a non-charter public school (0)?
-- `schPctnonw` = proportion of non-white students in a school (based on 2010 figures)
-- `schPctsped` = proportion of special education students in a school (based on 2010 figures)
-- `schPctfree` = proportion of students who receive free or reduced lunches in a school (based on 2010 figures).  This serves as a measure of poverty among school families.
-- `MathAvgScore.0` = average MCA-II math score for all sixth grade students in a school in 2008
-- `MathAvgScore.1` = average MCA-II math score for all sixth grade students in a school in 2009
-- `MathAvgScore.2` = average MCA-II math score for all sixth grade students in a school in 2010
-
-This data is stored in WIDE format, with one row per school, as illustrated in Table \@ref(tab:table1chp9). 
-
-```{r, include=FALSE, warning=FALSE}
-#Getting started
-chart.wide = read_csv("data/chart_wide_condense.csv") 
+```{r, include=FALSE}
+Variable <- c("Intercept", "Person-Level predictors", "Female", "Married", "Separated or divorced", "Single", "Homeowner", "Latino", "Black", "Mobility", "Age", "Years in neighborhood", "SES", "Neighborhood-level predictors", "Concentrated disadvantage", "Immigrant concentration", "Residential stability", "Variance Components", "Within neighborhoods", "Between neighborhoods", "Percent of variance explained", "Within neighborhoods", "Between neighborhoods")
+Coefficient <- c(3.523, " ", -0.012, -0.005, -0.045, -0.026, 0.122, 0.042, -0.029, -0.025, 0.0021, 0.0006, 0.035," ", -0.172, -0.037, 0.074, " ", 0.320, 0.026, " ", 3.2, 70.3)
+SE2 <- c("0.013", " ", "0.015", "0.021", "0.026", "0.024", "0.020", "0.028", "0.030", "0.007", "0.0006", "0.0008", "0.008", " ", "0.016", "0.014", "0.013", " ", " ", " ", " ", " ", " ")
+tratio <- c("263.20", " ", "-0.76", "-0.25", "-1.72", "-1.05", "6.04", "1.52", "-0.98", "-3.71", "3.47", "0.78", "4.64", " ", "-10.74", "-2.66", "5.61", " ", " ", " ", " ", " ", " ")
 ```
 
-```{r table1ch9, echo=FALSE, warning=TRUE}
-table1chp9 <- head(chart.wide[2:11])
-
-kable(table1chp9, booktabs=T,
-      caption = "The first six observations in the wide data set for the Charter Schools case study.") %>%
-  kable_styling(bootstrap_options = c("striped")) %>%
-#  column_spec(column = 1:2, width = "18em; min-width: 15em;")
-    kable_styling(latex_options = "scale_down")
-
-#ifelse(knitr::is_html_output(),
-#       kab1chp9 %>% scroll_box(width="100%"), kab1chp9)
+```{r, table4chp10, echo=FALSE}
+table4chp10 <- data.frame(Variable, Coefficient, SE2, tratio)
+colnames(table4chp10) <- c("Variable", "Coefficient", "SE",
+                           "t ratio")
+table4chp10[7,2] <- paste0("\\textbf{", table4chp10[7,2], "}")
+table4chp10[11,2] <- paste0("\\textbf{", table4chp10[11,2], "}")
+table4chp10[13,2] <- paste0("\\textbf{", table4chp10[13,2], "}")
+table4chp10[15,2] <- paste0("\\textbf{", table4chp10[15,2], "}")
+table4chp10[16,2] <- paste0("\\textbf{", table4chp10[16,2], "}")
+kable(table4chp10, booktabs=T, escape=F,
+      caption="Table 3: Correlates of collective efficacy from Sampson (1997)") %>%
+  kable_styling(latex_options = "scale_down") %>%
+  row_spec(c(2,14,18,21), bold=T) 
 ```
-  
-```{r table2chp9,echo=FALSE}
-table2chp9 <- md.pattern(chart.wide[c(5,9,10,11)], plot=FALSE)
-kable(table2chp9, booktabs=T, 
-  caption="A frequency table of missing data patterns. The number of schools with a particular missing data pattern are listed in the left column; the remaining columns of 0's and 1's describe the missing data pattern, with 0 indicating a missing value.  Some covariates that are present for every school are not listed.  The bottom row gives the number of schools with missing values for specific variables; the last entry indicates that 121 total observations were missing.") %>%
-  kable_styling(latex_options = "scale_down")
-```
+
+22. Table \@ref(tab:table5chp10) shows a portion of Table 4 from @Sampson1997. Describe the multilevel model that likely produced this table. State the primary result from this table in context. [Note that collective efficacy is a Level Three covariate in this table, summarized over an entire neighborhood.]
 
 ```{r, include=FALSE}
-Predictor <- c("Intercept (initial Status)", "Base (intercept for predicting int term)", "Peer behavior", "Black Ethnicity", "White/Other ethnicity", "Parenting", "Black Ethnicity X Parenting", "White/Other ethnicity X Parenting", "...Slope(change)", "...Base(intercept for predicting slope term)", "...Peer behavior", "...Black ethnicity", "...White/Other ethnicity", "...Parenting", "...Black Ethnicity X Parenting", "...White/Other ethnicity X Parenting")
-Gammafiller <- c(" ","-.219",".252**",".671*",".149",".076","-.161+","-.026"," ",".028","-.011*","-.132*","-.059","-.015+","-.048**",".016")
-SE <- c(" ", ".160",".026",".289",".252",".050",".088",".082"," ",".030",".005",".054",".046",".009",".017",".015")
+Variable2 <- c("Concentrated disadvantage","Immigrant concentration","Residential stability","Collective efficacy")
+Coefficient2 <- c("0.277","0.041","-0.102"," ")
+SE3 <- c("0.021","0.017","0.015"," ")
+t2 <- c("13.30","2.44","-6.95"," ")
+Coefficient3 <- c("0.171","0.018","-0.056","-0.618")
+SE4 <- c("0.024","0.016","0.016","0.104")
+t3 <- c("7.24","1.12","-3.49","-5.95")
 ```
 
-```{r, table4chp9, echo=FALSE}
-table4chp9 <- data.frame(Predictor, Gammafiller, SE)
-colnames(table4chp9) <- c("Predictor","Coefficient", "SE")
-kable(table4chp9, booktabs=T, escape=F,
-      caption="A portion of Table 2: Results of Hierarchical Linear Modeling Analyses Modeling Gang Involvement from Walker-Barnes and Mason (2001).  These columns focus on the parenting behavior of psychological control.") %>%
-  kable_styling(latex_options = "scale_down") %>%
-  row_spec(c(1,9), bold=T) %>%
-  add_footnote("Table reports values for coefficients in the final model with all variables entered.  * p<.05; ** p<.01; + p<.10", notation="alphabet")
+```{r, table5chp10, echo=FALSE}
+table5chp10 <- data.frame(Variable2, Coefficient2, SE3 ,t2, Coefficient3, SE4, t3)
+colnames(table5chp10) <- c("Variable","Coefficient","SE", "t", 
+                           "Coefficient","SE", "t")
+kable(table5chp10, booktabs=T, 
+      caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).") %>%
+      add_header_above(c(" ","Model 1"=3, "Model 2"=3)) %>%
+      add_header_above(c(" ","Social composition"=3, "Social comp and collective efficacy"=3)) %>%
+      kable_styling(latex_options = "scale_down") %>%
+      row_spec(1, bold=T) 
+
 ```
+
+\begin{tiny}
+\[  Cov(\textbf{Y}_{i}) = \left[
+          \begin{array}{cccccc}
+            Cov(\textbf{Y}_{i1}) & & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i4}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. \]
+\end{tiny}
+
+
+We once again begin with the __unconditional means model__, in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
+
+- Level One (timepoint within plant):
+
+\begin{equation}
+Y_{ijk} = a_{ij}+\epsilon_{ijk} \textrm{ where } \epsilon_{ijk}\sim N(0,\sigma^2)
+(\#eq:initunun)
+\end{equation}
+
+- Level Two (plant within pot):
+
+\begin{equation}
+a_{ij} = a_{i}+u_{ij} \textrm{ where } u_{ij}\sim N(0,\sigma_{u}^{2})
+(\#eq:initunun2)
+\end{equation}
+
+- Level Three (pot):
+
+\begin{equation}
+a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_{\tilde{u}}^{2})
+(\#eq:initunun3)
+\end{equation}
+
+where the heights of plants from different pots are considered independent, but plants from the same pot are correlated as well as measurements at different times from the same plant.

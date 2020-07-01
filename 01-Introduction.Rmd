@@ -477,7 +477,7 @@ bootreg <- derby.df %>%
             tidy())
 bootreg %>% 
   group_by(term) %>% 
-  summarize(low=quantile(estimate, .025),
+  dplyr::summarize(low=quantile(estimate, .025),
             high=quantile(estimate, .975))
 ```
 
