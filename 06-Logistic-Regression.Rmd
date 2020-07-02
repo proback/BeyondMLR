@@ -312,7 +312,7 @@ We first look at a coded scatterplot to see our data. Figure \@ref(fig:coded) po
 ```{r, coded, fig.align="center",out.width="60%", fig.cap=' Scatterplot of distance from a proposed rail line and percent black in the community coded by whether the community was in favor of the referendum or not.',echo=FALSE, warning=FALSE}
 #Coded Scatterplot
 ggplot(rrHale.df, aes(x=distance, y=pctBlack, color=InFavor)) + 
-  geom_point(size = 2.5) +
+  geom_point(aes(shape = InFavor), size = 2.5) +
   #scale_shape_manual(values=c(1,2)) + # Use a slightly darker palette than normal
   ylab("Percent black in the community") +
   xlab("Distance to the proposed railroad")
@@ -409,12 +409,21 @@ Do we have statistically significant evidence that support for the railroad refe
 
 With our larger model given by $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i$, the Wald test produces a highly significant p-value ($Z=\frac{-0.0132}{0.0039}= -3.394$, $p=.00069$) indicating significant evidience that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
 
-The drop in deviance test would compare the larger model above to the reduced model $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i$ by comparing residual deviances from the two models.  
-```{r, comment=NA, message=FALSE}
-drop_in_dev <- anova(model.HaleD, model.HaleBD, 
-                     test = "Chisq")
-print(drop_in_dev, signif.stars = FALSE)
+The drop in deviance test would compare the larger model above to the reduced model $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i$ by comparing residual deviances from the two models. 
+
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(model.HaleD, model.HaleBD, test = "Chisq")
 ```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(ResidDF=drop_in_dev$`Resid. Df`,
+    ResidDev=drop_in_dev$`Resid. Dev`,
+    Deviance=drop_in_dev$Deviance, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chi)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
 The drop-in-deviance test statistic is $318.44 - 307.22 = 11.22$ on $9 - 8 = 1$ df, producing a p-value of .00081, in close agreement with the Wald test.  
 
 A third approach to determining significance of $\beta_2$ would be to generate a 95\% confidence interval and then checking if 0 falls within the interval or, equivalently, if 1 falls within a 95\% confidence interval for $e^{\beta_2}.$ The next section describes two approaches to producing a confidence interval for coefficients in logistic regression models.
@@ -473,10 +482,18 @@ cat(" Residual deviance = ",
     summary(model.HaleBxD)$dispersion)
 ```
 
-```{r, comment=NA, message=FALSE}
+```{r comment=NA, message=FALSE}
 drop_in_dev <- anova(model.HaleBD, model.HaleBxD, 
                      test = "Chisq")
-print(drop_in_dev, signif.stars = FALSE)
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(ResidDF=drop_in_dev$`Resid. Df`,
+    ResidDev=drop_in_dev$`Resid. Dev`,
+    Deviance=drop_in_dev$Deviance, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chi)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
 ```
 
 We have statistically significant evidence (Wald test: $Z = 5.974, p<.001$; Drop in deviance test: $\chi^2=32.984, p<.001$) that the effect of the proportion of the community that is black on the odds of voting Yes depends on the distance of the community from the proposed railroad.  
@@ -593,7 +610,7 @@ While we previously found a 95\% confidence interval for the odds ratio associat
 We began by fitting a logistic regression model with `distance` alone. Then we added the covariate `pctBlack`, and the Wald-type test and the drop-in-deviance test both provided strong support for the addition of `pctBlack` to the model. The model with `distance` and `pctBlack` had a large residual deviance suggesting an ill-fitted model. When we looked at the residuals, we saw that Greensboro is an extreme observation. Models without Greensboro were fitted and compared to our initial models. Seeing no appreciable improvement or differences with Greensboro removed, we left it in the model. There remained a large residual deviance so we attempted to account for it by using an estimated dispersion parameter similar to Section \@ref(sec-overdispPois) with Poisson regression. The final model included distance and percent black, although percent black was no longer significant after adjusting for overdispersion.
 
 
-## Least Squares Regression vs. Logistic Regression
+## Least Squares Regression vs. Binomial Logistic Regression
 
 \begin{gather*}
 \underline{\textrm{Response}} \\
@@ -752,7 +769,7 @@ Nearly half (44.7\%) of our sample of 445 youth report that they are trying to l
 
 ggplot(data = risk2009, aes(x = sex, fill = lose.wt)) +
   geom_bar(position = "fill") +
-  ylab("Proportion")
+  ylab("Proportion") + scale_fill_grey()
 ```
 
 
@@ -791,8 +808,8 @@ emplogit1 <- risk2009 %>%
          emplogit = log(prop.lose / (1 - prop.lose)))
 
 ggplot(emplogit1, aes(x = midpoint, y = emplogit, color = sex)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
+  geom_point(aes(shape = sex)) +
+  geom_smooth(aes(linetype = sex), method = "lm") +
   xlab("BMI percentile") + ylab("Empirical logits")
 ```
 
@@ -806,7 +823,7 @@ Figure \@ref(fig:logitBMIsex) presents the empirical logits for the BMI interval
 ggplot(data = risk2009, aes(x = sport, fill = lose.wt)) +
   geom_bar(position = "fill") +
   facet_wrap(~sex) +
-  ylab("Proportion")
+  ylab("Proportion") + scale_fill_grey()
 ```
 
 Out of those who play sports, 44\% want to lose weight whereas 46\% want to lose weight among those who do not play sports. Figure \@ref(fig:mosaicsexsports) compares the proportion of respondents who want to lose weight by their sex and sport participation. The data suggest that sports participation is associated with the same or even a slightly lower desire to lose weight, contrary to what had originally been hypothesized. While the overall levels of those wanting to lose weight differ considerably between the sexes, the differences between those in and out of sports within sex appear to be very small.  A term for sports participation or number of teams will be considered, but there is not compelling evidence that an interaction term will be needed.
@@ -822,7 +839,7 @@ ggplot(data = risk2009, aes(x = as.factor(media),
                             fill = lose.wt)) +
   geom_bar(position = "fill") +
   facet_wrap(~sex) +
-  ylab("Proportion")
+  ylab("Proportion") + scale_fill_grey()
 ```
 
 ```{r, logitmediasex, fig.align="center",out.width="60%", fig.cap='Empirical logits for the odds of trying to lose weight by TV watching and sex.',echo=FALSE, warning=FALSE, message=FALSE}
@@ -833,8 +850,8 @@ emplogit2 <- risk2009 %>%
   mutate(emplogit = log(prop.lose / (1 - prop.lose)))
 
 ggplot(emplogit2, aes(x = media, y = emplogit, color = sex)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
+  geom_point(aes(shape = sex)) +
+  geom_smooth(aes(linetype = sex), method = "lm") +
   xlab("TV hours per day") + ylab("Empirical logits")
 ```
 
@@ -956,8 +973,18 @@ summary(model4a)
 
 ### Drop-in-deviance Tests
 
-```{r, 6model1to4, echo=FALSE, comment=NA}
-anova(model1, model2, model3, model4, test="Chisq")
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(model1, model2, model3, model4,
+                     test="Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(ResidDF=drop_in_dev$`Resid. Df`,
+    ResidDev=drop_in_dev$`Resid. Dev`,
+    Deviance=drop_in_dev$Deviance, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chi)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
 AIC(model1, model2, model3, model4)
 ```
 
@@ -983,66 +1010,68 @@ Finally a limitation may be introduced as a result of the acknowledged variation
 ### Conceptual Exercises
 
 1. List the explanatory and response variable(s) for each research question. 
-  a. Are students with poor grades more likely to binge drink?
-  b. What is the chance you are accepted into medical school given your GPA and MCAT scores? 
-  c. Is a single mom more likely to marry the baby's father if she has a boy?
-  d. Are students participating in sports in college more or less likely to graduate? 
-  e. Is exposure to a particular chemical associated with a cancer diagnosis?
+
+    a. Are students with poor grades more likely to binge drink?
+    b. What is the chance you are accepted into medical school given your GPA and MCAT scores? 
+    c. Is a single mom more likely to marry the baby's father if she has a boy?
+    d. Are students participating in sports in college more or less likely to graduate? 
+    e. Is exposure to a particular chemical associated with a cancer diagnosis?
     
 2. Interpret the odds ratios in the following abstract.
 
-*Day Care Centers and Respiratory Health* [@Nafstad1999]
+    *Day Care Centers and Respiratory Health* [@Nafstad1999]
 
-- __Objective__. To estimate the effects of the type of day care on respiratory health in preschool children.
+    - __Objective__. To estimate the effects of the type of day care on respiratory health in preschool children.
 
-- __Methods__. A population-based cross-sectional study of Oslo children born in 1992 was conducted at the end of 1996. A self-administered questionnaire inquired about day care arrangements, environmental conditions, and family characteristics (n = 3853; response rate, 79\%).
+    - __Methods__. A population-based cross-sectional study of Oslo children born in 1992 was conducted at the end of 1996. A self-administered questionnaire inquired about day care arrangements, environmental conditions, and family characteristics (n = 3853; response rate, 79\%).
 
-- __Results__. In a logistic regression controlling for confounding, children in day care centers had more often nightly cough (adjusted odds ratio, 1.89; 95\% confidence interval 1.34-2.67), and blocked or runny nose without common cold (1.55; 1.07-1.61) during the past 12 months compared with children in home care... 
+    - __Results__. In a logistic regression controlling for confounding, children in day care centers had more often nightly cough (adjusted odds ratio, 1.89; 95\% confidence interval 1.34-2.67), and blocked or runny nose without common cold (1.55; 1.07-1.61) during the past 12 months compared with children in home care... 
 
 3. Construct a table and calculate the corresponding odds and odds ratios. Comment on the reported and calculated results in this *New York Times* article from @Kolata2009.
 
-- In November, the Centers for Disease Control and Prevention published a paper reporting that babies conceived with IVF, or with a technique in which sperm are injected directly into eggs, have a slightly increased risk of several birth defects, including a hole between the two chambers of the heart, a cleft lip or palate, an improperly developed esophagus and a malformed rectum. The study involved 9,584 babies with birth defects and 4,792 babies without. Among the mothers of babies without birth defects, 1.1 percent had used IVF or related methods, compared with 2.4 percent of mothers of babies with birth defects.
+    - In November, the Centers for Disease Control and Prevention published a paper reporting that babies conceived with IVF, or with a technique in which sperm are injected directly into eggs, have a slightly increased risk of several birth defects, including a hole between the two chambers of the heart, a cleft lip or palate, an improperly developed esophagus and a malformed rectum. The study involved 9,584 babies with birth defects and 4,792 babies without. Among the mothers of babies without birth defects, 1.1 percent had used IVF or related methods, compared with 2.4 percent of mothers of babies with birth defects.
 
-- The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3 percent chance that any given baby will have a birth defect.
+    - The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3 percent chance that any given baby will have a birth defect.
 
 ### Guided Exercises
 
 1. **Soccer goals on target.**  Data comes from an article in *Psychological Science* [@Roskes2011].  The authors report on the success rate of penalty kicks that were on-target, so that either the keeper saved the shot or the shot scored, for FIFA World Cup shootouts between 1982 and 2010.  They found that 18 out of 20 shots were scored when the goalkeeper's team was behind, 71 out of 90 shots were scored when the game was tied, and 55 out of 75 shots were scored with the goalkeeper's team ahead.  
 
- a. Calculate the odds of a successful penalty kick for games in which the goalkeeper's team was behind, tied, or ahead. Then, construct empirical odds ratios for successful penalty kicks for (a) behind versus tied, and (b) tied versus ahead.
+    a. Calculate the odds of a successful penalty kick for games in which the goalkeeper's team was behind, tied, or ahead. Then, construct empirical odds ratios for successful penalty kicks for (a) behind versus tied, and (b) tied versus ahead.
 
- b. Fit a model with the categorical predictor c("behind","tied","ahead") and interpret the exponentiated coefficients. How do they compare to the empirical odds ratios you calculated?
+    b. Fit a model with the categorical predictor c("behind","tied","ahead") and interpret the exponentiated coefficients. How do they compare to the empirical odds ratios you calculated?
 
 
 2. __Medical School Admissions.__  The data for Medical School Admissions is in `MedGPA.csv`, taken from undergraduates from a small liberal arts school over several years.  We are interested in student attributes that are associated with higher acceptance rates.
 
- -  `Accept` = accepted (A) into medical school or denied (D)
- -  `Acceptance` = accepted (1) into medical school or denied (0)
- -  `Sex` = male (M) or female (F)
- -  `BCPM` = GPA in natural sciences and mathematics
- -  `GPA` = overall GPA
- -  `VR` = verbal reasoning subscale score of the MCAT
- -  `PS` = physical sciences subscale score of the MCAT
- -  `WS` = writing samples subscale score of the MCAT
- -  `BS` = biological sciences subscale score of the MCAT
- -  `MCAT` = MCAT total score
- -  `Apps` = number of schools applied to
+    -  `Accept` = accepted (A) into medical school or denied (D)
+    -  `Acceptance` = accepted (1) into medical school or denied (0)
+    -  `Sex` = male (M) or female (F)
+    -  `BCPM` = GPA in natural sciences and mathematics
+    -  `GPA` = overall GPA
+    -  `VR` = verbal reasoning subscale score of the MCAT
+    -  `PS` = physical sciences subscale score of the MCAT
+    -  `WS` = writing samples subscale score of the MCAT
+    -  `BS` = biological sciences subscale score of the MCAT
+    -  `MCAT` = MCAT total score
+    -  `Apps` = number of schools applied to
 
-Be sure to interpret model coefficients and associated tests of significance or confidence intervals when answering the following questions:
+    Be sure to interpret model coefficients and associated tests of significance or confidence intervals when answering the following questions:
 
- a. Compare the relative effects of improving your MCAT score versus improving your GPA on your odds of being accepted to medical school.
- b. After controlling for MCAT and GPA, is the number of applications related to odds of getting into medical school? 
- c. Is one MCAT subscale more important than the others?
- d. Is there any evidence that the effect of MCAT score or GPA differs for males and females?
+    a. Compare the relative effects of improving your MCAT score versus improving your GPA on your odds of being accepted to medical school.
+    b. After controlling for MCAT and GPA, is the number of applications related to odds of getting into medical school? 
+    c. Is one MCAT subscale more important than the others?
+    d. Is there any evidence that the effect of MCAT score or GPA differs for males and females?
 
 3. __Moths.__  An article in the *Journal of Animal Ecology* by @Bishop1972 investigated whether moths provide evidence of “survival of the fittest” with their camouflage traits.  Researchers glued equal numbers of light and dark morph moths in lifelike positions on tree trunks at 7 locations from 0 to 51.2 km from Liverpool.  They then recorded the numbers of moths removed after 24 hours, presumably by predators.  The hypothesis was that, since tree trunks near Liverpool were blackened by pollution, light morph moths would be more likely to be removed near Liverpool. 
 
-Data can be found in `moth.csv` and contains the following variables:
+    Data can be found in `moth.csv` and contains the following variables:
 
- -  `MOPRH` = light or dark
- -  `DISTANCE` = kilometers from Liverpool
- -  `PLACED` = number of moths of a specific morph glued to trees at that location
- -  `REMOVED` = number of moths of a specific morph removed after 24 hours
+    -  `MOPRH` = light or dark
+    -  `DISTANCE` = kilometers from Liverpool
+    -  `PLACED` = number of moths of a specific morph glued to trees at that location
+    -  `REMOVED` = number of moths of a specific morph removed after 24 hours
+    
 ```{r, eval = FALSE}
 moth <- read_csv("data/moth.csv")
 moth <- mutate(moth, 
@@ -1052,15 +1081,16 @@ moth <- mutate(moth,
                dark = ifelse(MORPH=="dark",1,0) )
 ```
 
- a. What are logits in this study? 
- b. Create an empirical logit plot of logits vs. distance by morph. What can we conclude from this plot?
- c. Create a model with `DISTANCE` and `dark`. Interpret all the coefficients.
- d. Create a model with `DISTANCE`, `dark`, and the interaction between both variables. Interpret all the coefficients. 
- e. Interpret a drop-in-deviance test and a Wald test to test the significance of the interaction term in (d). 
- f. Test the goodness of fit for the interaction model.  What can we conclude about this model?
- g. Is there evidence of overdispersion in the interaction model?  What factors might lead to overdispersion in this case? Regardless of your answer, repeat (d) adjusting for overdispersion.
- h. Compare confidence intervals for coefficients in your models from (g) and (d). 
- i. What happens if we expand the data set to contain one row per moth (968 rows)?  Now we can run a logistic binary regression model.  How does the logistic binary regression model compare to the binomial regression model?  What are similarities and differences?  Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? The following is some starter code:
+    a. What are logits in this study? 
+    b. Create an empirical logit plot of logits vs. distance by morph. What can we conclude from this plot?
+    c. Create a model with `DISTANCE` and `dark`. Interpret all the coefficients.
+    d. Create a model with `DISTANCE`, `dark`, and the interaction between both variables. Interpret all the coefficients. 
+    e. Interpret a drop-in-deviance test and a Wald test to test the significance of the interaction term in (d). 
+    f. Test the goodness of fit for the interaction model.  What can we conclude about this model?
+    g. Is there evidence of overdispersion in the interaction model?  What factors might lead to overdispersion in this case? Regardless of your answer, repeat (d) adjusting for overdispersion.
+    h. Compare confidence intervals for coefficients in your models from (g) and (d). 
+    i. What happens if we expand the data set to contain one row per moth (968 rows)?  Now we can run a logistic binary regression model.  How does the logistic binary regression model compare to the binomial regression model?  What are similarities and differences?  Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? The following is some starter code:
+    
 ```{r, eval = FALSE}
 mtemp1 = rep(moth$dark[1],moth$REMOVED[1])
 dtemp1 = rep(moth$DISTANCE[1],moth$REMOVED[1])
@@ -1086,25 +1116,26 @@ cdplot(as.factor(rtemp1)~dtemp1)
  
 4. __2016 Election.__  An [award-winning](https://www.causeweb.org/usproc/usclap/2018/spring/winners) student project [@Renier2018] examined driving forces behind Donald Trump's surprising victory in the 2016 Presidential Election, using data from nearly 40,000 voters collected as part of the 2016 Cooperative Congressional Election Survey (CCES).  The student researchers investigated two theories: (1) Trump was seen as the candidate of change for voters experiencing economic hardship, and (2) Trump exploited voter fears about immigrants and minorities.  
 
-The dataset `electiondata.csv` has individual level data on voters in the 2016 Presidential election, collected from the CCES and subsequently tidied.  We will focus on the following variables:
+    The dataset `electiondata.csv` has individual level data on voters in the 2016 Presidential election, collected from the CCES and subsequently tidied.  We will focus on the following variables:
 
- - `Vote` = 1 if Trump; 0 if another candidate
- - `zfaminc` = family income expressed as a z-score (number of standard deviations above or below the mean)
- - `zmedinc` = state median income expressed as a z-score
- - `EconWorse` = 1 if the voter believed the economy had gotten worse in the past 4 years; 0 otherwise
- - `EducStatus` = 1 if the voter had at least a bachelor's degree; 0 otherwise
- - `republican` = 1 if the voter identified as Republican; 0 otherwise
- - `Noimmigrants` = 1 if the voter supported at least 1 of 2 anti-immigrant policy statements; 0 if neither
- - `propforeign` = proportion foreign born in the state
- - `evangelical` = 1 if `pew_bornagain` is 2; otherwise 0 
+    - `Vote` = 1 if Trump; 0 if another candidate
+    - `zfaminc` = family income expressed as a z-score (number of standard deviations above or below the mean)
+    - `zmedinc` = state median income expressed as a z-score
+    - `EconWorse` = 1 if the voter believed the economy had gotten worse in the past 4 years; 0 otherwise
+    - `EducStatus` = 1 if the voter had at least a bachelor's degree; 0 otherwise
+    - `republican` = 1 if the voter identified as Republican; 0 otherwise
+    - `Noimmigrants` = 1 if the voter supported at least 1 of 2 anti-immigrant policy statements; 0 if neither
+    - `propforeign` = proportion foreign born in the state
+    - `evangelical` = 1 if `pew_bornagain` is 2; otherwise 0 
 
-The questions below address Theory 1 (Economic Model).  We want to see if there is significant evidence that voting for Trump was associated with family income level and/or with a belief that the economy became worse during the Obama Administration.  
+    The questions below address Theory 1 (Economic Model).  We want to see if there is significant evidence that voting for Trump was associated with family income level and/or with a belief that the economy became worse during the Obama Administration.  
 
-  a. Create a plot showing the relationship between whether a voter voted for Trump and their opinion about the status of the economy. What do you find?
-  b. Repeat (a) separately for Republicans and non-Republicans.  Again describe what you find.
-  c. Create a plot with one observation per state showing the relationship between a state's median income and the log odds of a resident of that state voting for Trump.  What can you conclude from this plot?
+    a. Create a plot showing the relationship between whether a voter voted for Trump and their opinion about the status of the economy. What do you find?
+    b. Repeat (a) separately for Republicans and non-Republicans.  Again describe what you find.
+    c. Create a plot with one observation per state showing the relationship between a state's median income and the log odds of a resident of that state voting for Trump.  What can you conclude from this plot?
   
-Fit the following model to your data:
+  Fit the following model to your data:
+  
 ```{r, eval = FALSE}
 model1a <- glm(Vote01 ~ zfaminc + zmedinc + EconWorse +
     EducStatus + republican + EducStatus:republican +
@@ -1113,65 +1144,65 @@ model1a <- glm(Vote01 ~ zfaminc + zmedinc + EconWorse +
 summary(model1a)
 ```
 
-  d. Interpret the coefficient for `zmedinc` in context.
-  e. Interpret the coefficient for `republican` in context.
-  f. Interpret the coefficient for `EconWorse:republican` in context.  What does this allow us to conclude about Theory 1?
-  g. Repeat the above process for Theory 2 (Immigration Model).  That is, produce meaningful exploratory plots, fit a model to the data with special emphasis on `Noimmigrants`, interpret meaningful coefficients, and state what can be concluded about Theory 2.
-  h. Is there any concern about the independence assumption in these models?  We will return to this question in later chapters.
+    d. Interpret the coefficient for `zmedinc` in context.
+    e. Interpret the coefficient for `republican` in context.
+    f. Interpret the coefficient for `EconWorse:republican` in context.  What does this allow us to conclude about Theory 1?
+    g. Repeat the above process for Theory 2 (Immigration Model).  That is, produce meaningful exploratory plots, fit a model to the data with special emphasis on `Noimmigrants`, interpret meaningful coefficients, and state what can be concluded about Theory 2.
+    h. Is there any concern about the independence assumption in these models?  We will return to this question in later chapters.
   
  
 ### Open-ended Exercises
 
 1. __2008 Presidential Voting in Minnesota counties.__  Data in `mn08.csv` contains results from the 2008 US Presidential election by county in Minnesota, focusing on the two primary candidates (Democrat Barack Obama and Republican John McCain).  You can consider the response to be either the percent of Obama votes in a county (binomial) or whether or not Obama had more votes than McCain (binary).  Then build a model for your response using county-level predictors listed below.  Interpret the results of your model.
 
- - `County` = county name
- - `Obama` = total votes for Obama
- - `McCain` = total votes for McCain
- - `pct_Obama` = percent of votes for Obama
- - `pct_rural` = percent of county who live in a rural setting
- - `medHHinc` = median household income
- - `unemp_rate` = unemployment rate
- - `pct_poverty` = percent living below the poverty line
- - `medAge2007` = median age in 2007
- - `medAge2000` = median age in 2000
- - `Gini_Index` = measure of income disparity in a county
- - `pct_native` = percent of native born residents
+    - `County` = county name
+    - `Obama` = total votes for Obama
+    - `McCain` = total votes for McCain
+    - `pct_Obama` = percent of votes for Obama
+    - `pct_rural` = percent of county who live in a rural setting
+    - `medHHinc` = median household income
+    - `unemp_rate` = unemployment rate
+    - `pct_poverty` = percent living below the poverty line
+    - `medAge2007` = median age in 2007
+    - `medAge2000` = median age in 2000
+    - `Gini_Index` = measure of income disparity in a county
+    - `pct_native` = percent of native born residents
  
 
 2. __Crime on Campus.__  The data set `c_data2.csv` contains statistics on violent crimes and property crimes for a sample of 81 US colleges and universities.  Characterize rates of violent crimes as a proportion of total crimes reported (i.e., `num_viol` / `total_crime`) -- do they differ based on type of institution, size of institution, or region of the country? 
 
- - `Enrollment` = number of students enrolled
- - `type` = university (U) or college (C)
- - `num_viol` = number of violent crimes reported
- - `num_prop` = number of property crimes reported
- - `viol_rate_10000` = violent crime rate per 10000 students enrolled
- - `prop_rate_10000` = property crime rate per 10000 students enrolled
- - `total_crime` = total crimes reported (property and violent)
- - `region` = region of the country
+    - `Enrollment` = number of students enrolled
+    - `type` = university (U) or college (C)
+    - `num_viol` = number of violent crimes reported
+    - `num_prop` = number of property crimes reported
+    - `viol_rate_10000` = violent crime rate per 10000 students enrolled
+    - `prop_rate_10000` = property crime rate per 10000 students enrolled
+    - `total_crime` = total crimes reported (property and violent)
+    - `region` = region of the country
 
 
 3. __NBA Data.__  Data in `NBA1718team.csv` [@rossotti] looks at factors that are associated with a pro basketball team's winning percentage in the 2017-18 season. After a thorough exploratory data analyses, create the best model you can to predict a team's winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team's success.
 
-  - `win_pct` = Percentage of Wins,
-  - `FT_pct` = Average Free Throw Percentage per game,
-  - `TOV` = Average Turnovers per game, 
-  - `FGA` = Average Field Goal Attempts per game,
-  - `FG` = Average Field Goals Made per game,
-  - `attempts_3P` = Average 3 Point Attempts per game,
-  - `avg_3P_pct` = Average 3 Point Percentage per game,
-  - `PTS` = Average Points per game,
-  - `OREB` = Average Offensive Rebounds per game,
-  - `DREB` = Average Defensive Rebounds per game,
-  - `REB` = Average Total Rebounds per game,
-  - `AST` = Average Assists per game,
-  - `STL` = Average Steals per game,
-  - `BLK` = Average Blocks per game,
-  - `PF` = Average Fouls per game,
-  - `attempts_2P` = Average 2 Point Attempts per game
+    - `win_pct` = Percentage of Wins,
+    - `FT_pct` = Average Free Throw Percentage per game,
+    - `TOV` = Average Turnovers per game, 
+    - `FGA` = Average Field Goal Attempts per game,
+    - `FG` = Average Field Goals Made per game,
+    - `attempts_3P` = Average 3 Point Attempts per game,
+    - `avg_3P_pct` = Average 3 Point Percentage per game,
+    - `PTS` = Average Points per game,
+    - `OREB` = Average Offensive Rebounds per game,
+    - `DREB` = Average Defensive Rebounds per game,
+    - `REB` = Average Total Rebounds per game,
+    - `AST` = Average Assists per game,
+    - `STL` = Average Steals per game,
+    - `BLK` = Average Blocks per game,
+    - `PF` = Average Fouls per game,
+    - `attempts_2P` = Average 2 Point Attempts per game
 
 
 4. __Trashball.__ Great for a rainy day! A fun way to generate overdispersed binomial data. Each student crumbles an 8-1/2 by 11 inch sheet and tosses it from three prescribed distances ten times each. The response is the number of made baskets out of 10 tosses, keeping track of the distance. Have the class generate and collect potential covariates, and include them in your dataset (ex: years of basketball experience, using a tennis ball instead of a sheet of paper, height).  Some sample analysis steps:
 
-  a. Create scatterplots of logits vs. continuous predictors (distance, height, shot number, etc.) and boxplots of logit vs. categorical variables (sex, type of ball, etc.). Summarize important trends in one or two sentences.
-  b. Create a graph with empirical logits vs. distance plotted separately by sex. What might you conclude from this plot?
-  c. Find a binomial model using the variables that you collected. Give a brief discussion on your findings. 
+    a. Create scatterplots of logits vs. continuous predictors (distance, height, shot number, etc.) and boxplots of logit vs. categorical variables (sex, type of ball, etc.). Summarize important trends in one or two sentences.
+    b. Create a graph with empirical logits vs. distance plotted separately by sex. What might you conclude from this plot?
+    c. Find a binomial model using the variables that you collected. Give a brief discussion on your findings. 

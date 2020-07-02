@@ -550,7 +550,7 @@ The three-level unconditional growth model (Model B) can be specified either usi
 - Level One (timepoint within plant):
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 (\#eq:timewithplnt)
 \end{equation}
 
@@ -571,8 +571,8 @@ b_{i} & = \beta_{0}+\tilde{v}_{i}
 or as a composite model:
 
 \begin{equation}
-Y_{ijk}=[\alpha_{0}+\beta_{0}\textstyle{time}_{ijk}]+
-[\tilde{u}_{i}+{v}_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+{v}_{ij})\textstyle{time}_{ijk}]
+Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
+[\tilde{u}_{i}+{v}_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+{v}_{ij})\textrm{time}_{ijk}]
 (\#eq:compmodb)
 \end{equation}
 
@@ -642,25 +642,25 @@ Typically, with models consisting of three or more levels, the next step after a
 Our Level One and Level Two models will look identical to those from Model B; our Level Three models will contain the new covariates for soil type (`cult` and `rem`) and sterilization (`strl`):
 
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}+\tilde{v}_{i}
 \end{align*}
 
 where the error terms at Level Three follow the same multivariate normal distribution as in Model B. In our case, the composite model can be written as:
 
 \begin{align*}
-Y_{ijk} & = (\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i}+u_{ij}) + \\
- & (\beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+\tilde{v}_{i}+
- v_{ij})\textstyle{time}_{ijk}+\epsilon_{ijk} 
+Y_{ijk} & = (\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+\tilde{u}_{i}+u_{ij}) + \\
+ & (\beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}+\tilde{v}_{i}+
+ v_{ij})\textrm{time}_{ijk}+\epsilon_{ijk} 
 \end{align*}
 
 which, after combining fixed effects and random effects, can be rewritten as:
 
 \begin{align*}
-Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
- \beta_{0}\textstyle{time}_{ijk} + \\
- & \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + \\
- & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+\tilde{v}_{i}\textstyle{time}_{ijk}+v_{ij}\textstyle{time}_{ijk}]
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i} +
+ \beta_{0}\textrm{time}_{ijk} + \\
+ & \beta_{1}\textrm{strl}_{i}\textrm{time}_{ijk}+\beta_{2}\textrm{cult}_{i}\textrm{time}_{ijk}+ \beta_{3}\textrm{rem}_{i}\textrm{time}_{ijk}] + \\
+ & [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+\tilde{v}_{i}\textrm{time}_{ijk}+v_{ij}\textrm{time}_{ijk}]
 \end{align*}
 
 From the output below, the addition of Level Three covariates in Model C (`cult`, `rem`, `strl`, and their interactions with `time`) appears to provide a significant improvement (likelihood ratio test statistic = 32.2 on 6 df, $p<.001$) to the unconditional growth model (Model B).
@@ -780,7 +780,7 @@ However, when it is possible to remove boundary constraints through reasonable m
 - Level One (timepoint within plant):
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 
 - Level Two (plant within pot):
@@ -793,8 +793,8 @@ b_{ij} & = b_{i}+v_{ij}
 - Level Three (pot):
 
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}
 
 Note that there is no longer an error term associated with the model for mean growth rate $b_{i}$ at the pot level. The growth rate for pot $i$ is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal:  $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$. By removing one of our two Level Three error terms ($\tilde{v}_{i}$), we effectively removed two parameters -- the variance for $\tilde{v}_{i}$ and the correlation between $\tilde{u}_{i}$ and $\tilde{v}_{i}$.  Fixed effects remain similar, as can be seen in the output below:
@@ -862,8 +862,8 @@ __Level Three__
 One way to see the data generation process under the null model (Model C.1) is to start with Level Three and work backwards to Level One. Recall that our Level Three models for $a_{i}$ and $b_{i}$, the true intercept and slope from Pot $i$, in Model C.1 are:
 
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+\tilde{u}_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+\tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}
 
 All the $\alpha$ and $\beta$ terms will be fixed at their estimated values, so the one term that will change for each bootstrapped data set is $\tilde{u}_{i}$. As we obtain a numeric value for $\tilde{u}_{i}$ for each pot, we will fix the subscript. For example, if $\tilde{u}_{i}$ is set to -.192 for Pot \#1, then we would denote this by $\tilde{u}_{1}=-.192$. Similarly, in the context of Model C.1, $a_{1}$ represents the mean height at Day 13 across all plants in Pot \#1, where $\tilde{u}_{1}$ quantifies how Pot \#1's Day 13 height relates to other pots with the same sterilization and soil type.
@@ -898,7 +898,7 @@ Although plants from Pot \#1 have a mean Day 13 height of 1.232 mm, Plant \#11's
 
 __Level One__
 
-Finally we proceed to Level One, where the height of Plant \#11 is modeled as a linear function of time ($1.568 + .189\textstyle{time}_{11k}$) with a normally distributed residual $\epsilon_{11k}$ at each time point $k$. Four residuals (one for each time point) are sampled independently from a normal distribution with mean 0 and standard deviation .287 -- the standard deviation again coming from parameter estimates from fitting Model C.1 to the actual data as reported in Section \@ref(sec:boundary). Suppose we obtain residuals of $\epsilon_{111}=-.311$, $\epsilon_{112}=.119$, $\epsilon_{113}=.241$, and $\epsilon_{114}=-.066$.  In that case, our parametrically generated data for Plant \#11 from Pot \#1 would look like:
+Finally we proceed to Level One, where the height of Plant \#11 is modeled as a linear function of time ($1.568 + .189\textrm{time}_{11k}$) with a normally distributed residual $\epsilon_{11k}$ at each time point $k$. Four residuals (one for each time point) are sampled independently from a normal distribution with mean 0 and standard deviation .287 -- the standard deviation again coming from parameter estimates from fitting Model C.1 to the actual data as reported in Section \@ref(sec:boundary). Suppose we obtain residuals of $\epsilon_{111}=-.311$, $\epsilon_{112}=.119$, $\epsilon_{113}=.241$, and $\epsilon_{114}=-.066$.  In that case, our parametrically generated data for Plant \#11 from Pot \#1 would look like:
 
 \[ \begin{array}{rcccl}
    Y_{111} & = & 1.568+.189(0)-.311 & = & 1.257 \\
@@ -1034,37 +1034,37 @@ For instance, consider Model C, where we must estimate a total of 15 parameters:
 - Level One (timepoint within plant):
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 (\#eq:lev1timemodcp)
 \end{equation}
 
 - Level Two (plant within pot):
 
 \begin{align*}
-a_{ij} & = a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
-b_{ij} & = b_{i}+d_{i}\textstyle{seedsize}_{ij}+v_{ij}
+a_{ij} & = a_{i}+c_{i}\textrm{seedsize}_{ij}+u_{ij} \\
+b_{ij} & = b_{i}+d_{i}\textrm{seedsize}_{ij}+v_{ij}
 \end{align*}
 
 - Level Three (pot):
 
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i}+ \tilde{u}_{i}\\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i}+ \tilde{v}_{i} \\
-c_{i} & = \gamma_{0}+\gamma_{1}\textstyle{strl}_{i}+\gamma_{2}\textstyle{cult}_{i}+\gamma_{3}\textstyle{rem}_{i}+ \tilde{w}_{i} \\
-d_{i} & = \delta_{0}+\delta_{1}\textstyle{strl}_{i}+\delta_{2}\textstyle{cult}_{i}+\delta_{3}\textstyle{rem}_{i}+ \tilde{z}_{i}
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+ \tilde{u}_{i}\\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}+ \tilde{v}_{i} \\
+c_{i} & = \gamma_{0}+\gamma_{1}\textrm{strl}_{i}+\gamma_{2}\textrm{cult}_{i}+\gamma_{3}\textrm{rem}_{i}+ \tilde{w}_{i} \\
+d_{i} & = \delta_{0}+\delta_{1}\textrm{strl}_{i}+\delta_{2}\textrm{cult}_{i}+\delta_{3}\textrm{rem}_{i}+ \tilde{z}_{i}
 \end{align*}
 
 or as a composite model:
 
 \begin{align*}
-Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
- \gamma_{0}\textstyle{seedsize}_{ij} + \\
- & \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk}+\beta_{2}\textstyle{cult}_{i}\textstyle{time}_{ijk}+ \beta_{3}\textstyle{rem}_{i}\textstyle{time}_{ijk} + \\
- & \gamma_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}+\gamma_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}+ \gamma_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij} + \\
- & \delta_{0}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{1}\textstyle{strl}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \\
- & \delta_{2}\textstyle{cult}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} + \delta_{3}\textstyle{rem}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk}] + \\
- & [\tilde{u}_{i} + u_{ij} + \epsilon_{ijk} + \tilde{w}_{i}\textstyle{seedsize}_{ij} + \tilde{v}_{i}\textstyle{time}_{ijk} + v_{ij}\textstyle{time}_{ijk} + \\ 
- & \tilde{z}_{i}\textstyle{seedsize}_{ij}\textstyle{time}_{ijk} ]
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i} +
+ \gamma_{0}\textrm{seedsize}_{ij} + \\
+ & \beta_{0}\textrm{time}_{ijk} + \beta_{1}\textrm{strl}_{i}\textrm{time}_{ijk}+\beta_{2}\textrm{cult}_{i}\textrm{time}_{ijk}+ \beta_{3}\textrm{rem}_{i}\textrm{time}_{ijk} + \\
+ & \gamma_{1}\textrm{strl}_{i}\textrm{seedsize}_{ij}+\gamma_{2}\textrm{cult}_{i}\textrm{seedsize}_{ij}+ \gamma_{3}\textrm{rem}_{i}\textrm{seedsize}_{ij} + \\
+ & \delta_{0}\textrm{seedsize}_{ij}\textrm{time}_{ijk} + \delta_{1}\textrm{strl}_{i}\textrm{seedsize}_{ij}\textrm{time}_{ijk} + \\
+ & \delta_{2}\textrm{cult}_{i}\textrm{seedsize}_{ij}\textrm{time}_{ijk} + \delta_{3}\textrm{rem}_{i}\textrm{seedsize}_{ij}\textrm{time}_{ijk}] + \\
+ & [\tilde{u}_{i} + u_{ij} + \epsilon_{ijk} + \tilde{w}_{i}\textrm{seedsize}_{ij} + \tilde{v}_{i}\textrm{time}_{ijk} + v_{ij}\textrm{time}_{ijk} + \\ 
+ & \tilde{z}_{i}\textrm{seedsize}_{ij}\textrm{time}_{ijk} ]
 \end{align*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
@@ -1107,20 +1107,20 @@ By following the options above, our potential 30-parameter model (C_plus) can be
 - Level One:
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 
 - Level Two:
 
 \begin{align*}
-a_{ij} & = a_{i}+c_{i}\textstyle{seedsize}_{ij}+u_{ij} \\
+a_{ij} & = a_{i}+c_{i}\textrm{seedsize}_{ij}+u_{ij} \\
 b_{ij} & = b_{i}
 \end{align*}
 
 - Level Three:
 
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \tilde{u}_{i} \\
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{strl}_{i} + \alpha_{2}\textrm{cult}_{i} + \alpha_{3}\textrm{rem}_{i} + \tilde{u}_{i} \\
 b_{i} & = \beta_{0} \\
 c_{i} & = \gamma_{0}
 \end{align*}
@@ -1128,8 +1128,8 @@ c_{i} & = \gamma_{0}
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$, $u_{ij}\sim N(0,\sigma_{u}^{2})$, and $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$.  Or, in terms of a composite model:
 
 \begin{align*}
-Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textstyle{strl}_{i}+\alpha_{2}\textstyle{cult}_{i}+\alpha_{3}\textstyle{rem}_{i} +
- \gamma_{0}\textstyle{seedsize}_{ij} + \beta_{0}\textstyle{time}_{ijk}] + \\
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i} +
+ \gamma_{0}\textrm{seedsize}_{ij} + \beta_{0}\textrm{time}_{ijk}] + \\
  &  [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}]
 \end{align*}
 
@@ -1144,7 +1144,7 @@ In Model C we considered the main effects of soil type and sterilization on lead
 - Level One:
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 
 - Level Two:
@@ -1157,8 +1157,8 @@ b_{ij} & = b_{i}+v_{ij}
 - Level Three:
 
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}\textstyle{strl}_{i} + \alpha_{2}\textstyle{cult}_{i} + \alpha_{3}\textstyle{rem}_{i} + \alpha_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \alpha_{5}\textstyle{strl}_{i}\textstyle{cult}_{i} + \tilde{u}_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{cult}_{i}+\beta_{3}\textstyle{rem}_{i} + \beta_{4}\textstyle{strl}_{i}\textstyle{rem}_{i} + \beta_{5}\textstyle{strl}_{i}\textstyle{cult}_{i}
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{strl}_{i} + \alpha_{2}\textrm{cult}_{i} + \alpha_{3}\textrm{rem}_{i} + \alpha_{4}\textrm{strl}_{i}\textrm{rem}_{i} + \alpha_{5}\textrm{strl}_{i}\textrm{cult}_{i} + \tilde{u}_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i} + \beta_{4}\textrm{strl}_{i}\textrm{rem}_{i} + \beta_{5}\textrm{strl}_{i}\textrm{cult}_{i}
 \end{align*}
 
 where error terms are defined as in Model C.1.
@@ -1190,7 +1190,7 @@ Our final model (Model F), with its constraints on Level Three error terms, can 
 - Level One:
 
 \begin{equation}
-Y_{ijk} = a_{ij}+b_{ij}\textstyle{time}_{ijk}+\epsilon_{ijk}
+Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
 \end{equation}
 
 - Level Two:
@@ -1204,7 +1204,7 @@ b_{ij} & = b_{i}+v_{ij}
 
 \begin{align*}
 a_{i} & = \alpha_{0} + \tilde{u}_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{strl}_{i}+\beta_{2}\textstyle{rem}_{i} + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}
+b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{rem}_{i} + \beta_{3}\textrm{strl}_{i}\textrm{rem}_{i}
 \end{align*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
@@ -1224,8 +1224,8 @@ and $\tilde{{u}_{i}}\sim N(0,\sigma_{\tilde{u}}^{2})$.
 In composite form, we have:
 
 \begin{align*}
-Y_{ijk} & = [\alpha_{0}+ \beta_{0}\textstyle{time}_{ijk} + \beta_{1}\textstyle{strl}_{i}\textstyle{time}_{ijk} + \beta_{2}\textstyle{rem}_{i}\textstyle{time}_{ijk}  \\
- & + \beta_{3}\textstyle{strl}_{i}\textstyle{rem}_{i}\textstyle{time}_{ijk}] + [\tilde{u}_{i}+u_{ij}+ \epsilon_{ijk}+ v_{ij}\textstyle{time}_{ijk}]
+Y_{ijk} & = [\alpha_{0}+ \beta_{0}\textrm{time}_{ijk} + \beta_{1}\textrm{strl}_{i}\textrm{time}_{ijk} + \beta_{2}\textrm{rem}_{i}\textrm{time}_{ijk}  \\
+ & + \beta_{3}\textrm{strl}_{i}\textrm{rem}_{i}\textrm{time}_{ijk}] + [\tilde{u}_{i}+u_{ij}+ \epsilon_{ijk}+ v_{ij}\textrm{time}_{ijk}]
 \end{align*}
 
 ```{r, comment=NA, message=F}
@@ -1364,8 +1364,8 @@ As in Chapter \@ref(ch-lon), it is important to be aware of the covariance struc
 We will first consider Model B with $\tilde{v}_{i}$ at Level Three, and then we will evaluate the resulting covariance structure that results from removing $\tilde{v}_{i}$, thereby restricting $\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0$.  The composite version of Model B has been previously expressed as:
 
 \begin{equation}
-Y_{ijk}=[\alpha_{0}+\beta_{0}\textstyle{time}_{ijk}]+
-[\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+v_{ij})\textstyle{time}_{ijk}]
+Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
+[\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+v_{ij})\textrm{time}_{ijk}]
 (\#eq:modbcomp)
 \end{equation}
 
@@ -1393,7 +1393,7 @@ where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
             \sigma_{\tilde{u}\tilde{v}} & \sigma_{\tilde{v}}^{2}
           \end{array} \right] \right). \]
 
-In order to assess the implied covariance structure from our standard model, we must first derive variance and covariance terms for related observations (i.e., same timepoint and same plant, different timepoints but same plant, different plants but same pot). Each derivation will rely on the random effects portion of the composite model, since there is no variability associated with fixed effects. For ease of notation, we will let $t_{k}=\textstyle{time}_{ijk}$, since all plants were planned to be observed on the same 4 days.
+In order to assess the implied covariance structure from our standard model, we must first derive variance and covariance terms for related observations (i.e., same timepoint and same plant, different timepoints but same plant, different plants but same pot). Each derivation will rely on the random effects portion of the composite model, since there is no variability associated with fixed effects. For ease of notation, we will let $t_{k}=\textrm{time}_{ijk}$, since all plants were planned to be observed on the same 4 days.
 
 The variance for an individual observation can be expressed as:
 
@@ -1490,7 +1490,7 @@ In this section, we present additional details regarding implications of our sta
 The variance for an individual observation can be derived as:
 
 \begin{align*}
-Var(Y_{ijk}) & = Var(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})\textstyle{time}_{ijk}) \\
+Var(Y_{ijk}) & = Var(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tilde{v}_{i})\textrm{time}_{ijk}) \\
  & = (\sigma^{2} + \sigma_{u}^{2} + \sigma_{\tilde{u}}^{2}) + 2(\sigma_{uv} + \sigma_{\tilde{u}\tilde{v}})t_k + (\sigma_{v}^{2} + \sigma_{\tilde{v}}^{2})t_{k}^{2}
 \end{align*}
 
@@ -1628,7 +1628,6 @@ kable(table5chp10, booktabs=T,
       caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).") %>%
       add_header_above(c(" ","Social composition"=3, "Social comp and collective efficacy"=3)) %>%
       add_header_above(c(" ","Model 1"=3, "Model 2"=3)) %>%
-      kable_styling(latex_options = "scale_down") %>%
       row_spec(1, bold=T) 
 ```
 
@@ -1651,7 +1650,7 @@ kable(table5chp10, booktabs=T,
     e. Fit Model A, a three level, unconditional means model for height. Write out the model at levels three, two, and one, as well as the composite model.
     f. Create a new variable, `TIME`, which represents the number of years since 1990. Use this to fit Model B, an unconditonal growth model for height. Write out this model at levels three, two, and one. What is the correlation of random effects at level two? What does this mean? (Section \@ref(sec:boundary) may help.)
     g. In response to part (f), fit a new unconditional growth model (Model C) with $\rho_{uv} = 0$ and $\rho_{\hat{u}\hat{v}} = 0$ (uncorrelated random effects at levels two and three). Write out the model at levels two and three.
-    h. If we wanted to compare Model B and Model C, it would not be appropriate to use a likelihood ratio test. Why is this?  
+    h. If we wanted to compare Model B and Model C, it would not be appropriate to use a likelihood ratio test. Why is this?
     i. Use the parametric bootstrap to compare Model B and Model C. Which model does the test favor?
     j. Regardless of your answer to (i), we will build off of Model C for the rest of the analysis. With that in mind, test the hypothesis that trees' growth rates are affected by tubes by adding an interaction between `TUBEX` and `TIME` (Model D). Interpret the fitted estimate of this interaction.
     k. Perform a likelihood ratio test comparing Model C and Model D. Interpret the results of this test in the context of this study.  

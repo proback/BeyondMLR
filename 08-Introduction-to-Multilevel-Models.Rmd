@@ -435,17 +435,17 @@ Does this musician tend to have higher anxiety levels when he is playing in a la
 Let $Y_{22j}$ be the performance anxiety score of Musician \#22 before performance $j$. Consider the observed performances for Musician \#22 to be a random sample of all conceivable performances by that subject. If we are initially interested in examining the effect of playing in a large ensemble, we can model the performance anxiety for Musician \#22 according to the model:
 
 \begin{equation}
-Y_{22j}=a_{22}+b_{22}\textstyle{LargeEns}_{22j}+\epsilon_{22j} \textrm{ where } \epsilon_{22j}\sim N(0,\sigma^2) \textrm{ and }
+Y_{22j}=a_{22}+b_{22}\textrm{LargeEns}_{22j}+\epsilon_{22j} \textrm{ where } \epsilon_{22j}\sim N(0,\sigma^2) \textrm{ and }
 (\#eq:level1a)
 \end{equation}
-\[ \textstyle{LargeEns}_{j} =
+\[ \textrm{LargeEns}_{j} =
 \left\lbrace
 \begin{tabular}{l l} 
 1 & if `perf\_type` = Large Ensemble \\
 0 & if `perf\_type` = Solo or Small Ensemble. 
 \end{tabular}\right.
 \]
-The parameters in this model ($a_{22}$, $b_{22}$, and $\sigma^2$) can be estimated through least squares methods. $a_{22}$ represents the true intercept for Musician \#22---the expected anxiety score for Musician \#22 when performance type is a Solo or Small Ensemble ($\textstyle{LargeEns}=0$), or the true average anxiety for Musician \#22 over all Solo or Small Ensemble performances he may conceivably give.  $b_{22}$ represents the true slope for Musician \#22---the expected increase in performance anxiety for Musician \#22 when performing as part of a Large Ensemble rather than in a Small Ensemble or as a Solo, or the true average difference in anxiety scores for Musician \#22 between Large Ensemble performances and other types. Finally, the $\epsilon_{22j}$ terms represent the deviations of Musician \#22's actual performance anxiety scores from the expected scores under this model---the part of Musician \#22's anxiety before performance $j$ that is not explained by performance type. The variability in these deviations from the regression model is denoted by $\sigma^2$.
+The parameters in this model ($a_{22}$, $b_{22}$, and $\sigma^2$) can be estimated through least squares methods. $a_{22}$ represents the true intercept for Musician \#22---the expected anxiety score for Musician \#22 when performance type is a Solo or Small Ensemble ($\textrm{LargeEns}=0$), or the true average anxiety for Musician \#22 over all Solo or Small Ensemble performances he may conceivably give.  $b_{22}$ represents the true slope for Musician \#22---the expected increase in performance anxiety for Musician \#22 when performing as part of a Large Ensemble rather than in a Small Ensemble or as a Solo, or the true average difference in anxiety scores for Musician \#22 between Large Ensemble performances and other types. Finally, the $\epsilon_{22j}$ terms represent the deviations of Musician \#22's actual performance anxiety scores from the expected scores under this model---the part of Musician \#22's anxiety before performance $j$ that is not explained by performance type. The variability in these deviations from the regression model is denoted by $\sigma^2$.
 
 For Subject 22, we estimate $\hat{a}_{22}=24.5$, $\hat{b}_{22}=-7.8$, and $\hat{\sigma}=4.8$.  Thus, according to our simple linear regression model, Subject 22 had an estimated anxiety score of 24.5 before Solo and Small Ensemble performances, and 16.7 (7.8 points lower) before Large Ensemble performances. With an $R^2$ of 0.425, the regression model explains a moderate amount (42.5\%) of the performance-to-performance variability in anxiety scores for Subject 22, and the trend toward lower scores for large ensemble performances is statistically significant at the 0.05 level (t(13)=-3.10, p=.009).
 
@@ -538,19 +538,19 @@ grid.arrange(inthist, slopehist, ncol = 1)
 As an illustration, we can consider whether or not there are significant relationships between individual regression parameters (intercepts and slopes) and instrument played. From a modeling perspective, we would build a system of two __Level Two models__ to predict the fitted intercept ($a_{i}$) and fitted slopes ($b_{i}$) for Subject $i$:
 
 \begin{align}
-a_{i} & =  \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i}
+a_{i} & =  \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i}
 (\#eq:level2s0)  \\
-b_{i} & =  \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+v_{i}
+b_{i} & =  \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i}
 (\#eq:level2s1)
 \end{align}
-where $\textstyle{Orch}_{i}=1$ if Subject $i$ plays an orchestral instrument and $\textstyle{Orch}_{i}=0$ if Subject $i$ plays keyboard or is a vocalist. Note that, at Level Two, our response variables are not observed measurements such as performance anxiety scores, but rather the fitted regression coefficients from the Level One models fit to each subject. (Well, in our theoretical model, the responses are actually the true intercepts and slopes from Level One models for each subject, but in reality, we have to use our estimated slopes and intercepts.)
+where $\textrm{Orch}_{i}=1$ if Subject $i$ plays an orchestral instrument and $\textrm{Orch}_{i}=0$ if Subject $i$ plays keyboard or is a vocalist. Note that, at Level Two, our response variables are not observed measurements such as performance anxiety scores, but rather the fitted regression coefficients from the Level One models fit to each subject. (Well, in our theoretical model, the responses are actually the true intercepts and slopes from Level One models for each subject, but in reality, we have to use our estimated slopes and intercepts.)
 
 Exploratory data analysis (see boxplots by instrument in Figure \@ref(fig:mli-boxmat2)) suggests that subjects playing orchestral instruments have higher intercepts than vocalists or keyboardists, and that orchestral instruments are associated with slight lower (more negative) slopes, although with less variability that the slopes of vocalists and keyboardists. These trends are borne out in regression modeling. If we fit Equations \@ref(eq:level2s0) and \@ref(eq:level2s1) using fitted intercepts and slopes as our response variables, we obtain the following estimated parameters: $\hat{\alpha}_{0}=16.3$, $\hat{\alpha}_{1}=1.4$, $\hat{\beta}_{0}=-0.8$, and $\hat{\beta}_{1}=-1.4$. Thus, the intercept ($a_{i}$) and slope ($b_{i}$) for Subject $i$ can be modeled as:
 
 \begin{align}
-\hat{a}_{i} & = 16.3+1.4\textstyle{Orch}_{i}+u_{i}
+\hat{a}_{i} & = 16.3+1.4\textrm{Orch}_{i}+u_{i}
 (\#eq:level2s0hat)  \\
-\hat{b}_{i} & = -0.8-1.4\textstyle{Orch}_{i}+v_{i}
+\hat{b}_{i} & = -0.8-1.4\textrm{Orch}_{i}+v_{i}
 (\#eq:level2s1hat)
 \end{align}
 where $a_{i}$ is the true mean negative affect when Subject $i$ is playing solos or small ensembles, and $b_{i}$ is the true mean difference in negative affect for Subject $i$ between large ensembles and other performance types. Based on these models, average performance anxiety before solos and small ensembles is 16.3 for vocalists and keyboardists, but 17.7 (1.4 points higher) for orchestral instrumentalists. Before playing in large ensembles, vocalists and instrumentalists have performance anxiety (15.5) which is 0.8 points lower, on average, than before solos and small ensembles, while subjects playing orchestral instruments experience an average difference of 2.2 points, producing an average performance anxiety of 15.5 before playing in large ensembles just like subjects playing other instruments. However, the difference between orchestral instruments and others does not appear to be statistically significant for either intercepts (t=1.424, p=0.163) or slopes (t=-1.168, p=0.253).
@@ -604,34 +604,34 @@ For the unified approach, we will still envision two levels of models as in sect
 
 - Level One:
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
 (\#eq:level1large)
 \end{equation}
 - Level Two:
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+v_{i},
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i},
 \end{align*}
 
 In this system, there are 4 key __fixed effects__ to estimate: $\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$ and $\beta_{1}$. Fixed effects are the fixed but unknown population effects associated with certain covariates. The intercepts and slopes for each subject from Level One, $a_{i}$ and $b_{i}$, don't need to be formally estimated as we did in section \@ref(twostage); they serve to conceptually connect Level One with Level Two. In fact, by substituting the two Level Two equations into the Level One equation, we can view this two-level system of models as a single __Composite Model__ without $a_{i}$ and $b_{i}$:
 
 \begin{align*}
-Y_{ij} & = [\alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+\beta_{0}\textstyle{LargeEns}_{ij}+\beta_{1}\textstyle{Orch}_{i}\textstyle{LargeEns}_{ij}] \\
- & \textrm{} + [u_{i}+v_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}]
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}_{ij}+\beta_{1}\textrm{Orch}_{i}\textrm{LargeEns}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}]
 \end{align*}
 
-From this point forward, when building multilevel models, we will use Greek letters (such as $\alpha_{0}$) to denote final fixed effects model parameters to be estimated empirically, and Roman letters (such as $a_{0}$) to denote preliminary fixed effects parameters at lower levels.  Variance components that will be estimated empirically will be denoted with $\sigma$ or $\rho$, while terms such as $\epsilon$ and $u_{i}$ represent error terms.  In our framework, we can estimate final parameters directly without first estimating preliminary parameters, which can be seen with the Composite Model formulation (although we can obtain estimates of preliminary parameters in those occasional cases when they are of interest to us).  Note that when we model a slope term like $b_{i}$ from Level One using Level Two covariates like $\textstyle{Orch}_{i}$, the resulting Composite Model contains a **cross-level interaction term**, denoting that the effect of $\textstyle{LargeEns}_{ij}$ depends on the instrument played.  
+From this point forward, when building multilevel models, we will use Greek letters (such as $\alpha_{0}$) to denote final fixed effects model parameters to be estimated empirically, and Roman letters (such as $a_{0}$) to denote preliminary fixed effects parameters at lower levels.  Variance components that will be estimated empirically will be denoted with $\sigma$ or $\rho$, while terms such as $\epsilon$ and $u_{i}$ represent error terms.  In our framework, we can estimate final parameters directly without first estimating preliminary parameters, which can be seen with the Composite Model formulation (although we can obtain estimates of preliminary parameters in those occasional cases when they are of interest to us).  Note that when we model a slope term like $b_{i}$ from Level One using Level Two covariates like $\textrm{Orch}_{i}$, the resulting Composite Model contains a **cross-level interaction term**, denoting that the effect of $\textrm{LargeEns}_{ij}$ depends on the instrument played.  
 
-Furthermore, with a binary predictor at Level Two such as instrument, we can write out what our Level Two model looks like for those who play keyboard or are vocalists ($\textstyle{Orch}_{i}=0$) and those who play orchestral instruments ($\textstyle{Orch}_{i}=1$):
+Furthermore, with a binary predictor at Level Two such as instrument, we can write out what our Level Two model looks like for those who play keyboard or are vocalists ($\textrm{Orch}_{i}=0$) and those who play orchestral instruments ($\textrm{Orch}_{i}=1$):
 
-- Keyboardists and Vocalists ($\textstyle{Orch}_{i}=0$)
+- Keyboardists and Vocalists ($\textrm{Orch}_{i}=0$)
 
 \begin{align*}
 a_{i} & = \alpha_{0}+u_{i} \\
 b_{i} & = \beta_{0}+v_{i}
 \end{align*}
 
-- Orchestral instrumentalists ($\textstyle{Orch}_{i}=1$)
+- Orchestral instrumentalists ($\textrm{Orch}_{i}=1$)
 
 \begin{align*}
 a_{i} & = (\alpha_{0}+\alpha_{1})+u_{i} \\
@@ -887,7 +887,7 @@ Thus, 18.2\% of the total variability in performance anxiety scores are attribut
 
 The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual. In this case, mirroring our model from section \@ref(twolevelmodeling), we will include a binary covariate for performance type:
 
-\[ \textstyle{LargeEns}_{ij} =
+\[ \textrm{LargeEns}_{ij} =
 \left\lbrace
 \begin{tabular}{l l} 
 1 & if `perf\_type` = Large Ensemble \\
@@ -898,7 +898,7 @@ and no other Level One covariates (for now). (Note that we may later also want t
 
 - Level One:
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
 (\#eq:level1modelb)
 \end{equation}
 - Level Two:
@@ -909,7 +909,7 @@ b_{i} & = \beta_{0}+v_{i}
 or as a composite model:
 
 \begin{equation}
-Y_{ij}=[\alpha_{0}+\beta_{0}\textstyle{LargeEns}_{ij}]+[u_{i}+v_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}]
+Y_{ij}=[\alpha_{0}+\beta_{0}\textrm{LargeEns}_{ij}]+[u_{i}+v_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}]
 (\#eq:compmodelb)
 \end{equation}
 where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
@@ -1023,14 +1023,14 @@ The initial two-level model described in section \@ref(initialmodel) essentially
 
 - Level One:
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
 (\#eq:level1modelc)
 \end{equation}
 
 - Level Two:
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+v_{i},
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i},
 \end{align*}
 where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
 
@@ -1064,14 +1064,14 @@ We could also run a "random intercepts" version of Model C, with no error term i
 
 - Level One:
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
 (\#eq:level1modelcrandint)
 \end{equation}
 
 - Level Two:
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+u_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{Orch}_{i},
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i},
 \end{align*}
 where $\epsilon_{ij}\sim N(0,\sigma^2)$ and $u_{i}\sim N(0,\sigma_{u}^{2})$.
 
@@ -1106,21 +1106,21 @@ Recall that we are particularly interested in this study in Level Two covariates
 
 - Level One:
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
 (\#eq:level1modelcnegem)
 \end{equation}
 
 - Level Two:
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+\alpha_{2}\textstyle{MPQnem}_{i}+u_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textstyle{Orch}_{i}+\beta_{2}\textstyle{MPQnem}_{i}+v_{i},
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\alpha_{2}\textrm{MPQnem}_{i}+u_{i} \\
+b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i}+\beta_{2}\textrm{MPQnem}_{i}+v_{i},
 \end{align*}
 or as a composite model:
 
 \begin{align*}
-Y_{ij} & = [\alpha_{0}+\alpha_{1}\textstyle{Orch}_{i}+\alpha_{2}\textstyle{MPQnem}_{i}+\beta_{0}\textstyle{LargeEns}_{ij} \\
- & \textrm{} + \beta_{1}\textstyle{Orch}_{i}\textstyle{LargeEns}_{ij}+\beta_{2}\textstyle{MPQnem}_{i}\textstyle{LargeEns}_{ij}] \\
- & \textrm{} + [u_{i}+v_{i}\textstyle{LargeEns}_{ij}+\epsilon_{ij}]
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\alpha_{2}\textrm{MPQnem}_{i}+\beta_{0}\textrm{LargeEns}_{ij} \\
+ & \textrm{} + \beta_{1}\textrm{Orch}_{i}\textrm{LargeEns}_{ij}+\beta_{2}\textrm{MPQnem}_{i}\textrm{LargeEns}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}]
 \end{align*}
 where error terms are defined as in Model C.
 
@@ -1156,10 +1156,10 @@ Some of the detail in these parameter interpretations can be tricky---describing
 - $\hat{\alpha}_{1}$. For solos and small ensembles (`LargeEns=0`), the following equations describe the fixed effects portion of the composite model for negative affect score for vocalists and keyboardsists (`Orch=0`) and orchestral instrumentalists (`Orch=1`):
 
 \begin{align*}
-\textstyle{Orch}=0: & \\
-Y_{ij} & = \alpha_{0}+\alpha_{2}\textstyle{MPQnem}_{i} \\
-\textstyle{Orch}=1: & \\
-Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textstyle{MPQnem}_{i}
+\textrm{Orch}=0: & \\
+Y_{ij} & = \alpha_{0}+\alpha_{2}\textrm{MPQnem}_{i} \\
+\textrm{Orch}=1: & \\
+Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textrm{MPQnem}_{i}
 \end{align*}
 Regardless of the subjects' baseline negative emotionality (`MPQnem`), $\hat{\alpha}_{1}$ represents the estimated difference in performance anxiety between those playing orchestral instruments and others. This interpretation, however, only holds for solos and small ensembles. For large ensembles, the difference between those playing orchestral instruments and others is actually given by $\hat{\alpha}_{1}+\hat{\beta}_{1}$, holding `MPQnem` constant (Show!).
 
@@ -1167,12 +1167,12 @@ Regardless of the subjects' baseline negative emotionality (`MPQnem`), $\hat{\al
 - $\hat{\beta}_{1}$. As with $\hat{\alpha}_{1}$, we consider equations describing the fixed effects portion of the composite model for negative affect score for vocalists and keyboardsists (`Orch=0`) and orchestral instrumentalists (`Orch=1`), except here we leave _LargeEns_ as an unknown rather than restricting the model to solos and small ensembles:
 
 \begin{align*}
-\textstyle{Orch}=0: & & \\
-Y_{ij} & = \alpha_{0}+\alpha_{2}\textstyle{MPQnem}_{i}+\beta_{0}\textstyle{LargeEns}_{ij} \\
- & \textrm{} +\beta_{2}\textstyle{MPQnem}_{i}\textstyle{LargeEns}_{ij} \\
-\textstyle{Orch}=1: & \\
-Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textstyle{MPQnem}_{i}+(\beta_{0}+\beta_{1})\textstyle{LargeEns}_{ij} \\
- & \textrm{} +\beta_{2}\textstyle{MPQnem}_{i}\textstyle{LargeEns}_{ij}
+\textrm{Orch}=0: & & \\
+Y_{ij} & = \alpha_{0}+\alpha_{2}\textrm{MPQnem}_{i}+\beta_{0}\textrm{LargeEns}_{ij} \\
+ & \textrm{} +\beta_{2}\textrm{MPQnem}_{i}\textrm{LargeEns}_{ij} \\
+\textrm{Orch}=1: & \\
+Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textrm{MPQnem}_{i}+(\beta_{0}+\beta_{1})\textrm{LargeEns}_{ij} \\
+ & \textrm{} +\beta_{2}\textrm{MPQnem}_{i}\textrm{LargeEns}_{ij}
 \end{align*}
 As long as baseline negative emotionality is held constant (at any level, not just 0), then $\hat{\beta}_{1}$ represents the estimated difference in the large ensemble effect between those playing orchestral instruments and others.
 
@@ -1223,9 +1223,9 @@ did_print
 As we observed above, the addition of baseline negative emotionality in Model D did not always produce sensible interpretations of fixed effects. It makes no sense to draw conclusions about performance anxiety levels for subjects with MPQNEM scores of 0 at baseline (as in $\hat{\beta}_{0}$), since the minimum NEM composite score among subjects in this study was 11. In order to produce more meaningful interpretations of parameter estimates and often more stable parameter estimates, it is often wise to __center__ explanatory variables. Centering involves subtracting a fixed value from each observation, where the fixed value represents a meaningful anchor value (e.g., last grade completed is 12; GPA is 3.0). Often, when there's no pre-defined anchor value, the mean is used to represent a typical case. With this in mind, we can create a new variable
 
 \begin{align*}
-\textstyle{centeredbaselineNEM} & = \textstyle{cmpqnem} \\
- & = \textstyle{mpqnem - mean(mpqnem)} \\
- & = \textstyle{mpqnem} - 31.63
+\textrm{centeredbaselineNEM} & = \textrm{cmpqnem} \\
+ & = \textrm{mpqnem - mean(mpqnem)} \\
+ & = \textrm{mpqnem} - 31.63
 \end{align*}
 and replace baseline NEM in Model D with its centered version to create Model E:
 
@@ -1273,20 +1273,20 @@ As we've done in previous sections, we can use (a) t-statistics for individual f
 - Level One:
 
 \begin{equation}
-Y_{ij} = a_{i}+b_{i}\textstyle{previous}_{ij}+c_{i}\textstyle{students}_{ij}+
-d_{i}\textstyle{juried}_{ij}+e_{i}\textstyle{public}_{ij}+f_{i}\textstyle{solo}_{ij}+\epsilon_{ij}
+Y_{ij} = a_{i}+b_{i}\textrm{previous}_{ij}+c_{i}\textrm{students}_{ij}+
+d_{i}\textrm{juried}_{ij}+e_{i}\textrm{public}_{ij}+f_{i}\textrm{solo}_{ij}+\epsilon_{ij}
 (\#eq:level1modelf)
 \end{equation}
 
 - Level Two:
 
 \begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textstyle{mpqpem}_{i}+\alpha_{2}\textstyle{mpqab}_{i} + \alpha_{3}\textstyle{orch}_{i}+\alpha_{4}\textstyle{mpqnem}_{i}+u_{i} \\
+a_{i} & = \alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i}+\alpha_{2}\textrm{mpqab}_{i} + \alpha_{3}\textrm{orch}_{i}+\alpha_{4}\textrm{mpqnem}_{i}+u_{i} \\
 b_{i} & = \beta_{0}+v_{i}, \\
 c_{i} & = \gamma_{0}+w_{i}, \\
 d_{i} & = \delta_{0}+x_{i}, \\
 e_{i} & = \varepsilon_{0}+y_{i}, \\
-f_{i} & = \zeta_{0}+\zeta_{1}\textstyle{mpqnem}_{i}+z_{i},
+f_{i} & = \zeta_{0}+\zeta_{1}\textrm{mpqnem}_{i}+z_{i},
 \end{align*}
 where `previous` is the number of previous diary entries filled out by that individual (`diary-1`); `students`, `juried`, and `public` are indicator variables created from the `audience` categorical variable (so that "Instructor" is the reference level in this model); and, `solo` is 1 if the performance was a solo and 0 if the performance was either a small or large ensemble.  
 

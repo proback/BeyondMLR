@@ -61,8 +61,7 @@ table4chp10[15,2] <- paste0("\\textbf{", table4chp10[15,2], "}")
 table4chp10[16,2] <- paste0("\\textbf{", table4chp10[16,2], "}")
 kable(table4chp10, booktabs=T, escape=F,
       caption="Table 3: Correlates of collective efficacy from Sampson (1997)") %>%
-  kable_styling(latex_options = "scale_down") %>%
-  row_spec(c(2,14,18,21), bold=T) 
+  kable_styling(latex_options = "scale_down") 
 ```
 
 22. Table \@ref(tab:table5chp10) shows a portion of Table 4 from @Sampson1997. Describe the multilevel model that likely produced this table. State the primary result from this table in context. [Note that collective efficacy is a Level Three covariate in this table, summarized over an entire neighborhood.]
@@ -90,40 +89,51 @@ kable(table5chp10, booktabs=T,
 
 ```
 
-\begin{tiny}
-\[  Cov(\textbf{Y}_{i}) = \left[
-          \begin{array}{cccccc}
-            Cov(\textbf{Y}_{i1}) & & & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i4}) & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
-          \end{array} \right]. \]
-\end{tiny}
+20. Table \@ref(tab:table4chp11) shows Table 2 from @Randall2014.  Let $Y_{ij}$ be the number of acute myocardial infarctions in subgroup $j$ from SLA $i$; write out the multilevel model that likely produced Table \@ref(tab:table4chp11).  How many fixed effects and variance components must be estimated?
 
+```{r, include=FALSE}
+blnkcol <- c("Aboriginal", "No(ref)", "Yes", "Age Group", "25-34 (ref)", "35-44", "45-54", "55-64", "65-74", "75-84", "Sex", "Male (ref)", "Female", "Year", "2002 (ref)", "2003", "2004", "2005", "2006", "2007")
+RR <- c(" ", 1.00, 2.10, " ", 1.00, 6.01, 19.36, 40.29, 79.92, 178.75, " ", 1.00, 0.45, " ", 1.00, 1.00, 0.97, 0.91, 0.88, 0.88)
+CI95 <- c(" ", " ", "1.98-2.23", " ", " ", "5.44-6.64", "17.58-21.31", "36.67-44.26", "72.74-87.80", "162.70-196.39", " ", " ", "0.44-0.45", " ", " ", "0.98-1.03", "0.95-0.99", "0.89-0.94", "0.86-0.91", "0.86-0.91")
+Pvalcol <- c(" ", "<0.01", " ", " ", "<0.01", " ", " ", " ", " ", " ", " ", "<0.01", " ", " ", "<0.01", " ", " ", " ", " ", " ")
+```
 
-We once again begin with the __unconditional means model__, in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
+```{r, table4chp11, echo=FALSE}
+table4chp11 <- data.frame(blnkcol, RR, CI95, Pvalcol)
+colnames(table4chp11) <- c(" ", "RR", "95% CI", "p-Value")
+table4chp11 <- table4chp11 %>%
+  mutate(RR = ifelse(RR == "2.1" | RR == "0.45", 
+                     cell_spec(RR, bold=T), RR))
+kable(table4chp11, booktabs=T, escape=F,
+      caption="Adjusted rate ratios for individual-level variables from the multilevel Poisson regression model with random intercept for area from Table 2 in Randall et al. (2014)") %>%
+  kable_styling(latex_options = "scale_down") 
+```
 
-- Level One (timepoint within plant):
+```{r, include=FALSE, eval=F}
+blnkcol <- c("Aboriginal", "No(ref)", "Yes", "Age Group", "25-34 (ref)", "35-44", "45-54", "55-64", "65-74", "75-84", "Sex", "Male (ref)", "Female", "Year", "2002 (ref)", "2003", "2004", "2005", "2006", "2007")
+RR <- c(" ", 1.00, 2.10, " ", 1.00, 6.01, 19.36, 40.29, 79.92, 178.75, " ", 1.00, 0.45, " ", 1.00, 1.00, 0.97, 0.91, 0.88, 0.88)
+CI95 <- c(" ", " ", "1.98-2.23", " ", " ", "5.44-6.64", "17.58-21.31", "36.67-44.26", "72.74-87.80", "162.70-196.39", " ", " ", "0.44-0.45", " ", " ", "0.98-1.03", "0.95-0.99", "0.89-0.94", "0.86-0.91", "0.86-0.91")
+Pvalcol <- c(" ", "<0.01", " ", " ", "<0.01", " ", " ", " ", " ", " ", " ", "<0.01", " ", " ", "<0.01", " ", " ", " ", " ", " ")
+```
 
-\begin{equation}
-Y_{ijk} = a_{ij}+\epsilon_{ijk} \textrm{ where } \epsilon_{ijk}\sim N(0,\sigma^2)
-(\#eq:initunun)
-\end{equation}
-
-- Level Two (plant within pot):
-
-\begin{equation}
-a_{ij} = a_{i}+u_{ij} \textrm{ where } u_{ij}\sim N(0,\sigma_{u}^{2})
-(\#eq:initunun2)
-\end{equation}
-
-- Level Three (pot):
-
-\begin{equation}
-a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_{\tilde{u}}^{2})
-(\#eq:initunun3)
-\end{equation}
-
-where the heights of plants from different pots are considered independent, but plants from the same pot are correlated as well as measurements at different times from the same plant.
+```{r, echo=FALSE, eval=F}
+table4chp11 <- data.frame(blnkcol, RR, CI95, Pvalcol)
+colnames(table4chp11) <- c(" ", "RR", "95% CI", "p-Value")
+table4chp11 <- tibble(table4chp11) %>%
+  format_cells(3, 2, "bold") %>%
+  format_cells(13, 2, "bold") %>%
+  format_cells(3, 3, "bold") %>%
+  format_cells(6, 3, "bold") %>%
+  format_cells(20, 3, "bold") %>%
+  format_cells(5, 4, "bold") %>%
+table4chp11[3,2] <- paste0("\\textbf{", table4chp11[3,2], "}")
+table4chp11[13,2] <- paste0("\\textbf{", table4chp11[13,2], "}")
+table4chp11[3,3] <- paste0("\\textbf{", table4chp11[3,3], "}")
+table4chp11[6,3] <- paste0("\\textbf{", table4chp11[6,3], "}")
+table4chp11[20,3] <- paste0("\\textbf{", table4chp11[20,3], "}")
+table4chp11[5,4] <- paste0("\\textbf{", table4chp11[5,4], "}")
+kable(table4chp11, booktabs=T, escape=F,
+      caption="Adjusted rate ratios for individual-level variables from the multilevel Poisson regression model with random intercept for area from Table 2 in Randall et al. (2014)") %>%
+  kable_styling(latex_options = "scale_down") %>%
+  row_spec(c(1,4,11,14), bold=T)
+```

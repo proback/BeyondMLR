@@ -135,9 +135,11 @@ theoretical_pi <- tibble(x = 1:250000,
 
 tibble(x = 1:24, pi_1b) %>%
   ggplot() +
-    geom_histogram(bins = 5, aes(x = pi_1b, y = ..density..)) + 
+    geom_histogram(bins = 5, aes(x = pi_1b, y = ..density..),
+                   color = "black", fill = "white") + 
     coord_cartesian(xlim = c(0,1)) +
-    geom_density(data = theoretical_pi, aes(x = p1), bw = 0.025, linetype = 3) +
+    geom_density(data = theoretical_pi, aes(x = p1), 
+                 bw = 0.025, linetype = 3) +
     geom_vline(xintercept = 0.5, color = "red", linetype = 2) +
     labs(title = "", x = "Probability of Deformity")
 ```
@@ -148,12 +150,14 @@ scenario_1 <- tibble(pi_1a, count_1a, pi_1b, count_1b) %>%
   mutate(phat_1a = count_1a / 10, phat_1b = count_1b / 10)
 
 hist_1a <- ggplot(data = scenario_1, aes(x = count_1a)) + 
-  geom_histogram(bins = 5) + coord_cartesian(xlim = c(0, 10)) +
+  geom_histogram(bins = 5, color = "black", fill = "white") +
+  coord_cartesian(xlim = c(0, 10)) +
   labs(title = "Scenario 1a: Binomial, p = 0.5",
        x = "Count of deformed pups per dam")
 
 hist_1b <- ggplot(data = scenario_1, aes(x = count_1b)) + 
-  geom_histogram(bins = 5) + coord_cartesian(xlim = c(0, 10)) +
+  geom_histogram(bins = 5, color = "black", fill = "white") +
+  coord_cartesian(xlim = c(0, 10)) +
   labs(title = "Scenario 1b: Binomial, p ~ Beta(0.5, 0.5)",
        x = "Count of deformed pups per dam")
 
@@ -330,7 +334,8 @@ theoretical_pi <- tibble(x = 1:50000,
 
 hist1 <- ggplot() + 
   geom_histogram(data = scenario_2[1:6,], bins = 5, 
-                 aes(x = pi_2b, y = ..density..)) + 
+                 aes(x = pi_2b, y = ..density..),
+                 color = "black", fill = "white") + 
   coord_cartesian(xlim = c(0,1)) +
   geom_density(data = theoretical_pi, aes(x = p1), 
                bw = 0.05, linetype = 3) +
@@ -343,7 +348,8 @@ hist1 <- ggplot() +
 
 hist2 <- ggplot() + 
   geom_histogram(data = scenario_2[7:12,], 
-                 aes(x = pi_2b, y = ..density..), bins = 5) +
+                 aes(x = pi_2b, y = ..density..), bins = 5,
+                 color = "black", fill = "white") +
   coord_cartesian(xlim = c(0,1)) +
   geom_density(data = theoretical_pi, aes(x = p2), 
                bw = 0.05, linetype = 3) +
@@ -352,7 +358,8 @@ hist2 <- ggplot() +
 
 hist3 <- ggplot() + 
   geom_histogram(data = scenario_2[13:18,], 
-                 aes(x = pi_2b, y = ..density..), bins = 5) +
+                 aes(x = pi_2b, y = ..density..), bins = 5,
+                 color = "black", fill = "white") +
   coord_cartesian(xlim = c(0,1)) +
   geom_density(data = theoretical_pi, aes(x = p3), 
                bw = 0.05, linetype = 3) +
@@ -361,7 +368,8 @@ hist3 <- ggplot() +
 
 hist4 <- ggplot() + 
   geom_histogram(data = scenario_2[19:24,], 
-                 aes(x = pi_2b, y = ..density..), bins = 5) +
+                 aes(x = pi_2b, y = ..density..), bins = 5,
+                 color = "black", fill = "white") +
   coord_cartesian(xlim = c(0,1)) +
   geom_density(data = theoretical_pi, aes(x = p4), 
                bw = 0.05, linetype = 3) +
@@ -613,23 +621,23 @@ density <- dbeta(p,5,1)
 plot(p, density, type = "l")
 ```
 
-a. What values do beta random variables take on?
-b. What do these values represent for the dams and pups simulation?
-c. Do the possible values depend on $\alpha$ or $\beta$?
-d. What is a feature of the beta density when $\alpha=\beta$?
-e. What happens to the density when $\alpha \neq \beta$?
-f. How does the magnitude of $\alpha$ or $\beta$ affect the density?
-g. How does the difference between $\alpha$ and $\beta$ affect the density?
-h. If you wanted to simulate dams with mostly low probabilities of defects and a few with very high probabilities, how would you do it?
-i. If you wanted to simulate dams with mostly high probabilities of defects and a few with very low probabilities, how would you do it?
-j. If you wanted to simulate a population of dams where half of the probabilities of defects are very high and half are very low, how would you do it?
-k. How might you decide on values for $\alpha$ and $\beta$ if you have run a preliminary experiment and gathered data on the number of dams with deformed pups?
+    a. What values do beta random variables take on?
+    b. What do these values represent for the dams and pups simulation?
+    c. Do the possible values depend on $\alpha$ or $\beta$?
+    d. What is a feature of the beta density when $\alpha=\beta$?
+    e. What happens to the density when $\alpha \neq \beta$?
+    f. How does the magnitude of $\alpha$ or $\beta$ affect the density?
+    g. How does the difference between $\alpha$ and $\beta$ affect the density?
+    h. If you wanted to simulate dams with mostly low probabilities of defects and a few with very high probabilities, how would you do it?
+    i. If you wanted to simulate dams with mostly high probabilities of defects and a few with very low probabilities, how would you do it?
+    j. If you wanted to simulate a population of dams where half of the probabilities of defects are very high and half are very low, how would you do it?
+    k. How might you decide on values for $\alpha$ and $\beta$ if you have run a preliminary experiment and gathered data on the number of dams with deformed pups?
 
 2. **Dams and Pups (continued)**.  Modify the dams and pups simulation in the following ways.  In each case, produce plots and describe the results of your modified simulation.
 
-a. Pick a different beta distribution for Scenario 1b.
-b. Center the beta distributions in Scenarios 1a and 1b somewhere other than 0.5.
-c. Repeat Scenario 2a with 3 doses and an underlying logistic model of your own choosing.  Then create beta distributions as in Scenario 2b to match your 3 doses.
+    a. Pick a different beta distribution for Scenario 1b.
+    b. Center the beta distributions in Scenarios 1a and 1b somewhere other than 0.5.
+    c. Repeat Scenario 2a with 3 doses and an underlying logistic model of your own choosing.  Then create beta distributions as in Scenario 2b to match your 3 doses.
 
 ### Note on Correlated Binary Outcomes
 

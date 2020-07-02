@@ -181,7 +181,7 @@ While we identified possible violations of assumptions for inference in LLSR for
 
 Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
-## Initial Exploratory Analyses {#explore}
+## Initial Exploratory Analyses {#explore1}
 ### Data Organization
 
 The first five and last five rows from our data set are illustrated in Table \@ref(tab:introtable1).  Note that, in certain cases, we created new variables from existing ones:
@@ -213,10 +213,12 @@ First, we will examine the response variable and each potential covariate indivi
 ```{r twohist, fig.align = "center", out.width="90%", fig.cap = 'Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters.', echo=FALSE, message=FALSE}
 # EDA graphs
 speed_hist <- ggplot(data = derby.df, aes(x = speed)) + 
-  geom_histogram(binwidth = 0.5, fill = "white",color = "black") + 
+  geom_histogram(binwidth = 0.5, fill = "white",
+                 color = "black") + 
   xlab("Winning speed (ft/s)") + ylab("Frequency") + labs(title="(a)")
 starters_hist <- ggplot(data = derby.df, aes(x = starters)) + 
-  geom_histogram(binwidth = 3, fill = "white",color = "black") + 
+  geom_histogram(binwidth = 3, fill = "white",
+                 color = "black") + 
   xlab("Number of starters") + ylab("Frequency") + labs(title="(b)")
 grid.arrange(speed_hist, starters_hist, ncol = 2)
 ```
@@ -483,7 +485,8 @@ bootreg %>%
 
 ```{r boot4, fig.align = "center", out.width = "90%", fig.cap = 'Bootstrapped distributions for Model 4 coefficients', echo=FALSE, warning=FALSE}
 ggplot(bootreg, aes(estimate)) + 
-  geom_histogram(bins = 10) + facet_wrap(~ term, scales="free")
+  geom_histogram(bins = 10, color = "black", fill = "white") + 
+  facet_wrap(~ term, scales="free")
 ```
 
 In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\beta_1$, and $\beta_2$ are very similar to the normal-theory confidence intervals we found earlier.  For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.89 to 1.55 ft/s.  
@@ -587,12 +590,20 @@ cat(" R squared = ", summary(model0)$r.squared, "\n",
     "Residual standard error = ", summary(model0)$sigma)
 ```
 
-```{r}
+```{r comment=NA, message=FALSE}
 # Compare models with and without terms for track condition
 model0_reduced <- lm(speed ~ yearnew + yearnew2 + 
                        starters, data = derby.df)
-nested_f <- anova(model0_reduced, model0)
-print(nested_f, signif.stars = FALSE)
+drop_in_dev <- anova(model0_reduced, model0, test = "Chisq")
+```
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(ResidDF=drop_in_dev$`Res.Df`,
+    RSS=drop_in_dev$RSS,
+    SS=drop_in_dev$`Sum of Sq`, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chi)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
 ```
 
 This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses).  The model explains 82.7\% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions.  We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.

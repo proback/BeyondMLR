@@ -646,12 +646,12 @@ grid.arrange(int.box,rate.box,ncol=2)
 
 The effect of other confounding variables (e.g., percent non-white, percent special education, urban or rural location) can be investigated in a similar fashion to free and reduced lunch percentage, both in terms of main effect (variability in outcomes such as slope and intercept which can be explained by the confounding variable) and interaction with school type (ability of the confounding variable to explain differences between charter and public non-charter schools).  We leave these explorations as an exercise.
 
-### Error structure within schools {#lineartwostageerror}
+### Error structure within schools {#lineartwostageerror2}
 
 Finally, with longitudinal data it is important to investigate the error variance-covariance structure of data collected within a school (the Level Two observational unit). In multilevel data, as in the examples we introduced in Chapter \@ref(ch-corrdata), we suspect observations within group (like a school) to be correlated, and we strive to model that correlation. When the data within group is collected over time, we often see distinct patterns in the residuals that can be modeled---correlations which decrease systematically as the time interval increases, variances that change over time, correlation structure that depends on a covariate, etc. A first step in modeling the error variance-covariance structure is the production of an exploratory plot such as Figure \@ref(fig:lon-cor1). To generate this plot, we begin by modeling MCA math score as a linear function of time using all 1733 observations and ignoring the school variable.  This population (marginal) trend is illustrated in Figure \@ref(fig:lon-spag1) and is given by:
 
 \begin{equation}
-\hat{Y}_{ij}=651.69+1.20\textstyle{Time}_{ij},
+\hat{Y}_{ij}=651.69+1.20\textrm{Time}_{ij},
 (\#eq:overalltrend)
 \end{equation}
 where $\hat{Y}_{ij}$ is the predicted math score of the $i^{th}$ school at time $j$, where time $j$ is the number of years since 2008.  In this model, the predicted math score will be identical for all schools at a given time point $j$. Residuals $Y_{ij}-\hat{Y}_{ij}$ are then calculated for each observation, measuring the difference between actual math score and the average overall time trend.  Figure \@ref(fig:lon-cor1) then combines three pieces of information: the upper right triangle contains correlation coefficients for residuals between pairs of years, the diagonal contains histograms of residuals at each time point, and the lower left triangle contains scatterplots of residuals from two different years.  In our case, we see that correlation between residuals from adjacent years is strongly positive (0.81-0.83) and does not drop off greatly as the time interval between years increases.
@@ -727,7 +727,7 @@ Based on the intraclass correlation coefficient:
 \end{equation}
 79.8 percent of the total variation in math scores is attributable to difference among schools rather than changes over time within schools.  We can also say that the average correlation for any pair of responses from the same school is 0.798.
 
-### Unconditional growth model {#modelb}
+### Unconditional growth model {#modelb9}
 
 The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \@ref(ch-multilevelintro)). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the **unconditional growth model**. The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
 
@@ -1781,22 +1781,22 @@ Careful modeling and estimation of the Level One covariance matrix is especially
 As an example, in Case Study \@ref(cs:music) where Level One observational units are musical performances rather than time points, the standard model implies the following covariance structure for Musician $i$ in Model C, which uses an indicator for large ensembles as a Level One predictor:
 
 \begin{align*}
-Var(Y_{ij}) & = \sigma_{u}^{2} + \textstyle{Large}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textstyle{Large}_{ij}\sigma_{uv} \\
+Var(Y_{ij}) & = \sigma_{u}^{2} + \textrm{Large}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textrm{Large}_{ij}\sigma_{uv} \\
  & = \left\{ \begin{array}{ll}
-                 \sigma^{2} + \sigma_{u}^{2} & \mbox{if $\textstyle{Large}_{ij}=0$} \\
-                 \sigma^{2} + \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textstyle{Large}_{ij}=1$}
+                 \sigma^{2} + \sigma_{u}^{2} & \mbox{if $\textrm{Large}_{ij}=0$} \\
+                 \sigma^{2} + \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=1$}
                \end{array}
        \right.
 \end{align*}
 \noindent and
 
 \begin{align*}
-Cov(Y_{ij},Y_{ik}) & = \sigma_{u}^{2} + \textstyle{Large}_{ij}\textstyle{Large}_{ik} \sigma_{v}^{2} + (\textstyle{Large}_{ij} + 
-  \textstyle{Large}_{ik}) \sigma_{uv} \\
+Cov(Y_{ij},Y_{ik}) & = \sigma_{u}^{2} + \textrm{Large}_{ij}\textrm{Large}_{ik} \sigma_{v}^{2} + (\textrm{Large}_{ij} + 
+  \textrm{Large}_{ik}) \sigma_{uv} \\
  & = \left\{ \begin{array}{ll}
-                 \sigma_{u}^{2} & \mbox{if $\textstyle{Large}_{ij}=\textstyle{Large}_{ik}=0$} \\
-                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textstyle{Large}_{ij}=0$ and $\textstyle{Large}_{ik}=1$ or alt.} \\
-                 \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textstyle{Large}_{ij}=\textstyle{Large}_{ik}=1$}
+                 \sigma_{u}^{2} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=0$} \\
+                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=0$ and $\textrm{Large}_{ik}=1$ or alt.} \\
+                 \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=1$}
                \end{array}
        \right.
 \end{align*}
@@ -1825,17 +1825,17 @@ Cov(Y_1,Y_2) & = a_1 b_1 Var(X_1) + a_2 b_2 Var(X_2) + (a_1 b_2 + a_2 b_1) Cov(X
 \noindent Applying these identities to Model C, we first see that we can ignore all fixed effects, since they do not contribute to the variability.  Thus,
 
 \begin{align*}
-Var(Y_{ij}) & = Var(u_{i}+v_{i}\textstyle{Year08}_{ij}+\epsilon_{ij}) \\
- & = Var(u_{i}) + \textstyle{Year08}^{2}_{ij} Var(v_{i}) + Var(\epsilon_{ij}) + 2\textstyle{Year08}_{ij} Cov(u_{i},v_{i}) \\
- & = \sigma_{u}^{2} + \textstyle{Year08}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textstyle{Year08}_{ij}\sigma_{uv} \\
+Var(Y_{ij}) & = Var(u_{i}+v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}) \\
+ & = Var(u_{i}) + \textrm{Year08}^{2}_{ij} Var(v_{i}) + Var(\epsilon_{ij}) + 2\textrm{Year08}_{ij} Cov(u_{i},v_{i}) \\
+ & = \sigma_{u}^{2} + \textrm{Year08}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textrm{Year08}_{ij}\sigma_{uv} \\
  & = \sigma_{u}^{2} + t^{2}_{j} \sigma_{v}^{2} + \sigma^{2} + 2t_{j}\sigma_{uv}
 \end{align*}
 \noindent where the last line reflects the fact that observations were taken at the same time points for all schools.  We can derive the covariance terms in a similar fashion:
 
 \begin{align*}
-Cov(Y_{ij},Y_{ik}) & = Cov(u_{i}+ v_{i}\textstyle{Year08}_{ij}+\epsilon_{ij}, u_{i}+v_{i}\textstyle{Year08}_{ik}+\epsilon_{ik}) \\
- & = Var(u_{i}) + \textstyle{Year08}_{ij}\textstyle{Year08}_{ik} Var(v_{i}) + \\
- & \qquad (\textstyle{Year08}_{ij} + \textstyle{Year08}_{ik}) Cov(u_{i},v_{i}) \\
+Cov(Y_{ij},Y_{ik}) & = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u_{i}+v_{i}\textrm{Year08}_{ik}+\epsilon_{ik}) \\
+ & = Var(u_{i}) + \textrm{Year08}_{ij}\textrm{Year08}_{ik} Var(v_{i}) + \\
+ & \qquad (\textrm{Year08}_{ij} + \textrm{Year08}_{ik}) Cov(u_{i},v_{i}) \\
  & = \sigma_{u}^{2} + t_{j}t_{k} \sigma_{v}^{2} + (t_{j}+t_{k})\sigma_{uv}
 \end{align*}
 
@@ -1916,7 +1916,7 @@ did_print
 5. Table \@ref(tab:table4chp9) shows a portion of Table 2: Results of Hierarchical Linear Modeling Analyses Modeling Gang Involvement from @Walker-Barnes2001.  Provide interpretations of significant coefficients in context.
 
 ```{r, include=FALSE}
-Predictor <- c("Intercept (initial Status)", "Base (intercept for predicting int term)", "Peer behavior", "Black Ethnicity", "White/Other ethnicity", "Parenting", "Black Ethnicity X Parenting", "White/Other ethnicity X Parenting", "...Slope(change)", "...Base(intercept for predicting slope term)", "...Peer behavior", "...Black ethnicity", "...White/Other ethnicity", "...Parenting", "...Black Ethnicity X Parenting", "...White/Other ethnicity X Parenting")
+Predictor <- c("Intercept (initial Status)", "Base (intercept for predicting int term)", "Peer behavior", "Black Ethnicity", "White/Other ethnicity", "Parenting", "Black Ethnicity X Parenting", "White/Other ethnicity X Parenting", "Slope(change)", "Base(intercept for predicting slope term)", "Peer behavior", "Black ethnicity", "White/Other ethnicity", "Parenting", "Black Ethnicity X Parenting", "White/Other ethnicity X Parenting")
 Gammafiller <- c(" ","-.219",".252**",".671*",".149",".076","-.161+","-.026"," ",".028","-.011*","-.132*","-.059","-.015+","-.048**",".016")
 SE <- c(" ", ".160",".026",".289",".252",".050",".088",".082"," ",".030",".005",".054",".046",".009",".017",".015")
 ```
@@ -1926,7 +1926,6 @@ table4chp9 <- data.frame(Predictor, Gammafiller, SE)
 colnames(table4chp9) <- c("Predictor","Coefficient", "SE")
 kable(table4chp9, booktabs=T, escape=F,
       caption="A portion of Table 2: Results of Hierarchical Linear Modeling Analyses Modeling Gang Involvement from Walker-Barnes and Mason (2001).  These columns focus on the parenting behavior of psychological control.") %>%
-  kable_styling(latex_options = "scale_down") %>%
   row_spec(c(1,9), bold=T) %>%
   add_footnote("Table reports values for coefficients in the final model with all variables entered.  * p<.05; ** p<.01; + p<.10", notation="alphabet")
 ```
@@ -1943,7 +1942,7 @@ kable(table4chp9, booktabs=T, escape=F,
 
 11. In Chapter \@ref(ch-multilevelintro) Model B is called the "random slopes and intercepts model", while in this chapter Model B is called the "unconditional growth model".  Are these models essentially the same or systematically different?  Explain.
 
-12. In Section \@ref(modelb), why don't we examine the pseudo $R^2$ value for Level Two?
+12. In Section \@ref(modelb9), why don't we examine the pseudo $R^2$ value for Level Two?
 
 13. If we have test score data from 2001-2010, explain how we'd create new variables to fit a piecewise model.
 

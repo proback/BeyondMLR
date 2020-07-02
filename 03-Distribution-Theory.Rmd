@@ -762,15 +762,14 @@ if (knitr:::is_latex_output()) {
 
 1. __Beta-Biomial Distribution.__ We can generate more distributions by mixing two random variables. Beta-binomial random variables are binomial random variables with fixed $n$ whose parameter $p$ follows a beta distribution with fixed parameters $\alpha, \beta$. In more detail, we would first draw $p_1$ from our beta distribution, and then generate our first observation $y_1$, a random number of successes from a binomial ($n, p_1$) distribution. Then, we would generate a new $p_2$ from our beta distribution, and use a binomial distribution with parameters $n, p_2$ to generate our second observation $y_2$. We would continue this process until desired.
 
-Note that all of the observations $y_i$ will be integer values from $0, 1, \ldots, n$.  With this in mind, use `rbinom()` to simulate 1,000 observations from a plain old vanilla binomial random variable with $n=10$ and $p=0.8$. Plot a histogram of these binomial observations.
-Then, do the following to generate a beta-binomial distribution:
+    Note that all of the observations $y_i$ will be integer values from $0, 1, \ldots, n$.  With this in mind, use `rbinom()` to simulate 1,000 observations from a plain old vanilla binomial random variable with $n=10$ and $p=0.8$. Plot a histogram of these binomial observations. Then, do the following to generate a beta-binomial distribution:
 
-a. Draw $p_i$ from the beta distribution with $\alpha=4$ and $\beta=1$.
-b. Generate an observation $y_i$ from a binomial distribution with $n=10$ and $p = p_i$.
-c. Repeat (a) and (b) 1,000 times ($i=1,\ldots,1000$).
-d. Plot a histogram of these beta-binomial observations.  
+    a. Draw $p_i$ from the beta distribution with $\alpha=4$ and $\beta=1$.
+    b. Generate an observation $y_i$ from a binomial distribution with $n=10$ and $p = p_i$.
+    c. Repeat (a) and (b) 1,000 times ($i=1,\ldots,1000$).
+    d. Plot a histogram of these beta-binomial observations.  
     
-Compare the histograms of the "plain old" binomial and beta-binomial distributions.  How do their shapes, standard deviations, means, possible values, etc. compare?  
+    Compare the histograms of the "plain old" binomial and beta-binomial distributions.  How do their shapes, standard deviations, means, possible values, etc. compare?  
 
 2. __Gamma-Poisson Mixture I__ Use the R function `rpois()` to generate 10,000 $x_i$ from a plain old vanilla Poisson random variable, $X \sim \textrm{Poisson}(\lambda=1.5)$. Plot a histogram of this distribution and note its mean and standard deviation. Next, let  $Y \sim \textrm{Gamma}(r = 3, \lambda = 2)$ and use `rgamma()` to generate 10,000 random $y_i$ from this distribution. Now, consider 10,000 different Poisson distributions where $\lambda_i = y_i$. Randomly generate one $z_i$ from each Poisson distribution. Plot a histogram of these $z_i$ and compare it to your original histogram of $X$ (where $X \sim \textrm{Poisson}(1.5)$). How do the means and standard deviations compare?
 
@@ -783,6 +782,7 @@ Find the parameters of a negative binomial distribution $X \sim \textrm{Negative
 
 ```{r, faithful, fig.align="center",out.width="60%",fig.cap= 'Waiting time between eruptions of Old Faithful.', echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data = faithful, aes(x = waiting, y = ..density..)) +
-  geom_histogram(binwidth = 5) +
+  geom_histogram(binwidth = 5, color = "black", 
+                 fill = "white") +
   labs(x = "Wait time in minutes", y = "Frequency")
 ```

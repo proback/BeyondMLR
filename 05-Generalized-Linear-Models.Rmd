@@ -141,10 +141,10 @@ In the chapter on Poisson modeling, we provided heuristic rationale for using th
 
 1. For each distribution below,
 
-- Write the pmf or pdf in one parameter exponential form, if possible.
-- Describe an example of a setting where this random variable might be used.
-- Identify the canonical link function, and
-- Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
+    - Write the pmf or pdf in one parameter exponential form, if possible.
+    - Describe an example of a setting where this random variable might be used.
+    - Identify the canonical link function, and
+    - Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
 
 a) Binary: Y = 1 for a success, 0 for a failure
 
