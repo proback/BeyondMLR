@@ -29,14 +29,14 @@ library(knitr)
 
 ## One parameter exponential families
 
-Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter $\theta$ is a GLM, we consider the following properties.
+Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. \index{generalized linear models (GLMs)} All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter $\theta$ is a GLM, we consider the following properties.
 When a probability formula can be written in the form below
 
 \begin{equation}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 (\#eq:1expForm)
 \end{equation}
-and if the support (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
+and if the support (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__ \index{one-parameter exponential family}. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
 
 ### One Parameter Exponential Family: Possion
 
@@ -68,7 +68,7 @@ c(\lambda)&=-\lambda \\
 d(y)&=-\log (y!)
 (\#eq:diffunc)
 \end{align*}
-These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function $b(\lambda)$, or more generally $b(\theta)$, will be particularly helpful in GLMs. The function $b(\theta)$ is referred to as the __canonical link__. The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as $\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots$.  In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of $\theta$, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.  
+These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function $b(\lambda)$, or more generally $b(\theta)$, will be particularly helpful in GLMs. The function $b(\theta)$ is referred to as the __canonical link__ \index{canonical link}. The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as $\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots$.  In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of $\theta$, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.  
 
 There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS).  In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of $Y$. With statistical theory you can show that
 

@@ -128,7 +128,7 @@ kable(table2chp10, booktabs=T,
       caption="A snapshot of data (Plants 236-242) from the Seed Germination case study in long format.")
 ```
 
-Notice the __three-level structure__ of this data. Treatments (levels of the three experimental factors) were assigned at the `pot` level, then multiple plants were grown in each pot, and multiple measurements were taken over time for each plant. Our multilevel analysis must therefore account for pot-to-pot variability in height measurements (which could result from factor effects), plant-to-plant variability in height within a single pot, and variability over time in height for individual plants. In order to fit such a three-level model, we must extend the two-level model which we have used thus far.
+Notice the __three-level structure__ \index{three-level structure} of this data. Treatments (levels of the three experimental factors) were assigned at the `pot` level, then multiple plants were grown in each pot, and multiple measurements were taken over time for each plant. Our multilevel analysis must therefore account for pot-to-pot variability in height measurements (which could result from factor effects), plant-to-plant variability in height within a single pot, and variability over time in height for individual plants. In order to fit such a three-level model, we must extend the two-level model which we have used thus far.
 
 ### Exploratory Analyses {#explore3v2}
 
@@ -472,7 +472,7 @@ ggpairs(hgtw.1[,2:5], lower=list(continuous="smooth"),
 
 The structure and notation for three level models will closely resemble the structure and notation for two level models, just with extra subscripts. Therein lies some of the power of multilevel models---extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section \@ref(sec:explodingvarcomps)).
 
-We once again begin with the __unconditional means model__, in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
+We once again begin with the __unconditional means model__ \index{unconditional means model}, in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
 
 - Level One (timepoint within plant):
 
@@ -543,7 +543,7 @@ From this output, we obtain estimates of our four model parameters:
 
 From the estimates of variance components, 69.0\% of total variability in height measurements is due to differences over time for each plant, 26.4\% of total variability is due to differences between plants from the same pot, and only 4.6\% of total variability is due to difference between pots. Accordingly, we will next explore whether the incorporation of time as a linear predictor at Level One can reduce the unexplained variability within plant.
 
-The __unconditional growth model__ introduces time as a predictor at Level One, but there are still no predictors at Levels Two or Three. The unconditional growth model allows us to assess how much of the within-plant variability (the variability among height measurements from the same plant at different time points) can be attributed to linear changes over time, while also determining how much variability we see in the intercept (Day 13 height) and slope (daily growth rate) from plant-to-plant and pot-to-pot. Later, we can model plant-to-plant and pot-to-pot differences in intercepts and slopes with Level Two and Three covariates.
+The __unconditional growth model__ \index{unconditional growth model} introduces time as a predictor at Level One, but there are still no predictors at Levels Two or Three. The unconditional growth model allows us to assess how much of the within-plant variability (the variability among height measurements from the same plant at different time points) can be attributed to linear changes over time, while also determining how much variability we see in the intercept (Day 13 height) and slope (daily growth rate) from plant-to-plant and pot-to-pot. Later, we can model plant-to-plant and pot-to-pot differences in intercepts and slopes with Level Two and Three covariates.
 
 The three-level unconditional growth model (Model B) can be specified either using formulations at each level:
 
@@ -698,7 +698,7 @@ did_print
 # remember that anova() assumes REML=F
 ```
 
-However, Model C has encountered a __boundary constraint__ with an estimated Level 3 correlation between the intercept and slope error terms of -1. "Allowable" values of correlation coefficients run from -1 to 1; by definition, it is impossible to have a correlation between two error terms below -1. Thus, our estimate of -1 is right on the boundary of the allowable values. But how did this happen, and why is it potentially problematic?
+However, Model C has encountered a __boundary constraint__ \index{boundary constraint} with an estimated Level 3 correlation between the intercept and slope error terms of -1. "Allowable" values of correlation coefficients run from -1 to 1; by definition, it is impossible to have a correlation between two error terms below -1. Thus, our estimate of -1 is right on the boundary of the allowable values. But how did this happen, and why is it potentially problematic?
 
 Consider a model in which we have two parameters that must be estimated: $\beta_0$ and $\sigma^2$. As the intercept, $\beta_0$ can take on any value; any real number is "allowable".  But, by definition, variance terms such as $\sigma^2$ must be non-negative; that is, $\sigma^2 \geq 0$.  Under the Principle of Maximum Likelihood, maximum likelihood estimators for $\beta_0$ and $\sigma^2$ will be chosen to maximize the likelihood of observing our given data. The left plot in Figure \@ref(fig:boundary) shows hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$; the likelihood is clearly maximized at $(\hat{\beta}_0 , \hat{\sigma}^2)=(4,-2)$. However, variance terms cannot be negative! A more sensible approach would have been to perform a constrained search for MLEs, considering any potential values for $\beta_0$ but only non-negative values for $\sigma^2$. This constrained search is illustrated in the right plot in Figure \@ref(fig:boundary). In this case, the likelihood is maximized at $(\hat{\beta}_0 , \hat{\sigma}^2)=(4,0)$. Note that the estimated intercept did not change, but the estimated variance is simply set at the smallest allowable value -- at the __boundary constraint__.
 
@@ -836,7 +836,7 @@ did_print
 
 ## Parametric bootstrap testing {#threelevel-paraboot}
 
-As in Section \@ref(longitudinal-paraboot), when testing variance components at the boundary (such as $\sigma_{\tilde{v}}^{2} = 0$), a method like the **parametric bootstrap** should be used, since using a chi-square distribution to conduct a likelihood ratio test produces p-values that tend to be too large.
+As in Section \@ref(longitudinal-paraboot), when testing variance components at the boundary (such as $\sigma_{\tilde{v}}^{2} = 0$), a method like the **parametric bootstrap** \index{parametric bootstrap} should be used, since using a chi-square distribution to conduct a likelihood ratio test produces p-values that tend to be too large.
 
 Under the parametric bootstrap, we must simulate data under the null hypothesis many times.  Here are the basic steps for running a parametric bootstrap procedure to compare Model C.1 with Model C:
 
@@ -1019,7 +1019,11 @@ x="Likelihood Ratio Test Statistics from Null Distribution")
 # sum(nullLRT>=2.089)/1000   # parametric bootstrap p-value
 ```
 
-Another way of testing whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95\% confidence intervals for both $\rho_{\tilde{u}\tilde{v}}$ and $\sigma_{\tilde{v}}$.  From the output below, the 95\% bootstrapped confidence interval for $\rho_{\tilde{u}\tilde{v}}$ (-1, 1) contains 0, and the interval for $\sigma_{\tilde{v}}$ (.0000044, .0198) nearly contains 0, providing further evidence that the larger model is not needed.
+Another way of testing whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95\% confidence intervals for both $\rho_{\tilde{u}\tilde{v}}$ and $\sigma_{\tilde{v}}$.  From the output below, the 95\% bootstrapped confidence interval for $\rho_{\tilde{u}\tilde{v}}$ (-1, 1) contains 0, and the interval for $\sigma_{\tilde{v}}$ (.00050, .0253) nearly contains 0, providing further evidence that the larger model is not needed.
+
+```{r, include=FALSE}
+set.seed(3313)
+```
 
 ```{r, warning=F, message=F, cache=T}
 confint(modelcl, method="boot", oldNames = F)
@@ -1027,7 +1031,7 @@ confint(modelcl, method="boot", oldNames = F)
 
 ## Exploding variance components {#sec:explodingvarcomps}
 
-Our modeling task in Section \@ref(sec:boundary) was simplified by the absence of covariates at Level Two. As multilevel models grow to include three or more levels, the addition of just a few covariates at lower levels can lead to a huge increase in the number of parameters (fixed effects and variance components) that must be estimated throughout the model. In this section, we will examine when and why the number of model parameters might explode, and we will consider strategies for dealing with these potentially complex models.
+Our modeling task in Section \@ref(sec:boundary) was simplified by the absence of covariates at Level Two. As multilevel models grow to include three or more levels, the addition of just a few covariates at lower levels can lead to a huge increase in the number of parameters (fixed effects and variance components) \index{variance components} that must be estimated throughout the model. In this section, we will examine when and why the number of model parameters might explode, and we will consider strategies for dealing with these potentially complex models.
 
 For instance, consider Model C, where we must estimate a total of 15 parameters: 8 fixed effects plus 7 variance components (1 at Level One, 3 at Level Two, and 3 at Level Three). By adding just a single covariate to the equations for $a_{ij}$ and $b_{ij}$ at Level Two in Model C (say, for instance, the size of each seed), we would now have a total of 30 parameters to estimate! The new multilevel model (Model C_plus) could be written as follows:
 
@@ -1099,7 +1103,7 @@ Now consider adding an extra Level One covariate to the model in the previous pa
 Estimating even 30 parameters as in Model C_plus from a single set of data is an ambitious task and computationally very challenging. Essentially we (or the statistics package we are using) must determine which combination of values for the 30 parameters would maximize the likelihood associated with our model and the observed data. Even in the absolute simplest case, with only two options for each parameter, there would be over one billion possible combinations to consider! But if our primary interest is in fixed effects, we really only have 5 covariates (and their associated interactions) in our model. What can be done to make fitting a 3-level model with 1 covariate at Level One, 1 at Level Two, and 3 at Level Three more manageable? Reasonable options include:
 
 - Reduce the number of variance components by assuming all error terms to be independent; that is, set all correlation terms to 0.
-- Reduce the number of variance components by removing error terms from certain Levels Two and Three equations. Often, researchers will begin with a __random intercepts model__, in which only the first equation at Level Two and Three has an error term. With the leadplant data, we would account for variability in Day 13 height (intercept) among plants and pots, but assume that the effects of time and seed size are constant among pots and plants.
+- Reduce the number of variance components by removing error terms from certain Levels Two and Three equations. Often, researchers will begin with a __random intercepts model__ \index{random intercepts model}, in which only the first equation at Level Two and Three has an error term. With the leadplant data, we would account for variability in Day 13 height (intercept) among plants and pots, but assume that the effects of time and seed size are constant among pots and plants.
 - Reduce the number of fixed effects by removing interaction terms that are not expected to be meaningful. Interaction terms between covariates at different levels can be eliminated simply by reducing the number of terms in certain equations at Levels Two and Three. There is no requirement that all equations at a certain level contain the same set of predictors. Often, researchers will not include covariates in equations beyond the intercept at a certain level unless there's a compelling reason.
 
 By following the options above, our potential 30-parameter model (C_plus) can be simplified to this 9-parameter model:
@@ -1183,7 +1187,7 @@ cat(" Number of Level Two groups = ",
 coef(summary(modeldl0))
 ```
 
-To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appear to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level).  This means we may have a **three-way interaction** in our final composite model between sterilization, remnant prairies, and time.  Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor.  Whew!  
+To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appear to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level).  This means we may have a **three-way interaction** \index{three-way interaction} in our final composite model between sterilization, remnant prairies, and time.  Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor.  Whew!  
 
 Our final model (Model F), with its constraints on Level Three error terms, can be expressed level-by-level as:
 
@@ -1359,7 +1363,7 @@ Based on t-values produced by Model F, sterilization has the most significant ef
 
 ## Covariance structure (Optional) {#error-3level}
 
-As in Chapter \@ref(ch-lon), it is important to be aware of the covariance structure implied by our chosen models (focusing initially on Model B). Our three-level model, through error terms at each level, defines a specific covariance structure at both the plant level (Level Two) and the pot level (Level Three). For example, our standard model implies a certain level of correlation among measurements from the same plant and among plants from the same pot. Although three-level models are noticeably more complex than two-level models, it is still possible to systematically determine the implication of our standard model; by doing this, we can evaluate whether our fitted model agrees with our exploratory analyses, and we can also decide if it's worth considering alternative covariance structures.
+As in Chapter \@ref(ch-lon), it is important to be aware of the covariance structure \index{covariance structure} implied by our chosen models (focusing initially on Model B). Our three-level model, through error terms at each level, defines a specific covariance structure at both the plant level (Level Two) and the pot level (Level Three). For example, our standard model implies a certain level of correlation among measurements from the same plant and among plants from the same pot. Although three-level models are noticeably more complex than two-level models, it is still possible to systematically determine the implication of our standard model; by doing this, we can evaluate whether our fitted model agrees with our exploratory analyses, and we can also decide if it's worth considering alternative covariance structures.
 
 We will first consider Model B with $\tilde{v}_{i}$ at Level Three, and then we will evaluate the resulting covariance structure that results from removing $\tilde{v}_{i}$, thereby restricting $\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0$.  The composite version of Model B has been previously expressed as:
 

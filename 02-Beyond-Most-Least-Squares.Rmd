@@ -87,7 +87,7 @@ kable(table1chp2, booktabs=T, caption="The gender composition of 30 families in 
 ```
 
 ## Model 0: Sex Unconditional Model (Equal probabilities, Independence)
-For the Sex Unconditional models, having children is modeled using coin flips.  With a coin flip model,  the result of each flip is independent of results of other flips.  With this version of the Sex Unconditional Model, the chance that a baby is a boy is specified to be $p_B=0.5$. It makes no difference if the first and third children are boys, the probability that the second child is a boy is 0.5; that is, the results for each child are __independent__ of the others.  Under this model  you expect to see equal numbers of boys and girls.  
+For the Sex Unconditional models, having children is modeled using coin flips.  With a coin flip model,  the result of each flip is independent of results of other flips.  With this version of the Sex Unconditional Model, the chance that a baby is a boy is specified to be $p_B=0.5$. It makes no difference if the first and third children are boys, the probability that the second child is a boy is 0.5; that is, the results for each child are __independent__ \index{independent} of the others.  Under this model  you expect to see equal numbers of boys and girls.  
  
 ## Model 1: Sex Unconditional Model (Any Probability, Independence) {#sex_unconditional_model}
 
@@ -96,7 +96,7 @@ You may want your model to allow for the probability of a boy, $p_B$, to be some
 ### What is a likelihood?
 
 As is often the case in statistics, our objective is to find an estimate for a model parameter using our data; here, the parameter to estimate is the probability of a boy, $p_B$, and the data is the gender composition for each family. One way in which to interpret  probability is to imagine repeatedly producing children. The probability of a boy will be the overall proportion of boys as the number of children increases. 
-With likelihood methods, conceptually we consider different possible values for our parameter(s), $p_B$, and determine how likely we would be to see our observed data in each case, $\lik(p_B)$. We'll select as our estimate the value of $p_B$ for which  our data is most likely. A __likelihood__ is a function that tells us how likely we are to observe our data for a given parameter value, $p_B$. For a single family which has a girl followed by two boys, GBB,  the likelihood function looks like:
+With likelihood methods, conceptually we consider different possible values for our parameter(s), $p_B$, and determine how likely we would be to see our observed data in each case, $\lik(p_B)$. We'll select as our estimate the value of $p_B$ for which  our data is most likely. A __likelihood__ \index{likelihood} is a function that tells us how likely we are to observe our data for a given parameter value, $p_B$. For a single family which has a girl followed by two boys, GBB,  the likelihood function looks like:
 
 \begin{equation}
  \lik (p_B) = P(G)P(B)P(B) = (1-p_B)p_B^2
@@ -123,7 +123,7 @@ GBBplot
 
 From the likelihood in Figure \@ref(fig:lik1), when $p_B$ = 0.3 we see a family of a girl followed by two boys  6.3\% ($0.7\cdot0.3^2$) of the time. However, it indicates that we are much more likely to see our data if $p_B$ = 0.6 where the likelihood of GBB is $0.4\cdot0.6^2$ or 14.4\%.
   
-If the choice was between 0.3 and 0.6 for an estimate of $p_B$, we'd choose 0.6. The "best" estimate of $p_B$ would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the __maximum likelihood estimate__ or MLE. We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
+If the choice was between 0.3 and 0.6 for an estimate of $p_B$, we'd choose 0.6. The "best" estimate of $p_B$ would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the __maximum likelihood estimate__ or MLE \index{maximum likelihood estimate (MLE)}. We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
 
 Suppose another family consisting of three girls is added to our data set. We've already seen that the Sex Unconditional Model multiplies probabilities to construct a likelihood because children are independent of one another. Extending this idea, families can be assumed to be independent of one another so that the likelihood for both families can be obtained by multiplication.  With two families (GBB and GGG) our likelihood is now:
 
@@ -325,7 +325,7 @@ Our first research question involves determining whether sex runs in the family.
   
 ### Model Specification
 
-Unlike the previous model, the $p_B$ in a Sex Conditional  Model *depends* on existing family compositions.  We introduce **conditional probabilities** and conditional notation to make the dependence explicit. One way to interpret the notation $P(A|B)$ is the "probability of A *given* B has occurred."  Another way to read this notation is the "probability of A *conditional* on B." Here, let $\neutral$ represent the probability the next child is a boy given that there are equal numbers of boys and girls (sex-neutral) in the existing family. Let $\bbias$ represent the probability the next child is a boy if the family is boy-biased; i.e., there are more boys than girls prior to this child. Similarly, let $\gbias$ represent the probability the next child is a boy if the family is girl-biased; i.e., there are more girls than boys prior to this child.  
+Unlike the previous model, the $p_B$ in a Sex Conditional  Model *depends* on existing family compositions.  We introduce **conditional probabilities** \index{conditional probability} and conditional notation to make the dependence explicit. One way to interpret the notation $P(A|B)$ is the "probability of A *given* B has occurred."  Another way to read this notation is the "probability of A *conditional* on B." Here, let $\neutral$ represent the probability the next child is a boy given that there are equal numbers of boys and girls (sex-neutral) in the existing family. Let $\bbias$ represent the probability the next child is a boy if the family is boy-biased; i.e., there are more boys than girls prior to this child. Similarly, let $\gbias$ represent the probability the next child is a boy if the family is girl-biased; i.e., there are more girls than boys prior to this child.  
   
 Before we are mired in notation and calculus, let's think about how these conditional probabilities can be used to describe sex running in families. While we only had one parameter, $p_B$, to estimate in the Sex Unconditional Model, here we have three parameters: $\neutral$, $\bbias$, and $\gbias$. Clearly if all three of these probabilities are equal, the probability a child is a boy does not depend upon the existing gender composition of the family and there is no evidence of sex running in families. A conditional probability $\bbias$ that is larger than $\neutral$  suggests families with more boys are more likely to produce additional boys in contrast to families with equal boys and girls. This finding would support the theory of "boys run in families." An analogous argument holds for girls. In addition, comparisons of $\bbias$ and $\gbias$ to the parameter estimate $p_B$ from the Sex Unconditional Model may be interesting and can be performed using likelihoods.  
   
@@ -662,7 +662,7 @@ Even though initial estimates don't support the idea, let's formally take a look
 ### Comparing the Sex Unconditional to the Sex Conditional Model {#sec-lrtest}
 #### Nested Models
     
-Likelihoods are not only useful for fitting models, but they are also useful when comparing models. If the parameters for a reduced model are a subset of parameters for a larger model, we say the models are __nested__ and the difference between their likelihoods can be incorporated into a statistical test to help judge the benefit of including additional parameters. Another way in which to think of nesting is to consider whether parameters in the larger model can be equated to obtain the simpler model or whether some parameters in the larger model can be set to constants.  Since $\bbias, \neutral$ and $\gbias$ in the Sex Conditional Model can be set to $p_B$ to obtain the Sex Unconditional Model, we can say the models are nested.
+Likelihoods are not only useful for fitting models, but they are also useful when comparing models. If the parameters for a reduced model are a subset of parameters for a larger model, we say the models are __nested__ \index{nested models} and the difference between their likelihoods can be incorporated into a statistical test to help judge the benefit of including additional parameters. Another way in which to think of nesting is to consider whether parameters in the larger model can be equated to obtain the simpler model or whether some parameters in the larger model can be set to constants.  Since $\bbias, \neutral$ and $\gbias$ in the Sex Conditional Model can be set to $p_B$ to obtain the Sex Unconditional Model, we can say the models are nested.
     
 If the parameters are not nested, comparing models with the likelihood can still be useful but will take a different form. We'll see that the Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) are functions of the log-likelihood that can be used to compare models even when the models  are not nested. Either way we see that this notion of likelihood is pretty useful.
     
@@ -674,7 +674,7 @@ The probability of a boy does not depend on the prior family composition.
 $H_A:$ At least one parameter from $\neutral, \bbias,\gbias$  differs from the others. (Sex Conditional Model)
 The probability of a boy does depend on the prior family composition. 
     
-We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model.  Here we will refer to the first model, the Sex Unconditional Model, as the **reduced model**, noting that it has only a single parameter, $p_B$.  The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the **larger (full) model**.  We'll use the MLEs derived earlier. (Equations \@ref(eq:MLESexUn) and \@ref(eq:likall)).
+We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model.  Here we will refer to the first model, the Sex Unconditional Model, as the **reduced model** \index{null (reduced) model}, noting that it has only a single parameter, $p_B$.  The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the **larger (full) model**.  We'll use the MLEs derived earlier. (Equations \@ref(eq:MLESexUn) and \@ref(eq:likall)).
     
 The maximum of the log-likelihood  for the reduced model can be found by replacing $p_{B}$ in the log-likelihood with the MLE of $p_{B}$, 0.5075.
     
@@ -694,7 +694,7 @@ The maximum of the log-likelihood for the larger model can be found by replacing
     
 Take a look at the log-likelihoods---the maximum log-likelihood for the larger model is indeed larger (less negative). The maximum log-likelihood for the larger model is guaranteed to be at least as large as the maximum log-likelihood for the reduced model, so we'll be interested in whether this observed difference in maximum log-likelihoods, -7391.448 -(-7396.067) = 4.619, is significant. 
     
-A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a $\chi^2$ distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred  to as the __Likelihood Ratio Test (LRT)__.
+A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a $\chi^2$ distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred  to as the __Likelihood Ratio Test (LRT)__ \index{likelihood ratio test (LRT)}.
     
 Our test statistic is
 
@@ -812,8 +812,8 @@ Similarly, for girls, the MLEs are $\hat{p}_{S|G1}$ = 0.457 and $\hat{p}_{S|N}$ 
     
 How does the waiting for a boy model compare to the waiting for a girl model? Thus far we've seen how  nested models can be compared.  But these two models are not nested since one is not simply a reduced version of the other. Two measures referred to as information criteria, AIC and BIC, are useful when comparing non-nested models. Each measure can be calculated for a model using a  function of the model's maximum log-likelihood. You can find the log-likelihood in the output from most modeling software packages.   
     
-- $\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p$, where $p$ represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion. Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC. 
-- $\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)$, where $p$ is the number of parameters and $n$ is the number of observations. BIC stands for  Bayesian Information Criterion, also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.  
+- $\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p$, where $p$ represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion \index{AIC}. Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC. 
+- $\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)$, where $p$ is the number of parameters and $n$ is the number of observations. BIC stands for  Bayesian Information Criterion \index{BIC}, also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.  
     
 So which explanation of the data seems more plausible---waiting for a boy or waiting for a girl?  These models are not nested (i.e., one is not a simplified version of the other), so it is not correct to perform a Likelihood Ratio Test, but we can legitimately compare these models using information criteria.
 
@@ -912,3 +912,34 @@ When the responses are are not normal such as in generalized linear models, wher
 Can you construct a model which suggests that childbearing is stopped when couples have a boy *and* a girl?  Define the parameter(s) for balance-preference stopping combined with the sex conditional model and write out likelihood contributions for the same family compositions that appear in Table \@ref(tab:table3chp2).
     
  - **Extra Credit** Obtain the MLEs for your balance-preference model parameters and interpret the results.  Then, compare the balance-preference stopping rule model to the random stopping model using a LRT.
+
+2. **The Hot Hand in Basketball**  @Gilovich1985 wrote a controversial but compelling article claiming that there is no such thing as “the hot hand” in basketball.  That is, there is no empirical evidence that shooters have stretches where they are more likely to make consecutive shots, and basketball shots are essentially independent events.  One of the many ways they tested for evidence of a “hot hand” was to record sequences of shots for players under game conditions and determine if players are more likely to make shots after made baskets than after misses.  For instance, assume we recorded data from one player's first 5 three-point attempts over a 5-game period.  We can assume games are independent, but we’ll consider two models for shots within a game:
+
+    - No Hot Hand (1 parameter): $p_B$ = probability of making a basket (thus $1-p_B$ = probability of not making a basket)
+
+    - Hot Hand (2 parameters): $p_B$ = probability of making a basket after a miss (or the first shot of a game); $p_{B|B}$ = probability of making a basket after making the previous shot
+
+```{r, include=FALSE}
+Game <- c(1,2,3,4,5, "Total")
+First5 <- c("BMMBB", "MBMBM", "MMBBB", "BMMMB", "MMMMM", " ")
+NoHotHand <- c(" "," "," "," "," "," ")
+HotHand <- c(" "," "," "," "," "," ")
+```
+    
+```{r, hothandchp2, echo=FALSE}
+hothandchp2 <- data.frame(Game, First5, NoHotHand, HotHand)
+kable(hothandchp2, booktabs = T, 
+      col.names = c("Game", "First 5 shots", 
+                    "Likelihood (No Hot Hand)", 
+                    "Likelihood (Hot Hand)"),
+      caption = "Data for Open Exercise 2.  B = made basket.  M = missed basket.") %>% 
+  column_spec(1:4, width = "2cm") %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
+    a. Fill out Table \@ref(tab:table10chp2)---write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.
+
+    b. Given that, for the No Hot Hand model, $\textrm{Lik}(p_B)=p_B^{10}(1-p_B)^{15}$ for the 5 games where we collected data, how do we know that 0.40 (the maximum likelihood estimator (MLE) of $p_B$) is a better estimate than, say, 0.30?
+
+    c. Find the MLEs for the parameters in each model, and then use those MLEs to determine if there's significant evidence that the hot hand exists.
+
