@@ -52,7 +52,7 @@ Charter schools were first introduced in the state of Minnesota in 1991 [@Charte
 
 One example of this unique schedule structure is the KIPP (Knowledge is Power Program) Stand Academy in Minneapolis, MN. KIPP stresses longer days and better partnerships with parents, and they claim that 80\% of their students go to college from a population where 87\% qualify for free and reduced lunch and 95\% are African-American or Latino [@KIPP]. However, the larger question is whether or not charter schools are out-performing non-charter public schools in general.  Because of the relative youthfulness of charter schools, data has just begun to be collected to evaluate the performance of charter versus non-charter schools and some of the factors that influence a school's performance. Along these lines, we will examine data collected by the Minnesota Department of Education for all Minnesota schools during the years 2008-2010.
 
-Comparisons of student performance in charter schools versus public schools have produced conflicting results, potentially as a result of the strong differences in the structure and population of the student bodies that represent the two types of schools. A study by the Policy and Program Studies Service of five states found that charter schools are less likely to meet state performance standards than conventional public schools [@DepartmentOfEducation2004]. However, @Witte2007 performed a statistical analysis comparing Wisconsin charter and non-charter schools and found that average achievement test scores were significantly higher in charter schools compared to non-charter schools, after controlling for demographic variables such as the percentage of white students. In addition, a study of California students who took the Stanford 9 exam from 1998 through 2002 found that charter schools, on average, were performing at the same level as conventional public schools [@Buddin2005]. Although school performance is difficult to quantify with a single measure, for illustration purposes in this chapter we will focus on that aspect of school performance measured by the math portion of the Minnesota Comprehensive Assessment (MCA-II) data for 6th grade students enrolled in 618 different Minnesota schools during the years 2008, 2009, and 2010 [@MNDepartmentOfEducation]. Similar comparisons could obviously be conducted for other grade levels or modes of assessment.
+Comparisons of student performance in charter schools versus public schools have produced conflicting results, potentially as a result of the strong differences in the structure and population of the student bodies that represent the two types of schools. A study by the Policy and Program Studies Service of five states found that charter schools are less likely to meet state performance standards than conventional public schools [@Finnegan2004]. However, @Witte2007 performed a statistical analysis comparing Wisconsin charter and non-charter schools and found that average achievement test scores were significantly higher in charter schools compared to non-charter schools, after controlling for demographic variables such as the percentage of white students. In addition, a study of California students who took the Stanford 9 exam from 1998 through 2002 found that charter schools, on average, were performing at the same level as conventional public schools [@Buddin2005]. Although school performance is difficult to quantify with a single measure, for illustration purposes in this chapter we will focus on that aspect of school performance measured by the math portion of the Minnesota Comprehensive Assessment (MCA-II) data for 6th grade students enrolled in 618 different Minnesota schools during the years 2008, 2009, and 2010 [@MNDepartmentOfEducation]. Similar comparisons could obviously be conducted for other grade levels or modes of assessment.
 
 As described in @Green2003, it is very challenging to compare charter and public non-charter schools, as charter schools are often designed to target or attract specific populations of students. Without accounting for differences in student populations, comparisons lose meaning. With the assistance of multiple school-specific predictors, we will attempt to model sixth grade math MCA-II scores of Minnesota schools, focusing on the differences between charter and public non-charter school performances. In the process, we hope to answer the following research questions:
 
@@ -1993,6 +1993,80 @@ kable(table4chp9, booktabs=T, escape=F,
     10. (Model C) Build upon the unconditional growth model by adding the effects of having an alcoholic parent and peer alcohol use in both Level Two equations.  Report and interpret all estimated fixed effects, using proper notation.
     11. (Model D) Remove the child of an alcoholic indicator variable as a predictor of slope in Model C (it will still be a predictor of intercept).  Write out Model D as both a two-level and a composite model using proper notation (including error distributions); how many parameters (fixed effects and variance components) must be estimated?  Compare Model D to Model C using an appropriate method and state a conclusion.
 
+2. __Ambulance Diversions__.  One response to emergency department overcrowding is “ambulance diversion”---closing its doors and forcing ambulances to bring patients to alternative hospitals.  The California Office of Statewide Health Planning and Development collected data on how often hospitals enacted “diversion status”, enabling researchers to investigate factors associated with increasing amounts of ambulance diversions.  An [award-winning](https://www.causeweb.org/usproc/usclap/2019/spring/winners) student project [@Radtke2019] examined a data set (`ambulance3.csv`) which contains the following variables from 184 California hospitals over a 3-year period (2013-2015):
+
+    - `diverthours` = number of hours of diversion status over the year (response)
+    - `year2013` = year (centered at 2013)
+    - `totalvisits1` = total number of patient visits to the emergency department over the year (in 1000s)
+    - `ems_basic` = 1 if the emergency department can only handle a basic level of severity; 0 if the emergency department can handle higher levels of severity
+    - `stations` = number of emergency department stations available for patients (fixed over 3 years)
+    
+    a. State the observational units at Level One and Level Two in this study, then state the explanatory variables at each level from the list above.
+
+    b. Create latticed spaghetti plots that illustrate the relationship between diversion hours and (i) EMS level, and (ii) number of stations (divided into "high" and "low").  Describe terms that might be worth testing in your final model based on these plots.
+
+    c. Consider Model B, where $Y_{ij}$ is the number of diversion hours for the $i^{th}$ hospital in the $j^{th} year$.  Interpret both a_i and v_i in the context of this problem (using words – no numbers necessary).
+
+- Level One:
+\begin{equation}
+Y_{ij}=a_{i}+b_{i}Year2013_{ij} + \epsilon_{ij}
+\end{equation}
+
+- Level Two:
+\begin{align*}
+a_{i}&=\alpha_{0} + u_{i}\\
+b_{i}&=\beta_{0} + v_{i}
+\end{align*}
+
+where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
+
+\[ \left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \\
+            \sigma_{uv} & \sigma_{v}^{2}
+          \end{array} \right] \right) . \]
+
+    d. In Model E, focus on the `ems_basic:year2013` interaction term.
+      - provide a careful interpretation in context
+      - why are there no p-values for testing significance in the lmer() output?
+      - confidence intervals are formed for parameters in Model E using two different methods on pages 3-4.  What can we conclude about the significance of the interaction from the CIs?  Be sure to make a statement about significance in context; no need to interpret the CI itself.
+
+```{r, eval=FALSE}
+modelE <- lmer(diverthours ~ year2013 + ems_basic +
+  ems_basic:year2013 + (year2013 | id), data = ambulance3)
+```
+
+    e. Write out Model G in terms of its Level 1 and Level 2 equations.  Be sure to use proper subscripts everywhere, and also be sure to also provide expressions for any assumptions made about error terms.  How many total parameters must be estimated?
+
+```{r, eval=FALSE}
+modelG <- lmer(diverthours ~ year2013 + totalvisits1 + 
+  ems_basic + stations + ems_basic:year2013 + 
+  stations:year2013 + (year2013 | id), data = ambulance3)
+```
+
+    f. In Model G, provide careful interpretations in context for the coefficient estimates of `year2013` and `stations`.
+
+    g. We wish to compare Models D and D0. 
+      - Write out null and alternative hypotheses in terms of model parameters
+      - State a conclusion based on a likelihood ratio test
+      - State a conclusion based on a parametric bootstrap.  
+      - Generate a plot that compares the null distributions and p-values for the likelihood ratio test and parametric bootstrap.
+      - Why might we consider using a parametric bootstrap p-value rather than a likelihood ratio test p-value?
+      - Show how you would produce a bootstrapped value for $Y_{11}$, the first row of `ambulance3.csv`.  Show all calculations with as many specific values filled in as possible.  If you need to select a random value from a normal distribution, identify the mean and SD for the normal distribution you’d like to sample from.
+
+```{r, eval=FALSE}
+modelD <- lmer(diverthours ~ year2013 + ems_basic + 
+  (year2013 | id), data = ambulance3)
+
+modelD0 <- lmer(diverthours ~ year2013 + ems_basic + 
+  (1 | id), data = ambulance3)
+```
+
 ### Open-ended Exercises
 
 1. __UCLA Nurse Blood Pressure Study.__ A study by @Goldstein2000 collected information from 203 registered nurses in the Los Angeles area between 24 and 50 years of age on blood pressure and potential factors that contribute to hypertension.  This information includes family history, including whether the subject had one or two hypertensive parents, as well as a wide range of measures of the physical and emotional condition of each nurse throughout the day.  Researchers sought to study the links between blood pressure and family history, personality, mood changes, working status, and menstrual phase.  
@@ -2033,3 +2107,24 @@ kable(table4chp9, booktabs=T, escape=F,
     - `tuition` = mean yearly tuition during 2002-2009 (in \$1000s) </ul>
 
     Perform exploratory analyses and run multilevel models to determine significant predictors of baseline (2002) completion rates and changes in completion rates between 2002 and 2009.  In particular, is the percentage of grant recipients or the average institutional grant awarded related to completion rate?
+
+3. __Beating the Blues__ Depression is a common mental disorder affecting approximately 121 million people worldwide, making it one of the leading causes of disability. Evidence has shown that cognitive behavioral therapy (CBT) can be an effective treatment, but delivery of the usual face-to-face treatment is expensive and dependent on the availability of trained therapists. As a result, Proudfoot et al. [-@Proudfoot2003] developed and studied an interactive multimedia program of CBT called Beating the Blues (BtheB). In their study, 167 participants suffering from anxiety and/or depression were randomly allocated to receive Beating the Blues therapy or treatment as usual (TAU). Beating the Blues consisted of 8 50-minute computerized weekly sessions with “homework” projects between sessions, while treatment as usual consisted of whatever treatment the patient’s general practitioner (GP) prescribed, including drug treatment or referral to a counselor. Subjects in the BtheB group could also receive pharmacotherapy if prescribed by their GP (who reviewed a computer-generated progress report after each subject’s session), but they could not receive face-to-face counseling. The primary response was the Beck Depression Inventory (BDI), measured prior to treatment, at the end of treatment (2 months later), and at 2, 4, and 6 months post-treatment follow-up. Researchers wished to examine the effect of treatment on depression levels, controlling for potential explanatory variables such as baseline BDI, if the patient took anti-depressant drugs, and the length of the current episode of depression (more or less than 6 months).  Was treatment effective in both the active treatment phase and the post-treatment follow-up?
+
+    Data from the Beating the Blues study can be found in `BtheB.csv`; it is also part of the `HSAUR` package @Everitt2006 in R. Examination of the data reveals the following variables:
+
+    - `drug` = Was the subject prescribed concomitant drug therapy?
+    - `length` = Was the current episode of depression (at study entry) longer or shorter than 6 months?
+    - `treatment` = TAU or BtheB
+    - `bdi.pre` = Baseline BDI at time of study entry (before treatment began)
+    - `bdi.2m` = BDI level after 2 months (at the end of treatment phase)
+    - `bdi.4m` = BDI level after 4 months (or 2 months after treatment ended)
+    - `bdi.6m` = BDI level after 6 months (or 4 months after treatment ended)
+    - `bdi.8m` = BDI level after 8 months (or 6 months after treatment ended)
+    
+    Things to consider when analyzing data from this case study:
+
+    - Examine patterns of missing data.
+    - Convert to LONG form (and eliminate subjects with no post-baseline data).
+    - Exploratory data analyses, including lattice, spaghetti, and correlation plots. 
+    - Set time 0 to be 2 months into the study (then the intercept represents BDI level at the end of active treatment, while the slope represents change in BDI level over the posttreatment follow-up). 
+    - Note that treatment is the variable of primary interest, while baseline BDI, concomitant drug use, and length of previous episode are confounding variables.

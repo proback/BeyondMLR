@@ -1336,3 +1336,14 @@ kable(table5chp11, booktabs=T,
     The primary response variable is `removed`.  Certain potential predictors are measured at the state level (e.g., `pvi2` and `cperhs`), at least one is at the book level (`freqchal`), and several are specific to an individual challenge (e.g., `obama` and `sexexp`).  In addition, note that the same book can be challenged for more than one reason, in different states, or even at different times in the same state.
 
     Perform exploratory analyses and then run multilevel models to examine significant determinants of successful challenges.  Write a short report comparing specific reasons for the challenge to the greater context in which a challenge was made.
+
+4. __Yelp restaurant reviews__  @Mohr2018 assembled a data set of Yelp restaurant reviews in Madison, WI, from 2005 through 2017 based on the Yelp Dataset Challenge on [Kaggle](https://www.kaggle.com/yelp-dataset/yelp-dataset).  Their data in `yelp.csv` contains almost 60,000 reviews on 888 restaurants from over 20,000 reviewers, and it contains a selection of variables on the reviewer (e.g., total reviews, average stars), the restaurant (e.g., neighborhood, average stars, category), and the review itself (e.g., stars, year, useful ratings, actual text).
+
+    There are various questions that could be pursued with this data.  Here are just a few ideas:
+      - how can we model number of stars in the rating, or whether or not the rating was 5 stars or not?
+      - how can we model whether or not at least one person thought the review was useful?
+      - how can we model whether or not at least one person thought the review was cool?
+      
+    A few things to keep in mind while building models to answer your questions:
+      - user and restaurant can be considered crossed random effects
+      - convergence may be an issue.  You may have to take a random sample of reviews, or a targeted sample of more frequently appearing users and/or restaurants.
