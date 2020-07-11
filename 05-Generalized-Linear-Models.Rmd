@@ -54,11 +54,10 @@ and consider the following useful identities for establishing exponential form:
   
 Determining whether the Poisson model is a member of the one-parameter exponential family is a matter of writing the Poisson pmf in the form of Equation \@ref(eq:1expForm) and checking that the support does not depend upon $\lambda$. First, consider the condition concerning the support of the distribution. The set of possible values for any Poisson random variable is $y=0,1,2\ldots\infty$ which does not depend on $\lambda$. The support condition is met. Now we see if we can rewrite the probability mass function in one-parameter exponential family form.
 
- \begin{align}
+ \begin{align*}
  P(Y=y)&= {e^{-\lambda}e^{y\log \lambda}e^{-\log (y!)}} \nonumber \\
        &= e^{y\log \lambda-\lambda-\log (y!)}
- (\#eq:opeff)
- \end{align}
+ \end{align*}
 The first term in the exponent for Equation \@ref(eq:1expForm) must be the product of two factors, one solely a function of y, $a(y)$, and another, $b(\lambda)$, a function of $\lambda$ only.  The middle term in the exponent must be a function of $\lambda$ only; no $y's$ should appear.  The last term has only $y's$ and no $\lambda$. Since this appears to be the case here, we can identify the different functions in this form:
 
 \begin{align*}
@@ -184,10 +183,10 @@ h) Geometric: Y = number of failures before the first success in a Bernoulli pro
 
 i) Negative Binomial (for fixed $r$): Y = number of failures prior to the $r^{th}$ success in a Bernoulli process
 
-\begin{align}
+\begin{align*}
 P(Y=y; p) & =  \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-p)^{y}p^r \nonumber \\
  & =  \frac{\Gamma(y+r)}{\Gamma(r)y!} (1-p)^{y}p^r  \\
-\end{align}
+\end{align*}
 
 j) Pareto (for fixed $k$): 
 

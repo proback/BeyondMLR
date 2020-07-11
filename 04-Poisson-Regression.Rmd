@@ -53,10 +53,9 @@ For a linear least squares regression model, the parameter of interest is the av
 
 One way to avoid these problems is to model log($\lambda_i$) instead of $\lambda_i$ as a function of the covariates. The log($\lambda_i$) takes on values from $-\infty$ to $\infty$. We can also take into account the increase in the variance with an increasing mean using this approach. (Note that throughout *Broadening Your Statistical Horizons* we use log to represent the natural logarithm.)  Thus, we will consider the **Poisson regression** \index{Poisson regression} model:
 
-\begin{equation}
+\begin{equation*}
 log(\lambda_i)=\beta_0+\beta_1 x_i
-(\#eq:poisReg)
-\end{equation}
+\end{equation*}
 where the observed values $Y_i \sim$ Poisson with $\lambda=\lambda_i$ for a given $x_i$. For example, each state $i$ can potentially have a different $\lambda$ depending on its value of $x_i$, where $x_i$ could represent presence or absence of a particular helmet law.  Note that the Poisson regression model contains no separate error term like the $\epsilon$ we see in linear regression, because $\lambda$ determines both the mean and the variance of a Poisson random variable.
 
 ### Poisson Regression Assumptions
@@ -161,7 +160,7 @@ Figure \@ref(fig:OLSpois) illustrates a comparison of the LLSR model for inferen
 
 We take a look at the Poisson regression model in the context of three case studies. Each case study is based on real data and real questions. Modeling household size in the Philippines introduces the idea of regression with a Poisson response along with its assumptions. A quadratic term is added to a model to determine an optimal size per household, and methods of model comparison are introduced. The campus crime case study introduces two big ideas in Poisson regression modeling: offsets, to account for sampling effort, and overdispersion, when actual variability exceeds what is expected by the model.  Finally, the weekend drinking example uses a modification of a Poisson model to account for more zeros than would be expected for a Poisson random variable. These three case studies also provide context for some of the familiar concepts related to modeling such as exploratory data analysis, estimation, and residual plots.
 
-## Case Study: Household Size in the Philippines
+## Case Study: Household Size in the Philippines {#cs-philippines}
 
 How many other people live with you in your home? The number of people sharing a house differs from country to country and often from region to region. International agencies use household size when determining needs of populations, and the household sizes determine the magnitude of the household needs.
 
@@ -493,19 +492,19 @@ optimize(estLogNumHouse.f, interval=c(20,70), maximum=TRUE)
 
 ```
 
-As shown in the following, with calculus we can determine that the maximum estimated additional number in the house is $e^{1.608} = 4.996$ when the head of the household is 50.328 years old.
+As shown in the following, with calculus we can determine that the maximum estimated additional number in the house is $e^{1.441} = 4.225$ when the head of the household is 50.04 years old.
 
 \begin{align*}
 \textrm{log(total)} & = -0.333 + 0.071\textrm{age} - 0.00071 \textrm{age}^2 \\
 \frac{d}{d\textrm{age}}\textrm{log(total)} & = 0 + 0.071 - 0.0014 \textrm{age} = 0 \\
 \textrm{age} & = 50.04 \\
-\textrm{max[log(total)]} & = -0.333 + 0.071 \times 50.04 - 0.00071 \times (50.04)^2 = 1.608
+\textrm{max[log(total)]} & = -0.333 + 0.071 \times 50.04 - 0.00071 \times (50.04)^2 = 1.441
 \end{align*}
 
 
 ### Adding a covariate
 
-We should consider other covariates that may be related to household size. By controlling for important covariates, we can obtain more precise estimates of the relationship between age and household size. In addition, we may discover that the relationship between age and household size may differ by levels of a covariate. One important covariate to consider is location. As described earlier in the case study, there are 5 different regions that are associated with the `Location` variable: Central Luzon, Metro Manila, Visayas, Davao Region, and Ilocos Region. Assessing the utility of including the covariate `Location` is, in essence, comparing two nested models; here the quadratic model is compared to the quadratic model plus terms for *Location*. Results from the fitted model appears below; note that Central Luzon is the reference region that all other regions are compared to.
+We should consider other covariates that may be related to household size. By controlling for important covariates, we can obtain more precise estimates of the relationship between age and household size. In addition, we may discover that the relationship between age and household size may differ by levels of a covariate. One important covariate to consider is location. As described earlier in the case study, there are 5 different regions that are associated with the `Location` variable: Central Luzon, Metro Manila, Visayas, Davao Region, and Ilocos Region. Assessing the utility of including the covariate `Location` is, in essence, comparing two nested models; here the quadratic model is compared to the quadratic model plus terms for `Location`. Results from the fitted model appears below; note that Central Luzon is the reference region that all other regions are compared to.
 
 ```{r, comment = NA}
 modela2L = glm(total ~ age + age2 + location, 
@@ -566,22 +565,20 @@ The residuals for linear least squares regression have the form:
  \end{align}
 Residual sum of squares (RSS) are formed by squaring and adding these residuals, and we generally seek to minimize RSS in model building. We have several options for creating residuals for Poisson regression models. One is to create residuals in much the same way as we do in LLSR. For Poisson residuals, the predicted values are denoted by $\hat{\lambda}_i$ (in place of $\hat{\mu}_i$ in Equation \@ref(eq:OLSresid)); they are then standardized by dividing by the standard error, $\sqrt{\hat{\lambda}_i}$.  These kinds of residuals are referred to as __Pearson residuals__ \index{Pearson residuals}. 
 
-\begin{equation}
+\begin{equation*}
 \textrm{Pearson residual}_i = \frac{Y_i-\hat{\lambda}_i}{\sqrt{\hat{\lambda}_i}}
-(\#eq:pearson)
-\end{equation}
+\end{equation*}
 
 Pearson residuals have the advantage that you are probably familiar with their meaning and the kinds of values you would expect. For example, after standardizing we expect most Pearson residuals to fall between -2 and 2.  However, __deviance residuals__ \index{deviance residuals} have some useful properties that make them a better choice for Poisson regression.  
 
 First, we define a __deviance residual__ for an observation from a Poisson regression:
 
-\begin{equation}
+\begin{equation*}
 \textrm{deviance residual}_i = \textrm{sign}(Y_i-\hat{\lambda}_i)
 \sqrt{
 2 \left[Y_i log\left(\frac{Y_i}{\hat{\lambda}_i}\right)
 -(Y_i - \hat{\lambda}_i) \right]}
-(\#eq:deviance)
-\end{equation}
+\end{equation*}
 where $\textrm{sign}(x)$ is defined such that:
 
 \[ \textrm{sign}(x) = \begin{cases} 1  & \textrm{if }\ x > 0 \\
@@ -747,11 +744,11 @@ Table \@ref(tab:table4ch4) and Figure \@ref(fig:boxtyperegion) display mean viol
 
 Although working with the observed rates (per 1000 students) is useful during the exploratory data analysis, we do not use these rates explicitly in the model. The counts (per year) are the Poisson responses when modeling, so we must take into account the enrollment in a different way. Our approach is to include  a term on the right side of the model called an __offset__ \index{offset}, which is the log of the enrollment, in thousands. There is an intuitive heuristic for the form of the offset. If we think of $\lambda$ as the mean number of violent crimes per year, then $\lambda/\textrm{enroll1000}$ represents the number per 1000 students, so that the yearly count is adjusted to be comparable across schools of different sizes. Adjusting the yearly count by enrollment is equivalent to adding $log(\textrm{enroll1000})$ to the right hand side of the Poisson regression equation---essentially adding a predictor with a fixed coefficient of 1:
 
-\begin{align} 
+\begin{align*} 
 log(\frac{\lambda}{\textrm{enroll1000}} )= \beta_0 + \beta_1(\textrm{type}) \nonumber \\
 log(\lambda)-log(\textrm{enroll1000}) = \beta_0 + \beta_1(\textrm{type}) \nonumber \\
 log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
-\end{align}
+\end{align*}
 
 While this heuristic is helpful, it is important to note that it is *not* $\frac{\lambda}{ \textrm{enroll1000}}$ that we are modeling.  We are still modeling $log(\lambda)$, but we're adding an offset to adjust for differing enrollments, where the offset has the unusual feature that the coefficient is fixed at 1.0. As a result, no estimated coefficient for `enroll1000` or $log(\textrm{enroll1000})$ will appear in the output. As this heuristic illustrates, modeling $log(\lambda)$ and adding an offset is equivalent to modeling rates, and coefficients can be interpreted that way.
 
@@ -867,7 +864,7 @@ drop_in_dev <- anova(modeltrq, modeliq, test = "F")
 ```{r comment=NA, message=F, echo=F}
 did_print <- data.frame(ResidDF=drop_in_dev$`Resid. Df`,
     ResidDev=drop_in_dev$`Resid. Dev`,
-    Deviance=drop_in_dev$Deviance, Df=drop_in_dev$Df,
+    F=drop_in_dev$F, Df=drop_in_dev$Df,
     pval=drop_in_dev$`Pr(>F)`)
 row.names(did_print) <- row.names(drop_in_dev)
 did_print
@@ -1082,7 +1079,7 @@ The second part has the form
 \[
 logit(\alpha)=\beta_0+\beta_1\textrm{firstYear}
 \]
-where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  We'll provide more detail on the logit in the Logistic Regression chapter. There are many ways in which to structure this model; here we use different predictors in the two pieces, athough it would have been perfectly fine to use the same predictors for both pieces, or even no predictors for one of the pieces.
+where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  We'll provide more detail on the logit in the Chapter \@ref(ch-logreg). There are many ways in which to structure this model; here we use different predictors in the two pieces, athough it would have been perfectly fine to use the same predictors for both pieces, or even no predictors for one of the pieces.
 
 ### Fitting a ZIP Model
 
@@ -1132,13 +1129,13 @@ The estimated chance that a first year student is a non-drinker is
 \[
 \frac{e^{0.533}}{1+e^{0.533}} = 0.630
 \]
-or 63.0\%, while for non-first years, the estimated probability of being a non-drinker in 0.354.  If you have seen logistic regression, you'll recognize that this transformation is what is used to estimate a probability. More on this in the Logistic Regression chapter.
+or 63.0\%, while for non-first years, the estimated probability of being a non-drinker is 0.354.  If you have seen logistic regression, you'll recognize that this transformation is what is used to estimate a probability. More on this in the Logistic Regression chapter.
 
 ### Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)
 
 Moving from ordinary Poisson to zero-inflated Poisson has helped us address additional research questions: What proportion of students are non-drinkers and what factors are associated with whether or not a student is a non-drinker?  While a ZIP model seems more faithful to the nature and structure of this data, can we quantitatively show that a zero-inflated Poisson is better than an ordinary Poisson model?
 
-We cannot use the drop-in-deviance test we discussed earlier because these two models are not nested within one another. Vuong (1989) devised a test to make this comparison for the special case of comparing a zero-inflated model and ordinary regression model. Essentially, the Vuong Test \index{Vuong test} is able to compare predicted probabilities of __non-nested__ models.
+We cannot use the drop-in-deviance test we discussed earlier because these two models are not nested within one another. Vuong [-@Vuong1989] devised a test to make this comparison for the special case of comparing a zero-inflated model and ordinary regression model. Essentially, the Vuong Test \index{Vuong test} is able to compare predicted probabilities of __non-nested__ models.
 
 ```{r, comment=NA}
 vuong(pois.m1, zip.m2)
@@ -1207,31 +1204,22 @@ d. Would a zero-inflated model be considered here? If so, what would be a "true 
     - Describe how the assumption of linearity can be assessed in this example.
     - Suggest a way in which to assess the equal mean and variance assumption.
     
-15. __Dating Online__ Researchers are interested in the number of dates respondents arranged online and whether the rates differ by age group. Questions which elicit responses similar to this can be found in the Pew survey concerning dating online and relationships [@Duggan2013]. Each survey respondent was asked how many dates they have arranged online in the past 3 months as well as the typical amount of time, $t$, in hours, they spend online weekly. Some rows of data appear below.
-	
 ```{r, tab2chp4, echo=FALSE}
 Agecol <- c(19,29,38,55)
 TimeOn <- c(35,20,15,10)
 Numdates <- c(3,5,0,0)
-#intentional non usage of caption in attempt for this to be a table that does not get numbered?!
 tab2chp4 <- data.frame(Agecol,TimeOn,Numdates)
 colnames(tab2chp4) <- c("Age","Time online","Number of dates arranged online")
-kable(tab2chp4)
+kable(tab2chp4, booktabs=T,
+      caption="Sample data for Exercise 15")
 ```
 
-- Identify the response, predictor, and offset in this context.  Does using an offset make sense?
-- Write out a model for this data. As part of your model description, define the parameter, $\lambda$.
-- Consider a Zero-inflated Poisson model for this data. Describe what the `true zeros' would be in this setting.
+15. __Dating Online__ Researchers are interested in the number of dates respondents arranged online and whether the rates differ by age group. Questions which elicit responses similar to this can be found in the Pew survey concerning dating online and relationships [@Duggan2013]. Each survey respondent was asked how many dates they have arranged online in the past 3 months as well as the typical amount of time, $t$, in hours, they spend online weekly. Some rows of data appear in Table \@ref(tab:tab2chp4).
+	
+    - Identify the response, predictor, and offset in this context.  Does using an offset make sense?
+    - Write out a model for this data. As part of your model description, define the parameter, $\lambda$.
+    - Consider a Zero-inflated Poisson model for this data. Describe what the `true zeros' would be in this setting.
     
-16. __Poisson Approximation: Rare Events__ For rare diseases, the probability of a case occurring, $p$, in a very large population, $n$, is small. With a small $p$ and large $n$, the random variable $Y$= the number of cases out of $n$ people can be approximated using a Poisson random variable with $\lambda = np$. If the count of those with the disease is observed in several different populations independently of one another, the $Y_i$ represents the number of cases in the $i^{th}$ population and can be approximated using a Poisson random variable with $\lambda_i=n_ip_i$ where $p_i$ is the probability of a case for the $i^{th}$ population. Poisson regression can take into account the differences in the population sizes, $n_i$, using as an offset log($n_i$) as well as differences in a population characteristic like $x_i$. The coefficient of the offset is set at one; it is not estimated like the other coefficients.  Thus the model statement has the form:
-
-\[
-log(\lambda_i) = \beta_0+\beta_1x_i + log(n_i)
-\]
-where $Y_i  \sim$ Poisson($\lambda_i = n_i p_i$). Note that $\lambda_i$ depends on $x_i$ which may differ for the different populations.
-
-Data from @Scotto1974 reported the number of cases of non melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St Paul and Dallas-Ft Worth); the year is unknown. They wondered if cancer rates by age group differ by city?  The columns contain: number of cases of skin cancer, population size of the age group per city, age group, and metropolitan area (1=Minneapolis-St Paul, 2=Dallas-Ft Worth).
-
 ```{r, tab3chp4, echo=FALSE}
 #skinCancer
 Numcases <- c(1,16,"...",226,65)
@@ -1240,17 +1228,19 @@ Agegroup <- c("15-24","25-34","...","75-84","85+")
 City <- c(1,1,"...",2,2)
 tab3chp4 <- data.frame(Numcases,Pop,Agegroup,City)
 colnames(tab3chp4) <- c("Number of Cases","Population","Age Group","City")
-kable(tab3chp4)
+kable(tab3chp4, caption="Data from Scotto et al. (1974) on the number of cases of non melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St Paul and Dallas-Ft Worth); the year is unknown. The columns contain: number of cases of skin cancer, population size of the age group per city, age group, and metropolitan area (1=Minneapolis-St Paul, 2=Dallas-Ft Worth).")
 ```
 
-Identify and describe the following quantities which appear in the description of the Poisson approximation for rare events:
+16. __Poisson Approximation: Rare Events__ For rare diseases, the probability of a case occurring, $p$, in a very large population, $n$, is small. With a small $p$ and large $n$, the random variable $Y$= the number of cases out of $n$ people can be approximated using a Poisson random variable with $\lambda = np$. If the count of those with the disease is observed in several different populations independently of one another, the $Y_i$ represents the number of cases in the $i^{th}$ population and can be approximated using a Poisson random variable with $\lambda_i=n_ip_i$ where $p_i$ is the probability of a case for the $i^{th}$ population. Poisson regression can take into account the differences in the population sizes, $n_i$, using as an offset log($n_i$) as well as differences in a population characteristic like $x_i$. The coefficient of the offset is set at one; it is not estimated like the other coefficients.  Thus the model statement has the form: $log(\lambda_i) = \beta_0+\beta_1x_i + log(n_i)$, where $Y_i  \sim$ Poisson($\lambda_i = n_i p_i$). Note that $\lambda_i$ depends on $x_i$ which may differ for the different populations.
 
-- A case,
-- The population size, $n_i$,
-- Probability, $p_i$,
-- Poisson parameter, $\lambda_i$,
-- Poisson random variables, $Y_i$, and
-- The predictors, $X_i$.
+    @Scotto1974 wondered if skin cancer rates by age group differ by city.  Based on their data in Table \@ref(tab:tab3chp4), identify and describe the following quantities which appear in the description of the Poisson approximation for rare events:
+
+      - A case,
+      - The population size, $n_i$,
+      - Probability, $p_i$,
+      - Poisson parameter, $\lambda_i$,
+      - Poisson random variables, $Y_i$, and
+      - The predictors, $X_i$.
 
 ### Guided Exercises
 
@@ -1283,8 +1273,6 @@ Identify and describe the following quantities which appear in the description o
         iii. What is the estimated dispersion parameter?
         iv. An estimated dispersion parameter greater than one suggests overdispersion. When adjusting for overdispersion, are you more or less likely to obtain a significant result when testing coefficients? Why?  
 
-3. __Smoking at Work and Home__ An earlier study examined the effect of workplace rules in Minnesota which require smokers to smoke cigarettes outside.  The number of cigarettes smoked by smokers in a 2-hour period was recorded, along with whether the smoker was at home or at work.  A (very) small subset of the data appears below:
-
 ```{r, ex3chp4, echo=FALSE}
 Subject <- c(1,2,3,4,5,6)
 `X (0 = home, 1 = work)` <- c(0,1,1,1,0,0)
@@ -1294,8 +1282,9 @@ ex3chp4 <- data.frame(Subject, `X (0 = home, 1 = work)`,
 kable(ex3chp4, booktabs=T, 
       caption="A small subset of hypothetical data on Minnesota workplace rules on smoking.  X is 0 for home and 1 for work.  Y is number of cigaretttes in a 2-hour period.",
       col.names = c("Subject", "X (location)", "Y (cigarettes)"))
-
 ```
+
+3. __Smoking at Work and Home__ An earlier study examined the effect of workplace rules in Minnesota which require smokers to smoke cigarettes outside.  The number of cigarettes smoked by smokers in a 2-hour period was recorded, along with whether the smoker was at home or at work.  A (very) small subset of the data appears in Table \@ref(tab:ex3chp4).
 
     - Model 1: Assume that $Y \sim \textrm{Poisson}(\lambda)$; there is no difference between home and work. 
     - Model 2: Assume that $Y \sim \textrm{Poisson}(\lambda_W)$ when the smoker is at work, and $Y \sim \textrm{Poisson}(\lambda_H)$ when the smoker is at home. 
@@ -1307,7 +1296,6 @@ kable(ex3chp4, booktabs=T,
     d. Write out the log-likelihood function $logL(\lambda_W, \lambda_H)$ in Model 2.  Use the data values above, and simplify where possible.
     e. Intuitively, what would be reasonable estimates for $\lambda_W$ and $\lambda_H$ based on this data?  Why?
     f. Find the maximum likelihood estimators for $\lambda_W$ and $\lambda_H$ in Model 2 using an optimization routine in R (but not the `glm()` function).
-
 
 4.  __Smoking at Work and Home (continued)__ We will use the same dataset in this question as we used in question 3. 
 
@@ -1348,14 +1336,7 @@ fit3 <- glm(burg09 ~ act.comp + tuition.thous +
             data = crime)
 ```
 
-6. __US National Medical Expenditure Survey__ The data set `NMES1988` in the `AER` package contains a sample of individuals over 65 who are covered by Medicare in order to assess the demand for health care through physician office visits, outpatient visits, ER visits, hospital stays, etc.  The data can be accessed by installing the `AER` package and then running:
-
-```{r, eval=FALSE}
-library(AER)
-data(NMES1988)
-```
-
-    More background information and references about the `NMES1988` data can be found in help pages for the `AER` package.  
+6. __US National Medical Expenditure Survey__ The data set `NMES1988` in the `AER` package contains a sample of individuals over 65 who are covered by Medicare in order to assess the demand for health care through physician office visits, outpatient visits, ER visits, hospital stays, etc.  The data can be accessed by installing and loading the `AER` package and then running `data(NMES1988)`.  More background information and references about the `NMES1988` data can be found in help pages for the `AER` package.  
 
     a. Show through graphical means that there are more respondents with 0 `visits` than might be expected under a Poisson model.
     b. Fit a ZIP model for the number of physician office `visits` using `chronic`, `health`, and `insurance` as predictors for the Poisson count, and `chronic` and `insurance` as the predictors for the binary part of the model.  Then, provide interpretations in context for the following model parameters:

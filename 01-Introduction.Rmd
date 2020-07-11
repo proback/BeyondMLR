@@ -295,13 +295,12 @@ cat(" R squared = ", summary(model1)$r.squared, "\n",
 
 You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896.  One way to create more meaningful parameters is through **centering** \index{centered variable}.  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
 
-\begin{equation}
+\begin{equation*}
 \begin{split}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
     &\textrm{and} \quad \textrm{Yearnew}=\textrm{Year}-1896.
 \end{split}
-(\#eq:model2)
-\end{equation}
+\end{equation*}
 
 Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; $\hat{\beta}_{1}$, $R^2$, and $\hat{\sigma}$ all remain exactly the same.  Now $\hat{\beta}_{0}$ tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same.  As Figure \@ref(fig:center) shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes. 
 
@@ -345,10 +344,9 @@ We recommend relying on graphical evidence for identifying regression model assu
 
 Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.  
 
-\begin{equation}
+\begin{equation*}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
-(\#eq:model2Q)
-\end{equation}
+\end{equation*}
 
 This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time.  In fact, there is evidence that the quadratic model improves upon the linear model (see Figure \@ref(fig:models2and2q)).  $R^2$, \index{R-squared} the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3\% to 64.1\%, and the pattern in the Residuals vs. Fitted plot of Figure \@ref(fig:resid2) has disappeared in Figure \@ref(fig:resid2q), although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability.  The significantly negative coefficient for $\beta_{2}$ suggests that the rate of increase is indeed slowing in more recent years.  
 
@@ -393,15 +391,15 @@ Here, it's easy to see the meaning of our slope and intercept by writing out sep
 
 - Good or slow conditions (`fast` = 0)
 
-\begin{equation}
+\begin{equation*}
 Y_{i} = \beta_{0}+\epsilon_{i}
-\end{equation}
+\end{equation*}
 
 - Fast conditions (`fast` = 1)
 
-\begin{equation}
+\begin{equation*}
 Y_{i} = (\beta_{0}+\beta_{1})+\epsilon_{i}
-\end{equation}
+\end{equation*}
 
 $\beta_{0}$ is the expected winning speed under good or slow conditions, while $\beta_{1}$ is the difference between expected winning speeds under fast conditions vs. non-fast conditions.  According to our fitted Model 3, the estimated winning speed under non-fast conditions is 52.0 ft/s, while mean winning speeds under fast conditions are estimated to be 1.6 ft/s higher. 
 
@@ -472,6 +470,7 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 
 ```{r model4boot, comment=NA, message=FALSE}
 # updated code from tobiasgerstenberg on github
+set.seed(413)
 bootreg <- derby.df %>% 
   bootstraps(1000) %>%
   pull(splits) %>% 
@@ -489,7 +488,7 @@ ggplot(bootreg, aes(estimate)) +
   facet_wrap(~ term, scales="free")
 ```
 
-In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\beta_1$, and $\beta_2$ are very similar to the normal-theory confidence intervals we found earlier.  For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.89 to 1.55 ft/s.  
+In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\beta_1$, and $\beta_2$ are very similar to the normal-theory confidence intervals we found earlier.  For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.91 to 1.57 ft/s.  
 
 There are many variations on this bootstrap procedure.  For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution.  In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated methods (@Hesterberg2015; @Efron1993; @Davison1997).  We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.  
 
@@ -499,13 +498,12 @@ Adding terms to form a multiple linear regression model as we did in Model 4 is 
 
 Thus, consider Model 5:
 
-\begin{equation}
+\begin{equation*}
 \begin{split}
 Y_{i}&= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
       &{}+\beta_{3}\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
-(\#eq:model5)
-\end{equation}
+\end{equation*}
 
 where OLS provides the following parameter estimates:
 
@@ -541,7 +539,7 @@ leading to the following interpretations for estimated model coefficients:
 - $\hat{\beta}_{0} = 50.53$.  The expected winning speed in 1896 under non-fast conditions was 50.53 ft/s.
 - $\hat{\beta}_{1} = 0.031$.  The expected yearly increase in winning speeds under non-fast conditions is 0.031 ft/s.
 - $\hat{\beta}_{2} = 1.83$.  The winning speed in 1896 was expected to be 1.83 ft/s faster under fast conditions compared to non-fast conditions.
-- $\hat{\beta}_{3} = -0.011$.  The expected yearly increase in winning speeds under fast conditions is 0.020 ft/s, which is 0.011 ft/s less than the expected annual increase under non-fast conditions.
+- $\hat{\beta}_{3} = -0.011$.  The expected yearly increase in winning speeds under fast conditions is 0.020 ft/s, compared to 0.031 ft/s under non-fast conditions, a difference of 0.011 ft/s.
 
 In fact, using interaction allows us to model the relationships we noticed in Figure \@ref(fig:codeds), where both the intercept and slope describing the relationships between `speed` and `year` differ depending on whether track conditions were fast or not.  Note that we interpret the coefficient for the interaction term by comparing slopes under fast and non-fast conditions; this produces a much more understandable interpretation for a reader than attempting to interpret the -0.011 directly.  
 
@@ -594,14 +592,14 @@ cat(" R squared = ", summary(model0)$r.squared, "\n",
 # Compare models with and without terms for track condition
 model0_reduced <- lm(speed ~ yearnew + yearnew2 + 
                        starters, data = derby.df)
-drop_in_dev <- anova(model0_reduced, model0, test = "Chisq")
+drop_in_dev <- anova(model0_reduced, model0, test = "F")
 ```
 
 ```{r comment=NA, message=F, echo=F}
 did_print <- data.frame(ResidDF=drop_in_dev$`Res.Df`,
     RSS=drop_in_dev$RSS,
-    SS=drop_in_dev$`Sum of Sq`, Df=drop_in_dev$Df,
-    pval=drop_in_dev$`Pr(>Chi)`)
+    SS=drop_in_dev$F, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>F)`)
 row.names(did_print) <- row.names(drop_in_dev)
 did_print
 ```

@@ -79,10 +79,9 @@ ggplot(dat, aes(x = x)) +
 
 Figure \@ref(fig:OLSlogistic) illustrates a data set with a binary (0 or 1) response (Y) and a single continuous predictor (X).  The blue line is a linear regression fit with least squares to model the probability of a success (Y=1) for a given value of X.  With a binary response, the line doesn't fit the data well, and it produces predicted probabilities below 0 and above 1.  On the other hand, the logistic regression fit (red curve) with its typical "S" shape follows the data closely and always produces predicted probabilities between 0 and 1.  For these and several other reasons detailed in this chapter, we will focus on the following model for logistic regression with binary or binomial responses:
 
-\begin{equation}
+\begin{equation*}
 log(\frac{p_i}{1-p_i})=\beta_0+\beta_1 x_i
-(\#eq:logisticReg)
-\end{equation}
+\end{equation*}
 where the observed values $Y_i \sim$ binomial with $p=p_i$ for a given $x_i$ and $n=1$ for binary responses.
 
    
@@ -164,10 +163,9 @@ Thus $e^{\beta_1}$ is the ratio of the odds of scoring when the goalkeeper's tea
 
 The logit model (Equation \@ref(eq:logitXform)) can also be re-written in a __probability form__:
 
-\begin{equation} 
+\begin{equation*} 
 p_X=\frac{e^{\beta_0+\beta_1X}}{1+e^{\beta_0+\beta_1X}}
-(\#eq:pXform)
-\end{equation}
+\end{equation*}
 which can be re-written for games when the goalkeeper's team is behind as:
 
 \begin{equation} 
@@ -214,6 +212,7 @@ summary(breg1)
 ```
 
 Exponentiating $\hat{\beta_1}$ provides an estimate of the odds ratio (the odds of scoring when the goalkeeper's team is behind compared to the odds of scoring when the team is not behind) of 3.04, which is consistent with our calculations using the 2 $\times$ 2 table. We estimate that the odds of scoring when the goalkeeper's team is behind is over 3 times that of when the team is not behind or, in other words, the odds a shooter is successful in a penalty kick shootout are 3.04 times higher when his team is leading.
+\vspace{5mm}
 
 **Time out for study discussion (Optional).**  
 
@@ -227,10 +226,9 @@ Before we go on, you may be curious as to why there is *no error term* in our mo
 
 Recall from Chapter \@ref(ch-glms) that generalized linear models (GLMs) \index{generalized linear models (GLMs)} are a way in which to model a variety of different types of responses. In this chapter, we apply the general results of GLMs to the specific application of binomial responses. Let $Y$ = the number scored out of $n$ penalty kicks. The parameter, $p$, is the probability of a score on a single penalty kick.  Recall that the theory of GLMs is based on the unifying notion of the one-parameter exponential family form:
 
-\begin{equation}
+\begin{equation*}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
-(\#eq:1expform)
-\end{equation}
+\end{equation*}
 To see that we can apply the general approach of GLMs \index{generalized linear models (GLMs)} to binomial responses, we first write an expression for the probability of a binomial response and then use a little algebra to rewrite it until we can demonstrate that it, too, can be written in one-parameter exponential family form with $\theta = p$. This will provide a way in which to specify the canonical link and the form for the model. Additional theory allows us to deduce the mean, standard deviation, and more from this form.
 
 If $Y$ follows a binomial distribution with $n$ trials and probability of success $p$, we can write:
@@ -258,7 +256,7 @@ In a paper entitled "Reconstructing Alabama: Reconstruction Era Demographic and 
 
 ### Data Organization
 
-The unit of observation for this data is a community in Hale County. We will focus on the following variables from `RR_Data_Hale.csv` collected for each community:
+The unit of observation for this data is a community in Hale County. We will focus on the following variables from `RR_Data_Hale.csv` collected for each community (see Table \@ref(tab:table2chp6)):
 
 - `pctBlack` = the percentage of blacks in the community
 
@@ -405,7 +403,7 @@ Despite the somewhat strong negative correlation between percent black and dista
 
 ### Tests for significance of model coefficients {#sec-logisticInf}
 
-Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(sec-PoisInference) with Poisson regression, there are two primary approaches to testing signficance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__ \index{Wald-type test}.
+Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(cs-philippines) with Poisson regression, there are two primary approaches to testing signficance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__ \index{Wald-type test}.
 
 With our larger model given by $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i$, the Wald test produces a highly significant p-value ($Z=\frac{-0.0132}{0.0039}= -3.394$, $p=.00069$) indicating significant evidience that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
 
@@ -448,7 +446,7 @@ and then exponentiating endpoints if we prefer a confidence interval for the odd
 
 Thus, we can be 95\% confident that a 10\% increase in the proportion of black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance.  This same relationship could be expressed as (a) between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the black population, or (b) between a 5.7\% ($1/e^{-.056}$) and a 23.1\% ($1/e^{-.208}$) increase in odds for each 10\% decrease in the black population, after adjusting for distance.  Of course, with $n=11$, we should be cautious about relying on a Wald-type interval in this example.
 
-Another approach available in R is the **profile likelihood method** \index{profile likelihood}, similar to Chapter \@ref(ch-poissonreg).
+Another approach available in R is the **profile likelihood method** \index{profile likelihood}, similar to Section \@ref(cs-philippines).
 
 ```{r, comment=NA, message=FALSE}
 exp(confint(model.HaleBD))
@@ -545,18 +543,14 @@ From this residual plot, Greensboro does not stand out as an outlier.  If it did
 Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is __extra-binomial variation__ \index{extra-binomial variation}, so the actual variance will be greater than the variance of a binomial variable, $np(1-p)$. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), $\hat{\phi}$, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \@ref(sec-overdispPois), and we will use the same estimate here: $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$.
 
 When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach \index{quasilikelihood}. Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it **quasibinomial** \index{quasibinomial}). R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming $\phi>1$). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using $\hat{\phi}$:
+\vspace{5mm}
 
 __Summary: Accounting for Overdispersion__
 
 - Use the dispersion parameter $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$ to inflate standard errors of model coefficients
 - Wald test statistics: multiply the standard errors by $\sqrt{\hat{\phi}}$ so that $\textrm{SE}_\textrm{Q}(\hat\beta)=\sqrt{\hat\phi}\cdot\textrm{SE}(\hat\beta)$ and conduct tests using the $t$-distribution
 - CIs use the adjusted standard errors and multiplier based on $t$, so they are thereby wider: $\hat\beta \pm t_{n-p} \cdot \textrm{SE}_\textrm{Q}(\hat\beta)$
-- Drop-in-deviance test statistic comparing Model 1 (larger model with $p$ parameters) to Model 2 (smaller model with $q<p$ parameters) is
-
- \begin{equation*}
- F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}
- \end{equation*}
- where $D_1$ and $D_2$ are the residual deviances for models 1 and 2 respectively and $p-q$ is the difference in the number of parameters for the two models. Note that both $D_2-D_1$ and $p-q$ are positive. This test statistic is compared to an F-distribution with $p-q$ and $n-p$ degrees of freedom.
+- Drop-in-deviance test statistic comparing Model 1 (larger model with $p$ parameters) to Model 2 (smaller model with $q<p$ parameters) is $F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}$ where $D_1$ and $D_2$ are the residual deviances for models 1 and 2 respectively and $p-q$ is the difference in the number of parameters for the two models. Note that both $D_2-D_1$ and $p-q$ are positive. This test statistic is compared to an F-distribution with $p-q$ and $n-p$ degrees of freedom.
 
 Output for a model which adjusts our interaction model for overdispersion appears below, where $\hat{\phi}=51.6$ is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of $\sqrt{51.6}=7.2$.  As a results, there are no significant terms in the adjusted interaction model below.
 
@@ -875,7 +869,7 @@ cat(" Residual deviance = ",
 
 Our estimated binomial regression model is:
 
-\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)=-0.79+1.11 \textrm{female}\]
+\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)=-0.75+1.09 \textrm{female}\]
 where $\hat{p}$ is the estimated proportion of youth wanting to lose weight. We can interpret the coefficient on `female` by exponentiating $e^{1.0919} = 2.98$ (95% CI = $(2.03, 4.41)$) indicating that the odds of a female trying to lose weight is nearly three times the odds of a male trying to lose weight ($Z=5.520$, $p=3.38e-08$). We retain sex in the model and consider adding the BMI percentile:
 
 ```{r, include=FALSE}
@@ -905,7 +899,7 @@ We see that there is statistically significant evidence ($Z=8.997, p<.001$) that
 
 Our estimated binomial regression model is:
 
-\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)= -4.46+1.54\textrm{female}+0.051\textrm{bmipct}\]
+\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)= -4.26+1.86\textrm{female}+0.047\textrm{bmipct}\]
 
 To interpret the coefficient on `bmipct`, we will consider a 10 unit increase in `bmipct`.  Because $e^{10*0.047}=1.602$, then there is an estimated 60.2\% increase in the odds of wanting to lose weight for each additional 10 percentile points of BMI for members of the same sex. Just as we had done in other multiple regression models we need to interpret our coefficient *given that the other variables remain constant*. An interaction term for BMI by sex was tested (not shown) and it was not significant ($Z=-0.70$, $p=0.485$), so the effect of BMI does not differ by sex.
 
@@ -1049,8 +1043,7 @@ fissurechp6 <- data.frame(col1, grp1, grp2, grp3, grp4)
 kable(fissurechp6, booktabs = T, 
       col.names = c("Turbine group", "1", "2", "3", "4"),
       caption = "Data for Conceptual Exercise 4") %>% 
-  column_spec(1, width = "2cm") %>% 
-  kable_styling(latex_options = "scale_down")
+  column_spec(1, width = "2cm") 
 ```
 
 
@@ -1086,12 +1079,22 @@ kable(fissurechp6, booktabs = T,
 
 3. __Moths.__  An article in the *Journal of Animal Ecology* by @Bishop1972 investigated whether moths provide evidence of “survival of the fittest” with their camouflage traits.  Researchers glued equal numbers of light and dark morph moths in lifelike positions on tree trunks at 7 locations from 0 to 51.2 km from Liverpool.  They then recorded the numbers of moths removed after 24 hours, presumably by predators.  The hypothesis was that, since tree trunks near Liverpool were blackened by pollution, light morph moths would be more likely to be removed near Liverpool. 
 
-    Data can be found in `moth.csv` and contains the following variables:
+    Data [@Ramsey2002] can be found in `moth.csv` and contains the variables below.  In addition, R code at the end of the problem can be used to input the data and create additional useful variables.
 
     -  `MOPRH` = light or dark
     -  `DISTANCE` = kilometers from Liverpool
     -  `PLACED` = number of moths of a specific morph glued to trees at that location
     -  `REMOVED` = number of moths of a specific morph removed after 24 hours
+    
+    a. What are logits in this study? 
+    b. Create an empirical logit plot of logits vs. distance by morph. What can we conclude from this plot?
+    c. Create a model with `DISTANCE` and `dark`. Interpret all the coefficients.
+    d. Create a model with `DISTANCE`, `dark`, and the interaction between both variables. Interpret all the coefficients. 
+    e. Interpret a drop-in-deviance test and a Wald test to test the significance of the interaction term in (d). 
+    f. Test the goodness of fit for the interaction model.  What can we conclude about this model?
+    g. Is there evidence of overdispersion in the interaction model?  What factors might lead to overdispersion in this case? Regardless of your answer, repeat (d) adjusting for overdispersion.
+    h. Compare confidence intervals for coefficients in your models from (g) and (d). 
+    i. What happens if we expand the data set to contain one row per moth (968 rows)?  Now we can run a logistic binary regression model.  How does the logistic binary regression model compare to the binomial regression model?  What are similarities and differences?  Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? Some starter code can be found below the input code.
     
 ```{r, eval = FALSE}
 moth <- read_csv("data/moth.csv")
@@ -1102,16 +1105,6 @@ moth <- mutate(moth,
                dark = ifelse(MORPH=="dark",1,0) )
 ```
 
-    a. What are logits in this study? 
-    b. Create an empirical logit plot of logits vs. distance by morph. What can we conclude from this plot?
-    c. Create a model with `DISTANCE` and `dark`. Interpret all the coefficients.
-    d. Create a model with `DISTANCE`, `dark`, and the interaction between both variables. Interpret all the coefficients. 
-    e. Interpret a drop-in-deviance test and a Wald test to test the significance of the interaction term in (d). 
-    f. Test the goodness of fit for the interaction model.  What can we conclude about this model?
-    g. Is there evidence of overdispersion in the interaction model?  What factors might lead to overdispersion in this case? Regardless of your answer, repeat (d) adjusting for overdispersion.
-    h. Compare confidence intervals for coefficients in your models from (g) and (d). 
-    i. What happens if we expand the data set to contain one row per moth (968 rows)?  Now we can run a logistic binary regression model.  How does the logistic binary regression model compare to the binomial regression model?  What are similarities and differences?  Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? The following is some starter code:
-    
 ```{r, eval = FALSE}
 mtemp1 = rep(moth$dark[1],moth$REMOVED[1])
 dtemp1 = rep(moth$DISTANCE[1],moth$REMOVED[1])
@@ -1137,7 +1130,7 @@ cdplot(as.factor(rtemp1)~dtemp1)
  
 4. __Birdkeeping and Lung Cancer: A Retrospective Observational Study__ A 1972-1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer.  To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague.  They identified 49 cases of lung cancer among patients who were registered with a general practice, who were age 65 or younger, and who had resided in the city since 1965.  Each patient (case) with cancer was matched with two control subjects (without cancer) by age and sex.  Further details can be found in @Holst1988.
 
-    Age, sex, and smoking history are all known to be associated with lung cancer incidence.  Thus, researchers wished to determine after age, sex, socioeconomic status, and smoking have been controlled for, is an additional risk associated with birdkeeping?  The data [@Ramsey2002] is found in `birdkeeping.csv`, and the variables are::
+    Age, sex, and smoking history are all known to be associated with lung cancer incidence.  Thus, researchers wished to determine after age, sex, socioeconomic status, and smoking have been controlled for, is an additional risk associated with birdkeeping?  The data [@Ramsey2002] is found in `birdkeeping.csv`, and the variables are listed below.  In addition, R code at the end of the problem can be used to input the data and create additional useful variables.
 
     - `female` = sex (1 = Female, 0 = Male)
     - `age` = age, in years
@@ -1146,16 +1139,6 @@ cdplot(as.factor(rtemp1)~dtemp1)
     - `cigsday` = average rate of smoking, in cigarettes per day
     - `bird` = indicator of birdkeeping (1 = Yes, 0 = No), determined by whether or not there were caged birds in the home for more than 6 consecutive months from 5 to 14 years before diagnosis (cases) or examination (controls)
     - `cancer` = indicator of lung cancer diagnosis (1 = Cancer, 0 = No Cancer)
-
-```{r, eval = FALSE}
-birds <- read_csv("data/birdkeeping.csv") %>%
-  mutate(sex = ifelse(female == 1, "Female", "Male"),
-         socioecon_status = ifelse(highstatus == 1, 
-                                   "High", "Low"),
-         keep_bird = ifelse(bird == 1, "Keep Bird", "No Bird"),
-         lung_cancer = ifelse(cancer == 1, "Cancer", 
-                              "No Cancer"))
-```
 
     a. Perform an exploratory data analysis to see how each explanatory variable is related to the response (`cancer`).  Summarize each relationship in one sentence.
 
@@ -1176,7 +1159,7 @@ birds <- read_csv("data/birdkeeping.csv") %>%
       - `model1` = `age`, `yrsmoke`, `cigsday`, `female`, `highstatus`, `bird`
       - `model2` = `yrsmoke`, `cigsday`, `highstatus`, `bird` 
       - `model4` = `yrsmoke`, `bird`
-      - `model5` = the complete second order version of model4 (add squared terms and an interaction)
+      - `model5` = the complete second order version of `model4` (add squared terms and an interaction)
       - `model6` = `yrsmoke`, `bird`, `yrsmoke:bird`
 
     f. Is there evidence that we can remove `age` and `female` from our model?  Perform an appropriate test comparing `model1` to `model2`; give a test statistic and p-value, and state a conclusion in context.
@@ -1191,22 +1174,25 @@ birds <- read_csv("data/birdkeeping.csv") %>%
 
     k. How does the adjusted odds ratio for birdkeeping from `model4` compare with the unadjusted odds ratio you found in (c)?  Is birdkeeping associated with a significant increase in the odds of developing lung cancer, even after adjusting for other factors?
 
-    l. Create a categorical variable based on `yrsmoke` using the code below and replace `yrsmoke` in `model4` with your new variable.  First, interpret the coefficient for `years_factorOver 25 years` in context.  Then tell if you prefer `model4` with years smoked as a numeric predictor or `model4a` with years smoked as a categorical predictor, and explain your reasoning.
-
-```{r, eval=FALSE}
-birds <- birds %>%
-  mutate(years_factor = cut(yrsmoke, 
-                            breaks = c(-Inf, 0, 25, Inf),
-            labels = c("No smoking", "1-25 years", 
-                       "Over 25 years")))
-
-model4a <- glm(cancer ~ years_factor + bird, 
-               family = binomial, data = birds)
-```
+    l. Use the categorical variable `years_factor` based on `yrsmoke` and replace `yrsmoke` in `model4` with your new variable to create `model4a`.  First, interpret the coefficient for `years_factorOver 25 years` in context.  Then tell if you prefer `model4` with years smoked as a numeric predictor or `model4a` with years smoked as a categorical predictor, and explain your reasoning.
 
     m. Discuss the scope of inference in this study.  Can we generalize our findings beyond the subjects in this study?  Can we conclude that birdkeeping causes increased odds of developing lung cancer?  Do you have other concerns with this study design or the analysis you carried out?
 
     n. Read the article that appeared in the *British Medical Journal*.  What similarities and differences do you see between their analyses and yours?  What are a couple of things you learned from the article that weren’t apparent in the short summary at the beginning of the assignment.
+
+```{r, eval = FALSE}
+birds <- read_csv("data/birdkeeping.csv") %>%
+  mutate(sex = ifelse(female == 1, "Female", "Male"),
+         socioecon_status = ifelse(highstatus == 1, 
+                                   "High", "Low"),
+         keep_bird = ifelse(bird == 1, "Keep Bird", "No Bird"),
+         lung_cancer = ifelse(cancer == 1, "Cancer", 
+                              "No Cancer")) %>%
+  mutate(years_factor = cut(yrsmoke, 
+                            breaks = c(-Inf, 0, 25, Inf),
+            labels = c("No smoking", "1-25 years", 
+                       "Over 25 years")))
+```
 
 
 5. __2016 Election.__  An [award-winning](https://www.causeweb.org/usproc/usclap/2018/spring/winners) student project [@Renier2018] examined driving forces behind Donald Trump's surprising victory in the 2016 Presidential Election, using data from nearly 40,000 voters collected as part of the 2016 Cooperative Congressional Election Survey (CCES).  The student researchers investigated two theories: (1) Trump was seen as the candidate of change for voters experiencing economic hardship, and (2) Trump exploited voter fears about immigrants and minorities.  
@@ -1229,7 +1215,13 @@ model4a <- glm(cancer ~ years_factor + bird,
     b. Repeat (a) separately for Republicans and non-Republicans.  Again describe what you find.
     c. Create a plot with one observation per state showing the relationship between a state's median income and the log odds of a resident of that state voting for Trump.  What can you conclude from this plot?
   
-  Fit the following model to your data:
+    Answer (d)-(f) based on `model1a` below:
+  
+    d. Interpret the coefficient for `zmedinc` in context.
+    e. Interpret the coefficient for `republican` in context.
+    f. Interpret the coefficient for `EconWorse:republican` in context.  What does this allow us to conclude about Theory 1?  
+    g. Repeat the above process for Theory 2 (Immigration Model).  That is, produce meaningful exploratory plots, fit a model to the data with special emphasis on `Noimmigrants`, interpret meaningful coefficients, and state what can be concluded about Theory 2.
+    h. Is there any concern about the independence assumption in these models?  We will return to this question in later chapters.
   
 ```{r, eval = FALSE}
 model1a <- glm(Vote01 ~ zfaminc + zmedinc + EconWorse +
@@ -1239,12 +1231,6 @@ model1a <- glm(Vote01 ~ zfaminc + zmedinc + EconWorse +
 summary(model1a)
 ```
 
-    d. Interpret the coefficient for `zmedinc` in context.
-    e. Interpret the coefficient for `republican` in context.
-    f. Interpret the coefficient for `EconWorse:republican` in context.  What does this allow us to conclude about Theory 1?
-    g. Repeat the above process for Theory 2 (Immigration Model).  That is, produce meaningful exploratory plots, fit a model to the data with special emphasis on `Noimmigrants`, interpret meaningful coefficients, and state what can be concluded about Theory 2.
-    h. Is there any concern about the independence assumption in these models?  We will return to this question in later chapters.
-  
  
 ### Open-ended Exercises
 

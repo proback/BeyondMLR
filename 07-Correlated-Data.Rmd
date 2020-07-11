@@ -170,6 +170,7 @@ scenario_1 %>%
             mean_1b = mean(count_1b), sd_1b = sd(count_1b) )
 ```
 
+\vspace{5mm}
 **Thought Questions**
 
 1. Will the counts of deformed pups for dams in Scenario 1a behave like a binomial distribution with $n=10$ and $p=0.5$ (that is, like counting heads in 10 flips of a fair coin)?  Why or why not?
@@ -280,6 +281,7 @@ We could compare this to a quasibinomial model. With overdispersion paramater $\
 \end{alignedat}
 \]
 
+\vspace{5mm}
 **Thought Questions**
 
 4. Describe how the quasibinomial analysis of Scenario 1b differs from the binomial analysis of the same simulated data.  Refer to Table \@ref(tab:simulationTableCh7) when answering this question; you will need to run the R code in the R markdown file for this chapter to completely fill out the table.  Do confidence intervals contain the true model parameters? 
@@ -404,6 +406,7 @@ kable(scenario2Tab, booktabs = T,
     column_spec(c(4:5,8:9), width = "1cm")
 ```
 
+\vspace{5mm}
 **Thought Questions**
 
 6. Compare and contrast the probabilities associated with the 24 dams under Scenarios 1a and 1b to the probabilities under Scenarios 2a and 2b. 
@@ -443,10 +446,9 @@ exp(confint(fit_2a_quasi))
 
 Turning to Scenario 2b, where probabilities were different between dams recieving the same dosage, we have the binomial model
 
-\begin{equation}
+\begin{equation*}
   \log\bigg( \frac{\hat{p}}{1-\hat{p}} \bigg) = -2.41 + 1.46\;\textrm{dose}
-  (\#eq:mod2bBinom)
-\end{equation}
+\end{equation*}
 Generating a 95\% confidence interval for $e^{\beta_1}$, we have: $(3.09, 6.27)$.
 ```{r scenario2bBinom, include=FALSE}
 fit_2b_binom = glm(phat_2b ~ dose, family=binomial, weight=rep(10,24), data=scenario_2)
@@ -463,6 +465,7 @@ summary(fit_2b_quasi)
 exp(confint(fit_2b_quasi)) 
 ```
 
+\vspace{5mm}
 **Thought Questions**
 
 9. Describe how the quasibinomial analysis of Scenario 2b differs from the binomial analysis of the same simulated data.  Refer to Table \@ref(tab:simulationTableCh7) when answering this question; you will need to run the R code in the R markdown file for this chapter to completely fill out the table.  Do confidence intervals contain the true model parameters? 
@@ -478,9 +481,14 @@ A student research team at St. Olaf College contributed to the efforts of biolog
 
 > Much of south-central Minnesota was comprised of maple-basswood forest prior to agricultural development and settlement. Currently, the forests that remain are highly fragmented and disturbed by human activities. Original land surveys describe the forest, also known as the Big Woods ecosystem, as dominated by elm, maple, oak, and basswood. In order to recover the loss of ecosystem services that forests provide, many new forested areas have been established through restoration.
 
-Tubes were placed on trees in some locations or *transects* but not in others. One research question is whether tree growth in the first year is affected by the presence of tubes. This analysis has a structure similar to the dams and pups; the two study designs are depicted below.  
+Tubes were placed on trees in some locations or *transects* but not in others. One research question is whether tree growth in the first year is affected by the presence of tubes. This analysis has a structure similar to the dams and pups; the two study designs are depicted in Figure \@ref(fig:DamsTreesStructure). 
 
-![Data structures in the Dams and Pups (left) and Tree Growth (right) case studies](data/DamsTreesStructure.png)
+```{r, DamsTreesStructure, out.width='80%', fig.show='hold', fig.cap="Data structures in the Dams and Pups (left) and Tree Growth (right) case studies", echo=FALSE}
+knitr::include_graphics("data/DamsTreesStructure.png")
+
+# Can also put these lines outside of R chunk
+#![Data structures in the Dams and Pups (left) and Tree Growth #(right) case studies](data/DamsTreesStructure.png)
+```
 
 Some transects were assigned to have tubes on all of their trees and other transects had no tubes on all of their trees, just as every dam assigned to a certain group received the same dose.  Within a transect, each tree's first year of growth was measured, much like the presence or absence of a defect was noted for every pup within a dam. Although the response in the tree tube study is continuous (and somewhat normally distributed) rather than binary as in the dams and pups study, we can use methods to account for correlation of trees within a transect, just as we accounted for correlation of pups within dams. 
 
@@ -534,9 +542,9 @@ Data sets with this kind of structure are often referred to as __multilevel data
 
 Attempting to model the effects of tubes on tree growth, we could use LLSR which yields the model:
 
-\begin{equation}
+\begin{equation*}
   \hat{\textrm{Growth}} = 0.106 - 0.040\; \textrm{Tube}
-\end{equation}
+\end{equation*}
 
 ```{r, comment=NA}
 tube_linear <- lm(growth_yr1 ~ tubes, data = treetubes_yr1)
@@ -603,24 +611,15 @@ f. *Teen Alcohol Use.*  @Curran1997 collected data on 82 adolescents at three ti
 
     Primary research questions included:
     
-        - do trajectories of alcohol use differ by parental alcoholism?
-        - do trajectories of alcohol use differ by peer alcohol use?
+      - do trajectories of alcohol use differ by parental alcoholism?
+      - do trajectories of alcohol use differ by peer alcohol use?
 
 2. __More dams and pups__ Describe how to generalize the pup and dam example by allowing for different size litters.
 
 
 ### Guided Exercises
 
-1. __Exploring Beta Distributions.__  In the Dams and Pups Case Study, we use the beta distribution to randomly select the probability that a dam produces a defective pup.  While the beta distribution is described in Chapter \@ref(ch-distthry), it can be valuable to play with the parameters $\alpha$ and $\beta$ to see what distribution ranges and shapes are possible.  Here is some basic code for plotting a beta density curve:
-
-```{r, eval=FALSE}
-# inputs for the beta distribution must be between 0 and 1
-p <- seq(0,1,by=.05)  
-
-# To plot a beta density use dbeta; here I selected a=5, b=1
-density <- dbeta(p,5,1)
-plot(p, density, type = "l")
-```
+1. __Exploring Beta Distributions.__  In the Dams and Pups Case Study, we use the beta distribution to randomly select the probability that a dam produces a defective pup.  While the beta distribution is described in Chapter \@ref(ch-distthry), it can be valuable to play with the parameters $\alpha$ and $\beta$ to see what distribution ranges and shapes are possible.  Some basic R code for plotting a beta density curve can be found at the end of this problem.
 
     a. What values do beta random variables take on?
     b. What do these values represent for the dams and pups simulation?
@@ -633,6 +632,15 @@ plot(p, density, type = "l")
     i. If you wanted to simulate dams with mostly high probabilities of defects and a few with very low probabilities, how would you do it?
     j. If you wanted to simulate a population of dams where half of the probabilities of defects are very high and half are very low, how would you do it?
     k. How might you decide on values for $\alpha$ and $\beta$ if you have run a preliminary experiment and gathered data on the number of dams with deformed pups?
+
+```{r, eval=FALSE}
+# inputs for the beta distribution must be between 0 and 1
+p <- seq(0,1,by=.05)  
+
+# To plot a beta density use dbeta; here I selected a=5, b=1
+density <- dbeta(p,5,1)
+plot(p, density, type = "l")
+```
 
 2. **Dams and Pups (continued)**.  Modify the dams and pups simulation in the following ways.  In each case, produce plots and describe the results of your modified simulation.
 

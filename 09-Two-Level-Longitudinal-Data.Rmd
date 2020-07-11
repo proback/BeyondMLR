@@ -52,7 +52,7 @@ Charter schools were first introduced in the state of Minnesota in 1991 [@Charte
 
 One example of this unique schedule structure is the KIPP (Knowledge is Power Program) Stand Academy in Minneapolis, MN. KIPP stresses longer days and better partnerships with parents, and they claim that 80\% of their students go to college from a population where 87\% qualify for free and reduced lunch and 95\% are African-American or Latino [@KIPP]. However, the larger question is whether or not charter schools are out-performing non-charter public schools in general.  Because of the relative youthfulness of charter schools, data has just begun to be collected to evaluate the performance of charter versus non-charter schools and some of the factors that influence a school's performance. Along these lines, we will examine data collected by the Minnesota Department of Education for all Minnesota schools during the years 2008-2010.
 
-Comparisons of student performance in charter schools versus public schools have produced conflicting results, potentially as a result of the strong differences in the structure and population of the student bodies that represent the two types of schools. A study by the Policy and Program Studies Service of five states found that charter schools are less likely to meet state performance standards than conventional public schools [@Finnegan2004]. However, @Witte2007 performed a statistical analysis comparing Wisconsin charter and non-charter schools and found that average achievement test scores were significantly higher in charter schools compared to non-charter schools, after controlling for demographic variables such as the percentage of white students. In addition, a study of California students who took the Stanford 9 exam from 1998 through 2002 found that charter schools, on average, were performing at the same level as conventional public schools [@Buddin2005]. Although school performance is difficult to quantify with a single measure, for illustration purposes in this chapter we will focus on that aspect of school performance measured by the math portion of the Minnesota Comprehensive Assessment (MCA-II) data for 6th grade students enrolled in 618 different Minnesota schools during the years 2008, 2009, and 2010 [@MNDepartmentOfEducation]. Similar comparisons could obviously be conducted for other grade levels or modes of assessment.
+Comparisons of student performance in charter schools versus public schools have produced conflicting results, potentially as a result of the strong differences in the structure and population of the student bodies that represent the two types of schools. A study by the Policy and Program Studies Service of five states found that charter schools are less likely to meet state performance standards than conventional public schools [@Finnigan2004]. However, @Witte2007 performed a statistical analysis comparing Wisconsin charter and non-charter schools and found that average achievement test scores were significantly higher in charter schools compared to non-charter schools, after controlling for demographic variables such as the percentage of white students. In addition, a study of California students who took the Stanford 9 exam from 1998 through 2002 found that charter schools, on average, were performing at the same level as conventional public schools [@Buddin2005]. Although school performance is difficult to quantify with a single measure, for illustration purposes in this chapter we will focus on that aspect of school performance measured by the math portion of the Minnesota Comprehensive Assessment (MCA-II) data for 6th grade students enrolled in 618 different Minnesota schools during the years 2008, 2009, and 2010 [@MNDepartmentOfEducation]. Similar comparisons could obviously be conducted for other grade levels or modes of assessment.
 
 As described in @Green2003, it is very challenging to compare charter and public non-charter schools, as charter schools are often designed to target or attract specific populations of students. Without accounting for differences in student populations, comparisons lose meaning. With the assistance of multiple school-specific predictors, we will attempt to model sixth grade math MCA-II scores of Minnesota schools, focusing on the differences between charter and public non-charter school performances. In the process, we hope to answer the following research questions:
 
@@ -95,7 +95,7 @@ kable(table1chp9, booktabs=T,
 #       kab1chp9 %>% scroll_box(width="100%"), kab1chp9)
 ```
 
-For most statistical analyses, it will be advantageous to convert WIDE format to LONG format, with one row per year per school.  To make this conversion, we will have to create a time variable, which under the LONG format is very flexible---each school can have a different number of and differently-spaced time points, and they can even have predictors which vary over time.  Details for making this conversion in R can be found in Section \@ref(notesr9), and the form of the LONG data in this study is exhibited in the next section.
+For most statistical analyses, it will be advantageous to convert WIDE format to LONG format, with one row per year per school.  To make this conversion, we will have to create a time variable, which under the LONG format is very flexible---each school can have a different number of and differently-spaced time points, and they can even have predictors which vary over time.  Details for making this conversion can be found in the R Markdown code for this chapter, and the form of the LONG data in this study is exhibited in the next section.
 
 ### Missing data {#missing}
 
@@ -736,7 +736,7 @@ At the lowest level, we can consider building individual growth models over time
 Let $Y_{ij}$ be the math score of the $i^{th}$ school in year $j$. Then we can model the linear change in math test scores over time for School $i$ according to Model B:
 
 \begin{equation}
-Y_{ij} = a_{i} + b_{i}Year08_{ij} + \epsilon_{ij} \textrm{ where } \epsilon_{ij} \sim N(0, \sigma^2)
+Y_{ij} = a_{i} + b_{i}\textrm{Year08}_{ij} + \epsilon_{ij} \textrm{ where } \epsilon_{ij} \sim N(0, \sigma^2)
 \end{equation}
 
 The parameters in this model $(a_{i}, b_{i},$ and $\sigma^2)$ can be estimated through LLSR methods. $a_{i}$ represents the true intercept for School $i$---i.e., the expected test score level for School $i$ when time is zero (2008)---while $b_{i}$ represents the true slope for School $i$---i.e., the expected yearly rate of change in math score for School $i$ over the three year observation period. Here we use Roman letters rather than Greek for model parameters since models by school will eventually be a conceptual first step in a multilevel model.  The $\epsilon_{ij}$ terms represent the deviation of School $i$'s actual test scores from the expected results under linear growth---the part of school $i$'s test score at time $j$ that is not explained by linear changes over time. The variability in these deviations from the linear model is given by $\sigma^2$.  In Figure \@ref(fig:lon-scat3), which illustrates a linear growth model for Norwood Central Middle School, $a_{i}$ is estimated by the $y$-intercept of the fitted regression line, $b_{i}$ is estimated by the slope of the fitted regression line, and $\sigma^2$ is estimated by the variability in the vertical distances between each point (the actual math score in year $j$) and the line (the predicted math score in year $j$).  
@@ -766,7 +766,7 @@ In a multilevel model, we let intercepts ($a_{i}$) and slopes ($b_{i}$) vary by 
 
 - Level One:
 \begin{equation}
-Y_{ij}=a_{i}+b_{i}Year08_{ij} + \epsilon_{ij}
+Y_{ij}=a_{i}+b_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
 \end{equation}
 
 - Level Two:
@@ -778,7 +778,7 @@ b_{i}&=\beta_{0} + v_{i}
 or as a composite model:
 
 \begin{equation}
-Y_{ij}=\alpha_{0} + \beta_{0}Year08_{ij}+u_{i}+v_{i}Year08_{ij} + \epsilon_{ij}
+Y_{ij}=\alpha_{0} + \beta_{0}\textrm{Year08}_{ij}+u_{i}+v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
 \end{equation}
 where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
 
@@ -836,7 +836,7 @@ While modeling linear trends over time is often a good approximation of reality,
 
 - Level One:
 \begin{equation}
-Y_{ij}=a_{i}+b_{i}Year08_{ij}+c_{i}Year08^{2}_{ij} + \epsilon_{ij}
+Y_{ij}=a_{i}+b_{i}\textrm{Year08}_{ij}+c_{i}\textrm{Year08}^{2}_{ij} + \epsilon_{ij}
 \end{equation}
 
 - Level Two:
@@ -928,10 +928,10 @@ Despite the good performances of the quadratic growth and piecewise linear model
 Initially, we can consider whether or not there are significant differences in individual school growth parameters (intercepts and slopes) based on school type. From a modeling perspective, we would build a system of two Level Two models:
 
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}Charter_i + u_{i} \\
-b_{i} & = \beta_{0} + \beta_{1}Charter_i + v_{i}
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{Charter}_i + u_{i} \\
+b_{i} & = \beta_{0} + \beta_{1}\textrm{Charter}_i + v_{i}
 \end{align*}
-where $Charter_i=1$ if School $i$ is a charter school and $Charter_i=0$ if School $i$ is a non-charter public school. In addition, the error terms at Level Two are assumed to follow a multivariate normal distribution:
+where $\textrm{Charter}_i=1$ if School $i$ is a charter school and $\textrm{Charter}_i=0$ if School $i$ is a non-charter public school. In addition, the error terms at Level Two are assumed to follow a multivariate normal distribution:
 
 \[ \left[ \begin{array}{c}
             u_{i} \\ v_{i}
@@ -960,13 +960,13 @@ a_{i} & = (\alpha_{0} + \alpha_{1}) + u_{i}\\
 b_{i} & = (\beta_{0}+ \beta_{1}) + v_{i}
 \end{align*}
 
-Writing the Level Two model in this manner helps us interpret the model parameters from our two-level model. We can use statistical software (such as the lmer() function from the lme4 package in R) to obtain parameter estimates using our $1733$ observations, after first converting our Level One and Level Two models into a composite model (Model C) with fixed effects and variance components separated:
+Writing the Level Two model in this manner helps us interpret the model parameters from our two-level model. We can use statistical software (such as the `lmer()` function from the `lme4` package in R) to obtain parameter estimates using our $1733$ observations, after first converting our Level One and Level Two models into a composite model (Model C) with fixed effects and variance components separated:
 
 \begin{align*}
-Y_{ij} & = a_{i} + b_{i}Year08_{ij}+ \epsilon_{ij} \\
-       & = (\alpha_{0} + \alpha_{1}Charter_i +u_{i}) + (\beta_{0} + \beta_{1}Charter_i + v_{i})Year08_{ij} + \epsilon_{ij} \\
-       & = [\alpha_{0} + \beta_{0}Year08_{ij} +\alpha_{1}Charter_i+ \beta_{1}Charter_iYear08_{ij}] + \\
-       & \quad [u_{i} + v_{i}Year08_{ij} + \epsilon_{ij}]
+Y_{ij} & = a_{i} + b_{i}\textrm{Year08}_{ij}+ \epsilon_{ij} \\
+       & = (\alpha_{0} + \alpha_{1}\textrm{Charter}_i +u_{i}) + (\beta_{0} + \beta_{1}\textrm{Charter}_i + v_{i})\textrm{Year08}_{ij} + \epsilon_{ij} \\
+       & = [\alpha_{0} + \beta_{0}\textrm{Year08}_{ij} +\alpha_{1}\textrm{Charter}_i+ \beta_{1}\textrm{Charter}_i\textrm{Year08}_{ij}] + \\
+       & \quad [u_{i} + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
 \end{align*}
 
 ```{r, comment=NA}
@@ -1301,21 +1301,21 @@ Based on these analyses, we will begin by adding percent free and reduced lunch 
 
 - Level One:
 \begin{equation}
-Y_{ij}=a_{i} + b_{i}Year08_{ij} + \epsilon_{ij}
+Y_{ij}=a_{i} + b_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
 \end{equation}
 
 - Level Two:
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}Charter_i + \alpha_{2}schpctfree_i + u_{i}\\
-b_{i} & = \beta_{0} + \beta_{1}Charter_i + \beta_{2}schpctfree_i + v_{i}
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{Charter}_i + \alpha_{2}\textrm{schpctfree}_i + u_{i}\\
+b_{i} & = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{schpctfree}_i + v_{i}
 \end{align*}
 
 The composite model is then:
 
 \begin{align}
-Y_{ij}= [\alpha_{0}&+\alpha_{1}Charter_i +\alpha_{2}schpctfree_i + \beta_{0}Year08_{ij} \nonumber \\
- &+ \beta_{1}Charter_iYear08_{ij}  + \beta_{2}schpctfree_iYear08_{ij}] \nonumber \\ 
- &+ [u_{i} + v_{i}Year08_{ij} + \epsilon_{ij}]
+Y_{ij}= [\alpha_{0}&+\alpha_{1}\textrm{Charter}_i +\alpha_{2}\textrm{schpctfree}_i + \beta_{0}\textrm{Year08}_{ij} \nonumber \\
+ &+ \beta_{1}\textrm{Charter}_i\textrm{Year08}_{ij}  + \beta_{2}\textrm{schpctfree}_i\textrm{Year08}_{ij}] \nonumber \\ 
+ &+ [u_{i} + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
 \end{align}
 where error terms are defined as in Model C.
 
@@ -1370,17 +1370,17 @@ We now begin iterating toward a "final model" for these data, on which we will b
 - Level One:
 
 \begin{equation}
-Y_{ij}= a_{i} + b_{i}Year08_{ij} + \epsilon_{ij}
+Y_{ij}= a_{i} + b_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
 \end{equation}
 
 - Level Two:
 
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}Charter_i + \alpha_{2}urban_i + \alpha_{3}schpctsped_i + \alpha_{4}schpctfree_i + u_{i} \\
-b_{i} & = \beta_{0} + \beta_{1}Charter_i + \beta_{2}urban_i + \beta_{3}schpctsped_i + v_{i}
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{Charter}_i + \alpha_{2}\textrm{urban}_i + \alpha_{3}\textrm{schpctsped}_i + \alpha_{4}\textrm{schpctfree}_i + u_{i} \\
+b_{i} & = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{urban}_i + \beta_{3}\textrm{schpctsped}_i + v_{i}
 \end{align*}
 
-where we find the effect of charter schools on 2008 test scores after adjusting for urban or rural location, percentage of special education students, and percentage of students that receive free or reduced lunch, and the effect of charter schools on yearly change between 2008 and 2010 after adjusting for urban or rural location and percentage of special education students.  We can use AIC and BIC criteria to compare Model F with Model D, since the two models are not nested.  By both criteria, Model F is significantly better than Model D: AIC of 9855 vs. 9988, and BIC of 9956 vs. 10043.  Based on the R output below, we offer interpretations for estimates of model fixed effects:
+where we find the effect of charter schools on 2008 test scores after adjusting for urban or rural location, percentage of special education students, and percentage of students that receive free or reduced lunch, and the effect of charter schools on yearly change between 2008 and 2010 after adjusting for urban or rural location and percentage of special education students.  We can use AIC and BIC criteria to compare Model F with Model D, since the two models are not nested.  By both criteria, Model F is significantly better than Model D: AIC of 9885 vs. 9988, and BIC of 9956 vs. 10043.  Based on the R output below, we offer interpretations for estimates of model fixed effects:
 
 ```{r, comment=NA, warning=F}
 model.f2 <- lmer(MathAvgScore ~ charter + urban + SchPctFree + 
@@ -1449,7 +1449,7 @@ did_print
 
 When testing random effects at the boundary (such as $\sigma_{v}^{2} = 0$) or those with restricted ranges (such as $\rho_{uv} = 0$), using a chi-square distribution to conduct a likelihood ratio test is not appropriate. In fact, this will produce a conservative test, with p-values that are too large and not rejected enough (@Bryk2002, @Singer2003, @Faraway2005). For example, we should suspect that the p-value (.8447) produced by the likelihood ratio test comparing Models F and F0 is too large, that the real probability of getting a likelihood ratio test statistic of 0.3376 or greater when Model F0 is true is smaller than .8447. 
 
-Researchers often use methods like the __parametric bootstrap__ \index{parametric bootstrap} to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis.  Here are the basic steps for running a parametric bootstrap procedure to compare Model F0 with Model F (see associated diagram below):
+Researchers often use methods like the __parametric bootstrap__ \index{parametric bootstrap} to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis.  Here are the basic steps for running a parametric bootstrap procedure to compare Model F0 with Model F (see associated diagram in Figure \@ref(fig:parabootdiagram)):
 
 - Fit Model F0 (the null model) to obtain estimated fixed effects and variance components (this is the "parametric" part.)
 - Use the estimated fixed effects and variance components from the null model to regenerate a new set of math test scores with the same sample size ($n=1733$) and associated covariates for each observation as the original data (this is the "bootstrap" part.)
@@ -1458,8 +1458,6 @@ Researchers often use methods like the __parametric bootstrap__ \index{parametri
 - Repeat the previous 3 steps many times (e.g., 1000)
 - Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true
 - Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
-
-These steps are outlined in Figure \@ref(fig:parabootdiagram). 
 
 ```{r, parabootdiagram, out.width='80%', fig.show='hold', fig.cap="The steps in conducting a parametric bootstrap test comparing Models F and F0.", echo=FALSE}
 knitr::include_graphics("data/ParametricBootstrapDiagram.PNG")
@@ -1482,8 +1480,8 @@ __Level Two__
 One way to see the data generation process under the null model (Model F0) is to start with Level Two and work backwards to Level One. Recall that our Level Two models for $a_{i}$ and $b_{i}$, the true intercept and slope for school $i$, in Model F0 are:
 
 \begin{align*}
-a_{i} & = \alpha_{0} + \alpha_{1}Charter_i + \alpha_{2}urban_i + \alpha_{3}schpctsped_i + \alpha_{4}schpctfree_i + u_{i} \\
-b_{i} & = \beta_{0} + \beta_{1}Charter_i + \beta_{2}urban_i + \beta_{3}schpctsped_i
+a_{i} & = \alpha_{0} + \alpha_{1}\textrm{Charter}_i + \alpha_{2}\textrm{urban}_i + \alpha_{3}\textrm{schpctsped}_i + \alpha_{4}\textrm{schpctfree}_i + u_{i} \\
+b_{i} & = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{urban}_i + \beta_{3}\textrm{schpctsped}_i
 \end{align*}
 
 All the $\alpha$ and $\beta$ terms will be fixed at their estimated values, so the one term that will change for each bootstrapped data set is $u_{i}$. As we obtain a numeric value for $u_{i}$ for each school, we will fix the subscript. For example, if $u_{i}$ is set to -5.92 for School \#1, then we would denote this by $u_{1}=-5.92$. Similarly, in the context of Model F0, $a_{1}$ represents the 2008 math test score for School \#1, where $u_{1}$ quantifies how School \#1's 2008 score differs from the average 2008 score across all schools with the same attributes: charter status, urban or rural location, percent of special education students, and percent of free and reduced lunch students.
@@ -1499,7 +1497,7 @@ Notice a couple of features of the above derivations. First, all of the coeffici
 
 __Level One__
 
-We next proceed to Level One, where the scores from Rippleside are modeled as a linear function of year ($654.2 + 1.60Year08_{ij}$) with a normally distributed residual $\epsilon_{1k}$ at each time point $k$. Three residuals (one for each year) are sampled independently from a normal distribution with mean 0 and standard deviation 2.97 -- the standard deviation again coming from parameter estimates from fitting Model F0 to the actual data. Suppose we obtain residuals of $\epsilon_{11}=-3.11$, $\epsilon_{12}=1.19$, and $\epsilon_{13}=2.41$.  In that case, our parametrically generated data for Rippleside Elementary (School \#1) would look like:
+We next proceed to Level One, where the scores from Rippleside are modeled as a linear function of year ($654.2 + 1.60\textrm{Year08}_{ij}$) with a normally distributed residual $\epsilon_{1k}$ at each time point $k$. Three residuals (one for each year) are sampled independently from a normal distribution with mean 0 and standard deviation 2.97 -- the standard deviation again coming from parameter estimates from fitting Model F0 to the actual data. Suppose we obtain residuals of $\epsilon_{11}=-3.11$, $\epsilon_{12}=1.19$, and $\epsilon_{13}=2.41$.  In that case, our parametrically generated data for Rippleside Elementary (School \#1) would look like:
 
 \[ \begin{array}{rcccl}
    Y_{11} & = & 654.2+1.60(0)-3.11 & = & 651.1 \\
