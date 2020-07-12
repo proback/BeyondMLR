@@ -561,7 +561,7 @@ At this point, you might imagine expanding model building efforts in a couple of
 
 ### A unified multilevel approach (the framework we'll use) {#unified-glmm}
 
-As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a composite model after first expressing Level One and Level Two models.  That is, we will create Level One and Level Two models as in Section \@ref(twostage-glmm), but we will then combine those models into a composite model and estimate all model parameters simultaneously.  Once again $Y_{ij}$ is an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), and $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  Our Level One model with foul differential as the sole predictor is given by Equation \@ref(eq:lev1glmm):
+As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a composite model after first expressing Level One and Level Two models.  That is, we will create Level One and Level Two models as in Section \@ref(twostage-glmm), but we will then combine those models into a composite model and estimate all model parameters simultaneously.  Once again $Y_{ij}$ is an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), and $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  Our Level One model with foul differential as the sole predictor is given by Equation \@ref(eq:lev1glmm) generalized to Game $i$:
 
   \[ \log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg)=a_i+b_i\mathrm{foul.diff}_{ij} \]
   
@@ -679,10 +679,9 @@ In the College Basketball Referees case study, our two primary Level Two covaria
 
 How will treating home and visiting teams as random effects change our multilevel model?  Another way we might view this situation is by considering that Game is not the only Level Two observational unit we might have selected.  What if we instead decided to focus on Home Team as the Level Two observational unit?  That is, what if we assumed that fouls called on the same home team across all games must be correlated?  In this case, we could redefine our Level One model from Equation \@ref(eq:lev1glmm).  Let $Y_{hj}$ be an indicator variable recording if the $j^{th}$ foul from Home Team $h$ was called on the home team (1) or the visiting team (0), and $p_{hj}$ be the true probability that the $j^{th}$ foul from Home Team $h$ was called on the home team.  Now, if we were to consider a simple model with foul differential as the sole predictor, we could model the probability of a foul on the home team for Home Team $h$ with the model:
 
-\begin{equation}
+\begin{equation*}
 \log\bigg(\frac{p_{hj}}{1-p_{hj}}\bigg)=a_h+b_h\mathrm{foul.diff}_{hj}
-(\#eq:lev1bglmm)
-\end{equation}
+\end{equation*}
 
 In this case, $e^{a_{h}}$ represents the odds that a foul is called on the home team when total fouls are equal between both teams in a game involving Home Team $h$, and $e^{b_{h}}$ represents the multiplicative change in the odds that a foul is called on the home team for every extra foul on the home team compared to the visitors in a game involving Home Team $h$.  After fitting logistic regression models for each of the 39 teams in our data set, we see in Figure \@ref(fig:gmu-histmat3) variability in fitted intercepts (mean=-0.15, sd=0.33) and slopes (mean=-0.22, sd=0.12) among the 39 teams, although much less variability than we observed from game-to-game.  Of course, each logistic regression model for a home team was based on about 10 times more foul calls than each model for a game, so observing less variability from team-to-team was not unexpected.
 
@@ -744,10 +743,9 @@ We could include terms that vary by home or visiting team in other Level Two equ
 
 Our composite model then looks like:
 
-\begin{equation}
+\begin{equation*}
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) = [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_{i}+v_{h}+w_{g}].
-(\#eq:compmoda)
-\end{equation}
+\end{equation*}
 We will refer to this as Model A3, where we look at the effect of foul differential on the odds a foul is called on the home team, while accounting for three crossed random effects at Level Two (game, home team, and visiting team).  Parameter estimates for Model A3 are given below:
 
 ```{r, include=FALSE}
@@ -1337,7 +1335,7 @@ kable(table5chp11, booktabs=T,
 
     Perform exploratory analyses and then run multilevel models to examine significant determinants of successful challenges.  Write a short report comparing specific reasons for the challenge to the greater context in which a challenge was made.
 
-4. __Yelp restaurant reviews__  @Mohr2018 assembled a data set of Yelp restaurant reviews in Madison, WI, from 2005 through 2017 based on the Yelp Dataset Challenge on [Kaggle](https://www.kaggle.com/yelp-dataset/yelp-dataset).  Their data in `yelp.csv` contains almost 60,000 reviews on 888 restaurants from over 20,000 reviewers, and it contains a selection of variables on the reviewer (e.g., total reviews, average stars), the restaurant (e.g., neighborhood, average stars, category), and the review itself (e.g., stars, year, useful ratings, actual text).
+4. __Yelp restaurant reviews__  @Mohr2018 assembled a data set of Yelp restaurant reviews in Madison, WI, from 2005 through 2017 based on the Yelp Dataset Challenge on [Kaggle](https://www.kaggle.com/yelp-dataset/yelp-dataset).  The data in `yelp.csv` contains almost 60,000 reviews on 888 restaurants from over 20,000 reviewers, and it contains a selection of variables on the reviewer (e.g., total reviews, average stars), the restaurant (e.g., neighborhood, average stars, category), and the review itself (e.g., stars, year, useful ratings, actual text).
 
     There are various questions that could be pursued with this data.  Here are just a few ideas:
       - how can we model number of stars in the rating, or whether or not the rating was 5 stars or not?

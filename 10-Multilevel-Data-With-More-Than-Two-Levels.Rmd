@@ -476,24 +476,21 @@ We once again begin with the __unconditional means model__ \index{unconditional 
 
 - Level One (timepoint within plant):
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+\epsilon_{ijk} \textrm{ where } \epsilon_{ijk}\sim N(0,\sigma^2)
-(\#eq:initunun)
-\end{equation}
+\end{equation*}
 
 - Level Two (plant within pot):
 
-\begin{equation}
+\begin{equation*}
 a_{ij} = a_{i}+u_{ij} \textrm{ where } u_{ij}\sim N(0,\sigma_{u}^{2})
-(\#eq:initunun2)
-\end{equation}
+\end{equation*}
 
 - Level Three (pot):
 
-\begin{equation}
+\begin{equation*}
 a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_{\tilde{u}}^{2})
-(\#eq:initunun3)
-\end{equation}
+\end{equation*}
 
 where the heights of plants from different pots are considered independent, but plants from the same pot are correlated as well as measurements at different times from the same plant.
 
@@ -512,10 +509,9 @@ Keeping track of all the model terms, especially with three subscripts, is not a
 
 The three-level unconditional means model can also be expressed as a composite model:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk}=\alpha_{0}+\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}
-(\#eq:initununcomp)
-\end{equation}
+\end{equation*}
 and this composite model can be fit using statistical software:
 
 ```{r, comment=NA}
@@ -549,10 +545,9 @@ The three-level unconditional growth model (Model B) can be specified either usi
 
 - Level One (timepoint within plant):
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-(\#eq:timewithplnt)
-\end{equation}
+\end{equation*}
 
 - Level Two (plant within pot):
 
@@ -570,11 +565,10 @@ b_{i} & = \beta_{0}+\tilde{v}_{i}
 
 or as a composite model:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
 [\tilde{u}_{i}+{v}_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+{v}_{ij})\textrm{time}_{ijk}]
-(\#eq:compmodb)
-\end{equation}
+\end{equation*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
 
@@ -779,9 +773,9 @@ However, when it is possible to remove boundary constraints through reasonable m
 
 - Level One (timepoint within plant):
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-\end{equation}
+\end{equation*}
 
 - Level Two (plant within pot):
 
@@ -848,7 +842,7 @@ Under the parametric bootstrap, we must simulate data under the null hypothesis 
 - Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true
 - Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
 
-Let's see how new plant heights are generated under the parametric bootstrap. Consider, for instance, $i=1$ and $j=1,2$. That is, consider Plants \#11 and \#12. These plants are found in Pot \#1, which was randomly assigned to contain sterilized soil from a restored prairie (STP):
+Let's see how new plant heights are generated under the parametric bootstrap. Consider, for instance, $i=1$ and $j=1,2$. That is, consider Plants \#11 and \#12 as shown in Table \@ref(tab:10verb7). These plants are found in Pot \#1, which was randomly assigned to contain sterilized soil from a restored prairie (STP):
 
 ```{r, 10verb7, echo=FALSE, comment=NA}
 verb7 <- seedwd[1:2, c(2:11)]
@@ -1037,10 +1031,9 @@ For instance, consider Model C, where we must estimate a total of 15 parameters:
 
 - Level One (timepoint within plant):
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-(\#eq:lev1timemodcp)
-\end{equation}
+\end{equation*}
 
 - Level Two (plant within pot):
 
@@ -1110,9 +1103,9 @@ By following the options above, our potential 30-parameter model (C_plus) can be
 
 - Level One:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-\end{equation}
+\end{equation*}
 
 - Level Two:
 
@@ -1147,9 +1140,9 @@ In Model C we considered the main effects of soil type and sterilization on lead
 
 - Level One:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-\end{equation}
+\end{equation*}
 
 - Level Two:
 
@@ -1193,9 +1186,9 @@ Our final model (Model F), with its constraints on Level Three error terms, can 
 
 - Level One:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk} = a_{ij}+b_{ij}\textrm{time}_{ijk}+\epsilon_{ijk}
-\end{equation}
+\end{equation*}
 
 - Level Two:
 
@@ -1367,11 +1360,10 @@ As in Chapter \@ref(ch-lon), it is important to be aware of the covariance struc
 
 We will first consider Model B with $\tilde{v}_{i}$ at Level Three, and then we will evaluate the resulting covariance structure that results from removing $\tilde{v}_{i}$, thereby restricting $\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0$.  The composite version of Model B has been previously expressed as:
 
-\begin{equation}
+\begin{equation*}
 Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
 [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+(\tilde{v}_{i}+v_{ij})\textrm{time}_{ijk}]
-(\#eq:modbcomp)
-\end{equation}
+\end{equation*}
 
 where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
 
@@ -1567,7 +1559,7 @@ In Section \@ref(threelevel-paraboot) we sought to perform a significance test c
 
 11. In Model C, we initially addressed boundary constraints by removing the Level Three correlation between error terms from our multilevel model. What other model adjustments might we have considered?
 
-12. How does Figure \@ref(fig:paraboot) show that a likelihood ratio test using a chi-square distribution would be biased?
+12. How does Figure \@ref(fig:paraboot10) show that a likelihood ratio test using a chi-square distribution would be biased?
 
 13. In Section \@ref(sec:explodingvarcomps), a model with 52 parameters is described: (a) illustrate that the model does indeed contain 52 parameters; (b) explain how to minimize the total number of parameters using ideas from Section \@ref(sec:explodingvarcomps); (c) what assumptions have you made in your simplification in (b)?
 
@@ -1612,7 +1604,7 @@ kable(table4chp10, booktabs=T, escape=F,
 
 21. At the bottom of Table \@ref(tab:table4chp10), the percent of variance explained is given within and between neighborhoods. Explain what these values likely represent and how they were calculated.
 
-22. Table \@ref(tab:table5chp10) shows a portion of Table 4 from @Sampson1997. Describe the multilevel model that likely produced this table. State the primary result from this table in context. [Note that collective efficacy is a Level Three covariate in this table, summarized over an entire neighborhood.]  Estimates of neighborhood-level coefficients control for gender, marital status, homeownership, ethnicity, mobility, age, years in neighborhood, and SES of those interviewed. Model 1 accounts for 70.5\% of the variation between neighborhoods in perceived violence, whereas model 2 accounts for 77.8\% of the variation.
+22. Table \@ref(tab:table5chp10) shows a portion of Table 4 from @Sampson1997. Describe the multilevel model that likely produced this table. State the primary result from this table in context. [Note that collective efficacy is a Level Three covariate in this table, summarized over an entire neighborhood.]  Estimates of neighborhood-level coefficients control for gender, marital status, homeownership, ethnicity, mobility, age, years in neighborhood, and SES of those interviewed. Model 1 accounts for 70.5\% of the variation between neighborhoods in perceived violence, whereas Model 2 accounts for 77.8\% of the variation.
 
 ```{r, include=FALSE}
 Variable2 <- c("Concentrated disadvantage","Immigrant concentration","Residential stability","Collective efficacy")
@@ -1632,7 +1624,7 @@ kable(table5chp10, booktabs=T,
       caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).") %>%
       add_header_above(c(" ","Social composition"=3, "Social comp and collective efficacy"=3)) %>%
       add_header_above(c(" ","Model 1"=3, "Model 2"=3)) %>%
-      row_spec(1, bold=T) 
+    kable_styling(latex_options = "scale_down")
 ```
 
 
