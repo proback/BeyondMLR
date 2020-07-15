@@ -1464,10 +1464,10 @@ Researchers often use methods like the __parametric bootstrap__ \index{parametri
 - Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
 
 ```{r, parabootdiagram, out.width='80%', fig.show='hold', fig.cap="The steps in conducting a parametric bootstrap test comparing Models F and F0.", echo=FALSE}
-knitr::include_graphics("data/ParametricBootstrapDiagram.PNG")
+knitr::include_graphics("data/ParametricBootstrapDiagram9.png")
 
 # Can also put these lines outside of R chunk
-# ![The steps in conducting a parametric bootstrap test comparing # Models F and F0.](data/ParametricBootstrapDiagram.PNG)
+# ![The steps in conducting a parametric bootstrap test comparing # Models F and F0.](data/ParametricBootstrapDiagram9.png)
 ```
 
 Let's see how new test scores are generated under the parametric bootstrap. Consider, for instance, $i=1$ and $j=1,2,3$; that is, consider test scores for School #1 (Rippleside Elementary) across all three years (2008, 2009, and 2010).  Table \@ref(tab:rippleside) shows the original data for Rippleside Elementary.
@@ -2041,7 +2041,7 @@ kable(table4chp9, booktabs=T, escape=F,
     d. In Model E (see R code at the end of these problems), focus on the `ems_basic:year2013` interaction term.
       - provide a careful interpretation in context
       - why are there no p-values for testing significance in the `lmer()` output?
-      - confidence intervals are formed for parameters in Model E using two different methods on pages 3-4.  What can we conclude about the significance of the interaction from the CIs?  Be sure to make a statement about significance in context; no need to interpret the CI itself.
+      - confidence intervals can be formed for parameters in Model E using two different methods.  What can we conclude about the significance of the interaction from the CIs?  Be sure to make a statement about significance in context; no need to interpret the CI itself.
 
     e. Write out Model G in terms of its Level 1 and Level 2 equations (see R code at the end of these problems).  Be sure to use proper subscripts everywhere, and also be sure to also provide expressions for any assumptions made about error terms.  How many total parameters must be estimated?
 
@@ -2050,7 +2050,7 @@ kable(table4chp9, booktabs=T, escape=F,
     g. We wish to compare Models D and D0. 
       - Write out null and alternative hypotheses in terms of model parameters
       - State a conclusion based on a likelihood ratio test
-      - State a conclusion based on a parametric bootstrap.  
+      - State a conclusion based on a parametric bootstrap.
       - Generate a plot that compares the null distributions and p-values for the likelihood ratio test and parametric bootstrap.
       - Why might we consider using a parametric bootstrap p-value rather than a likelihood ratio test p-value?
       - Show how you would produce a bootstrapped value for $Y_{11}$, the first row of `ambulance3.csv`.  Show all calculations with as many specific values filled in as possible.  If you need to select a random value from a normal distribution, identify the mean and SD for the normal distribution you’d like to sample from.
@@ -2113,7 +2113,7 @@ modelG <- lmer(diverthours ~ year2013 + totalvisits1 +
 
 3. __Beating the Blues__ Depression is a common mental disorder affecting approximately 121 million people worldwide, making it one of the leading causes of disability. Evidence has shown that cognitive behavioral therapy (CBT) can be an effective treatment, but delivery of the usual face-to-face treatment is expensive and dependent on the availability of trained therapists. As a result, Proudfoot et al. [-@Proudfoot2003] developed and studied an interactive multimedia program of CBT called Beating the Blues (BtheB). In their study, 167 participants suffering from anxiety and/or depression were randomly allocated to receive Beating the Blues therapy or treatment as usual (TAU). Beating the Blues consisted of 8 50-minute computerized weekly sessions with “homework” projects between sessions, while treatment as usual consisted of whatever treatment the patient’s general practitioner (GP) prescribed, including drug treatment or referral to a counselor. Subjects in the BtheB group could also receive pharmacotherapy if prescribed by their GP (who reviewed a computer-generated progress report after each subject’s session), but they could not receive face-to-face counseling. The primary response was the Beck Depression Inventory (BDI), measured prior to treatment, at the end of treatment (2 months later), and at 2, 4, and 6 months post-treatment follow-up. Researchers wished to examine the effect of treatment on depression levels, controlling for potential explanatory variables such as baseline BDI, if the patient took anti-depressant drugs, and the length of the current episode of depression (more or less than 6 months).  Was treatment effective in both the active treatment phase and the post-treatment follow-up?
 
-    Data from the Beating the Blues study can be found in `BtheB.csv`; it is also part of the `HSAUR` package @Everitt2006 in R. Examination of the data reveals the following variables:
+    Data from the Beating the Blues study can be found in `BtheB.csv`; it is also part of the `HSAUR` package [@Everitt2006] in R. Examination of the data reveals the following variables:
 
     - `drug` = Was the subject prescribed concomitant drug therapy?
     - `length` = Was the current episode of depression (at study entry) longer or shorter than 6 months?
