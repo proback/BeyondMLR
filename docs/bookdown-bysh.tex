@@ -37,7 +37,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={GLMs and Multilevel Models},
+  pdftitle={Beyond Multiple Linear Regression},
   pdfauthor={Paul Roback and Julie Legler},
   colorlinks=true,
   linkcolor=Maroon,
@@ -199,16 +199,16 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{GLMs and Multilevel Models}
+\title{Beyond Multiple Linear Regression}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Broadening Your Statistical Horizons with Applications using R}
+\subtitle{Applied Generalized Linear Models and Multilevel Models in R}
 \author{Paul Roback and Julie Legler}
-\date{2020-07-12}
+\date{2020-07-18}
 
 \begin{document}
 \maketitle
@@ -234,9 +234,37 @@
 \chapter*{Preface}\label{preface}}
 
 
-\includegraphics[width=0.75\linewidth]{data/cover}
+\textbf{Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R} \citep{RProject} is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like \emph{Stat2} \citep{Cannon2019}. We started teaching this course at St.~Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St.~Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook and \href{https://github.com/proback/BYSH}{available at our GitHub repo} arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will not necessarily be expert in these methods and associated theory, but that they will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
 
-\textbf{GLMs and Multilevel Models: Broadening Your Statistical Horizons (BYSH) with Applications using R} \citet{RProject} is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like \emph{Stat2} \citep{Cannon2019}. We started teaching this course at St.~Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St.~Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook and \href{https://github.com/proback/BYSH}{available at our GitHub repo} arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will not necessarily be expert in these methods and associated theory, but that they will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
+When we teach this course at St.~Olaf, we are able to cover Chapters 1-11 during a single semester, although in order to make time for a large, open-ended group project we sometimes cover some chapters in less depth (e.g., Chapters 3, 7, 10, or 11). How much you cover will certainly depend on the background of your students (ours have seen both multiple linear and logistic regression), their sophistication level (we have statistical but no mathematical prerequisites), and time available (we have a 14-week semester). It will also depend on your choice of topics; in our experience, we have found that GLMs and multilevel models nicely build on students' previous regression knowledge and allow them to better model data from many real contexts, but we also acknowledge that there are other good choices of topics for an applied ``Stat3'' course. The short chapter guide below can help you thread together the material in this book to create the perfect course for you:
+
+\begin{itemize}
+\tightlist
+\item
+  Chapter 1: Review of Multiple Linear Regression. We've found that our students really benefit from a review in the first week or so, plus in this initial chapter we introduce our approach to exploratory data analysis and model building while reminding students about concepts like indicators, interactions, and bootstrapping.
+\item
+  Chapter 2: Beyond Least Squares: Using Likelihoods to Fit and Compare Models. This chapter builds intuition for likelihoods and their usefulness in testing and estimation; any section involving calculus is optional. Chapter 2 could be skipped at the risk that later references to likelihoods become more blurry and understanding more shallow.
+\item
+  Chapter 3: Distribution Theory. A quick summary of key discrete and continuous probability distributions, this chapter can be used as a reference as needed.
+\item
+  Chapter 4: Poisson Regression. This is the most important chapter for generalized linear models, where each of the three case studies introduces new ideas such as coefficient interpretation, inference, offsets, overdispersion, zero-inflation, and alternatives like negative binomial.
+\item
+  Chapter 5: Generalized Linear Models (GLMs): A Unifying Theory. Chapter 5 is short, but it importantly shows how linear, logistic, binomial, Poisson, and other regression methods are connected. We believe it's important that students appreciate that GLMs aren't just a random collection of modeling approaches.
+\item
+  Chapter 6: Logistic Regression. We begin with two cases studies involving binomial regression, drawing connections with Chapters 4 and 5, before a third case study involving binary logistic regression.
+\item
+  Chapter 7: Correlated Data. This is the transition chapter, building intuition about correlated data through an extended simulation and a real case study, although you can jump right to Chapter 8 if you wish. Chapters 8-11 contain the multilevel model material and, for the most part, they do not depend on earlier chapters (except for generalized responses in Chapter 11 and references to ideas such as likelihoods, inferential approaches, etc.). In fact, during one semester we taught the multilevel material before the GLM material to facilitate academic civic engagement projects that needed multilevel models (that semester our order of chapters was: 1, 2, 7, 8, 9, 10, 3, 4, 5, 6, 11).
+\item
+  Chapter 8: Introduction to Multilevel Models. As we go through a comprehensive case study, several important ideas are motivated, including EDA for multilevel data, the two-stage approach, multivariate normal distributions, coefficient interpretations, fixed and random effects, random slopes and intercepts, and more. Another simulation illustrates the effect of inappropriately using regression methods that assume independence for correlated data.
+\item
+  Chapter 9: Two Level Longitudinal Data. This chapter covers the special case of Chapter 8 models where there are multiple measurements over time for each subject. New topics include longitudinal-specific EDA, missing data methods, parametric bootstrap inference, and covariance structure.
+\item
+  Chapter 10: Multilevel Data With More Than Two Levels. The ideas from Chapters 8-9 are extended to a three-level case study. New ideas include boundary constraints and exploding numbers of variance components and fixed effects.
+\item
+  Chapter 11: Multilevel Generalized Linear Models. This chapter brings everything together, combining multilevel data with non-normal responses. Crossed random effects and random effects estimates are both introduced here.
+\end{itemize}
+
+Three types of exercises are available for each chapter. \textbf{Conceptual exercises} ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear. \textbf{Guided exercises} provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions. Finally, \textbf{Open-ended exercises} provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps. A solutions manual with solutions to all exercises is available to qualified instructors at our \href{www.routledge.com}{book's website}.
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 
@@ -264,22 +292,6 @@ After finishing this chapter, you should be able to:
   Understand the basic ideas behind bootstrapped confidence intervals.
 \end{itemize}
 
-\hypertarget{introduction-to-broadening-your-statistical-horizons}{%
-\section{Introduction to Broadening Your Statistical Horizons}\label{introduction-to-broadening-your-statistical-horizons}}
-
-Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting \textbf{generalized linear models (GLMs)} as opposed to using to \textbf{linear least squares regression (LLSR)} models.
-
-When models are fit to data using linear least squares regression (LLSR) \index{linear least squares regression (LLSR)}, inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.
-
-However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.
-
-The \textbf{GLMs (Generalized Linear Models)} \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Models} \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will \emph{broaden your statistical horizons}.
-
-In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We've kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.
-
-\hypertarget{assumptions-for-linear-least-squares-regression-llsr}{%
-\section{Assumptions for Linear Least Squares Regression (LLSR)}\label{assumptions-for-linear-least-squares-regression-llsr}}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Packages required for Chapter 1}
@@ -293,6 +305,22 @@ In order to understand the motivation for handling violations of assumptions, it
 \KeywordTok{library}\NormalTok{(tidyverse)    }
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{introduction-to-beyond-multiple-linear-regression}{%
+\section{Introduction to Beyond Multiple Linear Regression}\label{introduction-to-beyond-multiple-linear-regression}}
+
+Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting \textbf{generalized linear models (GLMs)} as opposed to using to \textbf{linear least squares regression (LLSR)} models.
+
+When models are fit to data using linear least squares regression (LLSR), \index{linear least squares regression (LLSR)} inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.
+
+However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.
+
+The \textbf{GLMs (Generalized Linear Models)} \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Models} \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand \emph{beyond multiple linear regression}.
+
+In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We've kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.
+
+\hypertarget{assumptions-for-linear-least-squares-regression-llsr}{%
+\section{Assumptions for Linear Least Squares Regression (LLSR)}\label{assumptions-for-linear-least-squares-regression-llsr}}
 
 \begin{figure}
 
@@ -469,8 +497,8 @@ While we identified possible violations of assumptions for inference in LLSR for
 
 Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing. The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky. Our data set \texttt{derbyplus.csv} contains the \texttt{year} of the race, the winning horse (\texttt{winner}), the \texttt{condition} of the track, the average \texttt{speed} (in feet per second) of the winner, and the number of \texttt{starters} (field size, or horses who raced) for the years 1896-2017 \citep{KentuckyDerby}. The track \texttt{condition} has been grouped into three categories: fast, good (which includes the official designations ``good'' and ``dusty''), and slow (which includes the designations ``slow'', ``heavy'', ``muddy'', and ``sloppy''). We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.
 
-\hypertarget{explore1}{%
-\section{Initial Exploratory Analyses}\label{explore1}}
+\hypertarget{explorech1}{%
+\section{Initial Exploratory Analyses}\label{explorech1}}
 
 \hypertarget{data-organization}{%
 \subsection{Data Organization}\label{data-organization}}
@@ -480,11 +508,11 @@ The first five and last five rows from our data set are illustrated in Table \re
 \begin{itemize}
 \tightlist
 \item
-  \texttt{fast} is an \textbf{indicator variable} \index{indicator variable}, taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,
+  \texttt{fast} is an \textbf{indicator variable}, \index{indicator variable} taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,
 \item
   \texttt{good} is another indicator variable, taking the value 1 for races run under good conditions, and 0 for races run under other conditions,
 \item
-  \texttt{yearnew} is a \textbf{centered variable} \index{centered variable}, where we measure the number of years since 1896, and
+  \texttt{yearnew} is a \textbf{centered variable}, \index{centered variable} where we measure the number of years since 1896, and
 \item
   \texttt{fastfactor} replaces \texttt{fast} = 0 with the description ``not fast'', and \texttt{fast} = 1 with the description ``fast''. Changing a numeric categorical variable to descriptive phrases can make plot legends more meaningful.
 \end{itemize}
@@ -626,7 +654,7 @@ Using Kentucky Derby data, we estimate \(\hat{\beta}_{0}=2.05\), \(\hat{\beta}_{
 ##  Residual standard error =  0.9032
 \end{verbatim}
 
-You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896. One way to create more meaningful parameters is through \textbf{centering} \index{centered variable}. In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
+You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896. One way to create more meaningful parameters is through \textbf{centering}. \index{centered variable} In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
 
 \begin{equation*}
 \begin{split}
@@ -738,7 +766,7 @@ This model could suggest, for example, that the rate of increase in winning spee
 \hypertarget{linear-regression-with-a-binary-predictor}{%
 \subsection{Linear regression with a binary predictor}\label{linear-regression-with-a-binary-predictor}}
 
-We also may want to include track condition as an explanatory variable. We could start by using \texttt{fast} as the lone predictor: Do winning speeds differ for fast and non-fast conditions? \texttt{fast} is considered an \textbf{indicator variable} \index{indicator variable}---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions). Since \texttt{fast} is numeric, we can use simple linear regression techniques to fit Model 3:
+We also may want to include track condition as an explanatory variable. We could start by using \texttt{fast} as the lone predictor: Do winning speeds differ for fast and non-fast conditions? \texttt{fast} is considered an \textbf{indicator variable}---it takes on only the values 0 and 1, \index{indicator variable} where 1 indicates presence of a certain attribute (like fast racing conditions). Since \texttt{fast} is numeric, we can use simple linear regression techniques to fit Model 3:
 
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
@@ -867,14 +895,14 @@ fast         0.92840  1.52529
 \hypertarget{multreg-boot}{%
 \subsection{Inference in multiple linear regression: bootstrapping}\label{multreg-boot}}
 
-Remember that you must check LINE assumptions using the same residual plots as in Figure \ref{fig:resid2} to ensure that the inferential statements in the previous section are valid. In cases when model assumptions are shaky, one alternative approach to statistical inference is \textbf{bootstrapping} \index{bootstrapping}; in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility. In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates. Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.
+Remember that you must check LINE assumptions using the same residual plots as in Figure \ref{fig:resid2} to ensure that the inferential statements in the previous section are valid. In cases when model assumptions are shaky, one alternative approach to statistical inference is \textbf{bootstrapping}; \index{bootstrapping} in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility. In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates. Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.
 
 If we wish to use bootstrapping to obtain confidence intervals for our coefficients in Model 4, we could follow these steps:
 
 \begin{itemize}
 \tightlist
 \item
-  take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all. This is \textbf{case resampling} \index{case resampling}, so that all information from a given year (winning speed, track condition, number of starters) remains together.
+  take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all. This is \textbf{case resampling}, \index{case resampling} so that all information from a given year (winning speed, track condition, number of starters) remains together.
 \item
   fit Model 4 to the bootstrap sample, saving \(\hat{\beta}_0\), \(\hat{\beta}_1\), and \(\hat{\beta}_2\).
 \item
@@ -882,7 +910,7 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 \item
   the 1000 bootstrap estimates for each parameter can be plotted to show the \textbf{bootstrap distribution} \index{bootstrap distribution} (see Figure \ref{fig:boot4})
 \item
-  a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles. This is called the \textbf{percentile method} \index{percentile method}.
+  a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles. This is called the \textbf{percentile method}. \index{percentile method}
 \end{itemize}
 
 \begin{Shaded}
@@ -926,7 +954,7 @@ There are many variations on this bootstrap procedure. For example, you could sa
 \hypertarget{multiple-linear-regression-with-an-interaction-term}{%
 \subsection{Multiple linear regression with an interaction term}\label{multiple-linear-regression-with-an-interaction-term}}
 
-Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates. One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions. To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider \textbf{interaction terms} \index{interaction}. Amazingly, if we create a new variable by taking the product of \texttt{yearnew} and \texttt{fast} (i.e., the \textbf{interaction} between \texttt{yearnew} and \texttt{fast}), adding that variable into our model will have the desired effect.
+Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates. One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions. To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider \textbf{interaction terms}. \index{interaction} Amazingly, if we create a new variable by taking the product of \texttt{yearnew} and \texttt{fast} (i.e., the \textbf{interaction} between \texttt{yearnew} and \texttt{fast}), adding that variable into our model will have the desired effect.
 
 Thus, consider Model 5:
 
@@ -1023,11 +1051,11 @@ Several tests and measures of model performance can be used when comparing diffe
 \item
   \(R^2\) \index{R-squared} we have seen; it measures the variability in the response variable explained by the model. One problem is that \(R^2\) always increases with extra predictors, even if the predictors add very little information.
 \item
-  adjusted \(R^2\) \index{adjusted R-squared}. Adds a penalty for model complexity to \(R^2\) so that any increase in performance must outweigh the cost of additional complexity. We should ideally favor any model with higher adjusted \(R^2\), regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.
+  adjusted \(R^2\). \index{adjusted R-squared} Adds a penalty for model complexity to \(R^2\) so that any increase in performance must outweigh the cost of additional complexity. We should ideally favor any model with higher adjusted \(R^2\), regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.
 \item
-  AIC (Akaike Information Criterion) \index{AIC}. Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size. The BIC (Bayesian Information Criterion) \index{BIC} is similar to the AIC, but with a greater penalty for additional model terms.
+  AIC (Akaike Information Criterion). \index{AIC} Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size. The BIC (Bayesian Information Criterion) \index{BIC} is similar to the AIC, but with a greater penalty for additional model terms.
 \item
-  extra sum of squares F test. This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on \textbf{nested models} \index{nested models}, where one model is a reduced version of the other. For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level). Our null hypothesis is then \(\beta_{3}=\beta_{4}=0\). We have statistically significant evidence (F = 57.2 on 2 and 116 df, p \textless{} .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.
+  extra sum of squares F test. This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on \textbf{nested models}, \index{nested models} where one model is a reduced version of the other. For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level). Our null hypothesis is then \(\beta_{3}=\beta_{4}=0\). We have statistically significant evidence (F = 57.2 on 2 and 116 df, p \textless{} .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.
 \end{itemize}
 
 One potential final model for predicting winning speeds of Kentucky Derby races is:
@@ -1592,7 +1620,7 @@ With likelihood methods, conceptually we consider different possible values for 
 
 From the likelihood in Figure \ref{fig:lik1}, when \(p_B\) = 0.3 we see a family of a girl followed by two boys 6.3\% (\(0.7\cdot0.3^2\)) of the time. However, it indicates that we are much more likely to see our data if \(p_B\) = 0.6 where the likelihood of GBB is \(0.4\cdot0.6^2\) or 14.4\%.
 
-If the choice was between 0.3 and 0.6 for an estimate of \(p_B\), we'd choose 0.6. The ``best'' estimate of \(p_B\) would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the \textbf{maximum likelihood estimate} or MLE \index{maximum likelihood estimate (MLE)}. We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
+If the choice was between 0.3 and 0.6 for an estimate of \(p_B\), we'd choose 0.6. The ``best'' estimate of \(p_B\) would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the \textbf{maximum likelihood estimate} or MLE. \index{maximum likelihood estimate (MLE)} We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
 
 Suppose another family consisting of three girls is added to our data set. We've already seen that the Sex Unconditional Model multiplies probabilities to construct a likelihood because children are independent of one another. Extending this idea, families can be assumed to be independent of one another so that the likelihood for both families can be obtained by multiplication. With two families (GBB and GGG) our likelihood is now:
 
@@ -2101,7 +2129,7 @@ The probability of a boy does not depend on the prior family composition.
 \(H_A:\) At least one parameter from \(\neutral, \bbias,\gbias\) differs from the others. (Sex Conditional Model)
 The probability of a boy does depend on the prior family composition.
 
-We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model. Here we will refer to the first model, the Sex Unconditional Model, as the \textbf{reduced model} \index{null (reduced) model}, noting that it has only a single parameter, \(p_B\). The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the \textbf{larger (full) model}. We'll use the MLEs derived earlier in Section \ref{sex-cond-lik}.
+We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model. Here we will refer to the first model, the Sex Unconditional Model, as the \textbf{reduced model}, \index{null (reduced) model} noting that it has only a single parameter, \(p_B\). The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the \textbf{larger (full) model}. We'll use the MLEs derived earlier in Section \ref{sex-cond-lik}.
 
 The maximum of the log-likelihood for the reduced model can be found by replacing \(p_{B}\) in the log-likelihood with the MLE of \(p_{B}\), 0.5075.
 
@@ -2121,7 +2149,7 @@ The maximum of the log-likelihood for the larger model can be found by replacing
 
 Take a look at the log-likelihoods---the maximum log-likelihood for the larger model is indeed larger (less negative). The maximum log-likelihood for the larger model is guaranteed to be at least as large as the maximum log-likelihood for the reduced model, so we'll be interested in whether this observed difference in maximum log-likelihoods, -7391.448 -(-7396.067) = 4.619, is significant.
 
-A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a \(\chi^2\) distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred to as the \textbf{Likelihood Ratio Test (LRT)} \index{likelihood ratio test (LRT)}.
+A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a \(\chi^2\) distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred to as the \textbf{Likelihood Ratio Test (LRT)}. \index{likelihood ratio test (LRT)}
 
 Our test statistic is
 
@@ -2224,9 +2252,9 @@ How does the waiting for a boy model compare to the waiting for a girl model? Th
 \begin{itemize}
 \tightlist
 \item
-  \(\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p\), where \(p\) represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion \index{AIC}. Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC.
+  \(\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p\), where \(p\) represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion. \index{AIC} Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC.
 \item
-  \(\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)\), where \(p\) is the number of parameters and \(n\) is the number of observations. BIC stands for Bayesian Information Criterion \index{BIC}, also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.
+  \(\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)\), where \(p\) is the number of parameters and \(n\) is the number of observations. BIC stands for Bayesian Information Criterion, \index{BIC} also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.
 \end{itemize}
 
 So which explanation of the data seems more plausible---waiting for a boy or waiting for a girl? These models are not nested (i.e., one is not a simplified version of the other), so it is not correct to perform a Likelihood Ratio Test, but we can legitimately compare these models using information criteria (Table \ref{tab:tab1chp2}).
@@ -2298,7 +2326,7 @@ p_B= \frac{e^{\beta_0+\beta_1(\textrm{parental age})}}
 
 Another compelling reason for likelihoods occurs when we encounter correlated data. For example, models with conditional probabilities do not conform to the independence assumption. The Sex Conditional Model is an example of such a model. We'll see that likelihoods can be useful when the data has structure such as multilevel that induces a correlation. A good portion of the book addresses this.
 
-When the responses are are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we'll find it difficult to use the linear least squares regression models of the past and we'll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will significantly broaden your statistical horizons!
+When the responses are are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we'll find it difficult to use the linear least squares regression models of the past and we'll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will enable us to move \emph{beyond multiple linear regression}!
 
 \hypertarget{exercises-1}{%
 \section{Exercises}\label{exercises-1}}
@@ -2402,7 +2430,7 @@ When the responses are are not normal such as in generalized linear models, wher
   \begin{enumerate}
   \def\labelenumii{\alph{enumii}.}
   \item
-    Fill out Table \ref{tab:table10chp2}---write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.
+    Fill out Table \ref{tab:hothandchp2}---write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.
   \item
     Given that, for the No Hot Hand model, \(\textrm{Lik}(p_B)=p_B^{10}(1-p_B)^{15}\) for the 5 games where we collected data, how do we know that 0.40 (the maximum likelihood estimator (MLE) of \(p_B\)) is a better estimate than, say, 0.30?
   \item
@@ -2458,11 +2486,6 @@ After finishing this chapter, you should be able to:
   Create a mixture of distributions and evaluate the shape, mean, and variance.
 \end{itemize}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
-
-What if it is not plausible that a response is normally distributed? You may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery. In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival. These responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data. Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. In this chapter we begin with some general definitions, terms, and notation for different types of distributions with some examples of applications. We then create new random variables using combinations of random variables (see Guided Exercises).
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Packages required for Chapter 3}
@@ -2473,16 +2496,21 @@ What if it is not plausible that a response is normally distributed? You may wan
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+What if it is not plausible that a response is normally distributed? You may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery. In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival. These responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data. Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. In this chapter we begin with some general definitions, terms, and notation for different types of distributions with some examples of applications. We then create new random variables using combinations of random variables (see Guided Exercises).
+
 \hypertarget{discrete-random-variables}{%
 \section{Discrete Random Variables}\label{discrete-random-variables}}
 
-A discrete random variable has a countable number of possible values; for example, we may want to measure the number of people in a household or the number of crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a \textbf{probability mass function} (pmf) \index{probability mass function (pmf)}. A pmf is a function that calculates \(P(Y=y)\), given each variable's parameters.
+A discrete random variable has a countable number of possible values; for example, we may want to measure the number of people in a household or the number of crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a \textbf{probability mass function} (pmf). \index{probability mass function (pmf)} A pmf is a function that calculates \(P(Y=y)\), given each variable's parameters.
 
 \hypertarget{sec-binary}{%
 \subsection{Binary Random Variable}\label{sec-binary}}
 
 Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let's consider this a success and record \(Y = 1\).
-A series of these events is a \textbf{Bernoulli process} \index{Bernoulli process}, independent trials that take on one of two values (e.g.~0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
+A series of these events is a \textbf{Bernoulli process}, \index{Bernoulli process} independent trials that take on one of two values (e.g.~0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
 Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, \(p\). If we know this value, we can express \(P(Y=1) = p\) and \(P(Y=0) = 1-p\). In general, if we have a Bernoulli process with only one trial, we have a \textbf{binary distribution} (also called a \textbf{Bernoulli distribution}) \index{Bernoulli distribution} where
 
 \begin{equation} 
@@ -2498,7 +2526,7 @@ Assuming all songs have equal odds of playing, we can calculate \(p = \frac{200-
 \hypertarget{sec-binomial}{%
 \subsection{Binomial Random Variable}\label{sec-binomial}}
 
-We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin \(n\) times and recorded \(Y\), the number of heads after \(n\) flips. If we consider a case where \(p = 0.25\) and \(n = 4\), then here \(P(Y=0)\) represents the probability of no successes in 4 trials, i.e.~4 consecutive failures. The probability of 4 consecutive failures is \(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\). When we consider \(P(Y = 1)\), we are interested in the probability of exactly 1 success \emph{anywhere} among the 4 trials. There are \(\binom{4}{1} = 4\) ways to have exactly 1 success in 4 trials, so \(P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\). In general, if we carry out a sequence of \(n\) Bernoulli trials (with probability of success \(p\)) and record \(Y\), the total number of successes, then \(Y\) follows a \textbf{binomial distribution} \index{binomial distribution}, where
+We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin \(n\) times and recorded \(Y\), the number of heads after \(n\) flips. If we consider a case where \(p = 0.25\) and \(n = 4\), then here \(P(Y=0)\) represents the probability of no successes in 4 trials, i.e.~4 consecutive failures. The probability of 4 consecutive failures is \(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\). When we consider \(P(Y = 1)\), we are interested in the probability of exactly 1 success \emph{anywhere} among the 4 trials. There are \(\binom{4}{1} = 4\) ways to have exactly 1 success in 4 trials, so \(P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\). In general, if we carry out a sequence of \(n\) Bernoulli trials (with probability of success \(p\)) and record \(Y\), the total number of successes, then \(Y\) follows a \textbf{binomial distribution}, \index{binomial distribution} where
 
 \begin{equation}
 P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots, n.
@@ -2618,7 +2646,7 @@ Note that if we set \(r=1\) then
 \end{align*}
 which is the probability mass function of a geometric random variable! Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.
 
-While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as \(\binom{x}{y}\)), we can generalize our definition to allow non-integer values of \(r\). This will come in handy later when modeling. To do this, we need to first introduce the \textbf{gamma function} \index{gamma function}. The gamma function is defined as such
+While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as \(\binom{x}{y}\)), we can generalize our definition to allow non-integer values of \(r\). This will come in handy later when modeling. To do this, we need to first introduce the \textbf{gamma function}. \index{gamma function} The gamma function is defined as such
 
 \begin{equation}
 \Gamma(x)  = \int_0^\infty t^{x-1} e^{-t}dt.
@@ -2705,8 +2733,8 @@ So, there is a 0.08\% chance of all 4 queens being within the first 10 cards of 
 \hypertarget{poisson-random-variable}{%
 \subsection{Poisson Random Variable}\label{poisson-random-variable}}
 
-Sometimes, random variables are based on a \textbf{Poisson process} \index{Poisson process}. In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval.
-We can then model \(Y\), the number of events in one of these sections with the \textbf{Poisson distribution} \index{Poisson distribution}, where
+Sometimes, random variables are based on a \textbf{Poisson process}. \index{Poisson process} In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval.
+We can then model \(Y\), the number of events in one of these sections with the \textbf{Poisson distribution}, \index{Poisson distribution} where
 
 \begin{equation}
 P(Y=y) = \frac{e^{-\lambda}\lambda^y}{y!} \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
@@ -2755,7 +2783,7 @@ Therefore, there is a 27\% chance of 3 or fewer tickets being issued within one 
 \hypertarget{continuous-random-variables}{%
 \section{Continuous Random Variables}\label{continuous-random-variables}}
 
-A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using \textbf{probability density functions} (pdfs) \index{probability density function (pdf)}. Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, \(f(y)\), we can compute
+A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using \textbf{probability density functions} (pdfs). \index{probability density function (pdf)} Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, \(f(y)\), we can compute
 
 \begin{align*}
 P(a \le Y \le b) = \int_a^b f(y)dy.
@@ -2775,7 +2803,7 @@ This hints at a few properties of continuous random variables:
 \hypertarget{exponential-random-variable}{%
 \subsection{Exponential Random Variable}\label{exponential-random-variable}}
 
-Suppose we have a Poisson process with rate \(\lambda\), and we wish to model the wait time \(Y\) until the first event. We could model \(Y\) using an \textbf{exponential distribution} \index{exponential distribution}, where
+Suppose we have a Poisson process with rate \(\lambda\), and we wish to model the wait time \(Y\) until the first event. We could model \(Y\) using an \textbf{exponential distribution}, \index{exponential distribution} where
 
 \begin{equation}
 f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
@@ -2932,7 +2960,7 @@ f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (
 \label{eq:betaRV}
 \end{equation}
 
-If \(Y \sim \textrm{Beta}(\alpha, \beta)\), then \(\E(Y) = \alpha/(\alpha + \beta)\) and \(\SD(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}\). Figure \ref{fig:multBeta} displays several beta distributions \index{beta distribution}. Note that when \(\alpha = \beta\), distributions are symmetric. The distribution is left-skewed when \(\alpha > \beta\) and right-skewed when \(\beta > \alpha\).
+If \(Y \sim \textrm{Beta}(\alpha, \beta)\), then \(\E(Y) = \alpha/(\alpha + \beta)\) and \(\SD(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}\). Figure \ref{fig:multBeta} displays several beta distributions. \index{beta distribution} Note that when \(\alpha = \beta\), distributions are symmetric. The distribution is left-skewed when \(\alpha > \beta\) and right-skewed when \(\beta > \alpha\).
 
 
 
@@ -3104,7 +3132,7 @@ Beta & $\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Beta-Biomial Distribution.} We can generate more distributions by mixing two random variables \index{mixture model}. Beta-binomial random variables are binomial random variables with fixed \(n\) whose parameter \(p\) follows a beta distribution with fixed parameters \(\alpha, \beta\). In more detail, we would first draw \(p_1\) from our beta distribution, and then generate our first observation \(y_1\), a random number of successes from a binomial (\(n, p_1\)) distribution. Then, we would generate a new \(p_2\) from our beta distribution, and use a binomial distribution with parameters \(n, p_2\) to generate our second observation \(y_2\). We would continue this process until desired.
+  \textbf{Beta-Biomial Distribution.} We can generate more distributions by mixing two random variables. \index{mixture model} Beta-binomial random variables are binomial random variables with fixed \(n\) whose parameter \(p\) follows a beta distribution with fixed parameters \(\alpha, \beta\). In more detail, we would first draw \(p_1\) from our beta distribution, and then generate our first observation \(y_1\), a random number of successes from a binomial (\(n, p_1\)) distribution. Then, we would generate a new \(p_2\) from our beta distribution, and use a binomial distribution with parameters \(n, p_2\) to generate our second observation \(y_2\). We would continue this process until desired.
 
   Note that all of the observations \(y_i\) will be integer values from \(0, 1, \ldots, n\). With this in mind, use \texttt{rbinom()} to simulate 1,000 observations from a plain old vanilla binomial random variable with \(n=10\) and \(p=0.8\). Plot a histogram of these binomial observations. Then, do the following to generate a beta-binomial distribution:
 
@@ -3205,7 +3233,7 @@ Each example involves predicting a response using one or more explanatory variab
 
 For a linear least squares regression model, the parameter of interest is the average response, \(\mu_i\), for subject \(i\), and \(\mu_i\) is modeled as a line in the case of one explanatory variable. By analogy, it might seem reasonable to try to model the Poisson parameter \(\lambda_i\) as a linear function of an explanatory variable, but there are some problems with this approach. In fact, a model like \(\lambda_i=\beta_0+\beta_1x_i\) doesn't work well for Poisson data. A line is certain to yield negative values for certain \(x_i\), but \(\lambda_i\) can only take on values from 0 to \(\infty\). In addition, the equal variance assumption in linear regression inference is violated because as the mean rate for a Poisson variable increases the variance also increases (recall from Chapter \ref{ch-distthry} that if \(Y\) is the observed count, then \(E(Y)=Var(Y)=\lambda\)).
 
-One way to avoid these problems is to model log(\(\lambda_i\)) instead of \(\lambda_i\) as a function of the covariates. The log(\(\lambda_i\)) takes on values from \(-\infty\) to \(\infty\). We can also take into account the increase in the variance with an increasing mean using this approach. (Note that throughout \emph{Broadening Your Statistical Horizons} we use log to represent the natural logarithm.) Thus, we will consider the \textbf{Poisson regression} \index{Poisson regression} model:
+One way to avoid these problems is to model log(\(\lambda_i\)) instead of \(\lambda_i\) as a function of the covariates. The log(\(\lambda_i\)) takes on values from \(-\infty\) to \(\infty\). We can also take into account the increase in the variance with an increasing mean using this approach. (Note that throughout \emph{Beyond Multiple Linear Regression} we use log to represent the natural logarithm.) Thus, we will consider the \textbf{Poisson regression} \index{Poisson regression} model:
 
 \begin{equation*}
 log(\lambda_i)=\beta_0+\beta_1 x_i
@@ -3431,7 +3459,7 @@ log \left(\frac{\lambda_{X+1}}{\lambda_X}\right)   &= \beta_1\\
 \label{eq:rateRatio}
 \end{equation}
 
-These results suggest that by exponentiating the coefficient on age we obtain the multiplicative factor by which the mean count changes. In this case, the mean number in the house changes by a factor of \(e^{-0.0047}=0.995\) or decreases by 0.5\% (since \(1-.995 = .005\)) with each additional year older the household head is; or, we predict a 0.47\% \emph{increase} in mean household size for a 1 year \emph{decrease} in age of the household head (since \(1/.995=1.0047\)). The quantity on the left hand side of Equation \eqref{eq:rateRatio} is referred to as a \textbf{rate ratio} or \textbf{relative risk} \index{relative risk (rate ratio)}, and it represents a percent change in the response for a unit change in X. In fact, for regression models in general, whenever a variable (response or explanatory) is logged, we make interpretations about multiplicative effects on that variable, while with unlogged variables we can reach our usual interpretations about additive effects.
+These results suggest that by exponentiating the coefficient on age we obtain the multiplicative factor by which the mean count changes. In this case, the mean number in the house changes by a factor of \(e^{-0.0047}=0.995\) or decreases by 0.5\% (since \(1-.995 = .005\)) with each additional year older the household head is; or, we predict a 0.47\% \emph{increase} in mean household size for a 1 year \emph{decrease} in age of the household head (since \(1/.995=1.0047\)). The quantity on the left hand side of Equation \eqref{eq:rateRatio} is referred to as a \textbf{rate ratio} or \textbf{relative risk}, \index{relative risk (rate ratio)} and it represents a percent change in the response for a unit change in X. In fact, for regression models in general, whenever a variable (response or explanatory) is logged, we make interpretations about multiplicative effects on that variable, while with unlogged variables we can reach our usual interpretations about additive effects.
 
 Typically the standard errors for the estimated coefficients are included in Poisson regression output. Here the standard error for the estimated coefficient for age is 0.00094. We can use the standard error to construct a confidence interval for \(\beta_1\). A 95\% CI provides a range of plausible values for the \texttt{age} coefficient and can be constructed:
 
@@ -3469,12 +3497,12 @@ Exponentiating the endpoints yields a confidence interval for the relative risk;
 
 If there is no association between age and household size, there is no change in household size for each additional year, so \(\lambda_X\) is equal to \(\lambda_{X+1}\) and the ratio \(\lambda_{X+1}/\lambda_X\) is 1. In other words, if there is no association between age and household size, then \(\beta_1=0\) and \(e^{\beta_1}=1\). Note that our interval for \(e^{\beta_1}\), (0.993,0.997), does not include 1, so the model with age is preferred to a model without age; i.e., age is significantly associated with household size. Note that we could have similarly confirmed that our interval for \(\beta_1\) does not include 0 to show the significance of age as a predictor of household size.
 
-Another way to test the significance of the age term is to calculate a \textbf{Wald-type statistic} \index{Wald-type test}. A Wald-type test statistic is the estimated coefficient divided by its standard error. When the true coefficient is 0, this test statistic follows a standard normal distribution for sufficiently large \(n\). The estimated coefficient associated with the linear term in age is \({\hat{\beta}_1}=-0.0047\) with standard error \(SE(\hat{\beta}_1)=0.00094\). The value for the Wald test statistic is then \(Z=\hat{\beta}_1/SE(\hat{\beta}_1)=-5.026\), where \(Z\) follows a standard normal distribution if \(\beta_1=0\). In this case, the two-sided p-value based on the standard normal distribution for testing \(H_0:\beta_1=0\) is almost 0 (\(p=0.000000501\)). Therefore, we have statistically significant evidence (Z = -5.026, p \textless{} .001) that average household size decreases as age of the head of household increases.
+Another way to test the significance of the age term is to calculate a \textbf{Wald-type statistic}. \index{Wald-type test} A Wald-type test statistic is the estimated coefficient divided by its standard error. When the true coefficient is 0, this test statistic follows a standard normal distribution for sufficiently large \(n\). The estimated coefficient associated with the linear term in age is \({\hat{\beta}_1}=-0.0047\) with standard error \(SE(\hat{\beta}_1)=0.00094\). The value for the Wald test statistic is then \(Z=\hat{\beta}_1/SE(\hat{\beta}_1)=-5.026\), where \(Z\) follows a standard normal distribution if \(\beta_1=0\). In this case, the two-sided p-value based on the standard normal distribution for testing \(H_0:\beta_1=0\) is almost 0 (\(p=0.000000501\)). Therefore, we have statistically significant evidence (Z = -5.026, p \textless{} .001) that average household size decreases as age of the head of household increases.
 
 \hypertarget{sec-Devtocompare}{%
 \subsection{Using Deviances to Compare Models}\label{sec-Devtocompare}}
 
-There is another way in which to assess how useful age is in our model. A \textbf{deviance} \index{deviance} is a way in which to measure how the observed data deviates from the model predictions; it will be defined more precisely in Section \ref{sec-PoisResid}, but it is similar to sum of squared errors (unexplained variability in the response) in LLSR regression. Because we want models that minimize deviance, we calculate the \textbf{drop-in-deviance} \index{drop-in-deviance test} when adding age to the model with no covariates (the \textbf{null model}) \index{null (reduced) model}. The deviances for the null model and the model with age can be found in the model output. A residual deviance for the model with age is reported as 2337.1 with 1498 df. The output also includes the deviance and degrees of freedom for the null model (2362.5 with 1499 df). The drop-in-deviance is 25.4 (2362.5 - 2337.1) with a difference of only 1 df, so that the addition of one extra term (age) reduced unexplained variability by 25.4. If the null model were true, we would expect the drop-in-deviance to follow a \(\chi^2\) distribution with 1 df. Therefore the p-value for comparing the null model to the model with age is found by determining the probability that the value for a \(\chi^2\) random variable with one degree of freedom exceeds 25.4, which is essentially 0. Once again, we can conclude that we have statistically significant evidence (\(\chi^2_{\text{df} =1}=25.4\), \(p < .001\)) that average household size decreases as age of the head of household increases.
+There is another way in which to assess how useful age is in our model. A \textbf{deviance} \index{deviance} is a way in which to measure how the observed data deviates from the model predictions; it will be defined more precisely in Section \ref{sec-PoisResid}, but it is similar to sum of squared errors (unexplained variability in the response) in LLSR regression. Because we want models that minimize deviance, we calculate the \textbf{drop-in-deviance} \index{drop-in-deviance test} when adding age to the model with no covariates (the \textbf{null model}). \index{null (reduced) model} The deviances for the null model and the model with age can be found in the model output. A residual deviance for the model with age is reported as 2337.1 with 1498 df. The output also includes the deviance and degrees of freedom for the null model (2362.5 with 1499 df). The drop-in-deviance is 25.4 (2362.5 - 2337.1) with a difference of only 1 df, so that the addition of one extra term (age) reduced unexplained variability by 25.4. If the null model were true, we would expect the drop-in-deviance to follow a \(\chi^2\) distribution with 1 df. Therefore the p-value for comparing the null model to the model with age is found by determining the probability that the value for a \(\chi^2\) random variable with one degree of freedom exceeds 25.4, which is essentially 0. Once again, we can conclude that we have statistically significant evidence (\(\chi^2_{\text{df} =1}=25.4\), \(p < .001\)) that average household size decreases as age of the head of household increases.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3495,7 +3523,7 @@ More formally, we are testing:
 \[\textrm{Null (reduced) Model}: \log(\lambda) = \beta_0 \textrm{ or } \beta_1=0\]
 \[\textrm{Larger (full) Model}: \log(\lambda) = \beta_0 + \beta_1\textrm{age} \textrm{ or } \beta_1 \neq 0 \]
 
-In order to use the drop-in-deviance test, the models being compared must be \textbf{nested} \index{nested models}; e.g., all the terms in the smaller model must appear in the larger model. Here the smaller model is the null model with the single term \(\beta_0\) and the larger model has \(\beta_0\) and \(\beta_1\), so the two models are indeed nested. For nested models, we can compare the models' residual deviances to determine whether the larger model provides a significant improvement.
+In order to use the drop-in-deviance test, the models being compared must be \textbf{nested}; \index{nested models} e.g., all the terms in the smaller model must appear in the larger model. Here the smaller model is the null model with the single term \(\beta_0\) and the larger model has \(\beta_0\) and \(\beta_1\), so the two models are indeed nested. For nested models, we can compare the models' residual deviances to determine whether the larger model provides a significant improvement.
 
 Here, then, is a summary of these two approaches to hypothesis testing about terms in Poisson regression models:
 
@@ -3529,7 +3557,7 @@ The drop-in-deviance and the Wald-type tests usually provide consistent results;
 \hypertarget{likelihood.sec}{%
 \subsection{Using Likelihoods to fit Poisson Regression Models (Optional)}\label{likelihood.sec}}
 
-Before continuing with model building, we take a short detour to see how coefficient estimates are determined in a Poisson regression model. The least squares approach requires a linear relationship between the parameter, \(\lambda_i\) (the expected or mean response for observation \(i\)), and \(x_i\) (the age for observation \(i\)). However, it is log\((\lambda_i)\), not \(\lambda_i\), that is linearly related to X with the Poisson model. The assumptions of equal variance and normality also do not hold for Poisson regression. Thus, the method of least squares will not be helpful for inference in Poisson Regression. Instead of least squares, we employ the likelihood \index{likelihood} principle to find estimates of our model coefficients. We look for those coefficient estimates for which the likelihood of our data is maximized; these are the \textbf{maximum likelihood estimates} \index{maximum likelihood estimate (MLE)}.
+Before continuing with model building, we take a short detour to see how coefficient estimates are determined in a Poisson regression model. The least squares approach requires a linear relationship between the parameter, \(\lambda_i\) (the expected or mean response for observation \(i\)), and \(x_i\) (the age for observation \(i\)). However, it is log\((\lambda_i)\), not \(\lambda_i\), that is linearly related to X with the Poisson model. The assumptions of equal variance and normality also do not hold for Poisson regression. Thus, the method of least squares will not be helpful for inference in Poisson Regression. Instead of least squares, we employ the likelihood \index{likelihood} principle to find estimates of our model coefficients. We look for those coefficient estimates for which the likelihood of our data is maximized; these are the \textbf{maximum likelihood estimates}. \index{maximum likelihood estimate (MLE)}
 
 The likelihood for n \emph{independent} \index{independent} observations is the product of the probabilities. For example, if we observe five households with household sizes of 4, 2, 8, 6, and 1 person beyond the head, the likelihood is:
 
@@ -3703,7 +3731,7 @@ The residuals for linear least squares regression have the form:
  &= Y_i-(\hat{\beta}_0 +\hat{\beta}_1 X_i)
 \label{eq:OLSresid}
  \end{align}
-Residual sum of squares (RSS) are formed by squaring and adding these residuals, and we generally seek to minimize RSS in model building. We have several options for creating residuals for Poisson regression models. One is to create residuals in much the same way as we do in LLSR. For Poisson residuals, the predicted values are denoted by \(\hat{\lambda}_i\) (in place of \(\hat{\mu}_i\) in Equation \eqref{eq:OLSresid}); they are then standardized by dividing by the standard error, \(\sqrt{\hat{\lambda}_i}\). These kinds of residuals are referred to as \textbf{Pearson residuals} \index{Pearson residuals}.
+Residual sum of squares (RSS) are formed by squaring and adding these residuals, and we generally seek to minimize RSS in model building. We have several options for creating residuals for Poisson regression models. One is to create residuals in much the same way as we do in LLSR. For Poisson residuals, the predicted values are denoted by \(\hat{\lambda}_i\) (in place of \(\hat{\mu}_i\) in Equation \eqref{eq:OLSresid}); they are then standardized by dividing by the standard error, \(\sqrt{\hat{\lambda}_i}\). These kinds of residuals are referred to as \textbf{Pearson residuals}. \index{Pearson residuals}
 
 \begin{equation*}
 \textrm{Pearson residual}_i = \frac{Y_i-\hat{\lambda}_i}{\sqrt{\hat{\lambda}_i}}
@@ -3725,7 +3753,7 @@ where \(\textrm{sign}(x)\) is defined such that:
                                     -1 & \textrm{if }\ x < 0  \\
                                     0  & \textrm{if }\ x = 0\end{cases}\]
 
-As its name implies, a deviance residual describes how the observed data deviates from the fitted model. Squaring and summing the deviances for all observations produces the \textbf{residual deviance} \(=\sum (\textrm{deviance residual})^2_i\) \index{residual deviance}. Relatively speaking, observations for good fitting models will have small deviances; that is, the predicted values will deviate little from the observed. However, you can see that the deviance for an observation does not easily translate to a difference in observed and predicted responses as is the case with LLSR models.
+As its name implies, a deviance residual describes how the observed data deviates from the fitted model. Squaring and summing the deviances for all observations produces the \textbf{residual deviance} \(=\sum (\textrm{deviance residual})^2_i\). \index{residual deviance} Relatively speaking, observations for good fitting models will have small deviances; that is, the predicted values will deviate little from the observed. However, you can see that the deviance for an observation does not easily translate to a difference in observed and predicted responses as is the case with LLSR models.
 
 A careful inspection of the deviance formula reveals several places where the deviance compares \(Y\) to \(\hat{\lambda}\): the sign of the deviance is based on the difference between \(Y\) and \(\hat{\lambda}\), and under the radical sign we see the ratio \(Y/\hat{\lambda}\) and the difference \(Y -\hat{\lambda}\). When \(Y = \hat{\lambda}\), that is, when the model fits perfectly, the difference will be 0 and the ratio will be 1 (so that its log will be 0). So like the residuals in LLSR, an observation that fits perfectly will not contribute to the sum of the squared deviances. This definition of a deviance depends on the likelihood for Poisson models. Other models will have different forms for the deviance depending on their likelihood.
 
@@ -3755,7 +3783,7 @@ The model residual deviance can be used to assess the degree to which the predic
 [1] 0
 \end{verbatim}
 
-There are several reasons why \textbf{lack-of-fit} \index{lack of fit} may be observed. (1) We may be missing important covariates or interactions; a more comprehensive data set may be needed. (2) There may be extreme observations that may cause the deviance to be larger than expected; however, our residual plots did not reveal any unusual points. (3) Lastly, there may be a problem with the Poisson model. In particular, the Poisson model has only a single parameter, \(\lambda\), for each combination of the levels of the predictors which must describe both the mean and the variance. This limitation can become manifest when the variance appears to be larger than the corresponding means. In that case, the response is more variable than the Poisson model would imply, and the response is considered to be \textbf{overdispersed} \index{overdispersion}.
+There are several reasons why \textbf{lack-of-fit} \index{lack of fit} may be observed. (1) We may be missing important covariates or interactions; a more comprehensive data set may be needed. (2) There may be extreme observations that may cause the deviance to be larger than expected; however, our residual plots did not reveal any unusual points. (3) Lastly, there may be a problem with the Poisson model. In particular, the Poisson model has only a single parameter, \(\lambda\), for each combination of the levels of the predictors which must describe both the mean and the variance. This limitation can become manifest when the variance appears to be larger than the corresponding means. In that case, the response is more variable than the Poisson model would imply, and the response is considered to be \textbf{overdispersed}. \index{overdispersion}
 
 \hypertarget{linear-least-squares-regression-vs.-poisson-regression}{%
 \section{\texorpdfstring{Linear Least Squares Regression \index{linear least squares regression (LLSR)} vs.~Poisson Regression \index{Poisson regression}}{Linear Least Squares Regression  vs.~Poisson Regression }}\label{linear-least-squares-regression-vs.-poisson-regression}}
@@ -3899,7 +3927,7 @@ Table \ref{tab:table4ch4} and Figure \ref{fig:boxtyperegion} display mean violen
 \hypertarget{accounting-for-enrollment}{%
 \subsection{Accounting for Enrollment}\label{accounting-for-enrollment}}
 
-Although working with the observed rates (per 1000 students) is useful during the exploratory data analysis, we do not use these rates explicitly in the model. The counts (per year) are the Poisson responses when modeling, so we must take into account the enrollment in a different way. Our approach is to include a term on the right side of the model called an \textbf{offset} \index{offset}, which is the log of the enrollment, in thousands. There is an intuitive heuristic for the form of the offset. If we think of \(\lambda\) as the mean number of violent crimes per year, then \(\lambda/\textrm{enroll1000}\) represents the number per 1000 students, so that the yearly count is adjusted to be comparable across schools of different sizes. Adjusting the yearly count by enrollment is equivalent to adding \(log(\textrm{enroll1000})\) to the right hand side of the Poisson regression equation---essentially adding a predictor with a fixed coefficient of 1:
+Although working with the observed rates (per 1000 students) is useful during the exploratory data analysis, we do not use these rates explicitly in the model. The counts (per year) are the Poisson responses when modeling, so we must take into account the enrollment in a different way. Our approach is to include a term on the right side of the model called an \textbf{offset}, \index{offset} which is the log of the enrollment, in thousands. There is an intuitive heuristic for the form of the offset. If we think of \(\lambda\) as the mean number of violent crimes per year, then \(\lambda/\textrm{enroll1000}\) represents the number per 1000 students, so that the yearly count is adjusted to be comparable across schools of different sizes. Adjusting the yearly count by enrollment is equivalent to adding \(log(\textrm{enroll1000})\) to the right hand side of the Poisson regression equation---essentially adding a predictor with a fixed coefficient of 1:
 
 \begin{align*} 
 log(\frac{\lambda}{\textrm{enroll1000}} )= \beta_0 + \beta_1(\textrm{type}) \nonumber \\
@@ -3948,7 +3976,7 @@ From our model the Northeast and the South differ significantly from the Central
 \hypertarget{tukeys-honestly-significant-differences}{%
 \subsection{Tukey's Honestly Significant Differences}\label{tukeys-honestly-significant-differences}}
 
-Comparisons to regions other than the Central region can be accomplished by changing the reference region. If many comparisons are made, it would be best to adjust for multiple comparisons using a method such as \textbf{Tukey's Honestly Significant Differences} \index{Tukey's honestly significant differences}, which considers all pairwise comparisons among regions. This method helps control the large number of false positives that we would see if we ran multiple t-tests comparing groups. The honestly significant difference compares a standardized mean difference between two groups to a critical value from a studentized range distribution.
+Comparisons to regions other than the Central region can be accomplished by changing the reference region. If many comparisons are made, it would be best to adjust for multiple comparisons using a method such as \textbf{Tukey's Honestly Significant Differences}, \index{Tukey's honestly significant differences} which considers all pairwise comparisons among regions. This method helps control the large number of false positives that we would see if we ran multiple t-tests comparing groups. The honestly significant difference compares a standardized mean difference between two groups to a critical value from a studentized range distribution.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4031,7 +4059,7 @@ In the absence of other covariates or extreme observations, we consider overdisp
 
 We can take overdispersion into account in several different ways. The simplest is to use an estimated dispersion factor to inflate standard errors. Another way is to use a negative-binomial regression model. We begin with using an estimate of the dispersion parameter.
 
-We can estimate a dispersion parameter, \(\phi\), by dividing the model deviance by its corresponding degrees of freedom; i.e., \(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\) where \(p\) is the number of model parameters. It follows from what we know about the \(\chi^2\) distribution that if there is no overdispersion, this estimate should be close to one. It will be larger than one in the presence of overdispersion. We inflate the standard errors by multiplying the variance by \(\phi\) so that the standard errors are larger than the likelihood approach would imply; i.e., \(SE_Q(\hat\beta)=\sqrt{\hat\phi}*SE(\hat\beta)\), where \(Q\) stands for ``quasi-Poisson'' \index{quasi-Poisson} since multiplying variances by \(\phi\) is an ad-hoc solution. Our process for model building and comparison is called \textbf{quasilikelihood} \index{quasilikelihood}---similar to likelihood but without exact underlying distributions. If we choose to use a dispersion parameter with our model, we refer to the approach as quasilikelihood. The following output illustrates a quasi-Poisson approach to the interaction model:
+We can estimate a dispersion parameter, \(\phi\), by dividing the model deviance by its corresponding degrees of freedom; i.e., \(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\) where \(p\) is the number of model parameters. It follows from what we know about the \(\chi^2\) distribution that if there is no overdispersion, this estimate should be close to one. It will be larger than one in the presence of overdispersion. We inflate the standard errors by multiplying the variance by \(\phi\) so that the standard errors are larger than the likelihood approach would imply; i.e., \(SE_Q(\hat\beta)=\sqrt{\hat\phi}*SE(\hat\beta)\), where \(Q\) stands for ``quasi-Poisson'' \index{quasi-Poisson} since multiplying variances by \(\phi\) is an ad-hoc solution. Our process for model building and comparison is called \textbf{quasilikelihood}---similar to likelihood but without exact underlying distributions. \index{quasilikelihood} If we choose to use a dispersion parameter with our model, we refer to the approach as quasilikelihood. The following output illustrates a quasi-Poisson approach to the interaction model:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4202,7 +4230,7 @@ Beginning the EDA with the response, number of drinks, we find that over 46\% of
 
 Because our response is a count, it is natural to consider a Poisson regression model. You may recall that a Poisson distribution has only one parameter, \(\lambda\), for its mean and variance. Here we will include an additional parameter, \(\alpha\). We define \(\alpha\) to be the true proportion of \emph{non-drinkers} in the population.
 
-The next step in the EDA is especially helpful if you suspect your data contains excess zeros. Figure \ref{fig:obsVmodel}b is what we might expect to see under a Poisson model. Bars represent the probabilities for a Poisson distribution (using the Poisson probability formula) with \(\lambda\) equal to the mean observed number of drinks, 2.013 drinks per weekend. Comparing this Poisson distribution to what we observed (Figure \ref{fig:obsVmodel}a), it is clear that many more zeros have been reported by the students than you would expect to see if the survey observations were coming from a Poisson distribution. This doesn't surprise us because we had expected a subset of the survey respondents to be non-drinkers; i.e., they would not be included in this Poisson process. This circumstance actually arises in many Poisson regression settings. We will define \(\lambda\) to be the mean number of drinks \emph{among those who drink}, and \(\alpha\) to be the proportion of \emph{non-drinkers} (``true zeros''). Then, we will attempt to model \(\lambda\) and \(\alpha\) (or functions of \(\lambda\) and \(\alpha\)) simultaneously using covariates like sex, first-year status, and off-campus residence. This type of model is referred to as a \textbf{zero-inflated Poisson model} or \textbf{ZIP model} \index{zero-inflated Poisson}.
+The next step in the EDA is especially helpful if you suspect your data contains excess zeros. Figure \ref{fig:obsVmodel}b is what we might expect to see under a Poisson model. Bars represent the probabilities for a Poisson distribution (using the Poisson probability formula) with \(\lambda\) equal to the mean observed number of drinks, 2.013 drinks per weekend. Comparing this Poisson distribution to what we observed (Figure \ref{fig:obsVmodel}a), it is clear that many more zeros have been reported by the students than you would expect to see if the survey observations were coming from a Poisson distribution. This doesn't surprise us because we had expected a subset of the survey respondents to be non-drinkers; i.e., they would not be included in this Poisson process. This circumstance actually arises in many Poisson regression settings. We will define \(\lambda\) to be the mean number of drinks \emph{among those who drink}, and \(\alpha\) to be the proportion of \emph{non-drinkers} (``true zeros''). Then, we will attempt to model \(\lambda\) and \(\alpha\) (or functions of \(\lambda\) and \(\alpha\)) simultaneously using covariates like sex, first-year status, and off-campus residence. This type of model is referred to as a \textbf{zero-inflated Poisson model} or \textbf{ZIP model}. \index{zero-inflated Poisson}
 
 \hypertarget{modeling}{%
 \subsection{Modeling}\label{modeling}}
@@ -4518,20 +4546,16 @@ Age & Time online & Number of dates arranged online\\
 
 \caption{\label{tab:tab3chp4}Data from Scotto et al. (1974) on the number of cases of non melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St Paul and Dallas-Ft Worth); the year is unknown. The columns contain: number of cases of skin cancer, population size of the age group per city, age group, and metropolitan area (1=Minneapolis-St Paul, 2=Dallas-Ft Worth).}
 \centering
-\begin{tabular}[t]{l|l|l|l}
-\hline
+\begin{tabular}[t]{llll}
+\toprule
 Number of Cases & Population & Age Group & City\\
-\hline
+\midrule
 1 & 172675 & 15-24 & 1\\
-\hline
 16 & 123065 & 25-34 & 1\\
-\hline
 ... & ... & ... & ...\\
-\hline
 226 & 29007 & 75-84 & 2\\
-\hline
 65 & 7538 & 85+ & 2\\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -4976,7 +5000,7 @@ When a probability formula can be written in the form below
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 \label{eq:1expForm}
 \end{equation}
-and if the support (the set of possible input values) does not depend upon \(\theta\), it is said to have a \textbf{one-parameter exponential family form} \index{one-parameter exponential family}. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \eqref{eq:1expForm} and assessing its support.
+and if the support (the set of possible input values) does not depend upon \(\theta\), it is said to have a \textbf{one-parameter exponential family form}. \index{one-parameter exponential family} We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \eqref{eq:1expForm} and assessing its support.
 
 \hypertarget{one-parameter-exponential-family-possion}{%
 \subsection{One Parameter Exponential Family: Possion}\label{one-parameter-exponential-family-possion}}
@@ -5008,7 +5032,7 @@ c(\lambda)&=-\lambda \\
 d(y)&=-\log (y!)
 \label{eq:diffunc}
 \end{align*}
-These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function \(b(\lambda)\), or more generally \(b(\theta)\), will be particularly helpful in GLMs. The function \(b(\theta)\) is referred to as the \textbf{canonical link} \index{canonical link}. The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as \(\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots\). In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of \(\theta\), but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.
+These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function \(b(\lambda)\), or more generally \(b(\theta)\), will be particularly helpful in GLMs. The function \(b(\theta)\) is referred to as the \textbf{canonical link}. \index{canonical link} The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as \(\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots\). In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of \(\theta\), but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.
 
 There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS). In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of \(Y\). With statistical theory you can show that
 
@@ -5090,8 +5114,6 @@ Geometric &  & \\
 Completing Table \ref{tab:table1chp5} is left as an exercise.
 
 In the chapter on Poisson modeling, we provided heuristic rationale for using the \(\log()\) function as our link. That is, counts would be non-negative but a linear function inevitably goes negative. By taking the logarithm of our parameter \(\lambda\) we could use a linear predictor and not worry that it can take on negative values. Now we have theoretical justification for this choice, as the log is the canonical link for Poisson data. In the next chapter we encounter yet another type of response, a binary response, which calls for a different link function. Our work here suggests that we will model \(\text{logit}(p)=\log\left(\frac{p}{1-p}\right)\) using a linear predictor.
-
-{[}Note that \textbf{generalized linear models (GLMs)} differs from General Linear Models. The \emph{general} linear model is a statistical linear model with multivariate vectors as responses. For example, each subject in a study may have their height, weight, and shoe size recorded and modeled as a function of age and sex. The response is a vector, \(Y\) = (height, weight, shoe size), for each study participant. Age and sex are explanatory variables in the model. The residual is usually assumed to follow a multivariate normal distribution. If the residual is not a multivariate normal distribution, then generalized linear models may be used to relax assumptions about Y and the variance-covariance structure.{]}
 
 \hypertarget{exercises-4}{%
 \section{Exercises}\label{exercises-4}}
@@ -5281,7 +5303,7 @@ Logistic regression is characterized by research questions with binary (yes/no o
 
 Examples (a) and (b) above would be considered to have binary responses (Does a student binge drink? Was a patient diagnosed with cancer?), assuming that we have a unique set of covariates for each individual student or patient.
 
-\textbf{Binomial Responses:} Also recall from Section \ref{sec-binomial} that binomial responses are number of successes in \(n\) identical, independent trials with constant probability \(p\) of success. A sequence of independent trials like this with the same probability of success is called a \textbf{Bernoulli process} \index{Bernoulli process}. As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, \(p\), is associated with relevant covariates.
+\textbf{Binomial Responses:} Also recall from Section \ref{sec-binomial} that binomial responses are number of successes in \(n\) identical, independent trials with constant probability \(p\) of success. A sequence of independent trials like this with the same probability of success is called a \textbf{Bernoulli process}. \index{Bernoulli process} As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, \(p\), is associated with relevant covariates.
 
 Example (c) above would be considered to have a binonial response, assuming we have vote totals at the congressional district level rather than information on individual voters.
 
@@ -5367,12 +5389,12 @@ In our example, it is also possible to estimate the probability of a goal, \(p\)
 \hypertarget{logistic-regression-models-for-binomial-responses}{%
 \subsection{Logistic Regression Models for Binomial Responses}\label{logistic-regression-models-for-binomial-responses}}
 
-We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log(\(\lambda\)) in Poisson regression, which allowed the response to take on values from \(-\infty\) to \(\infty\), we will model the log(odds), the \textbf{logit}\index{logit}, in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:
+We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log(\(\lambda\)) in Poisson regression, which allowed the response to take on values from \(-\infty\) to \(\infty\), we will model the log(odds), the \textbf{logit}, \index{logit} in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:
 
 \begin{equation*}
 \log\left(\frac{p}{1 - p}\right)=\beta_0+\beta_1X 
  \end{equation*}
-Models of this form are referred to as \textbf{binomial regression models},\index{binomial logistic regression} or more generally as \textbf{logistic regression models}. \index{logistic regression} Here we provide intuition for using and interpreting logistic regression models, and then in the short optional section that follows, we present rationale for these models using GLM theory.
+Models of this form are referred to as \textbf{binomial regression models}, \index{binomial logistic regression} or more generally as \textbf{logistic regression models}. \index{logistic regression} Here we provide intuition for using and interpreting logistic regression models, and then in the short optional section that follows, we present rationale for these models using GLM theory.
 
 In our example we could define \(X=0\) for not behind and \(X=1\) for behind and fit the model:
 
@@ -5533,7 +5555,7 @@ We first look at a coded scatterplot to see our data. Figure \ref{fig:coded} por
 Recall that a model with two covariates has the form:
 
 \[\log(\textrm{odds}) = \log\left(\frac{p}{1-p}\right) = \beta_0+\beta_1X_1+\beta_2X_2.\]
-where \(p\) is the proportion of Yes votes in a community. In logistic regression, we expect the logits to be a linear function of \(X\), the predictors. To assess the linearity assumption, we construct \textbf{empirical logit plots} \index{empirical logit plot}, where ``empirical'' means ``based on sample data.'' Empirical logits are computed for each community by taking \(\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)\). In Figure \ref{fig:emplogits}, we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes with only 59.4\% black.
+where \(p\) is the proportion of Yes votes in a community. In logistic regression, we expect the logits to be a linear function of \(X\), the predictors. To assess the linearity assumption, we construct \textbf{empirical logit plots}, \index{empirical logit plot} where ``empirical'' means ``based on sample data.'' Empirical logits are computed for each community by taking \(\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)\). In Figure \ref{fig:emplogits}, we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes with only 59.4\% black.
 
 \begin{figure}
 
@@ -5604,7 +5626,7 @@ Despite the somewhat strong negative correlation between percent black and dista
 \hypertarget{sec-logisticInf}{%
 \subsection{Tests for significance of model coefficients}\label{sec-logisticInf}}
 
-Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section \ref{cs-philippines} with Poisson regression, there are two primary approaches to testing signficance of model coefficients: \textbf{Drop-in-deviance test to compare models} \index{drop-in-deviance test} and \textbf{Wald test for a single coefficient} \index{Wald-type test}.
+Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section \ref{cs-philippines} with Poisson regression, there are two primary approaches to testing signficance of model coefficients: \textbf{Drop-in-deviance test to compare models} \index{drop-in-deviance test} and \textbf{Wald test for a single coefficient}. \index{Wald-type test}
 
 With our larger model given by \(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i\), the Wald test produces a highly significant p-value (\(Z=\frac{-0.0132}{0.0039}= -3.394\), \(p=.00069\)) indicating significant evidience that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
 
@@ -5647,7 +5669,7 @@ and then exponentiating endpoints if we prefer a confidence interval for the odd
 
 Thus, we can be 95\% confident that a 10\% increase in the proportion of black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance. This same relationship could be expressed as (a) between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the black population, or (b) between a 5.7\% (\(1/e^{-.056}\)) and a 23.1\% (\(1/e^{-.208}\)) increase in odds for each 10\% decrease in the black population, after adjusting for distance. Of course, with \(n=11\), we should be cautious about relying on a Wald-type interval in this example.
 
-Another approach available in R is the \textbf{profile likelihood method} \index{profile likelihood}, similar to Section \ref{cs-philippines}.
+Another approach available in R is the \textbf{profile likelihood method}, \index{profile likelihood} similar to Section \ref{cs-philippines}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5731,7 +5753,7 @@ Because our interaction model still exhibits lack of fit (residual deviance of 2
 \hypertarget{residuals-for-binomial-regression}{%
 \subsection{Residuals for Binomial Regression}\label{residuals-for-binomial-regression}}
 
-With LLSR, residuals were used to assess model assumptions and identify outliers. For binomial regression, two different types of residuals are typically used. One residual, the \textbf{Pearson residual} \index{Pearson residuals}, has a form similar to that used with LLSR. Specifically, the Pearson residual is calculated using:
+With LLSR, residuals were used to assess model assumptions and identify outliers. For binomial regression, two different types of residuals are typically used. One residual, the \textbf{Pearson residual}, \index{Pearson residuals} has a form similar to that used with LLSR. Specifically, the Pearson residual is calculated using:
 
 \begin{equation*}
 \textrm{Pearson residual}_i = \frac{\textrm{actual count}-\textrm{predicted count}}{\textrm{SD of count}} =
@@ -5750,7 +5772,7 @@ A deviance residual can be calculated for each observation using:
 
 When the number of trials is large for all of the observations and the models are appropriate, both sets of residuals should follow a standard normal distribution.
 
-The sum of the individual deviance residuals is referred to as the \textbf{deviance} or \textbf{residual deviance} \index{residual deviance}. The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, \(m_i\), are large and a model fits, the residual deviance follows a \(\chi^2\) distribution with \(n-p\) degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a \(\chi_{n-p}^2\) that are greater than the observed residual deviance.
+The sum of the individual deviance residuals is referred to as the \textbf{deviance} or \textbf{residual deviance}. \index{residual deviance} The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, \(m_i\), are large and a model fits, the residual deviance follows a \(\chi^2\) distribution with \(n-p\) degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a \(\chi_{n-p}^2\) that are greater than the observed residual deviance.
 
 We begin a residual analysis of our interaction model by plotting the residuals against the fitted values in Figure \ref{fig:resid}. This kind of plot for binomial regression would produce two linear trends with similar negative slopes if there were equal sample sizes \(m_i\) for each observation.
 
@@ -5768,9 +5790,9 @@ From this residual plot, Greensboro does not stand out as an outlier. If it did,
 \hypertarget{sec-logOverdispersion}{%
 \subsection{Overdispersion}\label{sec-logOverdispersion}}
 
-Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is \textbf{extra-binomial variation} \index{extra-binomial variation}, so the actual variance will be greater than the variance of a binomial variable, \(np(1-p)\). One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), \(\hat{\phi}\), for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \ref{sec-overdispPois}, and we will use the same estimate here: \(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\).
+Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is \textbf{extra-binomial variation}, \index{extra-binomial variation} so the actual variance will be greater than the variance of a binomial variable, \(np(1-p)\). One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), \(\hat{\phi}\), for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \ref{sec-overdispPois}, and we will use the same estimate here: \(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\).
 
-When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach \index{quasilikelihood}. Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it \textbf{quasibinomial} \index{quasibinomial}). R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming \(\phi>1\)). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using \(\hat{\phi}\):
+When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach. \index{quasilikelihood} Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it \textbf{quasibinomial}. \index{quasibinomial}) R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming \(\phi>1\)). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using \(\hat{\phi}\):
 \vspace{5mm}
 
 \textbf{Summary: Accounting for Overdispersion}
@@ -5893,7 +5915,7 @@ We began by fitting a logistic regression model with \texttt{distance} alone. Th
 \hypertarget{case-study-trying-to-lose-weight}{%
 \section{Case Study: Trying to Lose Weight}\label{case-study-trying-to-lose-weight}}
 
-The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.). This type of problem---\textbf{binary logistic regression} \index{binary logistic regression}---is exceedingly common in practice. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
+The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.). This type of problem---\textbf{binary logistic regression}---is exceedingly common in practice \index{binary logistic regression}. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
 
 Sports have been implicated as a reason for young people wanting to shed pounds, but not all studies are consistent with this idea. For example, a study by \citet{Martinsen2009} reported that, despite preconceptions to the contrary, there was a higher rate of self-reported eating disorders among controls (non-elite athletes) as opposed to elite athletes. Interestingly, the kind of sport was not found to be a factor, as participants in leanness sports (for example, distance running, swimming, gymnastics, dance, and diving) did not differ in the proportion with eating disorders when compared to those in non-leanness sports. So, in our analysis, we will not make a distinction between different sports.
 
@@ -6005,7 +6027,7 @@ If we consider including a BMI term in our model(s), the logit should be linearl
 \caption{Empirical logits of trying to lose weight by BMI and Sex.}\label{fig:logitBMIsex}
 \end{figure}
 
-Figure \ref{fig:logitBMIsex} presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model.
+Figure \ref{fig:logitBMIsex} presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated with a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model.
 
 \begin{figure}
 
@@ -6266,7 +6288,7 @@ Finally a limitation may be introduced as a result of the acknowledged variation
 
 \caption{\label{tab:fissurechp6}Data for Conceptual Exercise 4}
 \centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2cm}llll}
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{5cm}llll}
 \toprule
 Turbine group & 1 & 2 & 3 & 4\\
 \midrule
@@ -6756,6 +6778,7 @@ This chapter will feel different than other chapters in this book. In order to u
 \caption{\label{tab:simulationTableCh7}Summary of simulations for Dams and Pups case study}
 \centering
 \resizebox{\linewidth}{!}{
+\fontsize{9}{11}\selectfont
 \begin{tabular}[t]{llllllll>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}}
 \toprule
 Scenario & Model & Model Name & $\beta_0$ & SE $\beta_0$ & $t$ & p value & $\phi$ & Est prob & CI prob & Mean count & SD count & GOF p value\\
@@ -6778,7 +6801,7 @@ Scenario & Model & Model Name & $\beta_0$ & SE $\beta_0$ & $t$ & p value & $\phi
 \hypertarget{recognizing-correlation}{%
 \section{Recognizing correlation}\label{recognizing-correlation}}
 
-Correlated data is encountered in nearly every field. In education, student scores from a particular teacher are typically more similar than scores of other students who have had a different teacher. During a study measuring depression indices weekly over the course of a month, we usually find that four measures for the same patient tend to be more similar than depression indices from other patients. In political polling, opinions from members of the same household are usually more similar than opinions of members from other randomly selected households. The structure of these data sets suggest inherent patterns of similarities or correlation among outcomes. This kind of correlation specifically concerns correlation of observations \emph{within the same teacher or patient or household} and is referred to as \textbf{intraclass correlation} \index{intraclass correlation}.
+Correlated data is encountered in nearly every field. In education, student scores from a particular teacher are typically more similar than scores of other students who have had a different teacher. During a study measuring depression indices weekly over the course of a month, we usually find that four measures for the same patient tend to be more similar than depression indices from other patients. In political polling, opinions from members of the same household are usually more similar than opinions of members from other randomly selected households. The structure of these data sets suggest inherent patterns of similarities or correlation among outcomes. This kind of correlation specifically concerns correlation of observations \emph{within the same teacher or patient or household} and is referred to as \textbf{intraclass correlation}. \index{intraclass correlation}
 
 Correlated data often takes on a multilevel structure. That is, population elements are grouped into aggregates, and we often have information on both the individual elements and the aggregated groups. For instance, students are grouped by teacher, weekly depression measures are grouped by patient, and survey respondents are grouped by household. In these cases, we refer to \textbf{levels} \index{levels} of measurement and observational units at each level. For example, students might represent \textbf{level one observational units} while teachers represent \textbf{level two observational units}, where \textbf{level one} is the most basic level of observation, and level one observations are aggregated to form \textbf{level two} observations. Then, if we are modeling a response such as test score, we may want to examine the effects of student characteristics such as sex and ethnicity, and teacher characteristics such as years of experience. Student characteristics would be considered \textbf{level one covariates}, while teacher characteristics would be \textbf{level two covariates}.
 
@@ -6792,9 +6815,9 @@ A \textbf{teratogen} is a substance or exposure that can result in harm to a dev
 
 Before we analyze data from our simulated experiment, let's step back and look at the big picture. Statistics is all about analyzing and explaining variability, so let's consider what sources of variability we have in the dams and pups example. There are several reasons why the counts of the number of defective pups might differ from dam to dam, and it is helpful to explicitly identify these reasons in order to determine how the dose levels affect the pups while also accommodating correlation.
 
-\textbf{Dose Effect} The dams and pups experiment is being carried out to determine whether different dose levels affect the development of defects differently. Of particular interest is determining whether a \textbf{dose-response} \index{dose response} effect is present. A dose-response effect is evident when dams receiving higher dose levels produce higher proportions of pups with defects. Knowing defect rates at specific dose levels is typically of interest within this experiment and beyond. Publishing the defect rates for each dose level in a journal paper, for example, would be of interest to other teratologists. For that reason, we refer to dose level effects as \textbf{fixed effects} \index{fixed effects}.
+\textbf{Dose Effect} The dams and pups experiment is being carried out to determine whether different dose levels affect the development of defects differently. Of particular interest is determining whether a \textbf{dose-response} \index{dose response} effect is present. A dose-response effect is evident when dams receiving higher dose levels produce higher proportions of pups with defects. Knowing defect rates at specific dose levels is typically of interest within this experiment and beyond. Publishing the defect rates for each dose level in a journal paper, for example, would be of interest to other teratologists. For that reason, we refer to dose level effects as \textbf{fixed effects}. \index{fixed effects}
 
-\textbf{Dams (Litter) Effect} In many settings like this, there is a litter effect as well. For example, some dams may exhibit a propensity to produce pups with defects while others rarely produce litters with defective pups. That is, observations on pups within the same litter are likely to be similar or correlated. Unlike the dose effect, teratologists reading experiment results are not interested in the estimated probability of defect for each dam in the study, and we would not report these estimated probabilities in a paper. However, there may be interest in the \emph{variability} in litter-specific defect probabilities; accounting for dam-to-dam variability reduces the amount of unexplained variability and leads to more precise estimates of fixed effects like dose. Often this kind of effect is modeled using the idea that randomly selected dams produce \textbf{random effects} \index{random effects}. This provides one way in which to model correlated data, in this case the correlation between pups from the same dam. We elaborate on this idea throughout the remainder of the text.
+\textbf{Dams (Litter) Effect} In many settings like this, there is a litter effect as well. For example, some dams may exhibit a propensity to produce pups with defects while others rarely produce litters with defective pups. That is, observations on pups within the same litter are likely to be similar or correlated. Unlike the dose effect, teratologists reading experiment results are not interested in the estimated probability of defect for each dam in the study, and we would not report these estimated probabilities in a paper. However, there may be interest in the \emph{variability} in litter-specific defect probabilities; accounting for dam-to-dam variability reduces the amount of unexplained variability and leads to more precise estimates of fixed effects like dose. Often this kind of effect is modeled using the idea that randomly selected dams produce \textbf{random effects}. \index{random effects} This provides one way in which to model correlated data, in this case the correlation between pups from the same dam. We elaborate on this idea throughout the remainder of the text.
 
 \textbf{Pup-to-pup variability} The within litter pup-to-pup differences reflect random, unexplained variation in the model.
 
@@ -6865,7 +6888,7 @@ which produces an estimated odds of deformity \(\widehat{p}/(1-\widehat{p}) = e^
 \end{alignedat}
 \]
 
-However, we can account for potential overdispersion \index{overdispersion} with a \textbf{quasibinomial model} \index{quasibinomial}, just as we did in Section \ref{sec-logOverdispersion}, in case the observed variance is larger than the variance under a binomial model. Quasibinomial regression yields the same estimate for \(\beta_0\) as the binomial regression model (\(\hat{\beta}_0 = 0.067\)), but we now have overdispersion paramater \(\widehat{\phi} = 0.894\). This gives us the following 95\% profile likelihood-based confidence intervals:
+However, we can account for potential overdispersion \index{overdispersion} with a \textbf{quasibinomial model}, \index{quasibinomial} just as we did in Section \ref{sec-logOverdispersion}, in case the observed variance is larger than the variance under a binomial model. Quasibinomial regression yields the same estimate for \(\beta_0\) as the binomial regression model (\(\hat{\beta}_0 = 0.067\)), but we now have overdispersion paramater \(\widehat{\phi} = 0.894\). This gives us the following 95\% profile likelihood-based confidence intervals:
 
 \[
 \begin{alignedat}{2}
@@ -7102,7 +7125,7 @@ First year tree growth may vary because of:
 
 \textbf{Tree-to-tree variability within transects} There is inherent variability in tree growth even when they are subject to the same transect and treatment effects. This variability remains unexplained in our model, although we will attempt to explain some of it with covariates such as species.
 
-Data sets with this kind of structure are often referred to as \textbf{multilevel data} \index{multilevel data}, and the remaining chapters delve into models for multilevel data in gory detail. With a continuous response variable, we will actually add random effects for transects to a more traditional linear least squares regression model rather than estimate an overdispersion parameter as with a binary response. Either way, if observations are really correlated, proper accounting will lead to larger standard errors for model coefficients and larger (but more appropriate) p-values for testing the significance of those coefficients.
+Data sets with this kind of structure are often referred to as \textbf{multilevel data}, \index{multilevel data} and the remaining chapters delve into models for multilevel data in gory detail. With a continuous response variable, we will actually add random effects for transects to a more traditional linear least squares regression model rather than estimate an overdispersion parameter as with a binary response. Either way, if observations are really correlated, proper accounting will lead to larger standard errors for model coefficients and larger (but more appropriate) p-values for testing the significance of those coefficients.
 
 \hypertarget{analysis-preview-accounting-for-correlation-within-transect}{%
 \subsection{Analysis preview: accounting for correlation within transect}\label{analysis-preview-accounting-for-correlation-within-transect}}
@@ -7413,6 +7436,7 @@ Sample rows containing selected variables from our data set are illustrated in T
 \caption{\label{tab:table1chp8}A snapshot of selected variables from the first three and the last three observations in the Music Performance Anxiety case study.}
 \centering
 \resizebox{\linewidth}{!}{
+\fontsize{9}{11}\selectfont
 \begin{tabular}[t]{rrrllrllrrr}
 \toprule
 Obs & id & diary & perf\_type & memory & na & gender & instrument & mpqab & mpqpem & mpqnem\\
@@ -7643,13 +7667,8 @@ Let \(Y_{22j}\) be the performance anxiety score of Musician \#22 before perform
 Y_{22j}=a_{22}+b_{22}\textrm{LargeEns}_{22j}+\epsilon_{22j} \textrm{ where } \epsilon_{22j}\sim N(0,\sigma^2) \textrm{ and }
 \label{eq:level1a}
 \end{equation}
-\[ \textrm{LargeEns}_{j} =
-\left\lbrace
-\begin{tabular}{l l} 
-1 & if `perf\_type` = Large Ensemble \\
-0 & if `perf\_type` = Solo or Small Ensemble. 
-\end{tabular}\right.
-\]
+\[ \textrm{LargeEns}_{j} = \begin{cases}  1  & \textrm{if perf-type = Large Ensemble} \\
+    0  & \textrm{if perf-type = Solo or Small Ensemble}\end{cases}\]
 The parameters in this model (\(a_{22}\), \(b_{22}\), and \(\sigma^2\)) can be estimated through least squares methods. \(a_{22}\) represents the true intercept for Musician \#22---the expected anxiety score for Musician \#22 when performance type is a Solo or Small Ensemble (\(\textrm{LargeEns}=0\)), or the true average anxiety for Musician \#22 over all Solo or Small Ensemble performances he may conceivably give. \(b_{22}\) represents the true slope for Musician \#22---the expected increase in performance anxiety for Musician \#22 when performing as part of a Large Ensemble rather than in a Small Ensemble or as a Solo, or the true average difference in anxiety scores for Musician \#22 between Large Ensemble performances and other types. Finally, the \(\epsilon_{22j}\) terms represent the deviations of Musician \#22's actual performance anxiety scores from the expected scores under this model---the part of Musician \#22's anxiety before performance \(j\) that is not explained by performance type. The variability in these deviations from the regression model is denoted by \(\sigma^2\).
 
 For Subject 22, we estimate \(\hat{a}_{22}=24.5\), \(\hat{b}_{22}=-7.8\), and \(\hat{\sigma}=4.8\). Thus, according to our simple linear regression model, Subject 22 had an estimated anxiety score of 24.5 before Solo and Small Ensemble performances, and 16.7 (7.8 points lower) before Large Ensemble performances. With an \(R^2\) of 0.425, the regression model explains a moderate amount (42.5\%) of the performance-to-performance variability in anxiety scores for Subject 22, and the trend toward lower scores for large ensemble performances is statistically significant at the 0.05 level (t(13)=-3.10, p=.009).
@@ -7673,7 +7692,7 @@ For Subject 22, we estimate \(\hat{a}_{22}=24.5\), \(\hat{b}_{22}=-7.8\), and \(
 
 We could continue trying to build a better model for Subject 22, adding indicators for audience and memory, and even adding a continuous variable representing the number of previous performance where a diary was kept. As our model R-square value increased, we would be explaining a larger proportion of Subject 22's performance-to-performance variability in anxiety. It would not, however, improve our model to incorporate predictors for age, gender, or even negative emotionality based on the MPQ---why is that?
 
-For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \eqref{eq:level1a}, with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the LLSR model in Equation \eqref{eq:level1a} to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called \textbf{Level One models} \index{level one model}. As displayed in Figure \ref{fig:mli-histmat2}, there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
+For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \eqref{eq:level1a}, with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the LLSR model in Equation \eqref{eq:level1a} to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called \textbf{Level One models}. \index{level one model} As displayed in Figure \ref{fig:mli-histmat2}, there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
 
 \begin{figure}
 
@@ -7845,7 +7864,7 @@ The multivariate normal distribution with \(n=2\) is illustrated in Figure \ref{
 \hypertarget{multileveltechnical}{%
 \subsection{Technical issues when estimating and testing parameters (Optional)}\label{multileveltechnical}}
 
-Now, our relatively simple two-level model has 8 parameters that need to be estimated: 4 fixed effects (\(\alpha_{0}\), \(\alpha_{1}\), \(\beta_{0}\), and \(\beta_{1}\)), and 4 variance components (\(\sigma^{2}\), \(\sigma_{u}^{2}\), \(\sigma_{v}^{2}\), and \(\sigma_{uv}\)). Note that we use the term \textbf{variance components} \index{variance components} to signify model parameters that describe the behavior of random effects. We can use statistical software, such as the lmer() function from the lme4 package in R, to obtain parameter estimates using our 497 observations. The most common methods for estimating model parameters---both fixed effects and variance components---are maximum likelihood (ML) and \textbf{restricted maximum likelihood (REML)} \index{restricted maximum likelihood (REML)}. The method of maximum likelihood (ML) was introduced in Chapter \ref{ch-beyondmost}, where parameter estimates are chosen to maximize the value of the likelihood function based on observed data. Restricted maximum likelihood (REML) is conditional on the fixed effects, so that the part of the data used for estimating variance components is separated from that used for estimating fixed effects. Thus REML, by accounting for the loss in degrees of freedom from estimating the fixed effects, provides an unbiased estimate of variance components, while ML estimators for variance components are biased under assumptions of normality, since they use estimated fixed effects rather than the true values. REML is preferable when the number of parameters is large or the primary interest is obtaining estimates of model parameters, either fixed effects or variance components associated with random effects. ML should be used if nested fixed effects models are being compared using a likelihood ratio test, although REML is fine for nested models of random effects (with the same fixed effects model). In this text, we will typically report REML estimates unless we are specifically comparing nested models with the same random effects. In most case studies and most models we consider, there is very little difference between ML and REML parameter estimates. Additional details are beyond the scope of this book \citep{Singer2003}.
+Now, our relatively simple two-level model has 8 parameters that need to be estimated: 4 fixed effects (\(\alpha_{0}\), \(\alpha_{1}\), \(\beta_{0}\), and \(\beta_{1}\)), and 4 variance components (\(\sigma^{2}\), \(\sigma_{u}^{2}\), \(\sigma_{v}^{2}\), and \(\sigma_{uv}\)). Note that we use the term \textbf{variance components} \index{variance components} to signify model parameters that describe the behavior of random effects. We can use statistical software, such as the lmer() function from the lme4 package in R, to obtain parameter estimates using our 497 observations. The most common methods for estimating model parameters---both fixed effects and variance components---are maximum likelihood (ML) and \textbf{restricted maximum likelihood (REML)}. \index{restricted maximum likelihood (REML)} The method of maximum likelihood (ML) was introduced in Chapter \ref{ch-beyondmost}, where parameter estimates are chosen to maximize the value of the likelihood function based on observed data. Restricted maximum likelihood (REML) is conditional on the fixed effects, so that the part of the data used for estimating variance components is separated from that used for estimating fixed effects. Thus REML, by accounting for the loss in degrees of freedom from estimating the fixed effects, provides an unbiased estimate of variance components, while ML estimators for variance components are biased under assumptions of normality, since they use estimated fixed effects rather than the true values. REML is preferable when the number of parameters is large or the primary interest is obtaining estimates of model parameters, either fixed effects or variance components associated with random effects. ML should be used if nested fixed effects models are being compared using a likelihood ratio test, although REML is fine for nested models of random effects (with the same fixed effects model). In this text, we will typically report REML estimates unless we are specifically comparing nested models with the same random effects. In most case studies and most models we consider, there is very little difference between ML and REML parameter estimates. Additional details are beyond the scope of this book \citep{Singer2003}.
 
 Note that the multilevel output shown beginning in the next section contains no p-values for performing hypothesis tests. This is primarily because the exact distribution of the test statistics under the null hypothesis (no fixed effect) is unknown, primarily because the exact degrees of freedom is not known \citep{Bates2015}. Finding good approximate distributions for test statistics (and thus good approximate p-values) in multilevel models is an area of active research. In most cases, we can simply conclude that t-values (ratios of parameter estimates to estimated standard errors) with absolute value above 2 indicate significant evidence that a particular model parameter is different than 0. Certain software packages will report p-values corresponding to hypothesis tests for parameters of fixed effects; these packages are typically using conservative assumptions, large-sample results, or approximate degrees of freedom for a t-distribution. In section \ref{multreg-boot}, we introduced the bootstrap as a non-parametric, computational approach for producing confidence intervals for model parameters. In addition, in section \ref{longitudinal-paraboot}, we will introduce a method called the parametric bootstrap which is being used more frequently by researchers to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis \citep{Efron2012}.
 
@@ -7973,7 +7992,7 @@ Our strategy for building multilevel models will begin with extensive explorator
 \hypertarget{modela8}{%
 \subsection{An initial model: unconditional means or random intercepts}\label{modela8}}
 
-The first model fit in almost any multilevel context should be the \textbf{unconditional means model} \index{unconditional means model}, also called a \textbf{random intercepts model} \index{random intercepts model}. In this model, there are no predictors at either level; rather, the purpose of the unconditional means model is to assess the amount of variation at each level---to compare variability within subject to variability between subjects. Expanded models will then attempt to explain sources of between and within subject variability.
+The first model fit in almost any multilevel context should be the \textbf{unconditional means model}, \index{unconditional means model} also called a \textbf{random intercepts model}. \index{random intercepts model} In this model, there are no predictors at either level; rather, the purpose of the unconditional means model is to assess the amount of variation at each level---to compare variability within subject to variability between subjects. Expanded models will then attempt to explain sources of between and within subject variability.
 
 The unconditional means (random intercepts) model, which we will denote as Model A, can be specified either using formulations at both levels:
 
@@ -8033,7 +8052,7 @@ From this output, we obtain estimates of our three model parameters:
   \(\hat{\sigma}_{u}^{2}=5.0=\) the estimated variance in between-person deviations.
 \end{itemize}
 
-The relative levels of between- and within-person variabilities can be compared through the \textbf{intraclass correlation coefficient} \index{intraclass correlation coefficient}:
+The relative levels of between- and within-person variabilities can be compared through the \textbf{intraclass correlation coefficient}: \index{intraclass correlation coefficient}
 
 \begin{equation*}
 \hat{\rho}=\frac{\textrm{Between-person variability}}{\textrm{Total variability}} = \frac{\hat{\sigma}_{u}^{2}}{\hat{\sigma}_{u}^{2}+\hat{\sigma}^2} = \frac{5.0}{5.0+22.5} = .182.
@@ -8046,15 +8065,10 @@ Thus, 18.2\% of the total variability in performance anxiety scores are attribut
 \hypertarget{randomslopeandint}{%
 \subsection{Random slopes and intercepts model}\label{randomslopeandint}}
 
-The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual \index{random slopes and intercepts model}. In this case, mirroring our model from section \ref{twolevelmodeling}, we will include a binary covariate for performance type:
+The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual. \index{random slopes and intercepts model} In this case, mirroring our model from section, \ref{twolevelmodeling} we will include a binary covariate for performance type:
 
-\[ \textrm{LargeEns}_{ij} =
-\left\lbrace
-\begin{tabular}{l l} 
-1 & if `perf\_type` = Large Ensemble \\
-0 & if `perf\_type` = Solo or Small Ensemble. 
-\end{tabular}\right.
-\]
+\[ \textrm{LargeEns}_{ij} = \begin{cases} 1  & \textrm{if perf-type = Large Ensemble} \\
+    0  & \textrm{if perf-type = Solo or Small Ensemble}\end{cases}\]
 and no other Level One covariates (for now). (Note that we may later also want to include an indicator variable for ``Small Ensemble'' to separate the effects of \texttt{Solo} performances and \texttt{Small\ Ensemble} performances.) The resulting model, which we will denote as Model B, can be specified either using formulations at both levels:
 
 \begin{itemize}
@@ -8391,7 +8405,7 @@ As long as baseline negative emotionality is held constant (at any level, not ju
 \hypertarget{compare:modeld}{%
 \subsection{Model comparisons}\label{compare:modeld}}
 
-At this point, we might ask: do the two extra fixed effects terms in Model D provide a significant improvement over Model C? Nested models such as these can be tested using a \textbf{likelihood ratio test} \index{likelihood ratio test (LRT)} (drop in deviance test) \index{drop-in-deviance test}, as we've used in Sections \ref{sec-Devtocompare} and \ref{sec-logisticInf} with certain generalized linear models. Since we are comparing models nested in their fixed effects, we use full maximum likelihood methods to estimate model parameters, as discussed in section \ref{multileveltechnical}. As expected, the likelihood is larger (and the log-likelihood is less negative) under the larger model (Model D); our test statistic (14.734) is then -2 times the difference in log-likelihood between Models C and D. Comparing the test statistic to a chi-square distribution with 2 degrees of freedom (signifying the number of additional terms in Model D), we obtain a p-value of .0006. Thus, Model D significantly outperforms Model C.
+At this point, we might ask: do the two extra fixed effects terms in Model D provide a significant improvement over Model C? Nested models such as these can be tested using a \textbf{likelihood ratio test} \index{likelihood ratio test (LRT)} (drop in deviance test), \index{drop-in-deviance test} as we've used in Sections \ref{sec-Devtocompare} and \ref{sec-logisticInf} with certain generalized linear models. Since we are comparing models nested in their fixed effects, we use full maximum likelihood methods to estimate model parameters, as discussed in section \ref{multileveltechnical}. As expected, the likelihood is larger (and the log-likelihood is less negative) under the larger model (Model D); our test statistic (14.734) is then -2 times the difference in log-likelihood between Models C and D. Comparing the test statistic to a chi-square distribution with 2 degrees of freedom (signifying the number of additional terms in Model D), we obtain a p-value of .0006. Thus, Model D significantly outperforms Model C.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8609,7 +8623,7 @@ Here are how a couple of key fixed effects would be interpreted in this final mo
 \hypertarget{multinecessary}{%
 \section{Modeling the multilevel structure: is it really necessary?}\label{multinecessary}}
 
-Before going too much further, we should really consider if this multilevel structure has gained us anything over linear least squares regression \index{linear least squares regression (LLSR)}. Sure, multilevel modeling \index{multilevel model} seems more faithful to the inherent structure of the data---performances from the same musician should be more highly correlated than performances from different musicians---but do our conclusions change in a practical sense? Some authors have expressed doubts. For instance Robert Bickel, in his 2007 book, states, ``When comparing OLS and multilevel regression results, we may find that differences among coefficient values are inconsequential, and tests of significance may lead to the same decisions. A great deal of effort seems to have yielded precious little gain'' \citep{Bickel2007}. Others, especially economists, advocate simply accounting for the effect of different Level Two observational units (like \texttt{musicians}) with a sequence of indicator variables for those observational units. We contend that (1) fitting multilevel models is a small extension of LLSR regression that is not that difficult to conceptualize and fit, especially with the software available today, and (2) using multilevel models to remain faithful to the data structure \emph{can} lead to different coefficient estimates and \emph{often} leads to different (and larger) standard error estimates and thus smaller test statistics. Hopefully you've seen evidence of (1) in this chapter already; the rest of this section introduces two small examples to help illustrate (2).
+Before going too much further, we should really consider if this multilevel structure has gained us anything over linear least squares regression. \index{linear least squares regression (LLSR)} Sure, multilevel modeling \index{multilevel model} seems more faithful to the inherent structure of the data---performances from the same musician should be more highly correlated than performances from different musicians---but do our conclusions change in a practical sense? Some authors have expressed doubts. For instance Robert Bickel, in his 2007 book, states, ``When comparing OLS and multilevel regression results, we may find that differences among coefficient values are inconsequential, and tests of significance may lead to the same decisions. A great deal of effort seems to have yielded precious little gain'' \citep{Bickel2007}. Others, especially economists, advocate simply accounting for the effect of different Level Two observational units (like \texttt{musicians}) with a sequence of indicator variables for those observational units. We contend that (1) fitting multilevel models is a small extension of LLSR regression that is not that difficult to conceptualize and fit, especially with the software available today, and (2) using multilevel models to remain faithful to the data structure \emph{can} lead to different coefficient estimates and \emph{often} leads to different (and larger) standard error estimates and thus smaller test statistics. Hopefully you've seen evidence of (1) in this chapter already; the rest of this section introduces two small examples to help illustrate (2).
 
 \begin{figure}
 
@@ -9016,6 +9030,7 @@ This data is stored in WIDE format, with one row per school, as illustrated in T
 \caption{\label{tab:table1chp9}The first six observations in the wide data set for the Charter Schools case study.}
 \centering
 \resizebox{\linewidth}{!}{
+\fontsize{9}{11}\selectfont
 \begin{tabular}[t]{llrrrrrrrr}
 \toprule
 schoolid & schoolName & urban & charter & schPctnonw & schPctsped & schPctfree & MathAvgScore.0 & MathAvgScore.1 & MathAvgScore.2\\
@@ -9036,7 +9051,7 @@ For most statistical analyses, it will be advantageous to convert WIDE format to
 \hypertarget{missing}{%
 \subsection{Missing data}\label{missing}}
 
-In this case, before we convert our data to LONG form, we should first address problems with missing data \index{missing data}. Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
+In this case, before we convert our data to LONG form, we should first address problems with missing data. \index{missing data} Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
 
 First, we must understand the extent and nature of missing data in our study. Table \ref{tab:table2chp9}, where 1 indicates presence of a variable and 0 indicates a missing value for a particular variable, is a helpful starting point. Among our 618 schools, 540 had complete data (all covariates and math scores for all three years), 25 were missing a math score for 2008, 35 were missing math scores in both 2008 and 2009, etc.
 
@@ -9151,7 +9166,7 @@ Figure \ref{fig:lon-hist1} shows the distribution of MCA math test scores as som
 \hypertarget{longitudinalanalyses}{%
 \subsection{Exploratory analyses for longitudinal data}\label{longitudinalanalyses}}
 
-In addition to the initial exploratory analyses above, longitudinal data---multilevel data with time at Level One---calls for further plots and summaries that describe time trends within and across individuals. For example, we can examine trends over time within individual schools. Figure \ref{fig:lon-lat1} provides a \textbf{lattice plot} \index{lattice plot} illustrating trends over time for the first 24 schools in the data set. We note differences among schools in starting point (test scores in 2008), slope (change in test scores over the three year period), and form of the relationship. These differences among schools are nicely illustrated in so-called \textbf{spaghetti plots} \index{spaghetti plot} such as Figure \ref{fig:lon-spag1}, which overlays the individual schools' time trends (for the math test scores) from Figure \ref{fig:lon-lat1} on a single set of axes. In order to illustrate the overall time trend without making global assumptions about the form of the relationship, we overlaid in bold a nonparametric fitted curve through a \textbf{loess smoother} \index{loess smoother}. LOESS comes from ``locally weighted scatterplot smoother'', in which a low-degree polynomial is fit to each data point using weighted regression techniques, where nearby points receive greater weight. LOESS is a computationally intensive method which performs especially well with larger sets of data, although ideally there would be a greater diversity of x-values than the three time points we have. In this case, the loess smoother follows very closely to a linear trend, indicating that assuming a linear increase in test scores over the three year period is probably a reasonable simplifying assumption. To further examine the hypothesis that linearity would provide a reasonable approximation to the form of the individual time trends in most cases, Figure \ref{fig:lon-lat2} shows a lattice plot containing linear fits through ordinary least squares rather than connected time points as in Figure \ref{fig:lon-lat1}.
+In addition to the initial exploratory analyses above, longitudinal data---multilevel data with time at Level One---calls for further plots and summaries that describe time trends within and across individuals. For example, we can examine trends over time within individual schools. Figure \ref{fig:lon-lat1} provides a \textbf{lattice plot} \index{lattice plot} illustrating trends over time for the first 24 schools in the data set. We note differences among schools in starting point (test scores in 2008), slope (change in test scores over the three year period), and form of the relationship. These differences among schools are nicely illustrated in so-called \textbf{spaghetti plots} \index{spaghetti plot} such as Figure \ref{fig:lon-spag1}, which overlays the individual schools' time trends (for the math test scores) from Figure \ref{fig:lon-lat1} on a single set of axes. In order to illustrate the overall time trend without making global assumptions about the form of the relationship, we overlaid in bold a nonparametric fitted curve through a \textbf{loess smoother}. \index{loess smoother} LOESS comes from ``locally weighted scatterplot smoother'', in which a low-degree polynomial is fit to each data point using weighted regression techniques, where nearby points receive greater weight. LOESS is a computationally intensive method which performs especially well with larger sets of data, although ideally there would be a greater diversity of x-values than the three time points we have. In this case, the loess smoother follows very closely to a linear trend, indicating that assuming a linear increase in test scores over the three year period is probably a reasonable simplifying assumption. To further examine the hypothesis that linearity would provide a reasonable approximation to the form of the individual time trends in most cases, Figure \ref{fig:lon-lat2} shows a lattice plot containing linear fits through ordinary least squares rather than connected time points as in Figure \ref{fig:lon-lat1}.
 
 \begin{figure}
 
@@ -9198,7 +9213,7 @@ In addition to the initial exploratory analyses above, longitudinal data---multi
 \caption{Spaghetti plots showing time trends for each school by quartiles of percent free and reduced lunch, with loess fits.}\label{fig:lon-spagmat1}
 \end{figure}
 
-Just as we explored the relationship between our response (average math scores) and important covariates in Section \ref{generalanalyses}, we can now examine the relationships between time trends by school and important covariates. For instance, Figure \ref{fig:lon-spag3} shows that charter schools had math scores that were lower on average than public non-charter schools and more variable. This type of plot is sometimes called a \textbf{trellis graph} \index{trellis graph}, since it displays a grid of smaller charts with consistent scales, where each smaller chart represents a condition---an item in a category. Trends over time by school type are denoted by bold loess curves. Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools. Exploratory analyses like this can be repeated for other covariates, such as percent free and reduced lunch in Figure \ref{fig:lon-spagmat1}. The trellis plot automatically divides schools into four groups based on quartiles of their percent free and reduced lunch, and we see that schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.
+Just as we explored the relationship between our response (average math scores) and important covariates in Section \ref{generalanalyses}, we can now examine the relationships between time trends by school and important covariates. For instance, Figure \ref{fig:lon-spag3} shows that charter schools had math scores that were lower on average than public non-charter schools and more variable. This type of plot is sometimes called a \textbf{trellis graph}, \index{trellis graph} since it displays a grid of smaller charts with consistent scales, where each smaller chart represents a condition---an item in a category. Trends over time by school type are denoted by bold loess curves. Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools. Exploratory analyses like this can be repeated for other covariates, such as percent free and reduced lunch in Figure \ref{fig:lon-spagmat1}. The trellis plot automatically divides schools into four groups based on quartiles of their percent free and reduced lunch, and we see that schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.
 
 \hypertarget{twostage9}{%
 \section{Preliminary two-stage modeling}\label{twostage9}}
@@ -9330,7 +9345,7 @@ As in Chapter \ref{ch-multilevelintro}, we will begin model fitting with some si
 \hypertarget{modela}{%
 \subsection{Unconditional means model}\label{modela}}
 
-In the multilevel context, we almost always begin with the \textbf{unconditional means model} \index{unconditional means model}, in which there are no predictors at any level. The purpose of the unconditional means model is to assess the amount of variation at each level, and to compare variability within school to variability between schools. Define \(Y_{ij}\) as the MCA-II math score from school \(i\) and year \(j\). Using the composite model specification from Chapter \ref{ch-multilevelintro}:
+In the multilevel context, we almost always begin with the \textbf{unconditional means model}, \index{unconditional means model} in which there are no predictors at any level. The purpose of the unconditional means model is to assess the amount of variation at each level, and to compare variability within school to variability between schools. Define \(Y_{ij}\) as the MCA-II math score from school \(i\) and year \(j\). Using the composite model specification from Chapter \ref{ch-multilevelintro}:
 
 \begin{equation*}
 Y _{ij} = \alpha_{0} + u_{i} + \epsilon_{ij} \textrm{ with } u_{i} \sim N(0, \sigma^2_u) \textrm{ and } \epsilon_{ij} \sim N(0, \sigma^2)
@@ -9381,7 +9396,7 @@ Based on the intraclass correlation coefficient:
 \hypertarget{modelb9}{%
 \subsection{Unconditional growth model}\label{modelb9}}
 
-The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \ref{ch-multilevelintro}). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the \textbf{unconditional growth model} \index{unconditional growth model}. The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
+The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \ref{ch-multilevelintro}). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the \textbf{unconditional growth model}. \index{unconditional growth model} The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
 
 At the lowest level, we can consider building individual growth models over time for each of the 618 schools in our study. First, we must decide upon a form for each of our 618 growth curves. Based on our initial exploratory analyses, assuming that an individual school's MCA-II math scores follow a linear trend seems like a reasonable starting point. Under the assumption of linearity, we must estimate an intercept and a slope for each school, based on their 1-3 test scores over a period of three years. Compared to time series analyses of economic data, most longitudinal data analyses have relatively few time periods for each subject (or school), and the basic patterns within subject are often reasonably described by simpler functional forms.
 
@@ -10270,7 +10285,7 @@ Cov(Y_{ij},Y_{ik}) & = \sigma_{u}^{2} + \textrm{Large}_{ij}\textrm{Large}_{ik} \
   \textrm{Large}_{ik}) \sigma_{uv} \\
  & = \left\{ \begin{array}{ll}
                  \sigma_{u}^{2} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=0$} \\
-                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=0$ and $\textrm{Large}_{ik}=1$ or alt.} \\
+                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=0$, $\textrm{Large}_{ik}=1$ or vice versa} \\
                  \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=1$}
                \end{array}
        \right.
@@ -11056,7 +11071,7 @@ Since we have time at Level One, any exploratory analysis of Case Study \ref{cs:
 
 The structure and notation for three level models will closely resemble the structure and notation for two level models, just with extra subscripts. Therein lies some of the power of multilevel models---extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section \ref{sec:explodingvarcomps}).
 
-We once again begin with the \textbf{unconditional means model} \index{unconditional means model}, in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
+We once again begin with the \textbf{unconditional means model}, \index{unconditional means model} in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
 
 \begin{itemize}
 \tightlist
@@ -11788,7 +11803,7 @@ Estimating even 30 parameters as in Model C\_plus from a single set of data is a
 \item
   Reduce the number of variance components by assuming all error terms to be independent; that is, set all correlation terms to 0.
 \item
-  Reduce the number of variance components by removing error terms from certain Levels Two and Three equations. Often, researchers will begin with a \textbf{random intercepts model} \index{random intercepts model}, in which only the first equation at Level Two and Three has an error term. With the leadplant data, we would account for variability in Day 13 height (intercept) among plants and pots, but assume that the effects of time and seed size are constant among pots and plants.
+  Reduce the number of variance components by removing error terms from certain Levels Two and Three equations. Often, researchers will begin with a \textbf{random intercepts model}, \index{random intercepts model} in which only the first equation at Level Two and Three has an error term. With the leadplant data, we would account for variability in Day 13 height (intercept) among plants and pots, but assume that the effects of time and seed size are constant among pots and plants.
 \item
   Reduce the number of fixed effects by removing interaction terms that are not expected to be meaningful. Interaction terms between covariates at different levels can be eliminated simply by reducing the number of terms in certain equations at Levels Two and Three. There is no requirement that all equations at a certain level contain the same set of predictors. Often, researchers will not include covariates in equations beyond the intercept at a certain level unless there's a compelling reason.
 \end{itemize}
@@ -12246,17 +12261,25 @@ Cov(Y_{ijk},Y_{ij'k'}) & = Cov(\epsilon_{ijk}+u_{ij}+\tilde{u}_{i}+(v_{ij}+\tild
 
 Based on these variances and covariances and the expressions for \(Cov(\textbf{Y}_{ij})\) and \(Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})\) in Section \ref{error-3level}, the complete covariance matrix for observations from pot \(i\) can be expressed as the following 24x24 matrix (assuming 4 observations over time for each of 6 plants):
 
-\begin{tiny}
-\[  Cov(\textbf{Y}_{i}) = \left[
-          \begin{array}{cccccc}
-            Cov(\textbf{Y}_{i1}) & & & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i4}) & & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
-            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
-          \end{array} \right]. \]
-\end{tiny}
+\begin{align*}
+Cov(\textbf{Y}_{i}) & = \left[
+          \begin{array}{cccc}
+            Cov(\textbf{Y}_{i1}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & \ldots 
+          \end{array} \right. \\
+ & \left. \begin{array}{cccc} 
+      & & &  \\
+      & & &  \\
+      & & &  \\
+ & Cov(\textbf{Y}_{i4}) & &  \\
+ & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+ \ldots & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. 
+\end{align*}
 
 A covariance matrix for our entire data set, therefore, would be block diagonal, with \(Cov(\textbf{Y}_{i})\) matrices along the diagonal reflecting within pot correlation and 0's off-diagonal reflecting the assumed independence of observations from plants from different pots. As with any covariance matrix, we can convert the \(Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})\) blocks for two different plants from the same pot into correlation matrices by dividing covariance terms by the product of corresponding standard deviations. Specifically, for \(Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})\), the diagonal terms in a correlation matrix are formed by \(Corr(Y_{ijk},Y_{ij'k})=\frac{\tilde{\tau}_{kk}}{\sqrt{Var(Y_{ijk})Var(Y_{ij'k})}}=\frac{\tilde{\tau}_{kk}}{\tau_{k}^{2}}\) and the off-diagonal terms are formed by \(Corr(Y_{ijk},Y_{ij'k'})=\frac{\tilde{\tau}_{kk'}}{\sqrt{Var(Y_{ijk})Var(Y_{ij'k'})}}=\frac{\tilde{\tau}_{kk'}}{\tau_{k}\tau_{k'}}\).
 
@@ -12688,6 +12711,7 @@ Data was collected for 4972 fouls over 340 games from the Big Ten, ACC, and Big 
 \caption{\label{tab:table1chp11}Key variables from the first 10 rows of data from the College Basketball Referees case study.  Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.}
 \centering
 \resizebox{\linewidth}{!}{
+\fontsize{9}{11}\selectfont
 \begin{tabular}[t]{rllrrrrrlr}
 \toprule
 game & visitor & hometeam & foul.num & foul.home & foul.diff & score.diff & lead.home & foul.type & time\\
@@ -12709,7 +12733,7 @@ game & visitor & hometeam & foul.num & foul.home & foul.diff & score.diff & lead
 
 For our initial analysis, our primary response variable is \texttt{foul.home}, and our primary hypothesis concerns evening out foul calls. We hypothesize that the probability a foul is called on the home team is inversely related to the foul differential; that is, if more fouls have been called on the home team than the visiting team, the next foul is less likely to be on the home team.
 
-The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way. With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression). But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible. So what we need is a multilevel model with a non-normal response; in other words, a \textbf{multilevel generalized linear model (multilevel GLM)} \index{multilevel GLM}. We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
+The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way. With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression). But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible. So what we need is a multilevel model with a non-normal response; in other words, a \textbf{multilevel generalized linear model (multilevel GLM)}. \index{multilevel GLM} We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
 
 As with other multilevel situations, we will begin with broad summaries across all 4972 foul calls from all 340 games. Most of the variables we have collected can vary with each foul called; these Level One variables include:
 
@@ -13010,7 +13034,7 @@ In this case, \(e^{a_{h}}\) represents the odds that a foul is called on the hom
 \caption{Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team.}\label{fig:gmu-histmat3}
 \end{figure}
 
-From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested? Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team). However, a specific home team is not associated with a single game; that home team appears in several games. Therefore, any effects of game, home team, and visiting team are considered \textbf{crossed random effects} \index{crossed random effects}.
+From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested? Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team). However, a specific home team is not associated with a single game; that home team appears in several games. Therefore, any effects of game, home team, and visiting team are considered \textbf{crossed random effects}. \index{crossed random effects}
 
 A two-level model which accounts for variability among games, home teams, and visiting teams would take on a slightly new look. First, the full subscripting would change a bit. Our primary response variable would now be written as \(Y_{i[gh]j}\), an indicator variable recording if the \(j^{th}\) foul from Game \(i\) was called on the home team (1) or the visiting team (0), where Game \(i\) pitted Visiting Team \(g\) against Home Team \(h\). Square brackets are introduced since \(g\) and \(h\) are essentially at the same level as \(i\), whereas we have assumed (without stating so) throughout this book that subscripting without square brackets implies a movement to lower levels as the subscripts move left to right (e.g., \(ij\) indicates \(i\) units are at Level Two, while \(j\) units are at Level One, nested inside Level Two units). We can then consider \(Y_{i[gh]j}\) to be a Bernoulli random variable with parameter \(p_{i[gh]j}\), where \(p_{i[gh]j}\) is the true probability that the \(j^{th}\) foul from Game \(i\) was called on Home Team \(h\) rather than Visiting Team \(g\). We will include the crossed subscripting only where necessary.
 
@@ -13343,7 +13367,7 @@ Using the composite form of this multilevel generalized linear model, the parame
 
 In general, we see a highly significant negative effect of foul differential---a strong tendency for referees to even out foul calls when one team starts amassing more fouls than the other. Important covariates to control for (because of their effects on the odds of a home foul) include score differential, whether the home team held the lead, time left in the first half, and the type of foul called.
 
-Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls. The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled). Evidence like this can be considered \textbf{dose response} \index{dose response}, since higher ``doses'' of referee control are associated with a greater effect of foul differential on their calls. A dose response effect provides even stronger indication of referee bias.
+Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls. The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled). Evidence like this can be considered \textbf{dose response}, \index{dose response} since higher ``doses'' of referee control are associated with a greater effect of foul differential on their calls. A dose response effect provides even stronger indication of referee bias.
 
 Analyses of data from 2004-05 \citep{Noecker2012} showed that the tendency to even out foul calls was stronger when one team had a large lead, but we found no evidence of a foul differential by score differential interaction in the 2009-10 data, although home team fouls are more likely when the home team has a large lead, regardless of the foul differential.
 
@@ -13448,7 +13472,7 @@ The R code below shows how \texttt{fixef()} can be used to extract the estimated
 \item
   In Section \ref{glmm-paraboot}, could we use a likelihood ratio test to determine if it would be better to add either a random effect for home team or a random effect for visiting team to the model with a random effect for game (assuming we're going to add one or the other)? Why or why not?
 \item
-  Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \ref{fig:gmu-lrt1}.
+  Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \ref{fig:gmu-lrt1}. In particular, describe how to simulate responses for the first two rows of the data set (the first two fouls in the IA at MN game from 03.07.2010).
 \item
   In Figure \ref{fig:gmu-lrt1}, why is it a problem that ``a chi-square distribution puts too much mass in the tail'' when using a likelihood ratio test to compare models?
 \item

@@ -43,12 +43,36 @@ library(kableExtra)
 library(tidyverse)
 ```
 
-Here's a reference @BBCNEWS1995
+\begin{tiny}
+\[  Cov(\textbf{Y}_{i}) = \left[
+          \begin{array}{cccccc}
+            Cov(\textbf{Y}_{i1}) & & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i4}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. \]
+\end{tiny}
 
-and another with brackets [@Bayer2011]
 
-and another with brackets and minus sign [-@Allison2005]
+\begin{align*}
+Cov(\textbf{Y}_{i}) & = \left[
+          \begin{array}{cccc}
+            Cov(\textbf{Y}_{i1}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & \ldots 
+          \end{array} \right. \\
+ & \left. \begin{array}{cccc} 
+      & & &  \\
+      & & &  \\
+      & & &  \\
+ & Cov(\textbf{Y}_{i4}) & &  \\
+ & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+ \ldots & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. 
+\end{align*}
 
-does double brackets help with caps: @idre2018
-
-Also @Bayer2011, @Awad2017, @Dahlquist2011, @Strutz2013, @Fast2011, @Trinh2018, @Renier2018, @Angell2010, @Pray2009

@@ -83,7 +83,8 @@ NumbChild <- c(6,7,10,8,10,3,6,50)
 ```{r table1chp2, echo=FALSE}
 table1chp2 <- data.frame(Composition, NumbFams, NumbChild)
 colnames(table1chp2) <- c("Composition","Number of families", "Number of children")
-kable(table1chp2, booktabs=T, caption="The gender composition of 30 families in the hypothetical data set of n=50 children.")
+kable(table1chp2, booktabs=T, caption="The gender composition of 30 families in the hypothetical data set of n=50 children.") %>%
+  kable_styling(full_width = F)
 ```
 
 ## Model 0: Sex Unconditional Model (Equal probabilities, Independence)
@@ -122,7 +123,7 @@ GBBplot
 
 From the likelihood in Figure \@ref(fig:lik1), when $p_B$ = 0.3 we see a family of a girl followed by two boys  6.3\% ($0.7\cdot0.3^2$) of the time. However, it indicates that we are much more likely to see our data if $p_B$ = 0.6 where the likelihood of GBB is $0.4\cdot0.6^2$ or 14.4\%.
   
-If the choice was between 0.3 and 0.6 for an estimate of $p_B$, we'd choose 0.6. The "best" estimate of $p_B$ would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the __maximum likelihood estimate__ or MLE \index{maximum likelihood estimate (MLE)}. We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
+If the choice was between 0.3 and 0.6 for an estimate of $p_B$, we'd choose 0.6. The "best" estimate of $p_B$ would be the value where we are most likely to see our data from all possible values between 0 and 1, which we refer to as the __maximum likelihood estimate__ or MLE. \index{maximum likelihood estimate (MLE)} We can approximate an MLE using graphical or numerical approaches. Graphically, here it looks like the MLE is just above 0.6. In many, but not all, circumstances, we can obtain an MLE exactly using calculus. In this simple example, the MLE is 2/3. This is consistent with our intuition since 2 out of the 3 children are boys.
 
 Suppose another family consisting of three girls is added to our data set. We've already seen that the Sex Unconditional Model multiplies probabilities to construct a likelihood because children are independent of one another. Extending this idea, families can be assumed to be independent of one another so that the likelihood for both families can be obtained by multiplication.  With two families (GBB and GGG) our likelihood is now:
 
@@ -497,7 +498,7 @@ colnames(sex_uncond_model) <-c("Family composition",
 kable(sex_uncond_model, booktabs = T, escape = F,
       caption="Contributions to the likelihood function for the Sex Unconditional Model for a sample of family compositions from the NLSY data") %>% 
   column_spec(1:2, width = "5cm") %>%
-  kable_styling(latex_options = "scale_down")
+  kable_styling(latex_options = "scale_down", full_width = F)
 ```
 
 Now we create the entire likelihood for our data under the Sex Unconditional Model.
@@ -537,7 +538,7 @@ colnames(sex_cond_model) <-c("Family composition",
 kable(sex_cond_model, booktabs = T, escape = F,
       caption="Contributions to the likelihood function for the Sex Conditional Model for a sample of family compositions from the NLSY data") %>% 
   column_spec(1:2, width = "5cm") %>%
-  kable_styling(latex_options = "scale_down")
+  kable_styling(latex_options = "scale_down", full_width = F)
 ```
 
 The products of the last three columns of Table \@ref(tab:table8chp2) provide the likelihood contributions for the Sex Conditional Model for all of the one-, two- and three-child NLSY families. We write the likelihood as a function of the three parameters $\neutral,  \bbias$, and $\gbias$.
@@ -670,7 +671,7 @@ The probability of a boy does not depend on the prior family composition.
 $H_A:$ At least one parameter from $\neutral, \bbias,\gbias$  differs from the others. (Sex Conditional Model)
 The probability of a boy does depend on the prior family composition. 
     
-We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model.  Here we will refer to the first model, the Sex Unconditional Model, as the **reduced model** \index{null (reduced) model}, noting that it has only a single parameter, $p_B$.  The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the **larger (full) model**.  We'll use the MLEs derived earlier in Section \@ref(sex-cond-lik).
+We start with the idea of comparing the likelihoods or, equivalently, the log-likelihoods of each model at their maxima. To do so, we use the log-likelihoods to determine the MLEs, and then replace the parameters in the log-likelihood with their MLEs, thereby finding the maximum value for the log-likelihood of each model.  Here we will refer to the first model, the Sex Unconditional Model, as the **reduced model**, \index{null (reduced) model} noting that it has only a single parameter, $p_B$.  The more complex model, the Sex Conditional Model, has three parameters and is referred to here as the **larger (full) model**.  We'll use the MLEs derived earlier in Section \@ref(sex-cond-lik).
     
 The maximum of the log-likelihood  for the reduced model can be found by replacing $p_{B}$ in the log-likelihood with the MLE of $p_{B}$, 0.5075.
     
@@ -690,7 +691,7 @@ The maximum of the log-likelihood for the larger model can be found by replacing
     
 Take a look at the log-likelihoods---the maximum log-likelihood for the larger model is indeed larger (less negative). The maximum log-likelihood for the larger model is guaranteed to be at least as large as the maximum log-likelihood for the reduced model, so we'll be interested in whether this observed difference in maximum log-likelihoods, -7391.448 -(-7396.067) = 4.619, is significant. 
     
-A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a $\chi^2$ distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred  to as the __Likelihood Ratio Test (LRT)__ \index{likelihood ratio test (LRT)}.
+A result from statistical theory states that, when the reduced model is the true model, twice the difference of the maximum log-likelihoods follows a $\chi^2$ distribution with the degrees of freedom equal to the difference in the number of parameters between the two models. A difference of the maximum log-likelihoods can also be looked at as the log of the ratio of the likelihoods and for that reason the test is referred  to as the __Likelihood Ratio Test (LRT)__. \index{likelihood ratio test (LRT)}
     
 Our test statistic is
 
@@ -808,8 +809,8 @@ Similarly, for girls, the MLEs are $\hat{p}_{S|G1}$ = 0.457 and $\hat{p}_{S|N}$ 
     
 How does the waiting for a boy model compare to the waiting for a girl model? Thus far we've seen how  nested models can be compared.  But these two models are not nested since one is not simply a reduced version of the other. Two measures referred to as information criteria, AIC and BIC, are useful when comparing non-nested models. Each measure can be calculated for a model using a  function of the model's maximum log-likelihood. You can find the log-likelihood in the output from most modeling software packages.   
     
-- $\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p$, where $p$ represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion \index{AIC}. Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC. 
-- $\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)$, where $p$ is the number of parameters and $n$ is the number of observations. BIC stands for  Bayesian Information Criterion \index{BIC}, also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.  
+- $\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p$, where $p$ represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion. \index{AIC} Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC. 
+- $\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)$, where $p$ is the number of parameters and $n$ is the number of observations. BIC stands for  Bayesian Information Criterion, \index{BIC} also known as Schwarz's Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.  
     
 So which explanation of the data seems more plausible---waiting for a boy or waiting for a girl?  These models are not nested (i.e., one is not a simplified version of the other), so it is not correct to perform a Likelihood Ratio Test, but we can legitimately compare these models using information criteria (Table \@ref(tab:tab1chp2)).
 
@@ -822,7 +823,9 @@ Waitgirl <- c(-14715.65,29433.31,29440.58)
 ```{r, tab1chp2, echo=FALSE}
 tab1chp2 <- data.frame(Untcol,Waitboy,Waitgirl)
 colnames(tab1chp2) <- c(" ","Waiting for a boy","Waiting for a girl")
-kable(tab1chp2, booktabs=T, caption="Measures of model performance with NLSY data: Waiting for a Boy vs. Waiting for a Girl Model.")
+kable(tab1chp2, booktabs=T, 
+      caption="Measures of model performance with NLSY data: Waiting for a Boy vs. Waiting for a Girl Model.") %>%
+  kable_styling(full_width = F)
 ```
 
 Smaller AIC and BIC are preferred, so here the Waiting for a Boy Model is judged superior to the Waiting for a Girl Model, suggesting that couples waiting for a boy is a better explanation of the data than waiting for a girl. However, for either boys and girls, couples do not stop more frequently after the first occurrence.  
@@ -871,7 +874,7 @@ p_B= \frac{e^{\beta_0+\beta_1(\textrm{parental age})}}
     
 Another compelling reason for likelihoods occurs when we encounter correlated data. For example, models with conditional probabilities do not conform to the independence assumption.  The Sex Conditional Model is an example of such a model.  We'll see that likelihoods can be  useful when the data has structure such as multilevel that induces a correlation. A good portion of the book addresses this.
     
-When the responses are are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we'll find it difficult to use the linear least squares regression models of the past and we'll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will significantly broaden your statistical horizons!
+When the responses are are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we'll find it difficult to use the linear least squares regression models of the past and we'll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will enable us to move *beyond multiple linear regression*!
 
 ## Exercises
 ### Conceptual Exercises
@@ -915,7 +918,7 @@ Can you construct a model which suggests that childbearing is stopped when coupl
 
     - Hot Hand (2 parameters): $p_B$ = probability of making a basket after a miss (or the first shot of a game); $p_{B|B}$ = probability of making a basket after making the previous shot
 
-    a. Fill out Table \@ref(tab:table10chp2)---write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.
+    a. Fill out Table \@ref(tab:hothandchp2)---write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.
 
     b. Given that, for the No Hot Hand model, $\textrm{Lik}(p_B)=p_B^{10}(1-p_B)^{15}$ for the 5 games where we collected data, how do we know that 0.40 (the maximum likelihood estimator (MLE) of $p_B$) is a better estimate than, say, 0.30?
 

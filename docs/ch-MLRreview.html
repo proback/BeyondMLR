@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 1 Review of Multiple Linear Regression | Broadening Your Statistical Horizons</title>
-  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Review of Multiple Linear Regression | Beyond Multiple Linear Regression</title>
+  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Review of Multiple Linear Regression | Broadening Your Statistical Horizons" />
+  <meta property="og:title" content="Chapter 1 Review of Multiple Linear Regression | Beyond Multiple Linear Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="data/cover.png" />
@@ -17,30 +16,31 @@
   <meta name="github-repo" content="proback/BYSH" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Review of Multiple Linear Regression | Broadening Your Statistical Horizons" />
+  <meta name="twitter:title" content="Chapter 1 Review of Multiple Linear Regression | Beyond Multiple Linear Regression" />
   
   <meta name="twitter:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="twitter:image" content="data/cover.png" />
 
-<meta name="author" content="Julie Legler and Paul Roback">
+<meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2020-07-18" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="ch-beyondmost.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link rel="prev" href="index.html"/>
+<link rel="next" href="ch-beyondmost.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,48 +48,78 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -108,29 +138,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-broadening-your-statistical-horizons"><i class="fa fa-check"></i><b>1.2</b> Introduction to Broadening Your Statistical Horizons</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#ordinary-least-squares-ols-assumptions"><i class="fa fa-check"></i><b>1.3</b> Ordinary Least Squares (OLS) Assumptions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-the-ols-assumptions-for-inference"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate the OLS assumptions for inference</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-the-ols-assumptions-for-inference-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where the OLS assumptions for inference are violated</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explorech1"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#data-organization"><i class="fa fa-check"></i><b>1.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#simple-linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Simple linear regression with a binary predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
 <li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
 <li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
 <li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
 <li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
 <li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview"><i class="fa fa-check"></i><b>1.7</b> Preview</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -162,7 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
 <li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
-<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_cond_lik.sec"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
 <li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
@@ -173,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercise"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
 </ul></li>
 </ul></li>
@@ -202,7 +232,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
 <li class="chapter" data-level="3.7.1" data-path="ch-distthry.html"><a href="ch-distthry.html#conceptual-exercises-2"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-1"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-2"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html"><i class="fa fa-check"></i><b>4</b> Poisson Regression</a><ul>
@@ -212,9 +242,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#a-graphical-look-at-poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> A Graphical Look at Poisson Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-studies-overview"><i class="fa fa-check"></i><b>4.3</b> Case Studies Overview</a></li>
-<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
-<li class="chapter" data-level="4.4.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
+<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata4"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
@@ -223,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
 <li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#least-squares-regression-vs.poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Least Squares Regression vs. Poisson Regression</a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -235,7 +265,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
 <li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.2</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
@@ -243,13 +274,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-2"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -285,7 +316,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#least-squares-regression-vs.logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Least Squares Regression vs. Logistic Regression</a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
@@ -294,8 +325,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
-<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises:</a></li>
-<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -315,15 +346,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
 <li class="chapter" data-level="7.10.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#conceptual-exercises-4"><i class="fa fa-check"></i><b>7.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-4"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-5"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="7.10.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#note-on-correlated-binary-outcomes"><i class="fa fa-check"></i><b>7.10.3</b> Note on Correlated Binary Outcomes</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html"><i class="fa fa-check"></i><b>8</b> Introduction to Multilevel Models</a><ul>
 <li class="chapter" data-level="8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#learning-objectives-7"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#cs:music"><i class="fa fa-check"></i><b>8.2</b> Case Study: Music Performance Anxiety</a></li>
-<li class="chapter" data-level="8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
@@ -333,14 +364,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
 <li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
 <li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
 <li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
 <li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
@@ -357,7 +388,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise-1"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -373,17 +404,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
 <li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
 <li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
 <li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
 <li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
 <li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
@@ -395,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-2"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -417,11 +449,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-5"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Multilevel Models</a><ul>
+<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
@@ -456,7 +488,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Broadening Your Statistical Horizons</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beyond Multiple Linear Regression</a>
           </h1>
         </div>
 
@@ -470,30 +502,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">1.1</span> Learning Objectives</h2>
 <p>After finishing this chapter, you should be able to:</p>
 <ul>
-<li>Identify cases where ordinary least squares (OLS) assumptions are violated.</li>
+<li>Identify cases where linear least squares regression (LLSR) assumptions are violated.</li>
 <li>Generate exploratory data analysis plots and summary statistics.</li>
-<li>Use residual diagnostics to examine OLS assumptions.</li>
+<li>Use residual diagnostics to examine LLSR assumptions.</li>
 <li>Interpret parameters and associated tests and intervals from multiple regression models.</li>
 <li>Understand the basic ideas behind bootstrapped confidence intervals.</li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ch-MLRreview.html#cb1-1"></a><span class="co"># Packages required for Chapter 1</span></span>
+<span id="cb1-2"><a href="ch-MLRreview.html#cb1-2"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb1-3"><a href="ch-MLRreview.html#cb1-3"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb1-4"><a href="ch-MLRreview.html#cb1-4"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb1-5"><a href="ch-MLRreview.html#cb1-5"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb1-6"><a href="ch-MLRreview.html#cb1-6"></a><span class="kw">library</span>(jtools)</span>
+<span id="cb1-7"><a href="ch-MLRreview.html#cb1-7"></a><span class="kw">library</span>(rsample)</span>
+<span id="cb1-8"><a href="ch-MLRreview.html#cb1-8"></a><span class="kw">library</span>(broom)</span>
+<span id="cb1-9"><a href="ch-MLRreview.html#cb1-9"></a><span class="kw">library</span>(tidyverse)    </span></code></pre></div>
 </div>
-<div id="introduction-to-broadening-your-statistical-horizons" class="section level2">
-<h2><span class="header-section-number">1.2</span> Introduction to Broadening Your Statistical Horizons</h2>
-<p>Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets in to medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists’, pre-med students’ and sociologists’ interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting <strong>generalized linear models (GLMs)</strong> as opposed to using to <strong>ordinary least squares (OLS)</strong> models.</p>
-<p>When models are fit to data using OLS, inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.</p>
-<p>However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians’ performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient’s outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician’s anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for OLS or GLM inference.</p>
-<p>The <strong>Generalized Linear Models</strong> in the book’s title extends OLS methods you may have seen in linear regression to handle responses that are non-normal. The <strong>Multilevel Methods</strong> will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will <em>broaden your statistical horizons</em>.</p>
-<p>In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with OLS in the context of different studies. While linearity is sufficient for fitting an OLS model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with OLS modeling is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We’ve kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.</p>
+<div id="introduction-to-beyond-multiple-linear-regression" class="section level2">
+<h2><span class="header-section-number">1.2</span> Introduction to Beyond Multiple Linear Regression</h2>
+<p>Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists’, pre-med students’ and sociologists’ interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting <strong>generalized linear models (GLMs)</strong> as opposed to using to <strong>linear least squares regression (LLSR)</strong> models.</p>
+<p>When models are fit to data using linear least squares regression (LLSR),  inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.</p>
+<p>However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians’ performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient’s outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician’s anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.</p>
+<p>The <strong>GLMs (Generalized Linear Models)</strong>  in the book’s title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The <strong>Multilevel Models</strong>  in the book’s title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand <em>beyond multiple linear regression</em>.</p>
+<p>In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We’ve kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.</p>
 </div>
-<div id="ordinary-least-squares-ols-assumptions" class="section level2">
-<h2><span class="header-section-number">1.3</span> Ordinary Least Squares (OLS) Assumptions</h2>
+<div id="assumptions-for-linear-least-squares-regression-llsr" class="section level2">
+<h2><span class="header-section-number">1.3</span> Assumptions for Linear Least Squares Regression (LLSR)</h2>
 <div class="figure" style="text-align: center"><span id="fig:OLSassumptions"></span>
-<img src="bookdown-bysh_files/figure-html/OLSassumptions-1.png" alt="Ordinary least squares assumptions" width="60%" />
+<img src="bookdown-bysh_files/figure-html/OLSassumptions-1.png" alt="Assumptions for linear least squares regression (LLSR)" width="90%" />
 <p class="caption">
-Figure 1.1: Ordinary least squares assumptions
+Figure 1.1: Assumptions for linear least squares regression (LLSR)
 </p>
 </div>
-<p>Recall that making inferences or predictions with models fit using ordinary least squares (OLS) requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on OLS. If we consider a simple linear regression with just a single predictor X, then:</p>
+<p>Recall that making inferences or predictions with models fit using linear least squares regression  requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on LLSR. If we consider a simple linear regression  with just a single predictor X, then:</p>
 <ul>
 <li><strong>L:</strong> there is a linear relationship between the mean response (Y) and the explanatory variable (X),</li>
 <li><strong>I:</strong> the errors are independent—there’s no connection between how far any two points lie from the regression line,</li>
@@ -507,103 +548,95 @@ Figure 1.1: Ordinary least squares assumptions
 <li><strong>N:</strong> At each level of X, the values for Y are normally distributed.</li>
 <li><strong>E:</strong> The spread in the Y’s for each level of X is the same.</li>
 </ul>
-<div id="cases-that-do-not-violate-the-ols-assumptions-for-inference" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> Cases that do not violate the OLS assumptions for inference</h3>
-<p>It can be argued that the following studies do not violate the OLS assumptions for inference. We begin by identifying the response and the explanatory variables followed by describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.</p>
+<div id="cases-that-do-not-violate-assumptions-for-inference-in-llsr" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Cases that do not violate assumptions for inference in LLSR</h3>
+<p>It can be argued that the following studies do not violate assumptions for inference in linear least squares regression. We begin by identifying the response and the explanatory variables followed by describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Reaction times and car radios.</strong> A researcher suspects that loud music can affect how quickly drivers react. She randomly selects drivers to drive the same stretch of road with varying levels of music volume. Stopping distances for each driver are measured along with the decibel level of the music on their car radio.</p>
 <ul>
 <li><em>Response variable:</em> Reaction time</li>
-<li><em>Explanatory variable:</em> Decibel level of music<br />
-<br></li>
+<li><em>Explanatory variable:</em> Decibel level of music</li>
 </ul>
-<p>The OLS assumptions for inference would apply if:</p>
+<p>The assumptions for inference in LLSR would apply if:</p>
 <ul>
 <li><strong>L:</strong> The mean reaction time is linearly related to decibel level of the music.</li>
 <li><strong>I:</strong> Stopping distances are independent. The random selection of drivers should assure independence.</li>
 <li><strong>N:</strong> The stopping distances for a given decibel level of music vary and are normally distributed.</li>
-<li><strong>E:</strong> The variation in stopping distances should be approximately the same for each decibel level of music.<br />
-<br></li>
+<li><strong>E:</strong> The variation in stopping distances should be approximately the same for each decibel level of music.</li>
 </ul>
-<p>There are potential problems with the linearity and equal standard deviation assumptions. For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be a linear function of music. Another problem may occur if a few subjects at each decibel level took a really long time to react. In this case, reaction times would be right skewed and the normality assumption would be violated. Often we can think of circumstances where the OLS assumptions may be suspect. Later in this chapter we will describe plots which can help diagnose issues with OLS assumptions.</p></li>
+<p>There are potential problems with the linearity and equal standard deviation assumptions. For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be a linear function of music. Another problem may occur if a few subjects at each decibel level took a really long time to react. In this case, reaction times would be right skewed and the normality assumption would be violated. Often we can think of circumstances where the LLSR assumptions may be suspect. Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.</p></li>
 <li><p><strong>Crop yield and rainfall.</strong> The yield of wheat per acre for the month of July is thought to be related to the rainfall. A researcher randomly selects acres of wheat and records the rainfall and bushels of wheat per acre.</p>
 <ul>
-<li><em>Response variable:</em> Yield of wheat measured in bushels per acre for July</li>
+<li><p><em>Response variable:</em> Yield of wheat measured in bushels per acre for July</p></li>
 <li><p><em>Explanatory variable:</em> Rainfall measured in inches for July</p></li>
-<li><strong>L:</strong> The mean yield per acre is linearly related to rainfall.</li>
-<li><strong>I:</strong> Fields’ yields are independent; knowing one (X, Y) pair does not provide information about another.</li>
-<li><strong>N:</strong> The yields for a given amount of rainfall are normally distributed.</li>
-<li><p><strong>E:</strong> The standard deviation of yields is approximately the same for each rainfall level.<br />
-<br></p></li>
+<li><p><strong>L:</strong> The mean yield per acre is linearly related to rainfall.</p></li>
+<li><p><strong>I:</strong> Fields’ yields are independent; knowing one (X, Y) pair does not provide information about another.</p></li>
+<li><p><strong>N:</strong> The yields for a given amount of rainfall are normally distributed.</p></li>
+<li><p><strong>E:</strong> The standard deviation of yields is approximately the same for each rainfall level.</p></li>
 </ul>
 <p>Again we may encounter problems with the linearity assumption if mean yields increase initially as the amount of rainfall increases after which excess rainfall begins to ruin crop yield. The random selection of fields should assure independence if fields are not close to one another.</p></li>
-<li><p><strong>Heights of sons and fathers.</strong> Sir Francis Galton suspected that a son’s height could be predicted using the father’s height. He collected observations on heights of fathers and their firstborn sons <span class="citation">(Stigler <a href="#ref-Stigler2002">2002</a>)</span>.</p>
+<li><p><strong>Heights of sons and fathers.</strong> Sir Francis Galton suspected that a son’s height could be predicted using the father’s height. He collected observations on heights of fathers and their firstborn sons <span class="citation">(Stigler <a href="#ref-Stigler2002" role="doc-biblioref">2002</a>)</span>.</p>
 <ul>
-<li><em>Response variable:</em> Height of the firstborn son</li>
+<li><p><em>Response variable:</em> Height of the firstborn son</p></li>
 <li><p><em>Explanatory variable:</em> Height of the father</p></li>
-<li><strong>L:</strong> The mean height of firstborn sons is linearly related to heights of fathers.</li>
-<li><strong>I:</strong> The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.</li>
-<li><strong>N:</strong> The heights of firstborn sons for a given fathers’ height are normally distributed.</li>
-<li><p><strong>E:</strong> The standard deviation of firstborn sons’ heights at a given father’s height are the same.<br />
-<br></p></li>
+<li><p><strong>L:</strong> The mean height of firstborn sons is linearly related to heights of fathers.</p></li>
+<li><p><strong>I:</strong> The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.</p></li>
+<li><p><strong>N:</strong> The heights of firstborn sons for a given father’s height are normally distributed.</p></li>
+<li><p><strong>E:</strong> The standard deviation of firstborn sons’ heights at a given father’s height are the same.</p></li>
 </ul>
 <p>Heights and other similar measurements are often normally distributed. There would be a problem with the independence assumption if multiple sons from the same family were selected. Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.</p></li>
 </ol>
 </div>
-<div id="cases-where-the-ols-assumptions-for-inference-are-violated" class="section level3">
-<h3><span class="header-section-number">1.3.2</span> Cases where the OLS assumptions for inference are violated</h3>
+<div id="cases-where-assumptions-for-inference-in-llsr-are-violated" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Cases where assumptions for inference in LLSR are violated</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Grades and studying.</strong> Is the time spent studying predictive of success on an exam? The time spent studying for an exam, in hours, and success, measured as Pass or Fail, are recorded for randomly selected students.</p>
 <ul>
 <li><em>Response variable:</em> Exam outcome (Pass or Fail)</li>
-<li><em>Explanatory variable:</em> Time spent studying (in hours)<br />
-<br></li>
+<li><em>Explanatory variable:</em> Time spent studying (in hours)</li>
 </ul>
-<p>Here the response is a binary outcome which violates the OLS assumption of a normally distributed response at each level of X. In Chapter <a href="ch-logreg.html#ch-logreg">6</a>, we will see logistic regression which is more suitable for models with binary responses.</p></li>
+<p>Here the response is a binary outcome which violates the assumption of a normally distributed response at each level of X. In Chapter <a href="ch-logreg.html#ch-logreg">6</a>, we will see logistic regression, which is more suitable for models with binary responses.</p></li>
 <li><p><strong>Income and family size.</strong> Do wealthy families tend to have fewer children compared to lower income families? Annual income and family size are recorded for a random sample of families.</p>
 <ul>
 <li><em>Response variable:</em> Family size, number of children</li>
-<li><em>Explanatory variable:</em> Annual income, in dollars<br />
-<br></li>
+<li><em>Explanatory variable:</em> Annual income, in dollars</li>
 </ul>
-<p>Family size is a count taking on integer values from 0 to (technically) no upper bound. The normality assumption may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number of children. Both of these concerns lead us to question the validity of the normality assumption. Study design should also specify that families are done adding children to their family.</p></li>
+<p>Family size is a count taking on integer values from 0 to (technically) no upper bound. The normality assumption may be problematic again because the distribution of family size is likely to be skewed, with more families having one or two children and only a few with a much larger number of children. Both of these concerns, along with the discrete nature of the response, lead us to question the validity of the normality assumption. In fact, we might consider Poisson models discussed in Chapter <a href="ch-poissonreg.html#ch-poissonreg">4</a>. Study design should also specify that families are done adding children to their family.</p></li>
 <li><p><strong>Exercise, weight, and sex.</strong> Investigators collected the weight, sex, and amount of exercise for a random sample of college students.</p>
 <ul>
 <li><em>Response variable:</em> Weight</li>
-<li><em>Explanatory variables:</em> Sex and hours spent exercising in a typical week<br />
-<br></li>
+<li><em>Explanatory variables:</em> Sex and hours spent exercising in a typical week</li>
 </ul>
-<p>With two predictors, the assumptions now apply to the combination of sex and exercise. For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females. This data may not be appropriate for OLS modeling because the standard deviation in weight for students who do not exercise for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime. We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected. There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.</p></li>
+<p>With two predictors, the assumptions now apply to the combination of sex and exercise. For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females. This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime. We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected. There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.</p></li>
 <li><p><strong>Surgery Outcome and Patient Age.</strong> Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest. Patients were randomly selected for each surgeon at each hospital. The surgery outcome was recorded on a scale of one to ten.</p>
 <ul>
 <li><em>Response variable:</em> Surgery outcome, scale 1-10</li>
-<li><em>Explanatory variable:</em> Patient age, in years<br />
-<br></li>
+<li><em>Explanatory variable:</em> Patient age, in years</li>
 </ul>
-<p>Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons’ skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon. Furthermore, outcomes at one hospital may be more similar possibly due to factors associated with different patient populations. The very structure of this data suggests that the independence assumption will be violated. Multilevel models will explicitly take this structure into account for a proper analysis of this study’s results.</p></li>
+<p>Outcomes for patients operated on by the same surgeon are more likely to be similar and have similar results. For example, if surgeons’ skills differ or if their criteria for selecting patients for surgery vary, individual surgeons may tend to have better or worse outcomes, and patient outcomes will be dependent on surgeon. Furthermore, outcomes at one hospital may be more similar, possibly due to factors associated with different patient populations. The very structure of this data suggests that the independence assumption will be violated. Multilevel models, which we begin discussing in Chapter <a href="ch-multilevelintro.html#ch-multilevelintro">8</a>, will explicitly take this structure into account for a proper analysis of this study’s results.</p></li>
 </ol>
-<p>While we identified possible violations of OLS assumptions for inference for each of the examples in this section, there may be violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.</p>
+<p>While we identified possible violations of assumptions for inference in LLSR for each of the examples in this section, there may be violations of the other assumptions that we have not pointed out. Prior to reading this book, you have presumably learned some ways to handle these violations such as applying variance stabilizing transformations or logging responses, but you will discover other models in this text that may be more appropriate for the violations we have presented.</p>
 </div>
 </div>
 <div id="review-of-multiple-linear-regression" class="section level2">
 <h2><span class="header-section-number">1.4</span> Review of Multiple Linear Regression</h2>
 <div id="cs:derby" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> Case Study: Kentucky Derby</h3>
-<p>Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing. The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky. Our data set <code>derbyplus.csv</code> contains the <code>year</code> of the race, the winning horse (<code>winner</code>), the <code>condition</code> of the track, the average <code>speed</code> (in feet per second) of the winner, and the number of <code>starters</code> (field size, or horses who raced) for the years 1896-2017 <span class="citation">(Wikipedia contributors <a href="#ref-KentuckyDerby">2018</a>)</span>. The track <code>condition</code> has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”). We would like to use OLS linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.</p>
+<p>Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing. The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky. Our data set <code>derbyplus.csv</code> contains the <code>year</code> of the race, the winning horse (<code>winner</code>), the <code>condition</code> of the track, the average <code>speed</code> (in feet per second) of the winner, and the number of <code>starters</code> (field size, or horses who raced) for the years 1896-2017 <span class="citation">(Wikipedia contributors <a href="#ref-KentuckyDerby" role="doc-biblioref">2018</a>)</span>. The track <code>condition</code> has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”). We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.</p>
 </div>
 </div>
-<div id="explore" class="section level2">
+<div id="explorech1" class="section level2">
 <h2><span class="header-section-number">1.5</span> Initial Exploratory Analyses</h2>
 <div id="data-organization" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Data Organization</h3>
 <p>The first five and last five rows from our data set are illustrated in Table <a href="ch-MLRreview.html#tab:introtable1">1.1</a>. Note that, in certain cases, we created new variables from existing ones:</p>
 <ul>
-<li><code>fast</code> is an <strong>indicator variable</strong>, taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,</li>
+<li><code>fast</code> is an <strong>indicator variable</strong>,  taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,</li>
 <li><code>good</code> is another indicator variable, taking the value 1 for races run under good conditions, and 0 for races run under other conditions,</li>
-<li><code>yearnew</code> is a <strong>centered variable</strong>, where we measure the number of years since 1896, and</li>
+<li><code>yearnew</code> is a <strong>centered variable</strong>,  where we measure the number of years since 1896, and</li>
 <li><code>fastfactor</code> replaces <code>fast</code> = 0 with the description “not fast”, and <code>fast</code> = 1 with the description “fast”. Changing a numeric categorical variable to descriptive phrases can make plot legends more meaningful.</li>
 </ul>
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:introtable1">Table 1.1: </span>The first five and the last five observations from the Kentucky Derby case study.
 </caption>
@@ -935,9 +968,9 @@ fast
 <div id="univariate-summaries" class="section level3">
 <h3><span class="header-section-number">1.5.2</span> Univariate Summaries</h3>
 <p>With any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables. This should <em>always</em> be done <em>before</em> any model fitting! We must understand our data thoroughly before doing anything else.</p>
-<p>First, we will examine each response variable and potential covariate individually. Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.</p>
+<p>First, we will examine the response variable and each potential covariate individually. Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.</p>
 <div class="figure" style="text-align: center"><span id="fig:twohist"></span>
-<img src="bookdown-bysh_files/figure-html/twohist-1.png" alt="Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters." width="60%" />
+<img src="bookdown-bysh_files/figure-html/twohist-1.png" alt="Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters." width="90%" />
 <p class="caption">
 Figure 1.2: Histograms of key continuous variables. Plot (a) shows winning speeds, while plot (b) shows the number of starters.
 </p>
@@ -949,16 +982,16 @@ Figure 1.2: Histograms of key continuous variables. Plot (a) shows winning speed
 <h3><span class="header-section-number">1.5.3</span> Bivariate Summaries</h3>
 <p>The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses. Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a> is densely packed with illustrations of bivariate relationships. The relationship between two continuous variables is depicted with scatterplots below the diagonal and correlation coefficients above the diagonal. Here, we see that higher winning speeds are associated with more recent years, while the relationship between winning speed and number of starters is less clear cut. We also see a somewhat strong correlation between year and number of starters—we should be aware of highly correlated explanatory variables whose contributions might overlap too much.</p>
 <div class="figure" style="text-align: center"><span id="fig:bivariate"></span>
-<img src="bookdown-bysh_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set" width="60%" />
+<img src="bookdown-bysh_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set" width="90%" />
 <p class="caption">
 Figure 1.3: Relationships between pairs of variables in the Kentucky Derby data set
 </p>
 </div>
 <p>Relationships between categorical variables like track condition and continuous variables can be illustrated with side-by-side boxplots as in the top row, or with stacked histograms as in the first column. As expected, we see evidence of higher speeds on fast tracks and also a tendency for recent years to have more fast conditions. These observed trends can be supported with summary statistics generated by subgroup. For instance, the mean speed under fast conditions is 53.6 feet per second, compared to 52.7 ft/s under good conditions and 51.7 ft/s under slow conditions. Variability in winning speeds, however, is greatest under slow conditions (SD = 1.36 ft/s) and least under fast conditions (0.94 ft/s).</p>
 <p>Finally, notice that the diagonal illustrates the distribution of individual variables, using density curves for continuous variables and a bar chart for categorical variables. Trends observed in the last two diagonal entries match trends observed in Figure <a href="ch-MLRreview.html#fig:twohist">1.2</a>.</p>
-<p>By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a>. For example, in the <strong>coded scatterplot</strong> of Figure <a href="ch-MLRreview.html#fig:codeds">1.4</a> we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.</p>
+<p>By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a>. For example, in the <strong>coded scatterplot</strong>  of Figure <a href="ch-MLRreview.html#fig:codeds">1.4</a> we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.</p>
 <div class="figure" style="text-align: center"><span id="fig:codeds"></span>
-<img src="bookdown-bysh_files/figure-html/codeds-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions" width="60%" />
+<img src="bookdown-bysh_files/figure-html/codeds-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions" width="90%" />
 <p class="caption">
 Figure 1.4: Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions
 </p>
@@ -978,48 +1011,41 @@ Figure 1.4: Linear trends in winning speeds over time, presented separately for 
 <h2><span class="header-section-number">1.6</span> Multiple linear regression modeling</h2>
 <div id="SLRcontinuous" class="section level3">
 <h3><span class="header-section-number">1.6.1</span> Simple linear regression with a continuous predictor</h3>
-We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896? For this initial model, let <span class="math inline">\(Y_{i}\)</span> be the speed of the winning horse in year <span class="math inline">\(i\)</span>. Then, we might consider Model 1:
-<span class="math display" id="eq:model1">\[\begin{equation}
- Y_{i}=\beta_{0}+\beta_{1}(\textrm{Year}_{i})+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+<p>We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896? For this initial model, let <span class="math inline">\(Y_{i}\)</span> be the speed of the winning horse in year <span class="math inline">\(i\)</span>. Then, we might consider Model 1:</p>
+<p><span class="math display" id="eq:model1">\[\begin{equation}
+ Y_{i}=\beta_{0}+\beta_{1}\textrm{Year}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \tag{1.1}
-\end{equation}\]</span>
-<p>In this case, <span class="math inline">\(\beta_{0}\)</span> represents the true intercept—the expected winning speed during Year 0. <span class="math inline">\(\beta_{1}\)</span> represents the true slope—the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896). Finally, the <strong>error</strong> (<span class="math inline">\(\epsilon_{i}\)</span>) terms represent the deviations of the actual winning speed in Year <span class="math inline">\(i\)</span> (<span class="math inline">\(Y_i\)</span>) from the expected scores under this model (<span class="math inline">\(\beta_{0}+\beta_{1}(\textrm{Year}_{i})\)</span>)—the part of a horse’s winning speed that is not explained by a linear trend over time. The variability in these deviations from the regression model is denoted by <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>The parameters in this model (<span class="math inline">\(\beta_{0}\)</span>, <span class="math inline">\(\beta_{1}\)</span>, and <span class="math inline">\(\sigma^2\)</span>) can be estimated through OLS methods; we will use hats to denote estimates of population parameters based on empirical data. Values for <span class="math inline">\(\hat{\beta}_{0}\)</span> and <span class="math inline">\(\hat{\beta}_{1}\)</span> are selected to minimize the sum of squared residuals, where a <strong>residual</strong> is simply the observed prediction error—the actual winning speed for a given year minus the winning speed predicted by the model. In the notation of this section,</p>
+\end{equation}\]</span></p>
+<p>In this case, <span class="math inline">\(\beta_{0}\)</span> represents the true intercept—the expected winning speed during Year 0. <span class="math inline">\(\beta_{1}\)</span> represents the true slope—the expected increase in winning speed from one year to the next, assuming the rate of increase is linear (i.e., constant with each successive year since 1896). Finally, the <strong>error</strong> (<span class="math inline">\(\epsilon_{i}\)</span>)  terms represent the deviations of the actual winning speed in Year <span class="math inline">\(i\)</span> (<span class="math inline">\(Y_i\)</span>) from the expected speeds under this model (<span class="math inline">\(\beta_{0}+\beta_{1}\textrm{Year}_{i}\)</span>)—the part of a horse’s winning speed that is not explained by a linear trend over time. The variability in these deviations from the regression model is denoted by <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>The parameters in this model (<span class="math inline">\(\beta_{0}\)</span>, <span class="math inline">\(\beta_{1}\)</span>, and <span class="math inline">\(\sigma^2\)</span>) can be estimated through ordinary least squares methods; we will use hats to denote estimates of population parameters based on empirical data. Values for <span class="math inline">\(\hat{\beta}_{0}\)</span> and <span class="math inline">\(\hat{\beta}_{1}\)</span> are selected to minimize the sum of squared residuals, where a <strong>residual</strong>  is simply the observed prediction error—the actual winning speed for a given year minus the winning speed predicted by the model. In the notation of this section,</p>
 <ul>
-<li>Predicted speed: <span class="math inline">\(\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}(\textrm{Year}_{i})\)</span></li>
+<li>Predicted speed: <span class="math inline">\(\hat{Y}_{i}=\hat{\beta}_{0}+\hat{\beta}_{1}\textrm{Year}_{i}\)</span></li>
 <li>Residual (estimated error): <span class="math inline">\(\hat{\epsilon}_{i}=Y_{i} - \hat{Y}_{i}\)</span></li>
 <li>Estimated variance of points around the line: <span class="math inline">\(\hat{\sigma}^2 = \sum \hat{\epsilon}^2_{i} / (n-2)\)</span></li>
 </ul>
 <p>Using Kentucky Derby data, we estimate <span class="math inline">\(\hat{\beta}_{0}=2.05\)</span>, <span class="math inline">\(\hat{\beta}_{1}=0.026\)</span>, and <span class="math inline">\(\hat{\sigma}=0.90\)</span>. Thus, according to our simple linear regression model, winning horses of the Kentucky Derby have an estimated winning speed of 2.05 ft/s in Year 0 (more than 2000 years ago!), and the winning speed improves by an estimated 0.026 ft/s every year. With an <span class="math inline">\(R^2\)</span> of 0.513, the regression model explains a moderate amount (51.3%) of the year-to-year variability in winning speeds, and the trend toward a linear rate of improvement each year is statistically significant at the 0.05 level (t(120) = 11.251, p &lt; .001).</p>
-<pre><code>lm(formula = speed ~ year, data = derby.df)
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 2.053473   4.543754   0.452    0.652    
-year        0.026126   0.002322  11.251   &lt;2e-16 ***
----
-Residual standard error: 0.9032 on 120 degrees of freedom
-Multiple R-squared:  0.5134,    Adjusted R-squared:  0.5093 </code></pre>
-You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896. One way to create more meaningful parameters is through <strong>centering</strong>. In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
-<span class="math display" id="eq:model2">\[\begin{equation}
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ch-MLRreview.html#cb2-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept)  2.05347   4.543754  0.4519 6.521e-01
+## year         0.02613   0.002322 11.2515 1.717e-20</code></pre>
+<pre><code>##  R squared =  0.5134 
+##  Residual standard error =  0.9032</code></pre>
+<p>You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896. One way to create more meaningful parameters is through <strong>centering</strong>.  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:</p>
+<p><span class="math display">\[\begin{equation*}
 \begin{split}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\epsilon_{i}\quad &amp;\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &amp;\textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2) \\
     &amp;\textrm{and} \quad \textrm{Yearnew}=\textrm{Year}-1896.
 \end{split}
-\tag{1.2}
-\end{equation}\]</span>
+\end{equation*}\]</span></p>
 <p>Note that the only thing that changes from Model 1 to Model 2 is the estimated intercept; <span class="math inline">\(\hat{\beta}_{1}\)</span>, <span class="math inline">\(R^2\)</span>, and <span class="math inline">\(\hat{\sigma}\)</span> all remain exactly the same. Now <span class="math inline">\(\hat{\beta}_{0}\)</span> tells us that the estimated winning speed in 1896 is 51.59 ft/s, but estimates of the linear rate of improvement or the variability explained by the model remain the same. As Figure <a href="ch-MLRreview.html#fig:center">1.5</a> shows, centering year has the effect of shifting the y-axis from year 0 to year 1896, but nothing else changes.</p>
-<pre><code>lm(formula = speed ~ yearnew, data = derby.df)
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 51.588393   0.162549  317.37   &lt;2e-16 ***
-yearnew      0.026126   0.002322   11.25   &lt;2e-16 ***
----
-Residual standard error: 0.9032 on 120 degrees of freedom
-Multiple R-squared:  0.5134,    Adjusted R-squared:  0.5093 </code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ch-MLRreview.html#cb5-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept) 51.58839   0.162549  317.37 2.475e-177
+## yearnew      0.02613   0.002322   11.25  1.717e-20</code></pre>
+<pre><code>##  R squared =  0.5134 
+##  Residual standard error =  0.9032</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:center"></span>
-<img src="bookdown-bysh_files/figure-html/center-1.png" alt="Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)" width="60%" />
+<img src="bookdown-bysh_files/figure-html/center-1.png" alt="Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)" width="90%" />
 <p class="caption">
 Figure 1.5: Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)
 </p>
@@ -1032,196 +1058,180 @@ Figure 1.5: Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 
 <li>The lower right plot, Residuals vs. Leverage, can be used to check for influential points. Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:resid2"></span>
-<img src="bookdown-bysh_files/figure-html/resid2-1.png" alt="Residual plots for Model 2" width="60%" />
+<img src="bookdown-bysh_files/figure-html/resid2-1.png" alt="Residual plots for Model 2" width="90%" />
 <p class="caption">
 Figure 1.6: Residual plots for Model 2
 </p>
 </div>
 <p>In this case, the Residuals vs. Fitted plot indicates that a quadratic fit might be better than the linear fit of Model 2; other assumptions look reasonable. Influential points would be denoted by high values of Cook’s Distance; they would fall outside cutoff lines in the northeast or southeast section of the Residuals vs. Leverage plot. Since no cutoff lines are even noticeable, there are no potential influential points of concern.</p>
 <p>We recommend relying on graphical evidence for identifying regression model assumption violations, looking for highly obvious violations of assumptions before trying corrective actions. While some numerical tests have been devised for issues such as normality and influence, most of these tests are not very reliable, highly influenced by sample size and other factors. There is typically no residual plot, however, to evaluate the Independence assumption; evidence for lack of independence comes from knowing about the study design and methods of data collection. In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.</p>
-Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.<br />
-
-<span class="math display" id="eq:model2Q">\[\begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
-\tag{1.3}
-\end{equation}\]</span>
-<p>This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time. In fact, there is evidence that the quadratic model improves upon the linear model (see Figure <a href="ch-MLRreview.html#fig:models2and2q">1.7</a>). <span class="math inline">\(R^2\)</span>, the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3% to 64.1%, and the pattern in the Residuals vs. Fitted plot of Figure <a href="ch-MLRreview.html#fig:resid2">1.6</a> has disappeared in Figure <a href="ch-MLRreview.html#fig:resid2q">1.8</a>, although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability. The significantly negative coefficient for <span class="math inline">\(\beta_{2}\)</span> suggests that the rate of increase is indeed slowing in more recent years.</p>
+<p>Based on residual diagnostics, we should test Model 2Q, in which a quadratic term is added to the linear term in Model 2.</p>
+<p><span class="math display">\[\begin{equation*}
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+\end{equation*}\]</span></p>
+<p>This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time. In fact, there is evidence that the quadratic model improves upon the linear model (see Figure <a href="ch-MLRreview.html#fig:models2and2q">1.7</a>). <span class="math inline">\(R^2\)</span>,  the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3% to 64.1%, and the pattern in the Residuals vs. Fitted plot of Figure <a href="ch-MLRreview.html#fig:resid2">1.6</a> has disappeared in Figure <a href="ch-MLRreview.html#fig:resid2q">1.8</a>, although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability. The significantly negative coefficient for <span class="math inline">\(\beta_{2}\)</span> suggests that the rate of increase is indeed slowing in more recent years.</p>
 <div class="figure" style="text-align: center"><span id="fig:models2and2q"></span>
-<img src="bookdown-bysh_files/figure-html/models2and2q-1.png" alt="Linear vs. quadratic fit" width="60%" />
+<img src="bookdown-bysh_files/figure-html/models2and2q-1.png" alt="Linear (solid) vs. quadratic (dashed) fit" width="90%" />
 <p class="caption">
-Figure 1.7: Linear vs. quadratic fit
+Figure 1.7: Linear (solid) vs. quadratic (dashed) fit
 </p>
 </div>
-<pre><code>lm(formula = speed ~ yearnew + yearnew2, data = derby.df)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  5.059e+01  2.082e-01 243.010  &lt; 2e-16 ***
-yearnew      7.617e-02  7.950e-03   9.581  &lt; 2e-16 ***
-yearnew2    -4.136e-04  6.359e-05  -6.505 1.92e-09 ***
----
-Residual standard error: 0.779 on 119 degrees of freedom
-Multiple R-squared:  0.641, Adjusted R-squared:  0.635 </code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ch-MLRreview.html#cb8-1"></a>derby.df &lt;-<span class="st"> </span><span class="kw">mutate</span>(derby.df, <span class="dt">yearnew2 =</span> yearnew<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="ch-MLRreview.html#cb8-2"></a>model2q &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##               Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept) 50.5874566  2.082e-01 243.010 2.615e-162
+## yearnew      0.0761728  7.950e-03   9.581  1.839e-16
+## yearnew2    -0.0004136  6.359e-05  -6.505  1.921e-09</code></pre>
+<pre><code>##  R squared =  0.641 
+##  Residual standard error =  0.779</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:resid2q"></span>
-<img src="bookdown-bysh_files/figure-html/resid2q-1.png" alt="Residual plots for Model 2Q" width="60%" />
+<img src="bookdown-bysh_files/figure-html/resid2q-1.png" alt="Residual plots for Model 2Q" width="90%" />
 <p class="caption">
 Figure 1.8: Residual plots for Model 2Q
 </p>
 </div>
 </div>
-<div id="simple-linear-regression-with-a-binary-predictor" class="section level3">
-<h3><span class="header-section-number">1.6.2</span> Simple linear regression with a binary predictor</h3>
-We also may want to include track condition as an explanatory variable. We could start by using <code>fast</code> as the lone predictor: Do winning speeds differ for fast and non-fast conditions? <code>fast</code> is considered an <strong>indicator variable</strong>—it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions). Since <code>fast</code> is numeric, we can use simple linear regression techniques to fit Model 3:
-<span class="math display" id="eq:model3">\[\begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
-\tag{1.4}
-\end{equation}\]</span>
+<div id="linear-regression-with-a-binary-predictor" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Linear regression with a binary predictor</h3>
+<p>We also may want to include track condition as an explanatory variable. We could start by using <code>fast</code> as the lone predictor: Do winning speeds differ for fast and non-fast conditions? <code>fast</code> is considered an <strong>indicator variable</strong>—it takes on only the values 0 and 1,  where 1 indicates presence of a certain attribute (like fast racing conditions). Since <code>fast</code> is numeric, we can use simple linear regression techniques to fit Model 3:</p>
+<p><span class="math display" id="eq:model3">\[\begin{equation}
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+\tag{1.2}
+\end{equation}\]</span></p>
 <p>Here, it’s easy to see the meaning of our slope and intercept by writing out separate equations for the two conditions:</p>
 <ul>
 <li>Good or slow conditions (<code>fast</code> = 0)</li>
 </ul>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation*}
 Y_{i} = \beta_{0}+\epsilon_{i}
-\end{equation}\]</span>
+\end{equation*}\]</span></p>
 <ul>
 <li>Fast conditions (<code>fast</code> = 1)</li>
 </ul>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation*}
 Y_{i} = (\beta_{0}+\beta_{1})+\epsilon_{i}
-\end{equation}\]</span>
+\end{equation*}\]</span></p>
 <p><span class="math inline">\(\beta_{0}\)</span> is the expected winning speed under good or slow conditions, while <span class="math inline">\(\beta_{1}\)</span> is the difference between expected winning speeds under fast conditions vs. non-fast conditions. According to our fitted Model 3, the estimated winning speed under non-fast conditions is 52.0 ft/s, while mean winning speeds under fast conditions are estimated to be 1.6 ft/s higher.</p>
-<pre><code>lm(formula = speed ~ fast, data = derby.df)
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  51.9938     0.1826 284.698  &lt; 2e-16 ***
-fast          1.6292     0.2150   7.577 8.17e-12 ***
----
-Residual standard error: 1.065 on 120 degrees of freedom
-Multiple R-squared:  0.3236,    Adjusted R-squared:  0.318 </code></pre>
-<p>You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn’t we just run a two-sample t-test? The answer is: we did! The t-test corresponding to <span class="math inline">\(\beta_{1}\)</span> is equivalent to an independent-samples t-test with under equal variances. Convince yourself that this is true, and that the equal variance assumption is needed.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ch-MLRreview.html#cb11-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>fast, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept)   51.994     0.1826 284.698 1.117e-171
+## fast           1.629     0.2150   7.577  8.166e-12</code></pre>
+<pre><code>##  R squared =  0.3236 
+##  Residual standard error =  1.065</code></pre>
+<p>You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn’t we just run a two-sample t-test? The answer is: we did! The t-test corresponding to <span class="math inline">\(\beta_{1}\)</span> is equivalent to an independent-samples t-test under equal variances. Convince yourself that this is true, and that the equal variance assumption is needed.</p>
 </div>
 <div id="multiple-linear-regression-with-two-predictors" class="section level3">
 <h3><span class="header-section-number">1.6.3</span> Multiple linear regression with two predictors</h3>
 <p>The beauty of the linear regression framework is that we can add additional explanatory variables in order to explain more variability in our response, obtain better and more precise predictions, and control for certain covariates while evaluating the effect of others. For example, we could consider adding <code>yearnew</code> to Model 3, which has the indicator variable <code>fast</code> as its only predictor. In this way, we would estimate the difference between winning speeds under fast and non-fast conditions <em>after accounting for the effect of time</em>. As we observed in Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a>, recent years have tended to have more races under fast conditions, so Model 3 might overstate the effect of fast conditions because winning speeds have also increased over time. A model with terms for both year and track condition will estimate the difference between winning speeds under fast and non-fast conditions <em>for a fixed year</em>; for example, if it had rained in 2016 and turned the track muddy, how much would we have expected the winning speed to decrease?</p>
-Our new model (Model 4) can be written:
-<span class="math display" id="eq:model4">\[\begin{equation}
-Y_{i}=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
-\tag{1.5}
-\end{equation}\]</span>
-<p>and OLS provides the following parameter estimates:</p>
-<pre><code>lm(formula = speed ~ yearnew + fast, data = derby.df)
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 50.917822   0.154602  329.35  &lt; 2e-16 ***
-yearnew      0.022583   0.001919   11.77  &lt; 2e-16 ***
-fast         1.226846   0.150721    8.14 4.39e-13 ***
----
-Residual standard error: 0.7269 on 119 degrees of freedom
-Multiple R-squared:  0.6874,    Adjusted R-squared:  0.6822 </code></pre>
+<p>Our new model (Model 4) can be written:</p>
+<p><span class="math display" id="eq:model4">\[\begin{equation}
+Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+\tag{1.3}
+\end{equation}\]</span></p>
+<p>and ordinary least squares (OLS) provides the following parameter estimates:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ch-MLRreview.html#cb14-1"></a>model4 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept) 50.91782   0.154602  329.35 5.360e-178
+## yearnew      0.02258   0.001919   11.77  1.117e-21
+## fast         1.22685   0.150721    8.14  4.393e-13</code></pre>
+<pre><code>##  R squared =  0.6874 
+##  Residual standard error =  0.7269</code></pre>
 <p>Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time. It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time. Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition. This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition. Based on the <span class="math inline">\(R^2\)</span> value, Model 4 explains 68.7% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.</p>
 </div>
 <div id="multreg-inference" class="section level3">
 <h3><span class="header-section-number">1.6.4</span> Inference in multiple linear regression: normal theory</h3>
-<p>So far we have been using linear regression for descriptive purposes, which is an important task. We are often interested in issues of statistical inference as well—determining if effects are statistically significant, quantifying uncertainty in effect size estimates with confidence intervals, and quantifying uncertainty in model predictions with prediction intervals. Under LINE assumptions, all of these inferential tasks can be completed with the help of the t-distribution and estimated standard errors.</p>
+<p>So far we have been using linear regression for descriptive purposes, which is an important task. We are often interested in issues of statistical inference  as well—determining if effects are statistically significant, quantifying uncertainty in effect size estimates with confidence intervals, and quantifying uncertainty in model predictions with prediction intervals. Under LINE assumptions, all of these inferential tasks can be completed with the help of the t-distribution and estimated standard errors.</p>
 <p>Here are examples of inferential statements based on Model 4:</p>
 <ul>
 <li>We can be 95% confident that average winning speeds under fast conditions are between 0.93 and 1.53 ft/s higher than under non-fast conditions, after accounting for the effect of year.</li>
 <li>Fast conditions lead to significantly faster winning speeds than non-fast conditions (t = 8.14 on 119 df, p &lt; .001), holding year constant.</li>
 <li>Based on our model, we can be 95% confident that the winning speed in 2017 under fast conditions will be between 53.4 and 56.3 ft/s. Note that Always Dreaming’s actual winning speed barely fit within this interval—the 2017 winning speed was a borderline outlier on the slow side.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(model4)</code></pre></div>
-<pre><code>                  2.5 %      97.5 %
-(Intercept) 50.61169473 51.22394836
-yearnew      0.01878324  0.02638227
-fast         0.92840273  1.52528902</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new.data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">yearnew =</span> <span class="dv">2017</span> <span class="op">-</span><span class="st"> </span><span class="dv">1896</span>, <span class="dt">fast =</span> <span class="dv">1</span>) 
-<span class="kw">predict</span>(model4, <span class="dt">new =</span> new.data, <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</code></pre></div>
-<pre><code>       fit     lwr      upr
-1 54.87718 53.4143 56.34006</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ch-MLRreview.html#cb17-1"></a><span class="kw">confint</span>(model4)</span></code></pre></div>
+<pre><code>               2.5 %   97.5 %
+(Intercept) 50.61169 51.22395
+yearnew      0.01878  0.02638
+fast         0.92840  1.52529</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="ch-MLRreview.html#cb19-1"></a>new.data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">yearnew =</span> <span class="dv">2017</span> <span class="op">-</span><span class="st"> </span><span class="dv">1896</span>, <span class="dt">fast =</span> <span class="dv">1</span>) </span>
+<span id="cb19-2"><a href="ch-MLRreview.html#cb19-2"></a><span class="kw">predict</span>(model4, <span class="dt">new =</span> new.data, <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre><code>    fit   lwr   upr
+1 54.88 53.41 56.34</code></pre>
 </div>
 <div id="multreg-boot" class="section level3">
 <h3><span class="header-section-number">1.6.5</span> Inference in multiple linear regression: bootstrapping</h3>
-<p>Remember that you must check LINE assumptions using the same residual plots as in Figure <a href="ch-MLRreview.html#fig:resid2">1.6</a> to ensure that the inferential statements in the previous section are valid. In cases when model assumptions are shaky, one alternative approach to statistical inference is <strong>bootstrapping</strong>; in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility. In bootstrapping, we use only the data we’ve collected and computing power to estimate the uncertainty surrounding our parameter estimates. Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.</p>
+<p>Remember that you must check LINE assumptions using the same residual plots as in Figure <a href="ch-MLRreview.html#fig:resid2">1.6</a> to ensure that the inferential statements in the previous section are valid. In cases when model assumptions are shaky, one alternative approach to statistical inference is <strong>bootstrapping</strong>;  in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility. In bootstrapping, we use only the data we’ve collected and computing power to estimate the uncertainty surrounding our parameter estimates. Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.</p>
 <p>If we wish to use bootstrapping to obtain confidence intervals for our coefficients in Model 4, we could follow these steps:</p>
 <ul>
-<li>take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all. This is <strong>case resampling</strong>, so that all information from a given year (winning speed, track condition, number of starters) remains together.</li>
+<li>take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all. This is <strong>case resampling</strong>,  so that all information from a given year (winning speed, track condition, number of starters) remains together.</li>
 <li>fit Model 4 to the bootstrap sample, saving <span class="math inline">\(\hat{\beta}_0\)</span>, <span class="math inline">\(\hat{\beta}_1\)</span>, and <span class="math inline">\(\hat{\beta}_2\)</span>.</li>
 <li>repeat the two steps above a large number of times (say 1000)</li>
-<li>the 1000 bootstrap estimates for each parameter can be plotted to show the <strong>bootstrap distribution</strong> (see Figure <a href="ch-MLRreview.html#fig:boot4">1.9</a>)</li>
-<li>a 95% confidence interval for each parameter can be found by taking the middle 95% of each bootstrap distribution—i.e., by picking off the 2.5 and 97.5 percentiles. This is called the <strong>percentile method</strong>.</li>
+<li>the 1000 bootstrap estimates for each parameter can be plotted to show the <strong>bootstrap distribution</strong>  (see Figure <a href="ch-MLRreview.html#fig:boot4">1.9</a>)</li>
+<li>a 95% confidence interval for each parameter can be found by taking the middle 95% of each bootstrap distribution—i.e., by picking off the 2.5 and 97.5 percentiles. This is called the <strong>percentile method</strong>. </li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># updated code from tobiasgerstenberg on github</span>
-<span class="kw">library</span>(rsample)
-<span class="kw">library</span>(purrr)
-<span class="kw">library</span>(broom)
-bootreg =<span class="st"> </span>derby.df <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">bootstraps</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pull</span>(splits) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map_dfr</span>(<span class="op">~</span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast, <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">tidy</span>())
-summarize =<span class="st"> </span>dplyr<span class="op">::</span>summarize
-bootreg <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(term) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">low=</span><span class="kw">quantile</span>(estimate, .<span class="dv">025</span>),
-            <span class="dt">high=</span><span class="kw">quantile</span>(estimate, .<span class="dv">975</span>))</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="ch-MLRreview.html#cb21-1"></a><span class="co"># updated code from tobiasgerstenberg on github</span></span>
+<span id="cb21-2"><a href="ch-MLRreview.html#cb21-2"></a><span class="kw">set.seed</span>(<span class="dv">413</span>)</span>
+<span id="cb21-3"><a href="ch-MLRreview.html#cb21-3"></a>bootreg &lt;-<span class="st"> </span>derby.df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-4"><a href="ch-MLRreview.html#cb21-4"></a><span class="st">  </span><span class="kw">bootstraps</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span></span>
+<span id="cb21-5"><a href="ch-MLRreview.html#cb21-5"></a><span class="st">  </span><span class="kw">pull</span>(splits) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-6"><a href="ch-MLRreview.html#cb21-6"></a><span class="st">  </span><span class="kw">map_dfr</span>(<span class="op">~</span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast, <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-7"><a href="ch-MLRreview.html#cb21-7"></a><span class="st">            </span><span class="kw">tidy</span>())</span>
+<span id="cb21-8"><a href="ch-MLRreview.html#cb21-8"></a>bootreg <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-9"><a href="ch-MLRreview.html#cb21-9"></a><span class="st">  </span><span class="kw">group_by</span>(term) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-10"><a href="ch-MLRreview.html#cb21-10"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">low=</span><span class="kw">quantile</span>(estimate, <span class="fl">.025</span>),</span>
+<span id="cb21-11"><a href="ch-MLRreview.html#cb21-11"></a>            <span class="dt">high=</span><span class="kw">quantile</span>(estimate, <span class="fl">.975</span>))</span></code></pre></div>
 <pre><code># A tibble: 3 x 3
   term            low    high
   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
 1 (Intercept) 50.6    51.3   
-2 fast         0.929   1.56  
-3 yearnew      0.0183  0.0268</code></pre>
+2 fast         0.909   1.57  
+3 yearnew      0.0182  0.0265</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:boot4"></span>
-<img src="bookdown-bysh_files/figure-html/boot4-1.png" alt="Bootstrapped distributions for Model 4 coefficients" width="60%" />
+<img src="bookdown-bysh_files/figure-html/boot4-1.png" alt="Bootstrapped distributions for Model 4 coefficients" width="90%" />
 <p class="caption">
 Figure 1.9: Bootstrapped distributions for Model 4 coefficients
 </p>
 </div>
-<p>In this case, we see that 95% bootstrap confidence intervals for <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span> are very similar to the normal-theory confidence intervals we found earlier. For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.89 to 1.55 ft/s.</p>
-<p>There are many variations on this bootstrap procedure. For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution. In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated (<span class="citation">Hesterberg (<a href="#ref-Hesterberg2015">2015</a>)</span>; <span class="citation">Efron and Tibshirani (<a href="#ref-Efron1993">1993</a>)</span>; <span class="citation">Davison and Hinkley (<a href="#ref-Davison1997">1997</a>)</span>). We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.</p>
+<p>In this case, we see that 95% bootstrap confidence intervals for <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span> are very similar to the normal-theory confidence intervals we found earlier. For example, the normal-theory confidence interval for the effect of fast tracks is 0.93 to 1.53 ft/s, while the analogous bootstrap confidence interval is 0.91 to 1.57 ft/s.</p>
+<p>There are many variations on this bootstrap procedure. For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution. In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated methods (<span class="citation">Hesterberg (<a href="#ref-Hesterberg2015" role="doc-biblioref">2015</a>)</span>; <span class="citation">Efron and Tibshirani (<a href="#ref-Efron1993" role="doc-biblioref">1993</a>)</span>; <span class="citation">Davison and Hinkley (<a href="#ref-Davison1997" role="doc-biblioref">1997</a>)</span>). We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.</p>
 </div>
 <div id="multiple-linear-regression-with-an-interaction-term" class="section level3">
 <h3><span class="header-section-number">1.6.6</span> Multiple linear regression with an interaction term</h3>
-<p>Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates. One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions. To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider <strong>interaction terms</strong>. Amazingly, if we create a new variable by taking the product of <code>yearnew</code> and <code>fast</code> (i.e., the <strong>interaction</strong> between <code>yearnew</code> and <code>fast</code>), adding that variable into our model will have the desired effect.</p>
-Thus, consider Model 5:
-<span class="math display" id="eq:model5">\[\begin{equation}
+<p>Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates. One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions. To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider <strong>interaction terms</strong>.  Amazingly, if we create a new variable by taking the product of <code>yearnew</code> and <code>fast</code> (i.e., the <strong>interaction</strong> between <code>yearnew</code> and <code>fast</code>), adding that variable into our model will have the desired effect.</p>
+<p>Thus, consider Model 5:</p>
+<p><span class="math display">\[\begin{equation*}
 \begin{split}
- Y_{i}&amp;= \beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Fast}_{i}) \notag \\
-      &amp;{}+\beta_{3}(\textrm{Yearnew}\times\textrm{Fast}_{i})+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+Y_{i}&amp;= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
+      &amp;{}+\beta_{3}\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
-\tag{1.6}
-\end{equation}\]</span>
+\end{equation*}\]</span></p>
 <p>where OLS provides the following parameter estimates:</p>
-<pre><code>lm(formula = speed ~ yearnew + fast + yearnew:fast, data = derby.df)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  50.528629   0.205072 246.394  &lt; 2e-16 ***
-yearnew       0.030751   0.003471   8.859 9.84e-15 ***
-fast          1.833523   0.262175   6.994 1.73e-10 ***
-yearnew:fast -0.011490   0.004117  -2.791  0.00613 ** 
----
-Residual standard error: 0.7071 on 118 degrees of freedom
-Multiple R-squared:  0.7068,    Adjusted R-squared:  0.6993 </code></pre>
-According to OLS estimates, estimated winning speeds can be found by:
-<span class="math display" id="eq:model5est">\[\begin{equation}
- \hat{Y}_{i}=50.53+0.031(\textrm{Yearnew}_{i})+1.83(\textrm{Fast}_{i})-0.011(\textrm{Yearnew}\times\textrm{Fast}_{i}).
-\tag{1.7}
-\end{equation}\]</span>
-Interpretations of model coefficients are most easily seen by writing out separate equations for fast and non-fast track conditions:
-<span class="math display">\[\begin{align*}
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="ch-MLRreview.html#cb23-1"></a>model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>fast, </span>
+<span id="cb23-2"><a href="ch-MLRreview.html#cb23-2"></a>             <span class="dt">data=</span>derby.df)</span></code></pre></div>
+<pre><code>##              Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept)  50.52863   0.205072 246.394 6.989e-162
+## yearnew       0.03075   0.003471   8.859  9.839e-15
+## fast          1.83352   0.262175   6.994  1.730e-10
+## yearnew:fast -0.01149   0.004117  -2.791  6.128e-03</code></pre>
+<pre><code>##  R squared =  0.7068 
+##  Residual standard error =  0.7071</code></pre>
+<p>According to our model, estimated winning speeds can be found by:</p>
+<p><span class="math display" id="eq:model5est">\[\begin{equation}
+ \hat{Y}_{i}=50.53+0.031\textrm{Yearnew}_{i}+1.83\textrm{Fast}_{i}-0.011\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}.
+\tag{1.4}
+\end{equation}\]</span></p>
+<p>Interpretations of model coefficients are most easily seen by writing out separate equations for fast and non-fast track conditions:</p>
+<p><span class="math display">\[\begin{align*}
  \textrm{Fast}=0: &amp; \\
- \hat{Y}_{i} &amp;= 50.53+0.031(\textrm{Yearnew}_{i}) \\
+ \hat{Y}_{i} &amp;= 50.53+0.031\textrm{Yearnew}_{i} \\
  \textrm{Fast}=1: &amp; \\
- \hat{Y}_{i} &amp;= (50.53+1.83)+(0.031-0.011)(\textrm{Yearnew}_{i})
- \end{align*}\]</span>
+ \hat{Y}_{i} &amp;= (50.53+1.83)+(0.031-0.011)\textrm{Yearnew}_{i}
+ \end{align*}\]</span></p>
 <p>leading to the following interpretations for estimated model coefficients:</p>
 <ul>
 <li><span class="math inline">\(\hat{\beta}_{0} = 50.53\)</span>. The expected winning speed in 1896 under non-fast conditions was 50.53 ft/s.</li>
 <li><span class="math inline">\(\hat{\beta}_{1} = 0.031\)</span>. The expected yearly increase in winning speeds under non-fast conditions is 0.031 ft/s.</li>
 <li><span class="math inline">\(\hat{\beta}_{2} = 1.83\)</span>. The winning speed in 1896 was expected to be 1.83 ft/s faster under fast conditions compared to non-fast conditions.</li>
-<li><span class="math inline">\(\hat{\beta}_{3} = -0.011\)</span>. The expected yearly increase in winning speeds under fast conditions is 0.020 ft/s, which is 0.011 ft/s less than the expected annual increase under non-fast conditions.</li>
+<li><span class="math inline">\(\hat{\beta}_{3} = -0.011\)</span>. The expected yearly increase in winning speeds under fast conditions is 0.020 ft/s, compared to 0.031 ft/s under non-fast conditions, a difference of 0.011 ft/s.</li>
 </ul>
 <p>In fact, using interaction allows us to model the relationships we noticed in Figure <a href="ch-MLRreview.html#fig:codeds">1.4</a>, where both the intercept and slope describing the relationships between <code>speed</code> and <code>year</code> differ depending on whether track conditions were fast or not. Note that we interpret the coefficient for the interaction term by comparing slopes under fast and non-fast conditions; this produces a much more understandable interpretation for a reader than attempting to interpret the -0.011 directly.</p>
 </div>
@@ -1240,51 +1250,48 @@ Interpretations of model coefficients are most easily seen by writing out separa
 <p>Although the process of reporting and writing up research results often demands the selection of a sensible final model, it’s important to realize that (a) statisticians typically will examine and consider an entire taxonomy of models when formulating conclusions, and (b) different statisticians sometimes select different models as their “final model” for the same set of data. Choice of a “final model” depends on many factors, such as primary research questions, purpose of modeling, tradeoff between parsimony and quality of fitted model, underlying assumptions, etc. Modeling decisions should never be automated or made completely on the basis of statistical tests; subject area knowledge should always play a role in the modeling process. You should be able to defend any final model you select, but you should not feel pressured to find the one and only “correct model”, although most good models will lead to similar conclusions.</p>
 <p>Several tests and measures of model performance can be used when comparing different models for model building:</p>
 <ul>
-<li><span class="math inline">\(R^2\)</span> we have seen; it measures the variability in the response variable explained by the model. One problem is that <span class="math inline">\(R^2\)</span> always increases with extra predictors, even if the predictors add very little information.</li>
-<li>adjusted <span class="math inline">\(R^2\)</span>. Adds a penalty for model complexity to <span class="math inline">\(R^2\)</span> so that any increase in performance must outweigh the cost of additional complexity. We should ideally favor any model with higher adjusted <span class="math inline">\(R^2\)</span>, regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.</li>
-<li>AIC (Akaike Information Criterion). Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size. The BIC (Bayesian Information Criterion) is similar to the AIC, but with a greater penalty for additional model terms.</li>
-<li>extra sum of squares F test. This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on <strong>nested models</strong>, where one model is a reduced version of the other. For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level). Our null hypothesis is then <span class="math inline">\(\beta_{3}=\beta_{4}=0\)</span>. We have statistically significant evidence (F = 57.2 on 2 and 116 df, p &lt; .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.</li>
+<li><span class="math inline">\(R^2\)</span>  we have seen; it measures the variability in the response variable explained by the model. One problem is that <span class="math inline">\(R^2\)</span> always increases with extra predictors, even if the predictors add very little information.</li>
+<li>adjusted <span class="math inline">\(R^2\)</span>.  Adds a penalty for model complexity to <span class="math inline">\(R^2\)</span> so that any increase in performance must outweigh the cost of additional complexity. We should ideally favor any model with higher adjusted <span class="math inline">\(R^2\)</span>, regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.</li>
+<li>AIC (Akaike Information Criterion).  Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size. The BIC (Bayesian Information Criterion)  is similar to the AIC, but with a greater penalty for additional model terms.</li>
+<li>extra sum of squares F test. This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on <strong>nested models</strong>,  where one model is a reduced version of the other. For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level). Our null hypothesis is then <span class="math inline">\(\beta_{3}=\beta_{4}=0\)</span>. We have statistically significant evidence (F = 57.2 on 2 and 116 df, p &lt; .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.</li>
 </ul>
-One potential final model for predicting winning speeds of Kentucky Derby races is:
-<span class="math display" id="eq:model0">\[\begin{equation}
+<p>One potential final model for predicting winning speeds of Kentucky Derby races is:</p>
+<p><span class="math display" id="eq:model0">\[\begin{equation}
 \begin{split}
- Y_{i}&amp;=\beta_{0}+\beta_{1}(\textrm{Yearnew}_{i})+\beta_{2}(\textrm{Yearnew}^2_{i})+\beta_{3}(\textrm{Fast}_{i})\\
-      &amp;{}+\beta_{4}(\textrm{Good}_{i})+\beta_{5}(\textrm{Starters}_{i})+\epsilon_{i}\quad 
-      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\beta_{3}\textrm{Fast}_{i}\\
+      &amp;{}+\beta_{4}\textrm{Good}_{i}+\beta_{5}\textrm{Starters}_{i}+\epsilon_{i}\quad 
+      \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
-\tag{1.8}
-\end{equation}\]</span>
+\tag{1.5}
+\end{equation}\]</span></p>
 <p>and OLS provides the following parameter estimates:</p>
-<pre><code>lm(formula = speed ~ yearnew + yearnew2 + fast + good + starters, 
-    data = derby.df)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  5.002e+01  1.946e-01 256.980  &lt; 2e-16 ***
-yearnew      7.003e-02  6.130e-03  11.424  &lt; 2e-16 ***
-yearnew2    -3.697e-04  4.598e-05  -8.041 8.44e-13 ***
-fast         1.393e+00  1.305e-01  10.670  &lt; 2e-16 ***
-good         9.157e-01  2.077e-01   4.409 2.33e-05 ***
-starters    -2.528e-02  1.360e-02  -1.859   0.0656 .  
----
-Residual standard error: 0.5483 on 116 degrees of freedom
-Multiple R-squared:  0.8267,    Adjusted R-squared:  0.8192 </code></pre>
-<pre><code>Analysis of Variance Table
-
-Model 1: speed ~ yearnew + yearnew2 + starters
-Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
-  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
-1    118 69.257                                  
-2    116 34.870  2    34.386 57.196 &lt; 2.2e-16 ***</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ch-MLRreview.html#cb26-1"></a>model0 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>good <span class="op">+</span></span>
+<span id="cb26-2"><a href="ch-MLRreview.html#cb26-2"></a><span class="st">               </span>starters, <span class="dt">data =</span> derby.df)</span></code></pre></div>
+<pre><code>##               Estimate Std. Error t value   Pr(&gt;|t|)
+## (Intercept) 50.0203151  1.946e-01 256.980 1.035e-161
+## yearnew      0.0700341  6.130e-03  11.424  1.038e-20
+## yearnew2    -0.0003697  4.598e-05  -8.041  8.435e-13
+## fast         1.3926656  1.305e-01  10.670  6.199e-19
+## good         0.9156982  2.077e-01   4.409  2.331e-05
+## starters    -0.0252836  1.360e-02  -1.859  6.559e-02</code></pre>
+<pre><code>##  R squared =  0.8267 
+##  Residual standard error =  0.5483</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="ch-MLRreview.html#cb29-1"></a><span class="co"># Compare models with and without terms for track condition</span></span>
+<span id="cb29-2"><a href="ch-MLRreview.html#cb29-2"></a>model0_reduced &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-3"><a href="ch-MLRreview.html#cb29-3"></a><span class="st">                       </span>starters, <span class="dt">data =</span> derby.df)</span>
+<span id="cb29-4"><a href="ch-MLRreview.html#cb29-4"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model0_reduced, model0, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<pre><code>  ResidDF   RSS   SS Df      pval
+1     118 69.26   NA NA        NA
+2     116 34.87 57.2  2 5.194e-18</code></pre>
 <p>This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses). The model explains 82.7% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions. We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.</p>
 </div>
 </div>
-<div id="preview" class="section level2">
-<h2><span class="header-section-number">1.7</span> Preview</h2>
+<div id="preview-of-remaining-chapters" class="section level2">
+<h2><span class="header-section-number">1.7</span> Preview of remaining chapters</h2>
 <p>Having reviewed key ideas from multiple linear regression, you are now ready to extend those ideas, especially to handle non-normal responses and lack of independence. This section provides a preview of the type of problems you will encounter in the book. For each journal article cited, we provide an abstract in the authors’ words, a description of the type of response and, when applicable, the structure of the data. Each of these examples appears later as an exercise, where you can play with the actual data or evaluate the analyses detailed in the articles.</p>
 <div id="soccer" class="section level3">
 <h3><span class="header-section-number">1.7.1</span> Soccer</h3>
-<p><span class="citation">Roskes et al. (<a href="#ref-Roskes2011">2011</a>)</span> . The right side? Under time pressure, approach motivation leads to right-oriented bias. <em>Psychological Science</em> [Online] <strong>22(11)</strong>:1403-7. DOI: 10.1177/0956797611418677, October 2011.</p>
+<p><span class="citation">Roskes et al. (<a href="#ref-Roskes2011" role="doc-biblioref">2011</a>)</span> . The right side? Under time pressure, approach motivation leads to right-oriented bias. <em>Psychological Science</em> [Online] <strong>22(11)</strong>:1403-7. DOI: 10.1177/0956797611418677, October 2011.</p>
 <blockquote>
 <p><strong>Abstract:</strong> Approach motivation, a focus on achieving positive outcomes, is related to relative left-hemispheric brain activation, which translates to a variety of right-oriented behavioral biases. <span class="math inline">\([\ldots]\)</span> In our analysis of all Federation Internationale de Football Association (FIFA) World Cup penalty shoot-outs, we found that goalkeepers were two times more likely to dive to the right than to the left when their team was behind, a situation that we conjecture induces approach motivation. Because penalty takers shot toward the two sides of the goal equally often, the goalkeepers’ right-oriented bias was dysfunctional, allowing more goals to be scored.</p>
 </blockquote>
@@ -1292,15 +1299,15 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 </div>
 <div id="elephant-mating" class="section level3">
 <h3><span class="header-section-number">1.7.2</span> Elephant Mating</h3>
-<p><span class="citation">Poole (<a href="#ref-Poole1989">1989</a>)</span> . Mate guarding, reproductive success and female choice in African elephants. <em>Animal Behavior</em> <strong>37</strong>:842-49.</p>
+<p><span class="citation">Poole (<a href="#ref-Poole1989" role="doc-biblioref">1989</a>)</span> . Mate guarding, reproductive success and female choice in African elephants. <em>Animal Behavior</em> <strong>37</strong>:842-49.</p>
 <blockquote>
-<p><strong>Abstract:</strong> Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, Loxodonta africana. Males were not able to compete successfully for access to oestrous female until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants…</p>
+<p><strong>Abstract:</strong> Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, <em>Loxodonta africana</em>. Males were not able to compete successfully for access to oestrous females until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants…</p>
 </blockquote>
 <p>Poole and her colleagues recorded, for each male elephant, his age (in years) and the number of matings for a given year. The researchers were interested in how age affects the males’ mating patterns. Specifically, questions concern whether there is a steady increase in mating success as an elephant ages or if there is an optimal age after which the number of matings decline. Because the responses of interest are counts (number of matings for each elephant for a given year), we will consider a Poisson regression (see Chapter <a href="ch-poissonreg.html#ch-poissonreg">4</a>). The general form for Poisson responses is the number of events for a specified time, volume, or space.</p>
 </div>
 <div id="parenting-and-gang-activity" class="section level3">
 <h3><span class="header-section-number">1.7.3</span> Parenting and Gang Activity</h3>
-<p><span class="citation">Walker-Barnes and Mason (<a href="#ref-Walker-Barnes2001">2001</a>)</span> . Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective. <em>Child Development</em> <strong>72(6)</strong>:1814-31.</p>
+<p><span class="citation">Walker-Barnes and Mason (<a href="#ref-Walker-Barnes2001" role="doc-biblioref">2001</a>)</span> . Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective. <em>Child Development</em> <strong>72(6)</strong>:1814-31.</p>
 <blockquote>
 <p><strong>Abstract:</strong> This study examined the relative influence of peer and parenting behavior on changes in adolescent gang involvement and gang-related delinquency. An ethnically diverse sample of 300 ninth-grade students was recruited and assessed on eight occasions during the school year. Analyses were conducted using hierarchical linear modeling. Results indicated that, in general, adolescents decreased their level of gang involvement over the course of the school year, whereas the average level of gang delinquency remained constant over time. As predicted, adolescent gang involvement and gang-related delinquency were most strongly predicted by peer gang involvement and peer gang delinquency, respectively. Nevertheless, parenting behavior continued to significantly predict change in both gang involvement and gang delinquency, even after controlling for peer behavior. A significant interaction between parenting and ethnic and cultural heritage found the effect of parenting to be particularly salient for Black students, for whom higher levels of behavioral control and lower levels of lax parental control were related to better behavioral outcomes over time, whereas higher levels of psychological control predicted worse behavioral outcomes.</p>
 </blockquote>
@@ -1308,11 +1315,11 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 </div>
 <div id="crime" class="section level3">
 <h3><span class="header-section-number">1.7.4</span> Crime</h3>
-<p><span class="citation">Gelman, Fagan, and Kiss (<a href="#ref-Gelman2007">2007</a>)</span> . An analysis of the NYPD’s stop-and-frisk policy in the context of claims of racial bias. <em>Journal of the American Statistical Association</em> <strong>102(479)</strong>:813-823.</p>
+<p><span class="citation">Gelman, Fagan, and Kiss (<a href="#ref-Gelman2007" role="doc-biblioref">2007</a>)</span> . An analysis of the NYPD’s stop-and-frisk policy in the context of claims of racial bias. <em>Journal of the American Statistical Association</em> <strong>102(479)</strong>:813-823.</p>
 <blockquote>
 <p><strong>Abstract:</strong> Recent studies by police departments and researchers confirm that police stop racial and ethnic minority citizens more often than whites, relative to their proportions in the population. However, it has been argued stop rates more accurately reflect rates of crimes committed by each ethnic group, or that stop rates reflect elevated rates in specific social areas such as neighborhoods or precincts. Most of the research on stop rates and police-citizen interactions has focused on traffic stops, and analyses of pedestrian stops are rare. In this paper, we analyze data from 175,000 pedestrian stops by the New York Police Department over a fifteen-month period. We disaggregate stops by police precinct, and compare stop rates by racial and ethnic group controlling for previous race-specific arrest rates. We use hierarchical multilevel models to adjust for precinct-level variability, thus directly addressing the question of geographic heterogeneity that arises in the analysis of pedestrian stops. We find that persons of African and Hispanic descent were stopped more frequently than whites, even after controlling for precinct variability and race-specific estimates of crime participation.</p>
 </blockquote>
-<p>This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, generalized linear multilevel modeling, as addressed in Chapter <a href="ch-GLMM.html#ch-GLMM">11</a>.</p>
+<p>This application involves both non-normal data (number of stops by ethnic group can be modeled as a Poisson response) and multilevel data (number of stops within precincts will likely be correlated due to characteristics of the precinct population). This type of analysis will be the last type you encounter, multilevel generalized linear modeling, as addressed in Chapter <a href="ch-GLMM.html#ch-GLMM">11</a>.</p>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -1320,19 +1327,18 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 <div id="conceptual-exercises" class="section level3">
 <h3><span class="header-section-number">1.8.1</span> Conceptual Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Applications that do not violate the OLS assumptions for inference</strong>. Identify the response and explanatory variable(s) for each problem. Write the OLS assumptions for inference in the context of each study.</p>
+<li><p><strong>Applications that do not violate assumptions for inference in LLSR</strong>. Identify the response and explanatory variable(s) for each problem. Write the LLSR assumptions for inference in the context of each study.</p>
 <ol style="list-style-type: lower-alpha">
 <li><strong>Cricket Chirps.</strong> Researchers record the number of cricket chirps per minute and temperature during that time to investigate whether the number of chirps varies with the temperature.</li>
 <li><strong>Women’s Heights.</strong> A random selection of women aged 20-24 years are selected and their shoe size is used to predict their height<br />
 <br></li>
 </ol></li>
-<li><p><strong>Applications that do violate the OLS assumptions for inference</strong>. All of the examples in this section have at least one violation of the OLS assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which OLS assumption(s) are violated.</p>
+<li><p><strong>Applications that do violate assumptions for inference in LLSR</strong>. All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.</p>
 <ol style="list-style-type: lower-alpha">
 <li><strong>Low Birthweights.</strong> Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.</li>
 <li><strong>Clinical Trial I.</strong> A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.</li>
-<li><strong>Canoes and zip codes.</strong> For each of over 27,000 overnight permits for the Boundary Water Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. This data is used to create a model for the number of trips made per zip code.</li>
-<li><strong>Clinical Trial II.</strong> A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.</li>
-<li><strong>Elephant mating.</strong> Researchers are interested in how elephant age affects mating patterns among males. In particular, do older elephants have greater mating success, and is there an optimal age for mating among males? Data collected includes, for each elephant, age and number of matings in a given year.<br />
+<li><strong>Canoes and zip codes.</strong> For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. This data is used to create a model for the number of trips made per zip code.</li>
+<li><strong>Clinical Trial II.</strong> A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.
 <br></li>
 </ol></li>
 <li><p><strong>Kentucky Derby.</strong> The next set of questions is related to the Kentucky Derby case study from this chapter.</p>
@@ -1342,16 +1348,16 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 <li>How might you incorporate a fourth variable, say number of starters, into Figure <a href="ch-MLRreview.html#fig:codeds">1.4</a>?</li>
 <li>Explain why <span class="math inline">\(\epsilon_i\)</span> in Equation <a href="ch-MLRreview.html#eq:model1">(1.1)</a> measures the vertical distance from a data point to the regression line.</li>
 <li>In the first t-test in Section <a href="ch-MLRreview.html#SLRcontinuous">1.6.1</a> (t = 11.251 for <span class="math inline">\(H_0:\beta_1 = 0\)</span>), notice that <span class="math inline">\(t = \frac{\hat{\beta_1}}{SE(\beta_1)} = \frac{.026}{.0023} = 11.251\)</span>. Why is the t-test based on the ratio of the estimated slope to its standard error?</li>
-<li>In Equation <a href="ch-MLRreview.html#eq:model3">(1.4)</a>, explain why the t-test corresponding to <span class="math inline">\(\beta_{1}\)</span> is equivalent to an independent-samples t-test under equal variances. Why is the equal variance assumption needed?</li>
-<li>When interpreting <span class="math inline">\(\beta_2\)</span> in Equation <a href="ch-MLRreview.html#eq:model4">(1.5)</a>, why do we have to be careful to say <em>for a fixed year</em> or <em>after adjusting for year</em>? Is it wrong to leave a qualifier like that off?</li>
+<li>In Equation <a href="ch-MLRreview.html#eq:model3">(1.2)</a>, explain why the t-test corresponding to <span class="math inline">\(\beta_{1}\)</span> is equivalent to an independent-samples t-test under equal variances. Why is the equal variance assumption needed?</li>
+<li>When interpreting <span class="math inline">\(\beta_2\)</span> in Equation <a href="ch-MLRreview.html#eq:model4">(1.3)</a>, why do we have to be careful to say <em>for a fixed year</em> or <em>after adjusting for year</em>? Is it wrong to leave a qualifier like that off?</li>
 <li>Interpret in context a 95% confidence interval for <span class="math inline">\(\beta_0\)</span> in Model 4.</li>
 <li>State (in context) the result of a t-test for <span class="math inline">\(\beta_1\)</span> in Model 4.</li>
-<li>Why is there no <span class="math inline">\(\epsilon_i\)</span> term in Equation <a href="ch-MLRreview.html#eq:model5est">(1.7)</a>?</li>
+<li>Why is there no <span class="math inline">\(\epsilon_i\)</span> term in Equation <a href="ch-MLRreview.html#eq:model5est">(1.4)</a>?</li>
 <li>If you considered the interaction between two continuous variables (like <code>yearnew</code> and <code>starters</code>), how would you provide an interpretation for that coefficient in context?</li>
-<li>Interpret (in context) the OLS estimates for <span class="math inline">\(\beta_3\)</span> and <span class="math inline">\(\beta_5\)</span> in Equation <a href="ch-MLRreview.html#eq:model0">(1.8)</a>.<br />
+<li>Interpret (in context) the OLS estimates for <span class="math inline">\(\beta_3\)</span> and <span class="math inline">\(\beta_5\)</span> in Equation <a href="ch-MLRreview.html#eq:model0">(1.5)</a>.<br />
 <br></li>
 </ol></li>
-<li><p><strong>Moneyball.</strong> In a 2011 <a href="http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/">article</a> in <em>The Sport Journal</em>, Farrar and Bruggink attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis’s 2003 <em>Moneyball</em> book <span class="citation">(Lewis <a href="#ref-Lewis2003">2003</a>)</span>. They contend that players’ on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model. <span class="citation">(Farrar and Bruggink <a href="#ref-Farrar2011">2011</a>)</span></p>
+<li><p><strong>Moneyball.</strong> In a 2011 article in <em>The Sport Journal</em>, Farrar and Bruggink <span class="citation">(<a href="#ref-Farrar2011" role="doc-biblioref">2011</a>)</span> attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis’s 2003 <em>Moneyball</em> book <span class="citation">(Lewis <a href="#ref-Lewis2003" role="doc-biblioref">2003</a>)</span>. They contend that players’ on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Discuss potential concerns (if any) with the LINE assumptions for linear regression in each model.</li>
 <li>In Table 3, the authors contend that Model 1 is better than Model 3. Could you argue that Model 3 is actually better? How could you run a formal hypothesis test comparing Model 1 to Model 3?</li>
@@ -1365,7 +1371,7 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 <div id="guided-exercises" class="section level3">
 <h3><span class="header-section-number">1.8.2</span> Guided Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><strong>Gender discrimination in bank salaries</strong>. In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees. One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975. The following variables, which can be found in <code>banksalary.csv</code>, were collected for each worker <span class="citation">(Ramsey and Schafer <a href="#ref-Ramsey2002">2002</a>)</span>:
+<li><strong>Gender discrimination in bank salaries</strong>. In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees. One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975. The following variables, which can be found in <code>banksalary.csv</code>, were collected for each worker <span class="citation">(Ramsey and Schafer <a href="#ref-Ramsey2002" role="doc-biblioref">2002</a>)</span>:
 <ul>
 <li><code>bsal</code> = beginning salary (annual salary at time of hire)</li>
 <li><code>sal77</code> = annual salary in 1977</li>
@@ -1384,9 +1390,8 @@ Creating an indicator variable based on <code>sex</code> could be helpful.<br />
 <li>How would you expect age, experience, and education to be related to starting salary? Generate appropriate exploratory plots; are the relationships as you expected? What implications does this have for modeling?</li>
 <li>Why might it be important to control for seniority (number of years with the bank) if we are only concerned with the salary when the worker started?</li>
 <li>By referring to exploratory plots and summary statistics, are any explanatory variables (including sex) closely related to each other? What implications does this have for modeling?</li>
-<li>Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1). Interpret the intercept and slope of this model; also interpret the R-squared value. Is there a significant relationship between experience and starting salary?<br />
-</li>
-<li>Does Model 1 meet all linear regression assumptions? List each assumption and how you decided if it was met or not.</li>
+<li>Fit a simple linear regression model with starting salary as the response and experience as the sole explanatory variable (Model 1). Interpret the intercept and slope of this model; also interpret the R-squared value. Is there a significant relationship between experience and starting salary?</li>
+<li>Does Model 1 meet all linear least squares regression assumptions? List each assumption and how you decided if it was met or not.</li>
 <li>Is a model with all 4 confounding variables (Model 2, with <code>senior</code>, <code>educ</code>, <code>exper</code>, and <code>age</code>) better than a model with just experience (Model 1)? Justify with an appropriate significance test in addition to summary statistics of model performance.</li>
 <li>You should have noticed that the term for age was not significant in Model 2. What does this imply about age and about future modeling steps?</li>
 <li>Generate an appropriate coded scatterplot to examine a potential age-by-experience interaction. How would you describe the nature of this interaction?</li>
@@ -1397,7 +1402,7 @@ Creating an indicator variable based on <code>sex</code> could be helpful.<br />
 <li>Build your own final model for this study and justify the selection of your final model. You might consider interactions with gender, since those terms could show that discrimination is stronger among certain workers. Based on your final model, do you find evidence of gender discrimination at Harris Trust?<br />
 <br></li>
 </ol></li>
-<li><strong>Sitting and MTL Thickness.</strong> <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018">2018</a>)</span> researched relations between time spent sitting (sedentary behavior) and the thickness of participant’s medial temporal lobe (MTL) in their paper, <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0195549">Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults</a>. MTL volume is negatively associated with Alzheimer’s disease and memory impairment. Their data on 35 adults can be found in <code>sitting.csv</code>. Key variables include:
+<li><strong>Sitting and MTL Thickness.</strong> <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018" role="doc-biblioref">2018</a>)</span> researched relations between time spent sitting (sedentary behavior) and the thickness of participant’s medial temporal lobe (MTL) in a 2018 paper entitled “Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults”. MTL volume is negatively associated with Alzheimer’s disease and memory impairment. Their data on 35 adults can be found in <code>sitting.csv</code>. Key variables include:
 <ul>
 <ul>
 <li><code>MTL</code> = Medial temporal lobe thickness in mm</li>
@@ -1405,21 +1410,21 @@ Creating an indicator variable based on <code>sex</code> could be helpful.<br />
 <li><code>MET</code> = Reported metabolic equivalent unit minutes per week</li>
 <li><code>age</code> = Age in years</li>
 <li><code>sex</code> = Sex (<code>M</code> = Male, <code>F</code> = Female)</li>
-<li><code>education</code> = Years of education completed</li>
-</ul>
+<li><code>education</code> = Years of education completed
+</ul></li>
 </ul>
 <ol style="list-style-type: lower-alpha">
-<li>In their article’s introduction, <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018">2018</a>)</span> differentiate their analysis on sedentary behavior from analysis on active behavior by citing evidence supporting the claim that “one can be highly active yet still be sedentary for most of the day.” Fit your own linear model with <code>MET</code> and <code>sitting</code> as your explanatory and response variables, respectively. Using <span class="math inline">\(R^2\)</span>, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?</li>
+<li>In their article’s introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that “one can be highly active yet still be sedentary for most of the day.” Fit your own linear model with <code>MET</code> and <code>sitting</code> as your explanatory and response variables, respectively. Using <span class="math inline">\(R^2\)</span>, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?</li>
 <li>In the paper’s section, “Statistical analysis”, the authors report that “Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures.” Generate both a histogram of <code>MET</code> values and log–transformed <code>MET</code> values. Do you agree with the paper’s decision to use a log-transformation here?</li>
 <li>Fit a preliminary model with <code>MTL</code> as the response and <code>sitting</code> as the sole explanatory variable. Are OLS conditions satisfied?</li>
 <li>Expand on your previous model by including a centered version of <code>age</code> as a covariate. Interpret all three coefficients in this model.</li>
-<li>One model fit in <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018">2018</a>)</span> includes <code>sitting</code>, log–transformed <code>MET</code>, and <code>age</code> as explanatory variables. They report an estimate <span class="math inline">\(\widehat{\beta_1} = -0.02\)</span> with confidence interval <span class="math inline">\((-0.04,-0.002)\)</span> for the coefficient corresponding to <code>sitting</code>, and <span class="math inline">\(\widehat{\beta_2} = 0.007\)</span> with confidence interval <span class="math inline">\((-0.07, 0.08)\)</span> for the coefficient corresponding to <code>MET</code>. Verify these intervals and estimates on your own.<br />
-</li>
+<li>One model fit in <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018" role="doc-biblioref">2018</a>)</span> includes <code>sitting</code>, log–transformed <code>MET</code>, and <code>age</code> as explanatory variables. They report an estimate <span class="math inline">\(\hat{\beta}_{1} = -0.02\)</span> with confidence interval <span class="math inline">\((-0.04,-0.002)\)</span> for the coefficient corresponding to <code>sitting</code>, and <span class="math inline">\(\hat{\beta}_{2} = 0.007\)</span> with confidence interval <span class="math inline">\((-0.07, 0.08)\)</span> for the coefficient corresponding to <code>MET</code>. Verify these intervals and estimates on your own.</li>
 <li>Based on your confidence intervals from the previous part, do you support the paper’s claim that “it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]”? Why or why not?</li>
-<li>A <a href="https://www.nytimes.com/2018/04/19/opinion/standing-up-at-your-desk-could-make-you-smarter.html">New York Times Article</a> was published discussing <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018">2018</a>)</span> with the title “Standing Up at Your Desk Could Make You Smarter” <span class="citation">(Friedman <a href="#ref-Friedman2018">2018</a>)</span>. Do you agree with this headline choice? Why or why not?<br />
+<li>A <em>New York Times</em> article was published discussing <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018" role="doc-biblioref">2018</a>)</span> with the title “Standing Up at Your Desk Could Make You Smarter” <span class="citation">(Friedman <a href="#ref-Friedman2018" role="doc-biblioref">2018</a>)</span>. Do you agree with this headline choice? Why or why not?<br />
 <br></li>
 </ol></li>
-<li><strong>Housing Prices and log Transformations.</strong> The dataset <code>kingCountyHouses.csv</code> contains data on over 20,000 houses sold in King County, Washington <span class="citation">(“House Sales in King County, Usa” <a href="#ref-harlfoxem">2018</a>)</span>. The dataset includes the following variables:
+<li><strong>Housing Prices and log Transformations.</strong> The dataset <code>kingCountyHouses.csv</code> contains data on over 20,000 houses sold in King County,
+Washington <span class="citation">(Kaggle <a href="#ref-harlfoxem" role="doc-biblioref">2018</a><a href="#ref-harlfoxem" role="doc-biblioref">a</a>)</span>. The dataset includes the following variables:
 <ul>
 <li><code>price</code> = selling price of the house</li>
 <li><code>date</code> = date house was sold, measured in days since January 1, 2014</li>
@@ -1440,7 +1445,7 @@ We wish to create a linear model to predict a house’s selling price.
 <li>How does <code>logprice</code> change when <code>sqft</code> increases by 1.</li>
 <li>Recall that <span class="math inline">\(\log(a) - \log(b) = \log\big(\frac{a}{b}\big)\)</span>, and use this to derive how <code>price</code> changes as <code>sqft</code> increases by 1.</li>
 <li>Are OLS assumptions satisfied in Model 2? Why or why not?</li>
-<li>Create a new variable, <code>logsqft</code>, the natural log of <code>sqft</code>. Fit Model 3 where <code>price</code> and <code>logsqft</code> are the explanatory and response variables, respectively. Write out the regression line equation.</li>
+<li>Create a new variable, <code>logsqft</code>, the natural log of <code>sqft</code>. Fit Model 3 where <code>price</code> and <code>logsqft</code> are the response and explanatory variables, respectively. Write out the regression line equation.</li>
 <li>How does predicted <code>price</code> change as <code>logsqft</code> increases by 1 in Model 3?</li>
 <li>How does predicted <code>price</code> change as <code>sqft</code> increases by 1%? As a hint, this is the same as multiplying <code>sqft</code> by 1.01.</li>
 <li>Are OLS assumptions satisfied in Model 3? Why or why not?</li>
@@ -1454,14 +1459,14 @@ We wish to create a linear model to predict a house’s selling price.
 <div id="open-ended-exercises" class="section level3">
 <h3><span class="header-section-number">1.8.3</span> Open-ended Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><strong>The Bechdel Test.</strong> In April, 2014, website FiveThirtyEight published the article <a href="https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/">The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women</a> <span class="citation">(Hickey <a href="#ref-Hickey2014">2014</a>)</span>. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
+<li><p><strong>The Bechdel Test.</strong> In April, 2014, website FiveThirtyEight published the article “The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women” <span class="citation">(Hickey <a href="#ref-Hickey2014" role="doc-biblioref">2014</a>)</span>. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:</p>
 <ul>
 <li>there are at least two named women in the picture</li>
 <li>they have a conversation with each other at some point</li>
 <li>that conversation isn’t about a male character
 </ul></li>
 </ul>
-While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that “passing the Bechdel test had no effect on the film’s return on investment.” Their data can be found in <code>bechdel.csv</code>. Key variables include:
+<p>While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that “passing the Bechdel test had no effect on the film’s return on investment.” Their data can be found in <code>bechdel.csv</code>. Key variables include:</p>
 <ul>
 <ul>
 <li><code>year</code> = the year the film premiered</li>
@@ -1476,7 +1481,7 @@ While the test is not a perfect metric of gender bias, data from it does allow f
 </ul></li>
 </ul>
 <p>With this in mind, carry out your own analysis. Does passing the Bechdel test have any effect on a film’s return on investment?</p></li>
-<li><p><strong>Waitress Tips.</strong> A student collected data from a restaurant where she was a waitress <span class="citation">(Dahlquist and Dong <a href="#ref-Dahlquist2011">2011</a>)</span>. The student was interested in learning under what conditions a waitress can expect the largest tips—for example: At dinner time or late at night? From younger or older patrons? From patrons receiving free meals? From patrons drinking alcohol? From patrons tipping with cash or credit? And should tip amount be measured as total dollar amount or as a percentage? Data can be found in <code>TipData.csv</code>. Here is a quick description of the variables collected:</p>
+<li><p><strong>Waitress Tips.</strong> A student collected data from a restaurant where she was a waitress <span class="citation">(Dahlquist and Dong <a href="#ref-Dahlquist2011" role="doc-biblioref">2011</a>)</span>. The student was interested in learning under what conditions a waitress can expect the largest tips—for example: At dinner time or late at night? From younger or older patrons? From patrons receiving free meals? From patrons drinking alcohol? From patrons tipping with cash or credit? And should tip amount be measured as total dollar amount or as a percentage? Data can be found in <code>TipData.csv</code>. Here is a quick description of the variables collected:</p>
 <ul>
 <li><code>Day</code> = day of the week</li>
 <li><code>Meal</code> = time of day (Lunch, Dinner, Late Night)</li>
@@ -1499,56 +1504,56 @@ While the test is not a perfect metric of gender bias, data from it does allow f
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Stigler2002">
-<p>Stigler, Stephen M. 2002. <em>Statistics on the Table: The History of Statistical Concepts and Methods</em>. Harvard University Press.</p>
-</div>
-<div id="ref-KentuckyDerby">
-<p>Wikipedia contributors. 2018. “Kentucky Derby — Wikipedia, the Free Encyclopedia.” <a href="https://en.wikipedia.org/w/index.php?title=Kentucky_Derby&amp;oldid=846316018" class="uri">https://en.wikipedia.org/w/index.php?title=Kentucky_Derby&amp;oldid=846316018</a>.</p>
-</div>
-<div id="ref-Hesterberg2015">
-<p>Hesterberg, Tim C. 2015. “What Teachers Should Know About the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.” <em>The American Statistician</em> 69 (4). Taylor &amp; Francis: 371–86. doi:<a href="https://doi.org/10.1080/00031305.2015.1089789">10.1080/00031305.2015.1089789</a>.</p>
-</div>
-<div id="ref-Efron1993">
-<p>Efron, Bradley, and R.J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall/CRC.</p>
+<div id="ref-Dahlquist2011">
+<p>Dahlquist, Samantha, and Jin Dong. 2011. “The Effects of Credit Cards on Tipping.”</p>
 </div>
 <div id="ref-Davison1997">
 <p>Davison, A. C., and D. V. Hinkley. 1997. <em>Bootstrap Methods and Their Application</em>. Cambridge University Press.</p>
 </div>
-<div id="ref-Roskes2011">
-<p>Roskes, Marieke, Daniel Sligte, Shaul Shalvi, and Carsten K. W. De Dreu. 2011. “The Right Side? Under Time Pressure, Approach Motivation Leads to Right-Oriented Bias.” <em>Psychology Science</em> 22 (11): 1403–7. doi:<a href="https://doi.org/10.1177/0956797611418677">10.1177/0956797611418677</a>.</p>
+<div id="ref-Efron1993">
+<p>Efron, Bradley, and R. J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
 </div>
-<div id="ref-Poole1989">
-<p>Poole, Joyce H. 1989. “Mate Guarding, Reproductive Success and Female Choice in African Elephants.” <em>Animal Behaviour</em> 37: 842–49. doi:<a href="https://doi.org/https://doi.org/10.1016/0003-3472(89)90068-7">https://doi.org/10.1016/0003-3472(89)90068-7</a>.</p>
+<div id="ref-Farrar2011">
+<p>Farrar, Anthony, and Thomas H. Bruggink. 2011. “A New Test of the Moneyball Hypothesis.” <em>The Sport Journal</em>, May. <a href="http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/">http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/</a>.</p>
 </div>
-<div id="ref-Walker-Barnes2001">
-<p>Walker-Barnes, Chanequa J., and Craig A. Mason. 2001. “Ethnic Differences in the Effect of Parenting on Gang Involvement and Gang Delinquency: A Longitudinal, Hierarchical Linear Modeling Perspective.” <em>Child Development</em> 72 (6): 1814–31. doi:<a href="https://doi.org/10.1111/1467-8624.00380">10.1111/1467-8624.00380</a>.</p>
+<div id="ref-Friedman2018">
+<p>Friedman, Richard A. 2018. “Standing up at Your Desk Could Make You Smarter.” <em>The New York Times</em>.</p>
 </div>
 <div id="ref-Gelman2007">
-<p>Gelman, Andrew, Jeffrey Fagan, and Alex Kiss. 2007. “An Analysis of the Nypd’s Stop-and-Frisk Policy in the Context of Claims of Racial Bias” 102 (September): 813–23.</p>
+<p>Gelman, Andrew, Jeffrey Fagan, and Alex Kiss. 2007. “An Analysis of the NYPD’s Stop-and-Frisk Policy in the Context of Claims of Racial Bias.” <em>Journal of the American Statistical Association</em> 102: 813–23.</p>
+</div>
+<div id="ref-Hesterberg2015">
+<p>Hesterberg, Tim C. 2015. “What Teachers Should Know About the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.” <em>The American Statistician</em> 69 (4): 371–86. <a href="https://doi.org/10.1080/00031305.2015.1089789">https://doi.org/10.1080/00031305.2015.1089789</a>.</p>
+</div>
+<div id="ref-Hickey2014">
+<p>Hickey, Walt. 2014. “The Dollar-and-Cents Case Against Hollywood’s Exclusion of Women.” FiveThirtyEight. <a href="https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/">https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/</a>.</p>
+</div>
+<div id="ref-harlfoxem">
+<p>Kaggle. 2018a. “House Sales in King County, USA.” <a href="https://www.kaggle.com/harlfoxem/housesalesprediction/home">https://www.kaggle.com/harlfoxem/housesalesprediction/home</a>.</p>
 </div>
 <div id="ref-Lewis2003">
 <p>Lewis, Michael M. 2003. <em>Moneyball: The Art of Winning an Unfair Game</em>. W. W. Norton &amp; Company.</p>
 </div>
-<div id="ref-Farrar2011">
-<p>Farrar, Anthony, and Thomas H. Bruggink. 2011. “A New Test of the Moneyball Hypothesis.” <em>The Sport Journal</em>, May. <a href="http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/" class="uri">http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/</a>.</p>
+<div id="ref-Poole1989">
+<p>Poole, Joyce H. 1989. “Mate Guarding, Reproductive Success and Female Choice in African Elephants.” <em>Animal Behaviour</em> 37: 842–49. <a href="http://www.sciencedirect.com/science/article/pii/0003347289900687">http://www.sciencedirect.com/science/article/pii/0003347289900687</a>.</p>
 </div>
 <div id="ref-Ramsey2002">
-<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. Second Edition. Boston, Massachusetts: Brooks/ Cole Cengage Learning.</p>
+<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. 2nd ed. Boston, Massachusetts: Brooks/ Cole Cengage.</p>
+</div>
+<div id="ref-Roskes2011">
+<p>Roskes, Marieke, Daniel Sligte, Shaul Shalvi, and Carsten K. W. De Dreu. 2011. “The Right Side? Under Time Pressure, Approach Motivation Leads to Right-Oriented Bias.” <em>Psychology Science</em> 22 (11): 1403–7. <a href="https://doi.org/10.1177/0956797611418677">https://doi.org/10.1177/0956797611418677</a>.</p>
 </div>
 <div id="ref-Siddarth2018">
-<p>Siddarth, Prabha, Alison C. Burggren, Harris A. Eyre, Gary W. Small, and David A. Merrill. 2018. “Sedentary Behavior Associated with Reduced Medial Temporal Lobe Thickness in Middle-Aged and Older Adults.” <em>PLOS ONE</em> 13 (4). Public Library of Science: 1–13. doi:<a href="https://doi.org/10.1371/journal.pone.0195549">10.1371/journal.pone.0195549</a>.</p>
+<p>Siddarth, Prabha, Alison C. Burggren, Harris A. Eyre, Gary W. Small, and David A. Merrill. 2018. “Sedentary Behavior Associated with Reduced Medial Temporal Lobe Thickness in Middle-Aged and Older Adults.” <em>PLOS ONE</em> 13 (4): 1–13. <a href="https://doi.org/10.1371/journal.pone.0195549">https://doi.org/10.1371/journal.pone.0195549</a>.</p>
 </div>
-<div id="ref-Friedman2018">
-<p>Friedman, Richard A. 2018. “Standing up at Your Desk Could Make You Smarter.” <em>The New York Times</em>, April.</p>
+<div id="ref-Stigler2002">
+<p>Stigler, Stephen M. 2002. <em>Statistics on the Table: The History of Statistical Concepts and Methods</em>. Harvard University Press.</p>
 </div>
-<div id="ref-harlfoxem">
-<p>“House Sales in King County, Usa.” 2018. Accessed June 29. <a href="https://www.kaggle.com/harlfoxem/housesalesprediction/home" class="uri">https://www.kaggle.com/harlfoxem/housesalesprediction/home</a>.</p>
+<div id="ref-Walker-Barnes2001">
+<p>Walker-Barnes, Chanequa J., and Craig A. Mason. 2001. “Ethnic Differences in the Effect of Parenting on Gang Involvement and Gang Delinquency: A Longitudinal, Hierarchical Linear Modeling Perspective.” <em>Child Development</em> 72 (6): 1814–31. <a href="http://dx.doi.org/10.1111/1467-8624.00380">http://dx.doi.org/10.1111/1467-8624.00380</a>.</p>
 </div>
-<div id="ref-Hickey2014">
-<p>Hickey, Walt. 2014. “The Dollar-and-Cents Case Against Hollywood’s Exclusion of Women.” FiveThirtyEight. <a href="https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/" class="uri">https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/</a>.</p>
-</div>
-<div id="ref-Dahlquist2011">
-<p>Dahlquist, Samantha, and Jin Dong. 2011. “The Effects of Credit Cards on Tipping.” Project for Statistics 212-Statistics for the Sciences, St. Olaf College.</p>
+<div id="ref-KentuckyDerby">
+<p>Wikipedia contributors. 2018. “Kentucky Derby.” In <em>Wikipedia</em>. <a href="https://en.wikipedia.org/wiki/Kentucky_Derby">https://en.wikipedia.org/wiki/Kentucky_Derby</a>.</p>
 </div>
 </div>
             </section>
@@ -1560,13 +1565,15 @@ While the test is not a perfect metric of gender bias, data from it does allow f
 <a href="ch-beyondmost.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1574,12 +1581,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1594,7 +1600,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-bysh.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
@@ -1608,10 +1618,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

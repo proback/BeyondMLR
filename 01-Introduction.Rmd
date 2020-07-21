@@ -18,20 +18,6 @@ output:
 - Interpret parameters and associated tests and intervals from multiple regression models.
 - Understand the basic ideas behind bootstrapped confidence intervals.
 
-## Introduction to Broadening Your Statistical Horizons
-
-Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **linear least squares regression (LLSR)** models.  
-
-When models are fit to data using linear least squares regression (LLSR) \index{linear least squares regression (LLSR)}, inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples.  While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of  linearity between Y and X need to be plausible.  
-
-However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
-
-The **GLMs (Generalized Linear Models)** \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will *broaden your statistical horizons*.
-
-In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
-
-## Assumptions for Linear Least Squares Regression (LLSR)
-
 ```{r load_packages1, message = FALSE}
 # Packages required for Chapter 1
 library(knitr) 
@@ -47,6 +33,20 @@ library(tidyverse)
 ```{r include=FALSE}
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
+
+## Introduction to Beyond Multiple Linear Regression
+
+Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **linear least squares regression (LLSR)** models.  
+
+When models are fit to data using linear least squares regression (LLSR), \index{linear least squares regression (LLSR)} inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples.  While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of  linearity between Y and X need to be plausible.  
+
+However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
+
+The **GLMs (Generalized Linear Models)** \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will allow you to expand *beyond multiple linear regression*.
+
+In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
+
+## Assumptions for Linear Least Squares Regression (LLSR)
 
 ```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR)', echo=FALSE, message = FALSE}
 ## Sample data for graph of OLS normality assumption
@@ -181,14 +181,14 @@ While we identified possible violations of assumptions for inference in LLSR for
 
 Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
-## Initial Exploratory Analyses {#explore1}
+## Initial Exploratory Analyses {#explorech1}
 ### Data Organization
 
 The first five and last five rows from our data set are illustrated in Table \@ref(tab:introtable1).  Note that, in certain cases, we created new variables from existing ones:
 
-- `fast` is an **indicator variable** \index{indicator variable}, taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,
+- `fast` is an **indicator variable**, \index{indicator variable} taking the value 1 for races run on fast tracks, and 0 for races run under other conditions,
 - `good` is another indicator variable, taking the value 1 for races run under good conditions, and 0 for races run under other conditions,
-- `yearnew` is a **centered variable** \index{centered variable}, where we measure the number of years since 1896, and
+- `yearnew` is a **centered variable**, \index{centered variable} where we measure the number of years since 1896, and
 - `fastfactor` replaces `fast` = 0 with the description "not fast", and `fast` = 1 with the description "fast".  Changing a numeric categorical variable to descriptive phrases can make plot legends more meaningful.
 
 ```{r introtable1,echo=FALSE, warning=FALSE}
@@ -293,7 +293,7 @@ cat(" R squared = ", summary(model1)$r.squared, "\n",
     "Residual standard error = ", summary(model1)$sigma)
 ```
 
-You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896.  One way to create more meaningful parameters is through **centering** \index{centered variable}.  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
+You may have noticed in Model 1 that the intercept has little meaning in context, since it estimates a winning speed in Year 0, when the first Kentucky Derby run at the current distance (1.25 miles) was in 1896.  One way to create more meaningful parameters is through **centering**. \index{centered variable}  In this case, we could create a centered year variable by subtracting 1896 from each year for Model 2:
 
 \begin{equation*}
 \begin{split}
@@ -380,7 +380,7 @@ par(mfrow=c(1,1))
 
 ### Linear regression with a binary predictor
 
-We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable** \index{indicator variable}---it takes on only the values 0 and 1, where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
+We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable**---it takes on only the values 0 and 1, \index{indicator variable} where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
 
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
@@ -458,15 +458,15 @@ predict(model4, new = new.data, interval = "prediction")
 
 ### Inference in multiple linear regression: bootstrapping {#multreg-boot}
 
-Remember that you must check LINE assumptions using the same residual plots as in Figure \@ref(fig:resid2) to ensure that the inferential statements in the previous section are valid.  In cases when model assumptions are shaky, one alternative approach to statistical inference is **bootstrapping** \index{bootstrapping}; in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility.  In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates.  Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.  
+Remember that you must check LINE assumptions using the same residual plots as in Figure \@ref(fig:resid2) to ensure that the inferential statements in the previous section are valid.  In cases when model assumptions are shaky, one alternative approach to statistical inference is **bootstrapping**; \index{bootstrapping} in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility.  In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates.  Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.  
 
 If we wish to use bootstrapping to obtain confidence intervals for our coefficients in Model 4, we could follow these steps:
 
-- take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all.  This is **case resampling** \index{case resampling}, so that all information from a given year (winning speed, track condition, number of starters) remains together.
+- take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all.  This is **case resampling**, \index{case resampling} so that all information from a given year (winning speed, track condition, number of starters) remains together.
 - fit Model 4 to the bootstrap sample, saving $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$.
 - repeat the two steps above a large number of times (say 1000)
 - the 1000 bootstrap estimates for each parameter can be plotted to show the **bootstrap distribution** \index{bootstrap distribution} (see Figure \@ref(fig:boot4))
-- a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles.  This is called the **percentile method** \index{percentile method}.
+- a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles.  This is called the **percentile method**. \index{percentile method}
 
 ```{r model4boot, comment=NA, message=FALSE}
 # updated code from tobiasgerstenberg on github
@@ -494,7 +494,7 @@ There are many variations on this bootstrap procedure.  For example, you could s
 
 ### Multiple linear regression with an interaction term
 
-Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates.  One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions.  To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider **interaction terms** \index{interaction}.  Amazingly, if we create a new variable by taking the product of `yearnew` and `fast` (i.e., the **interaction** between `yearnew` and `fast`), adding that variable into our model will have the desired effect.  
+Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates.  One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions.  To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider **interaction terms**. \index{interaction}  Amazingly, if we create a new variable by taking the product of `yearnew` and `fast` (i.e., the **interaction** between `yearnew` and `fast`), adding that variable into our model will have the desired effect.  
 
 Thus, consider Model 5:
 
@@ -560,9 +560,9 @@ Although the process of reporting and writing up research results often demands 
 Several tests and measures of model performance can be used when comparing different models for model building:
 
 - $R^2$ \index{R-squared} we have seen; it measures the variability in the response variable explained by the model.  One problem is that $R^2$ always increases with extra predictors, even if the predictors add very little information.
-- adjusted $R^2$ \index{adjusted R-squared}.  Adds a penalty for model complexity to $R^2$ so that any increase in performance must outweigh the cost of additional complexity.  We should ideally favor any model with higher adjusted $R^2$, regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.
-- AIC (Akaike Information Criterion) \index{AIC}.  Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size.  The BIC (Bayesian Information Criterion) \index{BIC} is similar to the AIC, but with a greater penalty for additional model terms.
-- extra sum of squares F test.  This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on **nested models** \index{nested models}, where one model is a reduced version of the other.  For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level).  Our null hypothesis is then $\beta_{3}=\beta_{4}=0$.  We have statistically significant evidence (F = 57.2 on 2 and 116 df, p < .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.  
+- adjusted $R^2$. \index{adjusted R-squared}  Adds a penalty for model complexity to $R^2$ so that any increase in performance must outweigh the cost of additional complexity.  We should ideally favor any model with higher adjusted $R^2$, regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.
+- AIC (Akaike Information Criterion). \index{AIC}  Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size.  The BIC (Bayesian Information Criterion) \index{BIC} is similar to the AIC, but with a greater penalty for additional model terms.
+- extra sum of squares F test.  This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on **nested models**, \index{nested models} where one model is a reduced version of the other.  For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level).  Our null hypothesis is then $\beta_{3}=\beta_{4}=0$.  We have statistically significant evidence (F = 57.2 on 2 and 116 df, p < .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.  
 
 One potential final model for predicting winning speeds of Kentucky Derby races is:
 

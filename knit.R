@@ -4,7 +4,13 @@ library(bookdown)
 # skip - I think it's not necessary
 setwd("~/BYSH/")
 
-#render entire book
+#test bookdown format
+render_book("index.Rmd", output_format = 'bookdown::gitbook')
+
+#publish in bookdown
+publish_book(render = "local")
+
+#render entire book as pdf for hard copy
 render_book("index.Rmd", output_format = 'bookdown::pdf_book')
 
 #preview chapter as pdf

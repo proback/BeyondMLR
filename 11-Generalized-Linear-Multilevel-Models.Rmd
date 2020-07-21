@@ -115,12 +115,12 @@ table1chp11 <- data.frame(refdata %>% slice(1:10) %>%
 
 kable(table1chp11, booktabs=T, 
       caption="Key variables from the first 10 rows of data from the College Basketball Referees case study.  Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.") %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = "scale_down", font_size = 9)
 ```
 
 For our initial analysis, our primary response variable is `foul.home`, and our primary hypothesis concerns evening out foul calls.  We hypothesize that the probability a foul is called on the home team is inversely related to the foul differential; that is, if more fouls have been called on the home team than the visiting team, the next foul is less likely to be on the home team.
 
-The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way.  With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression).  But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible.  So what we need is a multilevel model with a non-normal response; in other words, a __multilevel generalized linear model (multilevel GLM)__ \index{multilevel GLM}.  We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
+The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way.  With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression).  But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible.  So what we need is a multilevel model with a non-normal response; in other words, a __multilevel generalized linear model (multilevel GLM)__. \index{multilevel GLM}  We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
 
 As with other multilevel situations, we will begin with broad summaries across all 4972 foul calls from all 340 games.  Most of the variables we have collected can vary with each foul called; these Level One variables include:
 
@@ -704,7 +704,7 @@ rate.hist3 <- ggplot(glm_info) +
 grid.arrange(int.hist3, rate.hist3, ncol = 1)
 ```
 
-From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested?  Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team).  However, a specific home team is not associated with a single game; that home team appears in several games.  Therefore, any effects of game, home team, and visiting team are considered __crossed random effects__ \index{crossed random effects}.
+From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested?  Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team).  However, a specific home team is not associated with a single game; that home team appears in several games.  Therefore, any effects of game, home team, and visiting team are considered __crossed random effects__. \index{crossed random effects}
 
 A two-level model which accounts for variability among games, home teams, and visiting teams would take on a slightly new look.  First, the full subscripting would change a bit.  Our primary response variable would now be written as $Y_{i[gh]j}$, an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), where Game $i$ pitted Visiting Team $g$ against Home Team $h$.  Square brackets are introduced since $g$ and $h$ are essentially at the same level as $i$, whereas we have assumed (without stating so) throughout this book that subscripting without square brackets implies a movement to lower levels as the subscripts move left to right (e.g., $ij$ indicates $i$ units are at Level Two, while $j$ units are at Level One, nested inside Level Two units).  We can then consider $Y_{i[gh]j}$ to be a Bernoulli random variable with parameter $p_{i[gh]j}$, where $p_{i[gh]j}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on Home Team $h$ rather than Visiting Team $g$.  We will include the crossed subscripting only where necessary.
 
@@ -1085,7 +1085,7 @@ cat(" AIC = ", AIC(model.f), ";  BIC = ", BIC(model.f))
 
 In general, we see a highly significant negative effect of foul differential---a strong tendency for referees to even out foul calls when one team starts amassing more fouls than the other.  Important covariates to control for (because of their effects on the odds of a home foul) include score differential, whether the home team held the lead, time left in the first half, and the type of foul called.
 
-Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls.  The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled).  Evidence like this can be considered __dose response__ \index{dose response}, since higher "doses" of referee control are associated with a greater effect of foul differential on their calls.  A dose response effect provides even stronger indication of referee bias.
+Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls.  The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled).  Evidence like this can be considered __dose response__, \index{dose response} since higher "doses" of referee control are associated with a greater effect of foul differential on their calls.  A dose response effect provides even stronger indication of referee bias.
 
 Analyses of data from 2004-05 [@Noecker2012] showed that the tendency to even out foul calls was stronger when one team had a large lead, but we found no evidence of a foul differential by score differential interaction in the 2009-10 data, although home team fouls are more likely when the home team has a large lead, regardless of the foul differential.
 
@@ -1206,7 +1206,7 @@ print(ranef1[[1]], more = TRUE)
 
 8. In Section \@ref(glmm-paraboot), could we use a likelihood ratio test to determine if it would be better to add either a random effect for home team or a random effect for visiting team to the model with a random effect for game (assuming we're going to add one or the other)?  Why or why not?
 
-9. Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \@ref(fig:gmu-lrt1).
+9. Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \@ref(fig:gmu-lrt1).  In particular, describe how to simulate responses for the first two rows of the data set (the first two fouls in the IA at MN game from 03.07.2010).
 
 10. In Figure \@ref(fig:gmu-lrt1), why is it a problem that "a chi-square distribution puts too much mass in the tail" when using a likelihood ratio test to compare models?
 
@@ -1246,7 +1246,8 @@ kable(table4chp11, booktabs=T,
   pack_rows("Aboriginal", 1, 2) %>%
   pack_rows("Age Group", 3, 8) %>%
   pack_rows("Sex", 9, 10) %>%
-  pack_rows("Year", 11, 16)
+  pack_rows("Year", 11, 16) %>%
+  kable_styling(full_width = F)
 ```
 
 21. Provide interpretations in context for the following rate ratios, confidence intervals, and p-values in Table \@ref(tab:table4chp11): RR of 2.1 and CI of 1.98 - 2.23 for Aboriginal = Yes; p-value of <.01 for Age Group; CI of 5.44 - 6.64 for Age Group = 35-44; RR of 0.45 for Sex = Female; CI of 0.86 - 0.91 for Year = 2007.
@@ -1274,7 +1275,8 @@ colnames(table5chp11) <- c(" ","RR","95% CI","p-Value")
 kable(table5chp11, booktabs=T,
       caption="Adjusted rate ratios for area-level variables from the multilevel Poisson regression model with random intercept for area from Table 3 in Randall et al. (2014).  Area-level factors added one at a time to the fully adjusted individual-level model (adjusted for Aboriginal status, age, sex and year) due to being highly associated.") %>%
   pack_rows("Remoteness of Residence", 1, 4) %>%
-  pack_rows("SES quintile", 5, 9)
+  pack_rows("SES quintile", 5, 9) %>%
+  kable_styling(full_width = F)
 ```
 
 27. @Randall2014 also report the results of a single-level Poisson regression model: "After adjusting for age, sex and year of event, the rate of AMI events in Aboriginal people was 2.3 times higher than in non-Aboriginal people (95\% CI: 2.17-2.44)."  Compare this to the results of the multilevel Poisson model; what might explain any observed differences?

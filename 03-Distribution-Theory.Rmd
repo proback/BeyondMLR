@@ -25,11 +25,6 @@ After finishing this chapter, you should be able to:
 `r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
 `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
 
-
-## Introduction
-
-What if it  is not plausible that a response is normally distributed? You may want to construct a model to predict whether a prospective student will enroll at a school or  model the lifetimes of patients following a particular surgery.  In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to  have very skewed data with many similar values and a few hardy souls with extremely long survival. These responses are not expected to be normally distributed; other distributions will be needed to describe and  model binary or lifetime data. Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. In this chapter we begin with some general definitions, terms, and notation for different types of distributions with some examples of applications. We then create new random variables using combinations of random variables (see Guided Exercises).  
-
 ```{r load_packages3, message = FALSE}
 # Packages required for Chapter 3
 library(gridExtra)  
@@ -42,16 +37,20 @@ library(tidyverse)
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
+## Introduction
+
+What if it  is not plausible that a response is normally distributed? You may want to construct a model to predict whether a prospective student will enroll at a school or  model the lifetimes of patients following a particular surgery.  In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to  have very skewed data with many similar values and a few hardy souls with extremely long survival. These responses are not expected to be normally distributed; other distributions will be needed to describe and  model binary or lifetime data. Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. In this chapter we begin with some general definitions, terms, and notation for different types of distributions with some examples of applications. We then create new random variables using combinations of random variables (see Guided Exercises).  
+
 
 ## Discrete Random Variables
 
-A discrete random variable has a countable number of possible values; for example, we may want to measure the number of people in a household or the number of crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a __probability mass function__ (pmf) \index{probability mass function (pmf)}. A pmf is a function that calculates $P(Y=y)$, given each variable's parameters.
+A discrete random variable has a countable number of possible values; for example, we may want to measure the number of people in a household or the number of crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a __probability mass function__ (pmf). \index{probability mass function (pmf)} A pmf is a function that calculates $P(Y=y)$, given each variable's parameters.
 
 
 ### Binary Random Variable {#sec-binary}
 
 Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let's consider this a success and record $Y = 1$.
-A series of these events is a  __Bernoulli process__ \index{Bernoulli process}, independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
+A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
 Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, $p$. If we know this value, we can express $P(Y=1) = p$ and $P(Y=0) = 1-p$. In general, if we have a Bernoulli process with only one trial, we have a __binary distribution__ (also called a __Bernoulli distribution__) \index{Bernoulli distribution} where
 
 \begin{equation} 
@@ -67,7 +66,7 @@ Assuming all songs have equal odds of playing, we can calculate $p = \frac{200-5
 
 ### Binomial Random Variable {#sec-binomial}
 
-We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin $n$ times and recorded $Y$, the number of heads after $n$ flips. If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials, i.e. 4 consecutive failures. The probability of 4 consecutive failures is $P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4$. When we consider $P(Y = 1)$, we are interested in the probability of exactly 1 success _anywhere_ among the 4 trials. There are $\binom{4}{1} = 4$ ways to have exactly 1 success in 4 trials, so $P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. In general, if we carry out a sequence of $n$ Bernoulli trials (with probability of success $p$) and record $Y$, the total number of successes, then $Y$ follows a __binomial distribution__ \index{binomial distribution}, where
+We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin $n$ times and recorded $Y$, the number of heads after $n$ flips. If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials, i.e. 4 consecutive failures. The probability of 4 consecutive failures is $P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4$. When we consider $P(Y = 1)$, we are interested in the probability of exactly 1 success _anywhere_ among the 4 trials. There are $\binom{4}{1} = 4$ ways to have exactly 1 success in 4 trials, so $P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. In general, if we carry out a sequence of $n$ Bernoulli trials (with probability of success $p$) and record $Y$, the total number of successes, then $Y$ follows a __binomial distribution__, \index{binomial distribution} where
 
 \begin{equation}
 P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots, n.
@@ -201,7 +200,7 @@ Note that if we set $r=1$ then
 \end{align*}
 which is the probability mass function of a geometric random variable! Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.
 
-While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as $\binom{x}{y}$), we can generalize our definition to allow non-integer values of $r$. This will come in handy later when modeling. To do this, we need to first introduce the __gamma function__ \index{gamma function}. The gamma function is defined as such
+While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as $\binom{x}{y}$), we can generalize our definition to allow non-integer values of $r$. This will come in handy later when modeling. To do this, we need to first introduce the __gamma function__. \index{gamma function} The gamma function is defined as such
 
 \begin{equation}
 \Gamma(x)  = \int_0^\infty t^{x-1} e^{-t}dt.
@@ -279,8 +278,8 @@ So, there is a 0.08\% chance of all 4 queens being within the first 10 cards of 
 
 ### Poisson Random Variable
 
-Sometimes, random variables are based on a __Poisson process__ \index{Poisson process}. In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval. 
-We can then model $Y$, the number of events in one of these sections with the __Poisson distribution__ \index{Poisson distribution}, where
+Sometimes, random variables are based on a __Poisson process__. \index{Poisson process} In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval. 
+We can then model $Y$, the number of events in one of these sections with the __Poisson distribution__, \index{Poisson distribution} where
 
 \begin{equation}
 P(Y=y) = \frac{e^{-\lambda}\lambda^y}{y!} \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
@@ -330,7 +329,7 @@ Therefore, there is a 27\% chance of 3 or fewer tickets being issued within one 
 
 ## Continuous Random Variables
 
-A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using __probability density functions__ (pdfs) \index{probability density function (pdf)}. Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, $f(y)$, we can compute
+A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using __probability density functions__ (pdfs). \index{probability density function (pdf)} Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, $f(y)$, we can compute
 
 \begin{align*}
 P(a \le Y \le b) = \int_a^b f(y)dy.
@@ -344,7 +343,7 @@ This hints at a few properties of continuous random variables:
 
 ### Exponential Random Variable
 
-Suppose we have a Poisson process with rate $\lambda$, and we wish to model the wait time $Y$ until the first event. We could model $Y$ using an __exponential distribution__ \index{exponential distribution}, where
+Suppose we have a Poisson process with rate $\lambda$, and we wish to model the wait time $Y$ until the first event. We could model $Y$ using an __exponential distribution__, \index{exponential distribution} where
 
 \begin{equation}
 f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
@@ -517,7 +516,7 @@ f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (
 (\#eq:betaRV)
 \end{equation}
 
-If $Y \sim \textrm{Beta}(\alpha, \beta)$, then $\E(Y) = \alpha/(\alpha + \beta)$ and  $\SD(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}$. Figure \@ref(fig:multBeta) displays several beta distributions \index{beta distribution}. Note that when $\alpha = \beta$, distributions are symmetric. The distribution is left-skewed when $\alpha > \beta$ and right-skewed when $\beta > \alpha$.
+If $Y \sim \textrm{Beta}(\alpha, \beta)$, then $\E(Y) = \alpha/(\alpha + \beta)$ and  $\SD(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}$. Figure \@ref(fig:multBeta) displays several beta distributions. \index{beta distribution} Note that when $\alpha = \beta$, distributions are symmetric. The distribution is left-skewed when $\alpha > \beta$ and right-skewed when $\beta > \alpha$.
 
 (ref:multBeta) Beta distributions with different values of $\alpha$ and $\beta$.
 
@@ -760,7 +759,7 @@ if (knitr:::is_latex_output()) {
 
 ### Guided Exercises
 
-1. __Beta-Biomial Distribution.__ We can generate more distributions by mixing two random variables \index{mixture model}. Beta-binomial random variables are binomial random variables with fixed $n$ whose parameter $p$ follows a beta distribution with fixed parameters $\alpha, \beta$. In more detail, we would first draw $p_1$ from our beta distribution, and then generate our first observation $y_1$, a random number of successes from a binomial ($n, p_1$) distribution. Then, we would generate a new $p_2$ from our beta distribution, and use a binomial distribution with parameters $n, p_2$ to generate our second observation $y_2$. We would continue this process until desired.
+1. __Beta-Biomial Distribution.__ We can generate more distributions by mixing two random variables. \index{mixture model} Beta-binomial random variables are binomial random variables with fixed $n$ whose parameter $p$ follows a beta distribution with fixed parameters $\alpha, \beta$. In more detail, we would first draw $p_1$ from our beta distribution, and then generate our first observation $y_1$, a random number of successes from a binomial ($n, p_1$) distribution. Then, we would generate a new $p_2$ from our beta distribution, and use a binomial distribution with parameters $n, p_2$ to generate our second observation $y_2$. We would continue this process until desired.
 
     Note that all of the observations $y_i$ will be integer values from $0, 1, \ldots, n$.  With this in mind, use `rbinom()` to simulate 1,000 observations from a plain old vanilla binomial random variable with $n=10$ and $p=0.8$. Plot a histogram of these binomial observations. Then, do the following to generate a beta-binomial distribution:
 

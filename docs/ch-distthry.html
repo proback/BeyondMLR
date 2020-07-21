@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 3 Distribution Theory | Broadening Your Statistical Horizons</title>
-  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Distribution Theory | Beyond Multiple Linear Regression</title>
+  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Distribution Theory | Broadening Your Statistical Horizons" />
+  <meta property="og:title" content="Chapter 3 Distribution Theory | Beyond Multiple Linear Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="data/cover.png" />
@@ -17,30 +16,31 @@
   <meta name="github-repo" content="proback/BYSH" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Distribution Theory | Broadening Your Statistical Horizons" />
+  <meta name="twitter:title" content="Chapter 3 Distribution Theory | Beyond Multiple Linear Regression" />
   
   <meta name="twitter:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="twitter:image" content="data/cover.png" />
 
-<meta name="author" content="Julie Legler and Paul Roback">
+<meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2020-07-18" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ch-beyondmost.html">
-<link rel="next" href="ch-poissonreg.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link rel="prev" href="ch-beyondmost.html"/>
+<link rel="next" href="ch-poissonreg.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,48 +48,78 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -108,29 +138,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-broadening-your-statistical-horizons"><i class="fa fa-check"></i><b>1.2</b> Introduction to Broadening Your Statistical Horizons</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#ordinary-least-squares-ols-assumptions"><i class="fa fa-check"></i><b>1.3</b> Ordinary Least Squares (OLS) Assumptions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-the-ols-assumptions-for-inference"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate the OLS assumptions for inference</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-the-ols-assumptions-for-inference-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where the OLS assumptions for inference are violated</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explorech1"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#data-organization"><i class="fa fa-check"></i><b>1.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#simple-linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Simple linear regression with a binary predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
 <li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
 <li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
 <li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
 <li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
 <li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview"><i class="fa fa-check"></i><b>1.7</b> Preview</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -162,7 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
 <li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
-<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_cond_lik.sec"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
 <li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
@@ -173,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercise"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
 </ul></li>
 </ul></li>
@@ -202,7 +232,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
 <li class="chapter" data-level="3.7.1" data-path="ch-distthry.html"><a href="ch-distthry.html#conceptual-exercises-2"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-1"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-2"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html"><i class="fa fa-check"></i><b>4</b> Poisson Regression</a><ul>
@@ -212,9 +242,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#a-graphical-look-at-poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> A Graphical Look at Poisson Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-studies-overview"><i class="fa fa-check"></i><b>4.3</b> Case Studies Overview</a></li>
-<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
-<li class="chapter" data-level="4.4.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
+<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata4"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
@@ -223,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
 <li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#least-squares-regression-vs.poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Least Squares Regression vs. Poisson Regression</a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -235,7 +265,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
 <li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.2</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
@@ -243,13 +274,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-2"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -285,7 +316,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#least-squares-regression-vs.logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Least Squares Regression vs. Logistic Regression</a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
@@ -294,8 +325,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
-<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises:</a></li>
-<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -315,15 +346,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
 <li class="chapter" data-level="7.10.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#conceptual-exercises-4"><i class="fa fa-check"></i><b>7.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-4"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-5"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="7.10.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#note-on-correlated-binary-outcomes"><i class="fa fa-check"></i><b>7.10.3</b> Note on Correlated Binary Outcomes</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html"><i class="fa fa-check"></i><b>8</b> Introduction to Multilevel Models</a><ul>
 <li class="chapter" data-level="8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#learning-objectives-7"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#cs:music"><i class="fa fa-check"></i><b>8.2</b> Case Study: Music Performance Anxiety</a></li>
-<li class="chapter" data-level="8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
@@ -333,14 +364,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
 <li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
 <li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
 <li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
 <li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
@@ -357,7 +388,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise-1"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -373,17 +404,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
 <li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
 <li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
 <li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
 <li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
 <li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
@@ -395,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-2"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -417,11 +449,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-5"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Multilevel Models</a><ul>
+<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
@@ -456,7 +488,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Broadening Your Statistical Horizons</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beyond Multiple Linear Regression</a>
           </h1>
         </div>
 
@@ -477,8 +509,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Identify the mean and variance for each distribution.</li>
 <li>Match the response for a study to a plausible random variable and provide reasons for ruling out other random variables.</li>
 <li>Match a histogram of sample data to plausible distributions.</li>
-<li>Create a mixture of distributions and compare the shape, mean, and variance to a similar distribution that is not a mixture.</li>
+<li>Create a mixture of distributions and evaluate the shape, mean, and variance.</li>
 </ul>
+
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="ch-distthry.html#cb38-1"></a><span class="co"># Packages required for Chapter 3</span></span>
+<span id="cb38-2"><a href="ch-distthry.html#cb38-2"></a><span class="kw">library</span>(gridExtra)  </span>
+<span id="cb38-3"><a href="ch-distthry.html#cb38-3"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb38-4"><a href="ch-distthry.html#cb38-4"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb38-5"><a href="ch-distthry.html#cb38-5"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2><span class="header-section-number">3.2</span> Introduction</h2>
@@ -486,26 +524,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="discrete-random-variables" class="section level2">
 <h2><span class="header-section-number">3.3</span> Discrete Random Variables</h2>
-<p>A discrete random variable has a countable number of possible values: for example, the number of people in a household or the number crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a <strong>probability mass function</strong> (pmf). A pmf is a function that calculates <span class="math inline">\(P(Y=y)\)</span>, given each variable’s parameters.</p>
+<p>A discrete random variable has a countable number of possible values; for example, we may want to measure the number of people in a household or the number of crimes committed on a college campus. With discrete random variables, the associated probabilities can be calculated for each possible value using a <strong>probability mass function</strong> (pmf).  A pmf is a function that calculates <span class="math inline">\(P(Y=y)\)</span>, given each variable’s parameters.</p>
 <div id="sec-binary" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Binary Random Variable</h3>
-Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let’s consider this a success and record <span class="math inline">\(Y = 1\)</span>. A series of these events is a <strong>Bernoulli process</strong>, independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial. Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, <span class="math inline">\(p\)</span>. If we know this value, we can express <span class="math inline">\(P(Y=1) = p\)</span> and <span class="math inline">\(P(Y=0) = 1-p\)</span>. In general, if we have a Bernoulli process with only one trial, we have a <strong>binary distribution</strong> (also called a <strong>Bernoulli distribution</strong>) where
-<span class="math display" id="eq:binaryRV">\[\begin{equation} 
+<p>Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let’s consider this a success and record <span class="math inline">\(Y = 1\)</span>.
+A series of these events is a <strong>Bernoulli process</strong>,  independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
+Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, <span class="math inline">\(p\)</span>. If we know this value, we can express <span class="math inline">\(P(Y=1) = p\)</span> and <span class="math inline">\(P(Y=0) = 1-p\)</span>. In general, if we have a Bernoulli process with only one trial, we have a <strong>binary distribution</strong> (also called a <strong>Bernoulli distribution</strong>)  where</p>
+<p><span class="math display" id="eq:binaryRV">\[\begin{equation} 
 P(Y = y) = p^y(1-p)^{1-y} \quad \textrm{for} \quad y = 0, 1.
 \tag{3.1}
 \end{equation}\]</span>
-<p>If <span class="math inline">\(Y \sim \textrm{Binary}(p)\)</span>, then <span class="math inline">\(Y\)</span> has mean <span class="math inline">\({\operatorname{E}}(Y) = p\)</span> and standard deviation <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{p(1-p)}\)</span>.</p>
+If <span class="math inline">\(Y \sim \textrm{Binary}(p)\)</span>, then <span class="math inline">\(Y\)</span> has mean <span class="math inline">\(\operatorname{E}(Y) = p\)</span> and standard deviation <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{p(1-p)}\)</span>.</p>
 <p><strong>Example 1:</strong> Your playlist of 200 songs has 5 which you cannot stand. What is the probability that when you hit shuffle, a song you tolerate comes on?</p>
 <p>Assuming all songs have equal odds of playing, we can calculate <span class="math inline">\(p = \frac{200-5}{200} = 0.975\)</span>, so there is a 97.5% chance of a song you tolerate playing, since <span class="math inline">\(P(Y=1)=.975^1*(1-.975)^0\)</span>.</p>
 </div>
 <div id="sec-binomial" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> Binomial Random Variable</h3>
-We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin <span class="math inline">\(n\)</span> times and recorded <span class="math inline">\(Y\)</span>, the number of heads after <span class="math inline">\(n\)</span> flips. If we consider a case where <span class="math inline">\(p = 0.25\)</span> and <span class="math inline">\(n = 4\)</span>, then here <span class="math inline">\(P(Y=0)\)</span> represents the probability of no successes in 4 trials, i.e. 4 consecutive failures. The probability of 4 consecutive failures is <span class="math inline">\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\)</span>. When we consider <span class="math inline">\(P(Y = 1)\)</span>, we are interested in the probability of exactly 1 success <em>anywhere</em> among the 4 trials. There are <span class="math inline">\(\binom{4}{1} = 4\)</span> ways to have exactly 1 success in 4 trials, so <span class="math inline">\(P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\)</span>. In general, if we carry out a sequence of <span class="math inline">\(n\)</span> Bernoulli trials (with probability of success <span class="math inline">\(p\)</span>) and record <span class="math inline">\(Y\)</span>, the total number of successes, then <span class="math inline">\(Y\)</span> follows a <strong>binomial distribution</strong>, where
-<span class="math display" id="eq:binomRV">\[\begin{equation}
+<p>We can extend our knowledge of binary random variables. Suppose we flipped an unfair coin <span class="math inline">\(n\)</span> times and recorded <span class="math inline">\(Y\)</span>, the number of heads after <span class="math inline">\(n\)</span> flips. If we consider a case where <span class="math inline">\(p = 0.25\)</span> and <span class="math inline">\(n = 4\)</span>, then here <span class="math inline">\(P(Y=0)\)</span> represents the probability of no successes in 4 trials, i.e. 4 consecutive failures. The probability of 4 consecutive failures is <span class="math inline">\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\)</span>. When we consider <span class="math inline">\(P(Y = 1)\)</span>, we are interested in the probability of exactly 1 success <em>anywhere</em> among the 4 trials. There are <span class="math inline">\(\binom{4}{1} = 4\)</span> ways to have exactly 1 success in 4 trials, so <span class="math inline">\(P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\)</span>. In general, if we carry out a sequence of <span class="math inline">\(n\)</span> Bernoulli trials (with probability of success <span class="math inline">\(p\)</span>) and record <span class="math inline">\(Y\)</span>, the total number of successes, then <span class="math inline">\(Y\)</span> follows a <strong>binomial distribution</strong>,  where</p>
+<p><span class="math display" id="eq:binomRV">\[\begin{equation}
 P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots, n.
 \tag{3.2}
 \end{equation}\]</span>
-<p>If <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>, then <span class="math inline">\({\operatorname{E}}(Y) = np\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{np(1-p)}\)</span>. Typical shapes of a binomial distribution are found in Figure <a href="ch-distthry.html#fig:multBin">3.1</a>. On the left side <span class="math inline">\(n\)</span> remains constant. We see that as <span class="math inline">\(p\)</span> increases, the center of the distribution (<span class="math inline">\({\operatorname{E}}(Y) = np\)</span>) shifts right. On the right, <span class="math inline">\(p\)</span> is held constant. As <span class="math inline">\(n\)</span> increases, the distribution becomes less skewed.</p>
+If <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>, then <span class="math inline">\(\operatorname{E}(Y) = np\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{np(1-p)}\)</span>.
+Typical shapes of a binomial distribution are found in Figure <a href="ch-distthry.html#fig:multBin">3.1</a>. On the left side <span class="math inline">\(n\)</span> remains constant. We see that as <span class="math inline">\(p\)</span> increases, the center of the distribution (<span class="math inline">\(\operatorname{E}(Y) = np\)</span>) shifts right. On the right, <span class="math inline">\(p\)</span> is held constant. As <span class="math inline">\(n\)</span> increases, the distribution becomes less skewed.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multBin"></span>
 <img src="bookdown-bysh_files/figure-html/multBin-1.png" alt="Binomial distributions with different values of \(n\) and \(p\)." width="60%" />
@@ -513,27 +554,27 @@ P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots,
 Figure 3.1: Binomial distributions with different values of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>.
 </p>
 </div>
-Note that if <span class="math inline">\(n=1\)</span>,
-<span class="math display">\[\begin{align*}
+<p>Note that if <span class="math inline">\(n=1\)</span>,</p>
+<p><span class="math display">\[\begin{align*}
  P(Y=y) &amp;= \binom{1}{y} p^y(1-p)^{1-y} \\
         &amp;= p^y(1-p)^{1-y}\quad \textrm{for}\quad y = 0, 1,
 \end{align*}\]</span>
-<p>a Bernoulli distribution! In fact, Bernoulli random variables are a special case of binomial random variables where <span class="math inline">\(n=1\)</span>.</p>
+a Bernoulli distribution! In fact, Bernoulli random variables are a special case of binomial random variables where <span class="math inline">\(n=1\)</span>.</p>
 <p>In R we can use the function <code>dbinom(y, n, p)</code>, which outputs the probability of <span class="math inline">\(y\)</span> successes given <span class="math inline">\(n\)</span> trials with probability <span class="math inline">\(p\)</span>, i.e., <span class="math inline">\(P(Y=y)\)</span> for <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>.</p>
 <p><strong>Example 2:</strong> While taking a multiple choice test, a student encountered 10 problems where she ended up completely guessing, randomly selecting one of the four options. What is the chance that she got exactly 2 of the 10 correct?</p>
 <p>Knowing that the student randomly selected her answers, we assume she has a 25% chance of a correct response. Thus, <span class="math inline">\(P(Y=2) = {10 \choose 2}(.25)^2(.75)^8 = 0.282\)</span>. We can use R to verify this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> .<span class="dv">25</span>)</code></pre></div>
-<pre><code>## [1] 0.2815676</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="ch-distthry.html#cb39-1"></a><span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.25</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2816</code></pre>
 <p>Therefore, there is a 28% chance of exactly 2 correct answers out of 10.</p>
 </div>
 <div id="geometric-random-variable" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> Geometric Random Variable</h3>
-Suppose we are to perform independent, identical Bernoulli trials until the first success. If we wish to model <span class="math inline">\(Y\)</span>, the number of failures before the first success, we can consider the following pmf
-<span class="math display" id="eq:geomRV">\[\begin{equation}
+<p>Suppose we are to perform independent, identical Bernoulli trials until the first success. If we wish to model <span class="math inline">\(Y\)</span>, the number of failures before the first success, we can consider the following pmf:</p>
+<p><span class="math display" id="eq:geomRV">\[\begin{equation}
 P(Y=y) = (1-p)^yp \quad \textrm{for}\quad y = 0, 1, \ldots, \infty.
 \tag{3.3}
-\end{equation}\]</span>
-<p>We can think about this function as modeling the probability of <span class="math inline">\(y\)</span> failures then 1 success. In this case, <span class="math inline">\(Y\)</span> follows a <strong>geometric distribution</strong> with <span class="math inline">\({\operatorname{E}}(Y) = \frac{1-p}p\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{\frac{1-p}{p^2}}\)</span>.</p>
+\end{equation}\]</span></p>
+<p>We can think about this function as modeling the probability of <span class="math inline">\(y\)</span> failures then 1 success. In this case, <span class="math inline">\(Y\)</span> follows a <strong>geometric distribution</strong>  with <span class="math inline">\(\operatorname{E}(Y) = \frac{1-p}p\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\frac{1-p}{p^2}}\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multGeo"></span>
 <img src="bookdown-bysh_files/figure-html/multGeo-1.png" alt="Geometric distributions with \(p = 0.3,\ 0.5\) and \(0.7\)." width="60%" />
@@ -545,18 +586,19 @@ Figure 3.2: Geometric distributions with <span class="math inline">\(p = 0.3,\ 0
 <p>Once again, we can use R to aid our calculations. The function <code>dgeom(y, p)</code> will output the probability of <span class="math inline">\(y\)</span> failures before the first success where <span class="math inline">\(Y \sim \textrm{Geometric}(p)\)</span>.</p>
 <p><strong>Example 3:</strong> Consider rolling a fair, six-sided die until a five appears. What is the probability of rolling the first five on the third roll?</p>
 <p>First note that <span class="math inline">\(p = 1/6\)</span>. We are then interested in <span class="math inline">\(P(Y=2)\)</span>, as we would want 2 failures before our success. We know that <span class="math inline">\(P(Y=2) = (5/6)^2(1/6) = 0.116\)</span>. Verifying through R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dgeom</span>(<span class="dv">2</span>, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.1157407</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="ch-distthry.html#cb41-1"></a><span class="kw">dgeom</span>(<span class="dv">2</span>, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1157</code></pre>
 <p>Thus, there is a 12% chance of rolling the first five on the third roll.</p>
 </div>
 <div id="negative-binomial-random-variable" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> Negative Binomial Random Variable</h3>
-What if we were to carry out multiple independent and identical Bernoulli trails until the <span class="math inline">\(r\)</span><sup>th</sup> success occurs? If we model <span class="math inline">\(Y\)</span>, the number of failures before the <span class="math inline">\(r\)</span><sup>th</sup> success, then <span class="math inline">\(Y\)</span> follows a <strong>negative binomial distribution</strong> where
-<span class="math display" id="eq:nBinomRV">\[\begin{equation}
+<p>What if we were to carry out multiple independent and identical Bernoulli trails until the <span class="math inline">\(r\)</span><sup>th</sup> success occurs?
+If we model <span class="math inline">\(Y\)</span>, the number of failures before the <span class="math inline">\(r\)</span><sup>th</sup> success, then <span class="math inline">\(Y\)</span> follows a <strong>negative binomial distribution</strong>  where</p>
+<p><span class="math display" id="eq:nBinomRV">\[\begin{equation}
 P(Y=y) = \binom{y + r - 1}{r-1} (1-p)^{y}(p)^r \quad \textrm{for}\quad y = 0, 1, \ldots, \infty.
 \tag{3.4}
 \end{equation}\]</span>
-<p>If <span class="math inline">\(Y \sim \textrm{Negative Binomial}(r, p)\)</span> then <span class="math inline">\({\operatorname{E}}(Y) = \frac{r(1-p)}{p}\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{\frac{r(1-p)}{p^2}}\)</span>. Figure <a href="ch-distthry.html#fig:multNBinom">3.3</a> displays three negative binomial distributions. Notice how centers shift right as <span class="math inline">\(r\)</span> increases, and left as <span class="math inline">\(p\)</span> increases.</p>
+If <span class="math inline">\(Y \sim \textrm{Negative Binomial}(r, p)\)</span> then <span class="math inline">\(\operatorname{E}(Y) = \frac{r(1-p)}{p}\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\frac{r(1-p)}{p^2}}\)</span>. Figure <a href="ch-distthry.html#fig:multNBinom">3.3</a> displays three negative binomial distributions. Notice how centers shift right as <span class="math inline">\(r\)</span> increases, and left as <span class="math inline">\(p\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multNBinom"></span>
 <img src="bookdown-bysh_files/figure-html/multNBinom-1.png" alt="Negative binomial distributions with different values of \(p\) and \(r\)." width="60%" />
@@ -564,45 +606,48 @@ P(Y=y) = \binom{y + r - 1}{r-1} (1-p)^{y}(p)^r \quad \textrm{for}\quad y = 0, 1,
 Figure 3.3: Negative binomial distributions with different values of <span class="math inline">\(p\)</span> and <span class="math inline">\(r\)</span>.
 </p>
 </div>
-Note that if we set <span class="math inline">\(r=1\)</span> then
-<span class="math display">\[\begin{align*}
+<p>Note that if we set <span class="math inline">\(r=1\)</span> then</p>
+<p><span class="math display">\[\begin{align*}
  P(Y=y) &amp;= \binom{y}{0} (1-p)^yp \\
         &amp;= (1-p)^yp \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
 \end{align*}\]</span>
-<p>which is the probability mass function of a geometric random variable. Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.</p>
-While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as <span class="math inline">\(\binom{x}{y}\)</span>), we can generalize our definition to allow non-integer values of <span class="math inline">\(r\)</span>. This will come in handy later when modeling. To do this, we need to first introduce the <strong>gamma function</strong>. The gamma function is defined as such
-<span class="math display" id="eq:gammaFun">\[\begin{equation}
+which is the probability mass function of a geometric random variable! Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.</p>
+<p>While negative binomial random variables typically are expressed as above using binomial coefficients (expressions such as <span class="math inline">\(\binom{x}{y}\)</span>), we can generalize our definition to allow non-integer values of <span class="math inline">\(r\)</span>. This will come in handy later when modeling. To do this, we need to first introduce the <strong>gamma function</strong>.  The gamma function is defined as such</p>
+<p><span class="math display" id="eq:gammaFun">\[\begin{equation}
 \Gamma(x)  = \int_0^\infty t^{x-1} e^{-t}dt.
 \tag{3.5}
 \end{equation}\]</span>
-One important property of the gamma function is that for any integer <span class="math inline">\(n\)</span>, <span class="math inline">\(\Gamma(n) = (n-1)!\)</span>. Applying this, we can generalize the pmf of a negative binomial variable such that
-<span class="math display">\[\begin{align*}
+One important property of the gamma function is that for any integer <span class="math inline">\(n\)</span>, <span class="math inline">\(\Gamma(n) = (n-1)!\)</span>. Applying this, we can generalize the pmf of a negative binomial variable such that</p>
+<p><span class="math display">\[\begin{align*}
  P(Y=y) &amp;= \binom{y + r - 1}{r-1}           (1-p)^{y}(p)^r \\
         &amp;= \frac{(y+r-1)!}{(r-1)!y!}         (1-p)^{y}(p)^r \\
         &amp;= \frac{\Gamma(y+r)}{\Gamma(r) y!}  (1-p)^{y}(p)^r \quad \textrm{for} \quad y = 0, 1, \ldots, \infty.
 \end{align*}\]</span>
-<p>With this formulation, <span class="math inline">\(r\)</span> is no longer restricted to non–negative integers; rather <span class="math inline">\(r\)</span> can be any non–negative real number.</p>
+With this formulation, <span class="math inline">\(r\)</span> is no longer restricted to non–negative integers; rather <span class="math inline">\(r\)</span> can be any non–negative real number.</p>
 <p>In R we can use the function <code>dnbinom(y, r, p)</code> for the probability of <span class="math inline">\(y\)</span> failures before the <span class="math inline">\(r\)</span><sup>th</sup> success given probability <span class="math inline">\(p\)</span>.</p>
 <p><strong>Example 4:</strong> A contestant on a game show needs to answer 10 questions correctly to win the jackpot. However, if they get 3 incorrect answers, they are kicked off of the show. Suppose one contestant consistently has a 90% chance of correctly responding to any question. What is the probability that she will correctly answer 10 questions before 3 incorrect responses?</p>
-Letting <span class="math inline">\(Y\)</span> represent the number of incorrect responses, and setting <span class="math inline">\(r = 10\)</span>, we want
-<span class="math display">\[\begin{align*}
+<p>Letting <span class="math inline">\(Y\)</span> represent the number of incorrect responses, and setting <span class="math inline">\(r = 10\)</span>, we want</p>
+<p><span class="math display">\[\begin{align*}
  P(Y &lt; 3) &amp;= P(Y=0) + P(Y=1) + P(Y=2) \\
-          &amp;= \binom{9}{9}(1-0.9)^0 (0.9)^{10} + \binom{10}{9}(1-0.9)^1 (0.9)^{9} + \binom{11}{9}(1-0.9)^2 (0.9)^{8} \\
+          &amp;= \binom{9}{9}(1-0.9)^0 (0.9)^{10} + \binom{10}{9}(1-0.9)^1 (0.9)^{10} \\
+          &amp; \quad + \binom{11}{9}(1-0.9)^2 (0.9)^{10} \\
           &amp;= 0.89
 \end{align*}\]</span>
-<p>Using R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">dnbinom</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> .<span class="dv">9</span>))  <span class="co"># or use pnbinom(2, 10, .9)</span></code></pre></div>
-<pre><code>## [1] 0.88913</code></pre>
+Using R:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="ch-distthry.html#cb43-1"></a><span class="co"># could also use pnbinom(2, 10, .9)</span></span>
+<span id="cb43-2"><a href="ch-distthry.html#cb43-2"></a><span class="kw">sum</span>(<span class="kw">dnbinom</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.9</span>))  </span></code></pre></div>
+<pre><code>## [1] 0.8891</code></pre>
 <p>Thus, there is a 89% chance that she gets 10 correct responses before missing 3.</p>
 </div>
 <div id="hypergeometric-random-variable" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> Hypergeometric Random Variable</h3>
-In all previous random variables, we considered a Bernoulli process, where the probability of a success remained constant across all trials. What if this probability is dynamic? The <strong>hypergeometric random variable</strong> helps us address some of these situations. Specifically, what if we wanted to select <span class="math inline">\(n\)</span> items <em>without replacement</em> from a collection of <span class="math inline">\(N\)</span> objects, <span class="math inline">\(m\)</span> of which are considered successes? In that case, the probability of selecting a “success” depends on the previous selections. If we model <span class="math inline">\(Y\)</span>, the number of successes after <span class="math inline">\(n\)</span> selections, <span class="math inline">\(Y\)</span> follows a <strong>hypergeometric distribution</strong> where
-<span class="math display" id="eq:hyperGeoRV">\[\begin{equation}
+<p>In all previous random variables, we considered a Bernoulli process, where the probability of a success remained constant across all trials. What if this probability is dynamic? The <strong>hypergeometric random variable</strong> helps us address some of these situations. Specifically, what if we wanted to select <span class="math inline">\(n\)</span> items <em>without replacement</em> from a collection of <span class="math inline">\(N\)</span> objects, <span class="math inline">\(m\)</span> of which are considered successes? In that case, the probability of selecting a “success” depends on the previous selections.
+If we model <span class="math inline">\(Y\)</span>, the number of successes after <span class="math inline">\(n\)</span> selections, <span class="math inline">\(Y\)</span> follows a <strong>hypergeometric distribution</strong>  where</p>
+<p><span class="math display" id="eq:hyperGeoRV">\[\begin{equation}
 P(Y=y) = \frac{\binom{m}{y} \binom{N-m}{n-y}}{\binom{N}{n}} \quad \textrm{for} \quad y = 0, 1, \ldots, \min(m,n).
 \tag{3.6}
-\end{equation}\]</span>
-<p>If <span class="math inline">\(Y\)</span> follows a hypergeometric distribution and we define <span class="math inline">\(p = m/N\)</span>, then <span class="math inline">\({\operatorname{E}}(Y) = np\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{np(1-p)\frac{N-n}{N-1}}\)</span>. Figure <a href="ch-distthry.html#fig:multHyper">3.4</a> displays several hypergeometric distributions. On the left, <span class="math inline">\(N\)</span> and <span class="math inline">\(n\)</span> are held constant. As <span class="math inline">\(m \rightarrow N/2\)</span>, the distribution becomes more and more symmetric. On the right, <span class="math inline">\(m\)</span> and <span class="math inline">\(N\)</span> are held constant. Both distributions are displayed on the same scale. We can see that as <span class="math inline">\(n \rightarrow N\)</span> (or <span class="math inline">\(n \rightarrow 0\)</span>), the distribution becomes less variable.</p>
+\end{equation}\]</span></p>
+<p>If <span class="math inline">\(Y\)</span> follows a hypergeometric distribution and we define <span class="math inline">\(p = m/N\)</span>, then <span class="math inline">\(\operatorname{E}(Y) = np\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{np(1-p)\frac{N-n}{N-1}}\)</span>. Figure <a href="ch-distthry.html#fig:multHyper">3.4</a> displays several hypergeometric distributions. On the left, <span class="math inline">\(N\)</span> and <span class="math inline">\(n\)</span> are held constant. As <span class="math inline">\(m \rightarrow N/2\)</span>, the distribution becomes more and more symmetric. On the right, <span class="math inline">\(m\)</span> and <span class="math inline">\(N\)</span> are held constant. Both distributions are displayed on the same scale. We can see that as <span class="math inline">\(n \rightarrow N\)</span> (or <span class="math inline">\(n \rightarrow 0\)</span>), the distribution becomes less variable.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multHyper"></span>
 <img src="bookdown-bysh_files/figure-html/multHyper-1.png" alt="Hypergeometric distributions with different values of \(m\), \(N\), and \(n\)." width="60%" />
@@ -613,46 +658,48 @@ Figure 3.4: Hypergeometric distributions with different values of <span class="m
 <p>If we wish to calculate probabilities through R, <code>dhyper(y, m, N-m, n)</code> gives <span class="math inline">\(P(Y=y)\)</span> given <span class="math inline">\(n\)</span> draws without replacement from <span class="math inline">\(m\)</span> successes and <span class="math inline">\(N-m\)</span> failures.</p>
 <p><strong>Example 5:</strong> Suppose a deck of cards is randomly shuffled. What is the probability that all 4 queens are located within the first 10 cards?</p>
 <p>We can model <span class="math inline">\(Y\)</span>, the number of queens in the first 10 cards as a hypergeometric random variable where <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(m = 4\)</span>, and <span class="math inline">\(N = 52\)</span>. Then, <span class="math inline">\(P(Y=4) = \displaystyle \frac{\binom{4}{4}\binom{48}{6}}{\binom{52}{10}} = 0.0008\)</span>. We can avoid this calculation through R, of course:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dhyper</span>(<span class="dv">4</span>, <span class="dt">m =</span> <span class="dv">4</span>, <span class="dt">n =</span> <span class="dv">48</span>, <span class="dt">k =</span> <span class="dv">10</span>)</code></pre></div>
-<pre><code>## [1] 0.0007756949</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="ch-distthry.html#cb45-1"></a><span class="kw">dhyper</span>(<span class="dv">4</span>, <span class="dt">m =</span> <span class="dv">4</span>, <span class="dt">n =</span> <span class="dv">48</span>, <span class="dt">k =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0007757</code></pre>
 <p>So, there is a 0.08% chance of all 4 queens being within the first 10 cards of a randomly shuffled deck of cards.</p>
 </div>
 <div id="poisson-random-variable" class="section level3">
 <h3><span class="header-section-number">3.3.6</span> Poisson Random Variable</h3>
-Sometimes, random variables are based on a <strong>Poisson process</strong>. In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval. We can then model <span class="math inline">\(Y\)</span>, the number of events in one of these sections with the <strong>Poisson distribution</strong>, where
-<span class="math display" id="eq:poissRV">\[\begin{equation}
+<p>Sometimes, random variables are based on a <strong>Poisson process</strong>.  In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval.
+We can then model <span class="math inline">\(Y\)</span>, the number of events in one of these sections with the <strong>Poisson distribution</strong>,  where</p>
+<p><span class="math display" id="eq:poissRV">\[\begin{equation}
 P(Y=y) = \frac{e^{-\lambda}\lambda^y}{y!} \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
 \tag{3.7}
 \end{equation}\]</span>
-<p>where <span class="math inline">\(\lambda\)</span> is the mean or expected count in the unit of time or space of interest. This probability mass function has <span class="math inline">\({\operatorname{E}}(Y) = \lambda\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{\lambda}\)</span>. Three Poisson distributions are displayed in Figure <a href="ch-distthry.html#fig:multPois">3.5</a>. Notice how distributions become more symmetric as <span class="math inline">\(\lambda\)</span> increases.</p>
+where <span class="math inline">\(\lambda\)</span> is the mean or expected count in the unit of time or space of interest.
+This probability mass function has <span class="math inline">\(\operatorname{E}(Y) = \lambda\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\lambda}\)</span>. Three Poisson distributions are displayed in Figure <a href="ch-distthry.html#fig:multPois">3.5</a>. Notice how distributions become more symmetric as <span class="math inline">\(\lambda\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multPois"></span>
-<img src="bookdown-bysh_files/figure-html/multPois-1.png" alt="Poisson distributions with \(\lambda = 0.5,\ 1\) and \(5\)." width="60%" />
+<img src="bookdown-bysh_files/figure-html/multPois-1.png" alt="Poisson distributions with \(\lambda = 0.5,\ 1\), and \(5\)." width="60%" />
 <p class="caption">
-Figure 3.5: Poisson distributions with <span class="math inline">\(\lambda = 0.5,\ 1\)</span> and <span class="math inline">\(5\)</span>.
+Figure 3.5: Poisson distributions with <span class="math inline">\(\lambda = 0.5,\ 1\)</span>, and <span class="math inline">\(5\)</span>.
 </p>
 </div>
 <p>If we wish to use R, <code>dpois(y, lambda)</code> outputs the probability of <span class="math inline">\(y\)</span> events given <span class="math inline">\(\lambda\)</span>.</p>
 <p><strong>Example 6:</strong> A small town’s police department issues 5 speeding tickets per month on average. Using a Poisson random variable, what is the likelihood that the police department issues 3 or fewer tickets in one month?</p>
-First, we note that here <span class="math inline">\(P(Y \le 3) = P(Y=0) + P(Y=1) + \cdots + P(Y=3)\)</span>. Applying the probability mass function for a Poisson distribution with <span class="math inline">\(\lambda = 5\)</span>, we find that
-<span class="math display">\[\begin{align*}
+<p>First, we note that here <span class="math inline">\(P(Y \le 3) = P(Y=0) + P(Y=1) + \cdots + P(Y=3)\)</span>. Applying the probability mass function for a Poisson distribution with <span class="math inline">\(\lambda = 5\)</span>, we find that</p>
+<p><span class="math display">\[\begin{align*}
  P(Y \le 3) &amp;= P(Y=0) + P(Y=1) + P(Y=2) + P(Y=3) \\
             &amp;= \frac{e^{-5}5^0}{0!} + \frac{e^{-5}5^1}{1!} + \frac{e^{-5}5^2}{2!} + \frac{e^{-5}5^3}{3!}\\
             &amp;= 0.27.
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>We can verify through R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lambda =</span> <span class="dv">5</span>))   <span class="co"># or use ppois(3, 5)</span></code></pre></div>
-<pre><code>## [1] 0.2650259</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="ch-distthry.html#cb47-1"></a><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lambda =</span> <span class="dv">5</span>))   <span class="co"># or use ppois(3, 5)</span></span></code></pre></div>
+<pre><code>## [1] 0.265</code></pre>
 <p>Therefore, there is a 27% chance of 3 or fewer tickets being issued within one month.</p>
 </div>
 </div>
 <div id="continuous-random-variables" class="section level2">
 <h2><span class="header-section-number">3.4</span> Continuous Random Variables</h2>
-A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using <strong>probability density functions</strong> (pdfs). Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, <span class="math inline">\(f(y)\)</span>, we can compute
-<span class="math display">\[\begin{align*}
+<p>A continuous random variable can take on an uncountably infinite number of values. With continuous random variables, we define probabilities using <strong>probability density functions</strong> (pdfs).  Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, <span class="math inline">\(f(y)\)</span>, we can compute</p>
+<p><span class="math display">\[\begin{align*}
 P(a \le Y \le b) = \int_a^b f(y)dy.
 \end{align*}\]</span>
-<p>This hints at a few properties of continuous random variables:</p>
+This hints at a few properties of continuous random variables:</p>
 <ul>
 <li><span class="math inline">\(\int_{-\infty}^{\infty} f(y)dy = 1\)</span>.<br />
 </li>
@@ -662,12 +709,12 @@ P(a \le Y \le b) = \int_a^b f(y)dy.
 </ul>
 <div id="exponential-random-variable" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Exponential Random Variable</h3>
-Suppose we have a Poisson process with rate <span class="math inline">\(\lambda\)</span>, and we wish to model the wait time <span class="math inline">\(Y\)</span> until the first event. We could model <span class="math inline">\(Y\)</span> using an <strong>exponential distribution</strong>, where
-<span class="math display" id="eq:expRV">\[\begin{equation}
+<p>Suppose we have a Poisson process with rate <span class="math inline">\(\lambda\)</span>, and we wish to model the wait time <span class="math inline">\(Y\)</span> until the first event. We could model <span class="math inline">\(Y\)</span> using an <strong>exponential distribution</strong>,  where</p>
+<p><span class="math display" id="eq:expRV">\[\begin{equation}
 f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y &gt; 0,
 \tag{3.8}
 \end{equation}\]</span>
-<p>where <span class="math inline">\({\operatorname{E}}(Y) = 1/\lambda\)</span>, <span class="math inline">\({\operatorname{SD}}(Y) = 1/\lambda\)</span>. Figure <a href="ch-distthry.html#fig:multExp">3.6</a> displays three exponential distributions with different <span class="math inline">\(\lambda\)</span> values. As <span class="math inline">\(\lambda\)</span> increases, <span class="math inline">\({\operatorname{E}}(Y)\)</span> tends towards 0, and distributions “die off” quicker.</p>
+where <span class="math inline">\(\operatorname{E}(Y) = 1/\lambda\)</span>, <span class="math inline">\(\operatorname{SD}(Y) = 1/\lambda\)</span>. Figure <a href="ch-distthry.html#fig:multExp">3.6</a> displays three exponential distributions with different <span class="math inline">\(\lambda\)</span> values. As <span class="math inline">\(\lambda\)</span> increases, <span class="math inline">\(\operatorname{E}(Y)\)</span> tends towards 0, and distributions “die off” quicker.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multExp"></span>
 <img src="bookdown-bysh_files/figure-html/multExp-1.png" alt="Exponential distributions with \(\lambda = 0.5, 1,\) and \(5\)." width="60%" />
@@ -675,25 +722,25 @@ f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y &gt; 0,
 Figure 3.6: Exponential distributions with <span class="math inline">\(\lambda = 0.5, 1,\)</span> and <span class="math inline">\(5\)</span>.
 </p>
 </div>
-<p>If we wish to use R, <code>pexp(y, lambda)</code> outputs the probability <span class="math inline">\(P(y &lt; Y)\)</span> given <span class="math inline">\(\lambda\)</span>.</p>
+<p>If we wish to use R, <code>pexp(y, lambda)</code> outputs the probability <span class="math inline">\(P(Y &lt; y)\)</span> given <span class="math inline">\(\lambda\)</span>.</p>
 <p><strong>Example 7:</strong> Refer to Example 6. What is the probability that 10 days or fewer elapse between two tickets being issued?</p>
-We know the town’s police issue 5 tickets per month. For simplicity’s sake, assume each month has 30 days. Then, the town issues <span class="math inline">\(\frac{1}{6}\)</span> tickets per day. That is <span class="math inline">\(\lambda = \frac{1}{6}\)</span>, and the average wait time between tickets is <span class="math inline">\(\frac{1}{1/6} = 6\)</span> days. Therefore,
-<span class="math display">\[\begin{align*}
+<p>We know the town’s police issue 5 tickets per month. For simplicity’s sake, assume each month has 30 days. Then, the town issues <span class="math inline">\(\frac{1}{6}\)</span> tickets per day. That is <span class="math inline">\(\lambda = \frac{1}{6}\)</span>, and the average wait time between tickets is <span class="math inline">\(\frac{1}{1/6} = 6\)</span> days. Therefore,</p>
+<p><span class="math display">\[\begin{align*}
 P(Y &lt; 10) = \int_{0}^{10} \textstyle \frac16 e^{-\frac16y} dy = 0.81.
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>We can also use R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.8111244</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="ch-distthry.html#cb49-1"></a><span class="kw">pexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] 0.8111</code></pre>
 <p>Hence, there is a 81% chance of waiting fewer than 10 days between tickets.</p>
 </div>
 <div id="gamma-random-variable" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Gamma Random Variable</h3>
-Once again consider a Poisson process. When discussing exponential random variables, we modeled the wait time before one event occurred. If <span class="math inline">\(Y\)</span> represents the wait time before <span class="math inline">\(r\)</span> events occur in a Poisson process with rate <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(Y\)</span> follows a <strong>gamma distribution</strong> where
-<span class="math display" id="eq:gammaRV">\[\begin{equation}
+<p>Once again consider a Poisson process. When discussing exponential random variables, we modeled the wait time before one event occurred. If <span class="math inline">\(Y\)</span> represents the wait time before <span class="math inline">\(r\)</span> events occur in a Poisson process with rate <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(Y\)</span> follows a <strong>gamma distribution</strong>  where</p>
+<p><span class="math display" id="eq:gammaRV">\[\begin{equation}
 f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \quad y &gt;0.
 \tag{3.9}
-\end{equation}\]</span>
-<p>If <span class="math inline">\(Y \sim \textrm{Gamma}(r, \lambda)\)</span> then <span class="math inline">\({\operatorname{E}}(Y) = r/\lambda\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sqrt{r/\lambda^2}\)</span>. A few gamma distributions are displayed in Figure <a href="ch-distthry.html#fig:multGamma">3.7</a>. Observe that means increase as <span class="math inline">\(r\)</span> increases, but decrease as <span class="math inline">\(\lambda\)</span> increases.</p>
+\end{equation}\]</span></p>
+<p>If <span class="math inline">\(Y \sim \textrm{Gamma}(r, \lambda)\)</span> then <span class="math inline">\(\operatorname{E}(Y) = r/\lambda\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{r/\lambda^2}\)</span>. A few gamma distributions are displayed in Figure <a href="ch-distthry.html#fig:multGamma">3.7</a>. Observe that means increase as <span class="math inline">\(r\)</span> increases, but decrease as <span class="math inline">\(\lambda\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multGamma"></span>
 <img src="bookdown-bysh_files/figure-html/multGamma-1.png" alt="Gamma distributions with different values of \(r\) and \(\lambda\)." width="60%" />
@@ -701,32 +748,32 @@ f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \qua
 Figure 3.7: Gamma distributions with different values of <span class="math inline">\(r\)</span> and <span class="math inline">\(\lambda\)</span>.
 </p>
 </div>
-Note that if we let <span class="math inline">\(r = 1\)</span>, we have the following pdf,
-<span class="math display">\[\begin{align*}
+<p>Note that if we let <span class="math inline">\(r = 1\)</span>, we have the following pdf,</p>
+<p><span class="math display">\[\begin{align*}
  f(y) &amp;= \frac{\lambda}{\Gamma(1)} y^{1-1} e^{-\lambda y} \\
       &amp;= \lambda e^{-\lambda y} \quad \textrm{for} \quad y &gt; 0,
 \end{align*}\]</span>
-<p>an exponential distribution. Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!</p>
+an exponential distribution. Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!</p>
 <p>Just like negative binomial, the pdf of a gamma distribution is defined for all real, non–negative <span class="math inline">\(r\)</span>.</p>
 <p>In R, <code>pgamma(y, r, lambda)</code> outputs the the probability <span class="math inline">\(P(Y &lt; y)\)</span> given <span class="math inline">\(r\)</span> and <span class="math inline">\(\lambda\)</span>.</p>
-<p><strong>Example 8:</strong> Two friends are out fishing. On average they catch one fish an hour, and their goal is to catch 5 fish. What is the probability that they take less than 3 hours to reach their goal?</p>
-Using a gamma random variable, we set <span class="math inline">\(r = 5\)</span> and <span class="math inline">\(\lambda = 1\)</span>. So,
-<span class="math display">\[\begin{align*}
-P(Y &lt; 3) = \int_0^3 \frac{1^4}{\Gamma(5)} y^{4} e^{-y}dy = 0.185.
-\end{align*}\]</span>
+<p><strong>Example 8:</strong> Two friends are out fishing. On average they catch two fish per hour, and their goal is to catch 5 fish. What is the probability that they take less than 3 hours to reach their goal?</p>
+<p>Using a gamma random variable, we set <span class="math inline">\(r = 5\)</span> and <span class="math inline">\(\lambda = 2\)</span>. So,</p>
+<p><span class="math display">\[\begin{align*}
+P(Y &lt; 3) = \int_0^3 \frac{2^4}{\Gamma(5)} y^{4} e^{-2y}dy = 0.715.
+\end{align*}\]</span></p>
 <p>Using R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pgamma</span>(<span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">1</span>)</code></pre></div>
-<pre><code>## [1] 0.1847368</code></pre>
-<p>There is a 18.5% chance of catching 5 fish within the first 3 hours.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="ch-distthry.html#cb51-1"></a><span class="kw">pgamma</span>(<span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.7149</code></pre>
+<p>There is a 71.5% chance of catching 5 fish within the first 3 hours.</p>
 </div>
 <div id="normal-gaussian-random-variable" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> Normal (Gaussian) Random Variable</h3>
-You have already at least informally seen normal random variables when evaluating OLS assumptions. To recall, we required responses to be normally distributed at each level of <span class="math inline">\(X\)</span>. Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on <span class="math inline">\(\mu\)</span>, the population mean of the variable of interest, and <span class="math inline">\(\sigma\)</span> the population standard deviation. We find that
-<span class="math display" id="eq:normalRV">\[\begin{equation}
+<p>You have already at least informally seen normal random variables when evaluating OLS assumptions. To recall, we required responses to be normally distributed at each level of <span class="math inline">\(X\)</span>. Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on <span class="math inline">\(\mu\)</span>, the population mean of the variable of interest, and <span class="math inline">\(\sigma\)</span>, the population standard deviation. We find that</p>
+<p><span class="math display" id="eq:normalRV">\[\begin{equation}
 f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{for} \quad -\infty &lt; y &lt; \infty.
 \tag{3.10}
-\end{equation}\]</span>
-<p>As the parameter names suggest, <span class="math inline">\({\operatorname{E}}(Y) = \mu\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \sigma\)</span>. Often, normal distributions are referred to as <span class="math inline">\(\textrm{N}(\mu, \sigma)\)</span>, implying a normal distribution with mean <span class="math inline">\(\mu\)</span>, and standard deviation <span class="math inline">\(\sigma\)</span>. The distribution <span class="math inline">\(\textrm{N}(0,1)\)</span> is often referred to as the <strong>standard normal distribution</strong>. A few normal distributions are displayed in Figure <a href="ch-distthry.html#fig:multNorm">3.8</a>.</p>
+\end{equation}\]</span></p>
+<p>As the parameter names suggest, <span class="math inline">\(\operatorname{E}(Y) = \mu\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sigma\)</span>. Often, normal distributions are referred to as <span class="math inline">\(\textrm{N}(\mu, \sigma)\)</span>, implying a normal distribution  with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The distribution <span class="math inline">\(\textrm{N}(0,1)\)</span> is often referred to as the <strong>standard normal distribution</strong>. A few normal distributions are displayed in Figure <a href="ch-distthry.html#fig:multNorm">3.8</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multNorm"></span>
 <img src="bookdown-bysh_files/figure-html/multNorm-1.png" alt="Normal distributions with different values of \(\mu\) and \(\sigma\)." width="60%" />
@@ -734,25 +781,25 @@ f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{f
 Figure 3.8: Normal distributions with different values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.
 </p>
 </div>
-<p>In R, <code>pnorm(y, mean, sd)</code> outputs the probability <span class="math inline">\(P(y &lt; Y)\)</span> given a mean and standard deviation.</p>
+<p>In R, <code>pnorm(y, mean, sd)</code> outputs the probability <span class="math inline">\(P(Y &lt; y)\)</span> given a mean and standard deviation.</p>
 <p><strong>Example 9:</strong> The weight of a box of Fruity Tootie cereal is approximately normally distributed with an average weight of 15 ounces and a standard deviation of 0.5 ounces. What is the probability that the weight of a randomly selected box is more than 15.5 ounces?</p>
-Using a normal distribution,
-<span class="math display">\[\begin{align*} 
+<p>Using a normal distribution,</p>
+<p><span class="math display">\[\begin{align*} 
 P(Y &gt; 15.5) = \int_{15.5}^{\infty} \frac{e^{-(y-15)^2/ (2\cdot 0.5^2)}}{\sqrt{2\pi\cdot 0.5^2}}dy = 0.159
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>We can use R as well:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="fl">15.5</span>, <span class="dt">mean =</span> <span class="dv">15</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 0.1586553</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="ch-distthry.html#cb53-1"></a><span class="kw">pnorm</span>(<span class="fl">15.5</span>, <span class="dt">mean =</span> <span class="dv">15</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1587</code></pre>
 <p>There is a 16% chance of a randomly selected box weighing more than 15.5 ounces.</p>
 </div>
 <div id="beta-random-variable" class="section level3">
 <h3><span class="header-section-number">3.4.4</span> Beta Random Variable</h3>
-So far, all of our continuous variables have had no upper bound. If we want to limit our possible values to a smaller interval, we may turn to a <strong>beta random variable</strong>. In fact, we often use beta random variables to model distributions of probabilities—bounded below by 0 and above by 1. The pdf is paramaterized by two values, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> (<span class="math inline">\(\alpha, \beta &gt; 0\)</span>). We can describe a beta random variable by the following pdf:
-<span class="math display" id="eq:betaRV">\[\begin{equation}
+<p>So far, all of our continuous variables have had no upper bound. If we want to limit our possible values to a smaller interval, we may turn to a <strong>beta random variable</strong>. In fact, we often use beta random variables to model distributions of probabilities—bounded below by 0 and above by 1. The pdf is parameterized by two values, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> (<span class="math inline">\(\alpha, \beta &gt; 0\)</span>). We can describe a beta random variable by the following pdf:</p>
+<p><span class="math display" id="eq:betaRV">\[\begin{equation}
 f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (1-y)^{\beta-1} \quad \textrm{for} \quad 0 &lt; y &lt; 1.
 \tag{3.11}
-\end{equation}\]</span>
-<p>If <span class="math inline">\(Y \sim \textrm{Beta}(\alpha, \beta)\)</span>, then <span class="math inline">\({\operatorname{E}}(Y) = \alpha/(\alpha + \beta)\)</span> and <span class="math inline">\({\operatorname{SD}}(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}\)</span>. Figure <a href="ch-distthry.html#fig:multBeta">3.9</a> displays several beta distributions. Note that when <span class="math inline">\(\alpha = \beta\)</span>, distributions are symmetric. The distribution is left-skewed when <span class="math inline">\(\alpha &gt; \beta\)</span> and right-skewed when <span class="math inline">\(\beta &gt; \alpha\)</span>.</p>
+\end{equation}\]</span></p>
+<p>If <span class="math inline">\(Y \sim \textrm{Beta}(\alpha, \beta)\)</span>, then <span class="math inline">\(\operatorname{E}(Y) = \alpha/(\alpha + \beta)\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}\)</span>. Figure <a href="ch-distthry.html#fig:multBeta">3.9</a> displays several beta distributions.  Note that when <span class="math inline">\(\alpha = \beta\)</span>, distributions are symmetric. The distribution is left-skewed when <span class="math inline">\(\alpha &gt; \beta\)</span> and right-skewed when <span class="math inline">\(\beta &gt; \alpha\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multBeta"></span>
 <img src="bookdown-bysh_files/figure-html/multBeta-1.png" alt="Beta distributions with different values of \(\alpha\) and \(\beta\)." width="60%" />
@@ -760,31 +807,31 @@ f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (
 Figure 3.9: Beta distributions with different values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.
 </p>
 </div>
-If <span class="math inline">\(\alpha = \beta = 1\)</span>, then
-<span class="math display">\[\begin{align*}
+<p>If <span class="math inline">\(\alpha = \beta = 1\)</span>, then</p>
+<p><span class="math display">\[\begin{align*}
  f(y) &amp;= \frac{\Gamma(1)}{\Gamma(1)\Gamma(1)}y^0(1-y)^0 \\
       &amp;= 1 \quad \textrm{for} \quad 0 &lt; y &lt; 1.
 \end{align*}\]</span>
-<p>This distribution is referred to as a <strong>uniform distribution</strong>.</p>
+This distribution is referred to as a <strong>uniform distribution</strong>.</p>
 <p>In R, <code>pbeta(y, alpha, beta)</code> yields <span class="math inline">\(P(Y &lt; y)\)</span> assuming <span class="math inline">\(Y \sim \textrm{Beta}(\alpha, \beta)\)</span>.</p>
 <p><strong>Example 10:</strong> A private college in the Midwest models the probabilities of prospective students accepting an admission decision through a beta distribution with <span class="math inline">\(\alpha = \frac{4}{3}\)</span> and <span class="math inline">\(\beta = 2\)</span>. What is the probability that a randomly selected student has probability of accepting greater than 80%?</p>
-Letting <span class="math inline">\(Y \sim \textrm{Beta}(4/3,2)\)</span>, we can calculate
-<span class="math display">\[\begin{align*} 
+<p>Letting <span class="math inline">\(Y \sim \textrm{Beta}(4/3,2)\)</span>, we can calculate</p>
+<p><span class="math display">\[\begin{align*} 
 P(Y &gt; 0.8) = \int_{0.8}^1 \frac{\Gamma(4/3 + 2)}{\Gamma(4/3)\Gamma(2)} y^{4/3-1} (1-y)^{2-1}dy = 0.06.
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Alternatively, in R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pbeta</span>(<span class="fl">0.8</span>, <span class="dt">shape1 =</span> <span class="dv">4</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 0.05930466</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="ch-distthry.html#cb55-1"></a><span class="kw">pbeta</span>(<span class="fl">0.8</span>, <span class="dt">shape1 =</span> <span class="dv">4</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0593</code></pre>
 <p>Hence, there is a 6% chance that a randomly selected student has a probability of accepting an admission decision above 80%.</p>
 </div>
 </div>
 <div id="distributions-used-in-testing" class="section level2">
 <h2><span class="header-section-number">3.5</span> Distributions used in Testing</h2>
-<p>We have spent most of this chapter discussing probability distributions that may come in handy when modeling. The following distributions, while rarely used in modeling, prove useful in hypothesis testing as many test statistics follow these distributions.</p>
+<p>We have spent most of this chapter discussing probability distributions that may come in handy when modeling. The following distributions, while rarely used in modeling, prove useful in hypothesis testing as certain commonly used test statistics follow these distributions.</p>
 <div id="chi2-distribution" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> <span class="math inline">\(\chi^2\)</span> Distribution</h3>
-<p>You have probably already encountered <span class="math inline">\(\chi^2\)</span> tests before. For example, <span class="math inline">\(\chi^2\)</span> tests are used with contingency tables to investigate the association between row and column variables. <span class="math inline">\(\chi^2\)</span> tests are also used in goodness-of-fit testing such as comparing counts expected according to Mendelian ratios to observed data. In those situations, <span class="math inline">\(\chi^2\)</span> tests compare observed counts to what would be expected under the null hypotheses and reject the null when these observed discrepancies are too large.</p>
-<p>In this course, we encounter <span class="math inline">\(\chi^2\)</span> distributions in several testing situations. In Section <a href="ch-beyondmost.html#sec-lrtest">2.6.5</a> we performed likelihood ratio tests (LRTs) to compare nested models. When a larger model provides no significant improvement over a reduced model, the LRT statistic (which is twice the difference in the log-likelihoods) follows a <span class="math inline">\(\chi^2\)</span> distribution with the degrees of freedom equal to the difference in the number of parameters.</p>
+<p>You have probably already encountered <span class="math inline">\(\chi^2\)</span> tests before. For example, <span class="math inline">\(\chi^2\)</span> tests are used with two-way contingency tables to investigate the association between row and column variables. <span class="math inline">\(\chi^2\)</span> tests are also used in goodness-of-fit testing such as comparing counts expected according to Mendelian ratios to observed data. In those situations, <span class="math inline">\(\chi^2\)</span> tests compare observed counts to what would be expected under the null hypotheses and reject the null when these observed discrepancies are too large.</p>
+<p>In this course, we encounter <span class="math inline">\(\chi^2\)</span> distributions  in several testing situations. In Section <a href="ch-beyondmost.html#sec-lrtest">2.6.5</a> we performed likelihood ratio tests (LRTs) to compare nested models. When a larger model provides no significant improvement over a reduced model, the LRT statistic (which is twice the difference in the log-likelihoods) follows a <span class="math inline">\(\chi^2\)</span> distribution with the degrees of freedom equal to the difference in the number of parameters.</p>
 <p>In general, <span class="math inline">\(\chi^2\)</span> distributions with <span class="math inline">\(k\)</span> degrees of freedom are right skewed with a mean <span class="math inline">\(k\)</span> and standard deviation <span class="math inline">\(\sqrt{2k}\)</span>. Figure <a href="ch-distthry.html#fig:multChisq">3.10</a> displays chi-square distributions with different values of <span class="math inline">\(k\)</span>.</p>
 <p>The <span class="math inline">\(\chi^2\)</span> distribution is a special case of gamma distributions. Specifically, a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k\)</span> degrees of freedom can be expressed as a gamma distribution with <span class="math inline">\(\lambda = 1/2\)</span> and <span class="math inline">\(r = k/2\)</span>.</p>
 
@@ -798,21 +845,20 @@ Figure 3.10: <span class="math inline">\(\chi^2\)</span> distributions with 1, 3
 </div>
 <div id="students-tdistribution" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> Student’s <span class="math inline">\(t\)</span>–Distribution</h3>
-<p>You likely have seen Student’s <span class="math inline">\(t\)</span>–distribution in a previous statistics course, developed by William Sealy Gosset under the penname <em>Student</em>. You may have used it when drawing inferences about a normally distributed population with an unknown population standard deviation. <span class="math inline">\(t\)</span>–distributions are parameterized by their degrees of freedom, <span class="math inline">\(k\)</span>.</p>
+<p>You likely have seen Student’s <span class="math inline">\(t\)</span>–distribution  (developed by William Sealy Gosset under the penname <em>Student</em>) in a previous statistics course. You may have used it when drawing inferences about the means of normally distributed populations with unknown population standard deviations. <span class="math inline">\(t\)</span>–distributions are parameterized by their degrees of freedom, <span class="math inline">\(k\)</span>.</p>
 <p>A <span class="math inline">\(t\)</span>–distribution with <span class="math inline">\(k\)</span> degrees of freedom has mean <span class="math inline">\(0\)</span> and standard deviation <span class="math inline">\(k/(k-2)\)</span> (standard deviation is only defined for <span class="math inline">\(k &gt; 2\)</span>). As <span class="math inline">\(k \rightarrow \infty\)</span> the <span class="math inline">\(t\)</span>-distribution approaches the standard normal distribution.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multT"></span>
-<img src="bookdown-bysh_files/figure-html/multT-1.png" alt="\(t\)–distributions with 1, 2, and 10 degrees of freedom." width="60%" />
+<img src="bookdown-bysh_files/figure-html/multT-1.png" alt="\(t\)–distributions with 1, 2, 10, and Infinite degrees of freedom." width="60%" />
 <p class="caption">
-Figure 3.11: <span class="math inline">\(t\)</span>–distributions with 1, 2, and 10 degrees of freedom.
+Figure 3.11: <span class="math inline">\(t\)</span>–distributions with 1, 2, 10, and Infinite degrees of freedom.
 </p>
 </div>
-<p>Figure <a href="ch-distthry.html#fig:multT">3.11</a> displays some <span class="math inline">\(t\)</span>-distributions.</p>
-<p>In R, <code>pt(y, df)</code> outputs <span class="math inline">\(P(Y &lt; y)\)</span> given <span class="math inline">\(k\)</span> degrees of freedom.</p>
+<p>Figure <a href="ch-distthry.html#fig:multT">3.11</a> displays some <span class="math inline">\(t\)</span>-distributions, where a <span class="math inline">\(t\)</span>-distribution with infinite degrees of freedom is equivalent to a standard normal distribution (with mean 0 and standard deviation 1). In R, <code>pt(y, df)</code> outputs <span class="math inline">\(P(Y &lt; y)\)</span> given <span class="math inline">\(k\)</span> degrees of freedom.</p>
 </div>
 <div id="fdistribution" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> <span class="math inline">\(F\)</span>–Distribution</h3>
-<p><span class="math inline">\(F\)</span>–distributions are also used when performing statistical tests. Like the <span class="math inline">\(\chi^2\)</span> distribution, the values from an <span class="math inline">\(F\)</span>–distribution are non-negative and the distribution is right skewed; in fact, an <span class="math inline">\(F\)</span>–distribution can be derived as the ratio of two <span class="math inline">\(\chi^2\)</span> random variables. R.A. Fisher (for whom the test is named) devised this test statistic to compare two different estimates of the same variance parameter, and it has a prominent role in Analysis of Variance (ANOVA). Model comparisons are often based on the comparison of variance estimates, e.g. the extra sums-of-squares <span class="math inline">\(F\)</span> test. <span class="math inline">\(F\)</span>–distributions are indexed by two degrees-of-freedom values, one for the numerator (<span class="math inline">\(k_1\)</span>) and one for the denominator (<span class="math inline">\(k_2\)</span>). The expected value for an <span class="math inline">\(F\)</span>–distribution with <span class="math inline">\(k_1, k_2\)</span> degrees of freedom under the null hypothesis is <span class="math inline">\(\frac{k_2}{k_2 - 2}\)</span>, which approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(k_2 \rightarrow \infty\)</span>. The standard deviation decreases as <span class="math inline">\(k_1\)</span> increases for fixed <span class="math inline">\(k_2\)</span>, as seen in Figure <a href="ch-distthry.html#fig:multF">3.12</a>, which illustrates several F distributions.</p>
+<p><span class="math inline">\(F\)</span>–distributions  are also used when performing statistical tests. Like the <span class="math inline">\(\chi^2\)</span> distribution, the values from an <span class="math inline">\(F\)</span>–distribution are non-negative and the distribution is right skewed; in fact, an <span class="math inline">\(F\)</span>–distribution can be derived as the ratio of two <span class="math inline">\(\chi^2\)</span> random variables. R.A. Fisher (for whom the test is named) devised this test statistic to compare two different estimates of the same variance parameter, and it has a prominent role in Analysis of Variance (ANOVA). Model comparisons are often based on the comparison of variance estimates, e.g. the extra sums-of-squares <span class="math inline">\(F\)</span> test. <span class="math inline">\(F\)</span>–distributions are indexed by two degrees-of-freedom values, one for the numerator (<span class="math inline">\(k_1\)</span>) and one for the denominator (<span class="math inline">\(k_2\)</span>). The expected value for an <span class="math inline">\(F\)</span>–distribution with <span class="math inline">\(k_1, k_2\)</span> degrees of freedom under the null hypothesis is <span class="math inline">\(\frac{k_2}{k_2 - 2}\)</span>, which approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(k_2 \rightarrow \infty\)</span>. The standard deviation decreases as <span class="math inline">\(k_1\)</span> increases for fixed <span class="math inline">\(k_2\)</span>, as seen in Figure <a href="ch-distthry.html#fig:multF">3.12</a>, which illustrates several F distributions.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multF"></span>
 <img src="bookdown-bysh_files/figure-html/multF-1.png" alt="\(F\)–distributions with different degrees of freedom." width="60%" />
@@ -914,7 +960,7 @@ Hypergeometric
 <span class="math inline">\(0, 1, \ldots , \min(m,n)\)</span>
 </td>
 <td style="text-align:left;">
-Number of successes after <span class="math inline">\(n\)</span> trails without replacement
+Number of successes after <span class="math inline">\(n\)</span> trials without replacement
 </td>
 </tr>
 <tr>
@@ -1015,34 +1061,34 @@ Useful for modeling probabilities
 <li><p>How are exponential and Poisson random variables related?</p></li>
 <li><p>How are geometric and exponential random variables similar? How are they different?</p></li>
 <li><p>A university’s college of sciences is elececting a new board of 5 members. There are 35 applicants, 10 of which come from the math department. What distribution could be helpful to model the probability of electing <span class="math inline">\(X\)</span> board members from the math department?</p></li>
-<li><p>Chapter 1 asked you to consider a scenario where <em>“Minnesota Pollution Control Agency is interested in using traffic volume data to generate predictions of particulate distributions as measured in counts per cubic feet.”</em> What distribution might be useful to model this count per cubic foot? Why?</p></li>
-<li><p>Chapter 1 also asked you to consider a scenario where <em>“Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify as having a low birthweight if their birthweight is less than 2500 gm, hence our response is binary: 1 for low birthweight, and 0 when the birthweight is not low.”</em> What distribution might be useful to model if a newborn has low birthweight?</p></li>
+<li><p>Chapter 1 asked you to consider a scenario where <em>“The Minnesota Pollution Control Agency is interested in using traffic volume data to generate predictions of particulate distributions as measured in counts per cubic feet.”</em> What distribution might be useful to model this count per cubic foot? Why?</p></li>
+<li><p>Chapter 1 also asked you to consider a scenario where <em>“Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify a low birthweight as below 2500 g, hence our response is binary: 1 for low birthweight, and 0 when the birthweight is not low.”</em> What distribution might be useful to model if a newborn has low birthweight?</p></li>
 <li><p>Chapter 1 also asked you to consider a scenario where <em>“Researchers are interested in how elephant age affects mating patterns among males. In particular, do older elephants have greater mating success, and is there an optimal age for mating among males? Data collected includes, for each elephant, age and number of matings in a given year.”</em> Which distribution would be useful to model the number of matings in a given year for these elephants? Why?</p></li>
 <li><p>Describe a scenario which could be modeled using a gamma distribution.</p></li>
 </ol>
 </div>
-<div id="guided-exercises-1" class="section level3">
+<div id="guided-exercises-2" class="section level3">
 <h3><span class="header-section-number">3.7.2</span> Guided Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><strong>Beta-Biomial Distribution.</strong> We can generate more distributions by mixing two random variables. Beta-binomial random variables are binomial random variables with fixed <span class="math inline">\(n\)</span> whose parameter <span class="math inline">\(p\)</span> follows a beta distribution with fixed parameters <span class="math inline">\(\alpha, \beta\)</span>. In more detail, we would first draw <span class="math inline">\(p_1\)</span> from our beta distribution, consider a binomial distribution with parameters <span class="math inline">\(n, p_1\)</span>, and generate our first observation <span class="math inline">\(y_1\)</span>, a random number of successes from a binomial (<span class="math inline">\(n, p_1\)</span>) distribution. Then, we would generate a new <span class="math inline">\(p_2\)</span> from our beta distribution, and use a binomial distribution with parameters <span class="math inline">\(n, p_2\)</span> to generate our second observation <span class="math inline">\(y_2\)</span>. We would continue this process until desired.</li>
-</ol>
+<li><p><strong>Beta-Biomial Distribution.</strong> We can generate more distributions by mixing two random variables.  Beta-binomial random variables are binomial random variables with fixed <span class="math inline">\(n\)</span> whose parameter <span class="math inline">\(p\)</span> follows a beta distribution with fixed parameters <span class="math inline">\(\alpha, \beta\)</span>. In more detail, we would first draw <span class="math inline">\(p_1\)</span> from our beta distribution, and then generate our first observation <span class="math inline">\(y_1\)</span>, a random number of successes from a binomial (<span class="math inline">\(n, p_1\)</span>) distribution. Then, we would generate a new <span class="math inline">\(p_2\)</span> from our beta distribution, and use a binomial distribution with parameters <span class="math inline">\(n, p_2\)</span> to generate our second observation <span class="math inline">\(y_2\)</span>. We would continue this process until desired.</p>
 <p>Note that all of the observations <span class="math inline">\(y_i\)</span> will be integer values from <span class="math inline">\(0, 1, \ldots, n\)</span>. With this in mind, use <code>rbinom()</code> to simulate 1,000 observations from a plain old vanilla binomial random variable with <span class="math inline">\(n=10\)</span> and <span class="math inline">\(p=0.8\)</span>. Plot a histogram of these binomial observations. Then, do the following to generate a beta-binomial distribution:</p>
 <ol style="list-style-type: lower-alpha">
 <li>Draw <span class="math inline">\(p_i\)</span> from the beta distribution with <span class="math inline">\(\alpha=4\)</span> and <span class="math inline">\(\beta=1\)</span>.</li>
 <li>Generate an observation <span class="math inline">\(y_i\)</span> from a binomial distribution with <span class="math inline">\(n=10\)</span> and <span class="math inline">\(p = p_i\)</span>.</li>
-<li>Repeat 1,000 times (<span class="math inline">\(i=1,\ldots,1000\)</span>).</li>
+<li>Repeat (a) and (b) 1,000 times (<span class="math inline">\(i=1,\ldots,1000\)</span>).</li>
 <li>Plot a histogram of these beta-binomial observations.</li>
 </ol>
-<p>Compare the histograms of the “plain old” binomial and beta-binomial distributions. How do their shapes, standard deviations, means, possible values, etc. compare?</p>
-<ol start="2" style="list-style-type: decimal">
+<p>Compare the histograms of the “plain old” binomial and beta-binomial distributions. How do their shapes, standard deviations, means, possible values, etc. compare?</p></li>
 <li><p><strong>Gamma-Poisson Mixture I</strong> Use the R function <code>rpois()</code> to generate 10,000 <span class="math inline">\(x_i\)</span> from a plain old vanilla Poisson random variable, <span class="math inline">\(X \sim \textrm{Poisson}(\lambda=1.5)\)</span>. Plot a histogram of this distribution and note its mean and standard deviation. Next, let <span class="math inline">\(Y \sim \textrm{Gamma}(r = 3, \lambda = 2)\)</span> and use <code>rgamma()</code> to generate 10,000 random <span class="math inline">\(y_i\)</span> from this distribution. Now, consider 10,000 different Poisson distributions where <span class="math inline">\(\lambda_i = y_i\)</span>. Randomly generate one <span class="math inline">\(z_i\)</span> from each Poisson distribution. Plot a histogram of these <span class="math inline">\(z_i\)</span> and compare it to your original histogram of <span class="math inline">\(X\)</span> (where <span class="math inline">\(X \sim \textrm{Poisson}(1.5)\)</span>). How do the means and standard deviations compare?</p></li>
-<li><p><strong>Gamma-Poisson Mixture II</strong> A negative binomial distribution can actually be expressed as a gamma-Poisson mixture. In the previous problem’s gamma-Poisson mixture <span class="math inline">\(Z \sim \textrm{Poisson}(\lambda)\)</span> where <span class="math inline">\(\lambda \sim \textrm{Gamma}(r = 3, \lambda&#39; = 2)\)</span>. Find the parameters of a negative binomial distribution <span class="math inline">\(X \sim \textrm{Negative Binomial}(r, p)\)</span> such that <span class="math inline">\(X\)</span> is equivalent to <span class="math inline">\(Z\)</span>. As a hint, the means of both distributions must be the same, so <span class="math inline">\(r(1-p)/p = 3/2\)</span>. Show through histograms and summary statistics that your negative binomial distribution is equivalent to your gamma-Poisson mixture from Problem 2. Argue that if you want a NB(<span class="math inline">\(r\)</span>, <span class="math inline">\(p\)</span>) random variable, you can instead sample from a Poisson distribution, where the <span class="math inline">\(\lambda\)</span> values are themselves sampled from a gamma distribution with parameters <span class="math inline">\(r\)</span> and <span class="math inline">\(\lambda&#39; = \frac{p}{1-p}\)</span>.</p></li>
+<li><p><strong>Gamma-Poisson Mixture II</strong> A negative binomial distribution can actually be expressed as a gamma-Poisson mixture.
+In the previous problem’s gamma-Poisson mixture <span class="math inline">\(Z \sim \textrm{Poisson}(\lambda)\)</span> where <span class="math inline">\(\lambda \sim \textrm{Gamma}(r = 3, \lambda&#39; = 2)\)</span>.
+Find the parameters of a negative binomial distribution <span class="math inline">\(X \sim \textrm{Negative Binomial}(r, p)\)</span> such that <span class="math inline">\(X\)</span> is equivalent to <span class="math inline">\(Z\)</span>. As a hint, the means of both distributions must be the same, so <span class="math inline">\(r(1-p)/p = 3/2\)</span>. Show through histograms and summary statistics that your negative binomial distribution is equivalent to your gamma-Poisson mixture from Problem 2. Argue that if you want a NB(<span class="math inline">\(r\)</span>, <span class="math inline">\(p\)</span>) random variable, you can instead sample from a Poisson distribution, where the <span class="math inline">\(\lambda\)</span> values are themselves sampled from a gamma distribution with parameters <span class="math inline">\(r\)</span> and <span class="math inline">\(\lambda&#39; = \frac{p}{1-p}\)</span>.</p></li>
 <li><p><strong>Mixture of Two Normal Distributions</strong> Sometimes, a value may be best modeled by a mixture of two normal distributions. We would have 5 parameters in this case— <span class="math inline">\(\mu_1, \sigma_1, \mu_2, \sigma_2, \alpha\)</span>, where <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> is a mixing parameter determining the probability that an observation comes from the first distribution. We would then have <span class="math inline">\(f(y) = \alpha\ f_1(y) + (1-\alpha)\ f_2(y)\)</span> (where <span class="math inline">\(f_i(y)\)</span> is the pdf of the normal distribution with <span class="math inline">\(\mu_i, \sigma_i\)</span>). One phenomena which could be modeled this way would be the waiting times between eruptions of Old Faithful geyser in Yellowstone National Park. The data can be accessed in R through <code>faithful</code>, and a histogram of wait times can be found in Figure <a href="ch-distthry.html#fig:faithful">3.13</a>. The MLEs of our 5 parameters would be the combination of values that produces the maximum probability of our observed data. We will try to approximate MLEs by hand. Find a combination of <span class="math inline">\(\mu_1, \sigma_1, \mu_2, \sigma_2, \alpha\)</span> for this distribution such that the logged likelihood is above -1050. (The command <code>dnorm(x, mean, sd)</code>, which outputs <span class="math inline">\(f(y)\)</span> assuming <span class="math inline">\(Y \sim \textrm{N}(\mu, \sigma)\)</span>, will be helpful in calculating likelihoods.)</p></li>
 </ol>
 <div class="figure" style="text-align: center"><span id="fig:faithful"></span>
-<img src="bookdown-bysh_files/figure-html/faithful-1.png" alt="Waiting time between erruptions of Old Faithful." width="60%" />
+<img src="bookdown-bysh_files/figure-html/faithful-1.png" alt="Waiting time between eruptions of Old Faithful." width="60%" />
 <p class="caption">
-Figure 3.13: Waiting time between erruptions of Old Faithful.
+Figure 3.13: Waiting time between eruptions of Old Faithful.
 </p>
 </div>
 
@@ -1058,13 +1104,15 @@ Figure 3.13: Waiting time between erruptions of Old Faithful.
 <a href="ch-poissonreg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1072,12 +1120,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1092,7 +1139,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-bysh.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
@@ -1106,10 +1157,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

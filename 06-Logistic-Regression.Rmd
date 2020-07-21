@@ -46,7 +46,7 @@ c. Are the number of votes for a congressional candidate associated with the amo
 
 Examples (a) and (b) above would be considered to have binary responses (Does a student binge drink?  Was a patient diagnosed with cancer?), assuming that we have a unique set of covariates for each individual student or patient.
 
-**Binomial Responses:** Also recall from Section \@ref(sec-binomial) that binomial responses are number of successes in $n$ identical, independent trials with constant probability $p$ of success. A sequence of independent trials like this with the same probability of success is called a **Bernoulli process** \index{Bernoulli process}.  As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, $p$, is associated with relevant covariates. 
+**Binomial Responses:** Also recall from Section \@ref(sec-binomial) that binomial responses are number of successes in $n$ identical, independent trials with constant probability $p$ of success. A sequence of independent trials like this with the same probability of success is called a **Bernoulli process**. \index{Bernoulli process}  As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, $p$, is associated with relevant covariates. 
 
 Example (c) above would be considered to have a binonial response, assuming we have vote totals at the congressional district level rather than information on individual voters.
 
@@ -110,7 +110,9 @@ Tot <- c(24,180,204)
 #tab:soccerdata
 table1chp6 <- data.frame(State,Saves,Scores,Tot)
 colnames(table1chp6) <- c(" ","Saves","Scores","Total")
-kable(table1chp6, booktabs=T,caption="Soccer goalkeepers' penalty kick saves when their team is and is not behind.  Source: Roskes et al. 2011 Psychological Science")
+kable(table1chp6, booktabs=T,
+      caption="Soccer goalkeepers' penalty kick saves when their team is and is not behind.  Source: Roskes et al. 2011 Psychological Science") %>%
+  kable_styling(full_width = F)
 ```
 
 ### Modeling Odds
@@ -125,12 +127,12 @@ In our example, it is also possible to estimate the probability of a goal, $p$, 
 
 ### Logistic Regression Models for Binomial Responses
 
-We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log($\lambda$) in Poisson regression, which allowed the response to take on values from $-\infty$ to $\infty$, we will model the log(odds), the __logit__\index{logit}, in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:
+We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log($\lambda$) in Poisson regression, which allowed the response to take on values from $-\infty$ to $\infty$, we will model the log(odds), the __logit__, \index{logit} in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:
 
 \begin{equation*}
 \log\left(\frac{p}{1 - p}\right)=\beta_0+\beta_1X 
  \end{equation*}
-Models of this form are referred to as __binomial regression models__,\index{binomial logistic regression} or more generally as __logistic regression models__. \index{logistic regression}  Here we provide intuition for using and interpreting logistic regression models, and then in the short optional section that follows, we present rationale for these models using GLM theory.
+Models of this form are referred to as __binomial regression models__, \index{binomial logistic regression} or more generally as __logistic regression models__. \index{logistic regression}  Here we provide intuition for using and interpreting logistic regression models, and then in the short optional section that follows, we present rationale for these models using GLM theory.
 
 In our example we could define $X=0$ for not behind and $X=1$ for behind and fit the model:
 
@@ -278,7 +280,9 @@ NumVotes <- c(110,15,1804,68)
 #tab:sampleRows
 table2chp6 <- data.frame(community, pctBlack, distance, YesVotes, NumVotes)
 colnames(table2chp6) <- c("community","pctBlack", "distance","YesVotes","NumVotes")
-kable(table2chp6, booktabs=T, caption="Sample of the data for the Hale County, Alabama, railroad subsidy vote.")
+kable(table2chp6, booktabs=T, 
+      caption="Sample of the data for the Hale County, Alabama, railroad subsidy vote.") %>%
+  kable_styling(full_width = F)
 ```
 
 ```{r, include=FALSE}
@@ -319,7 +323,7 @@ ggplot(rrHale.df, aes(x=distance, y=pctBlack, color=InFavor)) +
 Recall that a model with two covariates has the form:
 
  \[\log(\textrm{odds}) = \log\left(\frac{p}{1-p}\right) = \beta_0+\beta_1X_1+\beta_2X_2.\]
-where $p$ is the proportion of Yes votes in a community.  In logistic regression, we expect the logits to be a linear function of $X$, the predictors. To assess the linearity assumption, we construct **empirical logit plots** \index{empirical logit plot}, where "empirical" means "based on sample data." Empirical logits are computed for each community by taking $\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)$.  In Figure \@ref(fig:emplogits), we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes with only 59.4\% black. 
+where $p$ is the proportion of Yes votes in a community.  In logistic regression, we expect the logits to be a linear function of $X$, the predictors. To assess the linearity assumption, we construct **empirical logit plots**, \index{empirical logit plot} where "empirical" means "based on sample data." Empirical logits are computed for each community by taking $\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)$.  In Figure \@ref(fig:emplogits), we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes with only 59.4\% black. 
 
 ```{r,emplogits, fig.align="center",out.width="60%", fig.cap='Empirical logit plots for the Railroad Referendum data.',echo=FALSE, warning=FALSE, message=FALSE}
 #elogitXdist and elogitXperBlk
@@ -403,7 +407,7 @@ Despite the somewhat strong negative correlation between percent black and dista
 
 ### Tests for significance of model coefficients {#sec-logisticInf}
 
-Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(cs-philippines) with Poisson regression, there are two primary approaches to testing signficance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__ \index{Wald-type test}.
+Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(cs-philippines) with Poisson regression, there are two primary approaches to testing signficance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__. \index{Wald-type test}
 
 With our larger model given by $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i$, the Wald test produces a highly significant p-value ($Z=\frac{-0.0132}{0.0039}= -3.394$, $p=.00069$) indicating significant evidience that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
 
@@ -446,7 +450,7 @@ and then exponentiating endpoints if we prefer a confidence interval for the odd
 
 Thus, we can be 95\% confident that a 10\% increase in the proportion of black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance.  This same relationship could be expressed as (a) between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the black population, or (b) between a 5.7\% ($1/e^{-.056}$) and a 23.1\% ($1/e^{-.208}$) increase in odds for each 10\% decrease in the black population, after adjusting for distance.  Of course, with $n=11$, we should be cautious about relying on a Wald-type interval in this example.
 
-Another approach available in R is the **profile likelihood method** \index{profile likelihood}, similar to Section \@ref(cs-philippines).
+Another approach available in R is the **profile likelihood method**, \index{profile likelihood} similar to Section \@ref(cs-philippines).
 
 ```{r, comment=NA, message=FALSE}
 exp(confint(model.HaleBD))
@@ -502,7 +506,7 @@ Because our interaction model still exhibits lack of fit (residual deviance of 2
 
 ### Residuals for Binomial Regression
 
-With LLSR, residuals were used to assess model assumptions and identify outliers. For binomial regression, two different types of residuals are typically used. One residual, the **Pearson residual** \index{Pearson residuals}, has a form similar to that used with LLSR. Specifically, the Pearson residual is calculated using:
+With LLSR, residuals were used to assess model assumptions and identify outliers. For binomial regression, two different types of residuals are typically used. One residual, the **Pearson residual**, \index{Pearson residuals} has a form similar to that used with LLSR. Specifically, the Pearson residual is calculated using:
 
 \begin{equation*}
 \textrm{Pearson residual}_i = \frac{\textrm{actual count}-\textrm{predicted count}}{\textrm{SD of count}} =
@@ -521,7 +525,7 @@ A deviance residual can be calculated for each observation using:
 
 When the number of trials is large for all of the observations and the models are appropriate, both sets of residuals should follow a standard normal distribution.
 
-The sum of the individual deviance residuals is referred to as the **deviance** or **residual deviance** \index{residual deviance}. The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, $m_i$,  are large and a model fits, the residual deviance follows a $\chi^2$ distribution with $n-p$ degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a $\chi_{n-p}^2$ that are greater than the observed residual deviance.
+The sum of the individual deviance residuals is referred to as the **deviance** or **residual deviance**. \index{residual deviance} The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, $m_i$,  are large and a model fits, the residual deviance follows a $\chi^2$ distribution with $n-p$ degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a $\chi_{n-p}^2$ that are greater than the observed residual deviance.
 
 We begin a residual analysis of our interaction model by plotting the residuals against the fitted values in Figure \@ref(fig:resid). This kind of plot for binomial regression would produce two linear trends with similar negative slopes if there were equal sample sizes $m_i$ for each observation. 
 
@@ -540,9 +544,9 @@ From this residual plot, Greensboro does not stand out as an outlier.  If it did
  
 ### Overdispersion {#sec-logOverdispersion}
 
-Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is __extra-binomial variation__ \index{extra-binomial variation}, so the actual variance will be greater than the variance of a binomial variable, $np(1-p)$. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), $\hat{\phi}$, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \@ref(sec-overdispPois), and we will use the same estimate here: $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$.
+Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is __extra-binomial variation__, \index{extra-binomial variation} so the actual variance will be greater than the variance of a binomial variable, $np(1-p)$. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), $\hat{\phi}$, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \@ref(sec-overdispPois), and we will use the same estimate here: $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$.
 
-When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach \index{quasilikelihood}. Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it **quasibinomial** \index{quasibinomial}). R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming $\phi>1$). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using $\hat{\phi}$:
+When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach. \index{quasilikelihood} Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it **quasibinomial**. \index{quasibinomial}) R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming $\phi>1$). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using $\hat{\phi}$:
 \vspace{5mm}
 
 __Summary: Accounting for Overdispersion__
@@ -635,7 +639,7 @@ We began by fitting a logistic regression model with `distance` alone. Then we a
 
 ## Case Study: Trying to Lose Weight
 
-The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.).  This type of problem---__binary logistic regression__ \index{binary logistic regression}---is exceedingly common in practice. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
+The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.).  This type of problem---__binary logistic regression__---is exceedingly common in practice \index{binary logistic regression}. Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.
 
 Sports have been implicated as a reason for young people wanting to shed pounds, but not all studies are consistent with this idea. For example, a study by @Martinsen2009 reported that, despite preconceptions to the contrary, there was a higher rate of self-reported eating disorders among controls (non-elite athletes) as opposed to elite athletes. Interestingly, the kind of sport was not found to be a factor, as participants in leanness sports (for example, distance running, swimming, gymnastics, dance, and diving) did not differ in the proportion with eating disorders when compared to those in non-leanness sports. So, in our analysis, we will not make a distinction between different sports.
 
@@ -807,7 +811,7 @@ ggplot(emplogit1, aes(x = midpoint, y = emplogit, color = sex)) +
   xlab("BMI percentile") + ylab("Empirical logits")
 ```
 
-Figure \@ref(fig:logitBMIsex) presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model. 
+Figure \@ref(fig:logitBMIsex) presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated with a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model. 
  
 ```{r, mosaicsexsports, fig.align="center", out.width="60%", fig.cap='Weight loss plans vs. sex and sports participation',echo=FALSE, warning=FALSE, comment=NA}
 #ytable <- mosaic::tally(~ sex + sport + lose.wt, data = risk2009)   
@@ -1043,7 +1047,8 @@ fissurechp6 <- data.frame(col1, grp1, grp2, grp3, grp4)
 kable(fissurechp6, booktabs = T, 
       col.names = c("Turbine group", "1", "2", "3", "4"),
       caption = "Data for Conceptual Exercise 4") %>% 
-  column_spec(1, width = "2cm") 
+  column_spec(1, width = "5cm")  %>%
+  kable_styling(full_width = F)
 ```
 
 

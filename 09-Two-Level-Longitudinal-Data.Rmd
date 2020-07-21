@@ -89,7 +89,7 @@ table1chp9 <- head(chart.wide[2:11])
 
 kable(table1chp9, booktabs=T,
       caption = "The first six observations in the wide data set for the Charter Schools case study.") %>%
-    kable_styling(latex_options = "scale_down")
+    kable_styling(latex_options = "scale_down", font_size = 9)
 
 #ifelse(knitr::is_html_output(),
 #       kab1chp9 %>% scroll_box(width="100%"), kab1chp9)
@@ -99,7 +99,7 @@ For most statistical analyses, it will be advantageous to convert WIDE format to
 
 ### Missing data {#missing}
 
-In this case, before we convert our data to LONG form, we should first address problems with missing data \index{missing data}.  Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
+In this case, before we convert our data to LONG form, we should first address problems with missing data. \index{missing data}  Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
 
 First, we must understand the extent and nature of missing data in our study. Table \@ref(tab:table2chp9), where 1 indicates presence of a variable and 0 indicates a missing value for a particular variable, is a helpful starting point. Among our 618 schools, 540 had complete data (all covariates and math scores for all three years), 25 were missing a math score for 2008, 35 were missing math scores in both 2008 and 2009, etc.
 
@@ -302,7 +302,7 @@ grid.arrange(PctFree.school, PctSped.school,
 
 ### Exploratory analyses for longitudinal data {#longitudinalanalyses}
 
-In addition to the initial exploratory analyses above, longitudinal data---multilevel data with time at Level One---calls for further plots and summaries that describe time trends within and across individuals. For example, we can examine trends over time within individual schools. Figure \@ref(fig:lon-lat1) provides a **lattice plot** \index{lattice plot} illustrating trends over time for the first 24 schools in the data set. We note differences among schools in starting point (test scores in 2008), slope (change in test scores over the three year period), and form of the relationship. These differences among schools are nicely illustrated in so-called **spaghetti plots** \index{spaghetti plot} such as Figure \@ref(fig:lon-spag1), which overlays the individual schools' time trends (for the math test scores) from Figure \@ref(fig:lon-lat1) on a single set of axes.  In order to illustrate the overall time trend without making global assumptions about the form of the relationship, we overlaid in bold a nonparametric fitted curve through a **loess smoother** \index{loess smoother}. LOESS comes from "locally weighted scatterplot smoother", in which a low-degree polynomial is fit to each data point using weighted regression techniques, where nearby points receive greater weight. LOESS is a computationally intensive method which performs especially well with larger sets of data, although ideally there would be a greater diversity of x-values than the three time points we have. In this case, the loess smoother follows very closely to a linear trend, indicating that assuming a linear increase in test scores over the three year period is probably a reasonable simplifying assumption.  To further examine the hypothesis that linearity would provide a reasonable approximation to the form of the individual time trends in most cases, Figure \@ref(fig:lon-lat2) shows a lattice plot containing linear fits through ordinary least squares rather than connected time points as in Figure \@ref(fig:lon-lat1).
+In addition to the initial exploratory analyses above, longitudinal data---multilevel data with time at Level One---calls for further plots and summaries that describe time trends within and across individuals. For example, we can examine trends over time within individual schools. Figure \@ref(fig:lon-lat1) provides a **lattice plot** \index{lattice plot} illustrating trends over time for the first 24 schools in the data set. We note differences among schools in starting point (test scores in 2008), slope (change in test scores over the three year period), and form of the relationship. These differences among schools are nicely illustrated in so-called **spaghetti plots** \index{spaghetti plot} such as Figure \@ref(fig:lon-spag1), which overlays the individual schools' time trends (for the math test scores) from Figure \@ref(fig:lon-lat1) on a single set of axes.  In order to illustrate the overall time trend without making global assumptions about the form of the relationship, we overlaid in bold a nonparametric fitted curve through a **loess smoother**. \index{loess smoother} LOESS comes from "locally weighted scatterplot smoother", in which a low-degree polynomial is fit to each data point using weighted regression techniques, where nearby points receive greater weight. LOESS is a computationally intensive method which performs especially well with larger sets of data, although ideally there would be a greater diversity of x-values than the three time points we have. In this case, the loess smoother follows very closely to a linear trend, indicating that assuming a linear increase in test scores over the three year period is probably a reasonable simplifying assumption.  To further examine the hypothesis that linearity would provide a reasonable approximation to the form of the individual time trends in most cases, Figure \@ref(fig:lon-lat2) shows a lattice plot containing linear fits through ordinary least squares rather than connected time points as in Figure \@ref(fig:lon-lat1).
 
 ```{r, include=FALSE, warning=FALSE}
 #Lattice plots
@@ -371,7 +371,7 @@ ggplot(newsampdata.l,aes(x=year08,y=MathAvgScore)) +
   theme.1 
 ```
 
-Just as we explored the relationship between our response (average math scores) and important covariates in Section \@ref(generalanalyses), we can now examine the relationships between time trends by school and important covariates. For instance, Figure \@ref(fig:lon-spag3) shows that charter schools had math scores that were lower on average than public non-charter schools and more variable.  This type of plot is sometimes called a **trellis graph** \index{trellis graph}, since it displays a grid of smaller charts with consistent scales, where each smaller chart represents a condition---an item in a category. Trends over time by school type are denoted by bold loess curves.  Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools. Exploratory analyses like this can be repeated for other covariates, such as percent free and reduced lunch in Figure \@ref(fig:lon-spagmat1). The trellis plot automatically divides schools into four groups based on quartiles of their percent free and reduced lunch, and we see that schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.
+Just as we explored the relationship between our response (average math scores) and important covariates in Section \@ref(generalanalyses), we can now examine the relationships between time trends by school and important covariates. For instance, Figure \@ref(fig:lon-spag3) shows that charter schools had math scores that were lower on average than public non-charter schools and more variable.  This type of plot is sometimes called a **trellis graph**, \index{trellis graph} since it displays a grid of smaller charts with consistent scales, where each smaller chart represents a condition---an item in a category. Trends over time by school type are denoted by bold loess curves.  Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools. Exploratory analyses like this can be repeated for other covariates, such as percent free and reduced lunch in Figure \@ref(fig:lon-spagmat1). The trellis plot automatically divides schools into four groups based on quartiles of their percent free and reduced lunch, and we see that schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.
 
 ## Preliminary two-stage modeling {#twostage9}
 
@@ -690,7 +690,7 @@ As in Chapter \@ref(ch-multilevelintro), we will begin model fitting with some s
 
 ### Unconditional means model {#modela}
 
-In the multilevel context, we almost always begin with the **unconditional means model** \index{unconditional means model}, in which there are no predictors at any level. The purpose of the unconditional means model is to assess the amount of variation at each level, and to compare variability within school to variability between schools. Define $Y_{ij}$ as the MCA-II math score from school $i$ and year $j$. Using the composite model specification from Chapter \@ref(ch-multilevelintro):
+In the multilevel context, we almost always begin with the **unconditional means model**, \index{unconditional means model} in which there are no predictors at any level. The purpose of the unconditional means model is to assess the amount of variation at each level, and to compare variability within school to variability between schools. Define $Y_{ij}$ as the MCA-II math score from school $i$ and year $j$. Using the composite model specification from Chapter \@ref(ch-multilevelintro):
 
 \begin{equation*}
 Y _{ij} = \alpha_{0} + u_{i} + \epsilon_{ij} \textrm{ with } u_{i} \sim N(0, \sigma^2_u) \textrm{ and } \epsilon_{ij} \sim N(0, \sigma^2)
@@ -728,7 +728,7 @@ Based on the intraclass correlation coefficient:
 
 ### Unconditional growth model {#modelb9}
 
-The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \@ref(ch-multilevelintro)). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the **unconditional growth model** \index{unconditional growth model}. The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
+The second model in most multilevel contexts introduces a covariate at Level One (see Model B in Chapter \@ref(ch-multilevelintro)). With longitudinal data, this second model introduces time as a predictor at Level One, but there are still no predictors at Level Two. This model is then called the **unconditional growth model**. \index{unconditional growth model} The unconditional growth model allows us to assess how much of the within-school variability can be attributed to systematic changes over time.
 
 At the lowest level, we can consider building individual growth models over time for each of the 618 schools in our study. First, we must decide upon a form for each of our 618 growth curves. Based on our initial exploratory analyses, assuming that an individual school's MCA-II math scores follow a linear trend seems like a reasonable starting point. Under the assumption of linearity, we must estimate an intercept and a slope for each school, based on their 1-3 test scores over a period of three years.  Compared to time series analyses of economic data, most longitudinal data analyses have relatively few time periods for each subject (or school), and the basic patterns within subject are often reasonably described by simpler functional forms. 
 
@@ -1104,6 +1104,11 @@ model.f2b <- lmer(MathAvgScore ~ charter + urban + SchPctFree +
   SchPctSped:year08 + year08 +
   (1|schoolid), REML=T, data=chart.long)
 summary(model.f2b)
+
+model.f2 <- lmer(MathAvgScore ~ charter + urban + SchPctFree + 
+  SchPctSped + charter:year08 + urban:year08 + 
+  SchPctSped:year08 + year08 +
+  (year08|schoolid), REML=T, data=chart.long)
 
 anova(model.f2, model.f2a, test = "Chisq")
 anova(model.f2, model.f2b, test = "Chisq")
@@ -1826,7 +1831,7 @@ Cov(Y_{ij},Y_{ik}) & = \sigma_{u}^{2} + \textrm{Large}_{ij}\textrm{Large}_{ik} \
   \textrm{Large}_{ik}) \sigma_{uv} \\
  & = \left\{ \begin{array}{ll}
                  \sigma_{u}^{2} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=0$} \\
-                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=0$ and $\textrm{Large}_{ik}=1$ or alt.} \\
+                 \sigma_{u}^{2} + \sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=0$, $\textrm{Large}_{ik}=1$ or vice versa} \\
                  \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} & \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=1$}
                \end{array}
        \right.
@@ -1958,7 +1963,8 @@ colnames(table4chp9) <- c("Predictor","Coefficient", "SE")
 kable(table4chp9, booktabs=T, escape=F,
       caption="A portion of Table 2: Results of Hierarchical Linear Modeling Analyses Modeling Gang Involvement from Walker-Barnes and Mason (2001).  These columns focus on the parenting behavior of psychological control.") %>%
   row_spec(c(1,9), bold=T) %>%
-  add_footnote("Table reports values for coefficients in the final model with all variables entered.  * p<.05; ** p<.01; + p<.10", notation="alphabet")
+  add_footnote("Table reports values for coefficients in the final model with all variables entered.  * p<.05; ** p<.01; + p<.10", notation="alphabet") %>%
+  kable_styling(full_width = F)
 ```
 
 6. __Charter Schools.__ Differences exist in both sets of boxplots in Figure \@ref(fig:lon-box2).  What do these differences imply for multilevel modeling?
