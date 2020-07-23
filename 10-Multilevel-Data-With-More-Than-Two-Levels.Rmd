@@ -1577,7 +1577,7 @@ In Section \@ref(threelevel-paraboot) we sought to perform a significance test c
 
 16. __Collective Efficacy and Violent Crime.__  In a 1997 *Science* article, @Sampson1997 studied the effects on violent crime of a neighborhood's collective efficacy, defined as "social cohesion among neighbors combined with their willingness to intervene on behalf of the common good."  Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.
 
-17. Table \@ref(tab:table4chp10) shows Table 3 from @Sampson1997. Provide interpretations of the __bolded__ coefficients in context.
+17. Table \@ref(tab:table4chp10) shows Table 3 from @Sampson1997. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.
 
 ```{r, include=FALSE}
 Variable <- c("Intercept", "Female", "Married", "Separated or divorced", "Single", "Homeowner", "Latino", "Black", "Mobility", "Age", "Years in neighborhood", "SES", "Concentrated disadvantage", "Immigrant concentration", "Residential stability", "Within neighborhoods", "Between neighborhoods", "Within neighborhoods", "Between neighborhoods")

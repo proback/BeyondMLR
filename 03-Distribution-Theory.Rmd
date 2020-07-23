@@ -455,7 +455,7 @@ There is a 71.5\% chance of catching 5 fish within the first 3 hours.
 
 ### Normal (Gaussian) Random Variable
 
-You have already at least informally seen normal random variables when evaluating OLS assumptions. To recall, we required responses to be normally distributed at each level of $X$. Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on $\mu$, the population mean of the variable of interest, and $\sigma$, the population standard deviation. We find that
+You have already at least informally seen normal random variables when evaluating LLSR assumptions. To recall, we required responses to be normally distributed at each level of $X$. Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on $\mu$, the population mean of the variable of interest, and $\sigma$, the population standard deviation. We find that
 
 \begin{equation}
 f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{for} \quad -\infty < y < \infty.

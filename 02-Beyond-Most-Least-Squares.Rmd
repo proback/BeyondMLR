@@ -498,7 +498,7 @@ colnames(sex_uncond_model) <-c("Family composition",
 kable(sex_uncond_model, booktabs = T, escape = F,
       caption="Contributions to the likelihood function for the Sex Unconditional Model for a sample of family compositions from the NLSY data") %>% 
   column_spec(1:2, width = "5cm") %>%
-  kable_styling(latex_options = "scale_down", full_width = F)
+  kable_styling(full_width = F)
 ```
 
 Now we create the entire likelihood for our data under the Sex Unconditional Model.
@@ -538,7 +538,7 @@ colnames(sex_cond_model) <-c("Family composition",
 kable(sex_cond_model, booktabs = T, escape = F,
       caption="Contributions to the likelihood function for the Sex Conditional Model for a sample of family compositions from the NLSY data") %>% 
   column_spec(1:2, width = "5cm") %>%
-  kable_styling(latex_options = "scale_down", full_width = F)
+  kable_styling(full_width = F)
 ```
 
 The products of the last three columns of Table \@ref(tab:table8chp2) provide the likelihood contributions for the Sex Conditional Model for all of the one-, two- and three-child NLSY families. We write the likelihood as a function of the three parameters $\neutral,  \bbias$, and $\gbias$.

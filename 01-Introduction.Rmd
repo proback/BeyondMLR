@@ -42,7 +42,7 @@ When models are fit to data using linear least squares regression (LLSR), \index
 
 However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
 
-The **GLMs (Generalized Linear Models)** \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will allow you to expand *beyond multiple linear regression*.
+The **Generalized Linear Models** \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will allow you to expand *beyond multiple linear regression*.
 
 In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
 
@@ -426,7 +426,7 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilo
 (\#eq:model4)
 \end{equation}
 
-and ordinary least squares (OLS) provides the following parameter estimates:
+and linear least squares regression (LLSR) provides the following parameter estimates:
 
 ```{r model4, comment=NA}
 model4 <- lm(speed ~ yearnew + fast, data = derby.df)
@@ -505,7 +505,7 @@ Y_{i}&= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
 \end{split}
 \end{equation*}
 
-where OLS provides the following parameter estimates:
+where LLSR provides the following parameter estimates:
 
 ```{r model5, comment=NA}
 model5 <- lm(speed ~ yearnew + fast + yearnew:fast, 
@@ -575,7 +575,7 @@ One potential final model for predicting winning speeds of Kentucky Derby races 
 (\#eq:model0)
 \end{equation}
 
-and OLS provides the following parameter estimates:
+and LLSR provides the following parameter estimates:
 
 ```{r model0, comment=NA}
 model0 <- lm(speed ~ yearnew + yearnew2 + fast + good +
@@ -672,7 +672,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     i. State (in context) the result of a t-test for $\beta_1$ in Model 4.
     j. Why is there no $\epsilon_i$ term in Equation \@ref(eq:model5est)?
     k. If you considered the interaction between two continuous variables (like `yearnew` and `starters`), how would you provide an interpretation for that coefficient in context?
-    l. Interpret (in context) the OLS estimates for $\beta_3$ and $\beta_5$ in Equation \@ref(eq:model0).  
+    l. Interpret (in context) the LLSR estimates for $\beta_3$ and $\beta_5$ in Equation \@ref(eq:model0).  
     <br>
     
 1. **Moneyball.**  In a 2011 article in *The Sport Journal*, Farrar and Bruggink [-@Farrar2011] attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 *Moneyball* book [@Lewis2003].  They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out.  Two regression models are described: a Team Run Production Model and a Player Salary Model.   
@@ -722,7 +722,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     </ul>
     a. In their article's introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your explanatory and response variables, respectively. Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
     b. In the paper's section, "Statistical analysis", the authors report that "Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures."  Generate both a histogram of `MET` values and log--transformed `MET` values. Do you agree with the paper's decision to use a log-transformation here?
-    c. Fit a preliminary model with `MTL` as the response and `sitting` as the sole explanatory variable.  Are OLS conditions satisfied?
+    c. Fit a preliminary model with `MTL` as the response and `sitting` as the sole explanatory variable.  Are LLSR conditions satisfied?
     d. Expand on your previous model by including a centered version of `age` as a covariate. Interpret all three coefficients in this model.
     e. One model fit in @Siddarth2018 includes `sitting`, log--transformed `MET`, and `age` as explanatory variables. They report an estimate $\hat{\beta}_{1} = -0.02$ with confidence interval $(-0.04,-0.002)$ for the coefficient corresponding to `sitting`, and $\hat{\beta}_{2} = 0.007$ with confidence interval $(-0.07, 0.08)$ for the coefficient corresponding to `MET`. Verify these intervals and estimates on your own.
     f. Based on your confidence intervals from the previous part, do you support the paper's claim that "it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]"? Why or why not?
@@ -747,14 +747,14 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     c. Create a new variable, `logprice`, the natural log of `price`. Fit Model 2, where `logprice` is now the response variable and `sqft` is still the explanatory variable. Write out the regression line equation.
     d. How does `logprice` change when `sqft` increases by 1.
     e. Recall that $\log(a) - \log(b) = \log\big(\frac{a}{b}\big)$, and use this to derive how `price` changes as `sqft` increases by 1.
-    f. Are OLS assumptions satisfied in Model 2? Why or why not?
+    f. Are LLSR assumptions satisfied in Model 2? Why or why not?
     g. Create a new variable, `logsqft`, the natural log of `sqft`. Fit Model 3 where `price` and `logsqft` are the response and explanatory variables, respectively. Write out the regression line equation.
     h. How does predicted `price` change as `logsqft` increases by 1 in Model 3?
     i. How does predicted `price` change as `sqft` increases by 1\%? As a hint, this is the same as multiplying `sqft` by 1.01.
-    j. Are OLS assumptions satisfied in Model 3? Why or why not?
+    j. Are LLSR assumptions satisfied in Model 3? Why or why not?
     k. Fit Model 4, with `logsqft` and `logprice` as the response and explanatory variables, respectively.  Write out the regression line equation.
     l. In Model 4, what is the effect on `price` corresponding to a 1\% increase in `sqft`?
-    m. Are OLS assumptions satisfied in Model 4? Why or why not?
+    m. Are LLSR assumptions satisfied in Model 4? Why or why not?
     n. Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted $R^2$ value. Interpret the coefficient of this added variable.
     
 ### Open-ended Exercises

@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-18" />
+<meta name="date" content="2020-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -523,7 +523,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ecologists count species, criminologists count arrests, and cancer specialists count cases. Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos. In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts. The political scientists’, pre-med students’ and sociologists’ interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not. We can model these non-Gaussian (non-normal) responses in a more natural way by fitting <strong>generalized linear models (GLMs)</strong> as opposed to using to <strong>linear least squares regression (LLSR)</strong> models.</p>
 <p>When models are fit to data using linear least squares regression (LLSR),  inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples. While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of linearity between Y and X need to be plausible.</p>
 <p>However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians’ performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient’s outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician’s anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.</p>
-<p>The <strong>GLMs (Generalized Linear Models)</strong>  in the book’s title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The <strong>Multilevel Models</strong>  in the book’s title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand <em>beyond multiple linear regression</em>.</p>
+<p>The <strong>Generalized Linear Models</strong>  in the book’s title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The <strong>Multilevel Models</strong>  in the book’s title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand <em>beyond multiple linear regression</em>.</p>
 <p>In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We’ve kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.</p>
 </div>
 <div id="assumptions-for-linear-least-squares-regression-llsr" class="section level2">
@@ -1128,7 +1128,7 @@ Y_{i} = (\beta_{0}+\beta_{1})+\epsilon_{i}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \tag{1.3}
 \end{equation}\]</span></p>
-<p>and ordinary least squares (OLS) provides the following parameter estimates:</p>
+<p>and linear least squares regression (LLSR) provides the following parameter estimates:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ch-MLRreview.html#cb14-1"></a>model4 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast, <span class="dt">data =</span> derby.df)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value   Pr(&gt;|t|)
 ## (Intercept) 50.91782   0.154602  329.35 5.360e-178
@@ -1204,7 +1204,7 @@ Y_{i}&amp;= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \
       &amp;{}+\beta_{3}\textrm{Yearnew}_{i}\times\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 \end{equation*}\]</span></p>
-<p>where OLS provides the following parameter estimates:</p>
+<p>where LLSR provides the following parameter estimates:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="ch-MLRreview.html#cb23-1"></a>model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>fast, </span>
 <span id="cb23-2"><a href="ch-MLRreview.html#cb23-2"></a>             <span class="dt">data=</span>derby.df)</span></code></pre></div>
 <pre><code>##              Estimate Std. Error t value   Pr(&gt;|t|)
@@ -1264,7 +1264,7 @@ Y_{i}&amp;= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \
 \end{split}
 \tag{1.5}
 \end{equation}\]</span></p>
-<p>and OLS provides the following parameter estimates:</p>
+<p>and LLSR provides the following parameter estimates:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ch-MLRreview.html#cb26-1"></a>model0 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>good <span class="op">+</span></span>
 <span id="cb26-2"><a href="ch-MLRreview.html#cb26-2"></a><span class="st">               </span>starters, <span class="dt">data =</span> derby.df)</span></code></pre></div>
 <pre><code>##               Estimate Std. Error t value   Pr(&gt;|t|)
@@ -1354,7 +1354,7 @@ Y_{i}&amp;= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \
 <li>State (in context) the result of a t-test for <span class="math inline">\(\beta_1\)</span> in Model 4.</li>
 <li>Why is there no <span class="math inline">\(\epsilon_i\)</span> term in Equation <a href="ch-MLRreview.html#eq:model5est">(1.4)</a>?</li>
 <li>If you considered the interaction between two continuous variables (like <code>yearnew</code> and <code>starters</code>), how would you provide an interpretation for that coefficient in context?</li>
-<li>Interpret (in context) the OLS estimates for <span class="math inline">\(\beta_3\)</span> and <span class="math inline">\(\beta_5\)</span> in Equation <a href="ch-MLRreview.html#eq:model0">(1.5)</a>.<br />
+<li>Interpret (in context) the LLSR estimates for <span class="math inline">\(\beta_3\)</span> and <span class="math inline">\(\beta_5\)</span> in Equation <a href="ch-MLRreview.html#eq:model0">(1.5)</a>.<br />
 <br></li>
 </ol></li>
 <li><p><strong>Moneyball.</strong> In a 2011 article in <em>The Sport Journal</em>, Farrar and Bruggink <span class="citation">(<a href="#ref-Farrar2011" role="doc-biblioref">2011</a>)</span> attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis’s 2003 <em>Moneyball</em> book <span class="citation">(Lewis <a href="#ref-Lewis2003" role="doc-biblioref">2003</a>)</span>. They contend that players’ on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model.</p>
@@ -1416,7 +1416,7 @@ Creating an indicator variable based on <code>sex</code> could be helpful.<br />
 <ol style="list-style-type: lower-alpha">
 <li>In their article’s introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that “one can be highly active yet still be sedentary for most of the day.” Fit your own linear model with <code>MET</code> and <code>sitting</code> as your explanatory and response variables, respectively. Using <span class="math inline">\(R^2\)</span>, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?</li>
 <li>In the paper’s section, “Statistical analysis”, the authors report that “Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures.” Generate both a histogram of <code>MET</code> values and log–transformed <code>MET</code> values. Do you agree with the paper’s decision to use a log-transformation here?</li>
-<li>Fit a preliminary model with <code>MTL</code> as the response and <code>sitting</code> as the sole explanatory variable. Are OLS conditions satisfied?</li>
+<li>Fit a preliminary model with <code>MTL</code> as the response and <code>sitting</code> as the sole explanatory variable. Are LLSR conditions satisfied?</li>
 <li>Expand on your previous model by including a centered version of <code>age</code> as a covariate. Interpret all three coefficients in this model.</li>
 <li>One model fit in <span class="citation">Siddarth et al. (<a href="#ref-Siddarth2018" role="doc-biblioref">2018</a>)</span> includes <code>sitting</code>, log–transformed <code>MET</code>, and <code>age</code> as explanatory variables. They report an estimate <span class="math inline">\(\hat{\beta}_{1} = -0.02\)</span> with confidence interval <span class="math inline">\((-0.04,-0.002)\)</span> for the coefficient corresponding to <code>sitting</code>, and <span class="math inline">\(\hat{\beta}_{2} = 0.007\)</span> with confidence interval <span class="math inline">\((-0.07, 0.08)\)</span> for the coefficient corresponding to <code>MET</code>. Verify these intervals and estimates on your own.</li>
 <li>Based on your confidence intervals from the previous part, do you support the paper’s claim that “it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]”? Why or why not?</li>
@@ -1444,14 +1444,14 @@ We wish to create a linear model to predict a house’s selling price.
 <li>Create a new variable, <code>logprice</code>, the natural log of <code>price</code>. Fit Model 2, where <code>logprice</code> is now the response variable and <code>sqft</code> is still the explanatory variable. Write out the regression line equation.</li>
 <li>How does <code>logprice</code> change when <code>sqft</code> increases by 1.</li>
 <li>Recall that <span class="math inline">\(\log(a) - \log(b) = \log\big(\frac{a}{b}\big)\)</span>, and use this to derive how <code>price</code> changes as <code>sqft</code> increases by 1.</li>
-<li>Are OLS assumptions satisfied in Model 2? Why or why not?</li>
+<li>Are LLSR assumptions satisfied in Model 2? Why or why not?</li>
 <li>Create a new variable, <code>logsqft</code>, the natural log of <code>sqft</code>. Fit Model 3 where <code>price</code> and <code>logsqft</code> are the response and explanatory variables, respectively. Write out the regression line equation.</li>
 <li>How does predicted <code>price</code> change as <code>logsqft</code> increases by 1 in Model 3?</li>
 <li>How does predicted <code>price</code> change as <code>sqft</code> increases by 1%? As a hint, this is the same as multiplying <code>sqft</code> by 1.01.</li>
-<li>Are OLS assumptions satisfied in Model 3? Why or why not?</li>
+<li>Are LLSR assumptions satisfied in Model 3? Why or why not?</li>
 <li>Fit Model 4, with <code>logsqft</code> and <code>logprice</code> as the response and explanatory variables, respectively. Write out the regression line equation.</li>
 <li>In Model 4, what is the effect on <code>price</code> corresponding to a 1% increase in <code>sqft</code>?</li>
-<li>Are OLS assumptions satisfied in Model 4? Why or why not?</li>
+<li>Are LLSR assumptions satisfied in Model 4? Why or why not?</li>
 <li>Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted <span class="math inline">\(R^2\)</span> value. Interpret the coefficient of this added variable.</li>
 </ol></li>
 </ol>

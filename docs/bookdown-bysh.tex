@@ -208,7 +208,7 @@
 \makeatother
 \subtitle{Applied Generalized Linear Models and Multilevel Models in R}
 \author{Paul Roback and Julie Legler}
-\date{2020-07-18}
+\date{2020-07-23}
 
 \begin{document}
 \maketitle
@@ -234,7 +234,7 @@
 \chapter*{Preface}\label{preface}}
 
 
-\textbf{Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R} \citep{RProject} is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like \emph{Stat2} \citep{Cannon2019}. We started teaching this course at St.~Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St.~Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook and \href{https://github.com/proback/BYSH}{available at our GitHub repo} arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will not necessarily be expert in these methods and associated theory, but that they will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
+\textbf{Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R} \citep{RProject} is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like \emph{Stat2} \citep{Cannon2019}. We started teaching this course at St.~Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St.~Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook (and \href{https://github.com/proback/BeyondMLR}{available at our GitHub repo}) arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
 
 When we teach this course at St.~Olaf, we are able to cover Chapters 1-11 during a single semester, although in order to make time for a large, open-ended group project we sometimes cover some chapters in less depth (e.g., Chapters 3, 7, 10, or 11). How much you cover will certainly depend on the background of your students (ours have seen both multiple linear and logistic regression), their sophistication level (we have statistical but no mathematical prerequisites), and time available (we have a 14-week semester). It will also depend on your choice of topics; in our experience, we have found that GLMs and multilevel models nicely build on students' previous regression knowledge and allow them to better model data from many real contexts, but we also acknowledge that there are other good choices of topics for an applied ``Stat3'' course. The short chapter guide below can help you thread together the material in this book to create the perfect course for you:
 
@@ -247,13 +247,13 @@ When we teach this course at St.~Olaf, we are able to cover Chapters 1-11 during
 \item
   Chapter 3: Distribution Theory. A quick summary of key discrete and continuous probability distributions, this chapter can be used as a reference as needed.
 \item
-  Chapter 4: Poisson Regression. This is the most important chapter for generalized linear models, where each of the three case studies introduces new ideas such as coefficient interpretation, inference, offsets, overdispersion, zero-inflation, and alternatives like negative binomial.
+  Chapter 4: Poisson Regression. This is the most important chapter for generalized linear models, where each of the three case studies introduces new ideas such as coefficient interpretation, Wald-type and drop-in-deviance tests, Wald-type and profile likelihood confidence intervals, offsets, overdispersion, quasilikelihood, zero-inflation, and alternatives like negative binomial.
 \item
   Chapter 5: Generalized Linear Models (GLMs): A Unifying Theory. Chapter 5 is short, but it importantly shows how linear, logistic, binomial, Poisson, and other regression methods are connected. We believe it's important that students appreciate that GLMs aren't just a random collection of modeling approaches.
 \item
   Chapter 6: Logistic Regression. We begin with two cases studies involving binomial regression, drawing connections with Chapters 4 and 5, before a third case study involving binary logistic regression.
 \item
-  Chapter 7: Correlated Data. This is the transition chapter, building intuition about correlated data through an extended simulation and a real case study, although you can jump right to Chapter 8 if you wish. Chapters 8-11 contain the multilevel model material and, for the most part, they do not depend on earlier chapters (except for generalized responses in Chapter 11 and references to ideas such as likelihoods, inferential approaches, etc.). In fact, during one semester we taught the multilevel material before the GLM material to facilitate academic civic engagement projects that needed multilevel models (that semester our order of chapters was: 1, 2, 7, 8, 9, 10, 3, 4, 5, 6, 11).
+  Chapter 7: Correlated Data. This is the transition chapter, building intuition about correlated data through an extended simulation and a real case study, although you can jump right to Chapter 8 if you wish. Chapters 8-11 contain the multilevel model material and, for the most part, they do not depend on earlier chapters (except for generalized responses in Chapter 11 and references to ideas such as likelihoods, inferential approaches, etc.). In fact, during one semester we taught the multilevel material before the GLM material to facilitate academic civic engagement projects that needed multilevel models (during that semester our order of chapters was: 1, 2, 7, 8, 9, 10, 3, 4, 5, 6, 11).
 \item
   Chapter 8: Introduction to Multilevel Models. As we go through a comprehensive case study, several important ideas are motivated, including EDA for multilevel data, the two-stage approach, multivariate normal distributions, coefficient interpretations, fixed and random effects, random slopes and intercepts, and more. Another simulation illustrates the effect of inappropriately using regression methods that assume independence for correlated data.
 \item
@@ -315,7 +315,7 @@ When models are fit to data using linear least squares regression (LLSR), \index
 
 However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances. Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians. Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.
 
-The \textbf{GLMs (Generalized Linear Models)} \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Models} \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand \emph{beyond multiple linear regression}.
+The \textbf{Generalized Linear Models} \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal. The \textbf{Multilevel Models} \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another. Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares. These models will allow you to expand \emph{beyond multiple linear regression}.
 
 In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions the observations must also be independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal. After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances. These are settings where we may be able to use the methods of this text. We've kept the examples in the exposition simple to fix ideas. There are exercises which describe more realistic and complex studies.
 
@@ -828,7 +828,7 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilo
 \label{eq:model4}
 \end{equation}
 
-and ordinary least squares (OLS) provides the following parameter estimates:
+and linear least squares regression (LLSR) provides the following parameter estimates:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -965,7 +965,7 @@ Y_{i}&= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \\
 \end{split}
 \end{equation*}
 
-where OLS provides the following parameter estimates:
+where LLSR provides the following parameter estimates:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1069,7 +1069,7 @@ One potential final model for predicting winning speeds of Kentucky Derby races 
 \label{eq:model0}
 \end{equation}
 
-and OLS provides the following parameter estimates:
+and LLSR provides the following parameter estimates:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1222,7 +1222,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     If you considered the interaction between two continuous variables (like \texttt{yearnew} and \texttt{starters}), how would you provide an interpretation for that coefficient in context?
   \item
-    Interpret (in context) the OLS estimates for \(\beta_3\) and \(\beta_5\) in Equation \eqref{eq:model0}.\\
+    Interpret (in context) the LLSR estimates for \(\beta_3\) and \(\beta_5\) in Equation \eqref{eq:model0}.\\
   \end{enumerate}
 \item
   \textbf{Moneyball.} In a 2011 article in \emph{The Sport Journal}, Farrar and Bruggink \citeyearpar{Farrar2011} attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 \emph{Moneyball} book \citep{Lewis2003}. They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out. Two regression models are described: a Team Run Production Model and a Player Salary Model.
@@ -1335,7 +1335,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     In the paper's section, ``Statistical analysis'', the authors report that ``Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures.'' Generate both a histogram of \texttt{MET} values and log--transformed \texttt{MET} values. Do you agree with the paper's decision to use a log-transformation here?
   \item
-    Fit a preliminary model with \texttt{MTL} as the response and \texttt{sitting} as the sole explanatory variable. Are OLS conditions satisfied?
+    Fit a preliminary model with \texttt{MTL} as the response and \texttt{sitting} as the sole explanatory variable. Are LLSR conditions satisfied?
   \item
     Expand on your previous model by including a centered version of \texttt{age} as a covariate. Interpret all three coefficients in this model.
   \item
@@ -1387,7 +1387,7 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     Recall that \(\log(a) - \log(b) = \log\big(\frac{a}{b}\big)\), and use this to derive how \texttt{price} changes as \texttt{sqft} increases by 1.
   \item
-    Are OLS assumptions satisfied in Model 2? Why or why not?
+    Are LLSR assumptions satisfied in Model 2? Why or why not?
   \item
     Create a new variable, \texttt{logsqft}, the natural log of \texttt{sqft}. Fit Model 3 where \texttt{price} and \texttt{logsqft} are the response and explanatory variables, respectively. Write out the regression line equation.
   \item
@@ -1395,13 +1395,13 @@ This application involves both non-normal data (number of stops by ethnic group 
   \item
     How does predicted \texttt{price} change as \texttt{sqft} increases by 1\%? As a hint, this is the same as multiplying \texttt{sqft} by 1.01.
   \item
-    Are OLS assumptions satisfied in Model 3? Why or why not?
+    Are LLSR assumptions satisfied in Model 3? Why or why not?
   \item
     Fit Model 4, with \texttt{logsqft} and \texttt{logprice} as the response and explanatory variables, respectively. Write out the regression line equation.
   \item
     In Model 4, what is the effect on \texttt{price} corresponding to a 1\% increase in \texttt{sqft}?
   \item
-    Are OLS assumptions satisfied in Model 4? Why or why not?
+    Are LLSR assumptions satisfied in Model 4? Why or why not?
   \item
     Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted \(R^2\) value. Interpret the coefficient of this added variable.
   \end{enumerate}
@@ -1985,7 +1985,6 @@ Families with different compositions will contribute different factors to the li
 
 \caption{\label{tab:sexuncondmodel}Contributions to the likelihood function for the Sex Unconditional Model for a sample of family compositions from the NLSY data}
 \centering
-\resizebox{\linewidth}{!}{
 \begin{tabular}[t]{>{\raggedright\arraybackslash}p{5cm}>{\raggedright\arraybackslash}p{5cm}}
 \toprule
 Family composition & Likelihood contribution\\
@@ -1994,7 +1993,7 @@ G & $(1-p_B)^{951}$\\
 GB & $(1-p_B)^{666}p_B^{666}$\\
 BGB & $p_B^{2*148}(1-p_B)^{148}$\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 Now we create the entire likelihood for our data under the Sex Unconditional Model.
@@ -2024,7 +2023,6 @@ The contribution to a Sex Conditional Model likelihood for the same family compo
 
 \caption{\label{tab:sexcondmodel}Contributions to the likelihood function for the Sex Conditional Model for a sample of family compositions from the NLSY data}
 \centering
-\resizebox{\linewidth}{!}{
 \begin{tabular}[t]{>{\raggedright\arraybackslash}p{5cm}>{\raggedright\arraybackslash}p{5cm}}
 \toprule
 Family composition & Likelihood contribution\\
@@ -2033,7 +2031,7 @@ G & $(1-\neutral)^{951}$\\
 GB & $(1-\neutral)^{666}\gbias^{666}$\\
 BGB & $\neutral^{2*148}(1-\bbias)^{148}$\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 The products of the last three columns of Table \ref{tab:table8chp2} provide the likelihood contributions for the Sex Conditional Model for all of the one-, two- and three-child NLSY families. We write the likelihood as a function of the three parameters \(\neutral, \bbias\), and \(\gbias\).
@@ -2906,7 +2904,7 @@ There is a 71.5\% chance of catching 5 fish within the first 3 hours.
 \hypertarget{normal-gaussian-random-variable}{%
 \subsection{Normal (Gaussian) Random Variable}\label{normal-gaussian-random-variable}}
 
-You have already at least informally seen normal random variables when evaluating OLS assumptions. To recall, we required responses to be normally distributed at each level of \(X\). Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on \(\mu\), the population mean of the variable of interest, and \(\sigma\), the population standard deviation. We find that
+You have already at least informally seen normal random variables when evaluating LLSR assumptions. To recall, we required responses to be normally distributed at each level of \(X\). Like any continuous random variable, normal (also called Gaussian) random variables have their own pdf, dependent on \(\mu\), the population mean of the variable of interest, and \(\sigma\), the population standard deviation. We find that
 
 \begin{equation}
 f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{for} \quad -\infty < y < \infty.
@@ -5628,7 +5626,7 @@ Despite the somewhat strong negative correlation between percent black and dista
 
 Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section \ref{cs-philippines} with Poisson regression, there are two primary approaches to testing signficance of model coefficients: \textbf{Drop-in-deviance test to compare models} \index{drop-in-deviance test} and \textbf{Wald test for a single coefficient}. \index{Wald-type test}
 
-With our larger model given by \(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i\), the Wald test produces a highly significant p-value (\(Z=\frac{-0.0132}{0.0039}= -3.394\), \(p=.00069\)) indicating significant evidience that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
+With our larger model given by \(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i\), the Wald test produces a highly significant p-value (\(Z=\frac{-0.0132}{0.0039}= -3.394\), \(p=.00069\)) indicating significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
 
 The drop in deviance test would compare the larger model above to the reduced model \(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i\) by comparing residual deviances from the two models.
 
@@ -5792,7 +5790,7 @@ From this residual plot, Greensboro does not stand out as an outlier. If it did,
 
 Similarly to Poisson regression we can adjust for overdispersion \index{overdispersion} in binomial regression. With overdispersion there is \textbf{extra-binomial variation}, \index{extra-binomial variation} so the actual variance will be greater than the variance of a binomial variable, \(np(1-p)\). One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), \(\hat{\phi}\), for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section \ref{sec-overdispPois}, and we will use the same estimate here: \(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\).
 
-When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach. \index{quasilikelihood} Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it \textbf{quasibinomial}. \index{quasibinomial}) R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming \(\phi>1\)). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using \(\hat{\phi}\):
+When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach. \index{quasilikelihood} Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it \textbf{quasibinomial}). \index{quasibinomial} R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming \(\phi>1\)). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using \(\hat{\phi}\):
 \vspace{5mm}
 
 \textbf{Summary: Accounting for Overdispersion}
@@ -12335,7 +12333,7 @@ In Section \ref{threelevel-paraboot} we sought to perform a significance test co
 \item
   \textbf{Collective Efficacy and Violent Crime.} In a 1997 \emph{Science} article, \citet{Sampson1997} studied the effects on violent crime of a neighborhood's collective efficacy, defined as ``social cohesion among neighbors combined with their willingness to intervene on behalf of the common good.'' Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.
 \item
-  Table \ref{tab:table4chp10} shows Table 3 from \citet{Sampson1997}. Provide interpretations of the \textbf{bolded} coefficients in context.
+  Table \ref{tab:table4chp10} shows Table 3 from \citet{Sampson1997}. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.
 \end{enumerate}
 
 \begin{table}
