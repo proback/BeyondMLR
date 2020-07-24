@@ -1,0 +1,78 @@
+---
+title: "Chapter 8"
+subtitle: "Introduction to Multilevel Models"
+output:
+  pdf_document:
+    number_sections: yes
+  html_document: default
+---
+
+```{r,include=F}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
+# Two Level Longitudinal Data {#ch-lon}
+
+## Learning objectives
+
+  After finishing this chapter, you should be able to:
+
+- Recognize longitudinal data as a special case of multilevel data, with time at Level One.
+- Consider patterns of missingness and implications of that missing data on multilevel analyses.
+- Apply exploratory data analysis techniques specific to longitudinal data.
+- Build and understand a taxonomy of models for longitudinal data.
+- Interpret model parameters in multilevel models with time at Level One.
+- Compare models, both nested and not, with appropriate statistical tests and summary statistics.
+- Consider different ways of modeling the variance-covariance structure in longitudinal data.
+
+```{r load_packages9, message = FALSE}
+# Packages required for Chapter 9
+library(GGally)
+library(data.table)
+library(Hmisc)
+library(mice)
+library(lattice)
+library(nlme)
+library(reshape2)
+library(MASS)
+library(mnormt)
+library(lme4)
+library(gridExtra) 
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+```
+
+\begin{tiny}
+\[  Cov(\textbf{Y}_{i}) = \left[
+          \begin{array}{cccccc}
+            Cov(\textbf{Y}_{i1}) & & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i4}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. \]
+\end{tiny}
+
+
+\begin{align*}
+Cov(\textbf{Y}_{i}) & = \left[
+          \begin{array}{cccc}
+            Cov(\textbf{Y}_{i1}) & & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i2}) & Cov(\textbf{Y}_{i2}) & & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i3}) & Cov(\textbf{Y}_{i3}) & \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i4}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i4}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i5}) &  \\
+            Cov(\textbf{Y}_{i1},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i2},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i3},\textbf{Y}_{i6}) & \ldots 
+          \end{array} \right. \\
+ & \left. \begin{array}{cccc} 
+      & & &  \\
+      & & &  \\
+      & & &  \\
+ & Cov(\textbf{Y}_{i4}) & &  \\
+ & Cov(\textbf{Y}_{i4},\textbf{Y}_{i5}) & Cov(\textbf{Y}_{i5}) & \\
+ \ldots & Cov(\textbf{Y}_{i4},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i5},\textbf{Y}_{i6}) & Cov(\textbf{Y}_{i6})
+          \end{array} \right]. 
+\end{align*}
+

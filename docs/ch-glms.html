@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Broadening Your Statistical Horizons</title>
-  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Beyond Multiple Linear Regression</title>
+  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Broadening Your Statistical Horizons" />
+  <meta property="og:title" content="Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Beyond Multiple Linear Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="data/cover.png" />
@@ -17,30 +16,31 @@
   <meta name="github-repo" content="proback/BYSH" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Broadening Your Statistical Horizons" />
+  <meta name="twitter:title" content="Chapter 5 Generalized Linear Models (GLMs): A Unifying Theory | Beyond Multiple Linear Regression" />
   
   <meta name="twitter:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="twitter:image" content="data/cover.png" />
 
-<meta name="author" content="Julie Legler and Paul Roback">
+<meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2020-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ch-poissonreg.html">
-<link rel="next" href="ch-logreg.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link rel="prev" href="ch-poissonreg.html"/>
+<link rel="next" href="ch-logreg.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,48 +48,78 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -108,29 +138,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-broadening-your-statistical-horizons"><i class="fa fa-check"></i><b>1.2</b> Introduction to Broadening Your Statistical Horizons</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#ordinary-least-squares-ols-assumptions"><i class="fa fa-check"></i><b>1.3</b> Ordinary Least Squares (OLS) Assumptions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-the-ols-assumptions-for-inference"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate the OLS assumptions for inference</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-the-ols-assumptions-for-inference-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where the OLS assumptions for inference are violated</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explorech1"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#data-organization"><i class="fa fa-check"></i><b>1.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#simple-linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Simple linear regression with a binary predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
 <li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
 <li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
 <li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
 <li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
 <li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview"><i class="fa fa-check"></i><b>1.7</b> Preview</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -162,7 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
 <li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
-<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_cond_lik.sec"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
 <li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
@@ -173,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercise"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
 </ul></li>
 </ul></li>
@@ -202,7 +232,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
 <li class="chapter" data-level="3.7.1" data-path="ch-distthry.html"><a href="ch-distthry.html#conceptual-exercises-2"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-1"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-2"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html"><i class="fa fa-check"></i><b>4</b> Poisson Regression</a><ul>
@@ -212,9 +242,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#a-graphical-look-at-poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> A Graphical Look at Poisson Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-studies-overview"><i class="fa fa-check"></i><b>4.3</b> Case Studies Overview</a></li>
-<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
-<li class="chapter" data-level="4.4.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
+<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata4"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
@@ -223,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
 <li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#least-squares-regression-vs.poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Least Squares Regression vs. Poisson Regression</a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -235,7 +265,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
 <li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.2</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
@@ -243,13 +274,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-2"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -285,7 +316,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#least-squares-regression-vs.logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Least Squares Regression vs. Logistic Regression</a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
@@ -294,8 +325,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
-<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises:</a></li>
-<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -315,15 +346,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
 <li class="chapter" data-level="7.10.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#conceptual-exercises-4"><i class="fa fa-check"></i><b>7.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-4"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-5"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="7.10.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#note-on-correlated-binary-outcomes"><i class="fa fa-check"></i><b>7.10.3</b> Note on Correlated Binary Outcomes</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html"><i class="fa fa-check"></i><b>8</b> Introduction to Multilevel Models</a><ul>
 <li class="chapter" data-level="8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#learning-objectives-7"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#cs:music"><i class="fa fa-check"></i><b>8.2</b> Case Study: Music Performance Anxiety</a></li>
-<li class="chapter" data-level="8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
@@ -333,14 +364,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
 <li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
 <li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
 <li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
 <li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
@@ -357,7 +388,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise-1"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -373,17 +404,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
 <li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
 <li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
 <li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
 <li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
 <li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
@@ -395,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-2"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -417,11 +449,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-5"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Multilevel Models</a><ul>
+<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
@@ -456,7 +488,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Broadening Your Statistical Horizons</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beyond Multiple Linear Regression</a>
           </h1>
         </div>
 
@@ -472,67 +504,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Determine if a probability distribution can be expressed in one-parameter exponential family form.</li>
 <li>Identify canonical links for distributions of one parameter exponential family form.</li>
 </ul>
+
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="ch-glms.html#cb115-1"></a><span class="co"># Packages required for Chapter 5</span></span>
+<span id="cb115-2"><a href="ch-glms.html#cb115-2"></a><span class="kw">library</span>(knitr)</span></code></pre></div>
 </div>
 <div id="one-parameter-exponential-families" class="section level2">
 <h2><span class="header-section-number">5.2</span> One parameter exponential families</h2>
-Thus far, we have expanded our repertoire of models from OLS to include Poisson regression. But in the early 1970s <span class="citation">Nelder and Wedderburn (<a href="#ref-Nelder1972">1972</a>)</span> identified a broader class of models that generalizes the multiple linear regression we considered in the introductory chapter and are referred to as <strong>generalized linear models (GLMs)</strong>. All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model is a GLM, we consider the following properties. When a probability formula can be written in the form below
-<span class="math display" id="eq:1expForm">\[\begin{equation}
+<p>Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s <span class="citation">Nelder and Wedderburn (<a href="#ref-Nelder1972" role="doc-biblioref">1972</a>)</span> identified a broader class of models that generalizes the multiple linear regression we considered in the introductory chapter and are referred to as <strong>generalized linear models (GLMs)</strong>.  All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter <span class="math inline">\(\theta\)</span> is a GLM, we consider the following properties.
+When a probability formula can be written in the form below</p>
+<p><span class="math display" id="eq:1expForm">\[\begin{equation}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 \tag{5.1}
 \end{equation}\]</span>
-<p>and if the <strong>support</strong> (the set of possible input values) does not depend upon <span class="math inline">\(\theta\)</span>, it is said to have a <strong>one-parameter exponential family form</strong>. We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> and assessing its support.</p>
+and if the support (the set of possible input values) does not depend upon <span class="math inline">\(\theta\)</span>, it is said to have a <strong>one-parameter exponential family form</strong>.  We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> and assessing its support.</p>
 <div id="one-parameter-exponential-family-possion" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> One Parameter Exponential Family: Possion</h3>
-<p>Recall we begin with <span class="math display">\[
+<p>Recall we begin with</p>
+<p><span class="math display">\[
 P(Y=y)=\frac{e^{-\lambda}{\lambda}^y}{y!}\quad \textrm{where}\quad y=0,1,2\ldots\infty
-\]</span> and consider the following useful identities for establishing exponential form: <span class="math display">\[a=e^{\log(a)} \]</span> <span class="math display">\[a^x = e^{x\log(a)}\]</span> <span class="math display">\[\log(ab)=\log(a)+\log(b)\]</span> <span class="math display">\[\log\Big(\frac{a}{b}\Big)=\log(a)-\log(b)\]</span></p>
-Determining whether the Poisson model is a member of the one-parameter exponential family is a matter of writing the Poisson pmf in the form of Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> and checking that the support does not depend upon <span class="math inline">\(\lambda\)</span>. First, consider the condition concerning the support of the distribution. The set of possible values for any Poisson random variable is <span class="math inline">\(y=0,1,2\ldots\infty\)</span> which does not depend on <span class="math inline">\(\lambda\)</span>. The support condition is met. Now we see if we can rewrite the probability mass function in one-parameter exponential family form.
-<span class="math display" id="eq:opeff">\[\begin{eqnarray}
- P(Y=y)&amp;= &amp;{e^{-\lambda}e^{y\log \lambda}e^{-\log (y!)}} \nonumber \\
-       &amp;= &amp;e^{y\log \lambda-\lambda-\log (y!)}
- \tag{5.2}
- \end{eqnarray}\]</span>
-The first term in the exponent for Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> must be the product of two factors, one solely a function of y, <span class="math inline">\(a(y)\)</span>, and another, <span class="math inline">\(b(\lambda)\)</span>, a function of <span class="math inline">\(\lambda\)</span> only. The middle term in the exponent must be a function of <span class="math inline">\(\lambda\)</span> only; no <span class="math inline">\(y&#39;s\)</span> should appear. The last term has only <span class="math inline">\(y&#39;s\)</span> and no <span class="math inline">\(\lambda\)</span>. Since this appears to be the case here, we can identify the different functions in this form:
-<span class="math display" id="eq:diffunc">\[\begin{eqnarray}
-a(y)&amp;=&amp;y \\
-b(\lambda)&amp;=&amp;\log(\lambda) \\
-c(\lambda)&amp;=&amp;-\lambda \nonumber \\
-d(y)&amp;=&amp;-\log (y!) \\
-\tag{5.3}
-\end{eqnarray}\]</span>
-<p>These functions have useful interpretations in statistical theory. We won’t be going into this in detail, but we will note that function <span class="math inline">\(b(\lambda)\)</span>, or more generally <span class="math inline">\(b(\theta)\)</span>, will be particularly helpful in GLMs. The function <span class="math inline">\(b(\theta)\)</span> is referred to as the <strong>canonical link</strong>. The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as <span class="math inline">\(\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots\)</span>. In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of <span class="math inline">\(\theta\)</span>, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.</p>
-<p>There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS). In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of <span class="math inline">\(Y\)</span>. With statistical theory you can show that <span class="math display">\[{\operatorname{E}}(Y) =-\frac{c&#39;(\theta)}{b&#39;(\theta)} \quad \textrm{and} \quad {\operatorname{Var}}(Y) =\frac{b&#39;&#39;(\theta)c&#39;(\theta)-c&#39;&#39;(\theta)b&#39;(\theta)}{[b&#39;(\theta)]^3}
-\]</span> where differentiation is with respect to <span class="math inline">\(\theta\)</span>. Verifying these results for the Poisson response: <span class="math display">\[{\operatorname{E}}(Y)=-\frac{-1}{1/\lambda}=\lambda \quad \textrm{and} \quad  {\operatorname{Var}}(Y)=\frac{1/{{\lambda}^2}}
+\]</span>
+and consider the following useful identities for establishing exponential form:</p>
+<p><span class="math display">\[a=e^{\log(a)} \]</span>
+<span class="math display">\[a^x = e^{x\log(a)}\]</span>
+<span class="math display">\[\log(ab)=\log(a)+\log(b)\]</span>
+<span class="math display">\[\log\Big(\frac{a}{b}\Big)=\log(a)-\log(b)\]</span></p>
+<p>Determining whether the Poisson model is a member of the one-parameter exponential family is a matter of writing the Poisson pmf in the form of Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> and checking that the support does not depend upon <span class="math inline">\(\lambda\)</span>. First, consider the condition concerning the support of the distribution. The set of possible values for any Poisson random variable is <span class="math inline">\(y=0,1,2\ldots\infty\)</span> which does not depend on <span class="math inline">\(\lambda\)</span>. The support condition is met. Now we see if we can rewrite the probability mass function in one-parameter exponential family form.</p>
+<p><span class="math display">\[\begin{align*}
+ P(Y=y)&amp;= {e^{-\lambda}e^{y\log \lambda}e^{-\log (y!)}} \nonumber \\
+       &amp;= e^{y\log \lambda-\lambda-\log (y!)}
+ \end{align*}\]</span>
+The first term in the exponent for Equation <a href="ch-glms.html#eq:1expForm">(5.1)</a> must be the product of two factors, one solely a function of y, <span class="math inline">\(a(y)\)</span>, and another, <span class="math inline">\(b(\lambda)\)</span>, a function of <span class="math inline">\(\lambda\)</span> only. The middle term in the exponent must be a function of <span class="math inline">\(\lambda\)</span> only; no <span class="math inline">\(y&#39;s\)</span> should appear. The last term has only <span class="math inline">\(y&#39;s\)</span> and no <span class="math inline">\(\lambda\)</span>. Since this appears to be the case here, we can identify the different functions in this form:</p>
+<p><span class="math display" id="eq:diffunc">\[\begin{align*}
+a(y)&amp;=y \\
+b(\lambda)&amp;=\log(\lambda) \\
+c(\lambda)&amp;=-\lambda \\
+d(y)&amp;=-\log (y!)
+\tag{5.2}
+\end{align*}\]</span>
+These functions have useful interpretations in statistical theory. We won’t be going into this in detail, but we will note that function <span class="math inline">\(b(\lambda)\)</span>, or more generally <span class="math inline">\(b(\theta)\)</span>, will be particularly helpful in GLMs. The function <span class="math inline">\(b(\theta)\)</span> is referred to as the <strong>canonical link</strong>.  The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as <span class="math inline">\(\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots\)</span>. In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of <span class="math inline">\(\theta\)</span>, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.</p>
+<p>There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS). In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of <span class="math inline">\(Y\)</span>. With statistical theory you can show that</p>
+<p><span class="math display">\[\operatorname{E}(Y) =-\frac{c&#39;(\theta)}{b&#39;(\theta)} \quad \textrm{and} \quad \operatorname{Var}(Y) =\frac{b&#39;&#39;(\theta)c&#39;(\theta)-c&#39;&#39;(\theta)b&#39;(\theta)}{[b&#39;(\theta)]^3}
+\]</span>
+where differentiation is with respect to <span class="math inline">\(\theta\)</span>. Verifying these results for the Poisson response:</p>
+<p><span class="math display">\[\operatorname{E}(Y)=-\frac{-1}{1/\lambda}=\lambda \quad \textrm{and} \quad  \operatorname{Var}(Y)=\frac{1/{{\lambda}^2}}
 {(1/{\lambda}^3)}=\lambda
-\]</span> We’ll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we’ll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.</p>
+\]</span></p>
+<p>We’ll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we’ll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.</p>
 </div>
 <div id="one-parameter-exponential-family-normal" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> One parameter exponential family: Normal</h3>
-<p>Here we determine whether a normal distribution is a one parameter exponential family member. First we will need to assume that <span class="math inline">\(\sigma\)</span> is known. Next, possible values for a normal random variable range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, so the support does not depend on <span class="math inline">\(\mu\)</span>. Finally, we’ll need to write the probability density function (pdf) in the one parameter exponential family form. We start with the familiar form: <span class="math display">\[
+<p>Here we determine whether a normal distribution is a one parameter exponential family member. First we will need to assume that <span class="math inline">\(\sigma\)</span> is known. Next, possible values for a normal random variable range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, so the support does not depend on <span class="math inline">\(\mu\)</span>. Finally, we’ll need to write the probability density function (pdf) in the one parameter exponential family form. We start with the familiar form:</p>
+<p><span class="math display">\[
 f(y)=\frac{1}{{\sqrt{2\pi\sigma^2}}}{e^{-{(y-\mu)^2}/{(2\sigma^2)}}}
-\]</span> Even writing <span class="math inline">\({1/{\sqrt{2\pi\sigma^2}}}\)</span> as <span class="math inline">\(e^{-\log{\sigma}-\log(2\pi)/2}\)</span> we still do not have the pdf written in one parameter exponential family form. We will first need to expand the exponent so that we have <span class="math display">\[
+\]</span>
+Even writing <span class="math inline">\({1/{\sqrt{2\pi\sigma^2}}}\)</span> as <span class="math inline">\(e^{-\log{\sigma}-\log(2\pi)/2}\)</span> we still do not have the pdf written in one parameter exponential family form. We will first need to expand the exponent so that we have</p>
+<p><span class="math display">\[
 f(y)=e^{[-\log{\sigma}-\log(2\pi)/2]}{e^{[-{(y^2-2y\mu +\mu^2)}/{(2\sigma^2)}]}}
-\]</span></p>
-<p>Without loss of generality, we can assume <span class="math inline">\(\sigma=1\)</span>, so that <span class="math display">\[
+\]</span>
+Without loss of generality, we can assume <span class="math inline">\(\sigma=1\)</span>, so that</p>
+<p><span class="math display">\[
 f(y) \propto e^{y\mu - \frac{1}{2} \mu^2 - \frac{1}{2} y^2}
-\]</span> and <span class="math inline">\(a(y)=y\)</span>, <span class="math inline">\(b(\mu)=\mu\)</span>, <span class="math inline">\(c(\mu)= -\frac{1}{2}\mu^2\)</span>, and <span class="math inline">\(d(y) = - \frac{1}{2} y^2\)</span>.</p>
-<p>From this result, we can see that the canonical link for a normal response is <span class="math inline">\(\mu\)</span> which is consistent with what we’ve been doing with OLS, since the simple linear regression model has the form: <span class="math display">\[ \mu_{Y|X} = \beta_0 + \beta_1X. \]</span></p>
+\]</span>
+and <span class="math inline">\(a(y)=y\)</span>, <span class="math inline">\(b(\mu)=\mu\)</span>, <span class="math inline">\(c(\mu)= -\frac{1}{2}\mu^2\)</span>, and <span class="math inline">\(d(y) = - \frac{1}{2} y^2\)</span>.</p>
+<p>From this result, we can see that the canonical link for a normal response is <span class="math inline">\(\mu\)</span> which is consistent with what we’ve been doing with LLSR, since the simple linear regression model has the form:</p>
+<p><span class="math display">\[ \mu_{Y|X} = \beta_0 + \beta_1X. \]</span></p>
 </div>
 </div>
 <div id="generalized-linear-modeling" class="section level2">
 <h2><span class="header-section-number">5.3</span> Generalized Linear Modeling</h2>
 <p>GLM theory suggests that the canonical link can be modeled as a linear combination of the explanatory variable(s). This approach unifies a number of modeling results used throughout the text. For example, likelihoods can be used to compare models in the same way for any member of the one-parameter exponential family.</p>
 <p>We have now <strong>generalized</strong> our modeling to handle non-normal responses. In addition to normally distributed responses, we are able to handle Poisson responses, binomial responses, and more. Writing a pmf or pdf for a response in one parameter exponential family form reveals the canonical link which can be modeled as a linear function of the predictors. This linear function of the predictors is the last piece of the puzzle for performing generalized linear modeling. But, in fact, it is really nothing new. We already use linear combinations and the canonical link when modeling normally distributed data.</p>
-<p align="center">
-<strong>Three Components of a GLM</strong>
-</p>
-<blockquote>
+<p><strong>Three Components of a GLM</strong></p>
 <ol style="list-style-type: decimal">
 <li>Distribution of <span class="math inline">\(Y\)</span> (e.g., Poisson)</li>
 <li>Link Function (a function of the parameter, e.g., <span class="math inline">\(\log(\lambda)\)</span> for Poisson)</li>
-<li>Linear Predictor (choice of predictors, e.g., <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots\)</span>)</li>
+<li>Linear Predictor (choice of predictors,
+e.g., <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots\)</span>)</li>
 </ol>
-</blockquote>
 <table>
 <caption>
 <span id="tab:table1chp5">Table 5.1: </span>One parameter exponential family form and canonical links.
@@ -543,10 +591,10 @@ f(y) \propto e^{y\mu - \frac{1}{2} \mu^2 - \frac{1}{2} y^2}
 Distribution
 </th>
 <th style="text-align:left;">
-One-parameter Exponential Family Form
+One-parameter exponential family form
 </th>
 <th style="text-align:left;">
-Canonical Link
+Canonical link
 </th>
 </tr>
 </thead>
@@ -623,34 +671,33 @@ Geometric
 </table>
 <p>Completing Table <a href="ch-glms.html#tab:table1chp5">5.1</a> is left as an exercise.</p>
 <p>In the chapter on Poisson modeling, we provided heuristic rationale for using the <span class="math inline">\(\log()\)</span> function as our link. That is, counts would be non-negative but a linear function inevitably goes negative. By taking the logarithm of our parameter <span class="math inline">\(\lambda\)</span> we could use a linear predictor and not worry that it can take on negative values. Now we have theoretical justification for this choice, as the log is the canonical link for Poisson data. In the next chapter we encounter yet another type of response, a binary response, which calls for a different link function. Our work here suggests that we will model <span class="math inline">\(\text{logit}(p)=\log\left(\frac{p}{1-p}\right)\)</span> using a linear predictor.</p>
-<p>[Note that <strong>generalized linear models (GLMs)</strong> differs from <strong>General Linear Models</strong>. The <em>general</em> linear model is a statistical linear model with multivariate vectors as responses. For example, each subject in a study may have their height, weight, and shoe size recorded and modeled as a function of age and sex. The response is a vector, <span class="math inline">\(Y\)</span> = (height, weight, shoe size), for each study participant. Age and sex are explanatory variables in the model. The residual is usually assumed to follow a multivariate normal distribution. If the residual is not a multivariate normal distribution, then generalized linear models may be used to relax assumptions about Y and the variance-covariance structure.]</p>
 </div>
 <div id="exercises-4" class="section level2">
 <h2><span class="header-section-number">5.4</span> Exercises</h2>
 <ol style="list-style-type: decimal">
-<li>For each distribution,</li>
-</ol>
+<li><p>For each distribution below,</p>
 <ul>
-<li>Write the pdf in one parameter exponential form, if possible.</li>
+<li>Write the pmf or pdf in one parameter exponential form, if possible.</li>
 <li>Describe an example of a setting where this random variable might be used.</li>
 <li>Identify the canonical link function, and</li>
-<li>Compute <span class="math inline">\(\mu = -\frac{c&#39;(\theta)}{b&#39;(\theta)}\)</span> and <span class="math inline">\(\sigma^2 = \frac{b&#39;&#39;(\theta)c&#39;(\theta)-c&#39;&#39;(\theta)b&#39;(\theta)}{[b&#39;(\theta)]^3}\)</span> and compare with known <span class="math inline">\({\operatorname{E}}(Y)\)</span> and <span class="math inline">\({\operatorname{Var}}(Y)\)</span>.</li>
-</ul>
+<li>Compute <span class="math inline">\(\mu = -\frac{c&#39;(\theta)}{b&#39;(\theta)}\)</span> and <span class="math inline">\(\sigma^2 = \frac{b&#39;&#39;(\theta)c&#39;(\theta)-c&#39;&#39;(\theta)b&#39;(\theta)}{[b&#39;(\theta)]^3}\)</span> and compare with known <span class="math inline">\(\operatorname{E}(Y)\)</span> and <span class="math inline">\(\operatorname{Var}(Y)\)</span>.</li>
+</ul></li>
+</ol>
 <ol style="list-style-type: lower-alpha">
 <li>Binary: Y = 1 for a success, 0 for a failure</li>
 </ol>
-<p><span class="math display">\[p(y)=p^{y}(1-p)^{(1-y)}
+<p><span class="math display">\[P(Y=y;p)=p^{y}(1-p)^{(1-y)}
   \]</span></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Binomial (for fixed <span class="math inline">\(n\)</span>): Y = number of successes in <span class="math inline">\(n\)</span> independent, identical trials</li>
 </ol>
-<p><span class="math display">\[p(y)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}
+<p><span class="math display">\[P(Y=y;p)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}
   \]</span></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Poisson: Y = number of events occurring in a given time (or space) when the average event rate is <span class="math inline">\(\lambda\)</span> per unit of time (or space)</li>
 </ol>
 <p><span class="math display">\[
-  P(Y=y)=\frac{e^{-\lambda}\lambda^y}{y!}
+  P(Y=y; \lambda)=\frac{e^{-\lambda}\lambda^y}{y!}
   \]</span></p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Normal (with fixed <span class="math inline">\(\sigma\)</span> – could set <span class="math inline">\(\sigma=1\)</span> without loss of generality)</li>
@@ -663,7 +710,7 @@ Geometric
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Exponential: Y = time spent waiting for the first event in a Poisson process with an average rate of <span class="math inline">\(\lambda\)</span> events per unit of time</li>
 </ol>
-<p><span class="math display">\[f(y)=\lambda e^{-\lambda y}\]</span></p>
+<p><span class="math display">\[f(y; \lambda)=\lambda e^{-\lambda y}\]</span></p>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Gamma (for fixed <span class="math inline">\(r\)</span>): Y = time spent waiting for the <span class="math inline">\(r^{th}\)</span> event in a Poisson process with an average rate of <span class="math inline">\(\lambda\)</span> events per unit of time</li>
 </ol>
@@ -671,14 +718,14 @@ Geometric
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Geometric: Y = number of failures before the first success in a Bernoulli process</li>
 </ol>
-<p><span class="math display">\[p(y)=(1-p)^{y}p\]</span></p>
+<p><span class="math display">\[P(Y=y;p)=(1-p)^{y}p\]</span></p>
 <ol style="list-style-type: lower-roman">
 <li>Negative Binomial (for fixed <span class="math inline">\(r\)</span>): Y = number of failures prior to the <span class="math inline">\(r^{th}\)</span> success in a Bernoulli process</li>
 </ol>
-<span class="math display">\[\begin{eqnarray}
-p(y; r) &amp; = &amp; \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-p)^{y}p^r \nonumber \\
- &amp; = &amp; \frac{\Gamma(y+r)}{\Gamma(r)y!} (1-p)^{y}p^r  \\
-\end{eqnarray}\]</span>
+<p><span class="math display">\[\begin{align*}
+P(Y=y; p) &amp; =  \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-p)^{y}p^r \nonumber \\
+ &amp; =  \frac{\Gamma(y+r)}{\Gamma(r)y!} (1-p)^{y}p^r  \\
+\end{align*}\]</span></p>
 <ol start="10" style="list-style-type: lower-alpha">
 <li>Pareto (for fixed <span class="math inline">\(k\)</span>):</li>
 </ol>
@@ -692,7 +739,7 @@ p(y; r) &amp; = &amp; \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-Nelder1972">
-<p>Nelder, John Ashworth, and Robert William Maclagan Wedderburn. 1972. “Generalized Linear Models.” <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370–84. doi:<a href="https://doi.org/10.2307/2344614">10.2307/2344614</a>.</p>
+<p>Nelder, John Ashworth, and Robert William Maclagan Wedderburn. 1972. “Generalized Linear Models.” <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370–84. <a href="http://www.jstor.org/stable/2344614">http://www.jstor.org/stable/2344614</a>.</p>
 </div>
 </div>
             </section>
@@ -704,13 +751,15 @@ p(y; r) &amp; = &amp; \left(\begin{array} {c}  y+r-1\\r-1  \end{array}\right)(1-
 <a href="ch-logreg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -718,12 +767,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -738,7 +786,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-bysh.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
@@ -752,10 +804,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

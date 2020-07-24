@@ -1,13 +1,20 @@
 library(tidyverse)
 library(bookdown)
 
-setwd("~/BYSH PDF/")
+# skip - I think it's not necessary
+setwd("~/BYSH/")
 
-#render entire book
+#test bookdown format
+render_book("index.Rmd", output_format = 'bookdown::gitbook')
+
+#publish in bookdown
+publish_book(render = "local")
+
+#render entire book as pdf for hard copy
 render_book("index.Rmd", output_format = 'bookdown::pdf_book')
 
 #preview chapter as pdf
-preview_chapter("07-Correlated-Data.Rmd", output_format = 'bookdown::pdf_book')
+preview_chapter("01-Introduction.Rmd", output_format = 'bookdown::pdf_book')
 
 #preview chapter as html
 preview_chapter("07-Correlated-Data.Rmd", output_format = 'bookdown::gitbook')

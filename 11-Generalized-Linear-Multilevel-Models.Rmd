@@ -1,6 +1,6 @@
 ---
 title: "Chapter 11"
-subtitle: "Generalized Linear Multilevel Models"
+subtitle: "multilevel generalized linear Models"
 output:
   pdf_document:
     number_sections: yes
@@ -8,17 +8,36 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
-# Generalized Linear Multilevel Models {#ch-GLMM}
+
+# Multilevel Generalized Linear Models {#ch-GLMM}
+
 ## Learning Objectives {#objectives}
+
 After finishing this chapter, students should be able to:
 
-- Recognize when generalized linear multilevel models (GLMMs) are appropriate.
-- Understand how GLMMs essentially combine ideas from earlier chapters.
+- Recognize when multilevel generalized linear models (multilevel GLMs) are appropriate.
+- Understand how multilevel GLMs essentially combine ideas from earlier chapters.
 - Apply exploratory data analysis techniques to multilevel data with non-normal responses.
 - Recognize when crossed random effects are appropriate and how they differ from nested random effects.
-- Write out a generalized linear multilevel statistical model, including assumptions about variance components.
-- Interpret model parameters (including fixed effects and variance components) from a GLMM.
+- Write out a multilevel generalized linear statistical model, including assumptions about variance components.
+- Interpret model parameters (including fixed effects and variance components) from a multilevel GLM.
 - Generate and interpret random effect estimates.
+
+```{r load_packages11, message = FALSE}
+# Packages required for Chapter 11
+library(gridExtra)
+library(lme4)
+library(pander)
+library(ggmosaic)
+library(kableExtra)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+```
+
+```{r, include=F}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
 
 ## Case Study: College Basketball Referees {#cs:refs}
 
@@ -28,10 +47,12 @@ An article by @Anderson2009 describes empirical evidence that officials in NCAA 
 
 - Does evidence that college basketball referees tend to "even out" calls still exist in 2010 as it did in 2005?
 - How do results change if our analysis accounts for the correlation in calls from the same game and the same teams?
-- Is the tendency to even out calls stronger for fouls over which the referee generally has greater control?  Fouls are divided into offensive, personal, and shooting fouls, and one could argue that referees have the most control over offensive fouls (typically where the player with the ball knocks over a stationary defender) and the least control over shooting fouls (where an offensive player is fouled in the act of shooting).
+- Is the tendency to even out calls stronger for fouls over which the referee generally has greater control?  Fouls are divided into offensive, personal, and shooting fouls, and one could argue that referees have the most control over offensive fouls (for example, where the player with the ball knocks over a stationary defender) and the least control over shooting fouls (where an offensive player is fouled in the act of shooting).
 - Are the actions of referees associated with the score of the game?
 
+
 ## Initial Exploratory Analyses {#explore-glmm}
+
 ### Data organization
 
 Examination of data for Case Study \@ref(cs:refs) reveals the following key variables in `basketball0910.csv`:
@@ -57,21 +78,6 @@ Examination of data for Case Study \@ref(cs:refs) reveals the following key vari
 
 Data was collected for 4972 fouls over 340 games from the Big Ten, ACC, and Big East conference seasons during 2009-2010.  We focus on fouls called during the first half to avoid the issue of intentional fouls by the trailing team at the end of games.  Table \@ref(tab:table1chp11) illustrates key variables from the first 10 rows of the data set.
 
-```{r load_packages11, include=FALSE}
-library(ggplot2)
-library(gridExtra)
-library(tidyverse)
-library(broom)
-library(lme4)
-library(pander)
-library(ggmosaic)
-library(kableExtra)
-library(knitr)
-library(kableExtra)
-
-if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
-```
-
 ```{r, include=FALSE}
 #getting-started
 theme.1 <- theme(axis.title.x = element_text(size = 11),
@@ -84,26 +90,37 @@ dim(refdata)        # should be 4972 x 19
 head(refdata)       # examine first 6 rows
 ```
 
-<caption>(\#tab:table1chp11) Key variables from the first 10 rows of data from the College Basketball Referees case study.  Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.
-```{r, table1chp11, echo=FALSE, warning=FALSE}
-#tablehoops
+```{r, echo=FALSE, warning=FALSE}
+# Illustrate long data
+#table1chp11 <- data.frame(refdata %>% slice(1:10) %>%
+#  dplyr::select(., 2, 4, 5, 6, 7, 9, 10, 12, 15, 19))
+
+#if(knitr::is_html_output()){
+#  kable(table1chp11) %>%
+#    kable_styling(bootstrap_options = c("striped")) %>%
+#    scroll_box(width = "100%")
+#} else{
+#  kable(table1chp11) %>%
+#    kable_styling(bootstrap_options = c("striped")) 
+#}
+
+# Would place outside R chunk:
+#<caption>(\#tab:table1chp11) Key variables from the first 10 rows of data from the College Basketball Referees case study.  Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.
+```
+
+```{r table1chp11, echo=FALSE, warning=FALSE}
 # Illustrate long data
 table1chp11 <- data.frame(refdata %>% slice(1:10) %>%
   dplyr::select(., 2, 4, 5, 6, 7, 9, 10, 12, 15, 19))
 
-if(knitr::is_html_output()){
-  kable(table1chp11) %>%
-    kable_styling(bootstrap_options = c("striped")) %>%
-    scroll_box(width = "100%")
-} else{
-  kable(table1chp11) %>%
-    kable_styling(bootstrap_options = c("striped")) 
-}
+kable(table1chp11, booktabs=T, 
+      caption="Key variables from the first 10 rows of data from the College Basketball Referees case study.  Each row represents a different foul called; we see all 8 first-half fouls from Game 1 followed by the first 2 fouls called in Game 2.") %>%
+      kable_styling(latex_options = "scale_down", font_size = 9)
 ```
 
 For our initial analysis, our primary response variable is `foul.home`, and our primary hypothesis concerns evening out foul calls.  We hypothesize that the probability a foul is called on the home team is inversely related to the foul differential; that is, if more fouls have been called on the home team than the visiting team, the next foul is less likely to be on the home team.
 
-The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way.  With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression).  But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible.  So what we need is a multilevel model with a non-normal response; in other words, a __generalized linear multilevel model (GLMM)__.  We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
+The structure of this data suggests a couple of familiar attributes combined in an unfamiliar way.  With a binary response variable, a generalized linear model is typically applied, especially one with a logit link function (indicating logistic regression).  But, with covariates at multiple levels---some at the individual foul level and others at the game level---a multilevel model would also be sensible.  So what we need is a multilevel model with a non-normal response; in other words, a __multilevel generalized linear model (multilevel GLM)__. \index{multilevel GLM}  We will investigate what such a model might look like in the next section, but we will still begin by exploring the data with initial graphical and numerical summaries.
 
 As with other multilevel situations, we will begin with broad summaries across all 4972 foul calls from all 340 games.  Most of the variables we have collected can vary with each foul called; these Level One variables include:
 
@@ -118,17 +135,24 @@ Level Two variables, those that remain unchanged for a particular game, then inc
 In Figure \@ref(fig:gmu-histmat1), we see histograms for the continuous Level One covariates (time remaining, foul differential, and score differential).  These plots treat each foul within a game as independent even though we expect them to be correlated, but they provide a sense for the overall patterns.  We see that time remaining is reasonably uniform.  Score differential and foul differential are both bell-shaped, with a mean slightly favoring the home team in both cases -- on average, the home team leads by 2.04 points (SD 7.24) and has 0.36 fewer previous fouls (SD 2.05) at the time a foul is called.
 
 ```{r, include=FALSE}
-# Summarize Level 1 covariates (and responses) by ignoring within subject 
-#   correlation and pretending all observations are independent
+# Summarize Level 1 covariates (and responses) by ignoring 
+# within subject correlation and pretending all observations 
+# are independent
 time.hist <- ggplot(data = refdata, aes(x = time)) + 
-  geom_histogram(binwidth = 2, color = "black", fill = "white") + theme.1 + 
-  xlab("Time left in first half") + ylab("Frequency") + labs(title = "(a)")
+  geom_histogram(binwidth = 2, color = "black", 
+                 fill = "white") + 
+  theme.1 + xlab("Time left in first half") + 
+  ylab("Frequency") + labs(title = "(a)")
 score.hist <- ggplot(data = refdata, aes(x = score.diff)) + 
-  geom_histogram(binwidth = 5, color = "black", fill = "white") + theme.1 + 
-  xlab("Score difference (home-visitor)") + ylab("Frequency") + labs(title = "(b)")
+  geom_histogram(binwidth = 5, color = "black", 
+                 fill = "white") + 
+  theme.1 + xlab("Score difference (home-visitor)") +
+  ylab("Frequency") + labs(title = "(b)")
 foul.hist <- ggplot(data = refdata, aes(x = foul.diff)) + 
-  geom_histogram(binwidth = 1.5, color = "black", fill = "white") + theme.1 + 
-  xlab("Foul difference (home-visitor)") + ylab("Frequency") + labs(title = "(c)")
+  geom_histogram(binwidth = 1.5, color = "black", 
+                 fill = "white") + 
+  theme.1 + xlab("Foul difference (home-visitor)") +
+  ylab("Frequency") + labs(title = "(c)")
 ```
 
 ```{r gmu-histmat1, fig.cap= "Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference.", fig.align="center",out.width="60%", echo=FALSE}
@@ -147,17 +171,17 @@ visitt <- c("WVa","Nova","Wake"," ","Wisc","Mich","PSU")
 visits <- c("21.4","19.0","18.6"," ","10.4","11.1","11.3")
 Difft <- c("Duke","Wisc","Pitt"," ","WVa","Mia","Clem")
 Diffs <- c("4.0","2.6","2.3"," ","-6.9","-2.7","-2.6")
-table2chp11 <- data.frame(three,homet,homes,visitt,visits,Difft,Diffs)
-colnames(table2chp11) <- c(" "," "," "," "," "," "," ")
+table2chp11 <- data.frame(three, homet, homes, visitt, 
+                          visits, Difft, Diffs)
+colnames(table2chp11) <- c(" ", "Team", "Fouls", "Team", 
+                           "Fouls", "Team", "Fouls")
 kable(table2chp11, booktabs=T, caption=" Average total number of fouls in the first half over all games in which a particular team is home or visitor.  The left columns show the top 3 and bottom 3 teams according to total number of fouls (on both teams) in first halves of games in which they are the home team.  The middle columns correspond to games in which the listed teams are the visitors, and the right columns show the largest differences (in both directions) between total fouls in games in which a team is home or visitor.") %>%
   add_header_above(c(" ","Home"=2,"Visitor"=2, "Difference"=2))
 ```
 
-Next, we inspect numerical and graphical summaries of relationships between Level One model covariates and our binary model response.  As with other multilevel analyses, we will begin by observing broad trends involving all 4972 fouls called, even though fouls from the same game may be correlated.  The conditional density plots in the first row of Figure \@ref(fig:gmu-cdelogitmat1) examine continuous Level One covariates.  Figure \@ref(fig:gmu-cdelogitmat1)a provides support for our primary hypothesis about evening out foul calls, indicating a very strong trend for fouls to be more often called on the home team at points in the game when more fouls had previously been called on the visiting team.  Figures \@ref(fig:gmu-cdelogitmat1)b and \@ref(fig:gmu-cdelogitmat1)c then show that fouls were somewhat more likely to be called on the home team when the home team's lead was greater and (very slightly) later in the half.  Conclusions from the conditional density plots in Figure \@ref(fig:gmu-cdelogitmat1)a-c are supported with associated empirical logit plots in Figure \@ref(fig:gmu-cdelogitmat1)d-f.  If a logistic link function is appropriate, these plots should be linear, and the stronger the linear association, the more promising the predictor.  We see in Figure \@ref(fig:gmu-cdelogitmat1)d further confirmation of our primary hypothesis, with lower log-odds of a foul called on the home team the greater number of previous fouls the home team had accumulated compared to the visiting team.  Figure \@ref(fig:gmu-cdelogitmat1)e shows that game score may play a role in foul trends, as the log-odds of a foul on the home team grows as the home team accumulates a bigger lead on the scoreboard, and Figure \@ref(fig:gmu-cdelogitmat1)f shows a very slight tendency for greater log-odds of a foul called on the home team as the half proceeds (since points on the right are closer to the beginning of the game).
+Next, we inspect numerical and graphical summaries of relationships between Level One model covariates and our binary model response.  As with other multilevel analyses, we will begin by observing broad trends involving all 4972 fouls called, even though fouls from the same game may be correlated.  The conditional density plots in the first row of Figure \@ref(fig:gmu-cdelogitmat1) examine continuous Level One covariates.  Figure \@ref(fig:gmu-cdelogitmat1)a provides support for our primary hypothesis about evening out foul calls, indicating a very strong trend for fouls to be more often called on the home team at points in the game when more fouls had previously been called on the visiting team.  Figures \@ref(fig:gmu-cdelogitmat1)b and \@ref(fig:gmu-cdelogitmat1)c then show that fouls were somewhat more likely to be called on the home team when the home team's lead was greater and (very slightly) later in the half.  Conclusions from the conditional density plots in Figure \@ref(fig:gmu-cdelogitmat1)a-c are supported with associated empirical logit plots in Figure \@ref(fig:gmu-cdelogitmat1)d-f.  If a logistic link function is appropriate, these plots should be linear, and the stronger the linear association, the more promising the predictor.  We see in Figure \@ref(fig:gmu-cdelogitmat1)d further confirmation of our primary hypothesis, with lower log-odds of a foul called on the home team associated with a greater number of previous fouls the home team had accumulated compared to the visiting team.  Figure \@ref(fig:gmu-cdelogitmat1)e shows that game score may play a role in foul trends, as the log-odds of a foul on the home team grows as the home team accumulates a bigger lead on the scoreboard, and Figure \@ref(fig:gmu-cdelogitmat1)f shows a very slight tendency for greater log-odds of a foul called on the home team as the half proceeds (since points on the right are closer to the beginning of the game).
 
 Conclusions about continuous Level One covariates are further supported by summary statistics calculated separately for fouls called on the home team and those called on the visiting team.  For instance, when a foul is called on the home team, there is an average of 0.64 additional fouls on the visitors at that point in the game, compared to an average of 0.10 additional fouls on the visitors when a foul is called on the visiting team.  Similarly, when a foul is called on the home team, they are in the lead by an average of 2.7 points, compared to an average home lead of 1.4 points when a foul is called on the visiting team.  As expected, the average time remaining the half is very similar for home and visitor fouls (9.2 vs. 9.5 minutes, respectively).
-
-The mosaic plots in Figure \@ref(fig:gmu-barmat1) examine categorical Level One covariates, indicating that fouls were more likely to be called on the home team when the home team was leading, when the previous foul was on the visiting team, and when the foul was a personal foul rather than a shooting foul or an offensive foul.  51.8\% of calls go against the home team when it is leading the game, compared to only 42.9\% of calls when the it is behind; 51.3\% of calls go against the home team when the previous foul went against the visitors, compared to only 43.8\% of calls when the previous foul went against the home team; and, 49.2\% of personal fouls are called against the home team, compared to only 46.9\% of shooting fouls and 45.7\% of offensive fouls.  Eventually we will want to examine the relationship between foul type (personal, shooting, or offensive) and foul differential, examining our hypothesis that the tendency to even out calls will be even stronger for calls over which the referees have greater control (personal fouls and especially offensive fouls).
 
 ```{r, include=FALSE}
 # analyses using tidyverse
@@ -169,21 +193,26 @@ with(refdata, sd(time))
 with(refdata, sd(score.diff))
 with(refdata, sd(foul.diff))
 
-refdata %>% count(foul.home) %>% dplyr::mutate(prop = n/sum(n))
-refdata %>% count(lead.home) %>% dplyr::mutate(prop = n/sum(n)) 
-refdata %>% count(previous.foul.home) %>% dplyr::mutate(prop = n/sum(n)) 
-refdata %>% count(foul.type) %>% dplyr::mutate(prop = n/sum(n)) 
+refdata %>% count(foul.home) %>% 
+  mutate(prop = n/sum(n))
+refdata %>% count(lead.home) %>% 
+  mutate(prop = n/sum(n)) 
+refdata %>% count(previous.foul.home) %>% 
+  mutate(prop = n/sum(n)) 
+refdata %>% count(foul.type) %>% 
+  mutate(prop = n/sum(n)) 
 
-# There are no Level 2 covariates other than Home and Visiting Team.
-#   Tables below give overall summary of which teams called for more fouls.
+# There are no Level 2 covariates other than Home and 
+#   Visiting Team.  Tables below give overall summary of 
+#   which teams called for more fouls.
 f1 <- refdata %>% count(hometeam) %>% 
-  dplyr::mutate(prop = n/sum(n)) %>%
+  mutate(prop = n/sum(n)) %>%
   rename(n_fouls = n)
-print(f1, n = Inf)
+f1
 f2 <- refdata %>% count(visitor) %>% 
-  dplyr::mutate(prop = n/sum(n)) %>%
+  mutate(prop = n/sum(n)) %>%
   rename(n_fouls = n)
-print(f2, n = Inf)
+f2
 table(refdata$hometeam)
 table(refdata$visitor)
 
@@ -193,7 +222,7 @@ onepergame <- refdata %>%
   filter(row_number() == 1) %>%
   ungroup
 p1 <- onepergame %>% count(hometeam) %>% 
-  dplyr::mutate(prop = n/sum(n)) %>%
+  mutate(prop = n/sum(n)) %>%
   rename(n_games = n)
 print(p1, n = Inf)
 p2 <- onepergame %>% count(visitor) %>% 
@@ -203,8 +232,9 @@ print(p2, n = Inf)
 table(onepergame$hometeam)
 table(onepergame$visitor)
 
-#   These tables tell average total fouls for both teams in the first half
-#   of games where a certain team is home or visitor
+# These tables tell average total fouls for both teams 
+#   in the first half of games where a certain team is 
+#   home or visitor
 allhome <- p1 %>%
   inner_join(f1, by = "hometeam") %>%
   dplyr::mutate(fouls_per_game = n_fouls / n_games) %>%
@@ -233,16 +263,18 @@ sort(allhome0)
 sort(allvis0)
 sort(allhome0-allvis0)
 
-# Look at relationships among Level 1 covariates and primary response
-#   (again ignoring correlation).  Cdplots and elogits for continuous covariates and
-#   segmented barcharts for categorical covariates.
+# Look at relationships among Level 1 covariates and primary
+# response (again ignoring correlation).  Cdplots and elogits 
+# for continuous covariates and segmented barcharts for
+# categorical covariates.
 
 with(refdata, by(time, foul.home, summary))
 with(refdata, by(score.diff, foul.home, summary))
 with(refdata, by(foul.diff, foul.home, summary))
 
-# Find empirical logits and proportions by grouping fouls by foul.diff
-#   First remove foul.diff=-8 or 6, since not enough data
+# Find empirical logits and proportions by grouping fouls 
+# by foul.diff.  First remove foul.diff=-8 or 6, since not 
+# enough data
 foo1 <- refdata %>%
   filter(foul.diff >= -7 & foul.diff <= 5)
 
@@ -252,18 +284,19 @@ table(foo1$foul.home, foo1$foul.diff)
 foul.df <- foo1 %>%
   group_by(foul.diff) %>%
   summarise(foul.phats = mean(foul.home)) %>%
-  dplyr::mutate(foul.elogits = log(foul.phats/(1 - foul.phats)) )
+  mutate(foul.elogits = log(foul.phats/(1 - foul.phats)) )
 print(foul.df)
 
-ggplot(data = foul.df, aes(x = foul.diff, y = foul.elogits)) + geom_point() + 
+ggplot(data = foul.df, aes(x = foul.diff, y = foul.elogits)) +
+  geom_point() + 
   geom_smooth(method = "lm", color = "black") + theme.1 + 
   ylab("Empirical logits") + xlab("Foul differential")
 
 model0 = lm(foul.elogits ~ foul.diff, data = foul.df)
 summary(model0)
 
-# Repeat by grouping fouls by score.diff
-#   First remove score.diff<=-12 or >=19, since not enough data
+# Repeat by grouping fouls by score.diff.  First remove
+#   score.diff<=-12 or >=19, since not enough data
 foo1 <- refdata %>%
   filter(score.diff >= -11 & score.diff <= 18)
 
@@ -273,10 +306,12 @@ table(foo1$foul.home, foo1$score.diff)
 score.df <- foo1 %>%
   group_by(score.diff) %>%
   summarise(score.phats = mean(foul.home)) %>%
-  dplyr::mutate(score.elogits = log(score.phats/(1 - score.phats)) )
+  mutate(score.elogits = log(score.phats/(1 - score.phats)) )
 print(score.df)
 
-ggplot(data = score.df, aes(x = score.diff, y = score.elogits)) + geom_point() + 
+ggplot(data = score.df, aes(x = score.diff, 
+                            y = score.elogits)) + 
+  geom_point() + 
   geom_smooth(method = "lm", color = "black") + theme.1 + 
   ylab("Empirical logits") + xlab("Score differential")
 
@@ -286,10 +321,11 @@ summary(model0)
 # Repeat by grouping fouls by time remaining
 #   Must group in intervals since time truly continuous
 foo1 <- refdata %>% 
-  dplyr::mutate(group = cut(time, breaks = c(-Inf, 2, 4, 6, 8, 10, 12, 14, 16, 18, Inf),
-                        labels = c(1, 3, 5, 7, 9, 11, 13, 15, 17, 19))) %>%
-  dplyr::mutate(times = as.numeric(levels(group))[group]) %>%
-  dplyr::select(-group)
+  mutate(group = cut(time, 
+    breaks = c(-Inf, 2, 4, 6, 8, 10, 12, 14, 16, 18, Inf),
+    labels = c(1, 3, 5, 7, 9, 11, 13, 15, 17, 19))) %>%
+  mutate(times = as.numeric(levels(group))[group]) %>%
+  select(-group)
 
 foo1 %>% count(times, foul.home)
 table(foo1$foul.home, foo1$times)
@@ -297,10 +333,11 @@ table(foo1$foul.home, foo1$times)
 time.df <- foo1 %>%
   group_by(times) %>%
   summarise(time.phats = mean(foul.home)) %>%
-  dplyr::mutate(time.elogits = log(time.phats/(1 - time.phats)) )
+  mutate(time.elogits = log(time.phats/(1 - time.phats)) )
 print(time.df)
 
-ggplot(data = time.df, aes(x = times, y = time.elogits)) + geom_point() + 
+ggplot(data = time.df, aes(x = times, y = time.elogits)) +
+  geom_point() + 
   geom_smooth(method = "lm", color = "black") + theme.1 + 
   ylab("Empirical logits") + xlab("Time remaining")
 
@@ -308,67 +345,99 @@ model0 = lm(time.elogits ~ times, data = time.df)
 summary(model0)
 
 refdata <- refdata %>%
-  dplyr::mutate(foul.factor = as.factor(ifelse(foul.home == 1, "Home", "Visitor")) )
+  mutate(foul.factor = as.factor(ifelse(foul.home == 1, 
+                                        "Home", "Visitor")) )
 ```
 
 ```{r, include=FALSE}
 #needed for next figure
 foul.cd = ggplot(data = refdata, aes(x = foul.diff)) + 
   theme(legend.title = element_blank()) + theme.1 +
-  geom_density(aes(fill = foul.factor), position = "fill", adjust = 2) + 
-  xlab("Foul difference (H-V)") + ylab("Probability of Home Foul") + 
-  labs(title="(a)") + scale_fill_manual(values = c("grey20", "grey80"))
+  geom_density(aes(fill = foul.factor), position = "fill", 
+               adjust = 2, alpha = 0.5) + 
+  xlab("Foul difference (H-V)") + 
+  ylab("Probability of Home Foul") + 
+  labs(title="(a)") + 
+  scale_fill_manual(values = c("grey20", "grey80"))
+
 score.cd = ggplot(data = refdata, aes(x = score.diff)) + 
   theme(legend.title = element_blank()) + theme.1 +
-  geom_density(aes(fill = foul.factor), position = "fill", adjust = 2) + 
-  xlab("Score difference (H-V)") + ylab("Probability of Home Foul") + 
-  labs(title="(b)") + scale_fill_manual(values = c("grey20", "grey80"))
+  geom_density(aes(fill = foul.factor), position = "fill", 
+               adjust = 2, alpha = 0.5) + 
+  xlab("Score difference (H-V)") + 
+  ylab("Probability of Home Foul") + 
+  labs(title="(b)") + 
+  scale_fill_manual(values = c("grey20", "grey80"))
+
 time.cd = ggplot(data = refdata, aes(x = time)) + 
   theme(legend.title = element_blank()) + theme.1 +
-  geom_density(aes(fill = foul.factor), position = "fill", adjust = 2) + 
-  xlab("Time left in half") + ylab("Probability of Home Foul") + 
-  labs(title="(c)") + scale_fill_manual(values = c("grey20", "grey80"))
-foul.el <- ggplot(data = foul.df, aes(x = foul.diff, y = foul.elogits)) + 
-  geom_point(color="dark grey") + theme.1 + xlab("Foul difference (H-V)") + 
-  ylab("Empirical Log-odds of Home Foul") + labs(title = "(d)") +
+  geom_density(aes(fill = foul.factor), position = "fill", 
+               adjust = 2, alpha = 0.5) + 
+  xlab("Time left in half") + 
+  ylab("Probability of Home Foul") + 
+  labs(title="(c)") + 
+  scale_fill_manual(values = c("grey20", "grey80"))
+
+foul.el <- ggplot(data = foul.df, aes(x = foul.diff, 
+                                      y = foul.elogits)) + 
+  geom_point(color="dark grey") + 
+  theme.1 + xlab("Foul difference (H-V)") + 
+  ylab("Empirical Log-odds of Home Foul") + 
+  labs(title = "(d)") +
   geom_smooth(se = FALSE, method = "lm", color = "black")
-score.el <- ggplot(data = score.df, aes(x = score.diff, y = score.elogits)) + 
-  geom_point(color="dark grey") + theme.1 + xlab("Score difference (H-V)") + 
-  ylab("Empirical Log-odds of Home Foul") + labs(title = "(e)") +
+
+score.el <- ggplot(data = score.df, aes(x = score.diff, 
+                                        y = score.elogits)) + 
+  geom_point(color="dark grey") + 
+  theme.1 + xlab("Score difference (H-V)") + 
+  ylab("Empirical Log-odds of Home Foul") + 
+  labs(title = "(e)") +
   geom_smooth(se = FALSE, method = "lm", color = "black")
-time.el <- ggplot(data = time.df, aes(x = times, y = time.elogits)) + 
-  geom_point(color="dark grey") + theme.1 + xlab("Time left in half") + 
-  ylab("Empirical Log-odds of Home Foul") + labs(title = "(f)") +
+
+time.el <- ggplot(data = time.df, aes(x = times, 
+                                      y = time.elogits)) + 
+  geom_point(color="dark grey") + 
+  theme.1 + xlab("Time left in half") + 
+  ylab("Empirical Log-odds of Home Foul") + 
+  labs(title = "(f)") +
   geom_smooth(se = FALSE, method = "lm", color = "black")
 ```
 
-```{r, gmu-cdelogitmat1, fig.cap= "Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval.", fig.align="center",out.width="60%", echo=FALSE}
+```{r, gmu-cdelogitmat1, fig.cap= "Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval.", fig.align="center",out.width="60%", echo=FALSE, message=F}
 grid.arrange(foul.cd, score.cd, time.cd,
   foul.el, score.el, time.el, ncol = 3, nrow = 2)
 ```
 
+The mosaic plots in Figure \@ref(fig:gmu-barmat1) examine categorical Level One covariates, indicating that fouls were more likely to be called on the home team when the home team was leading, when the previous foul was on the visiting team, and when the foul was a personal foul rather than a shooting foul or an offensive foul.  51.8\% of calls go against the home team when it is leading the game, compared to only 42.9\% of calls when the it is behind; 51.3\% of calls go against the home team when the previous foul went against the visitors, compared to only 43.8\% of calls when the previous foul went against the home team; and, 49.2\% of personal fouls are called against the home team, compared to only 46.9\% of shooting fouls and 45.7\% of offensive fouls.  Eventually we will want to examine the relationship between foul type (personal, shooting, or offensive) and foul differential, examining our hypothesis that the tendency to even out calls will be even stronger for calls over which the referees have greater control (personal fouls and especially offensive fouls).
+
 ```{r, include=FALSE}
 refdata <- refdata %>%
-  dplyr::mutate(leadyes = ifelse(lead.home == 0, "No", "Yes"),
-         prevyes = ifelse(previous.foul.home == 0, "No", "Yes")) %>%
+  mutate(leadyes = ifelse(lead.home == 0, "No", "Yes"),
+    prevyes = ifelse(previous.foul.home == 0, "No", "Yes")) %>%
   rename(whofoul = foul.factor)
 
 barplot1 <- ggplot(data = refdata) +
-  geom_mosaic(aes(weight = 1, x = product(whofoul, foul.type), fill = whofoul)) +
+  geom_mosaic(aes(weight = 1, x = product(whofoul, foul.type),
+                  fill = whofoul)) +
   xlab("Foul Type") +
-  ylab("Proportion within Foul Type") + labs(title = "(a)") +
+  ylab("Proportion within Foul Type") + 
+  labs(title = "(a)") + scale_fill_grey() +
   theme(legend.title = element_blank()) + theme.1
 
 barplot2 <- ggplot(data = refdata) +
-  geom_mosaic(aes(weight = 1, x = product(whofoul, leadyes), fill = whofoul)) +
+  geom_mosaic(aes(weight = 1, x = product(whofoul, leadyes), 
+                  fill = whofoul)) +
   xlab("Home Team in Lead") +
-  ylab("Proportion within Leading Team") + labs(title = "(b)") +
+  ylab("Proportion within Leading Team") + 
+  labs(title = "(b)") + scale_fill_grey() +
   theme(legend.title = element_blank()) + theme.1
 
 barplot3 <- ggplot(data = refdata) +
-  geom_mosaic(aes(weight = 1, x = product(whofoul, prevyes), fill = whofoul)) +
+  geom_mosaic(aes(weight = 1, x = product(whofoul, prevyes), 
+                  fill = whofoul)) +
   xlab("Previous Foul on Home Team") +
-  ylab("Proportion within Previous Foul") + labs(title = "(c)") +
+  ylab("Proportion within Previous Foul") + 
+  labs(title = "(c)") + scale_fill_grey() +
   theme(legend.title = element_blank()) + theme.1
 ```
 
@@ -378,53 +447,67 @@ grid.arrange(barplot1, barplot2, barplot3, ncol = 2, nrow = 2)
 
 The exploratory analyses presented above are an essential first step in understanding our data, seeing univariate trends, and noting bivariate relationships between variable pairs.  However, our important research questions (a) involve the effect of foul differential after adjusting for other significant predictors of which team is called for a foul, (b) account for potential correlation between foul calls within a game (or within a particular home or visiting team), and (c) determine if the effect of foul differential is constant across game conditions.  In order to address research questions such as these, we need to consider multilevel, multivariate statistical models for a binary response variable.
 
+
 ## Two level Modeling with a Generalized Response {#twolevelmodeling-glmm}
 
 ### A GLM approach (correlation not accounted for) {#multregr-glmm}
 
 One quick and dirty approach to analysis might be to run a multiple logistic regression model on the entire long data set of 4972 fouls.  In fact, Anderson and Pierce ran such a model in their 2009 paper, using the results of their multiple logistic regression model to support their primary conclusions, while justifying their approach by confirming a low level of correlation within games and the minimal impact on fixed effect estimates that accounting for clustering would have.  Output from one potential multiple logistic regression model is shown below; this initial modeling attempt shows significant evidence that referees tend to even out calls (i.e., that the probability of a foul called on the home team decreases as total home fouls increase compared to total visiting team fouls---that is, as `foul.diff` increases) after accounting for score differential and time remaining (Z=-3.078, p=.002).  The extent of the effect of foul differential also appears to grow (in a negative direction) as the first half goes on, based on an interaction between time remaining and foul differential (Z=-2.485, p=.013).  We will compare this model with others that formally account for clustering and correlation patterns in our data.
 
-```{r, 11verb1, echo=FALSE, comment=NA}
+```{r, comment = NA}
 # Logistic regression model (not multilevel)
-mod0 = glm(foul.home ~ foul.diff + score.diff + lead.home + time + 
-  foul.diff:time + lead.home:time, family = binomial, data = refdata)
-tmp <- capture.output(summary(mod0))
-cat(tmp[c(3:6, 11:20, 25:27)], sep='\n')
+mod0 = glm(foul.home ~ foul.diff + score.diff + lead.home + 
+           time + foul.diff:time + lead.home:time, 
+           family = binomial, data = refdata)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(mod0))
+cat(" Residual deviance = ", 
+    summary(mod0)$deviance, " on ",
+    summary(mod0)$df.residual, "df")
 ```
 
 ### A two-stage modeling approach (provides the basic idea for multilevel modeling) {#twostage-glmm}
 
-As we saw in Section \@ref(twostage), to avoid clustering we could consider fitting a separate regression model to each unit of observation at Level Two (each game in this case).  Since our primary response variable is binary (Was the foul called on the home team or not?), we would fit a logistic regression model to the data from each game.  For example, consider the 14 fouls called during the first half of the March 3, 2010, game featuring Virginia at Boston College (Game 110). 
+As we saw in Section \@ref(twostage), to avoid clustering we could consider fitting a separate regression model to each unit of observation at Level Two (each game in this case).  Since our primary response variable is binary (Was the foul called on the home team or not?), we would fit a logistic regression model to the data from each game.  For example, consider the 14 fouls called during the first half of the March 3, 2010, game featuring Virginia at Boston College (Game 110) in Table \@ref(tab:table3chp11). 
 
 ```{r, table3chp11, echo=FALSE, warning=FALSE}
-#tableVABC
 # Model for Game 110 only (foul.diff as sole predictor)
-game110 <- refdata %>% filter(game == 110) %>%   # pick off data for Game 110
-  dplyr::select(.,4, 5, 6, 7, 9, 10, 15, 19)     # took out 2 and 12 - too wide
-kable(game110,booktabs=T, caption="Key variables from the March 3, 2010, game featuring Virginia at Boston College (Game 110).")
+game110 <- refdata %>% 
+  filter(game == 110) %>%   # pick off data for Game 110
+  select(.,4, 5, 6, 7, 9, 10, 15, 19)     
+  # took out 2 and 12 - too wide
+
+kable(game110, booktabs=T, 
+      caption="Key variables from the March 3, 2010, game featuring Virginia at Boston College (Game 110).") %>%
+      kable_styling(latex_options = "scale_down")
 ```
 
 Is there evidence from this game that referees tend to "even out" foul calls when one team starts to accumulate more fouls?  Is the score differential associated with the probability of a foul on the home team?  Is the effect of foul differential constant across all foul types during this game?  We can address these questions through multiple logistic regression applied to only data from Game 110.
 
 First, notation must be defined.  Let $Y_{ij}$ be an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0).  We can consider $Y_{ij}$ to be a Bernoulli random variable with parameter $p_{ij}$, where $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  As in Chapter \@ref(ch-logreg), we will begin by modeling the logit function of $p_{ij}$ for Game $i$ as a linear function of Level One covariates.  For instance, if we were to consider a simple model with foul differential as the sole predictor, we could model the probability of a foul on the home team in Game 110 with the model:
+
 \begin{equation}
 \log\bigg(\frac{p_{110j}}{1-p_{110j}}\bigg)=a_{110}+b_{110}\mathrm{foul.diff}_{110j}
 (\#eq:lev1glmm)
 \end{equation}
 where $i$ is fixed at 110.  Note that there is no separate error term or variance parameter, since the variance is a function of $p_{ij}$ with a Bernoulli random variable.
 
-Maximum likelihood estimators for the parameters in this model ($a_{110}$ and $b_{110}$) can be obtained through statistical software.  $e^{a_{110}}$ represents the odds that a foul is called on the home team when the foul totals in Game 110 are even, and $e^{b_{110}}$ represents the multiplicative change in the odds that a foul is called on the home team for each additional foul for the home team relative to the visiting team during the first half of Game 110.  For example, if we compared the situation when the home team has been called for 3 more fouls than the visiting team to when the home team has been called for 4 more fouls than the visitors, we'd estimate $e^{b_{110}}$ to be the multiplicative difference in odds of a foul called on the home team (the odds should decrease from 3 to 4 additional home fouls).
+Maximum likelihood estimators for the parameters in this model ($a_{110}$ and $b_{110}$) can be obtained through statistical software.  $e^{a_{110}}$ represents the odds that a foul is called on the home team when the foul totals in Game 110 are even, and $e^{b_{110}}$ represents the multiplicative change in the odds that a foul is called on the home team for each additional foul for the home team relative to the visiting team during the first half of Game 110.
 
 For Game 110, we estimate $\hat{a}_{110}=-5.67$ and $\hat{b}_{110}=-2.11$ (see output below).  Thus, according to our simple logistic regression model, the odds that a foul is called on the home team when both teams have an equal number of fouls in Game 110 is $e^{-5.67}=0.0035$; that is, the probability that a foul is called on the visiting team (0.9966) is $1/0.0035 = 289$ times higher than the probability a foul is called on the home team (0.0034) in that situation.  While these parameter estimates seem quite extreme, reliable estimates are difficult to obtain with 14 observations and a binary response variable, especially in a case like this where the fouls were only even at the start of the game.  Also, as the gap between home and visiting fouls increases by 1, the odds that a foul is called on the visiting team increases by a multiplicative factor of more than 8 (since $1/e^{-2.11}=8.25$).  In Game 110, this trend toward referees evening out foul calls is statistically significant at the 0.10 level (Z=-1.851, p=.0642).
 
-```{r, include=FALSE}
-dim(game110)
+```{r, comment = NA}
+lreg.game110 <- glm(foul.home ~ foul.diff, 
+                    family = binomial, data = game110)
 ```
 
-```{r, 11verb2, echo=FALSE, warning=FALSE, comment=NA}
-lreg.game110 = glm(foul.home ~ foul.diff, family = binomial, data = game110)
-tmp <- capture.output(summary(lreg.game110))
-cat(tmp[c(3:4, 9:13, 18:20)], sep='\n')
+```{r, echo=FALSE, message=FALSE}
+coef(summary(lreg.game110))
+cat(" Residual deviance = ", 
+    summary(lreg.game110)$deviance, " on ",
+    summary(lreg.game110)$df.residual, "df")
 ```
 
 As in Section \@ref(twostage), we can proceed to fit similar logistic regression models for each of the 339 other games in our data set.  Each model will yield a new estimate of the intercept and the slope from Equation \@ref(eq:lev1glmm).  These estimates are summarized graphically in Figure \@ref(fig:gmu-histmat2).  There is noticeable variability among the 340 games in the fitted intercepts and slopes, with an IQR for intercepts ranging from -1.45 to 0.70, and an IQR for slopes ranging from -1.81 to -0.51.  The majority of intercepts are below 0 (median = -0.41), so that in most games a foul is less likely to be called on the home team when foul totals are even.  In addition, almost all of the estimated slopes are below 0 (median = -0.89), indicating that as the home team's foul total grows in relation to the visiting team's foul total, the odds of a foul on the home team continues to decrease.
@@ -434,7 +517,8 @@ As in Section \@ref(twostage), we can proceed to fit similar logistic regression
 #   with foul.diff as only predictor
 regressions <- refdata %>% 
   group_by(game) %>% 
-  do(fit = glm(foul.home ~ foul.diff, family = binomial, data = .))
+  do(fit = glm(foul.home ~ foul.diff, family = binomial, 
+               data = .))
 
 glm_info <- regressions %>%
   tidy(fit) %>%
@@ -443,8 +527,8 @@ glm_info <- regressions %>%
   spread(key = term, value = estimate) %>%
   rename(rate = foul.diff, int = `(Intercept)`)
 
-# Descriptive statistics of the estimates obtained by fitting the 
-#   logistic model by game.
+# Descriptive statistics of the estimates obtained by 
+#   fitting the logistic model by game.
 summary(glm_info$int)
 summary(glm_info$rate)
 sd(glm_info$int)
@@ -455,11 +539,16 @@ cor(glm_info$int, glm_info$rate)
 ```{r, include=FALSE}
 # histograms for ints, rates of change - gmu-histmat2.eps
 int.hist2 <- ggplot(glm_info) + 
-  geom_histogram(aes(x = int), color = "black", fill = "white") + theme.1 + 
+  geom_histogram(aes(x = int), color = "black", 
+                 fill = "white") + 
+  theme.1 + 
   labs(x = "Intercepts", y = "Frequency", title = "(a)") +
   scale_x_continuous(limits = c(-10, 10))
+
 rate.hist2 <- ggplot(glm_info) + 
-  geom_histogram(aes(x = rate), color = "black", fill = "white") + theme.1 + 
+  geom_histogram(aes(x = rate), color = "black", 
+                 fill = "white") + 
+  theme.1 + 
   labs(x = "Slopes", y = "Frequency", title = "(b)") +
   scale_x_continuous(limits = c(-5, 5))
 ```
@@ -472,8 +561,10 @@ At this point, you might imagine expanding model building efforts in a couple of
 
 ### A unified multilevel approach (the framework we'll use) {#unified-glmm}
 
-As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a composite model after first expressing Level One and Level Two models.  That is, we will create Level One and Level Two models as in Section \@ref(twostage-glmm), but we will then combine those models into a composite model and estimate all model parameters simultaneously.  Once again $Y_{ij}$ is an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), and $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  Our Level One model with foul differential as the sole predictor is given by Equation \@ref(eq:lev1glmm):
+As in Chapters \@ref(ch-multilevelintro) and \@ref(ch-lon), we will write out a composite model after first expressing Level One and Level Two models.  That is, we will create Level One and Level Two models as in Section \@ref(twostage-glmm), but we will then combine those models into a composite model and estimate all model parameters simultaneously.  Once again $Y_{ij}$ is an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), and $p_{ij}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on the home team.  Our Level One model with foul differential as the sole predictor is given by Equation \@ref(eq:lev1glmm) generalized to Game $i$:
+
   \[ \log\bigg(\frac{p_{ij}}{1-p_{ij}}\bigg)=a_i+b_i\mathrm{foul.diff}_{ij} \]
+  
 Then we include no fixed covariates at Level Two, but we include error terms to allow the intercept and slope from Level One to vary by game, and we allow these errors to be correlated:
 
 \begin{align*}
@@ -505,25 +596,34 @@ The major changes when moving from a normally distributed response to a binary r
 Again, we can use statistical software to obtain parameter estimates for this unified multilevel model using all 4972 fouls recorded from the 340 games.  For example, the `glmer()` function from the `lme4` package in R extends the `lmer()` function to handle generalized responses and to account for the fact that fouls are not independent within games.  Results are given below for the two-level model with foul differential as the sole covariate and Game as the Level Two observational unit.
 
 ```{r, include=FALSE, message=FALSE}
-# Model for Boston College at home only (foul.diff as sole predictor)
-bc.home = refdata %>% filter(hometeam == "BC") # pick off data when BC at home
+# Model for Boston College at home only (foul.diff as 
+#   sole predictor)
+
+# pick off data when BC at home
+bc.home = refdata %>% filter(hometeam == "BC") 
 dim(bc.home)
-lreg.bchm = glm(foul.home ~ foul.diff, family = binomial, data = bc.home)
+lreg.bchm <- glm(foul.home ~ foul.diff, family = binomial, 
+                data = bc.home)
 summary(lreg.bchm)
 
-# Examine intercepts by hometeam for model with foul.diff as only predictor
+# Examine intercepts by hometeam for model with foul.diff 
+#   as only predictor
 int <- by(refdata, refdata$hometeam, function(data)
-            coefficients(glm(foul.home~foul.diff,family=binomial,data=data))[[1]])
+        coefficients(glm(foul.home~foul.diff,
+          family=binomial,data=data))[[1]])
 summary(int)   # summary statistics for 39 intercepts
 
-# Examine slopes by hometeam for model with foul.diff as only predictor
+# Examine slopes by hometeam for model with foul.diff 
+#   as only predictor
 rate <- by(refdata, refdata$hometeam, function(data)
-            coefficients(glm(foul.home~foul.diff,family=binomial,data=data))[[2]])
+         coefficients(glm(foul.home~foul.diff,
+           family=binomial,data=data))[[2]])
 summary(rate)
 
 regressions <- refdata %>% 
   group_by(hometeam) %>% 
-  do(fit = glm(foul.home ~ foul.diff, family = binomial, data = .))
+  do(fit = glm(foul.home ~ foul.diff, family = binomial, 
+               data = .))
 
 glm_info <- regressions %>%
   tidy(fit) %>%
@@ -532,8 +632,8 @@ glm_info <- regressions %>%
   spread(key = term, value = estimate) %>%
   rename(rate = foul.diff, int = `(Intercept)`)
 
-# Descriptive statistics of the estimates obtained by fitting the 
-#   logistic model by hometeam.
+# Descriptive statistics of the estimates obtained by 
+#   fitting the logistic model by hometeam.
 summary(glm_info$int)
 summary(glm_info$rate)
 sd(glm_info$int)
@@ -541,62 +641,84 @@ sd(glm_info$rate)
 cor(glm_info$int, glm_info$rate)
 ```
 
-```{r, 11verb3, echo=FALSE, comment=NA, message=FALSE}
-# Multilevel model with only foul.diff and errors on slope and int and 1 RE
-model.0b <- glmer(foul.home ~ foul.diff + (foul.diff|game), family = binomial,
-  data = refdata)
-tmp <- capture.output(summary(model.0b))
-cat(tmp[c(4, 6:9, 14:23)], sep='\n')
+```{r, comment=NA, message=FALSE}
+# Multilevel model with only foul.diff and errors on slope 
+#   and int and 1 RE
+model.b1 <- glmer(foul.home ~ foul.diff + (foul.diff|game),
+                  family = binomial, data = refdata)
 ```
 
-When parameter estimates from the multilevel model above are compared with those from the naive logistic regression model assuming independence of all observations (below), there are noticeable differences.  For instance, each additional foul for the visiting team is associated with a 33\% increase ($1/e^{-.285}$) in the odds of a foul called on the home team under the multilevel model, but the single level model estimates the same increase as only 14\% ($1/e^{-.130}$).  Also, estimated standard errors for fixed effects are greater under generalized linear multilevel modeling, which is not unusual after accounting for correlated observations, which effectively reduces the sample size.
+```{r, echo=FALSE, message=FALSE}
+VCrandom <- VarCorr(model.b1)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of Level Two groups = ",
+    summary(model.b1)$ngrps)
+coef(summary(model.b1))
+cat(" AIC = ", AIC(model.b1), ";  BIC = ", BIC(model.b1))
+```
 
-```{r, 11verb4, echo=FALSE, comment=NA}
-# Logistic regression model (not multilevel) with only foul.diff
-mod0a <- glm(foul.home ~ foul.diff, family = binomial, data = refdata)
-tmp <- capture.output(summary(mod0a))
-cat(tmp[c(3:4, 9:13, 18:20)], sep='\n')
+When parameter estimates from the multilevel model above are compared with those from the naive logistic regression model assuming independence of all observations (below), there are noticeable differences.  For instance, each additional foul for the visiting team is associated with a 33\% increase ($1/e^{-.285}$) in the odds of a foul called on the home team under the multilevel model, but the single level model estimates the same increase as only 14\% ($1/e^{-.130}$).  Also, estimated standard errors for fixed effects are greater under multilevel generalized linear modeling, which is not unusual after accounting for correlated observations, which effectively reduces the sample size.
+
+```{r, comment = NA}
+# Logistic regression model (not multilevel) with 
+#   only foul.diff
+mod0a <- glm(foul.home ~ foul.diff, family = binomial, 
+             data = refdata)
+```
+
+```{r, echo=FALSE, message=FALSE}
+coef(summary(mod0a))
+cat(" Residual deviance = ", 
+    summary(mod0a)$deviance, " on ",
+    summary(mod0a)$df.residual, "df")
 ```
 
 ## Crossed Random Effects {#crossedre}
 
-In the College Basketball Referees case study, our two primary Level Two covariates are home team and visiting team.  In Section \@ref(glmm-eda) we showed evidence that the probability a foul is called on the home team changes if we know precisely who the home and visiting teams are.  However, if we were to include an indicator variable for each distinct team, we would need 38 indicator variables for home teams and 38 more for visiting teams.  That's a lot of degrees of freedom to spend!  And adding those indicator variables would complicate our model considerably, despite the fact that we're not very interested in specific coefficient estimates for each team---we just want to control for teams playing to draw stronger conclusions about referee bias (focusing on the `foul.diff` variable).  One way, then, of accounting for teams is by treating them as __random effects__ rather than fixed effects.  For instance, we can assume the effect that Minnesota being the home team has on the log odds of foul call on the home team is drawn from a normal distribution with mean 0 and variance $\sigma^{2}_{v}$.  Maybe the estimated random effect for Minnesota as the home team is -0.5, so that Minnesota is slightly less likely that the typical home team to have fouls called on it, and the odds of a foul on the home team are somewhat correlated whenever Minnesota is the home team.  In this way, we account for the complete range of team effects, while only having to estimate a single parameter ($\sigma^{2}_{v}$) rather than coefficients for 38 indicator variables.  The effect of visiting teams can be similarly modeled.  
+In the College Basketball Referees case study, our two primary Level Two covariates are home team and visiting team.  In Section \@ref(glmm-eda) we showed evidence that the probability a foul is called on the home team changes if we know precisely who the home and visiting teams are.  However, if we were to include an indicator variable for each distinct team, we would need 38 indicator variables for home teams and 38 more for visiting teams.  That's a lot of degrees of freedom to spend!  And adding those indicator variables would complicate our model considerably, despite the fact that we're not very interested in specific coefficient estimates for each team---we just want to control for teams playing to draw stronger conclusions about referee bias (focusing on the `foul.diff` variable).  One way, then, of accounting for teams is by treating them as __random effects__ rather than fixed effects.  For instance, we can assume the effect that Minnesota being the home team has on the log odds of foul call on the home team is drawn from a normal distribution with mean 0 and variance $\sigma^{2}_{v}$.  Maybe the estimated random effect for Minnesota as the home team is -0.5, so that Minnesota is slightly less likely than the typical home team to have fouls called on it, and the odds of a foul on the home team are somewhat correlated whenever Minnesota is the home team.  In this way, we account for the complete range of team effects, while only having to estimate a single parameter ($\sigma^{2}_{v}$) rather than coefficients for 38 indicator variables.  The effect of visiting teams can be similarly modeled.  
 
 How will treating home and visiting teams as random effects change our multilevel model?  Another way we might view this situation is by considering that Game is not the only Level Two observational unit we might have selected.  What if we instead decided to focus on Home Team as the Level Two observational unit?  That is, what if we assumed that fouls called on the same home team across all games must be correlated?  In this case, we could redefine our Level One model from Equation \@ref(eq:lev1glmm).  Let $Y_{hj}$ be an indicator variable recording if the $j^{th}$ foul from Home Team $h$ was called on the home team (1) or the visiting team (0), and $p_{hj}$ be the true probability that the $j^{th}$ foul from Home Team $h$ was called on the home team.  Now, if we were to consider a simple model with foul differential as the sole predictor, we could model the probability of a foul on the home team for Home Team $h$ with the model:
 
-\begin{equation}
+\begin{equation*}
 \log\bigg(\frac{p_{hj}}{1-p_{hj}}\bigg)=a_h+b_h\mathrm{foul.diff}_{hj}
-(\#eq:lev1bglmm)
-\end{equation}
+\end{equation*}
 
 In this case, $e^{a_{h}}$ represents the odds that a foul is called on the home team when total fouls are equal between both teams in a game involving Home Team $h$, and $e^{b_{h}}$ represents the multiplicative change in the odds that a foul is called on the home team for every extra foul on the home team compared to the visitors in a game involving Home Team $h$.  After fitting logistic regression models for each of the 39 teams in our data set, we see in Figure \@ref(fig:gmu-histmat3) variability in fitted intercepts (mean=-0.15, sd=0.33) and slopes (mean=-0.22, sd=0.12) among the 39 teams, although much less variability than we observed from game-to-game.  Of course, each logistic regression model for a home team was based on about 10 times more foul calls than each model for a game, so observing less variability from team-to-team was not unexpected.
 
 ```{r, include=FALSE}
-# histograms for ints, rates of change - gmu-histmat3.eps
+# histograms for ints, rates of change
 int.hist3 <- ggplot(glm_info) + 
-  geom_histogram(aes(x = int), binwidth = .1, color = "black", fill = "white") +
-  theme.1 + labs(x = "Intercepts", y = "Frequency", title = "(a)")
+  geom_histogram(aes(x = int), binwidth = .1, 
+                 color = "black", fill = "white") +
+  theme.1 + 
+  labs(x = "Intercepts", y = "Frequency", title = "(a)")
+
 rate.hist3 <- ggplot(glm_info) + 
-  geom_histogram(aes(x = rate), binwidth = .04, color = "black", fill = "white") +
-  theme.1 + labs(x = "Slopes", y = "Frequency", title = "(b)")
+  geom_histogram(aes(x = rate), binwidth = .04, 
+                 color = "black", fill = "white") +
+  theme.1 + 
+  labs(x = "Slopes", y = "Frequency", title = "(b)")
 ```
 
 ```{r, gmu-histmat3, fig.align="center",out.width="60%", fig.cap='Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team.',echo=FALSE, warning=FALSE}
 grid.arrange(int.hist3, rate.hist3, ncol = 1)
 ```
 
-From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested?  Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team).  However, a specific home team is not associated with a single game; that home team appears in several games.  Therefore, any effects of game, home team, and visiting team are considered __crossed random effects__.
+From a modeling perspective, accounting for clustering by game and by home team (not to mention by visiting team) brings up an interesting issue we have not yet considered---can we handle random effects that are not nested?  Since each foul called is associated with only one game (or only one home team and one visiting team), foul is considered nested in game (or home or visiting team).  However, a specific home team is not associated with a single game; that home team appears in several games.  Therefore, any effects of game, home team, and visiting team are considered __crossed random effects__. \index{crossed random effects}
 
 A two-level model which accounts for variability among games, home teams, and visiting teams would take on a slightly new look.  First, the full subscripting would change a bit.  Our primary response variable would now be written as $Y_{i[gh]j}$, an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), where Game $i$ pitted Visiting Team $g$ against Home Team $h$.  Square brackets are introduced since $g$ and $h$ are essentially at the same level as $i$, whereas we have assumed (without stating so) throughout this book that subscripting without square brackets implies a movement to lower levels as the subscripts move left to right (e.g., $ij$ indicates $i$ units are at Level Two, while $j$ units are at Level One, nested inside Level Two units).  We can then consider $Y_{i[gh]j}$ to be a Bernoulli random variable with parameter $p_{i[gh]j}$, where $p_{i[gh]j}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on Home Team $h$ rather than Visiting Team $g$.  We will include the crossed subscripting only where necessary.
 
 Typically, with the addition of crossed effects, the Level One model will remain familiar and changes will be seen at Level Two, especially in the equation for the intercept term.  In the model formulation below we allow, as before, the slope and intercept to vary by game:
 
 - Level One:
+
 \begin{equation}
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg)=a_{i}+b_{i}\mathrm{foul.diff}_{ij}
 (\#eq:lev1cross) 
 \end{equation}
+
 - Level Two:
+
 \begin{align*}
 a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
 b_{i} & = \beta_{0},
@@ -610,6 +732,7 @@ Therefore, at Level Two, we assume that $a_{i}$, the log odds of a foul on the h
 - $w_{g}$ is the effect of Visiting Team $g$ (random)
 
 where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
+
 \begin{align*}
 u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
 v_{h} & \sim N \left( 0 , \sigma_{v}^{2} \right) \\
@@ -619,40 +742,44 @@ w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right).
 We could include terms that vary by home or visiting team in other Level Two equations, but often adjusting for these random effects on the intercept is sufficient.  The advantages to including additional random effects are three-fold.  First, by accounting for additional sources of variability, we should obtain more precise estimate of other model parameters, including key fixed effects.  Second, we obtain estimates of variance components, allowing us to compare the relative sizes of game-to-game and team-to-team variability.  Third, as outlined in Section \@ref(estimatedRE), we can obtain estimated random effects which allow us to compare the effects on the log-odds of a home foul of individual home and visiting teams.
 
 Our composite model then looks like:
-\begin{equation}
+
+\begin{equation*}
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) = [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_{i}+v_{h}+w_{g}].
-(\#eq:compmoda)
-\end{equation}
-We will refer to this as Model A, where we look at the effect of foul differential on the odds a foul is called on the home team, while accounting for three crossed random effects at Level Two (game, home team, and visiting team).  Parameter estimates for Model A are given below:
+\end{equation*}
+We will refer to this as Model A3, where we look at the effect of foul differential on the odds a foul is called on the home team, while accounting for three crossed random effects at Level Two (game, home team, and visiting team).  Parameter estimates for Model A3 are given below:
 
 ```{r, include=FALSE}
 # Multilevel model with only foul.diff and 1 random effect
-model.0a <- glmer(foul.home ~ foul.diff + (1|game), family = binomial,
-                  data = refdata)
-summary(model.0a)
+model.a1 <- glmer(foul.home ~ foul.diff + (1|game), 
+                  family = binomial, data = refdata)
+summary(model.a1)
 
-# Multilevel model with only foul.diff and errors on slope and int and 1 RE
-model.0b <- glmer(foul.home ~ foul.diff + (foul.diff|game), family = binomial,
-  data = refdata)
-summary(model.0b)
-anova(model.0b, model.0a)
-
-# Logistic regression model (not multilevel) with only foul.diff
-mod0a <- glm(foul.home ~ foul.diff, family = binomial, data = refdata)
-summary(mod0a)
+anova(model.b1, model.a1)
 ```
 
-```{r, 11verb5, echo=FALSE, comment=NA}
-## Model A ##
-model.a <- glmer(foul.home ~ foul.diff + (1|game) + (1|hometeam) + (1|visitor),
-  family = binomial, data = refdata)
-tmp <- capture.output(summary(model.a))
-cat(tmp[c(4, 6:9, 14:24)], sep='\n')
+```{r, comment=NA}
+# Model A3
+model.a3 <- glmer(foul.home ~ foul.diff + (1|game) + 
+    (1|hometeam) + (1|visitor), 
+    family = binomial, data = refdata)
+```
+
+```{r, echo=FALSE, message=FALSE}
+VCrandom <- VarCorr(model.a3)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of games = ",
+    summary(model.a3)$ngrps[1], "\n", 
+    "Number of hometeams = ",
+    summary(model.a3)$ngrps[2], "\n",
+    "Number of visitors = ",
+    summary(model.a3)$ngrps[3])
+coef(summary(model.a3))
+cat(" AIC = ", AIC(model.a3), ";  BIC = ", BIC(model.a3))
 ```
 
 From this output, we obtain estimates of our five model parameters:
 
-- $\hat{\alpha}_{0}=-0.188=$ the mean log odds of a home foul at the point where total fouls are equal between teams.  In other words, when fouls are balanced between teams, the odds that a foul is called on the visiting team is 20.7\% higher than the odds a foul is called on the home team ($1/e^{-.188}=1.207$).
+- $\hat{\alpha}_{0}=-0.188=$ the mean log odds of a home foul at the point where total fouls are equal between teams.  In other words, when fouls are balanced between teams, the probability that a foul is called on the visiting team (.547) is 20.7\% ($1/e^{-.188}=1.207$) higher than the probability a foul is called on the home team (.453).
 - $\hat{\beta}_{0}=-0.264=$ the decrease in mean log odds of a home foul for each 1 foul increase in the foul differential.  More specifically, the odds the next foul is called on the visiting team rather than the home team increases by 30.2\% with each additional foul called on the home team ($1/e^{-.264}=1.302$).
 - $\hat{\sigma}_{u}^{2}=0.172=$ the variance in intercepts from game-to-game.
 - $\hat{\sigma}_{v}^{2}=0.068=$ the variance in intercepts among different home teams.
@@ -664,84 +791,117 @@ Based on the t-value (-6.80) and p-value ($p<.001$) associated with foul differe
 
 Our estimates of variance components provide evidence of the relative variability in the different Level Two random effects.  For example, an estimated 65.4\% of variability in the intercepts is due to differences from game-to-game, while 25.9\% is due to differences among home teams, and 8.7\% is due to differences among visiting teams.  At this point, we could reasonably ask: if we use a random effect to account for differences among games, does it really pay off to also account for which team is home and which is the visitor?
 
-To answer this, we could compare models with and without the random effects for home and visiting teams (i.e., Model A, the full model, vs. Model A.0, the reduced model) using a likelihood ratio test.  In Model A.0, Level Two now looks like:
+To answer this, we could compare models with and without the random effects for home and visiting teams (i.e., Model A3, the full model, vs. Model A1, the reduced model) using a likelihood ratio test.  In Model A1, Level Two now looks like:
+
 \begin{align*}
 a_{i} & = \alpha_{0}+u_{i} \\
 b_{i} & = \beta_{0},
 \end{align*}
+
 The likelihood ratio test (see below) provides significant evidence (LRT=16.074, df=2, p=.0003) that accounting for variability among home teams and among visiting teams improves our model.
 
-```{r, 11verb6, echo=FALSE, comment=NA}
-anova(model.a, model.0a)  # model A is better, but p-value can be off (REML=F)
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(model.a3, model.a1, test = "Chisq")
 ```
 
-In Section \@ref(multileveltechnical) we noted that REML estimation is typically used when comparing models that differ only in random effects for multilevel models with normal responses, but with generalized linear multilevel models, full maximum likelihood (ML) estimation procedures are typically used regardless of the situation (including in the function `glmer()` in R).  So the likelihood ratio test above is based on ML methods---can we trust its accuracy?  In Section \@ref(threelevel-paraboot) we introduced the parametric bootstrap as a more reliable method in many cases for conducting hypothesis tests compared to the likelihood ratio test, especially when comparing full and reduced models that differ in their variance components.  What would a parametric bootstrap test say about testing $H_{0}: \sigma_{v}^{2}=\sigma_{w}^{2}=0$ vs. $H_{A}:$ at least one of $\sigma_{v}^{2}$ or $\sigma_{w}^{2}$ is not equal to 0?  Under the null hypothesis, since the two variance terms are being set to a value (0) on the boundary constraint, we would not expect the chi-square distribution to adequately approximate the behavior of the likelihood ratio test statistic.
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(npar=drop_in_dev$npar,
+    AIC=drop_in_dev$AIC, BIC=drop_in_dev$BIC, 
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+# model A is better, but p-value can be off (REML=F)
+```
 
-Figure \@ref(fig:gmu-lrt1) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure with 100 samples as compared to a chi-square distribution.  As we observed in Section \@ref(threelevel-paraboot), the parametric bootstrap provides a more reliable p-value in this case ($p<.001$ from output below) because a chi-square distribution puts too much mass in the tail and not enough near 0.  However, the parametric bootstrap is computationally intensive, and it can take a long time to run even with moderately complex models.  With this data, we would select our full Model A based on a parametric bootstrap test.
+In Section \@ref(multileveltechnical) we noted that REML estimation is typically used when comparing models that differ only in random effects for multilevel models with normal responses, but with multilevel generalized linear models, full maximum likelihood (ML) estimation procedures are typically used regardless of the situation (including in the function `glmer()` in R).  So the likelihood ratio test above is based on ML methods---can we trust its accuracy?  In Section \@ref(longitudinal-paraboot) we introduced the parametric bootstrap \index{parametric bootstrap} as a more reliable method in many cases for conducting hypothesis tests compared to the likelihood ratio test, especially when comparing full and reduced models that differ in their variance components.  What would a parametric bootstrap test say about testing $H_{0}: \sigma_{v}^{2}=\sigma_{w}^{2}=0$ vs. $H_{A}:$ at least one of $\sigma_{v}^{2}$ or $\sigma_{w}^{2}$ is not equal to 0?  Under the null hypothesis, since the two variance terms are being set to a value (0) on the boundary constraint, we would not expect the chi-square distribution to adequately approximate the behavior of the likelihood ratio test statistic.
 
-```{r, 11verb7a, echo=FALSE, comment=NA, include=FALSE}
-# run bootstrapAnova function (much quicker with B=100 rather than B=1000)
+Figure \@ref(fig:gmu-lrt1) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure with 100 samples as compared to a chi-square distribution.  As we observed in Section \@ref(longitudinal-paraboot), the parametric bootstrap provides a more reliable p-value in this case ($p<.001$ from output below) because a chi-square distribution puts too much mass in the tail and not enough near 0.  However, the parametric bootstrap is computationally intensive, and it can take a long time to run even with moderately complex models.  With this data, we would select our full Model A3 based on a parametric bootstrap test.
+
+```{r, echo=FALSE, comment=NA, message=FALSE, warning=FALSE}
+# run bootstrapAnova function, then line below takes about 
+#  15 minutes (much quicker with B=100 rather than B=1000)
 
 # Parametric bootstrap code for lme4-models
 #   from Fabian Scheipl on stack exchange
 
-#m0 is the lmer model under the null hypothesis (i.e. the smaller model)
+#m0 is the lmer model under the null hypothesis 
+#  (i.e. the smaller model)
 #mA is the lmer model under the alternative
 
-#bootstrapAnova <- function(mA, m0, B=1000){
-#  oneBootstrap <- function(m0, mA){
-#    d <- drop(simulate(m0))
-#    m2 <-refit(mA, newresp=d)
-#    m1 <-refit(m0, newresp=d)
-#    return(anova(m2,m1)$Chisq[2])
-#  }  
-#  nulldist <- replicate(B, oneBootstrap(m0, mA))
-#  ret <- anova(mA, m0)
-#  ret$"Pr(>Chisq)"[2] <- mean(ret$Chisq[2] < nulldist)
-#  names(ret)[8] <- "Pr_boot(>Chisq)"
-#  attr(ret, "heading") <- c(attr(ret, "heading")[1], 
-#                            paste("Parametric bootstrap with", B,"samples."),
-#                            attr(ret, "heading")[-1])
-#  attr(ret, "nulldist") <- nulldist
-#  return(ret)
-#}
-#use like this (and increase B if you want reviewers to believe you):
-# (bRLRT <- bootstrapAnova(mA=<BIG MODEL>, m0=<SMALLER MODEL>))
+bootstrapAnova <- function(mA, m0, B=1000){
+  oneBootstrap <- function(m0, mA){
+    d <- drop(simulate(m0))
+    m2 <-refit(mA, newresp=d)
+    m1 <-refit(m0, newresp=d)
+    return(anova(m2,m1)$Chisq[2])
+  }  
+  nulldist <- replicate(B, oneBootstrap(m0, mA))
+  ret <- anova(mA, m0)
+  ret$"Pr(>Chisq)"[2] <- mean(ret$Chisq[2] < nulldist)
+  names(ret)[8] <- "Pr_boot(>Chisq)"
+  attr(ret, "heading") <- c(attr(ret, "heading")[1], 
+    paste("Parametric bootstrap with", B,"samples."),
+    attr(ret, "heading")[-1])
+  attr(ret, "nulldist") <- nulldist
+  return(ret)
+}
 
-# Compare Model A vs Model A.0 with parametric bootstrap
+#use like this (and increase B for more believeability):
+# bRLRT <- bootstrapAnova(mA=<BIG MODEL>, m0=<SMALLER MODEL>)
+
+# Since this takes a while, it was run once and results
+#   stored in the data folder
+# Compare Model A3 vs Model A1 with parametric bootstrap
 #  - took 15 minutes to run just 100 bootstrap samples
 #set.seed(33)
-#bRLRT = bootstrapAnova(mA=model.a, m0=model.0a, B=100)
+#bRLRT = bootstrapAnova(mA=model.a3, m0=model.a1, B=100)
 #bRLRT
 #save(bRLRT, file = "data/modelaVS0a11.rda")
 ```
 
-```{r, 11verb7, echo=FALSE}
-load(file = "data/modelaVS0a11.rda")
-bRLRT
+```{r, eval=FALSE}
+bootstrapAnova(mA=model.a3, m0=model.a1, B=1000)
 ```
 
-```{r, gmu-lrt1, fig.align="center",out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic comparing Models A and A.0 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).',echo=FALSE, warning=FALSE}
+```{r comment=NA, message=F, echo=F}
+load(file = "data/modelaVS0a11.rda")
+drop_in_dev <- bRLRT
+did_print <- data.frame(Df=drop_in_dev$Df,
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, ChiDf=drop_in_dev$`Chi Df`,
+    pval_boot=drop_in_dev$`Pr_boot(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+```{r, gmu-lrt1, fig.align="center",out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic comparing Models A3 and A1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).',echo=FALSE, warning=FALSE}
 nullLRT = attr(bRLRT,"nulldist")
 x=seq(0,max(nullLRT),length=100)
 y=dchisq(x,2)
 nullLRT.1 <- as.data.frame(cbind(nullLRT=nullLRT,x=x,y=y))
 ggplot(nullLRT.1) + 
-  geom_histogram(aes(x=nullLRT,y=..density..),binwidth=1,color="black",fill="white")+   geom_vline(xintercept=16.074,size=1) + 
+  geom_histogram(aes(x=nullLRT,y=..density..),
+                 binwidth=1,color="black",fill="white")+
+  geom_vline(xintercept=16.074,size=1) + 
   theme.1 + 
   geom_line(aes(x=x,y=y)) +
   labs(x="Likelihood Ratio Test Statistics from Null Distribution",y="Density")
 # sum(nullLRT>=16.074)/1000   # parametric bootstrap p-value
 ```
 
-We might also reasonably ask: is it helpful to allow slopes (coefficients for foul differential) to vary by game, home team, and visiting team as well? Again, since we are comparing models that differ in random effects, and since the null hypothesis involves setting random effects at their boundaries, we use the parametric bootstrap.  Formally, we are comparing Model A to Model A.1, which has the same Level One equation as Model A:
+We might also reasonably ask: is it helpful to allow slopes (coefficients for foul differential) to vary by game, home team, and visiting team as well? Again, since we are comparing models that differ in random effects, and since the null hypothesis involves setting random effects at their boundaries, we use the parametric bootstrap.  Formally, we are comparing Model A3 to Model B3, which has the same Level One equation as Model A3:
+
 \[ \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg)=a_{i}+b_{i}\mathrm{foul.diff}_{ij} \]
-but more variance components to estimate at Level Two:
+but 6 variance components to estimate at Level Two:
+
 \begin{align*}
 a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
 b_{i} & = \beta_{0}+z_{i}+r_{h}+s_{g},
 \end{align*}
 where error terms (random effects) at Level Two can be assumed to follow independent normal distributions:
+
 \begin{align*}
 u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
 z_{i} & \sim N \left( 0 , \sigma_{z}^{2} \right) \\
@@ -751,36 +911,50 @@ w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right) \\
 s_{g} & \sim N \left( 0 , \sigma_{s}^{2} \right).
 \end{align*}
 
-Thus our null hypothesis for comparing Model A vs. Model A.1 is $H_{O}: \sigma_{z}^{2}=\sigma_{r}^{2}=\sigma_{s}^{2}=0$.  We do not have significant evidence (LRT=0.349, df=3, p=.46 by parametric bootstrap) of variability among slopes, so we will only include random effects for game, home team, and visiting team for the intercept going forward.  Figure \@ref(fig:gmu-lrt3) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution, again showing that the tails are too heavy in the chi-square distribution.
+Thus our null hypothesis for comparing Model A3 vs. Model B3 is $H_{0}: \sigma_{z}^{2}=\sigma_{r}^{2}=\sigma_{s}^{2}=0$.  We do not have significant evidence (LRT=0.349, df=3, p=.46 by parametric bootstrap) of variability among slopes, so we will only include random effects for game, home team, and visiting team for the intercept going forward.  Figure \@ref(fig:gmu-lrt3) illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution, again showing that the tails are too heavy in the chi-square distribution.
 
 ```{r, 11verb8a, echo=FALSE, comment=NA, include=FALSE}
-# Model A3 (Multilevel model with only foul.diff and all 3 random effects
-#             applied to both intercepts and slopes but no correlations)
-model.a3 <- glmer(foul.home ~ foul.diff + (1|game) +
-  (1|hometeam) + (1|visitor) + (0+foul.diff|game) + (0+foul.diff|hometeam) +
-  (0+foul.diff|visitor), family = binomial, data = refdata)
-summary(model.a3)
+# Model B3 (Multilevel model with only foul.diff and 
+#   all 3 random effects applied to both intercepts and 
+#   slopes but no correlations)
+model.b3 <- glmer(foul.home ~ foul.diff + (1|game) +
+  (1|hometeam) + (1|visitor) + (0+foul.diff|game) +
+  (0+foul.diff|hometeam) + (0+foul.diff|visitor), 
+  family = binomial, data = refdata)
+summary(model.b3)
 
-# Compare Model A vs Model A.1 with parametric bootstrap (A.1 called a3 here)
+# Compare Model A3 vs Model B3 with parametric bootstrap 
 #  - took 45 minutes to run just 100 bootstrap samples
 #set.seed(33)
-#bRLRT = bootstrapAnova(mA=model.a3, m0=model.a, B=100)
+#bRLRT = bootstrapAnova(mA=model.b3, m0=model.a3, B=100)
 #bRLRT
 #save(bRLRT, file = "data/modela3VSa11.rda")
 ```
 
-```{r, 11verb8, echo=FALSE}
-load(file = "data/modela3VSa11.rda")
-bRLRT
+```{r, eval=FALSE}
+bootstrapAnova(mA=model.b3, m0=model.a3, B=1000)
 ```
 
-```{r gmu-lrt3, fig.align="center",out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic comparing Models A and A.1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve).',echo=FALSE, warning=FALSE}
+```{r comment=NA, message=F, echo=F}
+load(file = "data/modela3VSa11.rda")
+drop_in_dev <- bRLRT
+did_print <- data.frame(Df=drop_in_dev$Df,
+    logLik=drop_in_dev$logLik, dev=drop_in_dev$deviance,
+    Chisq=drop_in_dev$Chisq, ChiDf=drop_in_dev$`Chi Df`,
+    pval_boot=drop_in_dev$`Pr_boot(>Chisq)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+```{r gmu-lrt3, fig.align="center",out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic comparing Models A3 and B3 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve).',echo=FALSE, warning=FALSE}
 nullLRT = attr(bRLRT,"nulldist")
 x=seq(0,max(nullLRT),length=100)
 y=dchisq(x,3)
 nullLRT.1 <- as.data.frame(cbind(nullLRT=nullLRT,x=x,y=y))
 ggplot(nullLRT.1) + 
-  geom_histogram(aes(x=nullLRT,y=..density..),binwidth=1,color="black",fill="white")+   geom_vline(xintercept=0.349,size=1) + 
+  geom_histogram(aes(x=nullLRT,y=..density..),binwidth=1,
+                 color="black",fill="white")+
+  geom_vline(xintercept=0.349,size=1) + 
   theme.1 + 
   geom_line(aes(x=x,y=y)) +
   labs(x="Likelihood Ratio Test Statistics from Null Distribution",y="Density")
@@ -788,6 +962,7 @@ ggplot(nullLRT.1) +
 ```
 
 Note that we could have also allowed for a correlation between the error terms for the intercept and slope by game, home team, or visiting team -- i.e., assume, for example:
+
 \[ \left[ \begin{array}{c}
             u_{i} \\ z_{i}
           \end{array}  \right] \sim N \left( \left[
@@ -798,20 +973,21 @@ Note that we could have also allowed for a correlation between the error terms f
             \sigma_{u}^{2} & \\
             \sigma_{uz} & \sigma_{z}^{2}
           \end{array} \right] \right) \]
-while error terms by game, home team, or visiting team are still independent.  Here, the new model would have 6 additional parameters when compared with Model A (3 variance terms and 3 covariance terms).  By the parametric bootstrap, there is no significant evidence that the model with 6 additional parameters is necessary (LRT=6.49, df=6, p=.06 by parametric bootstrap). The associated p-value based on a likelihood ratio test with approximate chi-square distribution (and restricted maximum likelihood estimation) is .370, reflecting once again the overly heavy tails of the chi-square distribution.
+while error terms by game, home team, or visiting team are still independent.  Here, the new model would have 6 additional parameters when compared with Model A3 (3 variance terms and 3 covariance terms).  By the parametric bootstrap, there is no significant evidence that the model with 6 additional parameters is necessary (LRT=6.49, df=6, p=.06 by parametric bootstrap). The associated p-value based on a likelihood ratio test with approximate chi-square distribution (and restricted maximum likelihood estimation) is .370, reflecting once again the overly heavy tails of the chi-square distribution.
 
 ```{r, 11verb9, echo=FALSE, comment=NA, include=FALSE}
-# Model A.2 (Multilevel model with only foul.diff and all 3 random effects
-#             applied to both intercepts and slopes along with correlations)
-model.a6 <- glmer(foul.home ~ foul.diff + (1+foul.diff|game) +
+# Model B6 (Multilevel model with only foul.diff and 
+#   all 3 random effects applied to both intercepts and 
+#   slopes along with correlations)
+model.b6 <- glmer(foul.home ~ foul.diff + (1+foul.diff|game) +
   (1+foul.diff|hometeam) + (1+foul.diff|visitor), 
   family = binomial, data = refdata)
-summary(model.a6)
+summary(model.b6)
 
-# Compare Model A vs Model A.2 with parametric bootstrap (A.2 called a6 here)
-#  - took 75 minutes to run just 100 bootstrap samples
+# Compare Model A3 vs Model B6 with parametric bootstrap
+#  - took many hours to run just 100 bootstrap samples
 #set.seed(33)
-#bRLRT = bootstrapAnova(mA=model.a6, m0=model.a, B=100)
+#bRLRT = bootstrapAnova(mA=model.b6, m0=model.a3, B=100)
 #bRLRT
 #save(bRLRT, file = "data/modela6VSa11.rda")
 
@@ -823,11 +999,16 @@ x=seq(0,max(nullLRT),length=100)
 y=dchisq(x,6)
 nullLRT.1 <- as.data.frame(cbind(nullLRT=nullLRT,x=x,y=y))
 ggplot(nullLRT.1) + 
-  geom_histogram(aes(x=nullLRT,y=..density..),binwidth=1,color="black",fill="white")+   geom_vline(xintercept=6.49,size=1) + 
+  geom_histogram(aes(x=nullLRT,y=..density..),binwidth=1,
+                 color="black",fill="white")+ 
+  geom_vline(xintercept=6.49,size=1) + 
   theme.1 + 
   geom_line(aes(x=x,y=y)) +
   labs(x="Likelihood Ratio Test Statistics from Null Distribution",y="Density")
 # sum(nullLRT>=6.49)/100   # parametric bootstrap p-value
+
+# likelihood ratio test with chi-square distribution
+anova(model.b6, model.a3, test = "Chisq")
 ```
 
 ## A Potential Final Model for Examining Referee Bias {#sec:finalmodel-glmm}
@@ -835,13 +1016,16 @@ ggplot(nullLRT.1) +
 In constructing a final model for this college basketball case study, we are guided by several considerations.  First, we want to estimate the effect of foul differential on the odds of a home foul, after adjusting for important covariates.  Second, we wish to find important interactions with foul differential, recognizing that the effect of foul differential might depend on the game situation and other covariates.  Third, we want to account for random effects associated with game, home team, and visiting team.  What follows is one potential final model that follows these guidelines:
 
 - Level One:
+
 \begin{align*}
-\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} + f_{i}\mathrm{time}_{ij} \\
- &{} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} + m_{i}\mathrm{foul.diff:offensive}_{ij} \\
- &{} + n_{i}\mathrm{foul.diff:personal}_{ij} + o_{i}\mathrm{foul.diff:time}_{ij} \\
- &{} + q_{i}\mathrm{lead.home:time}_{ij}
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} \\ 
+ &{} + f_{i}\mathrm{time}_{ij} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} \\ 
+ &{} + m_{i}\mathrm{foul.diff}_{ij}:\mathrm{offensive}_{ij} + n_{i}\mathrm{foul.diff}_{ij}:\mathrm{personal}_{ij} \\ 
+ &{} + o_{i}\mathrm{foul.diff}_{ij}:\mathrm{time}_{ij} + q_{i}\mathrm{lead.home}_{ij}:\mathrm{time}_{ij}
 \end{align*}
+
 - Level Two:
+
 \begin{align*}
 a_{i} & = \alpha_{0}+u_{i}+v_{h}+w_{g} \\
 b_{i} & = \beta_{0} \\
@@ -857,6 +1041,7 @@ q_{i} & = \xi_{0},
 \end{align*}
 
 where error terms at Level Two can be assumed to follow independent normal distributions:
+
 \begin{align*}
 u_{i} & \sim N \left( 0 , \sigma_{u}^{2} \right) \\
 v_{h} & \sim N \left( 0 , \sigma_{v}^{2} \right) \\
@@ -864,26 +1049,43 @@ w_{g} & \sim N \left( 0 , \sigma_{w}^{2} \right).
 \end{align*}
 
 Our composite model then looks like:
+
 \begin{align*}
-\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} + \phi_{0}\mathrm{time}_{ij} \\
- &{} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} + \mu_{0}\mathrm{foul.diff:offensive}_{ij} \\
- &{} + \nu_{0}\mathrm{foul.diff:personal}_{ij} + \omega_{0}\mathrm{foul.diff:time}_{ij} \\
- &{} + \xi_{0}\mathrm{lead.home:time}_{ij}] + [u_{i}+v_{h}+w_{g}].
+\log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} \\ 
+ &{} + \phi_{0}\mathrm{time}_{ij} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} \\ 
+ &{} + \mu_{0}\mathrm{foul.diff}_{ij}:\mathrm{offensive}_{ij} + \nu_{0}\mathrm{foul.diff}_{ij}:\mathrm{personal}_{ij} \\ 
+ &{} + \omega_{0}\mathrm{foul.diff}_{ij}:\mathrm{time}_{ij} + \xi_{0}\mathrm{lead.home}_{ij}:\mathrm{time}_{ij}] \\ 
+ &{} + [u_{i}+v_{h}+w_{g}].
 \end{align*}
 
-Using the composite form of this generalized linear multilevel model, the parameter estimates for our 11 fixed effects and 3 variance components are given in the output below:
-```{r, 11verb10, echo=FALSE, comment=NA}
-model.b <- glmer(foul.home ~ foul.diff + score.diff + lead.home + time + 
-  offensive + personal + foul.diff:offensive + foul.diff:personal + 
-  foul.diff:time + lead.home:time + (1|game) + (1|hometeam) + (1|visitor),
+Using the composite form of this multilevel generalized linear model, the parameter estimates for our 11 fixed effects and 3 variance components are given in the output below:
+
+```{r, comment=NA}
+# Model F (potential final model)
+model.f <- glmer(foul.home ~ foul.diff + score.diff + 
+  lead.home + time + offensive + personal + 
+  foul.diff:offensive + foul.diff:personal + 
+  foul.diff:time + lead.home:time + (1|game) + 
+  (1|hometeam) + (1|visitor),
   family = binomial, data = refdata)
-tmp <- capture.output(summary(model.b))
-cat(tmp[c(4:6, 8:11, 16:36)], sep='\n')
+```
+
+```{r, echo=FALSE, message=FALSE}
+VCrandom <- VarCorr(model.f)
+print(VCrandom, comp = c("Variance", "Std.Dev."))
+cat(" Number of games = ",
+    summary(model.f)$ngrps[1], "\n", 
+    "Number of hometeams = ",
+    summary(model.f)$ngrps[2], "\n",
+    "Number of visitors = ",
+    summary(model.f)$ngrps[3])
+coef(summary(model.f))
+cat(" AIC = ", AIC(model.f), ";  BIC = ", BIC(model.f))
 ```
 
 In general, we see a highly significant negative effect of foul differential---a strong tendency for referees to even out foul calls when one team starts amassing more fouls than the other.  Important covariates to control for (because of their effects on the odds of a home foul) include score differential, whether the home team held the lead, time left in the first half, and the type of foul called.
 
-Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls.  The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled).  Evidence like this can be considered __dose response__, since higher "doses" of referee control are associated with a greater effect of foul differential on their calls.  A dose response effect provides even stronger indication of referee bias.
+Furthermore, we see that the effect of foul differential depends on type of foul called and time left in the half---the tendency for evening out foul calls is stronger earlier in the half, and when offensive and personal fouls are called instead of shooting fouls.  The effect of foul type supports the hypothesis that if referees are consciously or subconsciously evening out foul calls, the behavior will be more noticeable for calls over which they have more control, especially offensive fouls (which are notorious judgment calls) and then personal fouls (which don't affect a player's shot, and thus a referee can choose to let them go uncalled).  Evidence like this can be considered __dose response__, \index{dose response} since higher "doses" of referee control are associated with a greater effect of foul differential on their calls.  A dose response effect provides even stronger indication of referee bias.
 
 Analyses of data from 2004-05 [@Noecker2012] showed that the tendency to even out foul calls was stronger when one team had a large lead, but we found no evidence of a foul differential by score differential interaction in the 2009-10 data, although home team fouls are more likely when the home team has a large lead, regardless of the foul differential.
 
@@ -893,7 +1095,7 @@ Here are specific interpretations of key model parameters:
 - $\exp(\hat{\beta}_{0})=\exp(-0.172)=0.842$.  Also, $0.842^{-1}=1.188$.  As the foul differential decreases by 1 (the visiting team accumulates another foul relative to the home team), the odds of a home foul increase by 18.8\%.  This interpretation applies to shooting fouls at the end of the half, after controlling for the effects of score differential and whether the home team has the lead.
 - $\exp(\hat{\gamma}_{0})=\exp(0.034)=1.034$.  As the score differential increases by 1 (the home team accumulates another point relative to the visiting team), the odds of a home foul increase by 3.4\%, after controlling for foul differential, type of foul, whether or not the home team has the lead, and time remaining in the half.  Referees are more likely to call fouls on the home team when the home team is leading, and vice versa.  Note that a change in the score differential could result in the home team gaining the lead, so that the effect of score differential experiences a non-linear "bump" at 0, where the size of the bump depends on the time remaining (this would involve the interpretation for $\hat{\xi}_{0}$).
 - $\exp(\hat{\mu}_{0})=\exp(-0.103)=0.902$.  Also, $0.902^{-1}=1.109$.  The effect of foul differential increases by 10.9\% if a foul is an offensive foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.  As hypothesized, the effect of foul differential is greater for offensive fouls, over which referees have more control when compared with shooting fouls.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while the odds that an offensive foul is on the home team increase by 43.6\%.
-- $\exp(\hat{\nu}_{0})=\exp(-0.056)=0.946$.  Also, $0.946^{-1}=1.057$.  The effect of foul differential increases by 5.7\% if a foul is a personal foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.
+- $\exp(\hat{\nu}_{0})=\exp(-0.056)=0.946$.  Also, $0.946^{-1}=1.057$.  The effect of foul differential increases by 5.7\% if a foul is a personal foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.  As hypothesized, the effect of foul differential is greater for personal fouls, over which referees have more control when compared with shooting fouls.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while the odds that an offensive foul is on the home team increase by 36.9\%.
 - $\exp(\hat{\omega}_{0})=\exp(-0.0087)=0.991$.  Also, $0.991^{-1}=1.009$.  The effect of foul differential increases by 0.9\% for each extra minute that is remaining in the half, after controlling for foul differential, score differential, whether the home team has the lead, and type of foul.  Thus, the tendency to even out foul calls is strongest earlier in the game.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while at the end of the half (`time=0`) the odds increase by 18.8\% for each extra visiting foul.
 - $\hat{\sigma}_{u}^{2}=0.185=$ the variance in log-odds intercepts from game-to-game after controlling for all other covariates in the model.
 
@@ -901,99 +1103,91 @@ Here are specific interpretations of key model parameters:
 
 Our final model includes random effects for game, home team, and visiting team, and thus our model accounts for variability due to these three factors without estimating fixed effects to represent specific teams or games.  However, we may be interested in examining the relative level of the random effects used for different teams or games.  The presence of random effects allows different teams or games to begin with different baseline odds of a home foul.  In other words, the intercept---the log odds of a home foul at the end of the first half when the score is tied, the fouls are even, and a shooting foul has been called---is adjusted by a random effect specific to the two teams playing and to the game itself.  Together, the estimated random effects for, say, home team, should follow a normal distribution as we assumed: centered at 0 and with variance given by $\sigma_{v}^{2}$. It is sometimes interesting to know, then, which teams are typical (with estimated random effects near 0) and which fall in the upper and lower tails of the normal distribution.
 
-Figure \@ref(fig:gmu-hist1) shows the 39 estimated random effects associated with each home team (see the discussion on Empirical Bayes estimates in Chapter \@ref(ch-multilevelintro)).  As expected, the distribution is normal with standard deviation near $\hat{\sigma}_{v}=0.28$.  To compare individual home teams, Figure \@ref(fig:gmu-cis1) shows the estimated random effect and associated prediction interval for each of the 39 home teams.  Although there is a great deal of uncertainty surrounding each estimate, we see that, for instance, DePaul and Seton Hall have higher baseline odds of home fouls than Purdue or Syracuse.  Similar histograms and prediction intervals plots can be generated for random effects due to visiting teams and specific games.
+Figure \@ref(fig:gmu-hist1) shows the 39 estimated random effects associated with each home team (see the discussion on empirical Bayes estimates \index{empirical Bayes estimates} in Chapter \@ref(ch-multilevelintro)).  As expected, the distribution is normal with standard deviation near $\hat{\sigma}_{v}=0.28$.  To compare individual home teams, Figure \@ref(fig:gmu-cis1) shows the estimated random effect and associated prediction interval for each of the 39 home teams.  Although there is a great deal of uncertainty surrounding each estimate, we see that, for instance, DePaul and Seton Hall have higher baseline odds of home fouls than Purdue or Syracuse.  Similar histograms and prediction intervals plots can be generated for random effects due to visiting teams and specific games.
 
 ```{r, include=FALSE}
-# Get estimated random effects based on Model B
-#   Actually conditional modes given the response, evaluated at 
-#   parameter estimates.
-re.int <- ranef(model.b)$`game`[["(Intercept)"]]
-# hist(re.int,xlab="Random Effect",main="Random Effects for Game")
-Home.re <- ranef(model.b)$`hometeam`[["(Intercept)"]]
-# hist(Home.re,xlab="Random Effect",main="Random Effects for Home Team")
-Visiting.re <- ranef(model.b)$`visitor`[["(Intercept)"]]
-# hist(Visiting.re,xlab="Random Effect",
-#   main="Random Effects for the Visiting Team",xlim=c(-0.5,0.5))
+# Get estimated random effects based on Model F
+#   Actually conditional modes given the response, 
+#   evaluated at parameter estimates.
+
+re.int <- ranef(model.f)$`game`[["(Intercept)"]]
+Home.re <- ranef(model.f)$`hometeam`[["(Intercept)"]]
+Visiting.re <- ranef(model.f)$`visitor`[["(Intercept)"]]
 cbind(Home.re,Visiting.re)   # 39x2 matrix of REs by team
 home.df <- data.frame(Home.re)
 ```
 
 ```{r, gmu-hist1, fig.align="center",out.width="60%", fig.cap='Histogram of estimated random effects for 39 home teams in Model F.',echo=FALSE, warning=FALSE}
 ggplot(data = home.df, aes(x = Home.re)) + 
-  geom_histogram(binwidth = .05, color = "black", fill = "white") + theme.1 + 
+  geom_histogram(binwidth = .05, color = "black", 
+                 fill = "white") + 
+  theme.1 + 
   xlab("Random Home Team Effects") + ylab("Frequency")
 ```
 
 ```{r, gmu-cis1, fig.align="center",out.width="60%", fig.cap='Estimated random effects and associated prediction intervals for 39 home teams in Model F.',echo=FALSE, warning=FALSE}
-# Prediction intervals for random effects based on Model B
-# ranef1=dotplot(ranef(model.b, postVar = TRUE), strip = FALSE)
+# Prediction intervals for random effects based on Model F
+# ranef1=dotplot(ranef(model.f, postVar = TRUE), strip = FALSE)
 # print(ranef1[[3]], more = TRUE) ##HOME
 # print(ranef1[[2]], more = TRUE) ##VIS
 # print(ranef1[[1]], more = TRUE)
-randoms <- ranef(model.b, postVar = TRUE)
-qq <- attr(ranef(model.b, postVar = TRUE)[[3]], "postVar")
+randoms <- ranef(model.f, postVar = TRUE)
+qq <- attr(ranef(model.f, postVar = TRUE)[[3]], "postVar")
 rand.interc <- randoms$hometeam
 df <- data.frame(Intercepts = randoms$hometeam[,1],
               sd.interc = 2*sqrt(qq[,,1:length(qq)]),
               lev.names = rownames(rand.interc))
-df$lev.names <- factor(df$lev.names, levels = df$lev.names[order(df$Intercepts)])
+df$lev.names <- factor(df$lev.names, 
+      levels = df$lev.names[order(df$Intercepts)])
 p <- ggplot(df, aes(lev.names, Intercepts))
 p <- p + geom_hline(yintercept=0) +
-  geom_errorbar(aes(ymin=Intercepts-sd.interc, ymax=Intercepts+sd.interc), 
-    width=0,color="black") + geom_point(aes(size=2)) +
-  guides(size=FALSE,shape=FALSE) + scale_shape_manual(values=c(1,1,1,16,16,16)) 
+  geom_errorbar(aes(ymin=Intercepts-sd.interc,
+                    ymax=Intercepts+sd.interc),
+                width=0,color="black") + 
+  geom_point(aes(size=2)) +
+  guides(size=FALSE,shape=FALSE) +
+  scale_shape_manual(values=c(1,1,1,16,16,16)) 
 p <- p + theme(axis.text.x=element_text(size=rel(1.2)),
                axis.title.x=element_text(size=rel(1.3)),
                axis.text.y=element_text(size=rel(1.2)),
                panel.grid.minor=element_blank(),
                panel.grid.major.x=element_blank())
-p <- p+ coord_flip() + labs(y="Estimated Random Effects",x="Home Teams")
+p <- p+ coord_flip() + 
+  labs(y="Estimated Random Effects",x="Home Teams")
 print(p)
 ```
 
 ## Notes on Using R (Optional) {#usingR-glmm}
 
-The R code below fits Model A.1 from Section \@ref(glmm-paraboot).  Note that, in `glmer()` or `lmer()`, if you have two equations at Level Two and want to fit a model with an error term for each equation, but you also want to assume that the two error terms are independent, the error terms must be requested separately.  For example, "(1$|$hometeam)" allows the Level One intercept to vary by home team, while "(0+foul.dff$|$hometeam)" allows the Level One effect of `foul.diff` to vary by home team.  Under this formulation, the correlation between those two error terms is assumed to be 0; a non-zero correlation could have been specified with "(1+foul.diff$|$hometeam)".
+Here we discuss in more detail how to fit Model B3 in \@ref(glmm-paraboot).  Note that, in `glmer()` or `lmer()`, if you have two equations at Level Two and want to fit a model with an error term for each equation, but you also want to assume that the two error terms are independent, the error terms must be requested separately.  For example, `(1 | hometeam)` allows the Level One intercept to vary by home team, while `(0+foul.dff | hometeam)` allows the Level One effect of `foul.diff` to vary by home team.  Under this formulation, the correlation between those two error terms is assumed to be 0; a non-zero correlation could have been specified with `(1+foul.diff | hometeam)`.
 
-```{r, 11verb11, eval=FALSE, comment=NA}
-library(lme4)
-
-# Model A.1 (Multilevel model with only foul.diff and all 3 random effects
-#             applied to both intercepts and slopes but no correlations)
-model.a3 <- glmer(foul.home~ foul.diff + (1|game)+
-  (1|hometeam)+(1|visitor) + (0+foul.diff|game)+(0+foul.diff|hometeam)+
-  (0+foul.diff|visitor),family=binomial,data=refdata)
-```
-
-The R code below shows how `fixef()` can be used to extract the estimated fixed effects from a multilevel model.  Even more, it shows how `ranef()` can be used to illustrate estimated random effects by Game, Home Team, and Visiting Team, along with prediction intervals for those random effects.  These estimated random effects are sometimes called Empirical Bayes estimators.  In this case, random effects are placed only on the "[["(Intercept)"]]" term; the phrase "Intercept" could be replaced with other Level One covariates whose values are allowed to vary by game, home team, or visiting team in our model.
+The R code below shows how `fixef()` can be used to extract the estimated fixed effects from a multilevel model.  Even more, it shows how `ranef()` can be used to illustrate estimated random effects by Game, Home Team, and Visiting Team, along with prediction intervals for those random effects.  These estimated random effects are sometimes called Empirical Bayes estimators.  In this case, random effects are placed only on the `[["(Intercept)"]]` term; the phrase "Intercept" could be replaced with other Level One covariates whose values are allowed to vary by game, home team, or visiting team in our model.
 
 ```{r, 11verb12, eval=FALSE, comment=NA}
-# Model F - final model?
-model.f=glmer(foul.home~foul.diff+score.diff+lead.home+time+offensive+
-  personal+foul.diff:offensive+foul.diff:personal+foul.diff:time+
-  lead.home:time+(1|game)+(1|hometeam)+(1|visitor),family=binomial,
-  data=refdata)
-summary(model.f)
-exp(fixef(model.f))
-
 # Get estimated random effects based on Model F
-re.int = ranef(model.f)$`game`[["(Intercept)"]]
-hist(re.int,xlab="Random Effect",main="Random Effects for Game")
-Home.re=ranef(model.f)$`hometeam`[["(Intercept)"]]
-hist(Home.re,xlab="Random Effect",main="Random Effects for Home Team")
-Visiting.re=ranef(model.f)$`visitor`[["(Intercept)"]]
-hist(Visiting.re,xlab="Random Effect",
-  main="Random Effects for the Visiting Team",xlim=c(-0.5,0.5))
-cbind(Home.re,Visiting.re)   # 39x2 matrix of REs by team
+re.int <- ranef(model.f)$`game`[["(Intercept)"]]
+hist(re.int, xlab = "Random Effect", 
+     main = "Random Effects for Game")
+Home.re <- ranef(model.f)$`hometeam`[["(Intercept)"]]
+hist(Home.re, xlab = "Random Effect", 
+     main = "Random Effects for Home Team")
+Visiting.re <- ranef(model.f)$`visitor`[["(Intercept)"]]
+hist(Visiting.re, xlab = "Random Effect",
+  main = "Random Effects for the Visiting Team",
+  xlim = c(-0.5,0.5))
+cbind(Home.re, Visiting.re)   # 39x2 matrix of REs by team
 
 # Prediction intervals for random effects based on Model F
-ranef1=dotplot(ranef(model.f, postVar = TRUE), strip = FALSE)
+ranef1 <- dotplot(ranef(model.f, postVar = TRUE), 
+                  strip = FALSE)
 print(ranef1[[3]], more = TRUE) ##HOME
 print(ranef1[[2]], more = TRUE) ##VIS
 print(ranef1[[1]], more = TRUE)
 ```
 
+
 ## Exercises
+
 ### Conceptual Exercises
 
 1. Give an example of a data set and an associated research question that would best be addressed with a multilevel model for a Poisson response.
@@ -1012,11 +1206,11 @@ print(ranef1[[1]], more = TRUE)
 
 8. In Section \@ref(glmm-paraboot), could we use a likelihood ratio test to determine if it would be better to add either a random effect for home team or a random effect for visiting team to the model with a random effect for game (assuming we're going to add one or the other)?  Why or why not?
 
-9. Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \@ref(fig:gmu-lrt1).
+9. Describe how we would obtain the 1000 values representing the parametric bootstrap distribution in the histogram in Figure \@ref(fig:gmu-lrt1).  In particular, describe how to simulate responses for the first two rows of the data set (the first two fouls in the IA at MN game from 03.07.2010).
 
 10. In Figure \@ref(fig:gmu-lrt1), why is it a problem that "a chi-square distribution puts too much mass in the tail" when using a likelihood ratio test to compare models?
 
-11. What would be the implications of using the R expression "(foul.diff $\mid$ game) + (foul.diff $\mid$ hometeam) + (foul.diff $\mid$ visitor)" in Model A.1 (Section \@ref(glmm-paraboot)) to obtain our variance components?
+11. What would be the implications of using the R expression `(foul.diff | game) + (foul.diff | hometeam) + (foul.diff | visitor)` in Model B6 (Section \@ref(glmm-paraboot)) to obtain our variance components?
 
 12. Explain the implications of having no error terms in any Level Two equations in Section \@ref(sec:finalmodel-glmm) except the one for $a_{i}$.
 
@@ -1028,7 +1222,7 @@ print(ranef1[[1]], more = TRUE)
 
 16. We could also interpret the interaction between two quantitative variables described by $\hat{\omega}_{0}$ as "the effect of time remaining increases by 0.9\% for each extra foul on the visiting team, after controlling for ..."  Numerically illustrate this interpretation by considering foul differentials of 2 (the home team has 2 more fouls than the visitors) and -2 (the visitors have 2 more fouls than the home team).
 
-17. Provide interpretations in context for $\hat{\phi}_{0}$, $\hat{\kappa}_{0}$, and $\hat{\xi}_{0}$.
+17. Provide interpretations in context for $\hat{\phi}_{0}$, $\hat{\kappa}_{0}$, and $\hat{\xi}_{0}$ in Model F.
 
 18. In Section \@ref(estimatedRE), why isn't the baseline odds of a home foul for DePaul considered a model parameter?
 
@@ -1037,50 +1231,53 @@ print(ranef1[[1]], more = TRUE)
 20. Table \@ref(tab:table4chp11) shows Table 2 from @Randall2014.  Let $Y_{ij}$ be the number of acute myocardial infarctions in subgroup $j$ from SLA $i$; write out the multilevel model that likely produced Table \@ref(tab:table4chp11).  How many fixed effects and variance components must be estimated?
 
 ```{r, include=FALSE}
-blnkcol <- c("Aboriginal","No(ref)","Yes","Age Group","25-34 (ref)","35-44","45-54","55-64","65-74","75-84", "Sex","Male (ref)","Female","Year","2002 (ref)","2003","2004","2005","2006","2007")
-RR <- c(" ",1.00,2.10," ",1.00,6.01,19.36,40.29,79.92,178.75," ",1.00,0.45," ",1.00,1.00,0.97,0.91,0.88,0.88)
-CI95 <- c(" "," ","1.98-2.23"," "," ","5.44-6.64","17.58-21.31","36.67-44.26","72.74-87.80","162.70-196.39"," "," ","0.44-0.45"," "," ","0.98-1.03","0.95-0.99","0.89-0.94","0.86-0.91","0.86-0.91")
-Pvalcol <- c(" ","<0.01"," "," ","<0.01"," "," "," "," "," "," ","<0.01"," "," ","<0.01"," "," "," "," "," ")
+blnkcol <- c("No(ref)", "Yes", "25-34 (ref)", "35-44", "45-54", "55-64", "65-74", "75-84", "Male (ref)", "Female", "2002 (ref)", "2003", "2004", "2005", "2006", "2007")
+RR <- c(1.00,2.10,1.00,6.01,19.36,40.29,79.92,178.75,1.00,0.45,
+        1.00,1.00,0.97,0.91,0.88,0.88)
+CI95 <- c(" ", "1.98-2.23", " ", "5.44-6.64", "17.58-21.31", "36.67-44.26", "72.74-87.80", "162.70-196.39", " ", "0.44-0.45", " ", "0.98-1.03", "0.95-0.99", "0.89-0.94", "0.86-0.91", "0.86-0.91")
+Pvalcol <- c("<0.01", " ", "<0.01", " ", " ", " ", " ", " ", "<0.01", " ", "<0.01", " ", " ", " ", " ", " ")
 ```
 
-<caption>(\#tab:table4chp11) Adjusted rate ratios for individual-level variables from the multilevel Poisson regression model with random intercept for area from Table 2 in @Randall2014.
-```{r, table4chp11, echo=FALSE, size="footnotesize"}
-#randall2
-table4chp11 <- data.frame(blnkcol,RR,CI95,Pvalcol)
-colnames(table4chp11) <- c(" ","RR","95% CI", "p-Value")
-emphasize.strong.cells(which(table4chp11 == 2.10 | table4chp11 == 0.45 | table4chp11 == "1.98-2.23" | table4chp11 == "5.44-6.64" | table4chp11 == "0.86-0.91", arr.ind = TRUE))
-pander(table4chp11)
+```{r, table4chp11, echo=FALSE}
+table4chp11 <- data.frame(blnkcol, RR, CI95, Pvalcol)
+colnames(table4chp11) <- c(" ", "RR", "95% CI", "p-Value")
+kable(table4chp11, booktabs=T,
+      caption="Adjusted rate ratios for individual-level variables from the multilevel Poisson regression model with random intercept for area from Table 2 in Randall et al. (2014)") %>%
+  pack_rows("Aboriginal", 1, 2) %>%
+  pack_rows("Age Group", 3, 8) %>%
+  pack_rows("Sex", 9, 10) %>%
+  pack_rows("Year", 11, 16) %>%
+  kable_styling(full_width = F)
 ```
 
-21. Provide interpretations in context for the bolded rate ratios, confidence intervals, and p-values in Table \@ref(tab:table4chp11).
+21. Provide interpretations in context for the following rate ratios, confidence intervals, and p-values in Table \@ref(tab:table4chp11): RR of 2.1 and CI of 1.98 - 2.23 for Aboriginal = Yes; p-value of <.01 for Age Group; CI of 5.44 - 6.64 for Age Group = 35-44; RR of 0.45 for Sex = Female; CI of 0.86 - 0.91 for Year = 2007.
 
 22. Given the rate ratio and 95\% confidence interval reported for Aboriginal Australians in Table \@ref(tab:table4chp11), find the estimated model fixed effect for Aboriginal Australians from the multilevel model along with its standard error.
 
-23. How might the p-value for Age have been produced?
+23. How might the p-value for Age Group have been produced?
 
 24. @Randall2014 report that "we identified a significant interaction between Aboriginal status and age group ($p<0.01$) and Aboriginal status and sex ($p<0.01$), but there was no significant interaction between Aboriginal status and year (p=0.94)."  How would the multilevel model associated with Table \@ref(tab:table4chp11) need to have been adjusted to allow these interactions to be tested?
 
 25. Table \@ref(tab:table5chp11) shows Table 3 from @Randall2014.  Describe the changes to the multilevel model for Table \@ref(tab:table4chp11) that likely produced this new table.
 
-26. Provide interpretations in context for the bolded rate ratios, confidence intervals, and p-values in Table \@ref(tab:table5chp11).
+26. Provide interpretations in context for the following rate ratios, confidence intervals, and p-values in Table \@ref(tab:table5chp11): p-value of <.01 for Remoteness of Residence; RR of 1.22 for Remote / very remote; CI of 1.52 - 1.91 for SES quintile = 5.
 
 ```{r, include=FALSE}
-blnkcol2 <- c("Remoteness of Residence*","Major City","Inner Regional","Outer Regional","Remote/very remote","SES quintile*","1 least disadvantaged", "2","3","4","5 most disadvantaged")
-RR2 <- c(" ",1.00,1.16,1.11,1.22," ",1.00,1.26,1.40,1.46,1.70)
-CI952 <- c(" "," ","1.04-1.28","1.01-1.23","1.02-1.45"," "," ","1.11-1.43","1.24-1.58","1.30-1.64","1.52-1.91")
-Pvalcol2 <- c(" ","<0.01"," "," "," "," ","<0.01"," "," "," "," ")
+blnkcol2 <- c("Major City", "Inner Regional", "Outer Regional", "Remote/very remote", "1 least disadvantaged", "2", "3", "4", "5 most disadvantaged")
+RR2 <- c(1.00,1.16,1.11,1.22,1.00,1.26,1.40,1.46,1.70)
+CI952 <- c(" ", "1.04-1.28", "1.01-1.23", "1.02-1.45", " ", "1.11-1.43", "1.24-1.58", "1.30-1.64", "1.52-1.91")
+Pvalcol2 <- c("<0.01"," "," "," ","<0.01"," "," "," "," ")
 ```
 
-<caption>(\#tab:table5chp11) Adjusted rate ratios for area-level variables from the multilevel Poisson regression model with random intercept for area from Table 3 in @Randall2014.
-```{r, table5chp11, echo=FALSE, size="footnotesize"}
-#randall3
+```{r, table5chp11, echo=FALSE}
 table5chp11 <- data.frame(blnkcol2,RR2,CI952,Pvalcol2)
 colnames(table5chp11) <- c(" ","RR","95% CI","p-Value")
-emphasize.strong.cells(which(table5chp11 == 1.22 | table5chp11 == "1.52-1.91", arr.ind = TRUE))
-pander(table5chp11)
+kable(table5chp11, booktabs=T,
+      caption="Adjusted rate ratios for area-level variables from the multilevel Poisson regression model with random intercept for area from Table 3 in Randall et al. (2014).  Area-level factors added one at a time to the fully adjusted individual-level model (adjusted for Aboriginal status, age, sex and year) due to being highly associated.") %>%
+  pack_rows("Remoteness of Residence", 1, 4) %>%
+  pack_rows("SES quintile", 5, 9) %>%
+  kable_styling(full_width = F)
 ```
-
-* Area-level factors added one at a time to the fully adjusted individual-level model (adjusted for Aboriginal status, age, sex and year) due to being highly associated.
 
 27. @Randall2014 also report the results of a single-level Poisson regression model: "After adjusting for age, sex and year of event, the rate of AMI events in Aboriginal people was 2.3 times higher than in non-Aboriginal people (95\% CI: 2.17-2.44)."  Compare this to the results of the multilevel Poisson model; what might explain any observed differences?
 
@@ -1088,30 +1285,30 @@ pander(table5chp11)
 
 ### Open-ended Exercises
 
-1. **Airbnb in Chicago.**  @Trinh2018 collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located.  We can examine traits that are associated with listings that achieve an overall satisfaction of 5 out of 5 vs. those that do not (i.e. treat satisfaction as a binary variable).  Conduct an EDA, build a generalized multilevel model, and interpret model coefficients to answer questions such as: What are characteristics of a higher rated listing?  Are the most influential traits associated with individual listings or entire neighborhoods?  Are there intriguing interactions where the effect of one variable depends on levels of another?
+1. **Airbnb in Chicago.**  @Trinh2018 collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located.  We can examine traits that are associated with listings that achieve an overall satisfaction of 5 out of 5 vs. those that do not (i.e. treat satisfaction as a binary variable).  Conduct an EDA, build a multilevel generalized model, and interpret model coefficients to answer questions such as: What are characteristics of a higher rated listing?  Are the most influential traits associated with individual listings or entire neighborhoods?  Are there intriguing interactions where the effect of one variable depends on levels of another?
 
-The following variables can be found in `airbnb.csv` or derived from the variables found there:
+    The following variables can be found in `airbnb.csv` or derived from the variables found there:
 
-- `overall_satisfaction` = rating on a 0-5 scale.  
-- `satisfaction` = 1 if `overall_satisfaction` is 5, 0 otherwise
-- `price` = price for one night (in dollars)
-- `reviews` = number of reviews posted
-- `room_type` = Entire home/apt, Private room, or Shared room
-- `accommodates` = number of people the unit can hold
-- `bedrooms` = number of bedrooms
-- `minstay` = minimum length of stay (in days)
-- `neighborhood` = neighborhood where unit is located (1 of 43)
-- `district` = district where unit is located (1 of 9)
-- `WalkScore` = quality of the neighborhood for walking (0-100)
-- `TransitScore` = quality of the neighborhood for public transit (0-100)
-- `BikeScore` = quality of the neighborhood for biking (0-100)
-- `PctBlack` = proportion of black residents in a neighborhood
-- `HighBlack` = 1 if `PctBlack` above .60, 0 otherwise
+    - `overall_satisfaction` = rating on a 0-5 scale.
+    - `satisfaction` = 1 if `overall_satisfaction` is 5, 0 otherwise
+    - `price` = price for one night (in dollars)
+    - `reviews` = number of reviews posted
+    - `room_type` = Entire home/apt, Private room, or Shared room
+    - `accommodates` = number of people the unit can hold
+    - `bedrooms` = number of bedrooms
+    - `minstay` = minimum length of stay (in days)
+    - `neighborhood` = neighborhood where unit is located (1 of 43)
+    - `district` = district where unit is located (1 of 9)
+    - `WalkScore` = quality of the neighborhood for walking (0-100)
+    - `TransitScore` = quality of the neighborhood for public transit (0-100)
+    - `BikeScore` = quality of the neighborhood for biking (0-100)
+    - `PctBlack` = proportion of black residents in a neighborhood
+    - `HighBlack` = 1 if `PctBlack` above .60, 0 otherwise
 
 
-2. __Seed Germination.__  We will return to the data from @Angell2010 used in Case Study \@ref(cs:seeds), but whether or not a seed germinated will be considered the response variable rather than the heights of germinated plants.  We will use the wide data set (one row per plant) `seeds2.csv` for this analysis as described in Section \@ref(organizedata3), although we will ignore plant heights over time and focus solely on if the plant germinated at any time.  Use generalized linear multilevel models to determine the effects of soil type and sterilization on germination rates; perform separate analyses for coneflowers and leadplants, and describe differences between the two species.  Support your conclusions with well-interpreted model coefficients and insightful graphical summaries.
+2. __Seed Germination.__  We will return to the data from @Angell2010 used in Case Study \@ref(cs:seeds), but whether or not a seed germinated will be considered the response variable rather than the heights of germinated plants.  We will use the wide data set (one row per plant) `seeds2.csv` for this analysis as described in Section \@ref(organizedata3), although we will ignore plant heights over time and focus solely on if the plant germinated at any time.  Use multilevel generalized linear models to determine the effects of soil type and sterilization on germination rates; perform separate analyses for coneflowers and leadplants, and describe differences between the two species.  Support your conclusions with well-interpreted model coefficients and insightful graphical summaries.
 
-3. __Book Banning.__ The risk of literature censorship is constant, with provocative literature risking being challenged and subsequently being banned. Reasons for censorship have changed over time, with modern day challenges more likely to be for reasons relating to obscenity and child protection rather than overt political and religious objections [@Jenkins2006]. Many past studies have addressed chiefly the reasons listed by those who challenge a book, but few examine the overall context in which books are banned---for example, the characteristics of the states in which they occur.  
+3. __Book Banning.__ Provocative literature constantly risks being challenged and subsequently banned. Reasons for censorship have changed over time, with modern day challenges more likely to be for reasons relating to obscenity and child protection rather than overt political and religious objections [@Jenkins2006]. Many past studies have addressed chiefly the reasons listed by those who challenge a book, but few examine the overall context in which books are banned---for example, the characteristics of the states in which they occur.  
 
     A team of students assembled a data set by starting with information on book challenges from the American Library Society [@Fast2011].  These book challenges---an initiation of the formal procedure for book censorship---occurred in US States between January of 2000 and November of 2010.  In addition, state-level demographic information was obtained from the US Census Bureau and the Political Value Index (PVI) was obtained from the Cook Political Report.
 
@@ -1139,3 +1336,14 @@ The following variables can be found in `airbnb.csv` or derived from the variabl
     The primary response variable is `removed`.  Certain potential predictors are measured at the state level (e.g., `pvi2` and `cperhs`), at least one is at the book level (`freqchal`), and several are specific to an individual challenge (e.g., `obama` and `sexexp`).  In addition, note that the same book can be challenged for more than one reason, in different states, or even at different times in the same state.
 
     Perform exploratory analyses and then run multilevel models to examine significant determinants of successful challenges.  Write a short report comparing specific reasons for the challenge to the greater context in which a challenge was made.
+
+4. __Yelp restaurant reviews__  @Mohr2018 assembled a data set of Yelp restaurant reviews in Madison, WI, from 2005 through 2017 based on the Yelp Dataset Challenge on [Kaggle](https://www.kaggle.com/yelp-dataset/yelp-dataset).  The data in `yelp.csv` contains almost 60,000 reviews on 888 restaurants from over 20,000 reviewers, and it contains a selection of variables on the reviewer (e.g., total reviews, average stars), the restaurant (e.g., neighborhood, average stars, category), and the review itself (e.g., stars, year, useful ratings, actual text).
+
+    There are various questions that could be pursued with this data.  Here are just a few ideas:
+      - how can we model number of stars in the rating, or whether or not the rating was 5 stars or not?
+      - how can we model whether or not at least one person thought the review was useful?
+      - how can we model whether or not at least one person thought the review was cool?
+      
+    A few things to keep in mind while building models to answer your questions:
+      - user and restaurant can be considered crossed random effects
+      - convergence may be an issue.  You may have to take a random sample of reviews, or a targeted sample of more frequently appearing users and/or restaurants.

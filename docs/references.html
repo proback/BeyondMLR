@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>References | Broadening Your Statistical Horizons</title>
-  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Beyond Multiple Linear Regression</title>
+  <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Broadening Your Statistical Horizons" />
+  <meta property="og:title" content="References | Beyond Multiple Linear Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="data/cover.png" />
@@ -17,79 +16,110 @@
   <meta name="github-repo" content="proback/BYSH" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Broadening Your Statistical Horizons" />
+  <meta name="twitter:title" content="References | Beyond Multiple Linear Regression" />
   
   <meta name="twitter:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="twitter:image" content="data/cover.png" />
 
-<meta name="author" content="Julie Legler and Paul Roback">
+<meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2020-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ch-GLMM.html">
+<link rel="prev" href="ch-GLMM.html"/>
 
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-
-
-
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+
+
+<script src="libs/accessible-code-block/empty-anchor.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -108,29 +138,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-broadening-your-statistical-horizons"><i class="fa fa-check"></i><b>1.2</b> Introduction to Broadening Your Statistical Horizons</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#ordinary-least-squares-ols-assumptions"><i class="fa fa-check"></i><b>1.3</b> Ordinary Least Squares (OLS) Assumptions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-the-ols-assumptions-for-inference"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate the OLS assumptions for inference</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-the-ols-assumptions-for-inference-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where the OLS assumptions for inference are violated</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="1.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explorech1"><i class="fa fa-check"></i><b>1.5</b> Initial Exploratory Analyses</a><ul>
 <li class="chapter" data-level="1.5.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#data-organization"><i class="fa fa-check"></i><b>1.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#simple-linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Simple linear regression with a binary predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
 <li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
 <li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
 <li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
 <li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
 <li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview"><i class="fa fa-check"></i><b>1.7</b> Preview</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -162,7 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
 <li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
-<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_cond_lik.sec"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
 <li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
@@ -173,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercise"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
 </ul></li>
 </ul></li>
@@ -202,7 +232,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
 <li class="chapter" data-level="3.7.1" data-path="ch-distthry.html"><a href="ch-distthry.html#conceptual-exercises-2"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-1"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="3.7.2" data-path="ch-distthry.html"><a href="ch-distthry.html#guided-exercises-2"><i class="fa fa-check"></i><b>3.7.2</b> Guided Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html"><i class="fa fa-check"></i><b>4</b> Poisson Regression</a><ul>
@@ -212,9 +242,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#a-graphical-look-at-poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> A Graphical Look at Poisson Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-studies-overview"><i class="fa fa-check"></i><b>4.3</b> Case Studies Overview</a></li>
-<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
-<li class="chapter" data-level="4.4.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
+<li class="chapter" data-level="4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs-philippines"><i class="fa fa-check"></i><b>4.4</b> Case Study: Household Size in the Philippines</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata4"><i class="fa fa-check"></i><b>4.4.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
 <li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
@@ -223,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
 <li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#least-squares-regression-vs.poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Least Squares Regression vs. Poisson Regression</a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -235,7 +265,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
 <li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.2</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
@@ -243,13 +274,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-2"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -285,7 +316,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#least-squares-regression-vs.logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Least Squares Regression vs. Logistic Regression</a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
@@ -294,8 +325,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
-<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises:</a></li>
-<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
+<li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -315,15 +346,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
 <li class="chapter" data-level="7.10.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#conceptual-exercises-4"><i class="fa fa-check"></i><b>7.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-4"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="7.10.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#guided-exercises-5"><i class="fa fa-check"></i><b>7.10.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="7.10.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#note-on-correlated-binary-outcomes"><i class="fa fa-check"></i><b>7.10.3</b> Note on Correlated Binary Outcomes</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html"><i class="fa fa-check"></i><b>8</b> Introduction to Multilevel Models</a><ul>
 <li class="chapter" data-level="8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#learning-objectives-7"><i class="fa fa-check"></i><b>8.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#cs:music"><i class="fa fa-check"></i><b>8.2</b> Case Study: Music Performance Anxiety</a></li>
-<li class="chapter" data-level="8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="8.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore"><i class="fa fa-check"></i><b>8.3</b> Initial Exploratory Analyses</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#organizedata1"><i class="fa fa-check"></i><b>8.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
@@ -333,14 +364,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
 <li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
 <li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
 <li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
 <li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
@@ -357,7 +388,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise-1"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -373,17 +404,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
 <li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
 <li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
 <li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
 <li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
 <li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
@@ -395,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-2"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
 <li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -417,11 +449,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-5"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
 <li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Multilevel Models</a><ul>
+<li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
@@ -456,7 +488,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Broadening Your Statistical Horizons</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beyond Multiple Linear Regression</a>
           </h1>
         </div>
 
@@ -469,64 +501,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="refs" class="references">
 <div>
-<p>Allison, E. H., W. N. Adger, M. C. Badjeck, K. Brown, D. Conway, N. K. Dulvy, A. Halls, A. Perry, and J. D. Reynolds. 2005. “Effects of Climate Change on the Sustainability of Capture and Enhancement Fisheries Important to the Poor: Analysis of the Vulnerability and Adaptability of Fisherfolk Living in Poverty.” Fisheries Management Science Programme.</p>
+<p>Allison, E. H., W. N. Adger, M. C. Badjeck, K. Brown, D. Conway, N. K. Dulvy, A. Halls, A. Perry, and J. D. Reynolds. 2005. “Effects of Climate Change on the Sustainability of Capture and Enhancement Fisheries Important to the Poor.” <em>Fisheries Management Science Programme</em>.</p>
 </div>
 <div>
-<p>Anderson, Kyle J., and David A. Pierce. 2009. “Officiating Bias: The Effect of Foul Differential on Foul Calls in Ncaa Basketball.” <em>Journal of Sports Sciences</em> 27 (7): 687–94. doi:<a href="https://doi.org/10.1080/02640410902729733">10.1080/02640410902729733</a>.</p>
+<p>Anderson, Kyle J., and David A. Pierce. 2009. “Officiating Bias: The Effect of Foul Differential on Foul Calls in NCAA Basketball.” <em>Journal of Sports Sciences</em> 27 (7): 687–94. <a href="https://doi.org/10.1080/02640410902729733">https://doi.org/10.1080/02640410902729733</a>.</p>
 </div>
 <div>
-<p>Angell, Diane. 2010. “Effects of Soil Type and Sterilization on the Growth of Coneflowers and Leadplants.” Class data for Biology 261-Ecological Principles, St. Olaf College.</p>
+<p>Angell, Diane. 2010. “Effects of Soil Type and Sterilization on the Growth of Coneflowers and Leadplants.”</p>
 </div>
 <div>
-<p>Awad, Annika, Evan Lebo, and Anna Linden. 2017. “Intercontinental Comparative Analysis of Airbnb Booking Factors.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+<p>Awad, Annika, Evan Lebo, and Anna Linden. 2017. “Intercontinental Comparative Analysis of Airbnb Booking Factors.”</p>
 </div>
 <div>
-<p>Baer, S. G., D. J. Kitchen, J. M. Blair, and C. W. Rice. 2002. “Changes in Ecosystem Structure and Function Along a Chronosequence of Restored Grasslands.” <em>Ecological Applications</em> 12 (6): 1688–1701. doi:<a href="https://doi.org/10.1890/1051-0761(2002)012[1688:CIESAF]2.0.CO;2">10.1890/1051-0761(2002)012[1688:CIESAF]2.0.CO;2</a>.</p>
+<p>Baer, S. G., D. J. Kitchen, J. M. Blair, and C. W. Rice. 2002. “Changes in Ecosystem Structure and Function Along a Chronosequence of Restored Grasslands.” <em>Ecological Applications</em> 12 (6): 1688–1701. <a href="https://doi.org/10.1890/1051-0761(2002)012%5B1688:CIESAF%5D2.0.CO;2">https://doi.org/10.1890/1051-0761(2002)012[1688:CIESAF]2.0.CO;2</a>.</p>
 </div>
 <div>
-<p>Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. “Fitting Linear Mixed-Effects Models Using Lme4.” <em>Journal of Statistical Software, Articles</em> 67 (1): 1–48. doi:<a href="https://doi.org/10.18637/jss.v067.i01">10.18637/jss.v067.i01</a>.</p>
+<p>Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. “Fitting Linear Mixed-Effects Models Using Lme4.” <em>Journal of Statistical Software, Articles</em> 67 (1): 1–48. <a href="https://www.jstatsoft.org/v067/i01">https://www.jstatsoft.org/v067/i01</a>.</p>
 </div>
 <div>
-<p>Bayer, Ben, and Michael Fitzgerald. 2011. “Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research.” St. Olaf College.</p>
+<p>Bayer, Ben, and Michael Fitzgerald. 2011. “Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research.”</p>
 </div>
 <div>
-<p>Bickel, Robert. 2007. <em>Multilevel Analysis for Applied Research: It’s Just Regression!</em> New York, New York: The Guilford Press.</p>
+<p>BBC News. 2009. “Sisters ‘Make People Happy’.” <a href="http://news.bbc.co.uk/2/hi/health/7977454.stm">http://news.bbc.co.uk/2/hi/health/7977454.stm</a>.</p>
 </div>
 <div>
-<p>Bishop, J. A. 1972. “An Experimental Study of the Cline of Industrial Melanism in Biston Betularia (L.) (Lepidoptera) Between Urban Liverpool and Rural North Wales.” <em>Journal of Animal Ecology</em> 41 (1): 209–43. doi:<a href="https://doi.org/10.2307/3513">10.2307/3513</a>.</p>
+<p>Bickel, Robert. 2007. <em>Multilevel Analysis for Applied Research: It’s Just Regression!</em> New York, New York: Guilford Publications.</p>
 </div>
 <div>
-<p>Blakeman, Margaret, Tim Renier, and Rami Shandaq. 2018. “Modeling Donald Trump’s Voters in the 2016 Election.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+<p>Bishop, J. A. 1972. “An Experimental Study of the Cline of Industrial Melanism in Biston Betularia (L.) (Lepidoptera) Between Urban Liverpool and Rural North Wales.” <em>Journal of Animal Ecology</em> 41 (1): 209–43. <a href="https://doi.org/10.2307/3513">https://doi.org/10.2307/3513</a>.</p>
 </div>
 <div>
-<p>Brockmann, H. Jane. 1996. “Satellite Male Groups in Horseshoe Crabs, Limulus Polyphemus.” <em>Ethology</em> 102 (1): 1–21. doi:<a href="https://doi.org/doi:10.1111/j.1439-0310.1996.tb01099.x">doi:10.1111/j.1439-0310.1996.tb01099.x</a>.</p>
+<p>Blakeman, Margaret, Tim Renier, and Rami Shandaq. 2018. “Modeling Donald Trump’s Voters in the 2016 Election.”</p>
 </div>
 <div>
-<p>Brown, Kenneth, and Bulent Uyar. 2004. “A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices.” <em>Journal of Real Estate Practice and Education</em> 7 (1): 15–24. doi:<a href="https://doi.org/10.5555/repe.7.1.f687057161743261">10.5555/repe.7.1.f687057161743261</a>.</p>
+<p>Brockmann, H. Jane. 1996. “Satellite Male Groups in Horseshoe Crabs, Limulus Polyphemus.” <em>Ethology</em> 102 (1): 1–21. <a href="http://dx.doi.org/doi:10.1111/j.1439-0310.1996.tb01099.x">http://dx.doi.org/doi:10.1111/j.1439-0310.1996.tb01099.x</a>.</p>
 </div>
 <div>
-<p>Buddin, Richard, and Ron Zimmer. 2005. “Student Achievement in Charter Schools: A Complex Picture.” <em>Journal of Policy Analysis and Management</em> 24 (2): 351–71. doi:<a href="https://doi.org/10.1002/pam.20093">10.1002/pam.20093</a>.</p>
+<p>Brown, Kenneth, and Bulent Uyar. 2004. “A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices.” <em>Journal of Real Estate Practice and Education</em> 7 (1): 15–24. <a href="http://aresjournals.org/doi/abs/10.5555/repe.7.1.f687057161743261">http://aresjournals.org/doi/abs/10.5555/repe.7.1.f687057161743261</a>.</p>
 </div>
 <div>
-<p>Bureau of Labor Statistics. 1997. “National Longitudinal Surveys.” National Longitudinal Surveys. <a href="https://www.bls.gov/nls/nlsy97.htm" class="uri">https://www.bls.gov/nls/nlsy97.htm</a>.</p>
+<p>Buddin, Richard, and Ron Zimmer. 2005. “Student Achievement in Charter Schools: A Complex Picture.” <em>Journal of Policy Analysis and Management</em> 24 (2): 351–71. <a href="http://dx.doi.org/10.1002/pam.20093">http://dx.doi.org/10.1002/pam.20093</a>.</p>
 </div>
 <div>
-<p>Cameron, A.C., and P.K. Trivedi. 1986. “Econometric Models Based on Count Data: Comparisons and Applications of Some Estimators and Tests.” <em>Journal of Applied Econometrics</em> 1: 29–53.</p>
+<p>Bureau of Labor Statistics. 1997. “National Longitudinal Surveys.” <a href="https://www.bls.gov/nls/nlsy97.htm">https://www.bls.gov/nls/nlsy97.htm</a>.</p>
+</div>
+<div>
+<p>Cameron, A. C., and P. K. Trivedi. 1986. “Econometric Models Based on Count Data: Comparisons and Applications of Some Estimators and Tests.” <em>Journal of Applied Econometrics</em> 1: 29–53.</p>
+</div>
+<div>
+<p>Camill, Philip, Mark J. McKone, Sean T. Sturges, William J. Severud, Erin Ellis, Jacob Limmer, Christopher B. Martin, et al. 2004. “Community- and Ecosystem-Level Changes in a Specie-Rich Tallgrass Prairie Restoration.” <em>Ecological Applications</em> 14 (6): 1680–94. <a href="https://doi.org/10.1890/03-5273">https://doi.org/10.1890/03-5273</a>.</p>
 </div>
 <div>
 <p>Cannon, Ann, George Cobb, Brad Hartlaub, Julie Legler, Robin Lock, Tom Moore, Allan Rossman, and Jeff Witmer. 2019. <em>Stat2: Modeling with Regression and Anova</em>. Macmillan.</p>
 </div>
 <div>
-<p>Centers for Disease Control and Prevention. 2009. “Youth Risk Behavior Survey Data.” <a href="http://www.cdc.gov/HealthyYouth/yrbs/index.htm" class="uri">http://www.cdc.gov/HealthyYouth/yrbs/index.htm</a>.</p>
+<p>Centers for Disease Control and Prevention. 2009. “Youth Risk Behavior Survey Data.” <a href="http://www.cdc.gov/HealthyYouth/yrbs/index.htm">http://www.cdc.gov/HealthyYouth/yrbs/index.htm</a>.</p>
 </div>
 <div>
-<p>Chapp, Christopher, Paul Roback, Kendra Jo Johnson-Tesch, Adrian Rossing, and Jack Werner. 2018. “Going Vague: Ambiguity and Avoidance in Online Political Messaging.” <em>Social Science Computer Review</em>.</p>
+<p>Central Intelligence Agency. 2013. “The World Factbook 2013.” <a href="https://www.cia.gov/library/publications/download/download-2013/index.html">https://www.cia.gov/library/publications/download/download-2013/index.html</a>.</p>
 </div>
 <div>
-<p>Curran, Patrick J., Eric Stice, and Laurie Chassin. 1997. “The Relation Between Adolescent Alcohol Use and Peer Alcohol Use: A Longitudinal Random Coefficients Model.” <em>Journal of Consulting and Clinical Psychology</em> 65 (1): 130–40. doi:<a href="https://doi.org/10.1037/0022-006X.65.1.130">10.1037/0022-006X.65.1.130</a>.</p>
+<p>Chapp, Christopher, Paul Roback, Kendra Jo Johnson-Tesch, Adrian Rossing, and Jack Werner. 2018. “Going Vague: Ambiguity and Avoidance in Online Political Messaging.” <em>Social Science Computer Review</em>, August. <a href="https://doi.org/10.1177/0894439318791168">https://doi.org/10.1177/0894439318791168</a>.</p>
 </div>
 <div>
-<p>Dahlquist, Samantha, and Jin Dong. 2011. “The Effects of Credit Cards on Tipping.” Project for Statistics 212-Statistics for the Sciences, St. Olaf College.</p>
+<p>Curran, Patrick J., Eric Stice, and Laurie Chassin. 1997. “The Relation Between Adolescent Alcohol Use and Peer Alcohol Use: A Longitudinal Random Coefficients Model.” <em>Journal of Consulting and Clinical Psychology</em> 65 (1): 130–40. <a href="http://dx.doi.org/10.1037/0022-006X.65.1.130">http://dx.doi.org/10.1037/0022-006X.65.1.130</a>.</p>
+</div>
+<div>
+<p>Dahlquist, Samantha, and Jin Dong. 2011. “The Effects of Credit Cards on Tipping.”</p>
 </div>
 <div>
 <p>Davison, A. C., and D. V. Hinkley. 1997. <em>Bootstrap Methods and Their Application</em>. Cambridge University Press.</p>
@@ -535,184 +576,205 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Diggle, P. J., P. Heagarty, K.‐Y. Liang, and S. L. Zeger. 2002. <em>Analysis of Longitudinal Data</em>. Oxford University Press.</p>
 </div>
 <div>
-<p>Efron, Bradley. 2012. “Bayesian Inference and the Parametric Bootstrap.” <em>Ann. Appl. Stat.</em> 6 (4). The Institute of Mathematical Statistics: 1971–97. doi:<a href="https://doi.org/10.1214/12-AOAS571">10.1214/12-AOAS571</a>.</p>
+<p>Efron, Bradley. 2012. “Bayesian Inference and the Parametric Bootstrap.” <em>Ann. Appl. Stat.</em> 6 (4): 1971–97. <a href="https://doi.org/10.1214/12-AOAS571">https://doi.org/10.1214/12-AOAS571</a>.</p>
 </div>
 <div>
-<p>Efron, Bradley, and R.J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall/CRC.</p>
+<p>Efron, Bradley, and R. J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
 </div>
 <div>
-<p>Eisinger, Robert, Amanda Elling, and J.R. Stamp. 2011. “Tree Growth Rates and Mortality.” In <em>Proceedings of the National Conference on Undergraduate Research (Ncur)</em>. Ithaca College, New York: Center for Interdisciplinary Research.</p>
+<p>Eisinger, Robert, Amanda Elling, and J. R. Stamp. 2011. “Tree Growth Rates and Mortality.” In <em>Proceedings of the National Conference on Undergraduate Research (NCUR)</em>. Ithaca College, New York.</p>
 </div>
 <div>
-<p>Farrar, Anthony, and Thomas H. Bruggink. 2011. “A New Test of the Moneyball Hypothesis.” <em>The Sport Journal</em>, May. <a href="http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/" class="uri">http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/</a>.</p>
+<p>Everitt, Brian S., and Torsten Hothorn. 2006. <em>A Handbook of Statistical Analyses Using R</em>. Boca Raton, FL: Chapmen &amp; Hall/ CRC.</p>
 </div>
 <div>
-<p>Fast, Shannon, and Thomas Hegland. 2011. “Book Challenges: A Statistical Examination.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+<p>Faraway, Julian. 2005. <em>Extending the Linear Model with R: Generalized Linear, Mixed Effects and Nonparametric Regression Models</em>. Boca Raton, FL: Chapmen &amp; Hall/ CRC.</p>
 </div>
 <div>
-<p>Finnigan, Kara, Nancy Adelman, Lee Anderson, Lynyonne Cotton, Mary Beth Donnelly, and Tiffany Price. 2004. “Evaluation of Public Charter Schools Program: Final Evaluation Report.” Washington, D.C.: U.S. Department of Education.</p>
+<p>Farrar, Anthony, and Thomas H. Bruggink. 2011. “A New Test of the Moneyball Hypothesis.” <em>The Sport Journal</em>, May. <a href="http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/">http://thesportjournal.org/article/a-new-test-of-the-moneyball-hypothesis/</a>.</p>
 </div>
 <div>
-<p>Friedman, Richard A. 2018. “Standing up at Your Desk Could Make You Smarter.” <em>The New York Times</em>, April.</p>
+<p>Fast, Shannon, and Thomas Hegland. 2011. “Book Challenges: A Statistical Examination.”</p>
 </div>
 <div>
-<p>Gelman, Andrew, Jeffrey Fagan, and Alex Kiss. 2007. “An Analysis of the Nypd’s Stop-and-Frisk Policy in the Context of Claims of Racial Bias” 102 (September): 813–23.</p>
+<p>Finnigan, Kara, Nancy Adelman, Lee Anderson, Lynyonne Cotton, Mary Beth Donnelly, and Tiffany Price. 2004. <em>Evaluation of Public Charter Schools Program: Final Evaluation Report</em>. Washington, D.C.: U.S. Department of Education.</p>
 </div>
 <div>
-<p>Goldstein, I. B., and D. Shapiro. 2000. “Ambulatory Blood Pressure in Women: Family History of Hypertension and Personality.” <em>Psychology, Health &amp; Medicine</em> 5 (3). Taylor &amp; Francis: 227–40. doi:<a href="https://doi.org/10.1080/713690197">10.1080/713690197</a>.</p>
+<p>Fisher, Lisa, Katie Murney, and Tyler Radtke. 2019. “Emergency Department Overcrowding and Factors That Contribute to Ambulance Diversion.”</p>
 </div>
 <div>
-<p>Grabe, Shelly, Janet Shibley Hyde, and L. Moniquee Ward. 2008. “The Role of the Media in Body Image Concerns Among Women: A Meta-Analysis of Experimental and Correlational Studies.” <em>Pyschological Bulletin</em> 134 (3): 460–76. doi:<a href="https://doi.org/10.1037/0033-2909.134.3.460">10.1037/0033-2909.134.3.460</a>.</p>
+<p>Friedman, Richard A. 2018. “Standing up at Your Desk Could Make You Smarter.” <em>The New York Times</em>.</p>
+</div>
+<div>
+<p>Gelman, Andrew, Jeffrey Fagan, and Alex Kiss. 2007. “An Analysis of the NYPD’s Stop-and-Frisk Policy in the Context of Claims of Racial Bias.” <em>Journal of the American Statistical Association</em> 102: 813–23.</p>
+</div>
+<div>
+<p>Gilovich, Thomas, Robert Vallone, and Amos Tversky. 1985. “The Hot Hand in Basketball: On the Misperception of Random Sequences.” <em>Cognitive Psychology</em> 17 (3): 295–314. <a href="https://doi.org/10.1016/0010-0285(85)90010-6">https://doi.org/10.1016/0010-0285(85)90010-6</a>.</p>
+</div>
+<div>
+<p>Goldstein, I. B., and D. Shapiro. 2000. “Ambulatory Blood Pressure in Women: Family History of Hypertension and Personality.” <em>Psychology, Health &amp; Medicine</em> 5 (3): 227–40. <a href="https://doi.org/10.1080/713690197">https://doi.org/10.1080/713690197</a>.</p>
+</div>
+<div>
+<p>Grabe, Shelly, Janet Shibley Hyde, and L. Moniquee Ward. 2008. “The Role of the Media in Body Image Concerns Among Women: A Meta-Analysis of Experimental and Correlational Studies.” <em>Pyschological Bulletin</em> 134 (3): 460–76. <a href="https://doi.org/10.1037/0033-2909.134.3.460">https://doi.org/10.1037/0033-2909.134.3.460</a>.</p>
 </div>
 <div>
 <p>GreenIII, Preston C., Bruce D. Baker, and Joseph O. Oluwole. 2003. “Having It Both Ways: How Charter Schools Try to Obtain Funding of Public Schools and the Autonomy of Private Schools.” <em>Emory Law Journal</em> 63 (2): 303–37.</p>
 </div>
 <div>
-<p>Hesterberg, Tim C. 2015. “What Teachers Should Know About the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.” <em>The American Statistician</em> 69 (4). Taylor &amp; Francis: 371–86. doi:<a href="https://doi.org/10.1080/00031305.2015.1089789">10.1080/00031305.2015.1089789</a>.</p>
+<p>Hesterberg, Tim C. 2015. “What Teachers Should Know About the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.” <em>The American Statistician</em> 69 (4): 371–86. <a href="https://doi.org/10.1080/00031305.2015.1089789">https://doi.org/10.1080/00031305.2015.1089789</a>.</p>
 </div>
 <div>
-<p>Hickey, Walt. 2014. “The Dollar-and-Cents Case Against Hollywood’s Exclusion of Women.” FiveThirtyEight. <a href="https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/" class="uri">https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/</a>.</p>
+<p>Hickey, Walt. 2014. “The Dollar-and-Cents Case Against Hollywood’s Exclusion of Women.” FiveThirtyEight. <a href="https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/">https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/</a>.</p>
 </div>
 <div>
-<p>“House Sales in King County, Usa.” 2018. Accessed June 29. <a href="https://www.kaggle.com/harlfoxem/housesalesprediction/home" class="uri">https://www.kaggle.com/harlfoxem/housesalesprediction/home</a>.</p>
+<p>Holst, P. A., D. Kromhout, and R. Brand. 1988. “For Debate: Pet Birds as an Independent Risk Factor for Lung Cancer.” <em>British Medical Journal</em> 297 (6659): 1319–21. <a href="https://doi.org/10.1136/bmj.297.6659.1319">https://doi.org/10.1136/bmj.297.6659.1319</a>.</p>
 </div>
 <div>
-<p>J. Faraway, Julian. 2005. <em>Extending the Linear Model with R: Generalized Linear, Mixed Effects and Nonparametric Regression Models</em>. Boca Raton, FL: Chapmen &amp; Hall/ CRC.</p>
+<p>Janusz, Brooke, and Michael Mohr. 2018. “Predicting User Yelp Star Ratings Based on Restaurant Attributes.”</p>
 </div>
 <div>
 <p>Jenkins, Christine A. 2008. “Book Challenges, Challenging Books, and Young Readers: The Research Picture.” <em>Language Arts</em> 85 (3): 228–36.</p>
 </div>
 <div>
-<p>KIPP. 2017. “KIPP North Star Academy.” <a href="http://www.kipp.org/school/kipp-north-star-academy/" class="uri">http://www.kipp.org/school/kipp-north-star-academy/</a>.</p>
+<p>Kaggle. 2018a. “House Sales in King County, USA.” <a href="https://www.kaggle.com/harlfoxem/housesalesprediction/home">https://www.kaggle.com/harlfoxem/housesalesprediction/home</a>.</p>
 </div>
 <div>
-<p>Knops, Johannes M. H., and David Tilman. 2000. “Dynamics of Soil Nitrogen and Carbon Accumulation for 61 Years After Agricultural Abandonment.” <em>Ecology</em> 81 (1): 88–98. doi:<a href="https://doi.org/10.1890/0012-9658(2000)081[0088:DOSNAC]2.0.CO;2">10.1890/0012-9658(2000)081[0088:DOSNAC]2.0.CO;2</a>.</p>
+<p>———. 2018b. “NBA Enhanced Box Scores and Standings.” <a href="https://www.kaggle.com/pablote/nba-enhanced-stats">https://www.kaggle.com/pablote/nba-enhanced-stats</a>.</p>
 </div>
 <div>
-<p>Kolata, Gina. 2009. “Picture Emerging on Genetic Risks of Ivf.” <em>The New York Times</em>, February.</p>
+<p>KIPP. 2018. “KIPP North Star Academy.” <a href="http://www.kipp.org/school/kipp-north-star-academy/">http://www.kipp.org/school/kipp-north-star-academy/</a>.</p>
 </div>
 <div>
-<p>Komdeur, Jan, Serge Daan, Joost Tinbergen, and Christa Mateman. 1997. “Extreme Adaptive Modification in Sex Ratio of the Seychelles Warbler’s Eggs.” <em>Nature</em> 385 (February): 522–25. doi:<a href="https://doi.org/10.1038/385522a0">10.1038/385522a0</a>.</p>
+<p>Knops, Johannes M. H., and David Tilman. 2000. “Dynamics of Soil Nitrogen and Carbon Accumulation for 61 Years After Agricultural Abandonment.” <em>Ecology</em> 81 (1): 88–98. <a href="https://doi.org/10.1890/0012-9658(2000)081%5B0088:DOSNAC%5D2.0.CO;2">https://doi.org/10.1890/0012-9658(2000)081[0088:DOSNAC]2.0.CO;2</a>.</p>
 </div>
 <div>
-<p>Laird, Nan M. 1988. “Missing Data in Longitudinal Studies.” <em>Statistics in Medicine</em> 7 (1-2): 305–15. doi:<a href="https://doi.org/10.1002/sim.4780070131">10.1002/sim.4780070131</a>.</p>
+<p>Kolata, Gina. 2009. “Picture Emerging on Genetic Risks of Ivf.” <em>The New York Times</em>.</p>
+</div>
+<div>
+<p>Komdeur, Jan, Serge Daan, Joost Tinbergen, and Christa Mateman. 1997. “Extreme Adaptive Modification in Sex Ratio of the Seychelles Warbler’s Eggs.” <em>Nature</em> 385 (February): 522–25. <a href="http://dx.doi.org/10.1038/385522a0">http://dx.doi.org/10.1038/385522a0</a>.</p>
+</div>
+<div>
+<p>Laird, Nan M. 1988. “Missing Data in Longitudinal Studies.” <em>Statistics in Medicine</em> 7 (1-2): 305–15. <a href="http://dx.doi.org/10.1002/sim.4780070131">http://dx.doi.org/10.1002/sim.4780070131</a>.</p>
 </div>
 <div>
 <p>Lewis, Michael M. 2003. <em>Moneyball: The Art of Winning an Unfair Game</em>. W. W. Norton &amp; Company.</p>
 </div>
 <div>
-<p>Martinsen, M, S Bratland-Sanda, A K Eriksson, and J Sundgot-Borgen. 2009. “Dieting to Win or to Be Thin? A Study of Dieting and Disordered Eating Among Adolescent Elite Athletes and Non-Athlete Controls.” <em>British Journal of Sports Medicine</em> 44 (1): 70–76. doi:<a href="https://doi.org/10.1136/bjsm.2009.068668">10.1136/bjsm.2009.068668</a>.</p>
+<p>Martinsen, M, S Bratland-Sanda, A K Eriksson, and J Sundgot-Borgen. 2009. “Dieting to Win or to Be Thin? A Study of Dieting and Disordered Eating Among Adolescent Elite Athletes and Non-Athlete Controls.” <em>British Journal of Sports Medicine</em> 44 (1): 70–76. <a href="http://bjsm.bmj.com/content/44/1/70">http://bjsm.bmj.com/content/44/1/70</a>.</p>
 </div>
 <div>
-<p>Mathews, T.J., and Brady E. Hamilton. 2005. “Trend Analysis of the Sex Ratio at Birth in the United States.” <em>National Vital Statistics Reports</em> 53 (20): 1–20. <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf" class="uri">https://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf</a>.</p>
+<p>Mathews, T. J., and Brady E. Hamilton. 2005. “Trend Analysis of the Sex Ratio at Birth in the United States.” <em>National Vital Statistics Reports</em> 53 (20): 1–20. <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf">https://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf</a>.</p>
 </div>
 <div>
-<p>McCullagh, Peter, and John Ashworth Nelder. 1989. <em>Generalized Linear Models</em>. Second Edition. Boca Raton, Florida: Chapman; Hall/ CRC Monographs on Statistics; Applied Probability.</p>
+<p>McCullagh, Peter, and John Ashworth Nelder. 1989. <em>Generalized Linear Models</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/ CRC.</p>
 </div>
 <div>
-<p>Minnesota Department of Education. 2018. “Minnesota Department of Education Data Center.” Accessed June 25. <a href="https://education.mn.gov/MDE/Data/" class="uri">https://education.mn.gov/MDE/Data/</a>.</p>
+<p>Minnesota Department of Education. 2018. “Minnesota Department of Education Data Center.” <a href="https://education.mn.gov/MDE/Data/">https://education.mn.gov/MDE/Data/</a>.</p>
 </div>
 <div>
-<p>Moskowitz, Tobias J., and L. Jon Wertheim. 2011. <em>Scorecasting: The Hidden Influences Behind How Sports Are Played and Games Are Won</em>. New York: Crown Archetype.</p>
+<p>Moskowitz, Tobias J., and L. Jon Wertheim. 2011. <em>Scorecasting: The Hidden Influences Behind How Sports Are Played and Games Are Won</em>. New York, NY: Crown Archetype.</p>
 </div>
 <div>
-<p>Nafstad, Per, Jorgen A. Hagen, Leif Oie, Per Magnus, and Jouni J. K. Jaakkola. 1999. “Day Care Centers and Respiratory Health.” <em>Pediatrics</em> 103 (4): 753–58. <a href="http://pediatrics.aappublications.org/content/103/4/753" class="uri">http://pediatrics.aappublications.org/content/103/4/753</a>.</p>
+<p>Nafstad, Per, Jorgen A. Hagen, Leif Oie, Per Magnus, and Jouni J. K. Jaakkola. 1999. “Day Care Centers and Respiratory Health.” <em>Pediatrics</em> 103 (4): 753–58. <a href="http://pediatrics.aappublications.org/content/103/4/753">http://pediatrics.aappublications.org/content/103/4/753</a>.</p>
 </div>
 <div>
-<p>National Center for Education Statistics. 2018. “The Integrated Postsecondary Education Data System.” Accessed June 25. <a href="https://nces.ed.gov/ipeds/" class="uri">https://nces.ed.gov/ipeds/</a>.</p>
+<p>National Center for Education Statistics. 2018. “The Integrated Postsecondary Education Data System.” <a href="https://nces.ed.gov/ipeds/">https://nces.ed.gov/ipeds/</a>.</p>
 </div>
 <div>
-<p>“NBA Enhanced Box Scores and Standings.” 2018. Accessed August 1. <a href="https://www.kaggle.com/pablote/nba-enhanced-stats" class="uri">https://www.kaggle.com/pablote/nba-enhanced-stats</a>.</p>
+<p>Nelder, John Ashworth, and Robert William Maclagan Wedderburn. 1972. “Generalized Linear Models.” <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370–84. <a href="http://www.jstor.org/stable/2344614">http://www.jstor.org/stable/2344614</a>.</p>
 </div>
 <div>
-<p>Nelder, John Ashworth, and Robert William Maclagan Wedderburn. 1972. “Generalized Linear Models.” <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370–84. doi:<a href="https://doi.org/10.2307/2344614">10.2307/2344614</a>.</p>
+<p>Noecker, Cecilia A., and Paul Roback. 2012. “New Insights on the Tendency of NCAA Basketball Officials to Even Out Foul Calls.” <em>Journal of Quantitative Analysis in Sports</em> 8 (3): 1–23.</p>
 </div>
 <div>
-<p>Noecker, Cecilia A., and Paul Roback. 2012. “New Insights on the Tendency of Ncaa Basketball Officials to Even Out Foul Calls.” <em>Journal of Quantitative Analysis in Sports</em> 8 (3): 1–23.</p>
+<p>Philippine Statistics Authority. 2015. “Family Income and Expenditure Survey.” <a href="https://www.kaggle.com/grosvenpaul/family-income-and-expenditure">https://www.kaggle.com/grosvenpaul/family-income-and-expenditure</a>.</p>
 </div>
 <div>
-<p>Philip, Camill, McKone Mark J., Sturges Sean T., Severud William J., Ellis Erin, Limmer Jacob, Martin Christopher B., et al. 2004. “Community- and Ecosystem-Level Changes in a Species-Rich Tallgrass Prairie Restoration.” <em>Ecological Applications</em> 14 (6): 1680–94. doi:<a href="https://doi.org/10.1890/03-5273">10.1890/03-5273</a>.</p>
+<p>Poole, Joyce H. 1989. “Mate Guarding, Reproductive Success and Female Choice in African Elephants.” <em>Animal Behaviour</em> 37: 842–49. <a href="http://www.sciencedirect.com/science/article/pii/0003347289900687">http://www.sciencedirect.com/science/article/pii/0003347289900687</a>.</p>
 </div>
 <div>
-<p>Philippine Statistics Authority. 2015. “Family Income and Expenditure Survey.” <a href="https://www.kaggle.com/grosvenpaul/family-income-and-expenditure" class="uri">https://www.kaggle.com/grosvenpaul/family-income-and-expenditure</a>.</p>
+<p>Pray, Ian. 2009. “Effects of Rainfall and Sun Exposure on Leaf Characteristics.”</p>
 </div>
 <div>
-<p>Poole, Joyce H. 1989. “Mate Guarding, Reproductive Success and Female Choice in African Elephants.” <em>Animal Behaviour</em> 37: 842–49. doi:<a href="https://doi.org/https://doi.org/10.1016/0003-3472(89)90068-7">https://doi.org/10.1016/0003-3472(89)90068-7</a>.</p>
+<p>Proudfoot, J, D Goldberg, A Mann, B Everitt, I Marks, and J A Gray. 2003. “Computerized, Interactive, Multimedia Cognitive-Behavioural Program for Anxiety and Depression in General Practice.” <em>Psychological Medicine</em> 33 (2): 217–27. <a href="https://doi.org/10.1017/s0033291702007225">https://doi.org/10.1017/s0033291702007225</a>.</p>
 </div>
 <div>
-<p>Pray, Ian. 2009. “Effects of Rainfall and Sun Exposure on Leaf Characteristics.” Project for Bio in South India, St. Olaf College.</p>
+<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. 2nd ed. Boston, Massachusetts: Brooks/ Cole Cengage.</p>
 </div>
 <div>
-<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. Second Edition. Boston, Massachusetts: Brooks/ Cole Cengage Learning.</p>
+<p>Randall, D. A., L. R. Jorm, S. Lujic, S. J. Eades, T. R. Churches, A. J. O’Loughlin, and A. H. Leyland. 2014. “Exploring Disparities in Acute Myocardial Infarction Events Between Aboriginal and non-Aboriginal Australians: Roles of Age, Gender, Geography and Area-Level Disadvantage.” <em>Health &amp; Place</em> 28: 58–66. <a href="https://doi.org/https://doi.org/10.1016/j.healthplace.2014.03.009">https://doi.org/https://doi.org/10.1016/j.healthplace.2014.03.009</a>.</p>
 </div>
 <div>
-<p>Randall, D.A., L.R. Jorm, S. Lujic, S.J. Eades, T.R. Churches, A.J. O’Loughlin, and A.H. Leyland. 2014. “Exploring Disparities in Acute Myocardial Infarction Events Between Aboriginal and Non-Aboriginal Australians: Roles of Age, Gender, Geography and Area-Level Disadvantage.” <em>Health &amp; Place</em> 28: 58–66. doi:<a href="https://doi.org/https://doi.org/10.1016/j.healthplace.2014.03.009">https://doi.org/10.1016/j.healthplace.2014.03.009</a>.</p>
+<p>Raudenbush, Stephen W., and Anthony S. Bryk. 2002. <em>Hierarchical Linear Models: Applications and Data Analysis Methods</em>. 2nd ed. Thousand Oaks, CA: SAGE Publications, Inc.</p>
 </div>
 <div>
-<p>Raudenbush, Stephen W., and Anthony S. Bryk. 2002. <em>Hierarchical Linear Models: Applications and Data Analysis Methods</em>. 2nd ed. SAGE Publications, Inc.</p>
+<p>R Core Team. 2020. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org">https://www.R-project.org</a>.</p>
 </div>
 <div>
-<p>Rodgers, Joseph Lee, and Debby Doughty. 2001. “Does Having Boys or Girls Run in the Family?” <em>CHANCE</em> 14 (4): 8–13. doi:<a href="https://doi.org/10.1080/09332480.2001.10542293">10.1080/09332480.2001.10542293</a>.</p>
+<p>Rodgers, Joseph Lee, and Debby Doughty. 2001. “Does Having Boys or Girls Run in the Family?” <em>CHANCE</em> 14 (4): 8–13. <a href="http://dx.doi.org/10.1080/09332480.2001.10542293">http://dx.doi.org/10.1080/09332480.2001.10542293</a>.</p>
 </div>
 <div>
-<p>Roskes, Marieke, Daniel Sligte, Shaul Shalvi, and Carsten K. W. De Dreu. 2011. “The Right Side? Under Time Pressure, Approach Motivation Leads to Right-Oriented Bias.” <em>Psychology Science</em> 22 (11): 1403–7. doi:<a href="https://doi.org/10.1177/0956797611418677">10.1177/0956797611418677</a>.</p>
+<p>Roskes, Marieke, Daniel Sligte, Shaul Shalvi, and Carsten K. W. De Dreu. 2011. “The Right Side? Under Time Pressure, Approach Motivation Leads to Right-Oriented Bias.” <em>Psychology Science</em> 22 (11): 1403–7. <a href="https://doi.org/10.1177/0956797611418677">https://doi.org/10.1177/0956797611418677</a>.</p>
 </div>
 <div>
-<p>Sadler, Michael E., and Christopher J. Miller. 2010. “Performance Anxiety.” <em>Social Psychological and Personality Science</em> 1 (3): 280–87. doi:<a href="https://doi.org/10.1177/1948550610370492">10.1177/1948550610370492</a>.</p>
+<p>Sadler, Michael E., and Christopher J. Miller. 2010. “Performance Anxiety: A Longitudinal Study of the Roles of Personality and Experience in Musicians.” <em>Social Psychological and Personality Science</em> 1 (3): 280–87. <a href="http://dx.doi.org/10.1177/1948550610370492">http://dx.doi.org/10.1177/1948550610370492</a>.</p>
 </div>
 <div>
-<p>Sampson, Robert J., Stephen W. Raudenbush, and Felton Earls. 1997. “Neighborhoods and Violent Crime: A Multilevel Study of Collective Efficacy.” <em>Science</em> 277 (5328). American Association for the Advancement of Science: 918–24. doi:<a href="https://doi.org/10.1126/science.277.5328.918">10.1126/science.277.5328.918</a>.</p>
+<p>Sampson, Robert J., Stephen W. Raudenbush, and Felton Earls. 1997. “Neighborhoods and Violent Crime: A Multilevel Study of Collective Efficacy.” <em>Science</em> 277 (5328): 918–24. <a href="https://doi.org/10.1126/science.277.5328.918">https://doi.org/10.1126/science.277.5328.918</a>.</p>
 </div>
 <div>
-<p>Scotto, Joseph, Alfred W. Kopf, and Fredrick Urbach. 1974. “Non-Melanoma Skin Cancer Among Caucasians in Four Areas of the United States.” <em>Cancer</em> 34 (4): 1333–8. doi:<a href="https://doi.org/10.1002/1097-0142(197410)34:4&lt;1333::AID-CNCR2820340447&gt;3.0.CO;2-A">10.1002/1097-0142(197410)34:4&lt;1333::AID-CNCR2820340447&gt;3.0.CO;2-A</a>.</p>
+<p>Scotto, Joseph, Alfred W. Kopf, and Fredrick Urbach. 1974. “Non-Melanoma Skin Cancer Among Caucasians in Four Areas of the United States.” <em>Cancer</em> 34 (4): 1333–8. <a href="https://doi.org/10.1002/1097-0142(197410)34:4%3C1333::AID-CNCR2820340447%3E3.0.CO;2-A">https://doi.org/10.1002/1097-0142(197410)34:4&lt;1333::AID-CNCR2820340447&gt;3.0.CO;2-A</a>.</p>
 </div>
 <div>
-<p>Siddarth, Prabha, Alison C. Burggren, Harris A. Eyre, Gary W. Small, and David A. Merrill. 2018. “Sedentary Behavior Associated with Reduced Medial Temporal Lobe Thickness in Middle-Aged and Older Adults.” <em>PLOS ONE</em> 13 (4). Public Library of Science: 1–13. doi:<a href="https://doi.org/10.1371/journal.pone.0195549">10.1371/journal.pone.0195549</a>.</p>
+<p>Siddarth, Prabha, Alison C. Burggren, Harris A. Eyre, Gary W. Small, and David A. Merrill. 2018. “Sedentary Behavior Associated with Reduced Medial Temporal Lobe Thickness in Middle-Aged and Older Adults.” <em>PLOS ONE</em> 13 (4): 1–13. <a href="https://doi.org/10.1371/journal.pone.0195549">https://doi.org/10.1371/journal.pone.0195549</a>.</p>
 </div>
 <div>
 <p>Singer, Judith D., and John B. Willett. 2003. <em>Applied Longitudinal Data Analysis: Modeling Change and Event Occurrence</em>. 1st ed. New York, New York: Oxford University Press, Inc.</p>
 </div>
 <div>
-<p>“Sisters ‘Make People Happy’.” 2009. BBC NEWS.</p>
-</div>
-<div>
-<p>Smith, Aaron, and Maeve Duggan. 2013. “Online Dating and Relationships.” Pew Research Center: Internet and Technology.</p>
+<p>Smith, Aaron, and Maeve Duggan. 2013. “Online Dating and Relationships.” Pew Research Center. <a href="https://www.issuelab.org/resources/15934/15934.pdf">https://www.issuelab.org/resources/15934/15934.pdf</a>.</p>
 </div>
 <div>
 <p>Stigler, Stephen M. 2002. <em>Statistics on the Table: The History of Statistical Concepts and Methods</em>. Harvard University Press.</p>
 </div>
 <div>
-<p>Sturtz, Adam, Alex Lampert, and Trent Friedrich. 2013. “Project 5183.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+<p>Sturtz, Adam, Alex Lampert, and Trent Friedrich. 2013. “Project 5183.”</p>
 </div>
 <div>
-<p>“The World Factbook.” 2013. The World Factbook; Central Intelligence Agency.</p>
+<p>Trinh, Ly, and Pony Ameri. 2018. “Airbnb Price Determinants: A Multilevel Modeling Approach.”</p>
 </div>
 <div>
-<p>Trinh, Ly, and Pony Ameri. 2018. “Airbnb Price Determinants: A Multilevel Modeling Approach.” Project for Statistics 316-Advanced Statistical Modeling, St. Olaf College.</p>
+<p>UCLA Statistical Consulting Group. 2018. “Zero-Inflated Negative Binomial Regression: R Data Analysis Examples.” <a href="https://stats.idre.ucla.edu/r/dae/zinb/">https://stats.idre.ucla.edu/r/dae/zinb/</a>.</p>
 </div>
 <div>
-<p>U.S. Department of Education. 2018. “National Charter School Resource Center: Frequently Asked Questions.” Accessed June 25. <a href="https://charterschoolcenter.ed.gov/faqs" class="uri">https://charterschoolcenter.ed.gov/faqs</a>.</p>
+<p>U.S. Department of Education. 2018. “National Charter School Resource Center.” <a href="https://charterschoolcenter.ed.gov/faqs">https://charterschoolcenter.ed.gov/faqs</a>.</p>
 </div>
 <div>
-<p>Walker-Barnes, Chanequa J., and Craig A. Mason. 2001. “Ethnic Differences in the Effect of Parenting on Gang Involvement and Gang Delinquency: A Longitudinal, Hierarchical Linear Modeling Perspective.” <em>Child Development</em> 72 (6): 1814–31. doi:<a href="https://doi.org/10.1111/1467-8624.00380">10.1111/1467-8624.00380</a>.</p>
+<p>Vuong, Q. H. 1989. “Likelihood Ratio Tests for Model Selection and Non-Nested Hypotheses.” <em>Econometrica</em> 57: 307–33. <a href="https://doi.org/10.2307/1912557">https://doi.org/10.2307/1912557</a>.</p>
+</div>
+<div>
+<p>Walker-Barnes, Chanequa J., and Craig A. Mason. 2001. “Ethnic Differences in the Effect of Parenting on Gang Involvement and Gang Delinquency: A Longitudinal, Hierarchical Linear Modeling Perspective.” <em>Child Development</em> 72 (6): 1814–31. <a href="http://dx.doi.org/10.1111/1467-8624.00380">http://dx.doi.org/10.1111/1467-8624.00380</a>.</p>
 </div>
 <div>
 <p>Weiss, Robert E. 2005. <em>Modeling Longitudinal Data</em>. New York, NY: Springer-Verlag.</p>
 </div>
 <div>
-<p>Wikipedia contributors. 2018. “Kentucky Derby — Wikipedia, the Free Encyclopedia.” <a href="https://en.wikipedia.org/w/index.php?title=Kentucky_Derby&amp;oldid=846316018" class="uri">https://en.wikipedia.org/w/index.php?title=Kentucky_Derby&amp;oldid=846316018</a>.</p>
+<p>Wikipedia contributors. 2018. “Kentucky Derby.” In <em>Wikipedia</em>. <a href="https://en.wikipedia.org/wiki/Kentucky_Derby">https://en.wikipedia.org/wiki/Kentucky_Derby</a>.</p>
 </div>
 <div>
-<p>Witte, John, David Weimer, Arnold Shober, and Paul Schlomer. 2007. “The Performance of Charter Schools in Wisconsin.” <em>Journal of Policy Analysis and Management</em> 26 (3): 557–73. doi:<a href="https://doi.org/10.1002/pam.20265">10.1002/pam.20265</a>.</p>
+<p>Witte, John, David Weimer, Arnold Shober, and Paul Schlomer. 2007. “The Performance of Charter Schools in Wisconsin.” <em>Journal of Policy Analysis and Management</em> 26 (3): 557–73. <a href="http://dx.doi.org/10.1002/pam.20265">http://dx.doi.org/10.1002/pam.20265</a>.</p>
 </div>
 <div>
-<p>Zak, Donald R., William E. Holmes, David C. White, Aaron D. Peacock, and David Tilman. 2003. “Plant Diversity, Soil Microbial Communities, and Ecosystem Function: Are There Any Links?” <em>Ecology</em> 84 (8): 2042–50. doi:<a href="https://doi.org/10.1890/02-0433">10.1890/02-0433</a>.</p>
-</div>
-<div>
-<p>“Zero-Inflated Negative Binomial Regression | R Data Analysis Examples.” 2018. <a href="https://stats.idre.ucla.edu/r/dae/zinb/" class="uri">https://stats.idre.ucla.edu/r/dae/zinb/</a>.</p>
+<p>Zak, Donald R., William E. Holmes, David C. White, Aaron D. Peacock, and David Tilman. 2003. “Plant Diversity, Soil Microbial Communities, and Ecosystem Function: Are There Any Links?” <em>Ecology</em> 84 (8): 2042–50. <a href="https://doi.org/10.1890/02-0433">https://doi.org/10.1890/02-0433</a>.</p>
 </div>
 </div>
 </div>
+
+
+
+
+
+
             </section>
 
           </div>
@@ -722,13 +784,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -736,12 +800,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -756,7 +819,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-bysh.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
@@ -770,10 +837,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
