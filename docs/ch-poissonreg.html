@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Poisson Regression | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -551,7 +551,7 @@ where the observed values <span class="math inline">\(Y_i \sim\)</span> Poisson 
 <div id="a-graphical-look-at-poisson-regression" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> A Graphical Look at Poisson Regression</h3>
 <div class="figure" style="text-align: center"><span id="fig:OLSpois"></span>
-<img src="bookdown-bysh_files/figure-html/OLSpois-1.png" alt="Regession Models: Linear Regression (left) and Poisson Regression (right)" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/OLSpois-1.png" alt="Regession Models: Linear Regression (left) and Poisson Regression (right)" width="60%" />
 <p class="caption">
 Figure 4.1: Regession Models: Linear Regression (left) and Poisson Regression (right)
 </p>
@@ -723,14 +723,14 @@ Predominantly Strong Material
 <h3><span class="header-section-number">4.4.2</span> Exploratory Data Analyses</h3>
 <p>For the rest of this case study, we will refer to the number of people in a household as the total number of people in that specific household <em>besides</em> the head of household. The average number of people in a household is 3.68 (Var = 5.53), and there are anywhere from 0 to 16 people in the houses. Over 11.1% of these households are made from predominantly light and salvaged material. The mean number of people in a house for houses with a roof made from predominantly strong material is is 3.69 (Var=5.55), whereas houses with a roof made from predominantly light/salvaged material average 3.64 people (Var=5.41). Of the various locations, Visayas has the largest household size, on average, with a mean of 3.90 in the household, and the Davao Region has the smallest with a mean of 3.39.</p>
 <div class="figure" style="text-align: center"><span id="fig:nhouse"></span>
-<img src="bookdown-bysh_files/figure-html/nhouse-1.png" alt="Distribution of household size in 5 Philippine regions" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/nhouse-1.png" alt="Distribution of household size in 5 Philippine regions" width="60%" />
 <p class="caption">
 Figure 4.3: Distribution of household size in 5 Philippine regions
 </p>
 </div>
 <p>Figure <a href="ch-poissonreg.html#fig:nhouse">4.3</a> reveals a fair amount of variability in the number in each house; responses range from 0 to 16 with many of the respondents reporting between 1 and 5 people in the house. Like many Poisson distributions, this graph is right skewed. It clearly does not suggest that the number of people in a household is a normally distributed response.</p>
 <div class="figure" style="text-align: center"><span id="fig:totalPoisByAge"></span>
-<img src="bookdown-bysh_files/figure-html/totalPoisByAge-1.png" alt="Distribution of household sizes by age group of the household head." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/totalPoisByAge-1.png" alt="Distribution of household sizes by age group of the household head." width="60%" />
 <p class="caption">
 Figure 4.4: Distribution of household sizes by age group of the household head.
 </p>
@@ -931,14 +931,14 @@ NA
 <p>If there is a problem with this assumption, most often we see variances much larger than means. Here, as expected, we see more variability as age increases. However, it appears that the variance is smaller than the mean for lower ages, while the variance is greater than the mean for higher ages. Thus, there is some evidence of a violation of the mean=variance assumption (Assumption 3), although any violations are modest.</p>
 <p>The Poisson regression model also implies that log(<span class="math inline">\(\lambda_i\)</span>), not the mean household size <span class="math inline">\(\lambda_i\)</span>, is a linear function of age; i.e., <span class="math inline">\(log(\lambda_i)=\beta_0+\beta_1\textrm{age}_i\)</span>. Therefore, to check the linearity assumption (Assumption 4) for Poisson regression we would like to plot log(<span class="math inline">\(\lambda_i\)</span>) by age. Unfortunately, <span class="math inline">\(\lambda_i\)</span> is unknown. Our best guess of <span class="math inline">\(\lambda_i\)</span> is the observed mean number in the household for each age (level of <span class="math inline">\(X\)</span>). Because these means are computed for observed data, they are referred to as <strong>empirical</strong> means. Taking the logs of the empirical means and plotting by age provides a way to assess the linearity assumption. The smoothed curve added to Figure <a href="ch-poissonreg.html#fig:ageXnhouse">4.5</a> suggests that there is a curvilinear relationship between age and the log of the mean household size, implying that adding a quadratic term should be considered. This finding is consistent with the researchers’ hypothesis that there is an age at which a maximum household size occurs. It is worth noting that we are not modeling the log of the empirical means, rather it is the log of the <em>true</em> rate that is modeled. Looking at empirical means, however, does provide an idea of the form of the relationship between log(<span class="math inline">\(\lambda)\)</span> and <span class="math inline">\(x_i\)</span>.</p>
 <div class="figure" style="text-align: center"><span id="fig:ageXnhouse"></span>
-<img src="bookdown-bysh_files/figure-html/ageXnhouse-1.png" alt="The log of the mean household sizes, besides the head of household, by age of the head of household, with loess smoother." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/ageXnhouse-1.png" alt="The log of the mean household sizes, besides the head of household, by age of the head of household, with loess smoother." width="60%" />
 <p class="caption">
 Figure 4.5: The log of the mean household sizes, besides the head of household, by age of the head of household, with loess smoother.
 </p>
 </div>
 <p>We can extend Figure <a href="ch-poissonreg.html#fig:ageXnhouse">4.5</a> by fitting separate curves for each region (see Figure <a href="ch-poissonreg.html#fig:byregion">4.6</a>). This allows us to see if the relationship between mean household size and age is consistent across region. In this case, the relationships are pretty similar; if they weren’t we could consider adding an age-by-region interaction to our eventual Poisson regression model.</p>
 <div class="figure" style="text-align: center"><span id="fig:byregion"></span>
-<img src="bookdown-bysh_files/figure-html/byregion-1.png" alt="Empirical log of the mean household sizes vs. age of the head of household, with loess smoother by region." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/byregion-1.png" alt="Empirical log of the mean household sizes vs. age of the head of household, with loess smoother by region." width="60%" />
 <p class="caption">
 Figure 4.6: Empirical log of the mean household sizes vs. age of the head of household, with loess smoother by region.
 </p>
@@ -1150,7 +1150,7 @@ where <span class="math inline">\(\textrm{sign}(x)\)</span> is defined such that
 <p>As its name implies, a deviance residual describes how the observed data deviates from the fitted model. Squaring and summing the deviances for all observations produces the <strong>residual deviance</strong> <span class="math inline">\(=\sum (\textrm{deviance residual})^2_i\)</span>.  Relatively speaking, observations for good fitting models will have small deviances; that is, the predicted values will deviate little from the observed. However, you can see that the deviance for an observation does not easily translate to a difference in observed and predicted responses as is the case with LLSR models.</p>
 <p>A careful inspection of the deviance formula reveals several places where the deviance compares <span class="math inline">\(Y\)</span> to <span class="math inline">\(\hat{\lambda}\)</span>: the sign of the deviance is based on the difference between <span class="math inline">\(Y\)</span> and <span class="math inline">\(\hat{\lambda}\)</span>, and under the radical sign we see the ratio <span class="math inline">\(Y/\hat{\lambda}\)</span> and the difference <span class="math inline">\(Y -\hat{\lambda}\)</span>. When <span class="math inline">\(Y = \hat{\lambda}\)</span>, that is, when the model fits perfectly, the difference will be 0 and the ratio will be 1 (so that its log will be 0). So like the residuals in LLSR, an observation that fits perfectly will not contribute to the sum of the squared deviances. This definition of a deviance depends on the likelihood for Poisson models. Other models will have different forms for the deviance depending on their likelihood.</p>
 <div class="figure" style="text-align: center"><span id="fig:resid1"></span>
-<img src="bookdown-bysh_files/figure-html/resid1-1.png" alt="Residual plot for the Poisson model of household size by age of the household head" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/resid1-1.png" alt="Residual plot for the Poisson model of household size by age of the household head" width="60%" />
 <p class="caption">
 Figure 4.7: Residual plot for the Poisson model of household size by age of the household head
 </p>
@@ -1224,7 +1224,7 @@ Figure 4.7: Residual plot for the Poisson model of household size by age of the 
 <div id="exploratory-data-analysis" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Exploratory Data Analysis</h3>
 <div class="figure" style="text-align: center"><span id="fig:nviolent"></span>
-<img src="bookdown-bysh_files/figure-html/nviolent-1.png" alt="Histogram of number of violent crimes by institution" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/nviolent-1.png" alt="Histogram of number of violent crimes by institution" width="60%" />
 <p class="caption">
 Figure 4.8: Histogram of number of violent crimes by institution
 </p>
@@ -1573,7 +1573,7 @@ U
 </tbody>
 </table>
 <div class="figure" style="text-align: center"><span id="fig:boxtyperegion"></span>
-<img src="bookdown-bysh_files/figure-html/boxtyperegion-1.png" alt="Boxplot of violent crime rate by region and type of institituion" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/boxtyperegion-1.png" alt="Boxplot of violent crime rate by region and type of institituion" width="60%" />
 <p class="caption">
 Figure 4.9: Boxplot of violent crime rate by region and type of institituion
 </p>
@@ -1819,7 +1819,7 @@ Drop in deviance test
 <li><strong>Drinkers</strong>: obviously this includes those responding with one or more drinks, but it also includes people who are drinkers but did not happen to imbibe the past weekend. These people reply zero but are not considered non-drinkers.</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:obsVmodel"></span>
-<img src="bookdown-bysh_files/figure-html/obsVmodel-1.png" alt="Observed (a) versus Modeled (b) Number of Drinks" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/obsVmodel-1.png" alt="Observed (a) versus Modeled (b) Number of Drinks" width="60%" />
 <p class="caption">
 Figure 4.10: Observed (a) versus Modeled (b) Number of Drinks
 </p>
@@ -1934,7 +1934,7 @@ BIC-corrected  0.0093</code></pre>
 <h3><span class="header-section-number">4.10.7</span> Residual Plot</h3>
 <p>Fitted values (<span class="math inline">\(\hat{y}\)</span>) and residuals (<span class="math inline">\(y-\hat{y}\)</span>) can be computed for zero-inflation models and plotted. Figure <a href="ch-poissonreg.html#fig:poisRes">4.11</a> reveals that one observation appears to be extreme (Y=22 drinks during the past weekend). Is this a legitimate observation or was there a transcribing error? Without the original respondents we cannot settle this question. It might be worthwhile to get a sense of how influential this extreme observation is by removing Y=22 and refitting the model.</p>
 <div class="figure" style="text-align: center"><span id="fig:poisRes"></span>
-<img src="bookdown-bysh_files/figure-html/poisRes-1.png" alt="Residuals by fitted counts for ZIP model." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/poisRes-1.png" alt="Residuals by fitted counts for ZIP model." width="60%" />
 <p class="caption">
 Figure 4.11: Residuals by fitted counts for ZIP model.
 </p>
@@ -2515,7 +2515,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

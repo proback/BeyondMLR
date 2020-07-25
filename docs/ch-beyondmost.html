@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 2 Beyond Least Squares: Using Likelihoods to Fit and Compare Models | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -518,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-6"><a href="ch-beyondmost.html#cb31-6"></a><span class="kw">library</span>(kableExtra)</span>
 <span id="cb31-7"><a href="ch-beyondmost.html#cb31-7"></a><span class="kw">library</span>(tidyverse) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:logistic1"></span>
-<img src="bookdown-bysh_files/figure-html/logistic1-1.png" alt="An attempt to fit a linear regression model to a binary response variable." width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/logistic1-1.png" alt="An attempt to fit a linear regression model to a binary response variable." width="90%" />
 <p class="caption">
 Figure 2.1: An attempt to fit a linear regression model to a binary response variable.
 </p>
@@ -670,7 +670,7 @@ With likelihood methods, conceptually we consider different possible values for 
  \mathrm{Lik}(p_B) = P(G)P(B)P(B) = (1-p_B)p_B^2
 \end{equation*}\]</span></p>
 <div class="figure" style="text-align: center"><span id="fig:lik1"></span>
-<img src="bookdown-bysh_files/figure-html/lik1-1.png" alt="Likehood function for GBB." width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lik1-1.png" alt="Likehood function for GBB." width="90%" />
 <p class="caption">
 Figure 2.2: Likehood function for GBB.
 </p>
@@ -685,7 +685,7 @@ Figure 2.2: Likehood function for GBB.
 \end{align*}\]</span></p>
 <p>A plot of this likelihood appears in Figure <a href="ch-beyondmost.html#fig:lik2">2.3</a>. It is right skewed with an MLE at approximately 0.3. Using calculus, we can show that the MLE is precisely 1/3 which is consistent with intuition given the 2 boys and 4 girls in our data.</p>
 <div class="figure" style="text-align: center"><span id="fig:lik2"></span>
-<img src="bookdown-bysh_files/figure-html/lik2-1.png" alt="Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lik2-1.png" alt="Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$" width="90%" />
 <p class="caption">
 Figure 2.3: Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE, <span class="math inline">\({p}_B=1/3\)</span>
 </p>
@@ -843,7 +843,7 @@ Total
 <div id="MLEgph.sec" class="section level4">
 <h4><span class="header-section-number">2.4.2.1</span> Graphically approximating an MLE</h4>
 <div class="figure" style="text-align: center"><span id="fig:lik4"></span>
-<img src="bookdown-bysh_files/figure-html/lik4-1.png" alt="Likelihood and log-likelihood functions for 50 children (30 boys and 20 girls) and for 1000 children (600 boys and 400 girls)." width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lik4-1.png" alt="Likelihood and log-likelihood functions for 50 children (30 boys and 20 girls) and for 1000 children (600 boys and 400 girls)." width="90%" />
 <p class="caption">
 Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and 20 girls) and for 1000 children (600 boys and 400 girls).
 </p>
@@ -2691,7 +2691,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

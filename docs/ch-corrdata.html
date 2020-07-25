@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 7 Correlated Data | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -927,13 +927,13 @@ X
 <span id="cb165-4"><a href="ch-corrdata.html#cb165-4"></a>pi_1b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>,.<span class="dv">5</span>,.<span class="dv">5</span>)  </span>
 <span id="cb165-5"><a href="ch-corrdata.html#cb165-5"></a>count_1b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_1b)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:scenario1ProbabilityPlot"></span>
-<img src="bookdown-bysh_files/figure-html/scenario1ProbabilityPlot-1.png" alt="Dam Probabilities in Scenario 1" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/scenario1ProbabilityPlot-1.png" alt="Dam Probabilities in Scenario 1" width="60%" />
 <p class="caption">
 Figure 7.1: Dam Probabilities in Scenario 1
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:scenario1Plot"></span>
-<img src="bookdown-bysh_files/figure-html/scenario1Plot-1.png" alt="Counts of deformed pups per dam under Scenarios 1a and 1b" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/scenario1Plot-1.png" alt="Counts of deformed pups per dam under Scenarios 1a and 1b" width="60%" />
 <p class="caption">
 Figure 7.2: Counts of deformed pups per dam under Scenarios 1a and 1b
 </p>
@@ -1013,7 +1013,7 @@ Thus, dams who received doses of 0, 1, 2, and 3 mg would have probabilities 0.12
 <span id="cb166-10"><a href="ch-corrdata.html#cb166-10"></a>pi_2b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>, a, b)</span>
 <span id="cb166-11"><a href="ch-corrdata.html#cb166-11"></a>count_2b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_2b)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:scenario2bPlot"></span>
-<img src="bookdown-bysh_files/figure-html/scenario2bPlot-1.png" alt="Observed (histograms) and theoretical (density curves) distributions of dams' probabilities of producing deformed pups by dose group in Scenario 2b.  The red vertical line represents the fixed probability of a deformed pup by dose group in Scenario 2a." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/scenario2bPlot-1.png" alt="Observed (histograms) and theoretical (density curves) distributions of dams' probabilities of producing deformed pups by dose group in Scenario 2b.  The red vertical line represents the fixed probability of a deformed pup by dose group in Scenario 2a." width="60%" />
 <p class="caption">
 Figure 7.3: Observed (histograms) and theoretical (density curves) distributions of dams’ probabilities of producing deformed pups by dose group in Scenario 2b. The red vertical line represents the fixed probability of a deformed pup by dose group in Scenario 2a.
 </p>
@@ -1686,7 +1686,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

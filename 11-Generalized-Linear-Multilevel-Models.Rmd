@@ -1,6 +1,6 @@
 ---
 title: "Chapter 11"
-subtitle: "multilevel generalized linear Models"
+subtitle: "Multilevel Generalized Linear Models"
 output:
   pdf_document:
     number_sections: yes

@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Distribution Theory | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -549,7 +549,7 @@ If <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>, then <spa
 Typical shapes of a binomial distribution are found in Figure <a href="ch-distthry.html#fig:multBin">3.1</a>. On the left side <span class="math inline">\(n\)</span> remains constant. We see that as <span class="math inline">\(p\)</span> increases, the center of the distribution (<span class="math inline">\(\operatorname{E}(Y) = np\)</span>) shifts right. On the right, <span class="math inline">\(p\)</span> is held constant. As <span class="math inline">\(n\)</span> increases, the distribution becomes less skewed.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multBin"></span>
-<img src="bookdown-bysh_files/figure-html/multBin-1.png" alt="Binomial distributions with different values of \(n\) and \(p\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multBin-1.png" alt="Binomial distributions with different values of \(n\) and \(p\)." width="60%" />
 <p class="caption">
 Figure 3.1: Binomial distributions with different values of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>.
 </p>
@@ -577,7 +577,7 @@ P(Y=y) = (1-p)^yp \quad \textrm{for}\quad y = 0, 1, \ldots, \infty.
 <p>We can think about this function as modeling the probability of <span class="math inline">\(y\)</span> failures then 1 success. In this case, <span class="math inline">\(Y\)</span> follows a <strong>geometric distribution</strong>  with <span class="math inline">\(\operatorname{E}(Y) = \frac{1-p}p\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\frac{1-p}{p^2}}\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multGeo"></span>
-<img src="bookdown-bysh_files/figure-html/multGeo-1.png" alt="Geometric distributions with \(p = 0.3,\ 0.5\) and \(0.7\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multGeo-1.png" alt="Geometric distributions with \(p = 0.3,\ 0.5\) and \(0.7\)." width="60%" />
 <p class="caption">
 Figure 3.2: Geometric distributions with <span class="math inline">\(p = 0.3,\ 0.5\)</span> and <span class="math inline">\(0.7\)</span>.
 </p>
@@ -601,7 +601,7 @@ P(Y=y) = \binom{y + r - 1}{r-1} (1-p)^{y}(p)^r \quad \textrm{for}\quad y = 0, 1,
 If <span class="math inline">\(Y \sim \textrm{Negative Binomial}(r, p)\)</span> then <span class="math inline">\(\operatorname{E}(Y) = \frac{r(1-p)}{p}\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\frac{r(1-p)}{p^2}}\)</span>. Figure <a href="ch-distthry.html#fig:multNBinom">3.3</a> displays three negative binomial distributions. Notice how centers shift right as <span class="math inline">\(r\)</span> increases, and left as <span class="math inline">\(p\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multNBinom"></span>
-<img src="bookdown-bysh_files/figure-html/multNBinom-1.png" alt="Negative binomial distributions with different values of \(p\) and \(r\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multNBinom-1.png" alt="Negative binomial distributions with different values of \(p\) and \(r\)." width="60%" />
 <p class="caption">
 Figure 3.3: Negative binomial distributions with different values of <span class="math inline">\(p\)</span> and <span class="math inline">\(r\)</span>.
 </p>
@@ -650,7 +650,7 @@ P(Y=y) = \frac{\binom{m}{y} \binom{N-m}{n-y}}{\binom{N}{n}} \quad \textrm{for} \
 <p>If <span class="math inline">\(Y\)</span> follows a hypergeometric distribution and we define <span class="math inline">\(p = m/N\)</span>, then <span class="math inline">\(\operatorname{E}(Y) = np\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{np(1-p)\frac{N-n}{N-1}}\)</span>. Figure <a href="ch-distthry.html#fig:multHyper">3.4</a> displays several hypergeometric distributions. On the left, <span class="math inline">\(N\)</span> and <span class="math inline">\(n\)</span> are held constant. As <span class="math inline">\(m \rightarrow N/2\)</span>, the distribution becomes more and more symmetric. On the right, <span class="math inline">\(m\)</span> and <span class="math inline">\(N\)</span> are held constant. Both distributions are displayed on the same scale. We can see that as <span class="math inline">\(n \rightarrow N\)</span> (or <span class="math inline">\(n \rightarrow 0\)</span>), the distribution becomes less variable.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multHyper"></span>
-<img src="bookdown-bysh_files/figure-html/multHyper-1.png" alt="Hypergeometric distributions with different values of \(m\), \(N\), and \(n\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multHyper-1.png" alt="Hypergeometric distributions with different values of \(m\), \(N\), and \(n\)." width="60%" />
 <p class="caption">
 Figure 3.4: Hypergeometric distributions with different values of <span class="math inline">\(m\)</span>, <span class="math inline">\(N\)</span>, and <span class="math inline">\(n\)</span>.
 </p>
@@ -674,7 +674,7 @@ where <span class="math inline">\(\lambda\)</span> is the mean or expected count
 This probability mass function has <span class="math inline">\(\operatorname{E}(Y) = \lambda\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{\lambda}\)</span>. Three Poisson distributions are displayed in Figure <a href="ch-distthry.html#fig:multPois">3.5</a>. Notice how distributions become more symmetric as <span class="math inline">\(\lambda\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multPois"></span>
-<img src="bookdown-bysh_files/figure-html/multPois-1.png" alt="Poisson distributions with \(\lambda = 0.5,\ 1\), and \(5\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multPois-1.png" alt="Poisson distributions with \(\lambda = 0.5,\ 1\), and \(5\)." width="60%" />
 <p class="caption">
 Figure 3.5: Poisson distributions with <span class="math inline">\(\lambda = 0.5,\ 1\)</span>, and <span class="math inline">\(5\)</span>.
 </p>
@@ -717,7 +717,7 @@ f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y &gt; 0,
 where <span class="math inline">\(\operatorname{E}(Y) = 1/\lambda\)</span>, <span class="math inline">\(\operatorname{SD}(Y) = 1/\lambda\)</span>. Figure <a href="ch-distthry.html#fig:multExp">3.6</a> displays three exponential distributions with different <span class="math inline">\(\lambda\)</span> values. As <span class="math inline">\(\lambda\)</span> increases, <span class="math inline">\(\operatorname{E}(Y)\)</span> tends towards 0, and distributions “die off” quicker.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multExp"></span>
-<img src="bookdown-bysh_files/figure-html/multExp-1.png" alt="Exponential distributions with \(\lambda = 0.5, 1,\) and \(5\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multExp-1.png" alt="Exponential distributions with \(\lambda = 0.5, 1,\) and \(5\)." width="60%" />
 <p class="caption">
 Figure 3.6: Exponential distributions with <span class="math inline">\(\lambda = 0.5, 1,\)</span> and <span class="math inline">\(5\)</span>.
 </p>
@@ -743,7 +743,7 @@ f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \qua
 <p>If <span class="math inline">\(Y \sim \textrm{Gamma}(r, \lambda)\)</span> then <span class="math inline">\(\operatorname{E}(Y) = r/\lambda\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sqrt{r/\lambda^2}\)</span>. A few gamma distributions are displayed in Figure <a href="ch-distthry.html#fig:multGamma">3.7</a>. Observe that means increase as <span class="math inline">\(r\)</span> increases, but decrease as <span class="math inline">\(\lambda\)</span> increases.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multGamma"></span>
-<img src="bookdown-bysh_files/figure-html/multGamma-1.png" alt="Gamma distributions with different values of \(r\) and \(\lambda\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multGamma-1.png" alt="Gamma distributions with different values of \(r\) and \(\lambda\)." width="60%" />
 <p class="caption">
 Figure 3.7: Gamma distributions with different values of <span class="math inline">\(r\)</span> and <span class="math inline">\(\lambda\)</span>.
 </p>
@@ -776,7 +776,7 @@ f(y) =  \frac{e^{-(y-\mu)^2/ (2 \sigma^2)}}{\sqrt{2\pi\sigma^2}} \quad \textrm{f
 <p>As the parameter names suggest, <span class="math inline">\(\operatorname{E}(Y) = \mu\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \sigma\)</span>. Often, normal distributions are referred to as <span class="math inline">\(\textrm{N}(\mu, \sigma)\)</span>, implying a normal distribution  with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The distribution <span class="math inline">\(\textrm{N}(0,1)\)</span> is often referred to as the <strong>standard normal distribution</strong>. A few normal distributions are displayed in Figure <a href="ch-distthry.html#fig:multNorm">3.8</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multNorm"></span>
-<img src="bookdown-bysh_files/figure-html/multNorm-1.png" alt="Normal distributions with different values of \(\mu\) and \(\sigma\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multNorm-1.png" alt="Normal distributions with different values of \(\mu\) and \(\sigma\)." width="60%" />
 <p class="caption">
 Figure 3.8: Normal distributions with different values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.
 </p>
@@ -802,7 +802,7 @@ f(y) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} y^{\alpha-1} (
 <p>If <span class="math inline">\(Y \sim \textrm{Beta}(\alpha, \beta)\)</span>, then <span class="math inline">\(\operatorname{E}(Y) = \alpha/(\alpha + \beta)\)</span> and <span class="math inline">\(\operatorname{SD}(Y) = \displaystyle \sqrt{\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha+\beta+1)}}\)</span>. Figure <a href="ch-distthry.html#fig:multBeta">3.9</a> displays several beta distributions.  Note that when <span class="math inline">\(\alpha = \beta\)</span>, distributions are symmetric. The distribution is left-skewed when <span class="math inline">\(\alpha &gt; \beta\)</span> and right-skewed when <span class="math inline">\(\beta &gt; \alpha\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multBeta"></span>
-<img src="bookdown-bysh_files/figure-html/multBeta-1.png" alt="Beta distributions with different values of \(\alpha\) and \(\beta\)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multBeta-1.png" alt="Beta distributions with different values of \(\alpha\) and \(\beta\)." width="60%" />
 <p class="caption">
 Figure 3.9: Beta distributions with different values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.
 </p>
@@ -836,7 +836,7 @@ P(Y &gt; 0.8) = \int_{0.8}^1 \frac{\Gamma(4/3 + 2)}{\Gamma(4/3)\Gamma(2)} y^{4/3
 <p>The <span class="math inline">\(\chi^2\)</span> distribution is a special case of gamma distributions. Specifically, a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k\)</span> degrees of freedom can be expressed as a gamma distribution with <span class="math inline">\(\lambda = 1/2\)</span> and <span class="math inline">\(r = k/2\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multChisq"></span>
-<img src="bookdown-bysh_files/figure-html/multChisq-1.png" alt="\(\chi^2\) distributions with 1, 3, and 7 degrees of freedom.." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multChisq-1.png" alt="\(\chi^2\) distributions with 1, 3, and 7 degrees of freedom.." width="60%" />
 <p class="caption">
 Figure 3.10: <span class="math inline">\(\chi^2\)</span> distributions with 1, 3, and 7 degrees of freedom..
 </p>
@@ -849,7 +849,7 @@ Figure 3.10: <span class="math inline">\(\chi^2\)</span> distributions with 1, 3
 <p>A <span class="math inline">\(t\)</span>–distribution with <span class="math inline">\(k\)</span> degrees of freedom has mean <span class="math inline">\(0\)</span> and standard deviation <span class="math inline">\(k/(k-2)\)</span> (standard deviation is only defined for <span class="math inline">\(k &gt; 2\)</span>). As <span class="math inline">\(k \rightarrow \infty\)</span> the <span class="math inline">\(t\)</span>-distribution approaches the standard normal distribution.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multT"></span>
-<img src="bookdown-bysh_files/figure-html/multT-1.png" alt="\(t\)–distributions with 1, 2, 10, and Infinite degrees of freedom." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multT-1.png" alt="\(t\)–distributions with 1, 2, 10, and Infinite degrees of freedom." width="60%" />
 <p class="caption">
 Figure 3.11: <span class="math inline">\(t\)</span>–distributions with 1, 2, 10, and Infinite degrees of freedom.
 </p>
@@ -861,7 +861,7 @@ Figure 3.11: <span class="math inline">\(t\)</span>–distributions with 1, 2, 1
 <p><span class="math inline">\(F\)</span>–distributions  are also used when performing statistical tests. Like the <span class="math inline">\(\chi^2\)</span> distribution, the values from an <span class="math inline">\(F\)</span>–distribution are non-negative and the distribution is right skewed; in fact, an <span class="math inline">\(F\)</span>–distribution can be derived as the ratio of two <span class="math inline">\(\chi^2\)</span> random variables. R.A. Fisher (for whom the test is named) devised this test statistic to compare two different estimates of the same variance parameter, and it has a prominent role in Analysis of Variance (ANOVA). Model comparisons are often based on the comparison of variance estimates, e.g. the extra sums-of-squares <span class="math inline">\(F\)</span> test. <span class="math inline">\(F\)</span>–distributions are indexed by two degrees-of-freedom values, one for the numerator (<span class="math inline">\(k_1\)</span>) and one for the denominator (<span class="math inline">\(k_2\)</span>). The expected value for an <span class="math inline">\(F\)</span>–distribution with <span class="math inline">\(k_1, k_2\)</span> degrees of freedom under the null hypothesis is <span class="math inline">\(\frac{k_2}{k_2 - 2}\)</span>, which approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(k_2 \rightarrow \infty\)</span>. The standard deviation decreases as <span class="math inline">\(k_1\)</span> increases for fixed <span class="math inline">\(k_2\)</span>, as seen in Figure <a href="ch-distthry.html#fig:multF">3.12</a>, which illustrates several F distributions.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:multF"></span>
-<img src="bookdown-bysh_files/figure-html/multF-1.png" alt="\(F\)–distributions with different degrees of freedom." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/multF-1.png" alt="\(F\)–distributions with different degrees of freedom." width="60%" />
 <p class="caption">
 Figure 3.12: <span class="math inline">\(F\)</span>–distributions with different degrees of freedom.
 </p>
@@ -1086,7 +1086,7 @@ Find the parameters of a negative binomial distribution <span class="math inline
 <li><p><strong>Mixture of Two Normal Distributions</strong> Sometimes, a value may be best modeled by a mixture of two normal distributions. We would have 5 parameters in this case— <span class="math inline">\(\mu_1, \sigma_1, \mu_2, \sigma_2, \alpha\)</span>, where <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> is a mixing parameter determining the probability that an observation comes from the first distribution. We would then have <span class="math inline">\(f(y) = \alpha\ f_1(y) + (1-\alpha)\ f_2(y)\)</span> (where <span class="math inline">\(f_i(y)\)</span> is the pdf of the normal distribution with <span class="math inline">\(\mu_i, \sigma_i\)</span>). One phenomena which could be modeled this way would be the waiting times between eruptions of Old Faithful geyser in Yellowstone National Park. The data can be accessed in R through <code>faithful</code>, and a histogram of wait times can be found in Figure <a href="ch-distthry.html#fig:faithful">3.13</a>. The MLEs of our 5 parameters would be the combination of values that produces the maximum probability of our observed data. We will try to approximate MLEs by hand. Find a combination of <span class="math inline">\(\mu_1, \sigma_1, \mu_2, \sigma_2, \alpha\)</span> for this distribution such that the logged likelihood is above -1050. (The command <code>dnorm(x, mean, sd)</code>, which outputs <span class="math inline">\(f(y)\)</span> assuming <span class="math inline">\(Y \sim \textrm{N}(\mu, \sigma)\)</span>, will be helpful in calculating likelihoods.)</p></li>
 </ol>
 <div class="figure" style="text-align: center"><span id="fig:faithful"></span>
-<img src="bookdown-bysh_files/figure-html/faithful-1.png" alt="Waiting time between eruptions of Old Faithful." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/faithful-1.png" alt="Waiting time between eruptions of Old Faithful." width="60%" />
 <p class="caption">
 Figure 3.13: Waiting time between eruptions of Old Faithful.
 </p>
@@ -1143,7 +1143,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

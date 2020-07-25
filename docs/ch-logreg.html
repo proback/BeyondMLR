@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 6 Logistic Regression | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -542,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-graphical-look-at-logistic-regression" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> A Graphical Look at Logistic Regression</h3>
 <div class="figure" style="text-align: center"><span id="fig:OLSlogistic"></span>
-<img src="bookdown-bysh_files/figure-html/OLSlogistic-1.png" alt="Linear vs. Logistic regression models for binary response data." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/OLSlogistic-1.png" alt="Linear vs. Logistic regression models for binary response data." width="60%" />
 <p class="caption">
 Figure 6.1: Linear vs. Logistic regression models for binary response data.
 </p>
@@ -831,7 +831,7 @@ Havana
 <h3><span class="header-section-number">6.5.2</span> Exploratory Analyses</h3>
 <p>We first look at a coded scatterplot to see our data. Figure <a href="ch-logreg.html#fig:coded">6.2</a> portrays the relationship between <code>distance</code> and <code>pctBlack</code> coded by the <code>InFavor</code> status (whether a community supported the referendum with over 50% Yes votes). From this scatterplot, we can see that all of the communities in favor of the railroad referendum are over 55% black, and all of those opposed are 7 miles or farther from the proposed line. The overall percentage of voters in Hale County in favor of the railroad is 87.9%.</p>
 <div class="figure" style="text-align: center"><span id="fig:coded"></span>
-<img src="bookdown-bysh_files/figure-html/coded-1.png" alt=" Scatterplot of distance from a proposed rail line and percent black in the community coded by whether the community was in favor of the referendum or not." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/coded-1.png" alt=" Scatterplot of distance from a proposed rail line and percent black in the community coded by whether the community was in favor of the referendum or not." width="60%" />
 <p class="caption">
 Figure 6.2:  Scatterplot of distance from a proposed rail line and percent black in the community coded by whether the community was in favor of the referendum or not.
 </p>
@@ -840,7 +840,7 @@ Figure 6.2:  Scatterplot of distance from a proposed rail line and percent black
 <p><span class="math display">\[\log(\textrm{odds}) = \log\left(\frac{p}{1-p}\right) = \beta_0+\beta_1X_1+\beta_2X_2.\]</span>
 where <span class="math inline">\(p\)</span> is the proportion of Yes votes in a community. In logistic regression, we expect the logits to be a linear function of <span class="math inline">\(X\)</span>, the predictors. To assess the linearity assumption, we construct <strong>empirical logit plots</strong>,  where “empirical” means “based on sample data.” Empirical logits are computed for each community by taking <span class="math inline">\(\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)\)</span>. In Figure <a href="ch-logreg.html#fig:emplogits">6.3</a>, we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2% voting yes with only 59.4% black.</p>
 <div class="figure" style="text-align: center"><span id="fig:emplogits"></span>
-<img src="bookdown-bysh_files/figure-html/emplogits-1.png" alt="Empirical logit plots for the Railroad Referendum data." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/emplogits-1.png" alt="Empirical logit plots for the Railroad Referendum data." width="60%" />
 <p class="caption">
 Figure 6.3: Empirical logit plots for the Railroad Referendum data.
 </p>
@@ -961,7 +961,7 @@ A deviance residual can be calculated for each observation using:</p>
 <p>The sum of the individual deviance residuals is referred to as the <strong>deviance</strong> or <strong>residual deviance</strong>.  The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, <span class="math inline">\(m_i\)</span>, are large and a model fits, the residual deviance follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a <span class="math inline">\(\chi_{n-p}^2\)</span> that are greater than the observed residual deviance.</p>
 <p>We begin a residual analysis of our interaction model by plotting the residuals against the fitted values in Figure <a href="ch-logreg.html#fig:resid">6.4</a>. This kind of plot for binomial regression would produce two linear trends with similar negative slopes if there were equal sample sizes <span class="math inline">\(m_i\)</span> for each observation.</p>
 <div class="figure" style="text-align: center"><span id="fig:resid"></span>
-<img src="bookdown-bysh_files/figure-html/resid-1.png" alt="Fitted values by residuals for the interaction model for the Railroad Referendum data." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/resid-1.png" alt="Fitted values by residuals for the interaction model for the Railroad Referendum data." width="60%" />
 <p class="caption">
 Figure 6.4: Fitted values by residuals for the interaction model for the Railroad Referendum data.
 </p>
@@ -1090,7 +1090,7 @@ pctBlack    0.9366    1.044</code></pre>
 <h3><span class="header-section-number">6.7.2</span> Exploratory Data Analysis</h3>
 <p>Nearly half (44.7%) of our sample of 445 youth report that they are trying to lose weight, 48.1% percent of the sample are females, and 59.3% play on one or more sports teams. 8.8 percent report that they do not watch any TV on school days, whereas another 13.0% watched 5 or more hours each day. Interestingly, the median BMI percentile for our 445 youth is 68. The most dramatic difference in the proportions of those who are trying to lose weight is by sex; 58% of the females want to lose weight in contrast to only 32% of the males (see Figure <a href="ch-logreg.html#fig:mosaicsexlose">6.5</a>). This provides strong support for the inclusion of a sex term in every model considered.</p>
 <div class="figure" style="text-align: center"><span id="fig:mosaicsexlose"></span>
-<img src="bookdown-bysh_files/figure-html/mosaicsexlose-1.png" alt="Weight loss plans vs. Sex" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexlose-1.png" alt="Weight loss plans vs. Sex" width="60%" />
 <p class="caption">
 Figure 6.5: Weight loss plans vs. Sex
 </p>
@@ -1190,14 +1190,14 @@ Lose weight
 <p>Table <a href="ch-logreg.html#tab:table3chp6">6.3</a> displays the mean BMI of those wanting and not wanting to lose weight for males and females. The mean BMI is greater for those trying to lose weight compared to those not trying to lose weight, regardless of sex. The size of the difference is remarkably similar for the two sexes.</p>
 If we consider including a BMI term in our model(s), the logit should be linearly related to BMI. We can investigate this assumption by constructing an empirical logit plot. In order to calculate empirical logits, we first divide our data by sex. Within each sex, we generate 10 groups of equal sizes, the first holding the bottom 10% in BMI percentile for that sex, the second holding the next lowest 10%, etc.. Within each group, we calculate the proporton, <span class="math inline">\(\hat{p}\)</span> that reported wanting to lose weight, and then the empirical log odds, <span class="math inline">\(log(\frac{\hat{p}}{1-\hat{p}})\)</span>, that a young person in that group wants to lose weight.
 <div class="figure" style="text-align: center"><span id="fig:logitBMIsex"></span>
-<img src="bookdown-bysh_files/figure-html/logitBMIsex-1.png" alt="Empirical logits of trying to lose weight by BMI and Sex." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/logitBMIsex-1.png" alt="Empirical logits of trying to lose weight by BMI and Sex." width="60%" />
 <p class="caption">
 Figure 6.6: Empirical logits of trying to lose weight by BMI and Sex.
 </p>
 </div>
 <p>Figure <a href="ch-logreg.html#fig:logitBMIsex">6.6</a> presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated with a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model.</p>
 <div class="figure" style="text-align: center"><span id="fig:mosaicsexsports"></span>
-<img src="bookdown-bysh_files/figure-html/mosaicsexsports-1.png" alt="Weight loss plans vs. sex and sports participation" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexsports-1.png" alt="Weight loss plans vs. sex and sports participation" width="60%" />
 <p class="caption">
 Figure 6.7: Weight loss plans vs. sex and sports participation
 </p>
@@ -1205,13 +1205,13 @@ Figure 6.7: Weight loss plans vs. sex and sports participation
 <p>Out of those who play sports, 44% want to lose weight whereas 46% want to lose weight among those who do not play sports. Figure <a href="ch-logreg.html#fig:mosaicsexsports">6.7</a> compares the proportion of respondents who want to lose weight by their sex and sport participation. The data suggest that sports participation is associated with the same or even a slightly lower desire to lose weight, contrary to what had originally been hypothesized. While the overall levels of those wanting to lose weight differ considerably between the sexes, the differences between those in and out of sports within sex appear to be very small. A term for sports participation or number of teams will be considered, but there is not compelling evidence that an interaction term will be needed.</p>
 <p>It was posited that increased exposure to media, here measured as hours of TV daily, is associated with increased desire to lose weight, particularly for females. Overall, the percentage who want to lose weight ranges from 38% of those watching 5 hours of TV per day to 55% among those watching 2 hours daily. There is minimal variation in the proportion wanting to lose weight with both sexes combined. However, we are more interested in differences between the sexes (see Figure <a href="ch-logreg.html#fig:mediaXsex">6.8</a>). We create empirical logits using the proportion of students trying to lose weight for each level of hours spent watching TV daily and look at the trends in the logits separately for males and females. From Figure <a href="ch-logreg.html#fig:logitmediasex">6.9</a>, there does not appear to be a linear relationship for males or females.</p>
 <div class="figure" style="text-align: center"><span id="fig:mediaXsex"></span>
-<img src="bookdown-bysh_files/figure-html/mediaXsex-1.png" alt="Weight loss plans vs. daily hours of TV and sex." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/mediaXsex-1.png" alt="Weight loss plans vs. daily hours of TV and sex." width="60%" />
 <p class="caption">
 Figure 6.8: Weight loss plans vs. daily hours of TV and sex.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:logitmediasex"></span>
-<img src="bookdown-bysh_files/figure-html/logitmediasex-1.png" alt="Empirical logits for the odds of trying to lose weight by TV watching and sex." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/logitmediasex-1.png" alt="Empirical logits for the odds of trying to lose weight by TV watching and sex." width="60%" />
 <p class="caption">
 Figure 6.9: Empirical logits for the odds of trying to lose weight by TV watching and sex.
 </p>
@@ -1724,7 +1724,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

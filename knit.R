@@ -2,7 +2,7 @@ library(tidyverse)
 library(bookdown)
 
 # skip - I think it's not necessary
-setwd("~/BYSH/")
+setwd("~/BeyondMLR/")
 
 #test bookdown format
 render_book("index.Rmd", output_format = 'bookdown::gitbook')
@@ -20,7 +20,7 @@ preview_chapter("01-Introduction.Rmd", output_format = 'bookdown::pdf_book')
 preview_chapter("07-Correlated-Data.Rmd", output_format = 'bookdown::gitbook')
 
 #remove the file if knitting went wrong
-bd <- "bookdown-bysh.Rmd"
+bd <- "bookdown-BeyondMLR.Rmd"
 if(file.exists(bd)) file.remove(bd)
 
 ##How to convert to a nice pdf format:

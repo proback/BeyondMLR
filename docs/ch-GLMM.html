@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 11 Multilevel Generalized Linear Models | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -932,7 +932,7 @@ Personal
 <h3><span class="header-section-number">11.3.2</span> Exploratory analyses</h3>
 <p>In Figure <a href="ch-GLMM.html#fig:gmu-histmat1">11.1</a>, we see histograms for the continuous Level One covariates (time remaining, foul differential, and score differential). These plots treat each foul within a game as independent even though we expect them to be correlated, but they provide a sense for the overall patterns. We see that time remaining is reasonably uniform. Score differential and foul differential are both bell-shaped, with a mean slightly favoring the home team in both cases – on average, the home team leads by 2.04 points (SD 7.24) and has 0.36 fewer previous fouls (SD 2.05) at the time a foul is called.</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-histmat1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-histmat1-1.png" alt="Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-histmat1-1.png" alt="Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference." width="60%" />
 <p class="caption">
 Figure 11.1: Histograms showing distributions of the 3 continuous Level One covariates: (a) time remaining, (b) score difference, and (c) foul difference.
 </p>
@@ -1142,14 +1142,14 @@ Clem
 <p>Next, we inspect numerical and graphical summaries of relationships between Level One model covariates and our binary model response. As with other multilevel analyses, we will begin by observing broad trends involving all 4972 fouls called, even though fouls from the same game may be correlated. The conditional density plots in the first row of Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a> examine continuous Level One covariates. Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>a provides support for our primary hypothesis about evening out foul calls, indicating a very strong trend for fouls to be more often called on the home team at points in the game when more fouls had previously been called on the visiting team. Figures <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>b and <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>c then show that fouls were somewhat more likely to be called on the home team when the home team’s lead was greater and (very slightly) later in the half. Conclusions from the conditional density plots in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>a-c are supported with associated empirical logit plots in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>d-f. If a logistic link function is appropriate, these plots should be linear, and the stronger the linear association, the more promising the predictor. We see in Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>d further confirmation of our primary hypothesis, with lower log-odds of a foul called on the home team associated with a greater number of previous fouls the home team had accumulated compared to the visiting team. Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>e shows that game score may play a role in foul trends, as the log-odds of a foul on the home team grows as the home team accumulates a bigger lead on the scoreboard, and Figure <a href="ch-GLMM.html#fig:gmu-cdelogitmat1">11.2</a>f shows a very slight tendency for greater log-odds of a foul called on the home team as the half proceeds (since points on the right are closer to the beginning of the game).</p>
 <p>Conclusions about continuous Level One covariates are further supported by summary statistics calculated separately for fouls called on the home team and those called on the visiting team. For instance, when a foul is called on the home team, there is an average of 0.64 additional fouls on the visitors at that point in the game, compared to an average of 0.10 additional fouls on the visitors when a foul is called on the visiting team. Similarly, when a foul is called on the home team, they are in the lead by an average of 2.7 points, compared to an average home lead of 1.4 points when a foul is called on the visiting team. As expected, the average time remaining the half is very similar for home and visitor fouls (9.2 vs. 9.5 minutes, respectively).</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-cdelogitmat1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-cdelogitmat1-1.png" alt="Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-cdelogitmat1-1.png" alt="Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval." width="60%" />
 <p class="caption">
 Figure 11.2: Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining). The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining. In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those interval.
 </p>
 </div>
 <p>The mosaic plots in Figure <a href="ch-GLMM.html#fig:gmu-barmat1">11.3</a> examine categorical Level One covariates, indicating that fouls were more likely to be called on the home team when the home team was leading, when the previous foul was on the visiting team, and when the foul was a personal foul rather than a shooting foul or an offensive foul. 51.8% of calls go against the home team when it is leading the game, compared to only 42.9% of calls when the it is behind; 51.3% of calls go against the home team when the previous foul went against the visitors, compared to only 43.8% of calls when the previous foul went against the home team; and, 49.2% of personal fouls are called against the home team, compared to only 46.9% of shooting fouls and 45.7% of offensive fouls. Eventually we will want to examine the relationship between foul type (personal, shooting, or offensive) and foul differential, examining our hypothesis that the tendency to even out calls will be even stronger for calls over which the referees have greater control (personal fouls and especially offensive fouls).</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-barmat1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-barmat1-1.png" alt="Mosaic plots of the binary model response (foul called on home or visitor) vs. the three categorical Level One covariates (foul type (a), team in the lead (b), and team called for the previous foul (c) ).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-barmat1-1.png" alt="Mosaic plots of the binary model response (foul called on home or visitor) vs. the three categorical Level One covariates (foul type (a), team in the lead (b), and team called for the previous foul (c) ).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels." width="60%" />
 <p class="caption">
 Figure 11.3: Mosaic plots of the binary model response (foul called on home or visitor) vs. the three categorical Level One covariates (foul type (a), team in the lead (b), and team called for the previous foul (c) ). Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate. The bar width shows the proportion of fouls at each of the covariate levels.
 </p>
@@ -1595,7 +1595,7 @@ where <span class="math inline">\(i\)</span> is fixed at 110. Note that there is
 <pre><code>##  Residual deviance =  11.75  on  12 df</code></pre>
 <p>As in Section <a href="ch-multilevelintro.html#twostage">8.4.2</a>, we can proceed to fit similar logistic regression models for each of the 339 other games in our data set. Each model will yield a new estimate of the intercept and the slope from Equation <a href="ch-GLMM.html#eq:lev1glmm">(11.1)</a>. These estimates are summarized graphically in Figure <a href="ch-GLMM.html#fig:gmu-histmat2">11.4</a>. There is noticeable variability among the 340 games in the fitted intercepts and slopes, with an IQR for intercepts ranging from -1.45 to 0.70, and an IQR for slopes ranging from -1.81 to -0.51. The majority of intercepts are below 0 (median = -0.41), so that in most games a foul is less likely to be called on the home team when foul totals are even. In addition, almost all of the estimated slopes are below 0 (median = -0.89), indicating that as the home team’s foul total grows in relation to the visiting team’s foul total, the odds of a foul on the home team continues to decrease.</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-histmat2"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-histmat2-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by game.  Several extreme outliers have been cut off in these plots for illustration purposes." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-histmat2-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by game.  Several extreme outliers have been cut off in these plots for illustration purposes." width="60%" />
 <p class="caption">
 Figure 11.4: Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by game. Several extreme outliers have been cut off in these plots for illustration purposes.
 </p>
@@ -1662,7 +1662,7 @@ The major changes when moving from a normally distributed response to a binary r
 \end{equation*}\]</span></p>
 <p>In this case, <span class="math inline">\(e^{a_{h}}\)</span> represents the odds that a foul is called on the home team when total fouls are equal between both teams in a game involving Home Team <span class="math inline">\(h\)</span>, and <span class="math inline">\(e^{b_{h}}\)</span> represents the multiplicative change in the odds that a foul is called on the home team for every extra foul on the home team compared to the visitors in a game involving Home Team <span class="math inline">\(h\)</span>. After fitting logistic regression models for each of the 39 teams in our data set, we see in Figure <a href="ch-GLMM.html#fig:gmu-histmat3">11.5</a> variability in fitted intercepts (mean=-0.15, sd=0.33) and slopes (mean=-0.22, sd=0.12) among the 39 teams, although much less variability than we observed from game-to-game. Of course, each logistic regression model for a home team was based on about 10 times more foul calls than each model for a game, so observing less variability from team-to-team was not unexpected.</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-histmat3"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-histmat3-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-histmat3-1.png" alt="Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team." width="60%" />
 <p class="caption">
 Figure 11.5: Histograms of (a) intercepts and (b) slopes from fitting simple logistic regression models by home team.
 </p>
@@ -1748,7 +1748,7 @@ model.a3    5 6780 6813  -3385 6770 16.07  2 0.0003233</code></pre>
 m0  3  -3393 6787    NA    NA        NA
 mA  5  -3385 6770 16.07     2         0</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:gmu-lrt1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-lrt1-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A3 and A1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-lrt1-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A3 and A1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve)." width="60%" />
 <p class="caption">
 Figure 11.6: Null distribution of likelihood ratio test statistic comparing Models A3 and A1 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).
 </p>
@@ -1775,7 +1775,7 @@ s_{g} &amp; \sim N \left( 0 , \sigma_{s}^{2} \right).
 m0  5  -3385 6770    NA    NA        NA
 mA  8  -3385 6770 0.349     3      0.46</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:gmu-lrt3"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-lrt3-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A3 and B3 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve)." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-lrt3-1.png" alt="Null distribution of likelihood ratio test statistic comparing Models A3 and B3 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve)." width="60%" />
 <p class="caption">
 Figure 11.7: Null distribution of likelihood ratio test statistic comparing Models A3 and B3 derived using parametric bootstrap with 100 samples (histogram) compared to a chi-square distribution with 3 degrees of freedom (smooth curve).
 </p>
@@ -1894,13 +1894,13 @@ w_{g} &amp; \sim N \left( 0 , \sigma_{w}^{2} \right).
 <p>Our final model includes random effects for game, home team, and visiting team, and thus our model accounts for variability due to these three factors without estimating fixed effects to represent specific teams or games. However, we may be interested in examining the relative level of the random effects used for different teams or games. The presence of random effects allows different teams or games to begin with different baseline odds of a home foul. In other words, the intercept—the log odds of a home foul at the end of the first half when the score is tied, the fouls are even, and a shooting foul has been called—is adjusted by a random effect specific to the two teams playing and to the game itself. Together, the estimated random effects for, say, home team, should follow a normal distribution as we assumed: centered at 0 and with variance given by <span class="math inline">\(\sigma_{v}^{2}\)</span>. It is sometimes interesting to know, then, which teams are typical (with estimated random effects near 0) and which fall in the upper and lower tails of the normal distribution.</p>
 <p>Figure <a href="ch-GLMM.html#fig:gmu-hist1">11.8</a> shows the 39 estimated random effects associated with each home team (see the discussion on empirical Bayes estimates  in Chapter <a href="ch-multilevelintro.html#ch-multilevelintro">8</a>). As expected, the distribution is normal with standard deviation near <span class="math inline">\(\hat{\sigma}_{v}=0.28\)</span>. To compare individual home teams, Figure <a href="ch-GLMM.html#fig:gmu-cis1">11.9</a> shows the estimated random effect and associated prediction interval for each of the 39 home teams. Although there is a great deal of uncertainty surrounding each estimate, we see that, for instance, DePaul and Seton Hall have higher baseline odds of home fouls than Purdue or Syracuse. Similar histograms and prediction intervals plots can be generated for random effects due to visiting teams and specific games.</p>
 <div class="figure" style="text-align: center"><span id="fig:gmu-hist1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-hist1-1.png" alt="Histogram of estimated random effects for 39 home teams in Model F." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-hist1-1.png" alt="Histogram of estimated random effects for 39 home teams in Model F." width="60%" />
 <p class="caption">
 Figure 11.8: Histogram of estimated random effects for 39 home teams in Model F.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:gmu-cis1"></span>
-<img src="bookdown-bysh_files/figure-html/gmu-cis1-1.png" alt="Estimated random effects and associated prediction intervals for 39 home teams in Model F." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/gmu-cis1-1.png" alt="Estimated random effects and associated prediction intervals for 39 home teams in Model F." width="60%" />
 <p class="caption">
 Figure 11.9: Estimated random effects and associated prediction intervals for 39 home teams in Model F.
 </p>
@@ -2511,7 +2511,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

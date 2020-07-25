@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 Review of Multiple Linear Regression | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -529,7 +529,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="assumptions-for-linear-least-squares-regression-llsr" class="section level2">
 <h2><span class="header-section-number">1.3</span> Assumptions for Linear Least Squares Regression (LLSR)</h2>
 <div class="figure" style="text-align: center"><span id="fig:OLSassumptions"></span>
-<img src="bookdown-bysh_files/figure-html/OLSassumptions-1.png" alt="Assumptions for linear least squares regression (LLSR)" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/OLSassumptions-1.png" alt="Assumptions for linear least squares regression (LLSR)" width="90%" />
 <p class="caption">
 Figure 1.1: Assumptions for linear least squares regression (LLSR)
 </p>
@@ -970,7 +970,7 @@ fast
 <p>With any statistical analysis, our first task is to explore the data, examining distributions of individual responses and predictors using graphical and numerical summaries, and beginning to discover relationships between variables. This should <em>always</em> be done <em>before</em> any model fitting! We must understand our data thoroughly before doing anything else.</p>
 <p>First, we will examine the response variable and each potential covariate individually. Continuous variables can be summarized using histograms and statistics indicating center and spread; categorical variables can be summarized with tables and possibly bar charts.</p>
 <div class="figure" style="text-align: center"><span id="fig:twohist"></span>
-<img src="bookdown-bysh_files/figure-html/twohist-1.png" alt="Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters." width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/twohist-1.png" alt="Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters." width="90%" />
 <p class="caption">
 Figure 1.2: Histograms of key continuous variables. Plot (a) shows winning speeds, while plot (b) shows the number of starters.
 </p>
@@ -982,7 +982,7 @@ Figure 1.2: Histograms of key continuous variables. Plot (a) shows winning speed
 <h3><span class="header-section-number">1.5.3</span> Bivariate Summaries</h3>
 <p>The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses. Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a> is densely packed with illustrations of bivariate relationships. The relationship between two continuous variables is depicted with scatterplots below the diagonal and correlation coefficients above the diagonal. Here, we see that higher winning speeds are associated with more recent years, while the relationship between winning speed and number of starters is less clear cut. We also see a somewhat strong correlation between year and number of starters—we should be aware of highly correlated explanatory variables whose contributions might overlap too much.</p>
 <div class="figure" style="text-align: center"><span id="fig:bivariate"></span>
-<img src="bookdown-bysh_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set" width="90%" />
 <p class="caption">
 Figure 1.3: Relationships between pairs of variables in the Kentucky Derby data set
 </p>
@@ -991,7 +991,7 @@ Figure 1.3: Relationships between pairs of variables in the Kentucky Derby data 
 <p>Finally, notice that the diagonal illustrates the distribution of individual variables, using density curves for continuous variables and a bar chart for categorical variables. Trends observed in the last two diagonal entries match trends observed in Figure <a href="ch-MLRreview.html#fig:twohist">1.2</a>.</p>
 <p>By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure <a href="ch-MLRreview.html#fig:bivariate">1.3</a>. For example, in the <strong>coded scatterplot</strong>  of Figure <a href="ch-MLRreview.html#fig:codeds">1.4</a> we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.</p>
 <div class="figure" style="text-align: center"><span id="fig:codeds"></span>
-<img src="bookdown-bysh_files/figure-html/codeds-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/codeds-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions" width="90%" />
 <p class="caption">
 Figure 1.4: Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions
 </p>
@@ -1045,7 +1045,7 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i}\quad &amp;\textrm{whe
 <pre><code>##  R squared =  0.5134 
 ##  Residual standard error =  0.9032</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:center"></span>
-<img src="bookdown-bysh_files/figure-html/center-1.png" alt="Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/center-1.png" alt="Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)" width="90%" />
 <p class="caption">
 Figure 1.5: Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)
 </p>
@@ -1058,7 +1058,7 @@ Figure 1.5: Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 
 <li>The lower right plot, Residuals vs. Leverage, can be used to check for influential points. Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:resid2"></span>
-<img src="bookdown-bysh_files/figure-html/resid2-1.png" alt="Residual plots for Model 2" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/resid2-1.png" alt="Residual plots for Model 2" width="90%" />
 <p class="caption">
 Figure 1.6: Residual plots for Model 2
 </p>
@@ -1071,7 +1071,7 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\e
 \end{equation*}\]</span></p>
 <p>This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time. In fact, there is evidence that the quadratic model improves upon the linear model (see Figure <a href="ch-MLRreview.html#fig:models2and2q">1.7</a>). <span class="math inline">\(R^2\)</span>,  the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3% to 64.1%, and the pattern in the Residuals vs. Fitted plot of Figure <a href="ch-MLRreview.html#fig:resid2">1.6</a> has disappeared in Figure <a href="ch-MLRreview.html#fig:resid2q">1.8</a>, although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability. The significantly negative coefficient for <span class="math inline">\(\beta_{2}\)</span> suggests that the rate of increase is indeed slowing in more recent years.</p>
 <div class="figure" style="text-align: center"><span id="fig:models2and2q"></span>
-<img src="bookdown-bysh_files/figure-html/models2and2q-1.png" alt="Linear (solid) vs. quadratic (dashed) fit" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/models2and2q-1.png" alt="Linear (solid) vs. quadratic (dashed) fit" width="90%" />
 <p class="caption">
 Figure 1.7: Linear (solid) vs. quadratic (dashed) fit
 </p>
@@ -1085,7 +1085,7 @@ Figure 1.7: Linear (solid) vs. quadratic (dashed) fit
 <pre><code>##  R squared =  0.641 
 ##  Residual standard error =  0.779</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:resid2q"></span>
-<img src="bookdown-bysh_files/figure-html/resid2q-1.png" alt="Residual plots for Model 2Q" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/resid2q-1.png" alt="Residual plots for Model 2Q" width="90%" />
 <p class="caption">
 Figure 1.8: Residual plots for Model 2Q
 </p>
@@ -1186,7 +1186,7 @@ fast         0.92840  1.52529</code></pre>
 2 fast         0.909   1.57  
 3 yearnew      0.0182  0.0265</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:boot4"></span>
-<img src="bookdown-bysh_files/figure-html/boot4-1.png" alt="Bootstrapped distributions for Model 4 coefficients" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/boot4-1.png" alt="Bootstrapped distributions for Model 4 coefficients" width="90%" />
 <p class="caption">
 Figure 1.9: Bootstrapped distributions for Model 4 coefficients
 </p>
@@ -1604,7 +1604,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

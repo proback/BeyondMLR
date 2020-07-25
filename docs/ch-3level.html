@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="data/cover.png" />
   <meta property="og:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
-  <meta name="github-repo" content="proback/BYSH" />
+  <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 10 Multilevel Data With More Than Two Levels | Beyond Multiple Linear Regression" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1374,14 +1374,14 @@ Y
 <p>We start by taking an initial look at the effect of Level Three covariates (factors applied at the pot level: species, soil type, and sterilization) on plant height, pooling observations across pot, across plant, and across time of measurement within plant. First, we observe that the initial balance which existed after randomization of pot to treatment no longer holds. After removing plants that did not germinate (and therefore had no height data), more height measurements exist for coneflowers (n=704, compared to 428 for leadplants), soil from restored prairies (n=524, compared to 288 for cultivated land and 320 for remnant prairies), and unsterilized soil (n=612, compared to 520 for sterilized soil). This imbalance indicates possible factor effects on germination rate; we will take up those hypotheses in Chapter <a href="ch-GLMM.html#ch-GLMM">11</a>. In this chapter, we will focus on the effects of species, soil type, and sterilization on the growth patterns of plants that germinate.</p>
 <p>Because we suspect that height measurements over time for a single plant are highly correlated, while height measurements from different plants from the same pot are less correlated, we calculate mean height per plant (over all available time points) before generating exploratory plots investigating Level Three factors. Figure <a href="ch-3level.html#fig:boxbyspec">10.2</a> then examines the effects of soil type and sterilization separately by species. Sterilization seems to have a bigger benefit for coneflowers, while soil from remnant prairies seems to lead to smaller leadplants and taller coneflowers.</p>
 <div class="figure" style="text-align: center"><span id="fig:boxbyspec"></span>
-<img src="bookdown-bysh_files/figure-html/boxbyspec-1.png" alt="Plant height comparisons of (a) soil type and (b) sterilization within species.  Each plant is represented by the mean height over all measurements at all time points for that plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/boxbyspec-1.png" alt="Plant height comparisons of (a) soil type and (b) sterilization within species.  Each plant is represented by the mean height over all measurements at all time points for that plant." width="60%" />
 <p class="caption">
 Figure 10.2: Plant height comparisons of (a) soil type and (b) sterilization within species. Each plant is represented by the mean height over all measurements at all time points for that plant.
 </p>
 </div>
 <p>We also use spaghetti plots to examine time trends within species to see (a) if it is reasonable to assume linear growth between Day 13 and Day 28 after planting, and (b) if initial height and rate of growth is similar in the two species. Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a> illustrates differences between species. While both species have similar average heights 13 days after planting, coneflowers appear to have faster early growth which slows later, while leadplants have a more linear growth rate which culminates in greater average heights 28 days after planting. Coneflowers also appear to have greater variability in initial height and growth rate, although there are more coneflowers with height data.</p>
 <div class="figure" style="text-align: center"><span id="fig:spagbyspec"></span>
-<img src="bookdown-bysh_files/figure-html/spagbyspec-1.png" alt="Spaghetti plot by species with loess fit.  Each &quot;line&quot; represents one plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/spagbyspec-1.png" alt="Spaghetti plot by species with loess fit.  Each &quot;line&quot; represents one plant." width="60%" />
 <p class="caption">
 Figure 10.3: Spaghetti plot by species with loess fit. Each “line” represents one plant.
 </p>
@@ -1389,39 +1389,39 @@ Figure 10.3: Spaghetti plot by species with loess fit. Each “line” represent
 <p>Exploratory analyses such as these confirm the suspicions of biology researchers that leadplants and coneflowers should be analyzed separately. Because of biological differences, it is expected that these two species will show different growth patterns and respond differently to treatments such as fertilization. Coneflowers are members of the aster family, growing up to 4 feet tall with their distinctive gray seed heads and drooping yellow petals. Leadplants, on the other hand, are members of the bean family, with purple flowers, a height of 1 to 3 feet, and compound greyish green leaves which look to be dusted with white lead. Leadplants have deep root systems and are symbiotic N-fixers, which means they might experience stifled growth in sterilized soil compared with other species. For the remainder of this chapter, we will focus on <strong>leadplants</strong> and how their growth patterns are affected by soil type and sterilization. You will have a chance to analyze coneflower data later in the Exercises section.</p>
 <p>Lattice plots, illustrating several observational units simultaneously, each with fitted lines where appropriate, are also valuable to examine during the exploratory analysis phase. Figure <a href="ch-3level.html#fig:lattlpall">10.4</a> shows height over time for 24 randomly selected leadplants that germinated in this study, with a fitted linear regression line. Linearity appears reasonable in most cases, although there is some variability in the intercepts and a good deal of variability in the slopes of the fitted lines. These intercepts and slopes by plant, of course, will be potential parameters in a multilevel model which we will fit to this data. Given the three-level nature of this data, it is also useful to examine a spaghetti plot by pot (Figure <a href="ch-3level.html#fig:spaglppot">10.5</a>). While linearity appears to reasonably model the average trend over time within pot, we see differences in the plant-to-plant variability within pot, but some consistency in intercept and slope from pot to pot.</p>
 <div class="figure" style="text-align: center"><span id="fig:lattlpall"></span>
-<img src="bookdown-bysh_files/figure-html/lattlpall-1.png" alt=" Lattice plot of linear trends fit to 24 randomly selected leadplants.  One plant with only a single height measurement has no associated regression line." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lattlpall-1.png" alt=" Lattice plot of linear trends fit to 24 randomly selected leadplants.  One plant with only a single height measurement has no associated regression line." width="60%" />
 <p class="caption">
 Figure 10.4:  Lattice plot of linear trends fit to 24 randomly selected leadplants. One plant with only a single height measurement has no associated regression line.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:spaglppot"></span>
-<img src="bookdown-bysh_files/figure-html/spaglppot-1.png" alt="Spaghetti plot for leadplants by pot with loess fit." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/spaglppot-1.png" alt="Spaghetti plot for leadplants by pot with loess fit." width="60%" />
 <p class="caption">
 Figure 10.5: Spaghetti plot for leadplants by pot with loess fit.
 </p>
 </div>
 <p>Spaghetti plots can also be an effective tool for examining the potential effects of soil type and sterilization on growth patterns of leadplants. Figure <a href="ch-3level.html#fig:spaglpsoil">10.6</a> and Figure <a href="ch-3level.html#fig:spaglpster">10.7</a> illustrate how the growth patterns of leadplants depend on soil type and sterilization. In general, we observe slower growth in soil from remnant prairies and soil that has not been sterilized.</p>
 <div class="figure" style="text-align: center"><span id="fig:spaglpsoil"></span>
-<img src="bookdown-bysh_files/figure-html/spaglpsoil-1.png" alt="Spaghetti plot for leadplants by soil type with loess fit." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/spaglpsoil-1.png" alt="Spaghetti plot for leadplants by soil type with loess fit." width="60%" />
 <p class="caption">
 Figure 10.6: Spaghetti plot for leadplants by soil type with loess fit.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:spaglpster"></span>
-<img src="bookdown-bysh_files/figure-html/spaglpster-1.png" alt="Spaghetti plot for leadplants by sterilization with loess fit." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/spaglpster-1.png" alt="Spaghetti plot for leadplants by sterilization with loess fit." width="60%" />
 <p class="caption">
 Figure 10.7: Spaghetti plot for leadplants by sterilization with loess fit.
 </p>
 </div>
 <p>We can further explore the variability in linear growth among plants and among pots by fitting regression lines and examining the estimated intercepts and slopes, as well as the corresponding <span class="math inline">\(R^2\)</span> values. Figures <a href="ch-3level.html#fig:intrateplant">10.8</a> and <a href="ch-3level.html#fig:intratepot">10.9</a> provide just such an analysis, where Figure <a href="ch-3level.html#fig:intrateplant">10.8</a> shows results of fitting lines by plant, and Figure <a href="ch-3level.html#fig:intratepot">10.9</a> shows results of fitting lines by pot. Certain caveats accompany these summaries. In the case of fitted lines by plant, each plant is given equal weight regardless of the number of observations (2-4) for a given plant, and in the case of fitted lines by pot, a line is estimated by simply pooling all observations from a given pot, ignoring the plant from which the observations came, and equally weighting pots regardless of how many plants germinated and survived to Day 28. Nevertheless, the summaries of fitted lines provide useful information. When fitting regression lines by plant, we see a mean intercept of 1.52 (SD=0.66), indicating an estimated average height at 13 days of 1.5 mm, and a mean slope of 0.114 mm per day of growth from Days 13 to 28 (SD=0.059). Most R-squared values were strong (e.g., 84% were above 0.8). Summaries of fitted regression lines by pot show similar mean intercepts (1.50) and slopes (0.107), but somewhat less variability pot-to-pot than we observed plant-to-plant (SD=0.46 for intercepts and SD=0.050 for slopes).</p>
 <div class="figure" style="text-align: center"><span id="fig:intrateplant"></span>
-<img src="bookdown-bysh_files/figure-html/intrateplant-1.png" alt=" Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all leadplants." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/intrateplant-1.png" alt=" Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all leadplants." width="60%" />
 <p class="caption">
 Figure 10.8:  Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all leadplants.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:intratepot"></span>
-<img src="bookdown-bysh_files/figure-html/intratepot-1.png" alt="Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all pots with leadplants." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/intratepot-1.png" alt="Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all pots with leadplants." width="60%" />
 <p class="caption">
 Figure 10.9: Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all pots with leadplants.
 </p>
@@ -1430,26 +1430,26 @@ Figure 10.9: Histograms of (a) intercepts, (b) slopes, and (c) R-squared values 
 <p>Fitted lines by plant and pot are modeled using a centered time variable (<code>time13</code>), adjusted so that the first day of height measurements (13 days after planting) corresponds to <code>time13</code>=0. This centering has two primary advantages. First, the estimated intercept becomes more interpretable. Rather than representing height on the day of planting (which should be 0 mm, but which represents a hefty extrapolation from our observed range of days 13 to 28), the intercept now represents height on Day 13. Second, the intercept and slope are much less correlated (r=-0.16) than when uncentered time is used, which improves the stability of future models.</p>
 <p>Fitted intercepts and slopes by plant can be used for an additional exploratory examination of factor effects to complement those from the earlier spaghetti plots. Figure <a href="ch-3level.html#fig:irboxbyspec">10.10</a> complements Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a>, again showing differences between species—coneflowers tend to start smaller and have slower growth rates, although they have much more variability in growth patterns than leadplants. Returning to our focus on leadplants, Figure <a href="ch-3level.html#fig:irboxbysoil">10.11</a> shows that plants grown in soil from cultivated fields tends to be taller at Day 13, and plants grown in soil from remnant prairies tend to grow more slowly than plants grown in other soil types. Figure <a href="ch-3level.html#fig:irboxbyster">10.12</a> shows the strong tendency for plants grown in sterilized soil to grow faster than plants grown in non-sterilized soil. We will soon see if our fitted multilevel models support these observed trends.</p>
 <div class="figure" style="text-align: center"><span id="fig:irboxbyspec"></span>
-<img src="bookdown-bysh_files/figure-html/irboxbyspec-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all plants by species, based on a linear fit to height data from each plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/irboxbyspec-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all plants by species, based on a linear fit to height data from each plant." width="60%" />
 <p class="caption">
 Figure 10.10: Boxplots of (a) intercepts and (b) slopes for all plants by species, based on a linear fit to height data from each plant.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:irboxbysoil"></span>
-<img src="bookdown-bysh_files/figure-html/irboxbysoil-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all leadplants by soil type, based on a linear fit to height data from each plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/irboxbysoil-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all leadplants by soil type, based on a linear fit to height data from each plant." width="60%" />
 <p class="caption">
 Figure 10.11: Boxplots of (a) intercepts and (b) slopes for all leadplants by soil type, based on a linear fit to height data from each plant.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:irboxbyster"></span>
-<img src="bookdown-bysh_files/figure-html/irboxbyster-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all leadplants by sterilization, based on a linear fit to height data from each plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/irboxbyster-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all leadplants by sterilization, based on a linear fit to height data from each plant." width="60%" />
 <p class="caption">
 Figure 10.12: Boxplots of (a) intercepts and (b) slopes for all leadplants by sterilization, based on a linear fit to height data from each plant.
 </p>
 </div>
 <p>Since we have time at Level One, any exploratory analysis of Case Study <a href="ch-3level.html#cs:seeds">10.2</a> should contain an investigation of the variance-covariance structure within plant. Figure <a href="ch-3level.html#fig:corrstruct">10.13</a> shows the potential for an autocorrelation structure in which the correlation between observations from the same plant diminishes as the time between measurements increases. Residuals five days apart have correlations ranging from .77 to .91, while measurements ten days apart have correlations of .62 and .70, and measurements fifteen days apart have correlation of .58.</p>
 <div class="figure" style="text-align: center"><span id="fig:corrstruct"></span>
-<img src="bookdown-bysh_files/figure-html/corrstruct-1.png" alt="Correlation structure within plant.  The upper right contains correlation coefficients between residuals at pairs of time points, the lower left contains scatterplots of the residuals at time point pairs, and the diagonal contains histograms of residuals at each of the four time points." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/corrstruct-1.png" alt="Correlation structure within plant.  The upper right contains correlation coefficients between residuals at pairs of time points, the lower left contains scatterplots of the residuals at time point pairs, and the diagonal contains histograms of residuals at each of the four time points." width="60%" />
 <p class="caption">
 Figure 10.13: Correlation structure within plant. The upper right contains correlation coefficients between residuals at pairs of time points, the lower left contains scatterplots of the residuals at time point pairs, and the diagonal contains histograms of residuals at each of the four time points.
 </p>
@@ -1648,7 +1648,7 @@ modelcl 1.493e-05</code></pre>
 <p>Consider a model in which we have two parameters that must be estimated: <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma^2\)</span>. As the intercept, <span class="math inline">\(\beta_0\)</span> can take on any value; any real number is “allowable”. But, by definition, variance terms such as <span class="math inline">\(\sigma^2\)</span> must be non-negative; that is, <span class="math inline">\(\sigma^2 \geq 0\)</span>. Under the Principle of Maximum Likelihood, maximum likelihood estimators for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma^2\)</span> will be chosen to maximize the likelihood of observing our given data. The left plot in Figure <a href="ch-3level.html#fig:boundary">10.14</a> shows hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span>; the likelihood is clearly maximized at <span class="math inline">\((\hat{\beta}_0 , \hat{\sigma}^2)=(4,-2)\)</span>. However, variance terms cannot be negative! A more sensible approach would have been to perform a constrained search for MLEs, considering any potential values for <span class="math inline">\(\beta_0\)</span> but only non-negative values for <span class="math inline">\(\sigma^2\)</span>. This constrained search is illustrated in the right plot in Figure <a href="ch-3level.html#fig:boundary">10.14</a>. In this case, the likelihood is maximized at <span class="math inline">\((\hat{\beta}_0 , \hat{\sigma}^2)=(4,0)\)</span>. Note that the estimated intercept did not change, but the estimated variance is simply set at the smallest allowable value – at the <strong>boundary constraint</strong>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:boundary"></span>
-<img src="bookdown-bysh_files/figure-html/boundary-1.png" alt="Left (a): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with no restrictions on \(\sigma^2\); the likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\). Right (b): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with the restriction that \(\sigma^2 \geq 0\); the constrained likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/boundary-1.png" alt="Left (a): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with no restrictions on \(\sigma^2\); the likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\). Right (b): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with the restriction that \(\sigma^2 \geq 0\); the constrained likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)" width="60%" />
 <p class="caption">
 Figure 10.14: Left (a): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with no restrictions on <span class="math inline">\(\sigma^2\)</span>; the likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\)</span>. Right (b): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with the restriction that <span class="math inline">\(\sigma^2 \geq 0\)</span>; the constrained likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)</span>
 </p>
@@ -1908,7 +1908,7 @@ m2   15 591.1 651.4 -280.5 561.1 1.405  2 0.4953</code></pre>
 m0 13 -277.8 555.6    NA    NA        NA
 mA 15 -276.8 553.6 2.089     2     0.088</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:paraboot10"></span>
-<img src="bookdown-bysh_files/figure-html/paraboot10-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/paraboot10-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
 <p class="caption">
 Figure 10.15: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve). The horizontal line represents the observed likelihood ratio test statistic.
 </p>
@@ -2144,7 +2144,7 @@ modelfl0   10 581.2 621.4 -280.6 561.2    NA NA     NA
 modeldl0   17 584.0 652.4 -275.0 550.0 11.15  7 0.1323</code></pre>
 <p>We mentioned in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> that we could also compare Model F and Model D, which differ only in their fixed effects terms, using the parametric bootstrap approach. In fact, in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> we suggested that the p-value using the chi-square approximation (.1323) may be a slight under-estimate of the true p-value, but probably in the ballpark. In fact, when we generated 1000 bootstrapped samples of plant heights under Model F, and produced 1000 simulated likelihood ratios comparing Models D and F, we produced a p-value of .201. In Figure <a href="ch-3level.html#fig:parabootDF">10.16</a>, we see that the chi-square distribution has too much area in the peak and too little area in the tails, although in general it approximates the parametric bootstrap distribution of the likelihood ratio pretty nicely.</p>
 <div class="figure" style="text-align: center"><span id="fig:parabootDF"></span>
-<img src="bookdown-bysh_files/figure-html/parabootDF-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/parabootDF-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
 <p class="caption">
 Figure 10.16: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve). The horizontal line represents the observed likelihood ratio test statistic.
 </p>
@@ -2986,7 +2986,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-bysh.pdf"],
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
