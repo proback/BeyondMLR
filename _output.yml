@@ -6,7 +6,7 @@ bookdown::gitbook:
       collapse: subsection
       scroll_highlight: true
       before: |
-        <li><a href="./">Broadening Your Statistical Horizons</a></li>
+        <li><a href="./">Beyond Multiple Linear Regression</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 bookdown::pdf_book:

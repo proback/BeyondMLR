@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-07-24" />
+<meta name="date" content="2020-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Broadening Your Statistical Horizons</a></li>
+<li><a href="./">Beyond Multiple Linear Regression</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
@@ -510,15 +510,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Interpret model parameters (including fixed effects and variance components) from a multilevel GLM.</li>
 <li>Generate and interpret random effect estimates.</li>
 </ul>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="ch-GLMM.html#cb311-1"></a><span class="co"># Packages required for Chapter 11</span></span>
-<span id="cb311-2"><a href="ch-GLMM.html#cb311-2"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb311-3"><a href="ch-GLMM.html#cb311-3"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb311-4"><a href="ch-GLMM.html#cb311-4"></a><span class="kw">library</span>(pander)</span>
-<span id="cb311-5"><a href="ch-GLMM.html#cb311-5"></a><span class="kw">library</span>(ggmosaic)</span>
-<span id="cb311-6"><a href="ch-GLMM.html#cb311-6"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb311-7"><a href="ch-GLMM.html#cb311-7"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb311-8"><a href="ch-GLMM.html#cb311-8"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb311-9"><a href="ch-GLMM.html#cb311-9"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="ch-GLMM.html#cb317-1"></a><span class="co"># Packages required for Chapter 11</span></span>
+<span id="cb317-2"><a href="ch-GLMM.html#cb317-2"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb317-3"><a href="ch-GLMM.html#cb317-3"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb317-4"><a href="ch-GLMM.html#cb317-4"></a><span class="kw">library</span>(pander)</span>
+<span id="cb317-5"><a href="ch-GLMM.html#cb317-5"></a><span class="kw">library</span>(ggmosaic)</span>
+<span id="cb317-6"><a href="ch-GLMM.html#cb317-6"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb317-7"><a href="ch-GLMM.html#cb317-7"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb317-8"><a href="ch-GLMM.html#cb317-8"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb317-9"><a href="ch-GLMM.html#cb317-9"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="cs:refs" class="section level2">
 <h2><span class="header-section-number">11.2</span> Case Study: College Basketball Referees</h2>
@@ -1162,10 +1162,10 @@ Figure 11.3: Mosaic plots of the binary model response (foul called on home or v
 <div id="multregr-glmm" class="section level3">
 <h3><span class="header-section-number">11.4.1</span> A GLM approach (correlation not accounted for)</h3>
 <p>One quick and dirty approach to analysis might be to run a multiple logistic regression model on the entire long data set of 4972 fouls. In fact, Anderson and Pierce ran such a model in their 2009 paper, using the results of their multiple logistic regression model to support their primary conclusions, while justifying their approach by confirming a low level of correlation within games and the minimal impact on fixed effect estimates that accounting for clustering would have. Output from one potential multiple logistic regression model is shown below; this initial modeling attempt shows significant evidence that referees tend to even out calls (i.e., that the probability of a foul called on the home team decreases as total home fouls increase compared to total visiting team fouls—that is, as <code>foul.diff</code> increases) after accounting for score differential and time remaining (Z=-3.078, p=.002). The extent of the effect of foul differential also appears to grow (in a negative direction) as the first half goes on, based on an interaction between time remaining and foul differential (Z=-2.485, p=.013). We will compare this model with others that formally account for clustering and correlation patterns in our data.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="ch-GLMM.html#cb312-1"></a><span class="co"># Logistic regression model (not multilevel)</span></span>
-<span id="cb312-2"><a href="ch-GLMM.html#cb312-2"></a>mod0 =<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>score.diff <span class="op">+</span><span class="st"> </span>lead.home <span class="op">+</span><span class="st"> </span></span>
-<span id="cb312-3"><a href="ch-GLMM.html#cb312-3"></a><span class="st">           </span>time <span class="op">+</span><span class="st"> </span>foul.diff<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>lead.home<span class="op">:</span>time, </span>
-<span id="cb312-4"><a href="ch-GLMM.html#cb312-4"></a>           <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="ch-GLMM.html#cb318-1"></a><span class="co"># Logistic regression model (not multilevel)</span></span>
+<span id="cb318-2"><a href="ch-GLMM.html#cb318-2"></a>mod0 =<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>score.diff <span class="op">+</span><span class="st"> </span>lead.home <span class="op">+</span><span class="st"> </span></span>
+<span id="cb318-3"><a href="ch-GLMM.html#cb318-3"></a><span class="st">           </span>time <span class="op">+</span><span class="st"> </span>foul.diff<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>lead.home<span class="op">:</span>time, </span>
+<span id="cb318-4"><a href="ch-GLMM.html#cb318-4"></a>           <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
 <pre><code>##                 Estimate Std. Error z value Pr(&gt;|z|)
 ## (Intercept)    -0.103416   0.101056 -1.0234 0.306138
 ## foul.diff      -0.076599   0.024888 -3.0777 0.002086
@@ -1587,8 +1587,8 @@ Personal
 where <span class="math inline">\(i\)</span> is fixed at 110. Note that there is no separate error term or variance parameter, since the variance is a function of <span class="math inline">\(p_{ij}\)</span> with a Bernoulli random variable.</p>
 <p>Maximum likelihood estimators for the parameters in this model (<span class="math inline">\(a_{110}\)</span> and <span class="math inline">\(b_{110}\)</span>) can be obtained through statistical software. <span class="math inline">\(e^{a_{110}}\)</span> represents the odds that a foul is called on the home team when the foul totals in Game 110 are even, and <span class="math inline">\(e^{b_{110}}\)</span> represents the multiplicative change in the odds that a foul is called on the home team for each additional foul for the home team relative to the visiting team during the first half of Game 110.</p>
 <p>For Game 110, we estimate <span class="math inline">\(\hat{a}_{110}=-5.67\)</span> and <span class="math inline">\(\hat{b}_{110}=-2.11\)</span> (see output below). Thus, according to our simple logistic regression model, the odds that a foul is called on the home team when both teams have an equal number of fouls in Game 110 is <span class="math inline">\(e^{-5.67}=0.0035\)</span>; that is, the probability that a foul is called on the visiting team (0.9966) is <span class="math inline">\(1/0.0035 = 289\)</span> times higher than the probability a foul is called on the home team (0.0034) in that situation. While these parameter estimates seem quite extreme, reliable estimates are difficult to obtain with 14 observations and a binary response variable, especially in a case like this where the fouls were only even at the start of the game. Also, as the gap between home and visiting fouls increases by 1, the odds that a foul is called on the visiting team increases by a multiplicative factor of more than 8 (since <span class="math inline">\(1/e^{-2.11}=8.25\)</span>). In Game 110, this trend toward referees evening out foul calls is statistically significant at the 0.10 level (Z=-1.851, p=.0642).</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="ch-GLMM.html#cb315-1"></a>lreg.game110 &lt;-<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff, </span>
-<span id="cb315-2"><a href="ch-GLMM.html#cb315-2"></a>                    <span class="dt">family =</span> binomial, <span class="dt">data =</span> game110)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="ch-GLMM.html#cb321-1"></a>lreg.game110 &lt;-<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff, </span>
+<span id="cb321-2"><a href="ch-GLMM.html#cb321-2"></a>                    <span class="dt">family =</span> binomial, <span class="dt">data =</span> game110)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value Pr(&gt;|z|)
 ## (Intercept)   -5.668      3.131  -1.810  0.07030
 ## foul.diff     -2.110      1.140  -1.851  0.06415</code></pre>
@@ -1630,10 +1630,10 @@ where the error terms at Level Two can be assumed to follow a multivariate norma
 \end{align*}\]</span>
 The major changes when moving from a normally distributed response to a binary response are the form of the response variable (a logit function) and the absence of an error term at Level One.</p>
 <p>Again, we can use statistical software to obtain parameter estimates for this unified multilevel model using all 4972 fouls recorded from the 340 games. For example, the <code>glmer()</code> function from the <code>lme4</code> package in R extends the <code>lmer()</code> function to handle generalized responses and to account for the fact that fouls are not independent within games. Results are given below for the two-level model with foul differential as the sole covariate and Game as the Level Two observational unit.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="ch-GLMM.html#cb318-1"></a><span class="co"># Multilevel model with only foul.diff and errors on slope </span></span>
-<span id="cb318-2"><a href="ch-GLMM.html#cb318-2"></a><span class="co">#   and int and 1 RE</span></span>
-<span id="cb318-3"><a href="ch-GLMM.html#cb318-3"></a>model.b1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(foul.diff<span class="op">|</span>game),</span>
-<span id="cb318-4"><a href="ch-GLMM.html#cb318-4"></a>                  <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="ch-GLMM.html#cb324-1"></a><span class="co"># Multilevel model with only foul.diff and errors on slope </span></span>
+<span id="cb324-2"><a href="ch-GLMM.html#cb324-2"></a><span class="co">#   and int and 1 RE</span></span>
+<span id="cb324-3"><a href="ch-GLMM.html#cb324-3"></a>model.b1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(foul.diff<span class="op">|</span>game),</span>
+<span id="cb324-4"><a href="ch-GLMM.html#cb324-4"></a>                  <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
 <pre><code>##  Groups Name        Variance Std.Dev. Corr 
 ##  game   (Intercept) 0.29414  0.5424        
 ##         foul.diff   0.00124  0.0351   -1.00</code></pre>
@@ -1643,10 +1643,10 @@ The major changes when moving from a normally distributed response to a binary r
 ## foul.diff    -0.2853    0.03835  -7.440 1.006e-13</code></pre>
 <pre><code>##  AIC =  6791 ;  BIC =  6824</code></pre>
 <p>When parameter estimates from the multilevel model above are compared with those from the naive logistic regression model assuming independence of all observations (below), there are noticeable differences. For instance, each additional foul for the visiting team is associated with a 33% increase (<span class="math inline">\(1/e^{-.285}\)</span>) in the odds of a foul called on the home team under the multilevel model, but the single level model estimates the same increase as only 14% (<span class="math inline">\(1/e^{-.130}\)</span>). Also, estimated standard errors for fixed effects are greater under multilevel generalized linear modeling, which is not unusual after accounting for correlated observations, which effectively reduces the sample size.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="ch-GLMM.html#cb323-1"></a><span class="co"># Logistic regression model (not multilevel) with </span></span>
-<span id="cb323-2"><a href="ch-GLMM.html#cb323-2"></a><span class="co">#   only foul.diff</span></span>
-<span id="cb323-3"><a href="ch-GLMM.html#cb323-3"></a>mod0a &lt;-<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff, <span class="dt">family =</span> binomial, </span>
-<span id="cb323-4"><a href="ch-GLMM.html#cb323-4"></a>             <span class="dt">data =</span> refdata)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="ch-GLMM.html#cb329-1"></a><span class="co"># Logistic regression model (not multilevel) with </span></span>
+<span id="cb329-2"><a href="ch-GLMM.html#cb329-2"></a><span class="co">#   only foul.diff</span></span>
+<span id="cb329-3"><a href="ch-GLMM.html#cb329-3"></a>mod0a &lt;-<span class="st"> </span><span class="kw">glm</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff, <span class="dt">family =</span> binomial, </span>
+<span id="cb329-4"><a href="ch-GLMM.html#cb329-4"></a>             <span class="dt">data =</span> refdata)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept)  -0.1300    0.02912  -4.466 7.983e-06
 ## foul.diff    -0.1305    0.01426  -9.148 5.804e-20</code></pre>
@@ -1703,10 +1703,10 @@ w_{g} &amp; \sim N \left( 0 , \sigma_{w}^{2} \right).
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) = [\alpha_{0}+\beta_{0}\mathrm{foul.diff}_{ij}]+[u_{i}+v_{h}+w_{g}].
 \end{equation*}\]</span>
 We will refer to this as Model A3, where we look at the effect of foul differential on the odds a foul is called on the home team, while accounting for three crossed random effects at Level Two (game, home team, and visiting team). Parameter estimates for Model A3 are given below:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="ch-GLMM.html#cb326-1"></a><span class="co"># Model A3</span></span>
-<span id="cb326-2"><a href="ch-GLMM.html#cb326-2"></a>model.a3 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb326-3"><a href="ch-GLMM.html#cb326-3"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>hometeam) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>visitor), </span>
-<span id="cb326-4"><a href="ch-GLMM.html#cb326-4"></a>    <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="ch-GLMM.html#cb332-1"></a><span class="co"># Model A3</span></span>
+<span id="cb332-2"><a href="ch-GLMM.html#cb332-2"></a>model.a3 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb332-3"><a href="ch-GLMM.html#cb332-3"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>hometeam) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>visitor), </span>
+<span id="cb332-4"><a href="ch-GLMM.html#cb332-4"></a>    <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  game     (Intercept) 0.1716   0.414   
 ##  hometeam (Intercept) 0.0681   0.261   
@@ -1737,13 +1737,13 @@ a_{i} &amp; = \alpha_{0}+u_{i} \\
 b_{i} &amp; = \beta_{0},
 \end{align*}\]</span></p>
 <p>The likelihood ratio test (see below) provides significant evidence (LRT=16.074, df=2, p=.0003) that accounting for variability among home teams and among visiting teams improves our model.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="ch-GLMM.html#cb331-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.a3, model.a1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="ch-GLMM.html#cb337-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.a3, model.a1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar  AIC  BIC logLik  dev Chisq Df      pval
 model.a1    3 6793 6812  -3393 6787    NA NA        NA
 model.a3    5 6780 6813  -3385 6770 16.07  2 0.0003233</code></pre>
 <p>In Section <a href="ch-multilevelintro.html#multileveltechnical">8.5.4</a> we noted that REML estimation is typically used when comparing models that differ only in random effects for multilevel models with normal responses, but with multilevel generalized linear models, full maximum likelihood (ML) estimation procedures are typically used regardless of the situation (including in the function <code>glmer()</code> in R). So the likelihood ratio test above is based on ML methods—can we trust its accuracy? In Section <a href="ch-lon.html#longitudinal-paraboot">9.6.4</a> we introduced the parametric bootstrap  as a more reliable method in many cases for conducting hypothesis tests compared to the likelihood ratio test, especially when comparing full and reduced models that differ in their variance components. What would a parametric bootstrap test say about testing <span class="math inline">\(H_{0}: \sigma_{v}^{2}=\sigma_{w}^{2}=0\)</span> vs. <span class="math inline">\(H_{A}:\)</span> at least one of <span class="math inline">\(\sigma_{v}^{2}\)</span> or <span class="math inline">\(\sigma_{w}^{2}\)</span> is not equal to 0? Under the null hypothesis, since the two variance terms are being set to a value (0) on the boundary constraint, we would not expect the chi-square distribution to adequately approximate the behavior of the likelihood ratio test statistic.</p>
 <p>Figure <a href="ch-GLMM.html#fig:gmu-lrt1">11.6</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure with 100 samples as compared to a chi-square distribution. As we observed in Section <a href="ch-lon.html#longitudinal-paraboot">9.6.4</a>, the parametric bootstrap provides a more reliable p-value in this case (<span class="math inline">\(p&lt;.001\)</span> from output below) because a chi-square distribution puts too much mass in the tail and not enough near 0. However, the parametric bootstrap is computationally intensive, and it can take a long time to run even with moderately complex models. With this data, we would select our full Model A3 based on a parametric bootstrap test.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="ch-GLMM.html#cb333-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.a3, <span class="dt">m0=</span>model.a1, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="ch-GLMM.html#cb339-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.a3, <span class="dt">m0=</span>model.a1, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>   Df logLik  dev Chisq ChiDf pval_boot
 m0  3  -3393 6787    NA    NA        NA
 mA  5  -3385 6770 16.07     2         0</code></pre>
@@ -1770,7 +1770,7 @@ w_{g} &amp; \sim N \left( 0 , \sigma_{w}^{2} \right) \\
 s_{g} &amp; \sim N \left( 0 , \sigma_{s}^{2} \right).
 \end{align*}\]</span></p>
 <p>Thus our null hypothesis for comparing Model A3 vs. Model B3 is <span class="math inline">\(H_{0}: \sigma_{z}^{2}=\sigma_{r}^{2}=\sigma_{s}^{2}=0\)</span>. We do not have significant evidence (LRT=0.349, df=3, p=.46 by parametric bootstrap) of variability among slopes, so we will only include random effects for game, home team, and visiting team for the intercept going forward. Figure <a href="ch-GLMM.html#fig:gmu-lrt3">11.7</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution, again showing that the tails are too heavy in the chi-square distribution.</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="ch-GLMM.html#cb335-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.b3, <span class="dt">m0=</span>model.a3, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="ch-GLMM.html#cb341-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.b3, <span class="dt">m0=</span>model.a3, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>   Df logLik  dev Chisq ChiDf pval_boot
 m0  5  -3385 6770    NA    NA        NA
 mA  8  -3385 6770 0.349     3      0.46</code></pre>
@@ -1836,13 +1836,13 @@ w_{g} &amp; \sim N \left( 0 , \sigma_{w}^{2} \right).
  &amp;{} + [u_{i}+v_{h}+w_{g}].
 \end{align*}\]</span></p>
 <p>Using the composite form of this multilevel generalized linear model, the parameter estimates for our 11 fixed effects and 3 variance components are given in the output below:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="ch-GLMM.html#cb337-1"></a><span class="co"># Model F (potential final model)</span></span>
-<span id="cb337-2"><a href="ch-GLMM.html#cb337-2"></a>model.f &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>score.diff <span class="op">+</span><span class="st"> </span></span>
-<span id="cb337-3"><a href="ch-GLMM.html#cb337-3"></a><span class="st">  </span>lead.home <span class="op">+</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>offensive <span class="op">+</span><span class="st"> </span>personal <span class="op">+</span><span class="st"> </span></span>
-<span id="cb337-4"><a href="ch-GLMM.html#cb337-4"></a><span class="st">  </span>foul.diff<span class="op">:</span>offensive <span class="op">+</span><span class="st"> </span>foul.diff<span class="op">:</span>personal <span class="op">+</span><span class="st"> </span></span>
-<span id="cb337-5"><a href="ch-GLMM.html#cb337-5"></a><span class="st">  </span>foul.diff<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>lead.home<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb337-6"><a href="ch-GLMM.html#cb337-6"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>hometeam) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>visitor),</span>
-<span id="cb337-7"><a href="ch-GLMM.html#cb337-7"></a>  <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="ch-GLMM.html#cb343-1"></a><span class="co"># Model F (potential final model)</span></span>
+<span id="cb343-2"><a href="ch-GLMM.html#cb343-2"></a>model.f &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>score.diff <span class="op">+</span><span class="st"> </span></span>
+<span id="cb343-3"><a href="ch-GLMM.html#cb343-3"></a><span class="st">  </span>lead.home <span class="op">+</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>offensive <span class="op">+</span><span class="st"> </span>personal <span class="op">+</span><span class="st"> </span></span>
+<span id="cb343-4"><a href="ch-GLMM.html#cb343-4"></a><span class="st">  </span>foul.diff<span class="op">:</span>offensive <span class="op">+</span><span class="st"> </span>foul.diff<span class="op">:</span>personal <span class="op">+</span><span class="st"> </span></span>
+<span id="cb343-5"><a href="ch-GLMM.html#cb343-5"></a><span class="st">  </span>foul.diff<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>lead.home<span class="op">:</span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb343-6"><a href="ch-GLMM.html#cb343-6"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>hometeam) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>visitor),</span>
+<span id="cb343-7"><a href="ch-GLMM.html#cb343-7"></a>  <span class="dt">family =</span> binomial, <span class="dt">data =</span> refdata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  game     (Intercept) 0.1846   0.430   
 ##  hometeam (Intercept) 0.0783   0.280   
@@ -1910,25 +1910,25 @@ Figure 11.9: Estimated random effects and associated prediction intervals for 39
 <h2><span class="header-section-number">11.9</span> Notes on Using R (Optional)</h2>
 <p>Here we discuss in more detail how to fit Model B3 in <a href="ch-GLMM.html#glmm-paraboot">11.6</a>. Note that, in <code>glmer()</code> or <code>lmer()</code>, if you have two equations at Level Two and want to fit a model with an error term for each equation, but you also want to assume that the two error terms are independent, the error terms must be requested separately. For example, <code>(1 | hometeam)</code> allows the Level One intercept to vary by home team, while <code>(0+foul.dff | hometeam)</code> allows the Level One effect of <code>foul.diff</code> to vary by home team. Under this formulation, the correlation between those two error terms is assumed to be 0; a non-zero correlation could have been specified with <code>(1+foul.diff | hometeam)</code>.</p>
 <p>The R code below shows how <code>fixef()</code> can be used to extract the estimated fixed effects from a multilevel model. Even more, it shows how <code>ranef()</code> can be used to illustrate estimated random effects by Game, Home Team, and Visiting Team, along with prediction intervals for those random effects. These estimated random effects are sometimes called Empirical Bayes estimators. In this case, random effects are placed only on the <code>[["(Intercept)"]]</code> term; the phrase “Intercept” could be replaced with other Level One covariates whose values are allowed to vary by game, home team, or visiting team in our model.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="ch-GLMM.html#cb342-1"></a><span class="co"># Get estimated random effects based on Model F</span></span>
-<span id="cb342-2"><a href="ch-GLMM.html#cb342-2"></a>re.int &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">game</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
-<span id="cb342-3"><a href="ch-GLMM.html#cb342-3"></a><span class="kw">hist</span>(re.int, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>, </span>
-<span id="cb342-4"><a href="ch-GLMM.html#cb342-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Random Effects for Game&quot;</span>)</span>
-<span id="cb342-5"><a href="ch-GLMM.html#cb342-5"></a>Home.re &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">hometeam</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
-<span id="cb342-6"><a href="ch-GLMM.html#cb342-6"></a><span class="kw">hist</span>(Home.re, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>, </span>
-<span id="cb342-7"><a href="ch-GLMM.html#cb342-7"></a>     <span class="dt">main =</span> <span class="st">&quot;Random Effects for Home Team&quot;</span>)</span>
-<span id="cb342-8"><a href="ch-GLMM.html#cb342-8"></a>Visiting.re &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">visitor</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
-<span id="cb342-9"><a href="ch-GLMM.html#cb342-9"></a><span class="kw">hist</span>(Visiting.re, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>,</span>
-<span id="cb342-10"><a href="ch-GLMM.html#cb342-10"></a>  <span class="dt">main =</span> <span class="st">&quot;Random Effects for the Visiting Team&quot;</span>,</span>
-<span id="cb342-11"><a href="ch-GLMM.html#cb342-11"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>))</span>
-<span id="cb342-12"><a href="ch-GLMM.html#cb342-12"></a><span class="kw">cbind</span>(Home.re, Visiting.re)   <span class="co"># 39x2 matrix of REs by team</span></span>
-<span id="cb342-13"><a href="ch-GLMM.html#cb342-13"></a></span>
-<span id="cb342-14"><a href="ch-GLMM.html#cb342-14"></a><span class="co"># Prediction intervals for random effects based on Model F</span></span>
-<span id="cb342-15"><a href="ch-GLMM.html#cb342-15"></a>ranef1 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(<span class="kw">ranef</span>(model.f, <span class="dt">postVar =</span> <span class="ot">TRUE</span>), </span>
-<span id="cb342-16"><a href="ch-GLMM.html#cb342-16"></a>                  <span class="dt">strip =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb342-17"><a href="ch-GLMM.html#cb342-17"></a><span class="kw">print</span>(ranef1[[<span class="dv">3</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) <span class="co">##HOME</span></span>
-<span id="cb342-18"><a href="ch-GLMM.html#cb342-18"></a><span class="kw">print</span>(ranef1[[<span class="dv">2</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) <span class="co">##VIS</span></span>
-<span id="cb342-19"><a href="ch-GLMM.html#cb342-19"></a><span class="kw">print</span>(ranef1[[<span class="dv">1</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="ch-GLMM.html#cb348-1"></a><span class="co"># Get estimated random effects based on Model F</span></span>
+<span id="cb348-2"><a href="ch-GLMM.html#cb348-2"></a>re.int &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">game</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
+<span id="cb348-3"><a href="ch-GLMM.html#cb348-3"></a><span class="kw">hist</span>(re.int, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>, </span>
+<span id="cb348-4"><a href="ch-GLMM.html#cb348-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Random Effects for Game&quot;</span>)</span>
+<span id="cb348-5"><a href="ch-GLMM.html#cb348-5"></a>Home.re &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">hometeam</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
+<span id="cb348-6"><a href="ch-GLMM.html#cb348-6"></a><span class="kw">hist</span>(Home.re, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>, </span>
+<span id="cb348-7"><a href="ch-GLMM.html#cb348-7"></a>     <span class="dt">main =</span> <span class="st">&quot;Random Effects for Home Team&quot;</span>)</span>
+<span id="cb348-8"><a href="ch-GLMM.html#cb348-8"></a>Visiting.re &lt;-<span class="st"> </span><span class="kw">ranef</span>(model.f)<span class="op">$</span><span class="st">`</span><span class="dt">visitor</span><span class="st">`</span>[[<span class="st">&quot;(Intercept)&quot;</span>]]</span>
+<span id="cb348-9"><a href="ch-GLMM.html#cb348-9"></a><span class="kw">hist</span>(Visiting.re, <span class="dt">xlab =</span> <span class="st">&quot;Random Effect&quot;</span>,</span>
+<span id="cb348-10"><a href="ch-GLMM.html#cb348-10"></a>  <span class="dt">main =</span> <span class="st">&quot;Random Effects for the Visiting Team&quot;</span>,</span>
+<span id="cb348-11"><a href="ch-GLMM.html#cb348-11"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>))</span>
+<span id="cb348-12"><a href="ch-GLMM.html#cb348-12"></a><span class="kw">cbind</span>(Home.re, Visiting.re)   <span class="co"># 39x2 matrix of REs by team</span></span>
+<span id="cb348-13"><a href="ch-GLMM.html#cb348-13"></a></span>
+<span id="cb348-14"><a href="ch-GLMM.html#cb348-14"></a><span class="co"># Prediction intervals for random effects based on Model F</span></span>
+<span id="cb348-15"><a href="ch-GLMM.html#cb348-15"></a>ranef1 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(<span class="kw">ranef</span>(model.f, <span class="dt">postVar =</span> <span class="ot">TRUE</span>), </span>
+<span id="cb348-16"><a href="ch-GLMM.html#cb348-16"></a>                  <span class="dt">strip =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb348-17"><a href="ch-GLMM.html#cb348-17"></a><span class="kw">print</span>(ranef1[[<span class="dv">3</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) <span class="co">##HOME</span></span>
+<span id="cb348-18"><a href="ch-GLMM.html#cb348-18"></a><span class="kw">print</span>(ranef1[[<span class="dv">2</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>) <span class="co">##VIS</span></span>
+<span id="cb348-19"><a href="ch-GLMM.html#cb348-19"></a><span class="kw">print</span>(ranef1[[<span class="dv">1</span>]], <span class="dt">more =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="exercises-10" class="section level2">
 <h2><span class="header-section-number">11.10</span> Exercises</h2>
@@ -2511,7 +2511,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-BeyondMLR.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
