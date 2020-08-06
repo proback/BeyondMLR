@@ -30,12 +30,9 @@ options(
 
 # Preface {-}
 
-```{r, cover, fig.show='hold', out.width='80%', echo=FALSE}
+```{r, cover, fig.show='hold', echo=FALSE, fig.cap="'Beyond Multiple Regression: Applied Generalized Linear Models and Multilevel Models in R' will be available in hard copy through Chapman and Hall / CRC Press in January 2021."}
 if(knitr::is_html_output()){
-  knitr::include_graphics("data/textbook_full.png")}
-# out.extra='trim={0 0 0 5cm},clip', out.width='75%'
-# 2838 / 3667 = .7739
-# fig.asp=0.774
+  knitr::include_graphics("data/cover.png")}
 ```
 
 **Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R** [@RProject] is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like *Stat2* [@Cannon2019]. We started teaching this course at St. Olaf in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St. Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook (and [available at our GitHub repo](https://github.com/proback/BeyondMLR)) arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
@@ -54,7 +51,7 @@ When we teach this course at St. Olaf, we are able to cover Chapters 1-11 during
 - Chapter 10: Multilevel Data With More Than Two Levels.  The ideas from Chapters 8-9 are extended to a three-level case study.  New ideas include boundary constraints and exploding numbers of variance components and fixed effects.
 - Chapter 11: Multilevel Generalized Linear Models.  This chapter brings everything together, combining multilevel data with non-normal responses.  Crossed random effects and random effects estimates are both introduced here.
 
-Three types of exercises are available for each chapter.  **Conceptual exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-ended exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises is available to qualified instructors at our [book’s website](www.routledge.com). 
+Three types of exercises are available for each chapter.  **Conceptual exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-ended exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises will be available to qualified instructors at our book’s website after January 2021. 
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 

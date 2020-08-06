@@ -22,7 +22,7 @@ After finishing this chapter, you should be able to:
 - Recognize when a fitted model has encountered boundary constraints and understand strategies for moving forward.
 - Apply a parametric bootstrap test of significance to appropriate situations with more than two levels.
 
-```{r load_packages10, message = FALSE}
+```{r load_packages10, message = FALSE, warning = FALSE}
 # Packages required for Chapter 10
 library(knitr)
 library(gridExtra)

@@ -5,6 +5,6 @@ account: roback
 server: bookdown.org
 hostUrl: https://bookdown.org/__api__
 appId: 5128
-bundleId: 25609
+bundleId: 26246
 url: https://bookdown.org/roback/bookdown-BeyondMLR/
-when: 1595623941.05421
+when: 1596639603.06271

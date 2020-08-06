@@ -28,7 +28,7 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 - Consider different ways of modeling the variance-covariance structure in longitudinal data.
 - Understand how a parametric bootstrap test of significance works and when it might be useful.
 
-```{r load_packages9, message = FALSE}
+```{r load_packages9, message = FALSE, warning = FALSE}
 # Packages required for Chapter 9
 library(GGally)
 library(data.table)
