@@ -458,7 +458,7 @@ exp(confint(model.HaleBD))
 
 In the model with `distance` and `pctBlack`, the profile likelihood 95\% confidence interval for $e^{\beta_2}$ is (.979, .994), which is approximately equal to the Wald-based interval despite the small sample size.  We can also confirm the statistically significant association between percent black and odds of voting Yes (after controlling for distance), because 1 is not a plausible value of $e^{\beta_2}$ (where an odds ratio of 1 would imply that the odds of voting Yes do not change with percent black).
   
-### Testing for goodness of fit
+### Testing for goodness-of-fit
 
 As in Section \@ref(sec-PoisGOF), we can evaluate the goodness of fit for our model by comparing the residual deviance (307.22) to a $\chi^2$ distribution with $n-p$ (8) degrees of freedom. 
 ```{r, gof2, comment=NA}

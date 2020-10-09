@@ -986,7 +986,7 @@ ggplot() +
 
 Figures \@ref(fig:mli-spag1) and \@ref(fig:mli-spag0) use **empirical Bayes estimates** \index{empirical Bayes estimates} for the intercepts ($a_{i}$) and slopes ($b_{i}$) of individual subjects. Empirical Bayes estimates are sometimes called "shrinkage estimates" since they combine individual-specific information with information from all subjects, thus "shrinking" the individual estimates toward the group averages. Empirical Bayes estimates are often used when a term such as $a_{i}$ involves both fixed and random components; further detail can be found in @Bryk2002 and @Singer2003.
 
-### Pseudo $R^2$ values {#pseudoR2}
+### Pseudo R-squared values {#pseudoR2}
 
 The estimated within-person variance $\hat{\sigma}^2$ decreased by 3.1\% (from 22.5 to 21.8) from the unconditional means model, implying that only 3.1\% of within-person variability in performance anxiety scores can be explained by performance type. This calculation is considered a __pseudo R-square__ \index{pseudo R-square} value:
 

@@ -7,13 +7,15 @@ output:
     number_sections: yes
 ---
 
+\mainmatter
+
 # Review of Multiple Linear Regression {#ch-MLRreview}
 
 ## Learning Objectives
   After finishing this chapter, you should be able to:
 
 - Identify cases where linear least squares regression (LLSR) assumptions are violated.
-- Generate exploratory data analysis plots and summary statistics.
+- Generate exploratory data analysis (EDA) plots and summary statistics.
 - Use residual diagnostics to examine LLSR assumptions.
 - Interpret parameters and associated tests and intervals from multiple regression models.
 - Understand the basic ideas behind bootstrapped confidence intervals.
@@ -36,19 +38,19 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 
 ## Introduction to Beyond Multiple Linear Regression
 
-Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using to **linear least squares regression (LLSR)** models.  
+Ecologists count species, criminologists count arrests, and cancer specialists count cases.  Political scientists seek to explain who is a Democrat, pre-med students are curious about who gets into medical school, and sociologists study which people get tattoos.  In the first case, ecologists, criminologists and cancer specialists are concerned about outcomes which are counts.  The political scientists', pre-med students' and sociologists' interest centers on binary responses: Democrat or not, accepted or not, and tattooed or not.   We can model these non-Gaussian (non-normal) responses in a more natural way by fitting **generalized linear models (GLMs)** as opposed to using **linear least squares regression (LLSR)** models.  
 
 When models are fit to data using linear least squares regression (LLSR), \index{linear least squares regression (LLSR)} inferences are possible using traditional statistical theory under certain conditions: if we can assume that there is a linear relationship between the response (Y) and an explanatory variable (X), the observations are independent of one another, the responses are approximately normal for each level of the X, and the variation in the responses is the same for each level of X. If we intend to make inferences using GLMs, necessary assumptions are different. First, we will not be constrained by the normality assumption. When conditions are met, GLMs can accommodate non-normal responses such as the counts and binary data in our preceding examples.  While the observations must still be independent of one another, the variance in Y at each level of X need not be equal nor does the assumption of  linearity between Y and X need to be plausible.  
 
-However GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
+However, GLMs cannot be used for models in the following circumstances: medical researchers collect data on patients in clinical trials weekly for 6 months; rat dams are injected with teratogenic substances and their offspring are monitored for defects; and, musicians' performance anxiety is recorded for several performances.  Each of these examples involves correlated data: the same patient's outcomes are more likely to be similar from week-to-week than outcomes from different patients; litter mates are more likely to suffer defects at similar rates in contrast to unrelated rat pups; and, a musician's anxiety is more similar from performance to performance than it is with other musicians.  Each of these examples violate the independence assumption of simpler linear models for LLSR or GLM inference.  
 
 The **Generalized Linear Models** \index{generalized linear models (GLMs)} in the book's title extends least squares methods you may have seen in linear regression to handle responses that are non-normal.  The **Multilevel Models** \index{multilevel model} in the book's title will allow us to create models for situations where the observations are not independent of one another.  Overall, these approaches will permit us to get much more out of data and may be more faithful to the actual data structure than models based on ordinary least squares.  These models will allow you to expand *beyond multiple linear regression*.
 
-In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting a LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
+In order to understand the motivation for handling violations of assumptions, it is helpful to be able to recognize the  model assumptions for inference with LLSR in the context of different studies. While linearity is sufficient for fitting an LLSR model, in order to make inferences and predictions  the observations must also be  independent, the responses should be approximately normal at each level of the predictors, and the standard deviation of the responses at each level of the predictors should be approximately equal.  After examining circumstances where inference with LLSR is appropriate, we will look for violations of these assumptions in other sets of circumstances.  These are settings where we may be able to use the methods of this text.  We've kept the examples in the exposition simple to fix ideas.  There are exercises which describe more realistic and complex studies.  
 
-## Assumptions for Linear Least Squares Regression (LLSR)
+## Assumptions for Linear Least Squares Regression
 
-```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR)', echo=FALSE, message = FALSE}
+```{r OLSassumptions, fig.align = "center", out.width = "90%", fig.cap = 'Assumptions for linear least squares regression (LLSR).', echo=FALSE, message = FALSE}
 ## Sample data for graph of OLS normality assumption
 ##   Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
 
@@ -89,10 +91,10 @@ ggplot(dat, aes(x, y)) +
 
 Recall that making inferences or predictions with models fit using linear least squares regression \index{linear least squares regression (LLSR)} requires that the following assumptions be tenable. The acronym LINE can be used to recall the assumptions required for making inferences and predictions with models based on LLSR.  If we consider a simple linear regression \index{simple linear regression} with just a single predictor X, then:
 
-- **L:** there is a linear relationship between the mean response (Y) and the explanatory variable (X),
-- **I:** the errors are independent---there's no connection between how far any two points lie from the regression line, 
-- **N:** the responses are normally distributed at each level of X, and
-- **E:** the variance or, equivalently, the standard deviation of the responses is equal for all levels of X.
+- **L:** There is a linear relationship between the mean response (Y) and the explanatory variable (X),
+- **I:** The errors are independent---there's no connection between how far any two points lie from the regression line, 
+- **N:** The responses are normally distributed at each level of X, and
+- **E:** The variance or, equivalently, the standard deviation of the responses is equal for all levels of X.
 
 These assumptions are depicted in Figure \@ref(fig:OLSassumptions).  
 
@@ -101,7 +103,7 @@ These assumptions are depicted in Figure \@ref(fig:OLSassumptions).
 - **N:** At each level of X, the values for Y are normally distributed.
 - **E:** The spread in the Y's for each level of X is the same.
 
-### Cases that do not violate assumptions for inference in LLSR
+### Cases That Do Not Violate Assumptions for Inference in LLSR
 
 It can be argued that the following studies do not violate assumptions for inference in linear least squares regression. We begin by identifying the response and the explanatory variables followed by  describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.  
 
@@ -117,7 +119,7 @@ It can be argued that the following studies do not violate assumptions for infer
     - **N:** The stopping distances for a given decibel level of music vary and are normally distributed.
     - **E:** The variation in stopping distances should be approximately the same for each decibel level of music.  
 
-    There are potential problems with the linearity and equal standard deviation assumptions.  For example, if there is threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be  a linear function of music.  Another problem may occur if a few subjects at each decibel level took a really long time to react.  In this case, reaction times would be right skewed and the normality assumption would be violated.  Often we can think of circumstances where the LLSR assumptions may be suspect.  Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.  
+    There are potential problems with the linearity and equal standard deviation assumptions.  For example, if there is a threshold for the volume of music where the effect on reaction times remains the same, mean reaction times would not be  a linear function of music.  Another problem may occur if a few subjects at each decibel level took a really long time to react.  In this case, reaction times would be right skewed and the normality assumption would be violated.  Often we can think of circumstances where the LLSR assumptions may be suspect.  Later in this chapter we will describe plots which can help diagnose issues with LLSR assumptions.  
 
 2) **Crop yield and rainfall.** The yield of wheat per acre for the month of July is thought to be related to the rainfall. A researcher randomly selects acres of wheat and records the rainfall and bushels of wheat per acre.  
 
@@ -125,7 +127,7 @@ It can be argued that the following studies do not violate assumptions for infer
     - *Explanatory variable:* Rainfall measured in inches for July  
     
     - **L:** The mean yield per acre is linearly related to rainfall.
-    - **I:** Fields' yields are independent; knowing one (X, Y) pair does not provide information about another.
+    - **I:** Field yields are independent; knowing one (X, Y) pair does not provide information about another.
     - **N:** The yields for a given amount of  rainfall are normally distributed.
     - **E:**  The standard deviation of yields is approximately the same for each rainfall level.  
 
@@ -139,11 +141,11 @@ It can be argued that the following studies do not violate assumptions for infer
       - **L:** The mean height of firstborn sons is linearly related to heights of fathers.
       - **I:** The height of one firstborn son is independent of the heights of other firstborn sons in the study. This would be the case if firstborn sons were randomly selected.
       - **N:** The heights of firstborn sons for a given father's height are normally distributed.
-      - **E:** The standard deviation of firstborn sons' heights at a given father's height are the same.  
+      - **E:** The standard deviation of firstborn sons' heights at a given father's height is the same.  
 
     Heights and other similar measurements are often normally distributed.  There would be a problem with the independence assumption if multiple sons from the same family were selected.  Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.  
 
-### Cases where assumptions for inference in LLSR are violated
+### Cases Where Assumptions for Inference in LLSR Are Violated
 
 1) **Grades and studying.** Is the time spent studying predictive of success on an exam? The time spent studying for an exam, in hours, and success, measured as Pass or Fail, are recorded for  randomly selected students.  
   
@@ -164,9 +166,9 @@ It can be argued that the following studies do not violate assumptions for infer
     - *Response variable:* Weight
     - *Explanatory variables:* Sex and hours spent exercising in a typical week  
 
-    With two predictors, the assumptions now apply to the combination of sex and exercise.  For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females.  This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise  for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime.  We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected.  There may be subgroups of subjects likely to be more similar, e.g. selecting students at a gym and others in a TV lounge.  
+    With two predictors, the assumptions now apply to the combination of sex and exercise.  For example, the linearity assumption implies that there is a linear relationship in mean weight and amount of exercise for males and, similarly, a linear relationship in mean weight and amount of exercise for females.  This data may not be appropriate for LLSR modeling because the standard deviation in weight for students who do not exercise  for each sex is likely to be considerably greater than the standard deviation in weight for students who follow an exercise regime.  We can assess this potential problem by plotting weight by amount of exercise for males and females separately. There may also be a problem with the independence assumption because there is no indication that the subjects were randomly selected.  There may be subgroups of subjects likely to be more similar, e.g., selecting students at a gym and others in a TV lounge.  
 
-4) **Surgery Outcome and Patient Age.** Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest.  Patients were randomly selected for each surgeon at each hospital.  The surgery outcome was recorded on a scale of one to ten.  
+4) **Surgery outcome and patient age.** Medical researchers investigated the outcome of a particular surgery for patients with comparable stages of disease but different ages. The ten hospitals in the study had at least two surgeons performing the surgery of interest.  Patients were randomly selected for each surgeon at each hospital.  The surgery outcome was recorded on a scale of 1-10.  
  
     - *Response variable:* Surgery outcome, scale 1-10
     - *Explanatory variable:* Patient age, in years  
@@ -179,7 +181,7 @@ While we identified possible violations of assumptions for inference in LLSR for
 
 ### Case Study: Kentucky Derby {#cs:derby}
 
-Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25 mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
+Before diving into generalized linear models and multilevel modeling, we review key ideas from multiple linear regression using an example from horse racing.  The Kentucky Derby is a 1.25-mile horse race held annually at the Churchill Downs race track in Louisville, Kentucky.  Our data set `derbyplus.csv` contains the `year` of the race, the winning horse (`winner`), the `condition` of the track, the average `speed` (in feet per second) of the winner, and the number of `starters` (field size, or horses who raced) for the years 1896-2017 [@KentuckyDerby]. The track `condition` has been grouped into three categories: fast, good (which includes the official designations “good” and “dusty”), and slow (which includes the designations “slow”, “heavy”, “muddy”, and “sloppy”).  We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
 ## Initial Exploratory Analyses {#explorech1}
 ### Data Organization
@@ -231,7 +233,7 @@ The primary categorical explanatory variable is track condition, where 88 (72\%)
 
 The next step in an initial exploratory analysis is the examination of numerical and graphical summaries of relationships between model covariates and responses.  Figure \@ref(fig:bivariate) is densely packed with illustrations of bivariate relationships.  The relationship between two continuous variables is depicted with scatterplots below the diagonal and correlation coefficients above the diagonal.  Here, we see that higher winning speeds are associated with more recent years, while the relationship between winning speed and number of starters is less clear cut.  We also see a somewhat strong correlation between year and number of starters---we should be aware of highly correlated explanatory variables whose contributions might overlap too much.  
 
-```{r bivariate, fig.align = "center", out.width = "90%", fig.cap = 'Relationships between pairs of variables in the Kentucky Derby data set', echo=FALSE, warning=FALSE, message = FALSE}
+```{r bivariate, fig.align = "center", out.width = "90%", fig.cap = 'Relationships between pairs of variables in the Kentucky Derby data set.', echo=FALSE, warning=FALSE, message = FALSE}
 gg <- ggpairs(data = derby.df, 
               columns = c("condition", "year", "starters", "speed"))
 gg[4,1] <- gg[4,1] + geom_histogram( binwidth = 0.75)
@@ -246,7 +248,7 @@ Finally, notice that the diagonal illustrates the distribution of individual var
 
 By using shape or color or other attributes, we can incorporate the effect of a third or even fourth variable into the scatterplots of Figure  \@ref(fig:bivariate).  For example, in the **coded scatterplot** \index{coded scatterplot} of Figure \@ref(fig:codeds) we see that speeds are generally faster under fast conditions, but the rate of increasing speed over time is greater under good or slow conditions.  
 
-```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions', echo=FALSE, warning=FALSE, message=FALSE}
+```{r codeds, fig.align = "center", out.width = "90%", fig.cap = 'Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions.', echo=FALSE, warning=FALSE, message=FALSE}
 # Coded scatterplot
 ggplot(derby.df, aes(x = year, y = speed, colour = fastfactor)) +
   geom_point(aes(shape = fastfactor)) +
@@ -263,8 +265,8 @@ Of course, any graphical analysis is exploratory, and any notable trends at this
 
 As you might expect, answers to these questions will arise from proper consideration of variability and properly identified statistical models.  
 
-## Multiple linear regression modeling {#multreg}
-### Simple linear regression with a continuous predictor {#SLRcontinuous}
+## Multiple Linear Regression Modeling {#multreg}
+### Simple Linear Regression with a Continuous Predictor {#SLRcontinuous}
 
 We will begin by modeling the winning speed as a function of time; for example, have winning speeds increased at a constant rate since 1896?  For this initial model, let $Y_{i}$ be the speed of the winning horse in year $i$.  Then, we might consider Model 1: 
 
@@ -314,7 +316,7 @@ cat(" R squared = ", summary(model2)$r.squared, "\n",
     "Residual standard error = ", summary(model2)$sigma)
 ```
 
-```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896)', echo=FALSE, warning=FALSE, message=FALSE}
+```{r center, fig.align = "center", out.width = "90%", fig.cap = 'Compare Model 1 (with intercept at 0) to Model 2 (with intercept at 1896).', echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() + xlim(0,2020) + ylim(0,55) +
   geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
@@ -331,7 +333,7 @@ We should also attempt to verify that our LINE linear regression model assumptio
 - The lower left plot, Scale-Location, can be used to check the Equal Variance assumption.  Positive or negative trends across the fitted values indicate variability that is not constant.
 - The lower right plot, Residuals vs. Leverage, can be used to check for influential points.  Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.  
 
-```{r resid2, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2', echo=FALSE, warning=FALSE}
+```{r resid2, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2.', echo=FALSE, warning=FALSE}
 # Residual diagnostics for Model 2
 par(mfrow=c(2,2))
 plot(model2)
@@ -350,7 +352,7 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\e
 
 This model could suggest, for example, that the rate of increase in winning speeds is slowing down over time.  In fact, there is evidence that the quadratic model improves upon the linear model (see Figure \@ref(fig:models2and2q)).  $R^2$, \index{R-squared} the proportion of year-to-year variability in winning speeds explained by the model, has increased from 51.3\% to 64.1\%, and the pattern in the Residuals vs. Fitted plot of Figure \@ref(fig:resid2) has disappeared in Figure \@ref(fig:resid2q), although normality is a little sketchier in the left tail, and the larger mass of points with fitted values near 54 appears to have slightly lower variability.  The significantly negative coefficient for $\beta_{2}$ suggests that the rate of increase is indeed slowing in more recent years.  
 
-```{r models2and2q, fig.align = "center", out.width = "90%", fig.cap = 'Linear (solid) vs. quadratic (dashed) fit', echo=FALSE, warning=FALSE}
+```{r models2and2q, fig.align = "center", out.width = "90%", fig.cap = 'Linear (solid) vs. quadratic (dashed) fit.', echo=FALSE, warning=FALSE}
 # Fitted models for Model 2 and Model 2Q
 ggplot(derby.df, aes(x = year, y = speed)) +
   geom_point() +
@@ -371,14 +373,14 @@ cat(" R squared = ", summary(model2q)$r.squared, "\n",
     "Residual standard error = ", summary(model2q)$sigma)
 ```
 
-```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q', echo=FALSE, warning=FALSE}
+```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q.', echo=FALSE, warning=FALSE}
 # Residual diagnostics for Model 2
 par(mfrow=c(2,2))
 plot(model2q)
 par(mfrow=c(1,1))
 ```
 
-### Linear regression with a binary predictor
+### Linear Regression with a Binary Predictor
 
 We also may want to include track condition as an explanatory variable.  We could start by using `fast` as the lone predictor: Do winning speeds differ for fast and non-fast conditions?  `fast` is considered an **indicator variable**---it takes on only the values 0 and 1, \index{indicator variable} where 1 indicates presence of a certain attribute (like fast racing conditions).  Since `fast` is numeric, we can use simple linear regression techniques to fit Model 3:
 
@@ -415,9 +417,9 @@ cat(" R squared = ", summary(model3)$r.squared, "\n",
 
 You might be asking at this point: If we simply wanted to compare mean winning speeds under fast and non-fast conditions, why didn't we just run a two-sample t-test?  The answer is: we did!  The t-test corresponding to $\beta_{1}$ is equivalent to an independent-samples t-test under equal variances.  Convince yourself that this is true, and that the equal variance assumption is needed.
 
-### Multiple linear regression with two predictors
+### Multiple Linear Regression with Two Predictors
 
-The beauty of the linear regression framework is that we can add additional explanatory variables in order to explain more variability in our response, obtain better and more precise predictions, and control for certain covariates while evaluating the effect of others.  For example, we could consider adding `yearnew` to Model 3, which has the indicator variable `fast` as its only predictor.  In this way, we would estimate the difference between winning speeds under fast and non-fast conditions *after accounting for the effect of time*.  As we observed in Figure \@ref(fig:bivariate), recent years have tended to have more races under fast conditions, so Model 3 might overstate the effect of fast conditions because winning speeds have also increased over time.  A model with terms for both year and track condition will estimate the difference between winning speeds under fast and non-fast conditions *for a fixed year*; for example, if it had rained in 2016 and turned the track muddy, how much would we have expected the winning speed to decrease?  
+The beauty of the linear regression framework is that we can add explanatory variables in order to explain more variability in our response, obtain better and more precise predictions, and control for certain covariates while evaluating the effect of others.  For example, we could consider adding `yearnew` to Model 3, which has the indicator variable `fast` as its only predictor.  In this way, we would estimate the difference between winning speeds under fast and non-fast conditions *after accounting for the effect of time*.  As we observed in Figure \@ref(fig:bivariate), recent years have tended to have more races under fast conditions, so Model 3 might overstate the effect of fast conditions because winning speeds have also increased over time.  A model with terms for both year and track condition will estimate the difference between winning speeds under fast and non-fast conditions *for a fixed year*; for example, if it had rained in 2016 and turned the track muddy, how much would we have expected the winning speed to decrease?  
 
 Our new model (Model 4) can be written:
 
@@ -440,7 +442,7 @@ cat(" R squared = ", summary(model4)$r.squared, "\n",
 
 Our new model estimates that winning speeds are, on average, 1.23 ft/s faster under fast conditions after accounting for time trends, which is down from an estimated 1.63 ft/s without accounting for time.  It appears our original model (Model 3) may have overestimated the effect of fast conditions by conflating it with improvements over time.  Through our new model, we also estimate that winning speeds increase by 0.023 ft/s per year, after accounting for track condition.  This yearly effect is also smaller than the 0.026 ft/s per year we estimated in Model 1, without adjusting for track condition.  Based on the $R^2$ value, Model 4 explains 68.7\% of the year-to-year variability in winning speeds, a noticeable increase over using either explanatory variable alone.  
 
-### Inference in multiple linear regression: normal theory {#multreg-inference}
+### Inference in Multiple Linear Regression: Normal Theory {#multreg-inference}
 
 So far we have been using linear regression for descriptive purposes, which is an important task.  We are often interested in issues of statistical inference \index{inference} as well---determining if effects are statistically significant, quantifying uncertainty in effect size estimates with confidence intervals, and quantifying uncertainty in model predictions with prediction intervals.  Under LINE assumptions, all of these inferential tasks can be completed with the help of the t-distribution and estimated standard errors.  
 
@@ -456,7 +458,7 @@ new.data <- data.frame(yearnew = 2017 - 1896, fast = 1)
 predict(model4, new = new.data, interval = "prediction")
 ```
 
-### Inference in multiple linear regression: bootstrapping {#multreg-boot}
+### Inference in Multiple Linear Regression: Bootstrapping {#multreg-boot}
 
 Remember that you must check LINE assumptions using the same residual plots as in Figure \@ref(fig:resid2) to ensure that the inferential statements in the previous section are valid.  In cases when model assumptions are shaky, one alternative approach to statistical inference is **bootstrapping**; \index{bootstrapping} in fact, bootstrapping is a robust approach to statistical inference that we will use frequently throughout this book because of its power and flexibility.  In bootstrapping, we use only the data we've collected and computing power to estimate the uncertainty surrounding our parameter estimates.  Our primary assumption is that our original sample represents the larger population, and then we can learn about uncertainty in our parameter estimates through repeated samples (with replacement) from our original sample.  
 
@@ -464,8 +466,8 @@ If we wish to use bootstrapping to obtain confidence intervals for our coefficie
 
 - take a (bootstrap) sample of 122 years of Derby data with replacement, so that some years will get sampled several times and others not at all.  This is **case resampling**, \index{case resampling} so that all information from a given year (winning speed, track condition, number of starters) remains together.
 - fit Model 4 to the bootstrap sample, saving $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$.
-- repeat the two steps above a large number of times (say 1000)
-- the 1000 bootstrap estimates for each parameter can be plotted to show the **bootstrap distribution** \index{bootstrap distribution} (see Figure \@ref(fig:boot4))
+- repeat the two steps above a large number of times (say 1000).
+- the 1000 bootstrap estimates for each parameter can be plotted to show the **bootstrap distribution** \index{bootstrap distribution} (see Figure \@ref(fig:boot4)).
 - a 95\% confidence interval for each parameter can be found by taking the middle 95\% of each bootstrap distribution---i.e., by picking off the 2.5 and 97.5 percentiles.  This is called the **percentile method**. \index{percentile method}
 
 ```{r model4boot, comment=NA, message=FALSE}
@@ -482,7 +484,7 @@ bootreg %>%
             high=quantile(estimate, .975))
 ```
 
-```{r boot4, fig.align = "center", out.width = "90%", fig.cap = 'Bootstrapped distributions for Model 4 coefficients', echo=FALSE, warning=FALSE}
+```{r boot4, fig.align = "center", out.width = "90%", fig.cap = 'Bootstrapped distributions for Model 4 coefficients.', echo=FALSE, warning=FALSE}
 ggplot(bootreg, aes(estimate)) + 
   geom_histogram(bins = 10, color = "black", fill = "white") + 
   facet_wrap(~ term, scales="free")
@@ -492,7 +494,7 @@ In this case, we see that 95\% bootstrap confidence intervals for $\beta_0$, $\b
 
 There are many variations on this bootstrap procedure.  For example, you could sample residuals rather than cases, or you could conduct a parametric bootstrap in which error terms are randomly chosen from a normal distribution.  In addition, researchers have devised other ways of calculating confidence intervals besides the percentile method, including normality, studentized, and bias-corrected and accelerated methods (@Hesterberg2015; @Efron1993; @Davison1997).  We will focus on case resampling and percentile confidence intervals for now for their understandability and wide applicability.  
 
-### Multiple linear regression with an interaction term
+### Multiple Linear Regression with an Interaction Term
 
 Adding terms to form a multiple linear regression model as we did in Model 4 is a very powerful modeling tool, allowing us to account for multiple sources of uncertainty and to obtain more precise estimates of effect sizes after accounting for the effect of important covariates.  One limitation of Model 4, however, is that we must assume that the effect of track condition has been the same for 122 years, or conversely that the yearly improvements in winning speeds are identical for all track conditions.  To expand our modeling capabilities to allow the effect of one predictor to change depending on levels of a second predictor, we need to consider **interaction terms**. \index{interaction}  Amazingly, if we create a new variable by taking the product of `yearnew` and `fast` (i.e., the **interaction** between `yearnew` and `fast`), adding that variable into our model will have the desired effect.  
 
@@ -543,7 +545,7 @@ leading to the following interpretations for estimated model coefficients:
 
 In fact, using interaction allows us to model the relationships we noticed in Figure \@ref(fig:codeds), where both the intercept and slope describing the relationships between `speed` and `year` differ depending on whether track conditions were fast or not.  Note that we interpret the coefficient for the interaction term by comparing slopes under fast and non-fast conditions; this produces a much more understandable interpretation for a reader than attempting to interpret the -0.011 directly.  
 
-### Building a multiple linear regression model {#multreg_build}
+### Building a Multiple Linear Regression Model {#multreg_build}
 
 We now begin iterating toward a "final model" for these data, on which we will base conclusions.  Typical features of a "final multiple linear regression model" include:
 
@@ -559,7 +561,7 @@ Although the process of reporting and writing up research results often demands 
 
 Several tests and measures of model performance can be used when comparing different models for model building:
 
-- $R^2$ \index{R-squared} we have seen; it measures the variability in the response variable explained by the model.  One problem is that $R^2$ always increases with extra predictors, even if the predictors add very little information.
+- $R^2$. \index{R-squared}  Measures the variability in the response variable explained by the model.  One problem is that $R^2$ always increases with extra predictors, even if the predictors add very little information.
 - adjusted $R^2$. \index{adjusted R-squared}  Adds a penalty for model complexity to $R^2$ so that any increase in performance must outweigh the cost of additional complexity.  We should ideally favor any model with higher adjusted $R^2$, regardless of size, but the penalty for model complexity (additional terms) is fairly ad-hoc.
 - AIC (Akaike Information Criterion). \index{AIC}  Again attempts to balance model performance with model complexity, with smaller AIC levels being preferable, regardless of model size.  The BIC (Bayesian Information Criterion) \index{BIC} is similar to the AIC, but with a greater penalty for additional model terms.
 - extra sum of squares F test.  This is a generalization of the t-test for individual model coefficients which can be used to perform significance tests on **nested models**, \index{nested models} where one model is a reduced version of the other.  For example, we could test whether our final model (below) really needs to adjust for track condition, which is comprised of indicators for both fast condition and good condition (leaving slow condition as the reference level).  Our null hypothesis is then $\beta_{3}=\beta_{4}=0$.  We have statistically significant evidence (F = 57.2 on 2 and 116 df, p < .001) that track condition is associated with winning speeds, after accounting for quadratic time trends and number of starters.  
@@ -606,29 +608,29 @@ did_print
 
 This model accounts for the slowing annual increases in winning speed with a negative quadratic term, adjusts for baseline differences stemming from track conditions, and suggests that, for a fixed year and track condition, a larger field is associated with slower winning times (unlike the positive relationship we saw between speed and number of starters in our exploratory analyses).  The model explains 82.7\% of the year-to-year variability in winning speeds, and residual plots show no serious issues with LINE assumptions.  We tested interaction terms for different effects of time or number of starters based on track condition, but we found no significant evidence of interactions.
 
-## Preview of remaining chapters
+## Preview of Remaining Chapters
 
 Having reviewed key ideas from multiple linear regression, you are now ready to extend those ideas, especially to handle non-normal responses and lack of independence.  This section provides a preview of the type of problems you will encounter in the book. For each journal article cited, we provide an abstract in the authors' words, a description of the type of response and, when applicable, the structure of the data. Each of these examples appears later as an exercise, where you can play with the actual data or evaluate the analyses detailed in the articles.    
 
 ### Soccer
 
-@Roskes2011 .  The right side? Under time pressure, approach motivation leads to right-oriented bias.  *Psychological Science* [Online] **22(11)**:1403-7. DOI: 10.1177/0956797611418677, October 2011.   
+@Roskes2011  The right side? Under time pressure, approach motivation leads to right-oriented bias.  *Psychological Science* [Online] **22(11)**:1403-7. DOI: 10.1177/0956797611418677, October 2011.   
 
 > **Abstract:**  Approach motivation, a focus on achieving positive outcomes, is related to relative left-hemispheric brain activation, which translates to a variety of right-oriented behavioral biases. $[\ldots]$ In our analysis of all Federation Internationale de Football Association (FIFA) World Cup penalty shoot-outs, we found that goalkeepers were two times more likely to dive to the right than to the left when their team was behind, a situation that we conjecture induces approach motivation. Because penalty takers shot toward the two sides of the goal equally often, the goalkeepers' right-oriented bias was dysfunctional, allowing more goals to be scored.  
 
-The response for this analysis is the direction of the goalkeeper dive, a binary variable.  For example, you could let Y=1 if the dive is to the right and Y=0 if the dive is to the left.  This response is clearly not normally distributed. One approach to the analysis is logistic regression as described in Chapter \@ref(ch-logreg).  A binomial random variable could also be created for this application by summing the binary variables for each game so that Y= the number of dives right out of the number of dives the goalkeeper makes during a game.  [Thought question: Do you buy the last line of the abstract?]
+The response for this analysis is the direction of the goalkeeper dive, a binary variable.  For example, you could let Y=1 if the dive is to the right and Y=0 if the dive is to the left.  This response is clearly not normally distributed. One approach to the analysis is logistic regression as described in Chapter \@ref(ch-logreg).  A binomial random variable could also be created for this application by summing the binary variables for each game so that Y= the number of dives right out of the number of dives the goalkeeper makes during a game.  [Thought question: Do you believe the last line of the abstract?]
 
 ### Elephant Mating
 
-@Poole1989 .  Mate guarding, reproductive success and female choice in African elephants.  *Animal Behavior* **37**:842-49.   
+@Poole1989  Mate guarding, reproductive success and female choice in African elephants.  *Animal Behavior* **37**:842-49.   
 
-> **Abstract:**  Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, *Loxodonta africana*. Males were not able to compete successfully for access to oestrous females until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35 years old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants...  
+> **Abstract:**  Male guarding of females, male mating success and female choice were studied for 8 years among a population of African elephants, *Loxodonta africana*. Males were not able to compete successfully for access to oestrous females until approximately 25 years of age. Males between 25 and 35 years of age obtained matings during early and late oestrus, but rarely in mid-oestrus. Large musth males over 35-years-old guarded females in mid-oestrus. Larger, older males ranked above younger, smaller males and the number of females guarded by males increased rapidly late in life. Body size and longevity are considered important factors in determining the lifetime reproductive success of male elephants...  
 
 Poole and her colleagues recorded, for each male elephant, his age (in years) and the number of matings for a given year.  The researchers were interested in how age affects the males' mating patterns. Specifically, questions concern whether there is a steady increase in mating success as an elephant ages or if there is an optimal age after which the number of matings decline.  Because the responses of interest are counts (number of matings for each elephant for a given year), we will consider a Poisson regression (see Chapter \@ref(ch-poissonreg)).  The general form for Poisson responses is the number of events for a specified time, volume, or space.    
 
 ### Parenting and Gang Activity
 
-@Walker-Barnes2001 .  Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective.  *Child Development* **72(6)**:1814-31.  
+@Walker-Barnes2001  Ethnic differences in the effect of parenting on gang involvement and gang delinquency: a longitudinal, hierarchical linear modeling perspective.  *Child Development* **72(6)**:1814-31.  
 
 > **Abstract:**  This study examined the relative influence of peer and parenting behavior on changes in adolescent gang involvement and gang-related delinquency. An ethnically diverse sample of 300 ninth-grade students was recruited and assessed on eight occasions during the school year. Analyses were conducted using hierarchical linear modeling. Results indicated that, in general, adolescents decreased their level of gang involvement over the course of the school year, whereas the average level of gang delinquency remained constant over time. As predicted, adolescent gang involvement and gang-related delinquency were most strongly predicted by peer gang involvement and peer gang delinquency, respectively. Nevertheless, parenting behavior continued to significantly predict change in both gang involvement and gang delinquency, even after controlling for peer behavior. A significant interaction between parenting and ethnic and cultural heritage found the effect of parenting to be particularly salient for Black students, for whom higher levels of behavioral control and lower levels of lax parental control were related to better behavioral outcomes over time, whereas higher levels of psychological control predicted worse behavioral outcomes.  
 
@@ -636,7 +638,7 @@ The response for this study is a gang activity measure which ranges from 1 to 10
 
 ### Crime
 
-@Gelman2007 .  An analysis of the NYPD's stop-and-frisk policy in the context of claims of racial bias.  *Journal of the American Statistical Association* **102(479)**:813-823.  
+@Gelman2007  An analysis of the NYPD's stop-and-frisk policy in the context of claims of racial bias.  *Journal of the American Statistical Association* **102(479)**:813-823.  
 
 > **Abstract:** Recent studies by police departments and researchers confirm that police stop racial and ethnic minority citizens more often than whites, relative to their proportions in the population. However, it has been argued stop rates more accurately reflect rates of crimes committed by each ethnic group, or that stop rates reflect elevated rates in specific social areas such as neighborhoods or precincts. Most of the research on stop rates and police-citizen interactions has focused on traffic stops, and analyses of pedestrian stops are rare. In this paper, we analyze data from 175,000 pedestrian stops by the New York Police Department over a fifteen-month period. We disaggregate stops by police precinct, and compare stop rates by racial and ethnic group controlling for previous race-specific arrest rates. We use hierarchical multilevel models to adjust for precinct-level variability, thus directly addressing the question of geographic heterogeneity that arises in the analysis of pedestrian stops. We find that persons of African and Hispanic descent were stopped more frequently than whites, even after controlling for precinct variability and race-specific estimates of crime participation.  
 
@@ -648,14 +650,14 @@ This application involves both non-normal data (number of stops by ethnic group 
 1. **Applications that do not violate assumptions for inference in LLSR**.  Identify the response and explanatory variable(s) for each problem.  Write the LLSR assumptions for inference in the context of each study.  
 
     a. **Cricket Chirps.** Researchers record the number of cricket chirps per minute and temperature during that time to investigate whether the number of chirps varies with the temperature.
-    b. **Women's Heights.** A random selection of women aged 20-24 years are selected and their shoe size is used to predict their height  
+    b. **Women's Heights.** A random selection of women aged 20-24 years are selected and their shoe size is used to predict their height.  
     <br>
 
 1. **Applications that do violate assumptions for inference in LLSR**.  All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated. 
 
     a. **Low Birthweights.** Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight.  They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.
     a. **Clinical Trial I.** A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.
-    a. **Canoes and zip codes.** For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data.  This data is used to create a model for the number of trips made per zip code.
+    a. **Canoes and Zip Codes.** For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data.  Thus, for each zip code we can model the number of trips made as a function of distance traveled and various socioeconomic measures.
     a. **Clinical Trial II.** A randomized clinical trial  investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.
     <br>
 
@@ -675,18 +677,18 @@ This application involves both non-normal data (number of stops by ethnic group 
     l. Interpret (in context) the LLSR estimates for $\beta_3$ and $\beta_5$ in Equation \@ref(eq:model0).  
     <br>
     
-1. **Moneyball.**  In a 2011 article in *The Sport Journal*, Farrar and Bruggink [-@Farrar2011] attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 *Moneyball* book [@Lewis2003].  They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out.  Two regression models are described: a Team Run Production Model and a Player Salary Model.   
+1. **Moneyball.**  In a 2011 article in *The Sport Journal*, Farrar and Bruggink [-@Farrar2011] attempt to show that Major League Baseball general managers did not immediately embrace the findings of Michael Lewis's 2003 *Moneyball* book [@Lewis2003].  They contend that players' on-base percentage remained relatively undercompensated compared to slugging percentage three years after the book came out.  Two regression models are described: Team Run Production Model and Player Salary Model.   
 
     a. Discuss potential concerns (if any) with the LINE assumptions for linear regression in each model.
     b. In Table 3, the authors contend that Model 1 is better than Model 3.  Could you argue that Model 3 is actually better?  How could you run a formal hypothesis test comparing Model 1 to Model 3?
     c. If authors had chosen Model 3 in Table 3 with the two interaction terms, how would that affect their final analysis, in which they compare coefficients of slugging and on-base percentage?  (Hint: write out interpretations for the two interaction coefficients---the first one should be NL:OBP and the second one should be NL:SLG)
-    d. The authors write that "It should also be noted that the runs scored equation fit is better than the one Hakes and Sauer have for their winning equation."  What do you think they mean by this statement?  Why might this comparison not be relevant?
+    d. The authors write that, "It should also be noted that the runs scored equation fit is better than the one Hakes and Sauer have for their winning equation."  What do you think they mean by this statement?  Why might this comparison not be relevant?
     e. In Table 4, Model 1 has a higher adjusted $R^2$ than Model 2, yet the extra term in Model 1 (an indicator value for the National League) is not significant at the 5\% level.  Explain how this is possible.
     f. What limits does this paper have on providing guidance to baseball decision makers?
 
 ### Guided Exercises
 
-1. **Gender discrimination in bank salaries**.  In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees.  One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975.  The following variables, which can be found in `banksalary.csv`, were collected for each worker [@Ramsey2002]:  
+1. **Gender Discrimination in Bank Salaries**.  In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees.  One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975.  The following variables, which can be found in `banksalary.csv`, were collected for each worker [@Ramsey2002]:  
     - `bsal` = beginning salary (annual salary at time of hire)
     - `sal77` = annual salary in 1977
     - `sex` = MALE or FEMALE
@@ -712,7 +714,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     o. Build your own final model for this study and justify the selection of your final model.  You might consider interactions with gender, since those terms could show that discrimination is stronger among certain workers.  Based on your final model, do you find evidence of gender discrimination at Harris Trust?  
 <br>
 
-1. **Sitting and MTL Thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of participant's medial temporal lobe (MTL) in a 2018 paper entitled "Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults".  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
+1. **Sitting and MTL Thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of a participant's medial temporal lobe (MTL) in a 2018 paper entitled, "Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults".  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
     - `MTL` = Medial temporal lobe thickness in mm 
     - `sitting` =  Reported hours/day spent sitting
     - `MET` =  Reported metabolic equivalent unit minutes per week
@@ -720,12 +722,12 @@ This application involves both non-normal data (number of stops by ethnic group 
     - `sex` = Sex (`M` = Male, `F` = Female)
     - `education` = Years of education completed
     </ul>
-    a. In their article's introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your explanatory and response variables, respectively. Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
-    b. In the paper's section, "Statistical analysis", the authors report that "Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures."  Generate both a histogram of `MET` values and log--transformed `MET` values. Do you agree with the paper's decision to use a log-transformation here?
+    a. In their article's introduction, Siddarth et al. differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that, "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your explanatory and response variables, respectively. Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? Does this support the claim that sedentary behaviors may be independent from physical activity?
+    b. In the paper's section, "Statistical analysis", the authors report that, "Due to the skewed distribution of physical activity levels, we used log-transformed values in all analyses using continuous physical activity measures."  Generate both a histogram of `MET` values and log--transformed `MET` values. Do you agree with the paper's decision to use a log-transformation here?
     c. Fit a preliminary model with `MTL` as the response and `sitting` as the sole explanatory variable.  Are LLSR conditions satisfied?
     d. Expand on your previous model by including a centered version of `age` as a covariate. Interpret all three coefficients in this model.
     e. One model fit in @Siddarth2018 includes `sitting`, log--transformed `MET`, and `age` as explanatory variables. They report an estimate $\hat{\beta}_{1} = -0.02$ with confidence interval $(-0.04,-0.002)$ for the coefficient corresponding to `sitting`, and $\hat{\beta}_{2} = 0.007$ with confidence interval $(-0.07, 0.08)$ for the coefficient corresponding to `MET`. Verify these intervals and estimates on your own.
-    f. Based on your confidence intervals from the previous part, do you support the paper's claim that "it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]"? Why or why not?
+    f. Based on your confidence intervals from the previous part, do you support the paper's claim that, "it is possible that sedentary behavior is a more significant predictor of brain structure, specifically MTL thickness [than physical activity]"? Why or why not?
     g. A *New York Times* article was published discussing @Siddarth2018 with the title "Standing Up at Your Desk Could Make You Smarter" [@Friedman2018]. Do you agree with this headline choice? Why or why not?  
 <br>
 
@@ -745,7 +747,7 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     a. Generate appropriate graphs and summary statistics detailing both `price` and `sqft` individually and then together. What do you notice?
     b. Fit a simple linear regression model with `price` as the response variable and `sqft` as the explanatory variable (Model 1). Interpret the slope coefficient $\beta_1$. Are all conditions met for linear regression?
     c. Create a new variable, `logprice`, the natural log of `price`. Fit Model 2, where `logprice` is now the response variable and `sqft` is still the explanatory variable. Write out the regression line equation.
-    d. How does `logprice` change when `sqft` increases by 1.
+    d. How does `logprice` change when `sqft` increases by 1?
     e. Recall that $\log(a) - \log(b) = \log\big(\frac{a}{b}\big)$, and use this to derive how `price` changes as `sqft` increases by 1.
     f. Are LLSR assumptions satisfied in Model 2? Why or why not?
     g. Create a new variable, `logsqft`, the natural log of `sqft`. Fit Model 3 where `price` and `logsqft` are the response and explanatory variables, respectively. Write out the regression line equation.
@@ -758,12 +760,12 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     n. Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted $R^2$ value. Interpret the coefficient of this added variable.
     
 ### Open-ended Exercises
-1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article "The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women" [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
+1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article, "The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women" [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
     - there are at least two named women in the picture
     - they have a conversation with each other at some point
     - that conversation isn’t about a male character </ul>
     
-    While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that "passing the Bechdel test had no effect on the film’s return on investment." Their data can be found in `bechdel.csv`. Key variables include:
+    While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that, "passing the Bechdel test had no effect on the film’s return on investment." Their data can be found in `bechdel.csv`. Key variables include:
   <ul>
     - `year` = the year the film premiered
     - `pass` = 1 if the film passes the Bechdel test, 0 otherwise
