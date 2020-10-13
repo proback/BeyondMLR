@@ -103,7 +103,7 @@ These assumptions are depicted in Figure \@ref(fig:OLSassumptions).
 - **N:** At each level of X, the values for Y are normally distributed.
 - **E:** The spread in the Y's for each level of X is the same.
 
-### Cases That Do Not Violate Assumptions for Inference in LLSR
+### Cases Without Assumption Violations
 
 It can be argued that the following studies do not violate assumptions for inference in linear least squares regression. We begin by identifying the response and the explanatory variables followed by  describing each of the LINE assumptions in the context of the study, commenting on possible problems with the assumptions.  
 
@@ -145,7 +145,7 @@ It can be argued that the following studies do not violate assumptions for infer
 
     Heights and other similar measurements are often normally distributed.  There would be a problem with the independence assumption if multiple sons from the same family were selected.  Or, there would be a problem with equal variance if sons of tall fathers had much more variety in their heights than sons of shorter fathers.  
 
-### Cases Where Assumptions for Inference in LLSR Are Violated
+### Cases With Assumption Violations
 
 1) **Grades and studying.** Is the time spent studying predictive of success on an exam? The time spent studying for an exam, in hours, and success, measured as Pass or Fail, are recorded for  randomly selected students.  
   
@@ -688,7 +688,7 @@ This application involves both non-normal data (number of stops by ethnic group 
 
 ### Guided Exercises
 
-1. **Gender Discrimination in Bank Salaries**.  In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees.  One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975.  The following variables, which can be found in `banksalary.csv`, were collected for each worker [@Ramsey2002]:  
+1. **Gender discrimination in bank salaries**.  In the 1970’s, Harris Trust was sued for gender discrimination in the salaries it paid its employees.  One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975.  The following variables, which can be found in `banksalary.csv`, were collected for each worker [@Ramsey2002]:  
     - `bsal` = beginning salary (annual salary at time of hire)
     - `sal77` = annual salary in 1977
     - `sex` = MALE or FEMALE
@@ -714,7 +714,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     o. Build your own final model for this study and justify the selection of your final model.  You might consider interactions with gender, since those terms could show that discrimination is stronger among certain workers.  Based on your final model, do you find evidence of gender discrimination at Harris Trust?  
 <br>
 
-1. **Sitting and MTL Thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of a participant's medial temporal lobe (MTL) in a 2018 paper entitled, "Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults".  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
+1. **Sitting and MTL thickness.** @Siddarth2018 researched relations between time spent sitting (sedentary behavior) and the thickness of a participant's medial temporal lobe (MTL) in a 2018 paper entitled, "Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults".  MTL volume is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: <ul>
     - `MTL` = Medial temporal lobe thickness in mm 
     - `sitting` =  Reported hours/day spent sitting
     - `MET` =  Reported metabolic equivalent unit minutes per week
@@ -731,7 +731,7 @@ This application involves both non-normal data (number of stops by ethnic group 
     g. A *New York Times* article was published discussing @Siddarth2018 with the title "Standing Up at Your Desk Could Make You Smarter" [@Friedman2018]. Do you agree with this headline choice? Why or why not?  
 <br>
 
-1. **Housing Prices and log Transformations.** The dataset `kingCountyHouses.csv` contains data on over 20,000 houses sold in King County,
+1. **Housing prices and log transformations.** The dataset `kingCountyHouses.csv` contains data on over 20,000 houses sold in King County,
 Washington [@harlfoxem]. The dataset includes the following variables:  
     - `price` = selling price of the house
     - `date` = date house was sold, measured in days since January 1, 2014
@@ -759,7 +759,7 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     m. Are LLSR assumptions satisfied in Model 4? Why or why not?
     n. Find another explanatory variable which can be added to Model 4 to create a model with a higher adjusted $R^2$ value. Interpret the coefficient of this added variable.
     
-### Open-ended Exercises
+### Open-Ended Exercises
 1. **The Bechdel Test.** In April, 2014, website FiveThirtyEight published the article, "The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women" [@Hickey2014]. There, they analyze returns on investment for 1,615 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:
     - there are at least two named women in the picture
     - they have a conversation with each other at some point
@@ -781,7 +781,7 @@ Washington [@harlfoxem]. The dataset includes the following variables:
     With this in mind, carry out your own analysis. Does passing the Bechdel test have any effect on a film's return on investment? 
 
 
-1. **Waitress Tips.**  A student collected data from a restaurant where she was a waitress [@Dahlquist2011].  The student was interested in learning under what conditions a waitress can expect the largest tips---for example:  At dinner time or late at night?  From younger or older patrons?  From patrons receiving free meals?  From patrons drinking alcohol?  From patrons tipping with cash or credit?  And should tip amount be measured as total dollar amount or as a percentage? Data can be found in `TipData.csv`. Here is a quick description of the variables collected:
+1. **Waitress tips.**  A student collected data from a restaurant where she was a waitress [@Dahlquist2011].  The student was interested in learning under what conditions a waitress can expect the largest tips---for example:  At dinner time or late at night?  From younger or older patrons?  From patrons receiving free meals?  From patrons drinking alcohol?  From patrons tipping with cash or credit?  And should tip amount be measured as total dollar amount or as a percentage? Data can be found in `TipData.csv`. Here is a quick description of the variables collected:
 
     - `Day` = day of the week
     - `Meal` = time of day (Lunch, Dinner, Late Night)

@@ -1,6 +1,6 @@
 ---
 title: "Chapter 10"
-subtitle: "Multilevel Data With More Than Two Levels"
+subtitle: "Multilevel Data with More Than Two Levels"
 output:
   html_document: default
   pdf_document:
@@ -44,15 +44,15 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 
 ## Case Studies: Seed Germination {#cs:seeds}
 
-It is estimated that 82-99\% of historic tallgrass prairie ecosystems have been converted to agricultural use [@Baer2002]. A prime example of this large scale conversion of native prairie to agricultural purposes can be seen in Minnesota, where less than 1\% of the prairies that once existed in the state still remain [@Camill2004]. Such large scale alteration of prairie communities has been associated with numerous problems. For example, erosion and decomposition that readily take place in cultivated soils have increased atmospheric CO2 levels and increased nitrogen inputs to adjacent waterways (@Baer2002, @Camill2004, @Knops2000). In addition, cultivation practices are known to affect rhizosphere composition as tilling can disrupt networks of soil microbes [@Allison2005]. The rhizosphere is the narrow region of soil that is directly influenced by root secretions and associated soil microorganisms; much of the nutrient cycling and disease suppression needed by plants occur immediately adjacent to roots. It is important to note that microbial communities in prairie soils have been implicated with plant diversity and overall ecosystem function by controlling carbon and nitrogen cycling in the soils [@Zak2003]. 
+It is estimated that 82-99\% of historic tallgrass prairie ecosystems have been converted to agricultural use [@Baer2002]. A prime example of this large scale conversion of native prairie to agricultural purposes can be seen in Minnesota, where less than 1\% of the prairies that once existed in the state remain [@Camill2004]. Such large-scale alteration of prairie communities has been associated with numerous problems. For example, erosion and decomposition that readily take place in cultivated soils have increased atmospheric $\textrm{CO}_2$ levels and increased nitrogen inputs to adjacent waterways (@Baer2002, @Camill2004, @Knops2000). In addition, cultivation practices are known to affect rhizosphere composition as tilling can disrupt networks of soil microbes [@Allison2005]. The rhizosphere is the narrow region of soil that is directly influenced by root secretions and associated soil microorganisms; much of the nutrient cycling and disease suppression needed by plants occur immediately adjacent to roots. It is important to note that microbial communities in prairie soils have been implicated with plant diversity and overall ecosystem function by controlling carbon and nitrogen cycling in the soils [@Zak2003]. 
 
-There have been many responses to these claims, but one response in recent years is reconstruction of the native prairie community. These reconstruction projects provide new habitat for a variety of native prairie species, yet it is important to know as much as possible about the outcomes of prairie reconstruction projects in order to ensure that a functioning prairie community is established. The ecological repercussions resulting from prairie reconstruction are not well known. For example, all of the aforementioned changes associated with cultivation practices are known to affect the subsequent reconstructed prairie community (@Baer2002, @Camill2004), yet there are few explanations for this phenomenon. For instance, prairies reconstructed in different years (using the same seed combinations and dispersal techniques) have yielded disparate prairie communities. 
+There have been many responses to these claims, but one response in recent years is reconstruction of the native prairie community. These reconstruction projects provide a new habitat for a variety of native prairie species, yet it is important to know as much as possible about the outcomes of prairie reconstruction projects in order to ensure that a functioning prairie community is established. The ecological repercussions resulting from prairie reconstruction are not well known. For example, all of the aforementioned changes associated with cultivation practices are known to affect the subsequent reconstructed prairie community (@Baer2002, @Camill2004), yet there are few explanations for this phenomenon. For instance, prairies reconstructed in different years (using the same seed combinations and dispersal techniques) have yielded disparate prairie communities. 
 
-Researchers at a small Midwestern college decided to experimentally explore the underlying causes of variation in reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect longitudinal data on native plant species grown in a greenhouse setting, using soil samples from surrounding lands [@Angell2010]. We will examine their data to compare germination and growth of two species of prairie plants---leadplants (*Amorpha canescens*) and coneflowers (*Ratibida pinnata*)---in soils taken from a remnant (natural) prairie, a cultivated (agricultural) field, and a restored (reconstructed) prairie. Additionally, half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation, so we will examine the effects of sterilization as well.
+Researchers at a small midwestern college decided to experimentally explore the underlying causes of variation in reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect longitudinal data on native plant species grown in a greenhouse setting, using soil samples from surrounding lands [@Angell2010]. We will examine their data to compare germination and growth of two species of prairie plants---leadplants (*Amorpha canescens*) and coneflowers (*Ratibida pinnata*)---in soils taken from a remnant (natural) prairie, a cultivated (agricultural) field, and a restored (reconstructed) prairie. Additionally, half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation, so we will examine the effects of sterilization as well.
 
 The data we'll examine was collected through an experiment run using a 3x2x2 factorial design, with 3 levels of soil type (remnant, cultivated, and restored), 2 levels of sterilization (yes or no), and 2 levels of species (leadplant and coneflower). Each of the 12 treatments (unique combinations of factor levels) was replicated in 6 pots, for a total of 72 pots. Six seeds were planted in each pot (although a few pots had 7 or 8 seeds), and initially student researchers recorded days to germination (defined as when two leaves are visible), if germination occurred. In addition, the height of each germinated plant (in mm) was measured at 13, 18, 23, and 28 days after planting. The study design is illustrated in Figure \@ref(fig:seedstudy).
 
-```{r, seedstudy, out.width='80%', fig.show='hold', fig.cap="The design of the seed germination study", echo=FALSE}
+```{r, seedstudy, out.width='80%', fig.show='hold', fig.cap="The design of the seed germination study.", echo=FALSE}
 knitr::include_graphics("data/StudyDesignDiagram.PNG")
 
 # Can also put these lines outside of R chunk
@@ -98,7 +98,7 @@ kable(table1chp10, booktabs=T,
       kable_styling(latex_options = "scale_down")
 ```
 
-Although the experimental design called for $72*6=432$ plants, the wide data set has 437 plants because a few pots had more than six plants (likely because two of the microscopically small seeds stuck together when planted). Of those 437 plants, 154 had no height data (did not germinate by the 28th day) and were removed from analysis (for example, see rows 145-146 in Table \@ref(tab:table1chp10)). 248 plants had complete height data (e.g., rows 135-139 and 141-143), 13 germinated later than the 13th day but had complete heights once they germinated (e.g., row 144), and 22 germinated and had measurable height on the 13th day but died before the 28th day (e.g., row 140). Ultimately, the long data set contains 1132 unique observations where plants heights were recorded; representation of plants 236-242 in the long data set can be seen in Table \@ref(tab:table2chp10).
+Although the experimental design called for $72*6=432$ plants, the wide data set has 437 plants because a few pots had more than six plants (likely because two of the microscopically small seeds stuck together when planted). Of those 437 plants, 154 had no height data (did not germinate by the 28th day) and were removed from analysis (for example, see rows 145-146 in Table \@ref(tab:table1chp10)). A total of 248 plants had complete height data (e.g., rows 135-139 and 141-143), 13 germinated later than the 13th day but had complete heights once they germinated (e.g., row 144), and 22 germinated and had measurable height on the 13th day but died before the 28th day (e.g., row 140). Ultimately, the long data set contains 1132 unique observations where plants heights were recorded; representation of plants 236-242 in the long data set can be seen in Table \@ref(tab:table2chp10).
 
 ```{r, include=FALSE}
 # Investigate patterns of missingness
@@ -203,7 +203,7 @@ grid.arrange(cone.soil, cone.sterile, lead.soil,
 
 We also use spaghetti plots to examine time trends within species to see (a) if it is reasonable to assume linear growth between Day 13 and Day 28 after planting, and (b) if initial height and rate of growth is similar in the two species. Figure \@ref(fig:spagbyspec) illustrates differences between species. While both species have similar average heights 13 days after planting, coneflowers appear to have faster early growth which slows later, while leadplants have a more linear growth rate which culminates in greater average heights 28 days after planting. Coneflowers also appear to have greater variability in initial height and growth rate, although there are more coneflowers with height data.
 
-```{r,spagbyspec,fig.align="center",out.width="60%", fig.cap='Spaghetti plot by species with loess fit.  Each "line" represents one plant.',echo=FALSE, warning=FALSE, message=FALSE}
+```{r,spagbyspec,fig.align="center",out.width="60%", fig.cap='Spaghetti plot by species with loess fit.  Each line represents one plant.',echo=FALSE, warning=FALSE, message=FALSE}
 # spaghetti plot by species - all plants (This plot used 
 #   earlier now); add loess smoothing curve for overall trend
 seedlg <- seedlg %>%
@@ -219,7 +219,7 @@ ggplot(seedlg,aes(x=time,y=hgt)) +
 options(warn = -1)
 ```
 
-Exploratory analyses such as these confirm the suspicions of biology researchers that leadplants and coneflowers should be analyzed separately. Because of biological differences, it is expected that these two species will show different growth patterns and respond differently to treatments such as fertilization. Coneflowers are members of the aster family, growing up to 4 feet tall with their distinctive gray seed heads and drooping yellow petals. Leadplants, on the other hand, are members of the bean family, with purple flowers, a height of 1 to 3 feet, and compound greyish green leaves which look to be dusted with white lead. Leadplants have deep root systems and are symbiotic N-fixers, which means they might experience stifled growth in sterilized soil compared with other species. For the remainder of this chapter, we will focus on __leadplants__ and how their growth patterns are affected by soil type and sterilization. You will have a chance to analyze coneflower data later in the Exercises section.
+Exploratory analyses such as these confirm the suspicions of biology researchers that leadplants and coneflowers should be analyzed separately. Because of biological differences, it is expected that these two species will show different growth patterns and respond differently to treatments such as fertilization. Coneflowers are members of the aster family, growing up to 4 feet tall with their distinctive gray seed heads and drooping yellow petals. Leadplants, on the other hand, are members of the bean family, with purple flowers, a height of 1 to 3 feet, and compound grayish green leaves which look to be dusted with white lead. Leadplants have deep root systems and are symbiotic N-fixers, which means they might experience stifled growth in sterilized soil compared with other species. For the remainder of this chapter, we will focus on __leadplants__ and how their growth patterns are affected by soil type and sterilization. You will have a chance to analyze coneflower data later in the Exercises section.
 
 Lattice plots, illustrating several observational units simultaneously, each with fitted lines where appropriate, are also valuable to examine during the exploratory analysis phase. Figure \@ref(fig:lattlpall) shows height over time for 24 randomly selected leadplants that germinated in this study, with a fitted linear regression line. Linearity appears reasonable in most cases, although there is some variability in the intercepts and a good deal of variability in the slopes of the fitted lines. These intercepts and slopes by plant, of course, will be potential parameters in a multilevel model which we will fit to this data. Given the three-level nature of this data, it is also useful to examine a spaghetti plot by pot (Figure \@ref(fig:spaglppot)). While linearity appears to reasonably model the average trend over time within pot, we see differences in the plant-to-plant variability within pot, but some consistency in intercept and slope from pot to pot.
 
@@ -309,7 +309,7 @@ rate.hist <- ggplot(int.rate.rsq,aes(x=rate)) +
   theme.1 + labs(x="Slopes",y="Frequency",title="(b)")
 rsq.hist <- ggplot(int.rate.rsq,aes(x=rsq)) + 
   geom_histogram(binwidth=0.1,color="black",fill="white") +
-  theme.1 + labs(x="R squared values",y="Frequency",title="(c)")
+  theme.1 + labs(x="R-squared values",y="Frequency",title="(c)")
 ```
 
 ```{r, intrateplant, fig.align="center",out.width="60%", fig.cap=' Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all leadplants.',echo=FALSE, warning=FALSE}
@@ -346,7 +346,7 @@ rate2.hist <- ggplot(int.rate.rsq2,aes(x=rate2)) +
   theme.1 + labs(x="Slopes",y="Frequency",title="(b)")
 rsq2.hist <- ggplot(int.rate.rsq2,aes(x=rsq2)) + 
   geom_histogram(binwidth=0.2,color="black",fill="white") + 
-  theme.1 + labs(x="R squared values",y="Frequency",title="(c)")
+  theme.1 + labs(x="R-squared values",y="Frequency",title="(c)")
 ```
 
 ```{r, intratepot, fig.align="center",out.width="60%", fig.cap='Histograms of (a) intercepts, (b) slopes, and (c) R-squared values for linear fits across all pots with leadplants.',echo=FALSE, warning=FALSE}
@@ -468,9 +468,11 @@ ggpairs(hgtw.1[,2:5], lower=list(continuous="smooth"),
 ```
 
 
-## Initial models: unconditional means and unconditional growth {#initialmodels-3level}
+## Initial Models {#initialmodels-3level}
 
-The structure and notation for three level models will closely resemble the structure and notation for two level models, just with extra subscripts. Therein lies some of the power of multilevel models---extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section \@ref(sec:explodingvarcomps)).
+The structure and notation for three level models will closely resemble the structure and notation for two-level models, just with extra subscripts. Therein lies some of the power of multilevel models---extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section \@ref(sec:explodingvarcomps)).
+
+### Unconditional Means
 
 We once again begin with the __unconditional means model__, \index{unconditional means model} in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:
 
@@ -494,17 +496,17 @@ a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_
 
 where the heights of plants from different pots are considered independent, but plants from the same pot are correlated as well as measurements at different times from the same plant.
 
-Keeping track of all the model terms, especially with three subscripts, is not a trivial task, but it's worth spending time thinking through. Here is a quick guide to the meaning of terms found in our three-level model:
+Keeping track of all the model terms, especially with three subscripts, is not a trivial task, but it's worth spending time thinking it through. Here is a quick guide to the meaning of terms found in our three-level model:
 
 - $Y_{ijk}$ is the height (in mm) of plant $j$ from pot $i$ at time $k$
 - $a_{ij}$ is the true mean height for plant $j$ from pot $i$ across all time points. This is not considered a model parameter, since we further model $a_{ij}$ at Level Two.
 - $a_{i}$ is the true mean height for pot $i$ across all plants from that pot and all time points. This is also not considered a model parameter, since we further model $a_{i}$ at Level Three.
-- $\alpha_{0}$ is a fixed effects model parameter representing the true mean height across all pots, plants, and time points
-- $\epsilon_{ijk}$ describes how far an observed height $Y_{ijk}$ is from the mean height for plant $j$ from pot $i$
-- $u_{ij}$ describe how far the mean height of plant $j$ from pot $i$ is from the mean height of all plants from pot $i$
+- $\alpha_{0}$ is a fixed effects model parameter representing the true mean height across all pots, plants, and time points.
+- $\epsilon_{ijk}$ describes how far an observed height $Y_{ijk}$ is from the mean height for plant $j$ from pot $i$.
+- $u_{ij}$ describe how far the mean height of plant $j$ from pot $i$ is from the mean height of all plants from pot $i$.
 - $\tilde{u}_{i}$ describes how far the mean height of all observations from pot $i$ is from the overall mean height across all pots, plants, and time points. None of the error terms ($\epsilon, u, \tilde{u}$) are considered model parameters; they simply account for differences between the observed data and expected values under our model.
-- $\sigma^2$ is a variance component (random effects model parameter) that describes within-plant variability over time
-- $\sigma_{u}^{2}$ is the variance component describing plant-to-plant variability within pot
+- $\sigma^2$ is a variance component (random effects model parameter) that describes within-plant variability over time.
+- $\sigma_{u}^{2}$ is the variance component describing plant-to-plant variability within pot.
 - $\sigma_{\tilde{u}}^{2}$ is the variance component describing pot-to-pot variability.
 
 The three-level unconditional means model can also be expressed as a composite model:
@@ -538,6 +540,8 @@ From this output, we obtain estimates of our four model parameters:
 - $\hat{\sigma}_{\tilde{u}}^{2}=0.049=$ the variance between pots.
 
 From the estimates of variance components, 69.0\% of total variability in height measurements is due to differences over time for each plant, 26.4\% of total variability is due to differences between plants from the same pot, and only 4.6\% of total variability is due to difference between pots. Accordingly, we will next explore whether the incorporation of time as a linear predictor at Level One can reduce the unexplained variability within plant.
+
+### Unconditional Growth
 
 The __unconditional growth model__ \index{unconditional growth model} introduces time as a predictor at Level One, but there are still no predictors at Levels Two or Three. The unconditional growth model allows us to assess how much of the within-plant variability (the variability among height measurements from the same plant at different time points) can be attributed to linear changes over time, while also determining how much variability we see in the intercept (Day 13 height) and slope (daily growth rate) from plant-to-plant and pot-to-pot. Later, we can model plant-to-plant and pot-to-pot differences in intercepts and slopes with Level Two and Three covariates.
 
@@ -626,10 +630,10 @@ From this output, we obtain estimates of our nine model parameters (two fixed ef
 - $\hat{\sigma}_{\tilde{v}}=.0355=$ the standard deviation in rates of change in height between pots.
 - $\hat{\rho}_{\tilde{u}\tilde{v}}=-.610=$ the correlation in pots' Day 13 height and their rate of change in height.
 
-We see that, on average, leadplants have a height of 1.54 mm thirteen days after planting (pooled across pots and treatment groups), and their heights tend to grow by 0.11 mm per day, producing an average height at the end of the study (Day 28) of 3.22 mm. According to the t-values listed in R, both the Day 13 height and the growth rate are statistically significant. The estimated within-plant variance $\hat{\sigma}^2$ decreased by 88.7\% from the unconditional means model (from 0.728 to 0.082), implying that 88.7\% of within-plant variability in height can be explained by linear growth over time.
+We see that, on average, leadplants have a height of 1.54 mm 13 days after planting (pooled across pots and treatment groups), and their heights tend to grow by 0.11 mm per day, producing an average height at the end of the study (Day 28) of 3.22 mm. According to the t-values listed in R, both the Day 13 height and the growth rate are statistically significant. The estimated within-plant variance $\hat{\sigma}^2$ decreased by 88.7\% from the unconditional means model (from 0.728 to 0.082), implying that 88.7\% of within-plant variability in height can be explained by linear growth over time.
 
 
-## Encountering boundary constraints {#sec:boundary}
+## Encountering Boundary Constraints {#sec:boundary}
 
 Typically, with models consisting of three or more levels, the next step after adding covariates at Level One (such as time) is considering covariates at Level Two. In the seed germination experiment, however, there are no Level Two covariates of interest, and the treatments being studied were applied to pots (Level Three). We are primarily interested in the effects of soil type and sterilization on the growth of leadplants. Since soil type is a categorical factor with three levels, we can represent soil type in our model with indicator variables for cultivated lands (`cult`) and remnant prairies (`rem`), using reconstructed prairies as the reference level. For sterilization, we create a single indicator variable (`strl`) which takes on the value 1 for sterilized soil.
 
@@ -696,7 +700,7 @@ However, Model C has encountered a __boundary constraint__ \index{boundary const
 
 Consider a model in which we have two parameters that must be estimated: $\beta_0$ and $\sigma^2$. As the intercept, $\beta_0$ can take on any value; any real number is "allowable".  But, by definition, variance terms such as $\sigma^2$ must be non-negative; that is, $\sigma^2 \geq 0$.  Under the Principle of Maximum Likelihood, maximum likelihood estimators for $\beta_0$ and $\sigma^2$ will be chosen to maximize the likelihood of observing our given data. The left plot in Figure \@ref(fig:boundary) shows hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$; the likelihood is clearly maximized at $(\hat{\beta}_0 , \hat{\sigma}^2)=(4,-2)$. However, variance terms cannot be negative! A more sensible approach would have been to perform a constrained search for MLEs, considering any potential values for $\beta_0$ but only non-negative values for $\sigma^2$. This constrained search is illustrated in the right plot in Figure \@ref(fig:boundary). In this case, the likelihood is maximized at $(\hat{\beta}_0 , \hat{\sigma}^2)=(4,0)$. Note that the estimated intercept did not change, but the estimated variance is simply set at the smallest allowable value -- at the __boundary constraint__.
 
-(ref:capboundary) Left (a): hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$ with no restrictions on $\sigma^2$; the likelihood function is maximized at $(\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)$. Right (b): hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$ with the restriction that $\sigma^2 \geq 0$; the constrained likelihood function is maximized at $(\hat{\beta}_0, \hat{\sigma}^2)=(4,0)$
+(ref:capboundary) Left (a): hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$ with no restrictions on $\sigma^2$; the likelihood function is maximized at $(\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)$. Right (b): hypothetical contours of the likelihood function $L(\beta_0, \sigma^2)$ with the restriction that $\sigma^2 \geq 0$; the constrained likelihood function is maximized at $(\hat{\beta}_0, \hat{\sigma}^2)=(4,0)$.
 
 ```{r,boundary,  fig.align="center",out.width="60%",fig.cap='(ref:capboundary)',echo=FALSE, warning=FALSE, message=FALSE}
 #thr-contour-boundary
@@ -742,10 +746,10 @@ Graphically, in this simple illustration, the effect of the boundary constraint 
 
 In general, then, boundary constraints occur when the maximum likelihood estimator of at least one model parameter occurs at the limits of allowable values (such as estimated correlation coefficients of -1 or 1, or estimated variances of 0). Maximum likelihood estimates at the boundary tend to indicate that the likelihood function would be maximized at non-allowable values of that parameter, if an unconstrained search for MLEs was conducted. Most software packages, however, will only report maximum likelihood estimates with allowable values. Therefore, boundary constraints would ideally be avoided, if possible.
 
-What should you do if you encounter boundary constraints? Often, boundary constraints signal that your model needs to be reparameterized -- i.e., you should alter your model to feature different parameters or ones that are interpreted differently. This can be accomplished in several ways:
+What should you do if you encounter boundary constraints? Often, boundary constraints signal that your model needs to be reparameterized, i.e., you should alter your model to feature different parameters or ones that are interpreted differently. This can be accomplished in several ways:
 
-- remove parameters, especially those variance and correlation terms which are being estimated on their boundaries
-- fix the values of certain parameters; for instance, you could set two variance terms equal to each other, thereby reducing the number of unknown parameters to estimate by one
+- remove parameters, especially those variance and correlation terms which are being estimated on their boundaries.
+- fix the values of certain parameters; for instance, you could set two variance terms equal to each other, thereby reducing the number of unknown parameters to estimate by one.
 - transform covariates. Centering variables, standardizing variables, or changing units can all help stabilize a model. Numerical procedures for searching for and finding maximum likelihood estimates can encounter difficulties when variables have very high or low values, extreme ranges, outliers, or are highly correlated.
 
 Although it is worthwhile attempting to reparameterize models to remove boundary constraints, sometimes they can be tolerated if (a) you are not interested in estimates of those parameters encountering boundary issues, and (b) removing those parameters does not affect conclusions about parameters of interest. For example, in the output below we explore the implications of simply removing the correlation between error terms at the pot level (i.e., assume $\rho_{\tilde{u}\tilde{v}}=0$ rather than accepting the (constrained) maximum likelihood estimate of $\hat{\rho}_{\tilde{u}\tilde{v}}=-1$ that we saw in Model C).
@@ -791,7 +795,7 @@ a_{i} & = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\al
 b_{i} & = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}
 
-Note that there is no longer an error term associated with the model for mean growth rate $b_{i}$ at the pot level. The growth rate for pot $i$ is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal:  $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$. By removing one of our two Level Three error terms ($\tilde{v}_{i}$), we effectively removed two parameters -- the variance for $\tilde{v}_{i}$ and the correlation between $\tilde{u}_{i}$ and $\tilde{v}_{i}$.  Fixed effects remain similar, as can be seen in the output below:
+Note that there is no longer an error term associated with the model for mean growth rate $b_{i}$ at the pot level. The growth rate for pot $i$ is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal:  $\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})$. By removing one of our two Level Three error terms ($\tilde{v}_{i}$), we effectively removed two parameters: the variance for $\tilde{v}_{i}$ and the correlation between $\tilde{u}_{i}$ and $\tilde{v}_{i}$.  Fixed effects remain similar, as can be seen in the output below:
 
 ```{r, comment=NA, message=F}
 # Try Model C without time at pot level
@@ -828,26 +832,26 @@ did_print
 ```
 
 
-## Parametric bootstrap testing {#threelevel-paraboot}
+## Parametric Bootstrap Testing {#threelevel-paraboot}
 
 As in Section \@ref(longitudinal-paraboot), when testing variance components at the boundary (such as $\sigma_{\tilde{v}}^{2} = 0$), a method like the **parametric bootstrap** \index{parametric bootstrap} should be used, since using a chi-square distribution to conduct a likelihood ratio test produces p-values that tend to be too large.
 
 Under the parametric bootstrap, we must simulate data under the null hypothesis many times.  Here are the basic steps for running a parametric bootstrap procedure to compare Model C.1 with Model C:
 
-- Fit Model C.1 (the null model) to obtain estimated fixed effects and variance components (this is the "parametric" part.)
-- Use the estimated fixed effects and variance components from the null model to regenerate a new set of plant heights with the same sample size ($n=413$) and associated covariates for each observation as the original data (this is the "bootstrap" part.)
-- Fit both Model C.1 (the reduced model) and Model C (the full model) to the new data
-- Compute a likelihood ratio statistic comparing Models C.1 and C
-- Repeat the previous 3 steps many times (e.g., 1000)
-- Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true
-- Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
+- Fit Model C.1 (the null model) to obtain estimated fixed effects and variance components (this is the "parametric" part).
+- Use the estimated fixed effects and variance components from the null model to regenerate a new set of plant heights with the same sample size ($n=413$) and associated covariates for each observation as the original data (this is the "bootstrap" part).
+- Fit both Model C.1 (the reduced model) and Model C (the full model) to the new data.
+- Compute a likelihood ratio statistic comparing Models C.1 and C.
+- Repeat the previous 3 steps many times (e.g., 1000).
+- Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true.
+- Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic.
 
 Let's see how new plant heights are generated under the parametric bootstrap. Consider, for instance, $i=1$ and $j=1,2$. That is, consider Plants \#11 and \#12 as shown in Table \@ref(tab:10verb7). These plants are found in Pot \#1, which was randomly assigned to contain sterilized soil from a restored prairie (STP):
 
 ```{r, 10verb7, echo=FALSE, comment=NA}
 verb7 <- seedwd[1:2, c(2:11)]
 kable(verb7, booktabs=T, 
-      caption = "Original data for Plants 11 and 12 from Pot 1") %>%
+      caption = "Original data for Plants 11 and 12 from Pot 1.") %>%
       kable_styling(latex_options = "scale_down")
 ```
 
@@ -906,7 +910,7 @@ We would next turn to Plant \#12 from Pot \#1 ($i=1$ and $j=2$). Fixed effects w
 Once an entire set of simulated heights for every pot, plant, and time point have been generated based on Model C.1, two models are fit to this data:
 
 - Model C.1 -- the correct (null) model that was actually used to generate the responses
-- Model C -- the incorrect (full) model that contains two extra variance components -- $\sigma_{\tilde{v}}^{2}$ and $\sigma_{\tilde{u}\tilde{v}}$ -- that were not actually used when generating the responses
+- Model C -- the incorrect (full) model that contains two extra variance components, $\sigma_{\tilde{v}}^{2}$ and $\sigma_{\tilde{u}\tilde{v}}$, that were not actually used when generating the responses
 
 ```{r, echo=FALSE, comment=NA, message=FALSE, warning=FALSE}
 # run bootstrapAnova function, then line below takes about 
@@ -997,7 +1001,7 @@ row.names(did_print) <- row.names(drop_in_dev)
 did_print
 ```
 
-```{r, paraboot10, fig.align="center", out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic.', echo=FALSE, warning=FALSE}
+```{r, paraboot10, fig.align="center", out.width="60%", fig.cap='Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The vertical line represents the observed likelihood ratio test statistic.', echo=FALSE, warning=FALSE}
 
 nullLRT = attr(bRLRT,"nulldist")
 x=seq(0,max(nullLRT),length=100)
@@ -1023,7 +1027,7 @@ set.seed(3313)
 confint(modelcl, method="boot", oldNames = F)
 ```
 
-## Exploding variance components {#sec:explodingvarcomps}
+## Exploding Variance Components {#sec:explodingvarcomps}
 
 Our modeling task in Section \@ref(sec:boundary) was simplified by the absence of covariates at Level Two. As multilevel models grow to include three or more levels, the addition of just a few covariates at lower levels can lead to a huge increase in the number of parameters (fixed effects and variance components) \index{variance components} that must be estimated throughout the model. In this section, we will examine when and why the number of model parameters might explode, and we will consider strategies for dealing with these potentially complex models.
 
@@ -1091,7 +1095,7 @@ where $\epsilon_{ijk}\sim N(0,\sigma^2)$,
           \end{array} \right] \right). \]
 We would have 16 fixed effects from the four equations at Level Three, each with 4 fixed effects to estimate. And, with four equations at Level Three, the error covariance matrix at the pot level would be 4x4 with 10 variance components to estimate; each error term (4) has a variance associated with it, and each pair of error terms (6) has an associated correlation. The error structure at Levels One (1 variance term) and Two (2 variance terms and 1 correlation) would remain the same, for a total of 14 variance components.
 
-Now consider adding an extra Level One covariate to the model in the previous paragraph. How many model parameters would now need to be estimated? (Try writing out the multilevel models and counting parameters...) The correct answer is 52 total parameters! There are 24 fixed effects (from 6 Level Three equations) and 28 variance components (1 at Level One, 6 at Level Two, and 21 at Level Three).
+Now consider adding an extra Level One covariate to the model in the previous paragraph. How many model parameters would now need to be estimated? (Try writing out the multilevel models and counting parameters.) The correct answer is 52 total parameters! There are 24 fixed effects (from 6 Level Three equations) and 28 variance components (1 at Level One, 6 at Level Two, and 21 at Level Three).
 
 Estimating even 30 parameters as in Model C_plus from a single set of data is an ambitious task and computationally very challenging. Essentially we (or the statistics package we are using) must determine which combination of values for the 30 parameters would maximize the likelihood associated with our model and the observed data. Even in the absolute simplest case, with only two options for each parameter, there would be over one billion possible combinations to consider! But if our primary interest is in fixed effects, we really only have 5 covariates (and their associated interactions) in our model. What can be done to make fitting a 3-level model with 1 covariate at Level One, 1 at Level Two, and 3 at Level Three more manageable? Reasonable options include:
 
@@ -1134,7 +1138,7 @@ According to the second option, we have built a random intercepts model with err
 
 The simplified 9-parameter model essentially includes a random effect for pot ($\sigma_{\tilde{u}}^{2}$) after controlling for sterilization and soil type, a random effect for plant within pot ($\sigma_{u}^{2}$) after controlling for seed size, and a random effect for error about the time trend for individual plants ($\sigma^{2}$). We must assume that the effect of time is the same for all plants and all pots, and it does not depend on seed size, sterilization, or soil type. Similarly, we must assume that the effect of seed size is the same for each pot and does not depend on sterilization or soil type. While somewhat proscriptive, a __random intercepts model__ such as this can be a sensible starting point, since the simple act of accounting for variability of observational units at Levels Two and Three can produce better estimates of fixed effects of interest and their standard errors.
 
-## Building to a final model {#modelsDEF}
+## Building to a Final Model {#modelsDEF}
 
 In Model C we considered the main effects of soil type and sterilization on leadplant initial height and growth rate, but we did not consider interactions---even though biology researchers expect that sterilization will aid growth in certain soil types more than others. Thus, in Model D we will build Level Three interaction terms into Model C.1:
 
@@ -1180,7 +1184,7 @@ cat(" Number of Level Two groups = ",
 coef(summary(modeldl0))
 ```
 
-To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appear to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level).  This means we may have a **three-way interaction** \index{three-way interaction} in our final composite model between sterilization, remnant prairies, and time.  Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor.  Whew!  
+To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appears to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level).  This means we may have a **three-way interaction** \index{three-way interaction} in our final composite model between sterilization, remnant prairies, and time.  Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor.  Whew!  
 
 Our final model (Model F), with its constraints on Level Three error terms, can be expressed level-by-level as:
 
@@ -1288,7 +1292,7 @@ y2=dchisq(x2,anova(modelfl0,modeldl0)[2,7])
 nullLRT.2 <- as.data.frame(cbind(nullLRT=nullLRT2,x=x2,y=y2))
 ```
 
-```{r, parabootDF, fig.align="center",out.width="60%",fig.cap='Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic.',echo=FALSE, warning=FALSE}
+```{r, parabootDF, fig.align="center",out.width="60%",fig.cap='Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The vertical line represents the observed likelihood ratio test statistic.',echo=FALSE, warning=FALSE}
 ggplot(nullLRT.2) + 
   geom_histogram(aes(x=nullLRT,y=..density..),
                  binwidth=2,color="black",fill="white")+
@@ -1354,7 +1358,7 @@ Estimates of model parameters can be interpreted in the following manner:
 Based on t-values produced by Model F, sterilization has the most significant effect on leadplant growth, while there is some evidence that growth rate is somewhat slower in remnant prairies, and that the effect of sterilization is also somewhat muted in remnant prairies.  Sterilization leads to an estimated 66\% increase in growth rate of leadplants from Days 13 to 28 in soil from reconstructed prairies and cultivated lands, and an estimated 28\% increase in soil from remnant prairies. In unsterilized soil, plants from remnant prairies grow an estimated 19\% slower than plants from other soil types.
 
 
-## Covariance structure (Optional) {#error-3level}
+## Covariance Structure (optional) {#error-3level}
 
 As in Chapter \@ref(ch-lon), it is important to be aware of the covariance structure \index{covariance structure} implied by our chosen models (focusing initially on Model B). Our three-level model, through error terms at each level, defines a specific covariance structure at both the plant level (Level Two) and the pot level (Level Three). For example, our standard model implies a certain level of correlation among measurements from the same plant and among plants from the same pot. Although three-level models are noticeably more complex than two-level models, it is still possible to systematically determine the implication of our standard model; by doing this, we can evaluate whether our fitted model agrees with our exploratory analyses, and we can also decide if it's worth considering alternative covariance structures.
 
@@ -1455,7 +1459,7 @@ for all plants $j$ and all pots $i$, and the correlation structure between diffe
             -.037 & .068 & .144 & .191
           \end{array} \right]. \]
 
-The within-plant correlation structure suggests that measurements taken closer in time tend to be more highly correlated than those with more separation in time, and later measurements tend to be more highly correlated than earlier measurements. Examination of standard deviation terms by timepoint suggests that variability increases over time within a plant (estimated SDs of .652, .703, .828, and .999 for days 13, 18, 23, and 28, respectively). The correlation structure between plants from the same pot depicts a fairly low level of correlation; even for measurements taken at the same timepoint, the largest correlation between plants from the same pot occurs on Day 28 (r=.191) while the smallest correlation occurs on Day 18 (r=.061).
+The within-plant correlation structure suggests that measurements taken closer in time tend to be more highly correlated than those with more separation in time, and later measurements tend to be more highly correlated than earlier measurements. Examination of standard deviation terms by timepoint suggests that variability increases over time within a plant (estimated SDs of .652, .703, .828, and .999 for Days 13, 18, 23, and 28, respectively). The correlation structure between plants from the same pot depicts a fairly low level of correlation; even for measurements taken at the same timepoint, the largest correlation between plants from the same pot occurs on Day 28 (r=.191) while the smallest correlation occurs on Day 18 (r=.061).
 
 We can use these results to estimate within-plant and within-pot correlation structure after imposing the same constraints on Model B that we did on Model F (i.e., $\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0$). Using the same REML variance components estimates as above except that $\hat{\sigma}_{\tilde{v}}^{2}=0$ rather than $.00126$ and $\hat{\sigma}_{\tilde{u}\tilde{v}}=\hat{\rho}_{\tilde{u}\tilde{v}}\sqrt{\hat{\sigma}_{\tilde{u}}^{2}\hat{\sigma}_{\tilde{v}}^{2}}=0$ rather than $-.00455$, the within-plant correlation structure is estimated to be:
 
@@ -1477,9 +1481,9 @@ for all plants $j$ and all pots $i$, and the correlation structure between diffe
             .073 & .067 & .059 & .052
           \end{array} \right]. \]
 
-Our model restrictions produced slightly higher estimated within-plant correlations, especially for observations separated by longer periods of time. Standard deviation terms by timepoint are very similar (estimated SDs of .652, .713, .806, and .923 for days 13, 18, 23, and 28, respectively). In terms of the relationship between heights of different plants from the same pot, our model restrictions produced slightly higher correlation estimates with Day 13 height, but slightly lower correlation estimates associated with heights at Days 23 and 28. For measurements taken at the same timepoint, the largest correlation between plants from the same pot now occurs on Day 13 (r=.104) while the smallest correlation now occurs on Day 28 (r=.052). None of the differences in the covariance structure, however, should have a large impact on final conclusions, especially regarding fixed effects, so our strategy for dealing with boundary constraints appears very reasonable. In addition, the covariance structure implied by our standard 3-level model appears to model the correlation structure we observed in Figure \@ref(fig:corrstruct) during our exploratory analyses very nicely. Even the variability over time implied by the standard model matches well with the raw observed variability in height by time period (respective standard deviations of .64, .64, .86, and .91). Thus, we feel well justified in fitting models based on the standard covariance structure.
+Our model restrictions produced slightly higher estimated within-plant correlations, especially for observations separated by longer periods of time. Standard deviation terms by timepoint are very similar (estimated SDs of .652, .713, .806, and .923 for Days 13, 18, 23, and 28, respectively). In terms of the relationship between heights of different plants from the same pot, our model restrictions produced slightly higher correlation estimates with Day 13 height, but slightly lower correlation estimates associated with heights at Days 23 and 28. For measurements taken at the same timepoint, the largest correlation between plants from the same pot now occurs on Day 13 (r=.104) while the smallest correlation now occurs on Day 28 (r=.052). None of the differences in the covariance structure, however, should have a large impact on final conclusions, especially regarding fixed effects, so our strategy for dealing with boundary constraints appears very reasonable. In addition, the covariance structure implied by our standard 3-level model appears to model the correlation structure we observed in Figure \@ref(fig:corrstruct) during our exploratory analyses very nicely. Even the variability over time implied by the standard model matches well with the raw observed variability in height by time period (respective standard deviations of .64, .64, .86, and .91). Thus, we feel well justified in fitting models based on the standard covariance structure.
 
-### Details of covariance structures {#optionalerror}
+### Details of Covariance Structures {#optionalerror}
 
 In this section, we present additional details regarding implications of our standard covariance structure for 3-level models. We will focus on Model B; derivations for Model F would proceed in a similar fashion.
 
@@ -1530,11 +1534,11 @@ Cov(\textbf{Y}_{i}) & = \left[
 
 A covariance matrix for our entire data set, therefore, would be block diagonal, with $Cov(\textbf{Y}_{i})$ matrices along the diagonal reflecting within pot correlation and 0's off-diagonal reflecting the assumed independence of observations from plants from different pots. As with any covariance matrix, we can convert the $Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})$ blocks for two different plants from the same pot into correlation matrices by dividing covariance terms by the product of corresponding standard deviations. Specifically, for $Cov(\textbf{Y}_{ij},\textbf{Y}_{ij'})$, the diagonal terms in a correlation matrix are formed by $Corr(Y_{ijk},Y_{ij'k})=\frac{\tilde{\tau}_{kk}}{\sqrt{Var(Y_{ijk})Var(Y_{ij'k})}}=\frac{\tilde{\tau}_{kk}}{\tau_{k}^{2}}$ and the off-diagonal terms are formed by $Corr(Y_{ijk},Y_{ij'k'})=\frac{\tilde{\tau}_{kk'}}{\sqrt{Var(Y_{ijk})Var(Y_{ij'k'})}}=\frac{\tilde{\tau}_{kk'}}{\tau_{k}\tau_{k'}}$.
 
-We calculated estimated covariance and correlation matrices within plant and between plants in Section \@ref(error-3level) based on the standard covariance structure for three-level models. However, it can sometimes be helpful to consider alternative covariance structures and evaluate the robustness of results to changes in assumptions. A couple of natural covariance structures to fit in the Seed Germination case study, given the observed structure in our data, are the heterogeneous compound symmetry and heterogeneous AR(1) models. We fit both structures, along with the toeplitz structure, and compared the resulting models with our standard 3-level model.  In all cases, the AIC and BIC from the standard model (615.2 and 651.4, respectively) are considerably lower than the corresponding performance measures from the models with alternative covariance structures. Thus, we feel justified in fitting models based on the standard covariance structure.
+We calculated estimated covariance and correlation matrices within plant and between plants in Section \@ref(error-3level) based on the standard covariance structure for three-level models. However, it can sometimes be helpful to consider alternative covariance structures and evaluate the robustness of results to changes in assumptions. A couple of natural covariance structures to fit in the Seed Germination case study, given the observed structure in our data, are the heterogeneous compound symmetry and heterogeneous AR(1) models. We fit both structures, along with the toeplitz structure, and compared the resulting models with our standard three-level model.  In all cases, the AIC and BIC from the standard model (615.2 and 651.4, respectively) are considerably lower than the corresponding performance measures from the models with alternative covariance structures. Thus, we feel justified in fitting models based on the standard covariance structure.
 
-## Notes on Using R (Optional) {#usingR3}
+## Notes on Using R (optional) {#usingR3}
 
-When fitting three level models in `lmer()`, note that an estimated variance at Level One ($\sigma^{2}$) comes for "free", but variance terms at Level Two ($\sigma_{u}^{2}$) and Level Three ($\sigma_{\tilde{u}}^{2}$) must be specified separately in Model A through `(1 | plant)` and `(1 | pot)`. Specifying `(time13 | plant)` in Model B is equivalent to specifying `(1+time13 | plant)` and produces a total of 3 variance components to estimate: variances for error terms associated with the intercept ($\sigma_{u}^{2}$ comes for "free") and slope ($\sigma_{v}^{2}$ comes from the `time13` term) at the plant level, along with a covariance or correlation ($\sigma_{uv}$ or $\rho_{uv}$) between those two error terms. To restrict $\sigma_{uv} = \rho_{uv} = 0$, you could specify each error term separately: `(1 | plant) + (0+time13 | plant)`.
+When fitting three-level models in `lmer()`, note that an estimated variance at Level One ($\sigma^{2}$) comes for "free", but variance terms at Level Two ($\sigma_{u}^{2}$) and Level Three ($\sigma_{\tilde{u}}^{2}$) must be specified separately in Model A through `(1 | plant)` and `(1 | pot)`. Specifying `(time13 | plant)` in Model B is equivalent to specifying `(1+time13 | plant)` and produces a total of 3 variance components to estimate: variances for error terms associated with the intercept ($\sigma_{u}^{2}$ comes for "free") and slope ($\sigma_{v}^{2}$ comes from the `time13` term) at the plant level, along with a covariance or correlation ($\sigma_{uv}$ or $\rho_{uv}$) between those two error terms. To restrict $\sigma_{uv} = \rho_{uv} = 0$, you could specify each error term separately: `(1 | plant) + (0+time13 | plant)`.
 
 Also note that to fit Model C.1 in R, the random error components are written as `(time13 | plant) + (1 | pot)`, indicating you'd like error terms associated with the intercept and slope at the plant level, but only for the intercept term at the pot level. The fixed effects in Model C.1 just reflect all fixed effects in the composite model.
 
@@ -1545,7 +1549,7 @@ In Section \@ref(threelevel-paraboot) we sought to perform a significance test c
 
 ### Conceptual Exercises
 
-1. __Seed Germination.__ In Sections \@ref(organizedata3) and \@ref(explore3v2), why must we be careful excluding plants with no height data? Why can't we simply leave those plants in our 3-level analysis with all missing heights set to 0 mm?
+1. __Seed germination.__ In Sections \@ref(organizedata3) and \@ref(explore3v2), why must we be careful excluding plants with no height data? Why can't we simply leave those plants in our 3-level analysis with all missing heights set to 0 mm?
 
 2. Give an example of a Level Two covariate that might have been recorded in this study.
 
@@ -1575,10 +1579,6 @@ In Section \@ref(threelevel-paraboot) we sought to perform a significance test c
 
 15. Section \@ref(modelsDEF) contains an interpretation for the coefficient of a three-way interaction term, $\hat{\beta}_{3}$. Provide an alternative interpretation for $\hat{\beta}_{3}$ by focusing on how the sterilization-by-soil type interaction differs over time.
 
-16. __Collective Efficacy and Violent Crime.__  In a 1997 *Science* article, @Sampson1997 studied the effects on violent crime of a neighborhood's collective efficacy, defined as "social cohesion among neighbors combined with their willingness to intervene on behalf of the common good."  Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.
-
-17. Table \@ref(tab:table4chp10) shows Table 3 from @Sampson1997. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.
-
 ```{r, include=FALSE}
 Variable <- c("Intercept", "Female", "Married", "Separated or divorced", "Single", "Homeowner", "Latino", "Black", "Mobility", "Age", "Years in neighborhood", "SES", "Concentrated disadvantage", "Immigrant concentration", "Residential stability", "Within neighborhoods", "Between neighborhoods", "Within neighborhoods", "Between neighborhoods")
 Coefficient <- c(3.523, -0.012, -0.005, -0.045, -0.026, 0.122, 0.042, -0.029, -0.025, 0.0021, 0.0006, 0.035, -0.172, -0.037, 0.074, 0.320, 0.026, 3.2, 70.3)
@@ -1596,13 +1596,17 @@ table4chp10[12,2] <- paste0("\\textbf{", table4chp10[12,2], "}")
 table4chp10[14,2] <- paste0("\\textbf{", table4chp10[14,2], "}")
 table4chp10[15,2] <- paste0("\\textbf{", table4chp10[15,2], "}")
 kable(table4chp10, booktabs=T, escape=F,
-      caption="Table 3: Correlates of collective efficacy from Sampson et al. (1997)") %>%
+      caption="Correlates of collective efficacy from Table 3 of Sampson et al. (1997).") %>%
   kable_styling(latex_options = "scale_down") %>%
   pack_rows("Person-level predictors", 2, 12) %>%
   pack_rows("Neighborhood-level predictors", 13, 15) %>%
   pack_rows("Variance components", 16, 17) %>%
   pack_rows("Percent of variance explained", 18, 19)
 ```
+
+16. __Collective efficacy and violent crime.__  In a 1997 *Science* article, @Sampson1997 studied the effects on violent crime of a neighborhood's collective efficacy, defined as "social cohesion among neighbors combined with their willingness to intervene on behalf of the common good."  Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.
+
+17. Table \@ref(tab:table4chp10) shows Table 3 from @Sampson1997. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.
 
 18. Based on Table \@ref(tab:table4chp10), let $Y_{ijk}$ be the response of person $j$ from neighborhood $i$ to item $k$ regarding collective efficacy; these are (difficulty-adjusted) responses to 10 items per person about collective efficacy. Then (a) write out the three-level model that likely produced this table, and (b) write out the corresponding composite model.  Assume there was also an unreported variance component estimating item-to-item variability within person.
 
@@ -1629,7 +1633,7 @@ table5chp10 <- data.frame(Variable2, Coefficient2, SE3 ,t2, Coefficient3, SE4, t
 colnames(table5chp10) <- c("Variable","Coefficient","SE", "t", 
                            "Coefficient","SE", "t")
 kable(table5chp10, booktabs=T, 
-      caption="A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).") %>%
+      caption="Neighborhood correlates of perceived neighborhood violence from a portion of Table 4 from Sampson et al. (1997).") %>%
       add_header_above(c(" ","Social composition"=3, "Social comp and collective efficacy"=3)) %>%
       add_header_above(c(" ","Model 1"=3, "Model 2"=3)) %>%
     kable_styling(latex_options = "scale_down")
@@ -1638,7 +1642,7 @@ kable(table5chp10, booktabs=T,
 
 ### Guided Exercises
 
-1. __Tree Tubes__ A student research team at St. Olaf College contributed to the efforts of biologist Dr. Kathy Shea to investigate a rich data set concerning forestation in the surrounding land [@Eisinger2011].  Tubes were placed on trees in some locations or *transects* but not in others. Interest centers on whether tree growth is affected by the presence of tubes. The data is currently stored in long format in `treetube.csv`. Each row represents one tree in a given year. Key variables include:  
+1. __Tree tubes.__ A student research team at St. Olaf College contributed to the efforts of biologist Dr. Kathy Shea to investigate a rich data set concerning forestation in the surrounding land [@Eisinger2011].  Tubes were placed on trees in some locations or *transects* but not in others. Interest centers on whether tree growth is affected by the presence of tubes. The data is currently stored in long format in `treetube.csv`. Each row represents one tree in a given year. Key variables include:  
     - `TRANSECT`: The id of the transect housing the tree
     - `TUBEX`: 1 if the tree had a tube, 0 if not
     - `ID`: The tree's unique id
@@ -1649,9 +1653,9 @@ kable(table5chp10, booktabs=T,
 
     a. Perform basic exploratory data analysis.  For example, which variables are correlated with the heights of the trees?
     b. Explore patterns of missing data. Consider looking for patterns between transects.  If you found any patterns of missing data, how might this affect your modeling?
-    c. We wish to fit a three level model for a tree's height. What would be observational units at level three?  At level two? At level one? What are our level three variables? Level two variables? Level one variables?
+    c. We wish to fit a three-level model for a tree's height. What would be observational units at Level Three?  At Level Two? At Level One? What are our Level Three variables? Level Two variables? Level One variables?
     d. Generate spaghetti plots showing how height varies over time for trees which had tubes and for trees which did not have tubes. What do you notice?
-    e. Fit Model A, a three level, unconditional means model for height. Write out the model at levels three, two, and one, as well as the composite model.
+    e. Fit Model A, a three-level, unconditional means model for height. Write out the model at levels three, two, and one, as well as the composite model.
     f. Create a new variable, `TIME`, which represents the number of years since 1990. Use this to fit Model B, an unconditonal growth model for height. Write out this model at levels three, two, and one. What is the correlation of random effects at level two? What does this mean? (Section \@ref(sec:boundary) may help.)
     g. In response to part (f), fit a new unconditional growth model (Model C) with $\rho_{uv} = 0$ and $\rho_{\hat{u}\hat{v}} = 0$ (uncorrelated random effects at levels two and three). Write out the model at levels two and three.
     h. If we wanted to compare Model B and Model C, it would not be appropriate to use a likelihood ratio test. Why is this?
@@ -1660,7 +1664,7 @@ kable(table5chp10, booktabs=T,
     k. Perform a likelihood ratio test comparing Model C and Model D. Interpret the results of this test in the context of this study.  
     </ul>
 
-2. __Kentucky Math Scores.__ Data was collected from 48,058 eighth graders from Kentucky who took the California Basic Educational Skills Test [@Bickel2007]. These students attended 235 different middle schools from 132 different districts, and the following variables were collected and can be found in `kentucky.csv`:  
+2. __Kentucky math scores.__ Data was collected from 48,058 eighth graders from Kentucky who took the California Basic Educational Skills Test [@Bickel2007]. These students attended 235 different middle schools from 132 different districts, and the following variables were collected and can be found in `kentucky.csv`:  
     - `dis_id` = District Identifier
     - `sch_id` = School Identifier
     - `stud_nm` = Student Identifier
@@ -1669,20 +1673,20 @@ kable(table5chp10, booktabs=T,
     - `readn` = California Test of Basic Skills Reading Score
     - `mathn` = California Test of Basic Skills Math Score
     - `sch_size` = School-Level Size (centered natural log)
-    - `sch_ses` = School-Level SES (socio-economic status - centered)
+    - `sch_ses` = School-Level SES (socio-economic status, centered)
     - `dis_size` = District-Level Size (centered natural log)
-    - `dis_ses` = District-Level SES (socio-economic status - centered) </ul>
+    - `dis_ses` = District-Level SES (socio-economic status, centered) </ul>
 
-    The primary research questions are whether or not math scores of eighth graders in Kentucky differ based on gender or ethnicity, and if any gender gap differs by ethnicity, or if any ethnicity gap differs by gender. Researchers wanted to be sure to adjust for important covariates at the school and district levels (e.g. school/district size and socio-economic status).  
+    The primary research questions are whether or not math scores of eighth graders in Kentucky differ based on gender or ethnicity, and if any gender gap differs by ethnicity, or if any ethnicity gap differs by gender. Researchers wanted to be sure to adjust for important covariates at the school and district levels (e.g., school/district size and socio-economic status).  
     a. Conduct a short exploratory data analysis. Which variables are most strongly related to `mathn`? Illustrate with summary statistics and plots. [Hints: your plots should accommodate the large number of observations in the data, and your summary statistics will have to handle occasional missing values.]
     b. (Model A) Run an unconditional means model with 3 levels and report the percentage of variability in math scores that can be explained at each level.
     c. (Model B) Add `female`, `nonwhite`, and their interaction at Level One.  
         - Write out the complete three-level model. How many parameters must be estimated?
-        - Run the model (be patient -- it may take a few minutes!). Report and interpret a relevant pseudo-Rsquare value. Is there evidence (based on the t-value) of a significant interaction?  In layman's terms, what can you conclude based on the test for interaction?
-    d. (Model C) Subtract the `female`-by-`nonwhite` interaction from Model B and add `sch_ses`, where `sch_ses` is a predictor in all Level Two equations. How many parameters must be estimated? Break your count down into fixed effects + variance components at Level 1 + varcomps at Level 2 + varcomps at Level 3. (No need to write out the model or run the model unless you want to...)
+        - Run the model (be patient -- it may take a few minutes!). Report and interpret a relevant pseudo Rsquared value. Is there evidence (based on the t-value) of a significant interaction?  In layman's terms, what can you conclude based on the test for interaction?
+    d. (Model C) Subtract the `female`-by-`nonwhite` interaction from Model B and add `sch_ses`, where `sch_ses` is a predictor in all Level Two equations. How many parameters must be estimated? Break your count down into fixed effects + variance components at Level One + varcomps at Level Two + varcomps at Level Three. (No need to write out the model or run the model unless you want to.)
     e. (Model D)  Subtract `nonwhite` from Model C and add `dis_size`, where `dis_size` is a predictor in all Level Three equations.  
         - Write out the complete three-level model. Also write out the composite model. How many parameters must be estimated?
-        - Run the model (be patient!), and then re-run it with an error term only on the intercept equation at Level Three. What are the implications of using this error structure?  Does it change any conclusions about fixed effects? Which of the two models would you choose and why?
+        - Run the model (be patient!) and then re-run it with an error term only on the intercept equation at Level Three. What are the implications of using this error structure?  Does it change any conclusions about fixed effects? Which of the two models would you choose and why?
         - (Optional) Explore the nature of the 3-way interaction between female, sch_ses, and dis_size by finding the predicted math score for 5 cases based on Model D with an error term only on the intercept equation at Level Three. Comment on trends you observe.
             - Female vs. male with average `sch_ses` and `dis_size`
             - Female vs. male with `sch_ses` at Q1 and `dis_size` at Q1
@@ -1691,17 +1695,17 @@ kable(table5chp10, booktabs=T,
             - Female vs. male with `sch_ses` at Q3 and `dis_size` at Q3
         - (Optional) Create two scatterplots to illustrate the 3-way interaction between `female`, `sch_ses`, and `dis_size`.
 
-### Open-ended Exercises
+### Open-Ended Exercises
 
-1. __Seed Germination: Coneflowers__ Repeat the exploratory data analyses and model fitting from this chapter using coneflowers rather than leadplants.
+1. __Seed germination: coneflowers.__ Repeat the exploratory data analyses and model fitting from this chapter using coneflowers rather than leadplants.
 
-2. __Mudamalai Leaf Growth__ Plant growth is influenced by many environmental factors, among them sunlight and water availability. A study conducted in the Mudamalai Wildlife Sanctuary in India in October of 2008 had as its purpose to "broaden the specific knowledge of certain tree species and climate zones located in the Nilgiri Hills of South India, and to enhance the overall knowledge of the dynamic relationship between plant growth and its environment" [@Pray2009].  
+2. __Mudamalai leaf growth.__ Plant growth is influenced by many environmental factors, among them sunlight and water availability. A study conducted in the Mudamalai Wildlife Sanctuary in India in October of 2008 had as its purpose to "broaden the specific knowledge of certain tree species and climate zones located in the Nilgiri Hills of South India, and to enhance the overall knowledge of the dynamic relationship between plant growth and its environment" [@Pray2009].  
 
-    Study researchers collected 1,960 leaves from 45 different trees (5 trees from each of 3 species within each of 3 climate zone). Within each tree, 3 branches were randomly chosen from each of 3 strata (high, medium, and low), and 5 leaves were randomly selected from each branch. Three different descriptive climatic zones were chosen for analysis---dry thorn, dry deciduous, and moist deciduous---and three different species of trees were analyzed---*Cassia fistula* (golden shower tree), *Anogeissus latifolia* (axlewood tree), and *Diospyros montana* (mountain ebony). Height and girth were measured for each tree, and length was assessed for each branch.  Measurements taken on each leaf included length, width, surface area (determined carefully for 25 leaves per species and then by linear regression using length and width as predictors for the rest), pedial length (the length of the stem), pedial width, and percent herbivory (an eyeball estimate of the percent of each leaf that had been removed or eaten by herbivores). In addition, stomata density was measured using a compound scope to examine nail polish impressions of leaves for each strata of each tree (135 measurements).  
+    Study researchers collected 1,960 leaves from 45 different trees (5 trees from each of 3 species within each of 3 climate zones). Within each tree, 3 branches were randomly chosen from each of 3 strata (high, medium, and low), and 5 leaves were randomly selected from each branch. Three different descriptive climatic zones were chosen for analysis---dry thorn, dry deciduous, and moist deciduous---and three different species of trees were analyzed---*Cassia fistula* (golden shower tree), *Anogeissus latifolia* (axlewood tree), and *Diospyros montana* (mountain ebony). Height and girth were measured for each tree, and length was assessed for each branch.  Measurements taken on each leaf included length, width, surface area (determined carefully for 25 leaves per species and then by linear regression using length and width as predictors for the rest), pedial length (the length of the stem), pedial width, and percent herbivory (an eyeball estimate of the percent of each leaf that had been removed or eaten by herbivores). In addition, stomata density was measured using a compound scope to examine nail polish impressions of leaves for each strata of each tree (135 measurements).  
 
     Here is a description of available variables in `mudamalai.csv`:
 
-    - `Species` = tree species (Cassia fistula, Anogeissus latifolia, or Diospyros montana)
+    - `Species` = tree species (*Cassia fistula*, *Anogeissus latifolia*, or *Diospyros montana*)
     - `Zone` = climate zone (dry thorn, dry deciduous, or moist deciduous)
     - `Tree` = tree number (1-5) within climate zone
     - `Tree.height` = tree height (m)

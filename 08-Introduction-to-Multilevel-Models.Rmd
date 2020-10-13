@@ -31,6 +31,7 @@ library(gridExtra)
 library(mnormt) 
 library(lme4) 
 library(knitr) 
+library(kableExtra)
 library(tidyverse)
 ```
 
@@ -108,7 +109,7 @@ Because of this data structure---the assessment of some variables on a performan
 
 First, we will examine each response variable and potential covariate individually. Continuous variables can be summarized using histograms and summaries of center and spread; categorical variables can be summarized with tables and possibly bar charts. When examining Level One covariates and responses, we will begin by considering all 497 observations, essentially treating each performance by each subject as independent even though we expect observations from the same musician to be correlated. Although these plots will contain dependent points, since each musician provides data for up to 15 performances, general patterns exhibited in these plots tend to be real. Alternatively, we can calculate mean scores across all performances for each of the 37 musicians so that we can more easily consider each plotted point to be independent. The disadvantage of this approach would be lost information which, in a study such as this with a relatively small number of musicians each being observed over many performances, could be considerable. In addition, if the sample sizes varied greatly by subject, a mean based on 1 observation would be given equal weight to a mean based on 15 observations. Nevertheless, both types of exploratory plots typically illustrate similar relationships.
 
-In Figure \@ref(fig:mli-hist1) we see histograms for the primary response (negative affect); plot (a) shows all 497 (dependent) observations, while plot (b) shows the mean negative affect for each of the 37 musicians across all their performances. Through plot (a), we see that performance anxiety (negative affect) across all performances follows a right skewed distribution with a lower bound of 10 (achieved when all 10 questions are answered with a 1).  Plot (b) shows that mean negative affect is also right-skewed (although not as smoothly decreasing in frequency), with range 12 to 23.
+In Figure \@ref(fig:mli-hist1) we see histograms for the primary response (negative affect); plot (a) shows all 497 (dependent) observations, while plot (b) shows the mean negative affect for each of the 37 musicians across all their performances. Through plot (a), we see that performance anxiety (negative affect) across all performances follows a right-skewed distribution with a lower bound of 10 (achieved when all 10 questions are answered with a 1).  Plot (b) shows that mean negative affect is also right-skewed (although not as smoothly decreasing in frequency), with range 12 to 23.
 
 ```{r, include=FALSE}
 #Getting started
@@ -176,7 +177,7 @@ mli.hist1 <- grid.arrange(na.all,na.mean,ncol=1)
 grid.arrange(na.all,na.mean,ncol=1)
 ```
 
-We can also summarize categorical Level One covariates across all (possibly correlated) observations to get a rough relative comparison of trends. 56.1\% of the 497 performances in our data set were solos, while 27.3\% were large ensembles and 16.5\% were small ensembles.  The most common audience type was a public performance (41.0\%), followed by instructors (30.0\%), students (20.1\%), and finally juried recitals (8.9\%). In 30.0\% of performances, the musician played by memory, while 55.1\% used the score and 14.9\% of performances were unspecified.
+We can also summarize categorical Level One covariates across all (possibly correlated) observations to get a rough relative comparison of trends. A total of 56.1\% of the 497 performances in our data set were solos, while 27.3\% were large ensembles and 16.5\% were small ensembles.  The most common audience type was a public performance (41.0\%), followed by instructors (30.0\%), students (20.1\%), and finally juried recitals (8.9\%). In 30.0\% of performances, the musician played by memory, while 55.1\% used the score and 14.9\% of performances were unspecified.
 
 To generate an initial examination of Level Two covariates, we consider a data set with just one observation per subject, since Level Two variables are constant over all performances from the same subject. Then, we can proceed as we did with Level One covariates---using histograms to illustrate the distributions of continuous covariates (see Figure \@ref(fig:mli-histmat1)) and tables to summarize categorical covariates. For example, we learn that the majority of subjects have positive emotionality scores between 50 and 60, but that several subjects fall into a lengthy lower tail with scores between 20 and 50. A summary of categorical Level Two covariates reveals that among the 37 subjects (26 female and 11 male), 17 play an orchestral instrument, 15 are vocal performers, and 5 play a keyboard instrument.
 
@@ -213,7 +214,7 @@ The next step in an initial exploratory analysis is the examination of numerical
 
 As with individual variables, we will begin by treating all 497 performances recorded as independent observations, even though blocks of 15 or so performances were performed by the same musician. For categorical Level One covariates, we can generate boxplots against negative affect as in Figure \@ref(fig:mli-boxscatmat1), plots (a) and (b). From these boxplots, we see that lower levels of performance anxiety seem to be associated with playing in large ensembles and playing in front of an instructor. For our lone continuous Level One covariate (number of previous performances), we can generate a scatterplot against negative affect as in plot (c) from Figure \@ref(fig:mli-boxscatmat1), adding a fitted line to illustrate general trends upward or downward. From this scatterplot, we see that negative affect seems to decrease slightly as a subject has more experience.
 
-To avoid the issue of dependent observations in our three plots from Figure \@ref(fig:mli-boxscatmat1), we could generate separate plots for each subject and examine trends within and across subjects. These "lattice plots" \index{lattice plot} are illustrated in Figures \@ref(fig:mli-lattice1), \@ref(fig:mli-lattice2), and \@ref(fig:mli-lattice3); we discuss such plots more thoroughly in Chapter \@ref(ch-lon). While general trends are difficult to discern from these lattice plots, we can see the variety in subjects in sample size distributions and overall level of performance anxiety. In particular, in Figure \@ref(fig:mli-lattice3), we notice that linear fits for many subjects illustrate the same same slight downward trend displayed in the overall scatterplot in Figure \@ref(fig:mli-boxscatmat1), although some subjects experience increasing anxiety and others exhibit non-linear trends. Having an idea of the range of individual trends will be important when we begin to draw overall conclusions from this study.
+To avoid the issue of dependent observations in our three plots from Figure \@ref(fig:mli-boxscatmat1), we could generate separate plots for each subject and examine trends within and across subjects. These "lattice plots" \index{lattice plot} are illustrated in Figures \@ref(fig:mli-lattice1), \@ref(fig:mli-lattice2), and \@ref(fig:mli-lattice3); we discuss such plots more thoroughly in Chapter \@ref(ch-lon). While general trends are difficult to discern from these lattice plots, we can see the variety in subjects in sample size distributions and overall level of performance anxiety. In particular, in Figure \@ref(fig:mli-lattice3), we notice that linear fits for many subjects illustrate the same slight downward trend displayed in the overall scatterplot in Figure \@ref(fig:mli-boxscatmat1), although some subjects experience increasing anxiety and others exhibit non-linear trends. Having an idea of the range of individual trends will be important when we begin to draw overall conclusions from this study.
 
 ```{r, include=FALSE, message = FALSE}
 # Look at relationships among Level 1 covariates and 
@@ -279,7 +280,7 @@ ggplot(music,aes(x=previous,y=na)) + theme.1 +
   labs(x="Previous Performances",y="Negative Affect")
 ```
 
-In Figure \@ref(fig:mli-boxmat1), we use boxplots to examine the relationship between our primary categorical Level Two covariate (instrument) and our continuous model response. Plot (a) uses all 497 performances, while plot (b) uses one observation per subject (the mean performance anxiety across all performances) regardless of how many performances that subject had. Naturally, plot (b) has a more condensed range of values, but both plots seem to support the notion that performance anxiety is slightly lower for vocalists and maybe a bit higher for keyboardists
+In Figure \@ref(fig:mli-boxmat1), we use boxplots to examine the relationship between our primary categorical Level Two covariate (instrument) and our continuous model response. Plot (a) uses all 497 performances, while plot (b) uses one observation per subject (the mean performance anxiety across all performances) regardless of how many performances that subject had. Naturally, plot (b) has a more condensed range of values, but both plots seem to support the notion that performance anxiety is slightly lower for vocalists and maybe a bit higher for keyboardists.
 
 ```{r, include=FALSE}
 # Look at relationships among Level 2 covariates and 
@@ -363,11 +364,11 @@ Of course, any graphical analysis is exploratory, and any notable trends at this
 As you might expect, answers to these questions will arise from proper consideration of variability and properly identified statistical models.
 
 
-## Two level modeling: preliminary considerations {#twolevelmodeling}
+## Two-Level Modeling: Preliminary Considerations {#twolevelmodeling}
 
-### Ignoring the two level structure (not recommended) {#multregr}
+### Ignoring the Two-Level Structure (not recommended) {#multregr}
 
-Armed with any statistical software package, it would be relatively simple to take our complete data set of 497 observations and run a multiple linear least squares regression model seeking to explain variability in negative affect with a number of performance-level or musician-level covariates.  As an example, output from a model with two binary covariates (Does the subject play an orchestral instrument? and, Was the performance a large ensemble?) is presented below. Do you see any problems with this approach?
+Armed with any statistical software package, it would be relatively simple to take our complete data set of 497 observations and run a multiple linear least squares regression model seeking to explain variability in negative affect with a number of performance-level or musician-level covariates.  As an example, output from a model with two binary covariates (Does the subject play an orchestral instrument? Was the performance a large ensemble?) is presented below. Do you see any problems with this approach?
 
 ```{r, include=FALSE}
 hook_output <- knit_hooks$get("output")
@@ -416,7 +417,7 @@ cat(" R squared = ", summary(modelc0)$r.squared, "\n",
 
 Other than somewhat skewed residuals, residual plots (not shown) do not indicate any major problems with the LLSR model. However, another key assumption in these models is the independence of all observations. While we might reasonably conclude that responses from different study participants are independent (although possibly not if they are members of the same ensemble group), it is not likely that the 15 or so observations taken over multiple performances from a single subject are similarly independent. If a subject begins with a relatively high level of anxiety (compared to other subjects) before their first performance, chances are good that they will have relatively high anxiety levels before subsequent performances. Thus, multiple linear least squares regression using all 497 observations is not advisable for this study (or multilevel data sets in general).
 
-### A two-stage modeling approach (better but imperfect) {#twostage}
+### A Two-Stage Modeling Approach (better but imperfect) {#twostage}
 
 If we assume that the 37 study participants can reasonably be considered to be independent, we could use traditional linear least squares regression techniques to analyze data from this study if we could condense each subject's set of responses to a single meaningful outcome. Candidates for this meaningful outcome include a subject's last performance anxiety measurement, average performance anxiety, minimum anxiety level, etc. For example, in clinical trials, data is often collected over many weekly or monthly visits for each patient, except that many patients will drop out early for many reasons (e.g., lack of efficacy, side effects, personal reasons). In these cases, treatments are frequently compared using "last-value-carried-forward" methods---the final visit of each patient is used as the primary outcome measure, regardless of how long they remained in the study. However, "last-value-carried-forward" and other summary measures feel inadequate, since we end up ignoring much of the information contained in the multiple measures for each individual. A more powerful solution is to model performance anxiety at multiple levels.
 
@@ -426,7 +427,7 @@ We will begin by considering all performances by a single individual. For instan
 table2chp8 <- music[music$id == 22, c("id", "diary",
     "perform_type", "audience", "na", "instrument")]
 kable(table2chp8, booktabs=T, 
-  caption="Data from the 15 performances of Musician 22") %>%
+  caption="Data from the 15 performances of Musician \\#22.") %>%
   kable_styling(latex_options = "scale_down")
 ```
   
@@ -473,9 +474,9 @@ cat(" R squared = ", summary(regr.id22)$r.squared, "\n",
     "Residual standard error = ", summary(regr.id22)$sigma)
 ```
 
-We could continue trying to build a better model for Subject 22, adding indicators for audience and memory, and even adding a continuous variable representing the number of previous performance where a diary was kept. As our model R-square value increased, we would be explaining a larger proportion of Subject 22's performance-to-performance variability in anxiety. It would not, however, improve our model to incorporate predictors for age, gender, or even negative emotionality based on the MPQ---why is that?
+We could continue trying to build a better model for Subject 22, adding indicators for audience and memory, and even adding a continuous variable representing the number of previous performances where a diary was kept. As our model R-squared value increased, we would be explaining a larger proportion of Subject 22's performance-to-performance variability in anxiety. It would not, however, improve our model to incorporate predictors for age, gender, or even negative emotionality based on the MPQ---why is that?
 
-For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \@ref(eq:level1a), with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the LLSR model in Equation \@ref(eq:level1a) to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called __Level One models__. \index{level one model} As displayed in Figure \@ref(fig:mli-histmat2), there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
+For the present time, we will model Subject 22's anxiety scores for his 15 performances using the model given by Equation \@ref(eq:level1a), with a lone indicator variable for performing in a Large Ensemble. We can then proceed to fit the LLSR model in Equation \@ref(eq:level1a) to examine the effect of performing in a Large Ensemble for each of the 37 subjects in this study. These are called __Level One models__. \index{level-one model} As displayed in Figure \@ref(fig:mli-histmat2), there is considerable variability in the fitted intercepts and slopes among the 37 subjects. Mean performance anxiety scores for Solos and Small Ensembles range from 11.6 to 24.5, with a median score of 16.7, while mean differences in performance anxiety scores for Large Ensembles compared to Solos and Small Ensembles range from -7.9 to 5.0, with a median difference of -1.7. Can these differences among individual musicians be explained by (performance-invariant) characteristics associated with each individual, such as gender, age, instrument, years studied, or baseline levels of personality measures? Questions like these can be addressed through further statistical modeling.
 
 ```{r, include=FALSE, warning=FALSE}
 # LVCF analysis 
@@ -530,7 +531,7 @@ mli.histmat2 <- grid.arrange(inthist, slopehist, ncol = 1)
 grid.arrange(inthist, slopehist, ncol = 1)
 ```
 
-As an illustration, we can consider whether or not there are significant relationships between individual regression parameters (intercepts and slopes) and instrument played. From a modeling perspective, we would build a system of two __Level Two models__ \index{level two model} to predict the fitted intercept ($a_{i}$) and fitted slopes ($b_{i}$) for Subject $i$:
+As an illustration, we can consider whether or not there are significant relationships between individual regression parameters (intercepts and slopes) and instrument played. From a modeling perspective, we would build a system of two __Level Two models__ \index{level-two model} to predict the fitted intercept ($a_{i}$) and fitted slopes ($b_{i}$) for Subject $i$:
 
 \begin{align}
 a_{i} & =  \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i}
@@ -584,18 +585,18 @@ slope.box <- ggplot(data=music.lev2,aes(factor(orch),rate)) +
 mli.boxmat2 <- grid.arrange(int.box, slope.box, ncol = 1)
 ```
 
-```{r mli-boxmat2,fig.align="center",out.width="60%", fig.cap='Boxplots of fitted intercepts (plot (a)) and slopes (plot (b)) by orchestral instrument (1) vs. keyboard or vocalist (0).',echo=FALSE, warning=FALSE}
+```{r mli-boxmat2,fig.align="center",out.width="60%", fig.cap='Boxplots of fitted intercepts, plot (a), and slopes, plot (b), by orchestral instrument (1) vs. keyboard or vocalist (0).',echo=FALSE, warning=FALSE}
 grid.arrange(int.box, slope.box, ncol = 1)
 ```
 
-This two stage modeling process does have some drawbacks. Among other things, (1) it weights every subject the same regardless of the number of diary entries we have, (2) it responds to missing individual slopes (from 7 subjects who never performed in a large ensemble) by simply dropping those subjects, and (3) it does not share strength effectively across individuals. These issues can be better handled through a unified multilevel modeling framework which we will develop over the remainder of this section.
+This two-stage modeling process does have some drawbacks. Among other things, (1) it weights every subject the same regardless of the number of diary entries we have, (2) it responds to missing individual slopes (from 7 subjects who never performed in a large ensemble) by simply dropping those subjects, and (3) it does not share strength effectively across individuals. These issues can be better handled through a unified multilevel modeling framework which we will develop over the remainder of this section.
 
 
-## Two level modeling: a unified approach {#twolevelmodelingunified}
+## Two-Level Modeling: A Unified Approach {#twolevelmodelingunified}
 
-### Our framework {#ourframework}
+### Our Framework {#ourframework}
 
-For the unified approach, we will still envision two levels of models as in section \@ref(twostage), but we will use likelihood-based methods for parameter estimation rather than ordinary least squares to address the drawbacks associated with the two-stage approach. To illustrate the unified approach, we will first generalize the models presented in section \@ref(twostage). Let $Y_{ij}$ be the performance anxiety score of the $i^{th}$ subject before performance $j$. If we are initially interested in examining the effects of playing in a large ensemble and playing an orchestral instrument, then we can model the performance anxiety for Subject $i$ in performance $j$ with the following system of equations:
+For the unified approach, we will still envision two levels of models as in Section \@ref(twostage), but we will use likelihood-based methods for parameter estimation rather than ordinary least squares to address the drawbacks associated with the two-stage approach. To illustrate the unified approach, we will first generalize the models presented in Section \@ref(twostage). Let $Y_{ij}$ be the performance anxiety score of the $i^{th}$ subject before performance $j$. If we are initially interested in examining the effects of playing in a large ensemble and playing an orchestral instrument, then we can model the performance anxiety for Subject $i$ in performance $j$ with the following system of equations:
 
 - Level One:
 \begin{equation*}
@@ -607,7 +608,7 @@ a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i} \\
 b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i},
 \end{align*}
 
-In this system, there are 4 key __fixed effects__ to estimate: $\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$ and $\beta_{1}$. Fixed effects are the fixed but unknown population effects associated with certain covariates. The intercepts and slopes for each subject from Level One, $a_{i}$ and $b_{i}$, don't need to be formally estimated as we did in section \@ref(twostage); they serve to conceptually connect Level One with Level Two. In fact, by substituting the two Level Two equations into the Level One equation, we can view this two-level system of models as a single __Composite Model__ \index{composite model} without $a_{i}$ and $b_{i}$:
+In this system, there are 4 key __fixed effects__ to estimate: $\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$ and $\beta_{1}$. Fixed effects are the fixed but unknown population effects associated with certain covariates. The intercepts and slopes for each subject from Level One, $a_{i}$ and $b_{i}$, don't need to be formally estimated as we did in Section \@ref(twostage); they serve to conceptually connect Level One with Level Two. In fact, by substituting the two Level Two equations into the Level One equation, we can view this two-level system of models as a single __Composite Model__ \index{composite model} without $a_{i}$ and $b_{i}$:
 
 \begin{align*}
 Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}_{ij}+\beta_{1}\textrm{Orch}_{i}\textrm{LargeEns}_{ij}] \\
@@ -625,7 +626,7 @@ a_{i} & = \alpha_{0}+u_{i} \\
 b_{i} & = \beta_{0}+v_{i}
 \end{align*}
 
-- Orchestral instrumentalists ($\textrm{Orch}_{i}=1$)
+- Orchestral Instrumentalists ($\textrm{Orch}_{i}=1$)
 
 \begin{align*}
 a_{i} & = (\alpha_{0}+\alpha_{1})+u_{i} \\
@@ -640,11 +641,11 @@ Writing the Level Two model in this manner helps us interpret the model paramete
 - Orchestral instrumentalists playing solos or small ensembles: $\alpha_{0}+\alpha_{1}$
 - Orchestral instrumentalists playing large ensembles: $\alpha_{0}+\alpha_{1}+\beta_{0}+\beta_{1}$
 
-### Random vs. fixed effects
+### Random vs. Fixed Effects
 
-Before we can use likelihood-based methods to estimate our model parameters, we still must define the distributions of our error terms. The error terms $\epsilon_{ij}$, $u_{i}$, and $v_{i}$ represent random effects in our model. In multilevel models, it is important to distinguish between fixed and random effects. Typically, __fixed effects__ \index{fixed effects} describe levels of a factor that we are specifically interested in drawing inferences about, and which would not change in replications of the study. For example, in our music performance anxiety case study, the levels of performance type will most likely remain as solos, small ensembles, and large ensembles even in replications of the study, and we wish to draw specific conclusions about differences between these three types of performances. Thus, performance type would be considered a fixed effect. On the other hand, __random effects__ \index{random effects} describe levels of a factor which can be thought of as a sample from a larger population of factor levels; we are not typically interested in drawing conclusions about specific levels of a random effect, although we are interested in accounting for the influence of the random effect in our model.  For example, in our case study the different musicians included can be thought of as a random sample from a population of performing musicians. Although our goal is not to make specific conclusions about differences between any two musicians, we do want to account for inherent differences among musicians in our model, and by doing so, we will be able to draw more precise conclusions about our fixed effects of interest. Thus, musician would be considered a random effect.
+Before we can use likelihood-based methods to estimate our model parameters, we still must define the distributions of our error terms. The error terms $\epsilon_{ij}$, $u_{i}$, and $v_{i}$ represent random effects in our model. In multilevel models, it is important to distinguish between fixed and random effects. Typically, __fixed effects__ \index{fixed effects} describe levels of a factor that we are specifically interested in drawing inferences about, and which would not change in replications of the study. For example, in our music performance anxiety case study, the levels of performance type will most likely remain as solos, small ensembles, and large ensembles even in replications of the study, and we wish to draw specific conclusions about differences between these three types of performances. Thus, performance type would be considered a fixed effect. On the other hand, __random effects__ \index{random effects} describe levels of a factor which can be thought of as a sample from a larger population of factor levels; we are not typically interested in drawing conclusions about specific levels of a random effect, although we are interested in accounting for the influence of the random effect in our model.  For example, in our case study, the different musicians included can be thought of as a random sample from a population of performing musicians. Although our goal is not to make specific conclusions about differences between any two musicians, we do want to account for inherent differences among musicians in our model, and by doing so, we will be able to draw more precise conclusions about our fixed effects of interest. Thus, musician would be considered a random effect.
 
-### Distribution of errors: the multivariate normal distribution {#MVN}
+### Distribution of Errors: Multivariate Normal {#MVN}
 
 As part of our multilevel model, we must provide probability distributions to describe the behavior of random effects. Typically, we assume that random effects follow a normal distribution with mean 0 and a variance parameter which must be estimated from the data. For example, at Level One, we will assume that the errors associated with each performance of a particular musician can be described as:  $\epsilon_{ij}\sim N(0,\sigma^2)$. At Level Two, we have one error term ($u_{i}$) associated with subject-to-subject differences in intercepts, and one error term ($v_{i}$) associated with subject-to-subject differences in slopes. That is, $u_{i}$ represents the deviation of Subject $i$ from the mean performance anxiety before solos and small ensembles after accounting for their instrument, and $v_{i}$ represents the deviation of Subject $i$ from the mean difference in performance anxiety between large ensembles and other performance types after accounting for their instrument.
 
@@ -723,13 +724,13 @@ con.2 <- ggplot(data = zframe, aes(x = Var1, y = Var2, z = z)) +
 grid.arrange(con.1, con.2, ncol = 2)
 ```
 
-### Technical issues when estimating and testing parameters (Optional) {#multileveltechnical}
+### Technical Issues when Testing Parameters (optional) {#multileveltechnical}
 
-Now, our relatively simple two-level model has 8 parameters that need to be estimated: 4 fixed effects ($\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$, and $\beta_{1}$), and 4 variance components ($\sigma^{2}$, $\sigma_{u}^{2}$, $\sigma_{v}^{2}$, and $\sigma_{uv}$). Note that we use the term __variance components__ \index{variance components} to signify model parameters that describe the behavior of random effects. We can use statistical software, such as the lmer() function from the lme4 package in R, to obtain parameter estimates using our 497 observations. The most common methods for estimating model parameters---both fixed effects and variance components---are maximum likelihood (ML) and **restricted maximum likelihood (REML)**. \index{restricted maximum likelihood (REML)} The method of maximum likelihood (ML) was introduced in Chapter \@ref(ch-beyondmost), where parameter estimates are chosen to maximize the value of the likelihood function based on observed data. Restricted maximum likelihood (REML) is conditional on the fixed effects, so that the part of the data used for estimating variance components is separated from that used for estimating fixed effects. Thus REML, by accounting for the loss in degrees of freedom from estimating the fixed effects, provides an unbiased estimate of variance components, while ML estimators for variance components are biased under assumptions of normality, since they use estimated fixed effects rather than the true values. REML is preferable when the number of parameters is large or the primary interest is obtaining estimates of model parameters, either fixed effects or variance components associated with random effects. ML should be used if nested fixed effects models are being compared using a likelihood ratio test, although REML is fine for nested models of random effects (with the same fixed effects model). In this text, we will typically report REML estimates unless we are specifically comparing nested models with the same random effects. In most case studies and most models we consider, there is very little difference between ML and REML parameter estimates. Additional details are beyond the scope of this book [@Singer2003].
+Now, our relatively simple two-level model has 8 parameters that need to be estimated: 4 fixed effects ($\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$, and $\beta_{1}$), and 4 variance components ($\sigma^{2}$, $\sigma_{u}^{2}$, $\sigma_{v}^{2}$, and $\sigma_{uv}$). Note that we use the term __variance components__ \index{variance components} to signify model parameters that describe the behavior of random effects. We can use statistical software, such as the lmer() function from the lme4 package in R, to obtain parameter estimates using our 497 observations. The most common methods for estimating model parameters---both fixed effects and variance components---are maximum likelihood (ML) and **restricted maximum likelihood (REML)**. \index{restricted maximum likelihood (REML)} The method of ML was introduced in Chapter \@ref(ch-beyondmost), where parameter estimates are chosen to maximize the value of the likelihood function based on observed data. REML is conditional on the fixed effects, so that the part of the data used for estimating variance components is separated from that used for estimating fixed effects. Thus REML, by accounting for the loss in degrees of freedom from estimating the fixed effects, provides an unbiased estimate of variance components, while ML estimators for variance components are biased under assumptions of normality, since they use estimated fixed effects rather than the true values. REML is preferable when the number of parameters is large or the primary interest is obtaining estimates of model parameters, either fixed effects or variance components associated with random effects. ML should be used if nested fixed effects models are being compared using a likelihood ratio test, although REML is fine for nested models of random effects (with the same fixed effects model). In this text, we will typically report REML estimates unless we are specifically comparing nested models with the same random effects. In most case studies and most models we consider, there is very little difference between ML and REML parameter estimates. Additional details are beyond the scope of this book [@Singer2003].
 
-Note that the multilevel output shown beginning in the next section contains no p-values for performing hypothesis tests. This is primarily because the exact distribution of the test statistics under the null hypothesis (no fixed effect) is unknown, primarily because the exact degrees of freedom is not known [@Bates2015]. Finding good approximate distributions for test statistics (and thus good approximate p-values) in multilevel models is an area of active research. In most cases, we can simply conclude that t-values (ratios of parameter estimates to estimated standard errors) with absolute value above 2 indicate significant evidence that a particular model parameter is different than 0. Certain software packages will report p-values corresponding to hypothesis tests for parameters of fixed effects; these packages are typically using conservative assumptions, large-sample results, or approximate degrees of freedom for a t-distribution.  In section \@ref(multreg-boot), we introduced the bootstrap as a non-parametric, computational approach for producing confidence intervals for model parameters.  In addition, in section \@ref(longitudinal-paraboot), we will introduce a method called the parametric bootstrap which is being used more frequently by researchers to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis [@Efron2012].
+Note that the multilevel output shown beginning in the next section contains no p-values for performing hypothesis tests. This is primarily because the exact distribution of the test statistics under the null hypothesis (no fixed effect) is unknown, primarily because the exact degrees of freedom is not known [@Bates2015]. Finding good approximate distributions for test statistics (and thus good approximate p-values) in multilevel models is an area of active research. In most cases, we can simply conclude that t-values (ratios of parameter estimates to estimated standard errors) with absolute value above 2 indicate significant evidence that a particular model parameter is different than 0. Certain software packages will report p-values corresponding to hypothesis tests for parameters of fixed effects; these packages are typically using conservative assumptions, large-sample results, or approximate degrees of freedom for a t-distribution.  In Section \@ref(multreg-boot), we introduced the bootstrap as a non-parametric, computational approach for producing confidence intervals for model parameters.  In addition, in Section \@ref(longitudinal-paraboot), we will introduce a method called the parametric bootstrap which is being used more frequently by researchers to better approximate the distribution of the likelihood test statistic and produce more accurate p-values by simulating data under the null hypothesis [@Efron2012].
 
-### An initial model with parameter interpretations {#initialmodel}
+### An Initial Model with Parameter Interpretations {#initialmodel}
 
 The output below contains likelihood-based estimates of our 8 parameters from a two-level model applied to the music performance anxiety data:
 
@@ -766,14 +767,14 @@ cat("   ", tmp[1], "\n",
 
 This output (except for the capital letters along the left column) was specifically generated by the lmer() function in R; multilevel modeling results from other packages will contain similar elements. Because we will use lmer() output to summarize analyses of case studies in this and following sections, we will spend a little time now orienting ourselves to the most important features in this output.
 
-- A: How our multilevel model is written in R, based on the composite model formulation. For more details, see section \@ref(notesr8).
+- A: How our multilevel model is written in R, based on the composite model formulation. For more details, see Section \@ref(notesr8).
 - B: Measures of model performance.  Since this model was fit using REML, this line only contains the REML criterion.
 - B2: If the model is fit with ML instead of REML, the measures of performance will contain AIC, BIC, deviance, and the log-likelihood.
 - C: Estimated variance components ($\hat{\sigma}_{u}^2$ and $\hat{\sigma}_{u}$) associated with the intercept equation in Level Two.
 - D: Estimated variance components ($\hat{\sigma}_{v}^2$ and $\hat{\sigma}_{v}$) associated with the large ensemble effect equation in Level Two, along with the estimated correlation ($\hat{\rho}_{uv}$) between the two Level Two error terms.
 - E: Estimated variance components ($\hat{\sigma}^2$ and $\hat{\sigma}$) associated with the Level One equation.
 - F: Total number of performances where data was collected (Level One observations = 497) and total number of subjects (Level Two observations = 37).
-- G: Estimated fixed effect ($\hat{\alpha}_{0}$) for the intercept term, along with its standard error and t-value (which is the ratio of the estimated coefficient to its standard error). As described in section \@ref(multileveltechnical), no p-value testing the significance of the coefficient is provided because the exact null distribution of the t-value is unknown.
+- G: Estimated fixed effect ($\hat{\alpha}_{0}$) for the intercept term, along with its standard error and t-value (which is the ratio of the estimated coefficient to its standard error). As described in Section \@ref(multileveltechnical), no p-value testing the significance of the coefficient is provided because the exact null distribution of the t-value is unknown.
 - H: Estimated fixed effect ($\hat{\alpha}_{1}$) for the orchestral instrument effect, along with its standard error and t-value .
 - I: Estimated fixed effect ($\hat{\beta}_{0}$) for the large ensemble effect, along with its standard error and t-value.
 - J: Estimated fixed effect ($\hat{\beta}_{1}$) for the interaction between orchestral instruments and large ensembles, along with its standard error and t-value.
@@ -808,18 +809,18 @@ kable(table3chp8, booktabs=T,
       caption="Comparison of estimated coefficients and standard errors from the approaches mentioned in this section.")
 ```
 
-Two level modeling as done with the music performance anxiety data usually involves fitting a number of models. Subsequent sections will describe a process of starting with the simplest two-level models and building toward a final model which addresses the research questions of interest.
+Two-level modeling as done with the music performance anxiety data usually involves fitting a number of models. Subsequent sections will describe a process of starting with the simplest two-level models and building toward a final model which addresses the research questions of interest.
 
 
-## Building a multilevel model {#sec:buildmodel}
+## Building a Multilevel Model {#sec:buildmodel}
 
-### Model building strategy {#buildstrategy}
+### Model Building Strategy {#buildstrategy}
 
 Initially, it is advisable to first fit some simple, preliminary models, in part to establish a baseline for evaluating larger models. Then, we can build toward a final model for description and inference by attempting to add important covariates, centering certain variables, and checking model assumptions. In this study, we are particularly interested in Level Two covariates---those subject-specific variables that provide insight into why individuals react differently in anxiety-inducing situations. To get more precise estimates of the effect of Level Two covariates, we also want to control for Level One covariates that describe differences in individual performances.
 
 Our strategy for building multilevel models will begin with extensive exploratory data analysis at each level. Then, after examining models with no predictors to assess variability at each level, we will first focus on creating a Level One model, starting simple and adding terms as necessary. Next, we will move to Level Two models, again starting simple and adding terms as necessary, beginning with the equation for the intercept term. Finally, we will examine the random effects and variance components, beginning with a full set of error terms and then removing covariance terms and variance terms where advisable (for instance, when parameter estimates are failing to converge or producing impossible or unlikely values). This strategy follows closely with that described by @Bryk2002 and used by @Singer2003. Singer and Willett further find that the modeled error structure rarely matters in practical contexts. Other model building approaches are certainly possible. @Diggle2002, for example, begins with a saturated fixed effects model, determines variance components based on that, and then simplifies the fixed part of the model after fixing the random part.
 
-### An initial model: unconditional means or random intercepts {#modela8}
+### An Initial Model: Random Intercepts {#modela8}
 
 The first model fit in almost any multilevel context should be the **unconditional means model**, \index{unconditional means model} also called a **random intercepts model**. \index{random intercepts model} In this model, there are no predictors at either level; rather, the purpose of the unconditional means model is to assess the amount of variation at each level---to compare variability within subject to variability between subjects. Expanded models will then attempt to explain sources of between and within subject variability.
 
@@ -869,11 +870,11 @@ The relative levels of between- and within-person variabilities can be compared 
 Thus, 18.2\% of the total variability in performance anxiety scores are attributable to differences among subjects. In this particular model, we can also say that the average correlation for any pair of responses from the same individual is a moderately low .182. As $\rho$ approaches 0, responses from an individual are essentially independent and accounting for the multilevel structure of the data becomes less crucial. However, as $\rho$ approaches 1, repeated observations from the same individual essentially provide no additional information and accounting for the multilevel structure becomes very important. With $\rho$ near 0, the __effective sample size__ \index{effective sample size} (the number of independent pieces of information we have for modeling) approaches the total number of observations, while with $\rho$ near 1, the effective sample size approaches the number of subjects in the study.
 
 
-## Binary covariates at Level One and Level Two {#modelb}
+## Binary Covariates at Level One and Level Two {#modelb}
 
-### Random slopes and intercepts model {#randomslopeandint}
+### Random Slopes and Intercepts Model {#randomslopeandint}
 
-The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual. \index{random slopes and intercepts model} In this case, mirroring our model from section, \@ref(twolevelmodeling) we will include a binary covariate for performance type:
+The next step in model fitting is to build a good model for predicting performance anxiety scores at Level One (within subject). We will add potentially meaningful Level One covariates---those that vary from performance-to-performance for each individual. \index{random slopes and intercepts model} In this case, mirroring our model from Section \@ref(twolevelmodeling) we will include a binary covariate for performance type:
 
 \[ \textrm{LargeEns}_{ij} = \begin{cases} 1  & \textrm{if perf-type = Large Ensemble} \\
     0  & \textrm{if perf-type = Solo or Small Ensemble}\end{cases}\]
@@ -905,7 +906,7 @@ where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
             \sigma_{u}^{2} & \\
             \rho\sigma_{u}\sigma_{v} & \sigma_{v}^{2}
           \end{array} \right] \right). \]
-as discussed in section \@ref(MVN).
+as discussed in Section \@ref(MVN).
 
 In this model, performance anxiety scores for subject $i$ are assumed to differ (on average) for Large Ensemble performances as compared with Solos and Small Ensemble performances; the $\epsilon_{ij}$ terms capture the deviation between the true performance anxiety levels for subjects (based on performance type) and their observed anxiety levels. $\alpha_{0}$ is then the true mean performance anxiety level for Solos and Small Ensembles, and $\beta_{0}$ is the true mean difference in performance anxiety for Large Ensembles compared to other performance types. As before, $\sigma^2$ quantifies the within-person variability (the scatter of points around individuals' means by performance type), while now the between-person variability is partitioned into variability in Solo and Small Ensemble scores ($\sigma_{u}^{2}$) and variability in differences with Large Ensembles ($\sigma_{v}^{2}$).
 
@@ -935,7 +936,7 @@ From this output, we obtain estimates of our six model parameters (2 fixed effec
 
 We see that, on average, subjects had a performance anxiety level of 16.7 before solos and small ensembles, and their anxiety levels were 1.7 points lower, on average, before large ensembles, producing an average performance anxiety level before large ensembles of 15.0.  According to the t-value listed in R, the difference between large ensembles and other performance types is statistically significant (t=-3.09).
 
-This random slopes and intercepts model is illustrated in Figure \@ref(fig:mli-spag1). The thicker black line shows the overall trends given by our estimated fixed effects: an intercept of 16.7 and a slope of -1.7. Then, each subject is represented by a gray line. Not only do the subjects' intercepts differ (with variance 6.3), but their slopes differ as well (with variance 0.7). Additionally, subjects' slopes and intercepts are negatively associated (with correlation -0.76), so that subjects with greater intercepts tend to have steeper negative slopes. We can compare this model with the random intercepts model from section \@ref(modela8), pictured in Figure \@ref(fig:mli-spag0). With no effect of large ensembles, each subject is represented by a gray line with identical slopes (0) but varying intercepts (with variance 5.0).
+This random slopes and intercepts model is illustrated in Figure \@ref(fig:mli-spag1). The thicker black line shows the overall trends given by our estimated fixed effects: an intercept of 16.7 and a slope of -1.7. Then, each subject is represented by a gray line. Not only do the subjects' intercepts differ (with variance 6.3), but their slopes differ as well (with variance 0.7). Additionally, subjects' slopes and intercepts are negatively associated (with correlation -0.76), so that subjects with greater intercepts tend to have steeper negative slopes. We can compare this model with the random intercepts model from Section \@ref(modela8), pictured in Figure \@ref(fig:mli-spag0). With no effect of large ensembles, each subject is represented by a gray line with identical slopes (0) but varying intercepts (with variance 5.0).
 
 ```{r, include=FALSE}
 # Plot random intercepts model
@@ -986,20 +987,20 @@ ggplot() +
 
 Figures \@ref(fig:mli-spag1) and \@ref(fig:mli-spag0) use **empirical Bayes estimates** \index{empirical Bayes estimates} for the intercepts ($a_{i}$) and slopes ($b_{i}$) of individual subjects. Empirical Bayes estimates are sometimes called "shrinkage estimates" since they combine individual-specific information with information from all subjects, thus "shrinking" the individual estimates toward the group averages. Empirical Bayes estimates are often used when a term such as $a_{i}$ involves both fixed and random components; further detail can be found in @Bryk2002 and @Singer2003.
 
-### Pseudo R-squared values {#pseudoR2}
+### Pseudo R-squared Values {#pseudoR2}
 
-The estimated within-person variance $\hat{\sigma}^2$ decreased by 3.1\% (from 22.5 to 21.8) from the unconditional means model, implying that only 3.1\% of within-person variability in performance anxiety scores can be explained by performance type. This calculation is considered a __pseudo R-square__ \index{pseudo R-square} value:
+The estimated within-person variance $\hat{\sigma}^2$ decreased by 3.1\% (from 22.5 to 21.8) from the unconditional means model, implying that only 3.1\% of within-person variability in performance anxiety scores can be explained by performance type. This calculation is considered a __pseudo R-squared__ \index{pseudo R-squared} value:
 
 \begin{equation*}
 \textrm{Pseudo }R^2_{L1} = \frac{\hat{\sigma}^{2}(\textrm{Model A})-\hat{\sigma}^{2}(\textrm{Model B})}{\hat{\sigma}^{2}(\textrm{Model A})} = \frac{22.5-21.8}{22.5} = 0.031
 \end{equation*}
 Values of $\hat{\sigma}_{u}^{2}$ and $\hat{\sigma}_{v}^{2}$ from Model B cannot be compared to between-person variability from Model A, since the inclusion of performance type has changed the interpretation of these values, although they can provide important benchmarks for evaluating more complex Level Two predictions. Finally, $\hat{\rho}_{uv}=-0.76$ indicates a strong negative relationship between a subject's performance anxiety before solos and small ensembles and their (typical) decrease in performance anxiety before large ensembles. As might be expected, subjects with higher levels of performance anxiety before solos and small ensembles tend to have smaller increases (or greater decreases) in performance anxiety before large ensembles; those with higher levels of performance anxiety before solos and small ensembles have more opportunity for decreases before large ensembles.
 
-Pseudo $R^2$ values are not universally reliable as measures of model performance. Because of the complexity of estimating fixed effects and variance components at various levels of a multilevel model, it is not unusual to encounter situations in which covariates in a Level Two equation for, say, the intercept remain constant (while other aspects of the model change), yet the associated pseudo $R^2$ values differ or are negative. For this reason, pseudo $R^2$ values in multilevel models should be interpreted cautiously.
+Pseudo R-squared values are not universally reliable as measures of model performance. Because of the complexity of estimating fixed effects and variance components at various levels of a multilevel model, it is not unusual to encounter situations in which covariates in a Level Two equation for, say, the intercept remain constant (while other aspects of the model change), yet the associated pseudo R-squared values differ or are negative. For this reason, pseudo R-squared values in multilevel models should be interpreted cautiously.
 
-### Adding a covariate at Level Two {#modelc}
+### Adding a Covariate at Level Two {#modelc}
 
-The initial two-level model described in section \@ref(initialmodel) essentially expands upon the random slopes and intercepts model by adding a binary covariate for instrument played at Level Two. We will denote this as Model C:
+The initial two-level model described in Section \@ref(initialmodel) essentially expands upon the random slopes and intercepts model by adding a binary covariate for instrument played at Level Two. We will denote this as Model C:
 
 - Level One:
 \begin{equation*}
@@ -1026,7 +1027,7 @@ where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
 
 We found that there are no highly significant fixed effects in Model C (other than the intercept). In particular, we have no significant evidence that musicians playing orchestral instruments reported different performance anxiety scores, on average, for solos and small ensembles than keyboardists and vocalists, no evidence of a difference in performance anxiety by performance type for keyboard players and vocalists, and no evidence of an instrument effect in difference between large ensembles and other types.
 
-Since no terms were added at Level One when expanding from the random slopes and intercepts model (Model B), no discernable changes should occur in explained within-person variability (although small changes could occur due to numerical estimation procedures used in likelihood-based parameter estimates). However, Model C expanded Model B by using the instrument which a subject plays to model both intercepts and slopes at Level Two. We can use pseudo R-square values for both intercepts and slopes to evaluate the impact on between-person variability of adding instrument to Model B.
+Since no terms were added at Level One when expanding from the random slopes and intercepts model (Model B), no discernible changes should occur in explained within-person variability (although small changes could occur due to numerical estimation procedures used in likelihood-based parameter estimates). However, Model C expanded Model B by using the instrument which a subject plays to model both intercepts and slopes at Level Two. We can use pseudo R-squared values for both intercepts and slopes to evaluate the impact on between-person variability of adding instrument to Model B.
 
 \begin{equation*}
 \textrm{Pseudo }R^2_{L2_u} = \frac{\hat{\sigma}_{u}^{2}(\textrm{Model B})-\hat{\sigma}_{u}^{2}(\textrm{Model C})}{\hat{\sigma}_{u}^{2}(\textrm{Model B})} = \frac{6.33-5.66}{6.33} = 0.106
@@ -1076,9 +1077,9 @@ BIC(model.c, model.c2)
 
 Note that parameter estimates for the remaining 6 fixed effects and variance components closely mirror the corresponding parameter estimates from Model C. In fact, removing the error term on the slope has improved (reduced) both the AIC and BIC measures of overall model performance. Instead of assuming that the large ensemble effects, after accounting for instrument played, vary by individual, we are assuming that large ensemble effect is fixed across subjects. It is not unusual to run a two-level model like this, with an error term on the intercept equation to account for subject-to-subject differences, but with no error terms on other Level Two equations unless there is an _a priori_ reason to allow effects to vary by subject or if the model performs better after building in those additional error terms.
 
-## Additional covariates: model comparison and interpretability {#sec:modeld}
+## Adding Further Covariates {#sec:modeld}
 
-Recall that we are particularly interested in this study in Level Two covariates---those subject-specific variables that provide insight into why individuals react differently in anxiety-inducing situations. In section \@ref(explore), we saw evidence that subjects with higher baseline levels of negative emotionality tend to have higher performance anxiety levels prior to performances. Thus, in our next step in model building, we will add negative emotionality as a Level Two predictor to Model C. With this addition, our new model can be expressed as a system of Level One and Level Two models:
+Recall that we are particularly interested in this study in Level Two covariates---those subject-specific variables that provide insight into why individuals react differently in anxiety-inducing situations. In Section \@ref(explore), we saw evidence that subjects with higher baseline levels of negative emotionality tend to have higher performance anxiety levels prior to performances. Thus, in our next step in model building, we will add negative emotionality as a Level Two predictor to Model C. With this addition, our new model can be expressed as a system of Level One and Level Two models:
 
 - Level One:
 \begin{equation*}
@@ -1115,7 +1116,7 @@ cat(" Number of Level Two groups = ",
 coef(summary(model.d))
 ```
 
-### Interpretation of parameter estimates {#interp:modeld}
+### Interpretation of Parameter Estimates {#interp:modeld}
 
 Compared to Model C, the directions of the effects of instrument and performance type are consistent, but the effect sizes and levels of significance are reduced because of the relative importance of the negative emotionality term. Interpretations will also change slightly to acknowledge that we have controlled for a covariate. In addition, interpretations of fixed effects involving negative emotionality must acknowledge that this covariate is a continuous measure and not binary like instrument and performance type:
 
@@ -1124,11 +1125,11 @@ Compared to Model C, the directions of the effects of instrument and performance
 - $\hat{\alpha}_{2} = 0.15$. A one point increase in baseline negative emotionality is associated with an estimated 0.15 mean increase in anxiety levels before solos and small ensembles, after controlling for instrument.
 - $\hat{\beta}_{0} = -0.28$. Keyboard players and vocalists (`orch=0`) with baseline negative emotionality levels of 0 (`mpqnem=0`) have an estimated mean decrease in anxiety level of 0.28 points before large ensemble performances compared to other performance types.
 - $\hat{\beta}_{1} = -0.95$. After accounting for baseline negative emotionality, orchestral instrument players have an estimated mean anxiety level before solos and small ensembles which is 1.00 point higher than keyboardists and vocalists, while the mean anxiety of orchestral players is only .05 points higher before large ensembles (a difference of .95 points).
-- $\hat{\beta}_{2} = -0.03$. After accounting for instrument, a one point increase in baseline negative emotionality is associated with an estimated 0.15 mean increase in anxiety levels before solos and small ensembles, but only an estimated 0.12 increase before large ensembles (a difference of .03 points).
+- $\hat{\beta}_{2} = -0.03$. After accounting for instrument, a one-point increase in baseline negative emotionality is associated with an estimated 0.15 mean increase in anxiety levels before solos and small ensembles, but only an estimated 0.12 increase before large ensembles (a difference of .03 points).
 
 Some of the detail in these parameter interpretations can be tricky---describing interaction terms, deciding if a covariate must be fixed at 0 or merely held constant, etc. Often it helps to write out models for special cases to isolate the effects of specific fixed effects. We will consider a few parameter estimates from above and see why the interpretations are written as they are.
 
-- $\hat{\alpha}_{1}$. For solos and small ensembles (`LargeEns=0`), the following equations describe the fixed effects portion of the composite model for negative affect score for vocalists and keyboardsists (`Orch=0`) and orchestral instrumentalists (`Orch=1`):
+- $\hat{\alpha}_{1}$. For solos and small ensembles (`LargeEns=0`), the following equations describe the fixed effects portion of the composite model for negative affect score for vocalists and keyboardists (`Orch=0`) and orchestral instrumentalists (`Orch=1`):
 
 \begin{align*}
 \textrm{Orch}=0: & \\
@@ -1139,7 +1140,7 @@ Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textrm{MPQnem}_{i}
 Regardless of the subjects' baseline negative emotionality (`MPQnem`), $\hat{\alpha}_{1}$ represents the estimated difference in performance anxiety between those playing orchestral instruments and others. This interpretation, however, only holds for solos and small ensembles. For large ensembles, the difference between those playing orchestral instruments and others is actually given by $\hat{\alpha}_{1}+\hat{\beta}_{1}$, holding `MPQnem` constant (Show!).
 
 - $\hat{\beta}_{0}$. Because `LargeEns` interacts with both `Orch` and `MPQnem` in Model C, $\hat{\beta}_{0}$ only describes the estimated difference between large ensembles and other performance types when both `Orch=0` and `MPQnem=0`, thus removing the effects of the interaction terms. If, for instance, `Orch=1` and `MPQnem=20`, then the difference between large ensembles and other performance types is given by $\hat{\beta}_{0}+\hat{\beta}_{1}+20\hat{\beta}_{2}$.
-- $\hat{\beta}_{1}$. As with $\hat{\alpha}_{1}$, we consider equations describing the fixed effects portion of the composite model for negative affect score for vocalists and keyboardsists (`Orch=0`) and orchestral instrumentalists (`Orch=1`), except here we leave _LargeEns_ as an unknown rather than restricting the model to solos and small ensembles:
+- $\hat{\beta}_{1}$. As with $\hat{\alpha}_{1}$, we consider equations describing the fixed effects portion of the composite model for negative affect score for vocalists and keyboardists (`Orch=0`) and orchestral instrumentalists (`Orch=1`), except here we leave _LargeEns_ as an unknown rather than restricting the model to solos and small ensembles:
 
 \begin{align*}
 \textrm{Orch}=0: & & \\
@@ -1151,9 +1152,9 @@ Y_{ij} & = (\alpha_{0}+\alpha_{1})+\alpha_{2}\textrm{MPQnem}_{i}+(\beta_{0}+\bet
 \end{align*}
 As long as baseline negative emotionality is held constant (at any level, not just 0), then $\hat{\beta}_{1}$ represents the estimated difference in the large ensemble effect between those playing orchestral instruments and others.
 
-### Model comparisons {#compare:modeld}
+### Model Comparisons {#compare:modeld}
 
-At this point, we might ask: do the two extra fixed effects terms in Model D provide a significant improvement over Model C? Nested models such as these can be tested using a **likelihood ratio test** \index{likelihood ratio test (LRT)} (drop in deviance test), \index{drop-in-deviance test} as we've used in Sections \@ref(sec-Devtocompare) and \@ref(sec-logisticInf) with certain generalized linear models. Since we are comparing models nested in their fixed effects, we use full maximum likelihood methods to estimate model parameters, as discussed in section \@ref(multileveltechnical). As expected, the likelihood is larger (and the log-likelihood is less negative) under the larger model (Model D); our test statistic (14.734) is then -2 times the difference in log-likelihood between Models C and D. Comparing the test statistic to a chi-square distribution with 2 degrees of freedom (signifying the number of additional terms in Model D), we obtain a p-value of .0006. Thus, Model D significantly outperforms Model C.
+At this point, we might ask: do the two extra fixed effects terms in Model D provide a significant improvement over Model C? Nested models such as these can be tested using a **likelihood ratio test** \index{likelihood ratio test (LRT)} (drop in deviance test), \index{drop-in-deviance test} as we've used in Sections \@ref(sec-Devtocompare) and \@ref(sec-logisticInf) with certain generalized linear models. Since we are comparing models nested in their fixed effects, we use full maximum likelihood methods to estimate model parameters, as discussed in Section \@ref(multileveltechnical). As expected, the likelihood is larger (and the log-likelihood is less negative) under the larger model (Model D); our test statistic (14.734) is then -2 times the difference in log-likelihood between Models C and D. Comparing the test statistic to a chi-square distribution with 2 degrees of freedom (signifying the number of additional terms in Model D), we obtain a p-value of .0006. Thus, Model D significantly outperforms Model C.
 
 ```{r comment=NA, message=FALSE}
 # anova() automatically uses ML for LRT tests
@@ -1193,7 +1194,7 @@ row.names(did_print) <- row.names(drop_in_dev)
 did_print
 ```
 
-## Center covariates {#sec:modele}
+## Centering Covariates {#sec:modele}
 
 As we observed above, the addition of baseline negative emotionality in Model D did not always produce sensible interpretations of fixed effects. It makes no sense to draw conclusions about performance anxiety levels for subjects with MPQNEM scores of 0 at baseline (as in $\hat{\beta}_{0}$), since the minimum NEM composite score among subjects in this study was 11. In order to produce more meaningful interpretations of parameter estimates and often more stable parameter estimates, it is often wise to __center__ \index{centering} explanatory variables. Centering involves subtracting a fixed value from each observation, where the fixed value represents a meaningful anchor value (e.g., last grade completed is 12; GPA is 3.0). Often, when there's no pre-defined anchor value, the mean is used to represent a typical case. With this in mind, we can create a new variable
 
@@ -1229,7 +1230,7 @@ As you compare Model D to Model E, you should notice that only two things change
 - $\hat{\alpha}_{0} = 16.26$. The estimated mean performance anxiety for solos and small ensembles (`large=0`) is 16.26 for keyboard players and vocalists (`orch=0`) with an average level of negative emotionality at baseline (`mpqnem=31.63`).
 - $\hat{\beta}_{0} = -1.23$. Keyboard players and vocalists (`orch=0`) with an average level of baseline negative emotionality levels (`mpqnem=31.63`) have an estimated mean decrease in anxiety level of 1.23 points before large ensemble performances compared to other performance types.
 
-## A potential final model for music performance anxiety {#modelf}
+## A Final Model for Music Performance Anxiety {#modelf}
 
 We now begin iterating toward a "final model" for these data, on which we will base conclusions. Typical features of a "final multilevel model" \index{multilevel model} include:
 
@@ -1282,14 +1283,14 @@ In addition, we assume the following variance-covariance structure at Level Two:
           \end{array} \right] \right). \]  
   
 
-Being able to write out these mammoth variance-covariance matrices is less important than recognizing the number of variance components that must be estimated by our intended model. In this case, we must use likelihood-based methods to obtain estimates for 6 variance terms and 15 correlation terms at Level Two, along with 1 variance term at Level One. Note that the number of correlation terms is equal to the number of unique pairs among Level Two random effects. In later sections we will consider ways to reduce the number of variance components in cases where the number of terms is exploding or the statistical software is struggling to simultaneously find estimates for all model parameters to maximize the likelihood function.
+Being able to write out these mammoth variance-covariance matrices is less important than recognizing the number of variance components that must be estimated by our intended model. In this case, we must use likelihood-based methods to obtain estimates for 6 variance terms and 15 correlation terms at Level Two, along with 1 variance term at Level One. Note that the number of correlation terms is equal to the number of unique pairs among Level Two random effects. In later sections we will consider ways to reduce the number of variance components in cases where the number of terms is exploding, or the statistical software is struggling to simultaneously find estimates for all model parameters to maximize the likelihood function.
 
 From the signs of fixed effects estimates in the R output below, we see that performance anxiety is higher when a musician is performing in front of students, a jury, or the general public rather than their instructor, and it is lower for each additional diary the musician previously filled out. In addition, musicians with lower levels of positive emotionality and higher levels of absorption tend to experience greater performance anxiety, and those who play orchestral instruments experience more performance anxiety than those who play keyboards or sing. Addressing the researchers' primary hypothesis, after controlling for all these factors, we have significant evidence that musicians with higher levels of negative emotionality experience higher levels of performance anxiety, and that this association is even more pronounced when musicians are performing solos rather than as part of an ensemble group.
 
 Here are how a couple of key fixed effects would be interpreted in this final model:
 
-- $\hat{\alpha}_{4} = 0.11$. A one point increase in baseline level of negative emotionality is associated with an estimated 0.11 mean increase in performance anxiety for musicians performing in an ensemble group (`solo=0`), after controlling for previous diary entries, audience, positive emotionality, absorption, and instrument.
-- $\hat{\zeta}_{1} = 0.08$. When musicians play solos, a one point increase in baseline level of negative emotionality is associated with an estimated 0.19 mean increase in performance anxiety, 0.08 points (73\%) higher than musicians playing in ensemble groups, controlling for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument.
+- $\hat{\alpha}_{4} = 0.11$. A one-point increase in baseline level of negative emotionality is associated with an estimated 0.11 mean increase in performance anxiety for musicians performing in an ensemble group (`solo=0`), after controlling for previous diary entries, audience, positive emotionality, absorption, and instrument.
+- $\hat{\zeta}_{1} = 0.08$. When musicians play solos, a one-point increase in baseline level of negative emotionality is associated with an estimated 0.19 mean increase in performance anxiety, 0.08 points (73\%) higher than musicians playing in ensemble groups, controlling for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument.
 
 ```{r, comment=NA, warning=FALSE}
 # Model F (One - of many - reasonable final models)
@@ -1308,7 +1309,7 @@ cat(" Number of Level Two groups = ",
 coef(summary(model.f))
 ```
 
-## Modeling the multilevel structure: is it really necessary? {#multinecessary}
+## Modeling Multilevel Structure: Is It Necessary? {#multinecessary}
 
 Before going too much further, we should really consider if this multilevel structure has gained us anything over linear least squares regression. \index{linear least squares regression (LLSR)} Sure, multilevel modeling \index{multilevel model} seems more faithful to the inherent structure of the data---performances from the same musician should be more highly correlated than performances from different musicians---but do our conclusions change in a practical sense? Some authors have expressed doubts. For instance Robert Bickel, in his 2007 book, states, "When comparing OLS and multilevel regression results, we may find that differences among coefficient values are inconsequential, and tests of significance may lead to the same decisions. A great deal of effort seems to have yielded precious little gain" [@Bickel2007].  Others, especially economists, advocate simply accounting for the effect of different Level Two observational units (like `musicians`) with a sequence of indicator variables for those observational units. We contend that (1) fitting multilevel models is a small extension of LLSR regression that is not that difficult to conceptualize and fit, especially with the software available today, and (2) using multilevel models to remain faithful to the data structure *can* lead to different coefficient estimates and *often* leads to different (and larger) standard error estimates and thus smaller test statistics. Hopefully you've seen evidence of (1) in this chapter already; the rest of this section introduces two small examples to help illustrate (2).
 
@@ -1375,7 +1376,7 @@ ggplot() +
   scale_y_continuous(name="Negative Affect", limits=c(0,40)) 
 ```
 
-Figure \@ref(fig:mli-spag2) is based on a synthetic data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting a LLSR model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the LLSR analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
+Figure \@ref(fig:mli-spag2) is based on a synthetic data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in Section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting a LLSR model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the LLSR analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
 
 ```{r ch8simulations, include=FALSE, cache=TRUE}
 # Simulation 2 - use estimated parameters from Model C
@@ -1505,13 +1506,13 @@ b1dens <- ggplot(data=se.data,
 grid.arrange(a0dens,a1dens,b0dens,b1dens,ncol=2)
 ```
 
-Our second example is based upon Model C from section \@ref(modelc), with single binary predictors at both Level One and Level Two. Using the estimated fixed effects coefficients and variance components from random effects produced in Model C, we generated 1000 sets of simulated data. Each set of simulated data contained 497 observations from 37 subjects just like the original data, with relationships between negative affect and large ensembles and orchestral instruments (along with associated variability) governed by the estimated parameters from Model C. Each set of simulated data was used to fit both a multilevel model and a linear least squares regression model, and the estimated fixed effects ($\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\beta}_{0}$, and $\hat{\beta}_{1}$) and their standard errors were saved. Figure \@ref(fig:mli-density1) shows density plots comparing the 1000 estimated values for each fixed effect from the two modeling approaches; in general, estimates from multilevel modeling and LLSR tend to agree pretty well, without noticeable bias. Based on coefficient estimates alone, there appears to be no reason to favor multilevel modeling over LLSR in this example, but Figure \@ref(fig:mli-density2) tells a different story. Figure \@ref(fig:mli-density2) shows density plots comparing the 1000 estimated standard errors associated with each fixed effect from the two modeling approaches; in general, standard errors are markedly larger with multilevel modeling than LLSR. This is not unusual, since LLSR assumes all 497 observations are independent while multilevel modeling acknowledges that, with correlated data within subject, there are fewer than 497 independent pieces of data. Therefore, linear least squares regression can overstate precision, producing t-statistics for each fixed effect that tend to be larger than they should be; the number of significant results in LLSR are then too great and not reflective of the true structure of the data.
+Our second example is based upon Model C from Section \@ref(modelc), with single binary predictors at both Level One and Level Two. Using the estimated fixed effects coefficients and variance components from random effects produced in Model C, we generated 1000 sets of simulated data. Each set of simulated data contained 497 observations from 37 subjects just like the original data, with relationships between negative affect and large ensembles and orchestral instruments (along with associated variability) governed by the estimated parameters from Model C. Each set of simulated data was used to fit both a multilevel model and a linear least squares regression model, and the estimated fixed effects ($\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\beta}_{0}$, and $\hat{\beta}_{1}$) and their standard errors were saved. Figure \@ref(fig:mli-density1) shows density plots comparing the 1000 estimated values for each fixed effect from the two modeling approaches; in general, estimates from multilevel modeling and LLSR tend to agree pretty well, without noticeable bias. Based on coefficient estimates alone, there appears to be no reason to favor multilevel modeling over LLSR in this example, but Figure \@ref(fig:mli-density2) tells a different story. Figure \@ref(fig:mli-density2) shows density plots comparing the 1000 estimated standard errors associated with each fixed effect from the two modeling approaches; in general, standard errors are markedly larger with multilevel modeling than LLSR. This is not unusual, since LLSR assumes all 497 observations are independent, while multilevel modeling acknowledges that, with correlated data within subject, there are fewer than 497 independent pieces of data. Therefore, linear least squares regression can overstate precision, producing t-statistics for each fixed effect that tend to be larger than they should be; the number of significant results in LLSR are then too great and not reflective of the true structure of the data.
 
-## Notes on Using R (Optional){#notesr8}
+## Notes on Using R (optional){#notesr8}
 
 Initial examination of the data for Case Study \@ref(cs:music) shows a couple of features that must be noted. First, there are 37 unique study participants, but they are not numbered successively from 1 to 43. The majority of participants filled out 15 diaries, but several filled out fewer (with a minimum of 2); as with participant IDs, diary numbers within participant are not always successively numbered. Finally, missing data is not an issue in this data set, since researchers had already removed participants with only 1 diary entry and performances for which the type was not recorded (of which there were 11).  
 
-The R code below runs the initial multilevel model \index{multilevel model} in section \@ref(initialmodel). Multilevel model notation in R is based on the composite model formulation. Here, the response variable is `na`, while `orch`, `large`, and `orch:large` represent the fixed effects $\alpha_{1}$, $\beta_{0}$, and $\beta_{1}$, along with the intercept $\alpha_{0}$ which is included automatically. Note that a colon is used to denote an interaction between two variables. Error terms and their associated variance components are specified in `(large|id)`, which is equivalent to `(1+large|id)`. This specifies two error terms at Level Two (the `id` level): one corresponding to the intercept ($u_{i}$) and one corresponding to the large ensemble effect ($v_{i}$); the multilevel model will then automatically include a variance for each error term in addition to the covariance between the two error terms. A variance associated with a Level One error term is also automatically included in the multilevel model. Note that there are ways to override the automatic inclusion of certain variance components; for example, `(0+large|id)` would not include an error term for the intercept (and therefore no covariance term at Level Two either).
+The R code below runs the initial multilevel model \index{multilevel model} in Section \@ref(initialmodel). Multilevel model notation in R is based on the composite model formulation. Here, the response variable is `na`, while `orch`, `large`, and `orch:large` represent the fixed effects $\alpha_{1}$, $\beta_{0}$, and $\beta_{1}$, along with the intercept $\alpha_{0}$ which is included automatically. Note that a colon is used to denote an interaction between two variables. Error terms and their associated variance components are specified in `(large|id)`, which is equivalent to `(1+large|id)`. This specifies two error terms at Level Two (the `id` level): one corresponding to the intercept ($u_{i}$) and one corresponding to the large ensemble effect ($v_{i}$); the multilevel model will then automatically include a variance for each error term in addition to the covariance between the two error terms. A variance associated with a Level One error term is also automatically included in the multilevel model. Note that there are ways to override the automatic inclusion of certain variance components; for example, `(0+large|id)` would not include an error term for the intercept (and therefore no covariance term at Level Two either).
 
 ```{r verb13, eval=FALSE}
 model0 <- lmer(na ~ orch + large + orch:large +
@@ -1524,7 +1525,7 @@ summary(model0)
 
 ### Conceptual Exercises
 
-1. __Housing Prices.__ @Brown2004 describe "A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices". Based on the title of their paper: (a) give the observational units at Level One and Level Two, and (b) list potential explanatory variables at both Level One and Level Two.
+1. __Housing prices.__ @Brown2004 describe "A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices". Based on the title of their paper: (a) give the observational units at Level One and Level Two, and (b) list potential explanatory variables at both Level One and Level Two.
 
 2. In the preceding problem, why can't we assume all houses in the data set are independent?  What would be the potential implications to our analysis of assuming independence among houses?
 
@@ -1534,11 +1535,11 @@ summary(model0)
     - Square footage, number of bedrooms, age of house, median neighborhood housing price
     - Square footage, median neighborhood income, rating of neighborhood schools, median neighborhood housing price
   
-4. __Music Performance Anxiety.__ Describe a situation in which the two plots in Figure \@ref(fig:mli-boxmat1) might tell different stories.
+4. __Music performance anxiety.__ Describe a situation in which the two plots in Figure \@ref(fig:mli-boxmat1) might tell different stories.
 
 5. Explain the difference between $a_{i}$ in Equation \@ref(eq:level2s0) and $\hat{a}_{i}$ in Equation \@ref(eq:level2s0hat).
 
-6. Why is the contour plot for multivariate normal density in Figure \@ref(fig:contour-boundary) (b) tilted from southwest to northeast, but the contour plot in Figure \@ref(fig:contour-boundary) (a) is not tilted?
+6. Why is the contour plot for multivariate normal density in Figure \@ref(fig:contour-boundary)(b) tilted from southwest to northeast, but the contour plot in Figure \@ref(fig:contour-boundary)(a) is not tilted?
 
 7. In Table \@ref(tab:table3chp8), note that the standard errors associated with estimated coefficients under independence are lower than standard errors under alternative analysis methods. Why is that often the case?
 
@@ -1552,7 +1553,7 @@ summary(model0)
   
 10. Give a short rule in your own words describing when an interpretation of an estimated coefficient should "hold constant" another covariate or "set to 0" that covariate (see Section \@ref(interp:modeld)).
 
-11. The interpretation of $\hat{\alpha}_{1}$ in Section \@ref(interp:modeld) claims that "This interpretation, however, only holds for solos and small ensembles. For large ensembles, the difference between those playing orchestral instruments and others is actually given by $\hat{\alpha}_{1}+\hat{\beta}_{1}$, holding MPQNEM constant." Show that this claim is true.
+11. The interpretation of $\hat{\alpha}_{1}$ in Section \@ref(interp:modeld) claims that, "This interpretation, however, only holds for solos and small ensembles. For large ensembles, the difference between those playing orchestral instruments and others is actually given by $\hat{\alpha}_{1}+\hat{\beta}_{1}$, holding MPQNEM constant." Show that this claim is true.
 
 12. Explain how the interpretations of the following parameter estimates change (or don't change) as we change our model:
     - $\hat{\alpha}_{0}$ from Model A to B to C to D to E
@@ -1570,9 +1571,9 @@ summary(model0)
 
 16. Summarize Figures \@ref(fig:mli-density1) and \@ref(fig:mli-density2) in your own words.
 
-### Guided Exercise
+### Guided Exercises
 
-1. __Music Performance Joy.__ In this chapter, we studied models for predicting music performance anxiety, as measured by the negative affect scale from the PANAS instrument. Now we will examine models for predicting the happiness of musicians prior to performances, as measured by the positive affect scale from the PANAS instrument.
+1. __Music performance joy.__ In this chapter, we studied models for predicting music performance anxiety, as measured by the negative affect scale from the PANAS instrument. Now we will examine models for predicting the happiness of musicians prior to performances, as measured by the positive affect scale from the PANAS instrument.
 
     To begin, run the following models:
 
@@ -1586,16 +1587,16 @@ summary(model0)
 <br>
     1. Perform an exploratory data analysis by comparing positive affect (happiness) to Level One and Level Two covariates using appropriate graphs. Comment on interesting trends, supporting your comments with appropriate summary statistics.
     2. Report estimated fixed effects and variance components from Model A, using proper notation from this chapter (no interpretations required). Also report and interpret an intraclass correlation coefficient.
-    3. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo-Rsquare value.
+    3. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo Rsquared value.
     4. Write out Model C, using both separate Level One and Level Two models as well as a composite model. Be sure to express distributions for error terms. How many parameters must be estimated in Model C?
     5. Report and interpret the following parameter estimates from Model C: $\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\gamma}_{0}$, $\hat{\beta}_{1}$, $\hat{\sigma}_{u}$, $\hat{\sigma}_{v}$, and $\hat{\rho}_{uv}$. Interpretations for variance components should be done in terms of standard deviations and correlation coefficients.
     6. Report and interpret the same parameter estimates listed above from Model D. In each case, the new interpretation should involve a small modification of your interpretation from Model C.  Use underlines or highlights to denote the part of the Model D interpretation that differs from the Model C interpretation.
     7. Also report and interpret the following parameter estimates from Model D: $\hat{\alpha}_{2}$ and $\hat{\beta}_{2}$.
-    8. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo-Rsquare value(s) and with AIC and BIC statistics.
+    8. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo Rsquared value(s) and with AIC and BIC statistics.
 
-### Open-ended Exercises
+### Open-Ended Exercises
 
-1. __Political Ambiguity.__ @Chapp2018 explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. 2014 websites were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model of candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
+1. __Political ambiguity.__ @Chapp2018 explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand-coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. A total of 2014 websites were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model of candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
     - "when incumbents do hazard issue statements, these statements will be marked by a higher degree of clarity." (Hypothesis 1b)
     - "ideological distance [from district residents] will be associated with greater ambiguity." (Hypothesis 2a)
     - "controlling for ideological distance, ideological extremity [of the candidate] should correspond to less ambiguity." (Hypothesis 2b)
@@ -1610,10 +1611,10 @@ summary(model0)
     - `mismatch` = the distance between the candidate's ideology and the district's ideology (candidate ideology scores were regressed against district ideology scores; mismatch values represent the absolute value of the residual associated with each candidate)
     - `distID` = the congressional district's unique ID
     - `distLean` = the district's political leaning. Higher scores imply more conservative districts.
-    - `attHeterogeneity` = a measure of the variability of ideologies within the district. Higher scores imply more attitidunal heterogeneity among voters.
+    - `attHeterogeneity` = a measure of the variability of ideologies within the district. Higher scores imply more attitudinal heterogeneity among voters.
     - `demHeterogeneity` = a measure of the demographic variability within the district. Higher scores imply more demographic heterogeneity among voters.
     
-    With this in mind, fit your own models to address these hypotheses from @Chapp2018. Be sure to use a two level structure to account for variables at both the candidate and district levels.  
+    With this in mind, fit your own models to address these hypotheses from @Chapp2018. Be sure to use a two-level structure to account for variables at both the candidate and district levels.  
 
 2. **Airbnb in Chicago.**  @Trinh2018 collected data on 1561 Airbnb listings in Chicago from August 2016, and then they merged in information from the neighborhood (out of 43 in Chicago) where the listing was located.  We can examine traits that are associated with listings that command a higher price.  Conduct an EDA, build a multilevel model, and interpret model coefficients to answer questions such as: What are characteristics of a higher priced listing?  Are the most influential traits associated with individual listings or entire neighborhoods?  Are there intriguing interactions where the effect of one variable depends on levels of another?
 
@@ -1637,7 +1638,7 @@ summary(model0)
 
 3. __Project 5183.__ The Colorado Rockies, a Major League Baseball team, instigated a radical experiment on June 20th, 2012. Hopelessly out of contention for the playoffs and struggling again with their pitching, the Rockies decided to limit their starting pitchers to 75 pitches from June 20th until the end of the year with the hope of improving a struggling starting rotation, teaching pitchers how to pitch to contact (which results in low pitch counts), and at the same time trying to conserve young arms. Data has shown that, as a game progresses, fatigue becomes a big factor in a pitcher's performance; if a pitcher has to tweak his mechanics to try to make up for a fatigued body, injuries can often occur. In addition, pitchers often struggle as they begin facing the same batters over again later in games. The Rockies called their experiment "Project 5183" to acknowledge the altitude at Coors Field, their home ballpark, and the havoc that high altitude can wreak on pitchers.  
 
-    A team of students collected 2012 data on Rockies pitchers from FanGraphs to evaluate Project 5183. [@Strutz2013] In a successful experiment, Colorado pitchers on a strict limit of 75 pitches would throw more strikes and yet record fewer strikeouts (pitching to contact rather than throwing more pitches to attempt to strike batters out). Different theories explain whether these pitchers would throw harder (since they don't have to save themselves) or throw slower (in order to throw more strikes). But the end result the Rockies hoped to observe was that their pitchers pitch better (allow fewer runs to the opponent) with a pitch limit.
+    A team of students collected 2012 data on Rockies pitchers from FanGraphs to evaluate Project 5183 [@Strutz2013]. In a successful experiment, Colorado pitchers on a strict limit of 75 pitches would throw more strikes and yet record fewer strikeouts (pitching to contact rather than throwing more pitches to attempt to strike batters out). Different theories explain whether these pitchers would throw harder (since they don't have to save themselves) or throw slower (in order to throw more strikes). But the end result the Rockies hoped to observe was that their pitchers pitch better (allow fewer runs to the opponent) with a pitch limit.
 
     The data set `FinalRockiesdata.csv` contains information for 7 starting pitchers who started at least one game before June 20th (without a pitch limit) and at least one game after June 20th (with a limit of 75 pitches). Key response variables include:  
     - `vFA` = average fastball velocity
@@ -1649,7 +1650,7 @@ summary(model0)
 
     Write a short report summarizing the results of Project 5183. (You may notice a few variance components with unusual estimates, such as an estimated variance of 0 or an estimated correlation of 1. These estimates have encountered boundary constraints; we will learn how to deal with these situations in Section \@ref(sec:boundary). For now ignore these variance components; the fixed effects coefficients are still reliable and their interpretations valid.)
 
-4. __Replicate the Sadler and Miller paper__ Try to replicate Models 1 and 2 presented in Table 2 of @Miller2010.  We expect small differences in parameter estimates, since they use SAS (with an unstructured covariance structure) instead of R.  
+4. __Replicate the Sadler and Miller paper.__ Try to replicate Models 1 and 2 presented in Table 2 of @Miller2010.  We expect small differences in parameter estimates, since they use SAS (with an unstructured covariance structure) instead of R.  
 
     - Do the parameter estimates, SEs, AIC, and variance explained compare well?
     

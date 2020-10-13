@@ -1,13 +1,13 @@
 ---
 title: "Chapter 5"
-subtitle: "Generalized Linear Models (GLMs): A Unifying Theory"
+subtitle: "Generalized Linear Models: A Unifying Theory"
 output:
   pdf_document:
     number_sections: yes
   html_document: default
 ---
 
-# Generalized Linear Models (GLMs): A Unifying Theory {#ch-glms}
+# Generalized Linear Models: A Unifying Theory {#ch-glms}
 
 ```{r,include=F}
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
@@ -16,7 +16,7 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 ## Learning Objectives
 
 - Determine if a probability distribution can be expressed in one-parameter exponential family form.
-- Identify canonical links for distributions of one parameter exponential family form.
+- Identify canonical links for distributions of one-parameter exponential family form.
 
 `r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
 `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
@@ -27,18 +27,18 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 library(knitr)
 ```
 
-## One parameter exponential families
+## One-Parameter Exponential Families
 
-Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. \index{generalized linear models (GLMs)} All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter $\theta$ is a GLM, we consider the following properties.
+Thus far, we have expanded our repertoire of models from linear least squares regression to include Poisson regression. But in the early 1970s, @Nelder1972 identified a broader class of models that generalizes the  multiple linear regression we considered in the introductory chapter and are referred to as __generalized linear models (GLMs)__. \index{generalized linear models (GLMs)} All GLMs have similar forms for their likelihoods, MLEs, and variances. This makes it easier to find model estimates and their corresponding uncertainty. To determine whether a model based on a single parameter $\theta$ is a GLM, we consider the following properties.
 When a probability formula can be written in the form below
 
 \begin{equation}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
 (\#eq:1expForm)
 \end{equation}
-and if the support (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. \index{one-parameter exponential family} We demonstrate that the Poisson distribution is a member of the one parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
+and if the support (the set of possible input values) does not depend upon $\theta$, it is said to have a __one-parameter exponential family form__. \index{one-parameter exponential family} We demonstrate that the Poisson distribution is a member of the one-parameter exponential family by writing its probability mass function (pmf) in the form of Equation \@ref(eq:1expForm) and assessing its support.
 
-### One Parameter Exponential Family: Possion
+### One-Parameter Exponential Family: Poisson
 
 Recall we begin with
 
@@ -69,7 +69,7 @@ d(y)&=-\log (y!)
 \end{align*}
 These functions have useful interpretations in statistical theory. We won't be going into this in detail, but we will note that function $b(\lambda)$, or more generally $b(\theta)$, will be particularly helpful in GLMs. The function $b(\theta)$ is referred to as the __canonical link__. \index{canonical link} The canonical link is often a good choice to model as a linear function of the explanatory variables. That is, Poisson regression should be set up as $\log(\lambda)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots$.  In fact, there is a distinct advantage to modeling the canonical link as opposed to other functions of $\theta$, but it is also worth noting that other choices are possible, and at times preferred, depending upon the context of the application.  
 
-There are other benefits of identifying a response as being from a one parameter exponential family. For example, by creating an unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS).  In addition, we can use the one parameter exponential family form to determine the expected value and standard deviation of $Y$. With statistical theory you can show that
+There are other benefits of identifying a response as being from a one-parameter exponential family. For example, by creating a unifying theory for regression modeling, Nelder and Wedderburn made possible a common and efficient method for finding estimates of model parameters using iteratively reweighted least squares (IWLS).  In addition, we can use the one-parameter exponential family form to determine the expected value and standard deviation of $Y$. With statistical theory you can show that
 
 \[\E(Y) =-\frac{c'(\theta)}{b'(\theta)} \quad \textrm{and} \quad \var(Y) =\frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}
 \]
@@ -79,16 +79,16 @@ where differentiation is with respect to $\theta$.  Verifying these results for 
 {(1/{\lambda}^3)}=\lambda
 \]
 
-We'll find that other distributions are members of the one parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we'll see that the binomial distribution meets these conditions, so it is also a member of the one parameter exponential family. The normal distribution is a special case where we have two parameters, a mean $\mu$ and standard deviation $\sigma$. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one parameter exponential family.  
+We'll find that other distributions are members of the one-parameter exponential family by writing their pdf or pmf in this manner and verifying the support condition. For example, we'll see that the binomial distribution meets these conditions, so it is also a member of the one-parameter exponential family. The normal distribution is a special case where we have two parameters, a mean $\mu$ and standard deviation $\sigma$. If we assume, however, that one of the parameters is known, then we can show that a normal random variable is also from a one-parameter exponential family.  
 
-### One parameter exponential family: Normal
+### One-Parameter Exponential Family: Normal
 
-Here we determine whether a normal distribution is a one parameter exponential family member. First we will need to assume that $\sigma$ is known. Next, possible values for a normal random variable range from $-\infty$ to $\infty$, so the support does not depend on $\mu$. Finally, we'll need to write the probability density function (pdf) in the one parameter exponential family form. We start with the familiar form:
+Here we determine whether a normal distribution is a one-parameter exponential family member. First we will need to assume that $\sigma$ is known. Next, possible values for a normal random variable range from $-\infty$ to $\infty$, so the support does not depend on $\mu$. Finally, we'll need to write the probability density function (pdf) in the one-parameter exponential family form. We start with the familiar form:
 
 \[
 f(y)=\frac{1}{{\sqrt{2\pi\sigma^2}}}{e^{-{(y-\mu)^2}/{(2\sigma^2)}}}
 \]
-Even writing ${1/{\sqrt{2\pi\sigma^2}}}$ as $e^{-\log{\sigma}-\log(2\pi)/2}$ we still do not have the pdf written in one parameter exponential family form. We will first need to expand the exponent so that we have
+Even writing ${1/{\sqrt{2\pi\sigma^2}}}$ as $e^{-\log{\sigma}-\log(2\pi)/2}$ we still do not have the pdf written in one-parameter exponential family form. We will first need to expand the exponent so that we have
 
 \[
 f(y)=e^{[-\log{\sigma}-\log(2\pi)/2]}{e^{[-{(y^2-2y\mu +\mu^2)}/{(2\sigma^2)}]}}
@@ -109,9 +109,9 @@ From this result, we can see that the canonical link for a normal response is $\
 
 GLM theory suggests that the canonical link can be modeled as a linear combination of the explanatory variable(s). This approach unifies a number of modeling results used throughout the text. For example, likelihoods can be used to compare models in the same way for any member of the one-parameter exponential family.
 
-We have now __generalized__ our modeling to handle non-normal responses. In addition to normally distributed responses, we are able to handle Poisson responses, binomial responses, and more. Writing a pmf or pdf for a response in one parameter exponential family form reveals the canonical link which can be modeled as a linear function of the predictors. This linear function of the predictors is the last piece of the puzzle for performing generalized linear modeling. But, in fact, it is really nothing new. We already use linear combinations and the canonical link when modeling normally distributed data.
+We have now __generalized__ our modeling to handle non-normal responses. In addition to normally distributed responses, we are able to handle Poisson responses, binomial responses, and more. Writing a pmf or pdf for a response in one-parameter exponential family form reveals the canonical link which can be modeled as a linear function of the predictors. This linear function of the predictors is the last piece of the puzzle for performing generalized linear modeling. But, in fact, it is really nothing new. We already use linear combinations and the canonical link when modeling normally distributed data.
 
-__Three Components of a GLM__
+__Three components of a GLM__
 
 1. Distribution of $Y$ (e.g., Poisson)
 2. Link Function (a function of the parameter, e.g., $\log(\lambda)$ for Poisson)
@@ -126,20 +126,20 @@ Opeff <- c(" "," ","$P(Y=y) = e^{y\\log\\lambda - \\lambda - y!}$","$f(y) \\prop
 canlink <- c(" ","$\\text{logit}(p)$","$\\log(\\lambda)$","$\\mu$"," "," "," ")
 
 table1chp5 <- data.frame(Dist, Opeff, canlink)
-colnames(table1chp5) <- c("Distribution","One-parameter exponential family form","Canonical link")
-kable(table1chp5, booktabs=T,caption="One parameter exponential family form and canonical links.",escape=F)
+colnames(table1chp5) <- c("Distribution","One-Parameter Exponential Family Form","Canonical Link")
+kable(table1chp5, booktabs=T,caption="One-parameter exponential family form and canonical links.",escape=F)
 ```
 
 Completing Table \@ref(tab:table1chp5) is left as an exercise.  
 
-In the chapter on Poisson modeling, we provided heuristic rationale for using the $\log()$ function as our link. That is, counts would be non-negative but a linear function inevitably goes negative. By taking the logarithm of our parameter $\lambda$ we could use a linear predictor and not worry that it can take on negative values. Now we have theoretical justification for this choice, as the log is the canonical link for Poisson data. In the next chapter we encounter yet another type of response, a binary response, which calls for a different link function. Our work here suggests that we will model $\text{logit}(p)=\log\left(\frac{p}{1-p}\right)$ using a linear predictor.
+In the chapter on Poisson modeling, we provided heuristic rationale for using the $\log()$ function as our link. That is, counts would be non-negative but a linear function inevitably goes negative. By taking the logarithm of our parameter $\lambda$, we could use a linear predictor and not worry that it can take on negative values. Now we have theoretical justification for this choice, as the log is the canonical link for Poisson data. In the next chapter we encounter yet another type of response, a binary response, which calls for a different link function. Our work here suggests that we will model $\text{logit}(p)=\log\left(\frac{p}{1-p}\right)$ using a linear predictor.
 
 
 ## Exercises
 
 1. For each distribution below,
 
-    - Write the pmf or pdf in one parameter exponential form, if possible.
+    - Write the pmf or pdf in one-parameter exponential form, if possible.
     - Describe an example of a setting where this random variable might be used.
     - Identify the canonical link function, and
     - Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.

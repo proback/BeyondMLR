@@ -1,12 +1,12 @@
 ---
 title: "Chapter 2"
-subtitle: 'Beyond Least Squares: Using Likelihoods to Fit and Compare Models-test'
+subtitle: 'Beyond Least Squares: Using Likelihoods'
 output:
   html_document: default
   pdf_document:
     number_sections: yes
 ---
-# Beyond Least Squares: Using Likelihoods to Fit and Compare Models {#ch-beyondmost}
+# Beyond Least Squares: Using Likelihoods {#ch-beyondmost}
 
 ## Learning Objectives 
 After finishing this chapter, you should be able to:
@@ -87,14 +87,14 @@ kable(table1chp2, booktabs=T, caption="The gender composition of 30 families in 
   kable_styling(full_width = F)
 ```
 
-## Model 0: Sex Unconditional Model (equal probabilities, independence)
+## Model 0: Sex Unconditional, Equal Probabilities
 For the Sex Unconditional models, having children is modeled using coin flips.  With a coin flip model,  the result of each flip is independent of results of other flips.  With this version of the Sex Unconditional Model, the chance that a baby is a boy is specified to be $p_B=0.5$. It makes no difference if the first and third children are boys, the probability that the second child is a boy is 0.5; that is, the results for each child are __independent__ \index{independent} of the others.  Under this model  you expect to see equal numbers of boys and girls.  
  
-## Model 1: Sex Unconditional Model (any probability, independence) {#sex_unconditional_model}
+## Model 1: Sex Unconditional, Unequal Probabilities {#sex_unconditional_model}
 
 You may want your model to allow for the probability of a boy, $p_B$, to be something different than 0.5.  With this version of the Sex Unconditional model,  $p_B>0.5$ or $p_B<0.5$ or $p_B=0.5$, in which case you expect to see more boys than girls or fewer boys than girls or equal numbers of boys and girls, respectively.  We would retain the assumption of independence; that is, the probability of a boy, $p_B$, is the same for each child. Seeing a boy for the first child will not lead you to change the probability that the second child is a boy; this would not imply that "sex runs in families."   
 
-### What Is a likelihood?
+### What Is a Likelihood?
 
 As is often the case in statistics, our objective is to find an estimate for a model parameter using our data; here, the parameter to estimate is the probability of a boy, $p_B$, and the data is the gender composition for each family. One way in which to interpret  probability is to imagine repeatedly producing children. The probability of a boy will be the overall proportion of boys as the number of children increases. 
 With likelihood methods, conceptually we consider different possible values for our parameter(s), $p_B$, and determine how likely we would be to see our observed data in each case, $\lik(p_B)$. We'll select as our estimate the value of $p_B$ for which  our data is most likely. A __likelihood__ \index{likelihood} is a function that tells us how likely we are to observe our data for a given parameter value, $p_B$. For a single family which has a girl followed by two boys, GBB,  the likelihood function looks like:
@@ -275,7 +275,7 @@ oLik.f <- function(pb){
 optimize(oLik.f, interval=c(0,1), maximum=TRUE)
 ```
 
-#### MLEs using calculus (Optional) {#calc-sec} 
+#### MLEs using calculus (optional) {#calc-sec} 
 
 Calculus may provide another way to determine an MLE.  Here, we can ascertain the value of $p_B$ where the likelihood is a maximum by using the first derivative of the likelihood with respect to $p_B$. We obtain the first derivative using the Product Rule, set it to 0, solve for $p_B$, and verify that a maximum occurs there.
 
@@ -312,13 +312,13 @@ In summary, we constructed a likelihood that reflected features of our Sex Uncon
   
 Work to understand the *idea* of a likelihood. Likelihoods are the foundation upon which estimates are obtained and models compared for most of this course. Do not be overly concerned with calculus and computation at this point. 
   
-### Is a Likelihood a Probability Function? (Optional)
+### Is a Likelihood a Probability Function? (optional)
   
 No. Even though we use probabilities to construct likelihoods, a likelihood is not a probability function.  A probability function fixes parameter values and takes as inputs possible outcomes, returning the probability of seeing different outcomes given the parameter value. For example, you flip a loaded coin which comes up heads 25\% of the time.  After 5 flips, you observe the outcome of three heads and two tails. A *probability function* provides the probability of observing (3H,2T) when $p_H=0.25$.  If you flip this same coin another 5 times and observe all tails (5T), the probability function provides the probability of (5T) when $p_H=0.25$.
   
 In contrast, a likelihood is constructed by fixing the data, say (3H,2T). It takes as input *possible parameter values* and returns the probability of seeing the fixed data for each parameter value.  For example, the likelihood will provide the chance of seeing the data (3H,2T) if $p_H=0.6$, the chance of seeing the data (3H,2T)  if $p_H=0.3$, and so on. With the likelihood we can find the value of $p_H$ where we are most likely to see our data.
   
-## Model 2: Sex Conditional Model (sex bias) {#sex_conditional.sec}
+## Model 2: Sex Conditional {#sex_conditional.sec}
   
 Our first research question involves determining whether sex runs in the family.  Do families who already have boys tend to have more additional boys than expected by chance, and do families who already have girls tend to have more additional girls than expected by chance? What do you think? And how could we use a statistical model to investigate this phenomenon? There are a number of different ways to construct a model for this question.  Here's one possibility.
   
@@ -410,7 +410,7 @@ If we anticipate any "sex running in families" effect, we would expect $p_{B|\te
 
 You should now have a feel for using the Likelihood Principle to obtain estimates of parameters using family gender composition data. Next, these ideas will be applied to the NLSY data summarized in Table 2 of [@Rodgers2001]. In addition to considering the Sex Unconditional and Conditional Models, we investigate some models that incorporate choices couples may make about when to stop having more children.  
     
-### Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis {#EDA.sec}
+### Exploratory Data Analysis {#EDA.sec}
 
 We begin by performing an exploratory data analysis (EDA) aimed at shedding some light on our research questions. We are looking for clues as to which of our models is most plausible. The first statistic of interest is the proportion of boys in the sample. There are 5,416 boys out of the 10,672 children or a proportion of .507 boys.  While this proportion is very close to .500, it is worth noting that a difference of .007 could be meaningful in population terms.
     
@@ -478,7 +478,7 @@ kable(table7chp2,booktabs=T, caption="Proportion of families in NLSY data with o
     
 There are many other ways to formulate and explore the idea that sex runs in families or that couples wait for a boy (or a girl). See @Rodgers2001 for other examples.
     
-### Likelihood for the Sex Unconditional Model: the NLSY data
+### Likelihood for the Sex Unconditional Model
     
 We construct a likelihood for the Sex Unconditional Model for the one-, two- and three-child families from the NLSY. See Table \@ref(tab:table4chp2) for the frequencies of each gender composition.
     
@@ -656,7 +656,7 @@ Are these results consistent with the notion that boys or girls run in families?
     
 Even though initial estimates don't support the idea, let's formally take a look as to whether prior gender composition affects the probability of a boy. To do so, we'll see if the Sex Conditional Model is statistically significantly better than the Sex Unconditional Model. 
     
-### Comparing the Sex Unconditional to the Sex Conditional Model {#sec-lrtest}
+### Model Comparisons {#sec-lrtest}
 #### Nested models
     
 Likelihoods are not only useful for fitting models, but they are also useful when comparing models. If the parameters for a reduced model are a subset of parameters for a larger model, we say the models are __nested__ \index{nested models} and the difference between their likelihoods can be incorporated into a statistical test to help judge the benefit of including additional parameters. Another way in which to think of nesting is to consider whether parameters in the larger model can be equated to obtain the simpler model or whether some parameters in the larger model can be set to constants.  Since $\bbias, \neutral$ and $\gbias$ in the Sex Conditional Model can be set to $p_B$ to obtain the Sex Unconditional Model, we can say the models are nested.
@@ -716,7 +716,7 @@ We have convincing evidence that the Sex Conditional Model provides a significan
 
 For stopping models, two probabilities are recorded for each child: the probability of the sex and the conditional probability of stopping after that child.  As we have done in previous models, let $p_B$ = probability the child is  a boy. When conditioning, every possible condition must have a probability associated with it. Here the stopping conditions for Model 3 are: stop on first boy $(S|B1)$ or stopping on a child who is not the first boy $(S|N)$.
 
-__Additional Parameters for the First Boy Stopping Model__
+__Additional parameters for the First Boy Stopping Model__
 
 * $\bstop =$ probability of stopping after the first boy
 * $1 - \bstop =$ probability of not stopping after the first boy
@@ -844,7 +844,7 @@ Under a random model that assumes the probability of a boy is 50\%, the percenta
     
 We can perform a LRT to compare stopping at the first boy to a Random Stopping Model. The parameters for the first model (waiting for a boy) are $p_B, \bstop, \nstop$ and the parameters for the second model (random stopping) are $p_B$ and $p_S$. The results suggest that the Waiting for a Boy Model is significantly better than the Random Stopping Model.  The Random Stopping Model takes into account that the odds of stopping after a child are not 50-50, but may be closer to the MLE for $p_S$ of 52.7\%. We leave the derivation of this result as an exercise.  
     
-## Likelihood-based Methods
+## Likelihood-Based Methods
     
 With likelihood methods, we are no longer restricted to independent, identically distributed normal responses (iidN).  Likelihood methods can accommodate non-normal responses and correlated data. Likelihood-based methods are useful for every model in this text, so that it is worth your time and effort to understand them. 
     
@@ -905,14 +905,14 @@ When the responses are not normal such as in generalized linear models, where we
       of $p_B$ given what we observed (our data)?
 4. Compare the Waiting for a Boy Model to a Random Stopping Model. The parameters for the first model (Waiting for a Boy) are $p_B$, $\bstop$, $\nstop$ and the parameters for the second model (Random Stopping) are $p_B$ and $p_S$. Use an intuitive approach to arrive at the MLEs for the parameters for each model. Perform a LRT to compare these two models. 
 
-### Open-ended Exercises
+### Open-Ended Exercises
     
-1. __Another Stopping Rule Model: Balance-preference__ 
+1. __Another stopping rule model: balance-preference.__ 
 Can you construct a model which suggests that childbearing is stopped when couples have a boy *and* a girl?  Define the parameter(s) for balance-preference stopping combined with the sex conditional model and write out likelihood contributions for the same family compositions that appear in Table \@ref(tab:table3chp2).
     
     - **Extra Credit** Obtain the MLEs for your balance-preference model parameters and interpret the results.  Then, compare the balance-preference stopping rule model to the random stopping model using a LRT.
 
-2. **The Hot Hand in Basketball**  @Gilovich1985 wrote a controversial but compelling article claiming that there is no such thing as “the hot hand” in basketball.  That is, there is no empirical evidence that shooters have stretches where they are more likely to make consecutive shots, and basketball shots are essentially independent events.  One of the many ways they tested for evidence of a “hot hand” was to record sequences of shots for players under game conditions and determine if players are more likely to make shots after made baskets than after misses.  For instance, assume we recorded data from one player's first 5 three-point attempts over a 5-game period.  We can assume games are independent, but we’ll consider two models for shots within a game:
+2. **The hot hand in basketball.**  @Gilovich1985 wrote a controversial but compelling article claiming that there is no such thing as “the hot hand” in basketball.  That is, there is no empirical evidence that shooters have stretches where they are more likely to make consecutive shots, and basketball shots are essentially independent events.  One of the many ways they tested for evidence of a “hot hand” was to record sequences of shots for players under game conditions and determine if players are more likely to make shots after made baskets than after misses.  For instance, assume we recorded data from one player's first 5 three-point attempts over a 5-game period.  We can assume games are independent, but we’ll consider two models for shots within a game:
 
     - No Hot Hand (1 parameter): $p_B$ = probability of making a basket (thus $1-p_B$ = probability of not making a basket).
 
