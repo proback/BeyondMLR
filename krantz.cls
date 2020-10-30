@@ -1051,7 +1051,7 @@
 %%%    \chapter*{\contentsname
 %%%        \@mkboth{%
 %%%           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
-           \pagestyle{headings}\thispagestyle{folio}
+           \pagestyle{headings}\thispagestyle{folio}\setcounter{page}{5}
              {\let\break\space
     \let\author\toc@author
     \reset@authors
