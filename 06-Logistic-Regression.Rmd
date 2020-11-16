@@ -121,8 +121,9 @@ Tot <- c(24,180,204)
 table1chp6 <- data.frame(State,Saves,Scores,Tot)
 colnames(table1chp6) <- c(" ","Saves","Scores","Total")
 kable(table1chp6, booktabs=T,
-      caption="Soccer goalkeepers' penalty kick saves when their team is and is not behind.  (Source: Roskes et al. 2011.)") %>%
-  kable_styling(full_width = F)
+      caption="Soccer goalkeepers' penalty kick saves when their team is and is not behind.") %>%
+  kable_styling(full_width = F) %>%
+  add_footnote("(Source: Roskes et al. 2011.)", notation = "none")
 ```
 
 ### Modeling Odds
@@ -566,7 +567,7 @@ __Summary: accounting for overdispersion__
 - Confidence intervals use the adjusted standard errors and multiplier based on $t$, so they are thereby wider: $\hat\beta \pm t_{n-p} \cdot \textrm{SE}_\textrm{Q}(\hat\beta)$.
 - Drop-in-deviance test statistic comparing Model 1 (larger model with $p$ parameters) to Model 2 (smaller model with $q<p$ parameters) is $F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}$ where $D_1$ and $D_2$ are the residual deviances for models 1 and 2, respectively, and $p-q$ is the difference in the number of parameters for the two models. Note that both $D_2-D_1$ and $p-q$ are positive. This test statistic is compared to an F-distribution with $p-q$ and $n-p$ degrees of freedom.
 
-Output for a model which adjusts our interaction model for overdispersion appears below, where $\hat{\phi}=51.6$ is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of $\sqrt{51.6}=7.2$.  As a results, there are no significant terms in the adjusted interaction model below.
+Output for a model which adjusts our interaction model for overdispersion appears below, where $\hat{\phi}=51.6$ is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of $\sqrt{51.6}=7.2$.  As a result, there are no significant terms in the adjusted interaction model below.
 
 ```{r, comment = NA}
 model.HaleBxDq <- glm(cbind(YesVotes, NumVotes - YesVotes) ~
@@ -1031,7 +1032,7 @@ Finally a limitation may be introduced as a result of the acknowledged variation
 
     *Daycare Centers and Respiratory Health* [@Nafstad1999]
 
-    - __Objective__. To estimate the effects of the type of day care on respiratory health in preschool children.
+    - __Objective__. To estimate the effects of the type of daycare on respiratory health in preschool children.
 
     - __Methods__. A population-based, cross-sectional study of Oslo children born in 1992 was conducted at the end of 1996. A self-administered questionnaire inquired about daycare arrangements, environmental conditions, and family characteristics (n = 3853; response rate, 79\%).
 
@@ -1279,7 +1280,7 @@ summary(model1a)
     - `region` = region of the country
 
 
-3. __NBA data.__  Data in `NBA1718team.csv` [@rossotti] looks at factors that are associated with a pro basketball team's winning percentage in the 2017-18 season. After thorough exploratory data analyses, create the best model you can to predict a team's winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team's success.
+3. __NBA data.__  Data in `NBA1718team.csv` [@rossotti] looks at factors that are associated with a professional basketball team's winning percentage in the 2017-18 season. After thorough exploratory data analyses, create the best model you can to predict a team's winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team's success.
 
     - `win_pct` = Percentage of Wins,
     - `FT_pct` = Average Free Throw Percentage per game,

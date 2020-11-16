@@ -587,7 +587,7 @@ Any initial exploratory analyses should also investigate effects of potential co
 
 With a confounding variable such as percentage of free and reduced lunch, we will treat this variable as continuous to produce the most powerful exploratory analyses. We can begin by examining boxplots of free and reduced lunch percentage against school type (Figure \@ref(fig:lon-boxcatmat1)).  We observe that charter schools tend to have greater percentages of free and reduced lunch students as well as greater school-to-school variability.  Next, we can use scatterplots to graphically illustrate the relationships between free and reduced lunch percentages and significant outcomes such as intercept and slope (also Figure \@ref(fig:lon-boxcatmat1)).  In this study, it appears that schools with higher levels of free and reduced lunch (i.e., greater poverty) tend to have lower math scores in 2008, but there is little evidence of a relationship between levels of free and reduced lunch and improvements in test scores between 2008 and 2010.  These observations are supported with correlation coefficients between percent free and reduced lunch and intercepts (r=-0.61) and slopes (r=-0.06).
 
-A less powerful but occasionally informative way to look at the effect of a continuous confounder on an outcome variables is by creating a categorical variable out of the confounder.  For instance, we could classify any school with a percentage of free and reduced lunch students above the median as having a high percentage of free and reduced lunch students, and all other schools as having a low percentage of free and reduced lunch students.  Then we could examine a possible interaction between percent free and reduced lunch and school type through a series of four boxplots (Figure \@ref(fig:lon-boxmat1)).  In fact, these boxplots suggest that the gap between charter and public non-charter schools in 2008 was greater in schools with a high percentage of free and reduced lunch students, while the difference in rate of change in test scores between charter and public non-charter schools appeared similar for high and low levels of free and reduced lunch.  We will investigate these trends more thoroughly with statistical modeling.
+A less powerful but occasionally informative way to look at the effect of a continuous confounder on an outcome variable is by creating a categorical variable out of the confounder.  For instance, we could classify any school with a percentage of free and reduced lunch students above the median as having a high percentage of free and reduced lunch students, and all other schools as having a low percentage of free and reduced lunch students.  Then we could examine a possible interaction between percent free and reduced lunch and school type through a series of four boxplots (Figure \@ref(fig:lon-boxmat1)).  In fact, these boxplots suggest that the gap between charter and public non-charter schools in 2008 was greater in schools with a high percentage of free and reduced lunch students, while the difference in rate of change in test scores between charter and public non-charter schools appeared similar for high and low levels of free and reduced lunch.  We will investigate these trends more thoroughly with statistical modeling.
 
 ```{r, include=FALSE, warning=FALSE}
 # OLS estimates plotted against the predictor Pct Free and Reduced Lunch
@@ -821,7 +821,7 @@ From this output, we obtain estimates of our six model parameters:
 - $\hat{\sigma}^2_v$ = 0.11 = the variance between schools in rates of change in math test scores during the three-year observation period.
 - $\hat{\rho}_{uv}$ = 0.72 = the correlation in schools' 2008 math score and their rate of change in scores between 2008 and 2010.
 
-We see that schools had a mean math test score of 651.4 in 2008 and their mean test scores tended to increase by 1.26 points per year over the three year observation period, producing a mean test score at the end of three years of 653.9. According to the t-value (14.1), the increase in mean test scores noted during the three year observation period is statistically significant.
+We see that schools had a mean math test score of 651.4 in 2008 and their mean test scores tended to increase by 1.26 points per year over the three-year observation period, producing a mean test score at the end of three years of 653.9. According to the t-value (14.1), the increase in mean test scores noted during the three-year observation period is statistically significant.
 
 The estimated within-school variance $\hat{\sigma}^2$ decreased by about 17\% from the unconditional means model, implying that 17\% of within-school variability in test scores can be explained by a linear increase over time:
 
@@ -1967,7 +1967,8 @@ temp <- kable(table4chp9, booktabs=T, escape=F,
   kable_styling(full_width = F)
 
 footnote(temp, 
-         general = c("These columns focus on the parenting behavior of psychological control.", "Table reports values for coefficients in the final model with all", "variables entered.  * p<.05; ** p<.01; + p<.10"))
+         general = c("These columns focus on the parenting behavior of psychological control.", "Table reports values for coefficients in the final model with all", "variables entered.  * p<.05; ** p<.01; + p<.10"),
+         fixed_small_size = T, general_title = "")
 ```
 
 6. __Charter schools.__ Differences exist in both sets of boxplots in Figure \@ref(fig:lon-box2).  What do these differences imply for multilevel modeling?
@@ -2035,7 +2036,7 @@ footnote(temp,
     
     h. (Model A) Run an unconditional means model.  Report and interpret the intraclass correlation coefficient.
     
-    i. (Model B) Run an unconditional growth model with `age14` as the time variable at Level One.  Report and interpret estimated fixed effects, using proper notation.  Also report and interpret a pseudo Rsquared value.
+    i. (Model B) Run an unconditional growth model with `age14` as the time variable at Level One.  Report and interpret estimated fixed effects, using proper notation.  Also report and interpret a pseudo R-squared value.
     
     j. (Model C) Build upon the unconditional growth model by adding the effects of having an alcoholic parent and peer alcohol use in both Level Two equations.  Report and interpret all estimated fixed effects, using proper notation.
     

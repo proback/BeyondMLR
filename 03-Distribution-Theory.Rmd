@@ -50,7 +50,7 @@ A discrete random variable has a countable number of possible values; for exampl
 ### Binary Random Variable {#sec-binary}
 
 Consider the event of flipping a (possibly unfair) coin. If the coin lands heads, let's consider this a success and record $Y = 1$.
-A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g. 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
+A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g., 0 or 1). These values are often referred to as a failure and a success, and the probability of success is identical for each trial.
 Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, $p$. If we know this value, we can express $P(Y=1) = p$ and $P(Y=0) = 1-p$. In general, if we have a Bernoulli process with only one trial, we have a __binary distribution__ (also called a __Bernoulli distribution__) \index{Bernoulli distribution} where
 
 \begin{equation} 
@@ -438,7 +438,7 @@ an exponential distribution. Just as how the geometric distribution was a specia
 
 Just like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative $r$.
 
-In R, `pgamma(y, r, lambda)` outputs the the probability $P(Y < y)$ given $r$ and $\lambda$.
+In R, `pgamma(y, r, lambda)` outputs the probability $P(Y < y)$ given $r$ and $\lambda$.
 
 __Example 8:__ Two friends are out fishing. On average they catch two fish per hour, and their goal is to catch 5 fish. What is the probability that they take less than 3 hours to reach their goal? 
 
@@ -727,11 +727,11 @@ colnames(table1chp3) <- c("Distribution Name","pmf / pdf",
   "Parameters","Possible Y Values", "Description")
 if (knitr:::is_latex_output()) {
   kable(table1chp3, booktabs = T, escape = F,
-        caption="Review of Mentioned Random Variables") %>%
+        caption="Review of mentioned random variables.") %>%
   column_spec(5, width = "10em") %>%
   kable_styling(latex_options = "scale_down")
 } else {
-  kable(table1chp3, "html", booktabs = T, caption="Review of mentioned random variables")
+  kable(table1chp3, "html", booktabs = T, caption="Review of mentioned random variables.")
 }
 ```
 

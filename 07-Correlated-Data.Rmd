@@ -296,7 +296,7 @@ In Scenario 1, each dam's probability of producing a deformed pup was independen
 We will suppose that true probability that a dam's pup has a deformity is related to the dose the dam received through this model:
 
 \[ \log \bigg(\frac{p}{1-p} \bigg) = -2 + 1.33\; \textrm{dose} \]
-That is, we assume that the log odds of a deformity is linearly related to dose through the equation above, and the odds of a deformity are 3.79 times greater ($e^{1.33}$) for each 1 mg increase in dose.
+That is, we assume that the log odds of a deformity is linearly related to dose through the equation above, and the odds of a deformity are 3.79 times greater ($e^{1.33}$) for each 1-mg increase in dose.
 
 In Scenario 2a, a dam who received a dose of $x$ would have probability
 

@@ -732,7 +732,7 @@ table4ch4 <- c.data %>%
 kable(table4ch4, booktabs=T, caption = 'The mean and variance of the violent crime rate by region and type of institution.')
 ```
 
-```{r, boxtyperegion, fig.align="center",out.width="60%", fig.cap='Boxplot of violent crime rate by region and type of institution',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, boxtyperegion, fig.align="center",out.width="60%", fig.cap='Boxplot of violent crime rate by region and type of institution.',echo=FALSE, warning=FALSE, message=FALSE}
 #Insert boxplot without the outlier and combining S and SE
 ggplot(c.data, aes(x = region, y = nvrate, fill = type)) +
   geom_boxplot() +
@@ -1231,8 +1231,9 @@ City <- c(1,1,"...",2,2)
 tab3chp4 <- data.frame(Numcases,Pop,Agegroup,City)
 colnames(tab3chp4) <- c("Number of Cases","Population","Age Group","City")
 kable(tab3chp4, booktabs=T,
-      caption="Data from Scotto et al. (1974) on the number of cases of non-melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St. Paul and Dallas-Ft. Worth); the year is unknown. The columns contain: number of cases, population size, age group, and city (1=Minneapolis-St. Paul, 2=Dallas-Ft. Worth).") %>%
-  kable_styling(full_width = F)
+      caption="Data from Scotto et al. (1974) on the number of cases of non-melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St. Paul and Dallas-Ft. Worth); the year is unknown.") %>%
+  kable_styling(full_width = F) %>%
+  add_footnote(c("The columns contain: number of cases, population size, age group, and city (1=Minneapolis-St. Paul, 2=Dallas-Ft. Worth)."), notation = "none")
 ```
 
 16. __Poisson approximation: rare events.__ For rare diseases, the probability of a case occurring, $p$, in a very large population, $n$, is small. With a small $p$ and large $n$, the random variable $Y$= the number of cases out of $n$ people can be approximated using a Poisson random variable with $\lambda = np$. If the count of those with the disease is observed in several different populations independently of one another, the $Y_i$ represents the number of cases in the $i^{th}$ population and can be approximated using a Poisson random variable with $\lambda_i=n_ip_i$ where $p_i$ is the probability of a case for the $i^{th}$ population. Poisson regression can take into account the differences in the population sizes, $n_i$, using as an offset log($n_i$) as well as differences in a population characteristic like $x_i$. The coefficient of the offset is set at one; it is not estimated like the other coefficients.  Thus the model statement has the form: $log(\lambda_i) = \beta_0+\beta_1x_i + log(n_i)$, where $Y_i  \sim$ Poisson($\lambda_i = n_i p_i$). Note that $\lambda_i$ depends on $x_i$ which may differ for the different populations.
@@ -1284,9 +1285,10 @@ Subject <- c(1,2,3,4,5,6)
 ex3chp4 <- data.frame(Subject, `X (0 = home, 1 = work)`, 
                       `Y (number of cigarettes)`)
 kable(ex3chp4, booktabs=T, 
-      caption="A small subset of hypothetical data on Minnesota workplace rules on smoking.  X is 0 for home and 1 for work.  Y is number of cigaretttes in a 2-hour period.",
+      caption="A small subset of hypothetical data on Minnesota workplace rules on smoking.",
   col.names = c("Subject", "X (location)", "Y (cigarettes)")) %>%
-kable_styling(full_width = F)
+kable_styling(full_width = F) %>%
+add_footnote(c("X is 0 for home and 1 for work.", "Y is number of cigaretttes in a 2-hour period."), notation = "none")
 ```
 
 3. __Smoking at work and home.__ An earlier study examined the effect of workplace rules in Minnesota which require smokers to smoke cigarettes outside.  The number of cigarettes smoked by smokers in a 2-hour period was recorded, along with whether the smoker was at home or at work.  A (very) small subset of the data appears in Table \@ref(tab:ex3chp4).

@@ -609,7 +609,7 @@ table8chp2 <- data.frame(Famcomp3, NumFams1, SexUnc, Child1,
 colnames(table8chp2) <- c("Family composition",
                           "Num. families",
                           "Sex Unconditional", 
-                          "Child1", "Child 2", "Child 3")
+                          "Child 1", "Child 2", "Child 3")
 kable(table8chp2, booktabs = T, 
       caption = "Likelihood contributions for NLSY families in Sex Unconditional and Sex Conditional Models.",
       escape=F) %>%
@@ -867,8 +867,8 @@ One of the reasons many of the likelihoods will become complex is because of cov
     
 \[
 p_B= \frac{e^{\beta_0+\beta_1(\textrm{parental age})}}
-{1+e^{\beta_0+\beta_1(\textrm{parental age})}}
-\].  
+{1+e^{\beta_0+\beta_1(\textrm{parental age})}}.
+\]  
     
 (We will give a good reason for this crazy-looking expression for $p_B$ in later chapters.) The next step would be to replace $p_B$ in the likelihood, $\Lik(p_B)$, (Equation \@ref(eq:lik30)), with the complicated expression for $p_B$.  The result would be a function of $\beta_0$ and $\beta_1$.  We could then use calculus to find the MLEs for $\beta_0$ and $\beta_1$.  
     
