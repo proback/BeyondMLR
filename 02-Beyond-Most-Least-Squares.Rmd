@@ -267,7 +267,7 @@ Lik.f(nBoys = 30, nGirls = 20, nGrid = 50)
 # more precise MLE for p_B based on finer grid (more points)
 Lik.f(nBoys = 30, nGirls = 20, nGrid = 1000)
 
-## Another approach: using R's optimize command
+## Another approach: using R's optimize function
 ##   Note that the log-likelihood is optimized here
 oLik.f <- function(pb){
     return(30*log(pb) + 20*log(1-pb))
@@ -421,9 +421,9 @@ Numfams <- c(930,951,582,666,666,530,186,177,173,
              148,151,125,182,159)
 Numchild <- c(930,951,1164,1332,1332,1060,558,531,
               519,444,453,375,546,477)
-Malesfemales <- c("97 boys to 100 girls"," ",
-    "104 boys to 100 girls"," "," "," ",
-    "104 boys to 100 girls"," "," "," "," "," "," "," ")
+Malesfemales <- c("97:100"," ",
+    "104:100"," "," "," ",
+    "104:100"," "," "," "," "," "," "," ")
 PB <- c("0.494", " ","0.511"," "," "," ","0.510"," "," ",
         " "," "," "," "," ")
 ```
@@ -708,7 +708,7 @@ We have convincing evidence that the Sex Conditional Model provides a significan
     
 *Note: *You may notice that the LRT is similar in spirit to the extra-sum-of-squares F-test used in linear regression. Recall that the extra-sum-of-squares F-test involves comparing two nested models.  When the smaller model is true, the F-ratio follows an F-distribution which on average is 1.0.  A large, unusual F-ratio provides evidence that the larger model provides a significant improvement.
     
-*Also note: * It might have been more logical to start by using Likelihood Ratio Test to determine whether the probability of having a boy differs significantly from 0.5.  We leave this as an exercise.
+*Also note: * It might have been more logical to start by using a Likelihood Ratio Test to determine whether the probability of having a boy differs significantly from 0.5.  We leave this as an exercise.
     
 ## Model 3: Stopping Rule Model (waiting for a boy)
 
@@ -763,8 +763,8 @@ Cont <- c("$\\bstop$",
 table9chp2 <- data.frame(Famcomp2, Numfamis3, Lik, Cont)
 colnames(table9chp2) <- c("Family Composition",
                           "Num. families",
-                          "  Likelihood",
-                          "Contribution")
+                          "Likelihood Contribution",
+                          " ")
 kable(table9chp2, booktabs = T, escape = F,
       caption="Likelihood contributions for NLSY families in Model 3: Waiting for a boy.")%>%   
   column_spec(1, width = "3cm") %>%

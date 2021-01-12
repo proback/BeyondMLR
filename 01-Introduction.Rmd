@@ -663,7 +663,7 @@ This application involves both non-normal data (number of stops by ethnic group 
 
 1. **Kentucky Derby.**  The next set of questions is related to the Kentucky Derby case study from this chapter.   
 
-    a. Discuss the pros and cons of using side-by-side boxplots vs. stacked histograms to illustrate the relationships between year and track condition in Figure \@ref(fig:bivariate).
+    a. Discuss the pros and cons of using side-by-side boxplots vs. stacked histograms to illustrate the relationship between year and track condition in Figure \@ref(fig:bivariate).
     b. Why is a scatterplot more informative than a correlation coefficient to describe the relationship between speed of the winning horse and year in Figure \@ref(fig:bivariate).
     c. How might you incorporate a fourth variable, say number of starters, into Figure \@ref(fig:codeds)?
     d. Explain why $\epsilon_i$ in Equation \@ref(eq:model1) measures the vertical distance from a data point to the regression line.

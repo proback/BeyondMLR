@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Beyond Least Squares: Using Likelihoods to Fit and Compare Models | Beyond Multiple Linear Regression</title>
+  <title>Chapter 2 Beyond Least Squares: Using Likelihoods | Beyond Multiple Linear Regression</title>
   <meta name="description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Beyond Least Squares: Using Likelihoods to Fit and Compare Models | Beyond Multiple Linear Regression" />
+  <meta property="og:title" content="Chapter 2 Beyond Least Squares: Using Likelihoods | Beyond Multiple Linear Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="data/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="proback/BeyondMLR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Beyond Least Squares: Using Likelihoods to Fit and Compare Models | Beyond Multiple Linear Regression" />
+  <meta name="twitter:title" content="Chapter 2 Beyond Least Squares: Using Likelihoods | Beyond Multiple Linear Regression" />
   
   <meta name="twitter:description" content="An applied textbook on generalized linear models and multilevel models for advanced undergraduates, featuring many real, unique data sets. It is intended to be accessible to undergraduate students who have successfully completed a regression course. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling." />
   <meta name="twitter:image" content="data/cover.png" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-08-05" />
+<meta name="date" content="2021-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -135,13 +135,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Beyond Multiple Linear Regression</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-without-assumption-violations"><i class="fa fa-check"></i><b>1.3.1</b> Cases Without Assumption Violations</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-with-assumption-violations"><i class="fa fa-check"></i><b>1.3.2</b> Cases With Assumption Violations</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
@@ -151,16 +155,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
-<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
-<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
-<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
-<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
-<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
+<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple Linear Regression Modeling</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple Linear Regression with a Continuous Predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear Regression with a Binary Predictor</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple Linear Regression with Two Predictors</a></li>
+<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in Multiple Linear Regression: Normal Theory</a></li>
+<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in Multiple Linear Regression: Bootstrapping</a></li>
+<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple Linear Regression with an Interaction Term</a></li>
+<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a Multiple Linear Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of Remaining Chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -169,42 +173,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.8" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#conceptual-exercises"><i class="fa fa-check"></i><b>1.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="1.8.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#guided-exercises"><i class="fa fa-check"></i><b>1.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods to Fit and Compare Models</a><ul>
+<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods</a><ul>
 <li class="chapter" data-level="2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does sex run in families?</a><ul>
+<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does Sex Run in Families?</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#research-questions"><i class="fa fa-check"></i><b>2.2.1</b> Research Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-model-equal-probabilities-independence"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional Model (Equal probabilities, Independence)</a></li>
-<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional Model (Any Probability, Independence)</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What is a likelihood?</a></li>
+<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-equal-probabilities"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional, Equal Probabilities</a></li>
+<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional, Unequal Probabilities</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What Is a Likelihood?</a></li>
 <li class="chapter" data-level="2.4.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#findMLE.sec"><i class="fa fa-check"></i><b>2.4.2</b> Finding MLEs</a></li>
 <li class="chapter" data-level="2.4.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary"><i class="fa fa-check"></i><b>2.4.3</b> Summary</a></li>
-<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a likelihood a probability function? (Optional)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a Likelihood a Probability Function? (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional Model (Sex Bias)</a><ul>
+<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-specification"><i class="fa fa-check"></i><b>2.5.1</b> Model Specification</a></li>
 <li class="chapter" data-level="2.5.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#application-to-hypothetical-data"><i class="fa fa-check"></i><b>2.5.2</b> Application to Hypothetical Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY data</a><ul>
+<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY Data</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
-<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model</a></li>
 <li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
-<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
+<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (waiting for a boy)</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#non-nested-models"><i class="fa fa-check"></i><b>2.7.1</b> Non-nested Models</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary-of-model-building"><i class="fa fa-check"></i><b>2.8</b> Summary of Model Building</a></li>
-<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-based Methods</a></li>
-<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
+<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-Based Methods</a></li>
+<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and This Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
+<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>2.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ch-distthry.html"><a href="ch-distthry.html"><i class="fa fa-check"></i><b>3</b> Distribution Theory</a><ul>
@@ -224,10 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="ch-distthry.html"><a href="ch-distthry.html#normal-gaussian-random-variable"><i class="fa fa-check"></i><b>3.4.3</b> Normal (Gaussian) Random Variable</a></li>
 <li class="chapter" data-level="3.4.4" data-path="ch-distthry.html"><a href="ch-distthry.html#beta-random-variable"><i class="fa fa-check"></i><b>3.4.4</b> Beta Random Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions used in Testing</a><ul>
+<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions Used in Testing</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="ch-distthry.html"><a href="ch-distthry.html#chi2-distribution"><i class="fa fa-check"></i><b>3.5.1</b> <span class="math inline">\(\chi^2\)</span> Distribution</a></li>
-<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-tdistribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>–Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#fdistribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>–Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-t-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#f-distribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>-Distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
@@ -247,13 +251,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
-<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
+<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to Fit Models (optional)</a></li>
 <li class="chapter" data-level="4.4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#second-order-model"><i class="fa fa-check"></i><b>4.4.6</b> Second Order Model</a></li>
-<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a covariate</a></li>
-<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
-<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a Covariate</a></li>
+<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (optional)</a></li>
+<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -264,31 +268,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#tukeys-honestly-significant-differences"><i class="fa fa-check"></i><b>4.8.1</b> Tukey’s Honestly Significant Differences</a></li>
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
-<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion Parameter Adjustment</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No Dispersion vs. Overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative Binomial Modeling</a></li>
 </ul></li>
-<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
+<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend Drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
 <li class="chapter" data-level="4.10.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-2"><i class="fa fa-check"></i><b>4.10.2</b> Data Organization</a></li>
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> The Vuong Test (optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>4.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models (GLMs): A Unifying Theory</a><ul>
+<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models: A Unifying Theory</a><ul>
 <li class="chapter" data-level="5.1" data-path="ch-glms.html"><a href="ch-glms.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One parameter exponential families</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-possion"><i class="fa fa-check"></i><b>5.2.1</b> One Parameter Exponential Family: Possion</a></li>
-<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One parameter exponential family: Normal</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One-Parameter Exponential Families</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-poisson"><i class="fa fa-check"></i><b>5.2.1</b> One-Parameter Exponential Family: Poisson</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One-Parameter Exponential Family: Normal</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="ch-glms.html"><a href="ch-glms.html#generalized-linear-modeling"><i class="fa fa-check"></i><b>5.3</b> Generalized Linear Modeling</a></li>
 <li class="chapter" data-level="5.4" data-path="ch-glms.html"><a href="ch-glms.html#exercises-4"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
@@ -303,45 +307,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-soccer-goalkeepers"><i class="fa fa-check"></i><b>6.4</b> Case Study: Soccer Goalkeepers</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="ch-logreg.html"><a href="ch-logreg.html#modeling-odds"><i class="fa fa-check"></i><b>6.4.1</b> Modeling Odds</a></li>
 <li class="chapter" data-level="6.4.2" data-path="ch-logreg.html"><a href="ch-logreg.html#logistic-regression-models-for-binomial-responses"><i class="fa fa-check"></i><b>6.4.2</b> Logistic Regression Models for Binomial Responses</a></li>
-<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-for-logistic-regression-models-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical rationale for logistic regression models (Optional)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical Rationale (optional)</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-reconstructing-alabama"><i class="fa fa-check"></i><b>6.5</b> Case Study: Reconstructing Alabama</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-3"><i class="fa fa-check"></i><b>6.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.5.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-analyses"><i class="fa fa-check"></i><b>6.5.2</b> Exploratory Analyses</a></li>
 <li class="chapter" data-level="6.5.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-1"><i class="fa fa-check"></i><b>6.5.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for significance of model coefficients</a></li>
-<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence intervals for model coefficients</a></li>
-<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for goodness of fit</a></li>
+<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence Intervals for Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for Goodness-of-Fit</a></li>
 <li class="chapter" data-level="6.5.7" data-path="ch-logreg.html"><a href="ch-logreg.html#residuals-for-binomial-regression"><i class="fa fa-check"></i><b>6.5.7</b> Residuals for Binomial Regression</a></li>
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-vs.-binomial-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares  vs. Binomial Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="6.7.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-2"><i class="fa fa-check"></i><b>6.7.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-deviance Tests</a></li>
+<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-Deviance Tests</a></li>
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>6.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-corrdata.html"><a href="ch-corrdata.html"><i class="fa fa-check"></i><b>7</b> Correlated Data</a><ul>
 <li class="chapter" data-level="7.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#learning-objectives-6"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#introduction-1"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing correlation</a></li>
-<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and pups</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing Correlation</a></li>
+<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and Pups</a></li>
 <li class="chapter" data-level="7.5" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability"><i class="fa fa-check"></i><b>7.5</b> Sources of Variability</a></li>
-<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No covariates</a></li>
-<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose effect</a></li>
+<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No Covariates</a></li>
+<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose Effect</a></li>
 <li class="chapter" data-level="7.8" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-tree-growth"><i class="fa fa-check"></i><b>7.8</b> Case Study: Tree Growth</a><ul>
-<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the data set</a></li>
-<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of variability</a></li>
-<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation-within-transect"><i class="fa fa-check"></i><b>7.8.3</b> Analysis preview: accounting for correlation within transect</a></li>
+<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the Data Set</a></li>
+<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of Variability</a></li>
+<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation"><i class="fa fa-check"></i><b>7.8.3</b> Analysis Preview: Accounting for Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
@@ -358,77 +362,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two level modeling: preliminary considerations</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the two level structure (not recommended)</a></li>
-<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A two-stage modeling approach (better but imperfect)</a></li>
+<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two-Level Modeling: Preliminary Considerations</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the Two-Level Structure (not recommended)</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A Two-Stage Modeling Approach (better but imperfect)</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
-<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
-<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
-<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
+<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two-Level Modeling: A Unified Approach</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our Framework</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of Errors: Multivariate Normal</a></li>
+<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical Issues when Testing Parameters (optional)</a></li>
+<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An Initial Model with Parameter Interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
-<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a Multilevel Model</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model Building Strategy</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An Initial Model: Random Intercepts</a></li>
 </ul></li>
-<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
-<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo <span class="math inline">\(R^2\)</span> values</a></li>
-<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a covariate at Level Two</a></li>
+<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary Covariates at Level One and Level Two</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random Slopes and Intercepts Model</a></li>
+<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo R-squared Values</a></li>
+<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a Covariate at Level Two</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Additional covariates: model comparison and interpretability</a><ul>
-<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of parameter estimates</a></li>
-<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model comparisons</a></li>
+<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Adding Further Covariates</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of Parameter Estimates</a></li>
+<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Center covariates</a></li>
-<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A potential final model for music performance anxiety</a></li>
-<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling the multilevel structure: is it really necessary?</a></li>
-<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Centering Covariates</a></li>
+<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A Final Model for Music Performance Anxiety</a></li>
+<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling Multilevel Structure: Is It Necessary?</a></li>
+<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercises-6"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>8.13.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two Level Longitudinal Data</a><ul>
-<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case study: Charter schools</a></li>
+<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two-Level Longitudinal Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case Study: Charter Schools</a></li>
 <li class="chapter" data-level="9.3" data-path="ch-lon.html"><a href="ch-lon.html#exploratoryanalysis"><i class="fa fa-check"></i><b>9.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing data</a></li>
-<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory analyses for general multilevel models</a></li>
-<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory analyses for longitudinal data</a></li>
+<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing Data</a></li>
+<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory Analyses for Longitudinal Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
-<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary Two-Stage Modeling</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear Trends Within Schools</a></li>
+<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of Level Two Covariates on Linear Time Trends</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error Structure Within Schools</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
-<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
+<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial Models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling Other Trends over Time</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
-<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
-<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
-<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
+<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a Final Model</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add Percent Free and Reduced Lunch as a Covariate</a></li>
+<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A Final Model with Three Level Two Covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric Bootstrap Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
-<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative covariance structures</a></li>
-<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#covariance-structure-in-non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Covariance structure in non-longitudinal multilevel models</a></li>
-<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final thoughts regarding covariance structures</a></li>
-<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of covariance structures (Optional)</a></li>
+<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance Structure among Observations</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final Thoughts Regarding Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of Covariance Structures (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercises-7"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>9.9.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ch-3level.html"><a href="ch-3level.html"><i class="fa fa-check"></i><b>10</b> Multilevel Data With More Than Two Levels</a><ul>
@@ -438,41 +442,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.1" data-path="ch-3level.html"><a href="ch-3level.html#organizedata3"><i class="fa fa-check"></i><b>10.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="10.3.2" data-path="ch-3level.html"><a href="ch-3level.html#explore3v2"><i class="fa fa-check"></i><b>10.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial models: unconditional means and unconditional growth</a></li>
-<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering boundary constraints</a></li>
-<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric bootstrap testing</a></li>
-<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding variance components</a></li>
-<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a final model</a></li>
-<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance structure (Optional)</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of covariance structures</a></li>
+<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial Models</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-means"><i class="fa fa-check"></i><b>10.4.1</b> Unconditional Means</a></li>
+<li class="chapter" data-level="10.4.2" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-growth"><i class="fa fa-check"></i><b>10.4.2</b> Unconditional Growth</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering Boundary Constraints</a></li>
+<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric Bootstrap Testing</a></li>
+<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding Variance Components</a></li>
+<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a Final Model</a></li>
+<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance Structure (optional)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of Covariance Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-8"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>10.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory analyses</a></li>
+<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two level Modeling with a Generalized Response</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM approach (correlation not accounted for)</a></li>
-<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A two-stage modeling approach (provides the basic idea for multilevel modeling)</a></li>
-<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A unified multilevel approach (the framework we’ll use)</a></li>
+<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two-Level Modeling with a Generalized Response</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM Approach</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A Two-Stage Modeling Approach</a></li>
+<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A Unified Multilevel Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="ch-GLMM.html"><a href="ch-GLMM.html#crossedre"><i class="fa fa-check"></i><b>11.5</b> Crossed Random Effects</a></li>
-<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Model Comparisons Using the Parametric Bootstrap</a></li>
-<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Potential Final Model for Examining Referee Bias</a></li>
+<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Parametric Bootstrap for Model Comparisons</a></li>
+<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Final Model for Examining Referee Bias</a></li>
 <li class="chapter" data-level="11.8" data-path="ch-GLMM.html"><a href="ch-GLMM.html#estimatedRE"><i class="fa fa-check"></i><b>11.8</b> Estimated Random Effects</a></li>
-<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="11.10" data-path="ch-GLMM.html"><a href="ch-GLMM.html#exercises-10"><i class="fa fa-check"></i><b>11.10</b> Exercises</a><ul>
 <li class="chapter" data-level="11.10.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#conceptual-exercises-8"><i class="fa fa-check"></i><b>11.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>11.10.2</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-7"><i class="fa fa-check"></i><b>11.10.2</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -497,7 +504,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="ch-beyondmost" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Beyond Least Squares: Using Likelihoods to Fit and Compare Models</h1>
+<h1><span class="header-section-number">Chapter 2</span> Beyond Least Squares: Using Likelihoods</h1>
 <div id="learning-objectives-1" class="section level2">
 <h2><span class="header-section-number">2.1</span> Learning Objectives</h2>
 <p>After finishing this chapter, you should be able to:</p>
@@ -508,7 +515,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Use likelihoods to compare models.</li>
 <li>Construct a likelihood for a simple model.</li>
 </ul>
-<p>This text encourages you to broaden your statistical horizons by moving beyond independent, identically distributed, normal responses (iidN). This chapter on likelihood focuses on ways to fit models, determine estimates, and compare models for a wide range of types of responses, not just iidN data. In your earlier study of statistics, you fit simple linear models using ordinary least squares (OLS). Fitting those models assumes that the mean value of a response, Y, is linearly related to some variable, X. However, often responses are not normally distributed. For example, a study in education may involve scoring responses on a test as correct or incorrect. This binary response may be explained by the number of hours students spend studying. However we do not expect a variable which takes on only 0 or 1 to be a linear function of time spent studying (see Figure <a href="ch-beyondmost.html#fig:logistic1">2.1</a>).</p>
+<p>This text encourages you to broaden your statistical horizons by moving beyond independent, identically distributed, normal responses (iidN). This chapter on likelihood focuses on ways to fit models, determine estimates, and compare models for a wide range of types of responses, not just iidN data. In your earlier study of statistics, you fit simple linear models using ordinary least squares (OLS). Fitting those models assumes that the mean value of a response, Y, is linearly related to some variable, X. However, often responses are not normally distributed. For example, a study in education may involve scoring responses on a test as correct or incorrect. This binary response may be explained by the number of hours students spend studying. However, we do not expect a variable which takes on only 0 or 1 to be a linear function of time spent studying (see Figure <a href="ch-beyondmost.html#fig:logistic1">2.1</a>).</p>
 
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="ch-beyondmost.html#cb31-1"></a><span class="co"># Packages required for Chapter 2</span></span>
 <span id="cb31-2"><a href="ch-beyondmost.html#cb31-2"></a><span class="kw">library</span>(gridExtra)  </span>
@@ -526,25 +533,25 @@ Figure 2.1: An attempt to fit a linear regression model to a binary response var
 <p>In this instance we’ll use logistic regression instead of linear least squares regression. Fitting a logistic regression requires the use of likelihood methods. Another setting where likelihood methods come into play is when data is produced from a complex structure which may imply correlation among outcomes. For example, test scores for students who have been taught by the same teacher may be correlated. We’ll see that likelihood methods are useful when modeling correlated data. Likelihood methods not only provide a great deal of flexibility in the types of models we can fit, but they also provide ways in which to compare models as well. You might find likelihood methods a bit more complicated, but conceptually the approach is straightforward. As you go through the material here, worry less about calculus and computational details and focus on the concepts. You will have software to help you with computation, but model specification and interpretation will be up to you.</p>
 </div>
 <div id="case-study-does-sex-run-in-families" class="section level2">
-<h2><span class="header-section-number">2.2</span> Case Study: Does sex run in families?</h2>
-<p>Doesn’t it seem that some families tend to have lots of boys while others have more than their share of girls? Is it really the case that each child human couples produce is equally likely to be a male or female? Or does sex run in families? It can be argued that these kinds of questions have implications for population demographics and sibling harmony. For example, a 2009 study at the University of Ulster found that growing up with sisters, as compared to brothers, can enhance the quality of life of an adult <span class="citation">(BBC News <a href="#ref-BBCNEWS1995" role="doc-biblioref">2009</a>)</span>.</p>
+<h2><span class="header-section-number">2.2</span> Case Study: Does Sex Run in Families?</h2>
+<p>Doesn’t it seem that some families tend to have lots of boys, while others have more than their fair share of girls? Is it really the case that each child human couples produce is equally likely to be a male or female? Or does sex run in families? It can be argued that these kinds of questions have implications for population demographics and sibling harmony. For example, a 2009 study at the University of Ulster in Northern Ireland found that growing up with sisters, as compared to brothers, can enhance the quality of life of an adult <span class="citation">(BBC News <a href="#ref-BBCNEWS1995" role="doc-biblioref">2009</a>)</span>.</p>
 <p>Sibling harmony aside, why do people care about gender imbalance? Comparisons of sex ratios between countries illustrate some compelling reasons. Some think that genetic or biological influences within families, such as “sex running in families,” can affect sex ratios. Mating behavior such as waiting until the family includes a boy or both sexes affects sex ratios. Some believe that sex ratios point to the practice of sex selection in a country accomplished through abortion or infanticide. Furthermore, there is speculation that an excess of men could lead to unrest among young males unable to find marriage partners or start families.</p>
-<p>In 1930, statistician R.A. Fisher posited a 50:50 equilibrium theory regarding sex ratios in terms of parental expenditure. Most often, in practice, sex ratios differ from what Fisher predicted. From 1970 to 2002, the sex ratio at birth in the US among white non-Hispanics was 105 boys to 100 girls, but only 103 boys to 100 girls among African Americans and Native Americans <span class="citation">(Mathews and Hamilton <a href="#ref-Mathews2005" role="doc-biblioref">2005</a>)</span>. A 1997 study in <em>Nature</em> reports evidence which suggests that the human sex ratio may be currently shifting in the United States toward more female babies, closer to Fisher’s prediction! <span class="citation">(Komdeur et al. <a href="#ref-Komdeur1997" role="doc-biblioref">1997</a>)</span> Sex ratio comparisons between countries are also intriguing. For example, Switzerland has a sex ratio of 106 boys to 100 girls whereas there are 112 boys to every 100 girls in China acoording to The World Factbook <span class="citation">(Central Intelligence Agency <a href="#ref-CIA2013" role="doc-biblioref">2013</a>)</span>. In the next section, we bring the notion of gender imbalance closer to home by focusing on families instead of countries or sub-populations.</p>
+<p>In 1930, statistician R.A. Fisher posited a 50:50 equilibrium theory regarding sex ratios in terms of parental expenditure. Most often, in practice, sex ratios differ from what Fisher predicted. From 1970 to 2002, the sex ratio at birth in the US among white non-Hispanics was 105 boys to 100 girls, but only 103 boys to 100 girls among African Americans and Native Americans <span class="citation">(Mathews and Hamilton <a href="#ref-Mathews2005" role="doc-biblioref">2005</a>)</span>. A 1997 study in <em>Nature</em> reports evidence which suggests that the human sex ratio may be currently shifting in the United States toward more female babies, closer to Fisher’s prediction! <span class="citation">(Komdeur et al. <a href="#ref-Komdeur1997" role="doc-biblioref">1997</a>)</span> Sex ratio comparisons between countries are also intriguing. For example, Switzerland has a sex ratio of 106 boys to 100 girls, whereas there are 112 boys to every 100 girls in China according to The World Factbook <span class="citation">(Central Intelligence Agency <a href="#ref-CIA2013" role="doc-biblioref">2013</a>)</span>. In the next section, we bring the notion of gender imbalance closer to home by focusing on families instead of countries or sub-populations.</p>
 <p>To investigate this question and others, we look at the gender composition of 5,626 families collected by the National Longitudinal Survey of Youth <span class="citation">(Bureau of Labor Statistics <a href="#ref-NLSY1997" role="doc-biblioref">1997</a>)</span>. We fit models to explore whether there is evidence sex runs in families, a model we refer to as a Sex Conditional Model. We also consider a separate but related question about whether couples are “waiting for a boy.” <span class="citation">(Rodgers and Doughty <a href="#ref-Rodgers2001" role="doc-biblioref">2001</a>)</span>.</p>
 <div id="research-questions" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Research Questions</h3>
-<p>We specify several models related to gender balance in families. Our models liken having babies to flipping a coin (heads=boy, tails=girl), of course, recognizing that in truth there is a little more to having babies. The baseline model (Model 0) assumes that the probability of a boy is the same as a probability of a girl. The first model (Model 1) considers the situation that the coin is loaded and the probability of heads (a boy) is different than the probability of tails (a girl). Next, we consider a model (Model 2) that conditions on the previous number of boys or girls in a family to get at the question of whether sex runs in families. This data is also used for a different set of models that relate to couples’ behavior. Specifically, we look to see if there is evidence that couples are waiting for a boy. searching for evidence of waiting for a girl, or waiting for both a boy and a girl, are left as exercises.</p>
+<p>We specify several models related to gender balance in families. Our models liken having babies to flipping a coin (heads=boy, tails=girl), of course, recognizing that in truth there is a little more to having babies. The baseline model (Model 0) assumes that the probability of a boy is the same as the probability of a girl. The first model (Model 1) considers the situation that the coin is loaded and the probability of heads (a boy) is different than the probability of tails (a girl). Next, we consider a model (Model 2) that conditions on the previous number of boys or girls in a family to get at the question of whether sex runs in families. This data is also used for a different set of models that relate to couples’ behavior. Specifically, we look to see if there is evidence that couples are waiting for a boy. Searching for evidence of waiting for a girl, or waiting for both a boy and a girl, are left as exercises.</p>
 <p>Models 0 and 1 assume that having children is like flipping a coin. The gender of each child is independent of the gender of other children and the probability of a boy is the same for each new child. Let <span class="math inline">\(p_B\)</span> be the probability a child is a boy.</p>
 <ol style="list-style-type: decimal">
-<li><strong>Model 0: Sex Unconditional Model (Equal probabilities)</strong> Is a child just as likely to be a boy as it is to be a girl; is <span class="math inline">\(p_B\)</span> = 0.5?</li>
-<li><strong>Model 1: Sex Unconditional Model (Different probabilities)</strong> Is the coin loaded; is <span class="math inline">\(p_B \neq 0.5\)</span>?</li>
-<li><strong>Model 2: Sex Conditional Model (Sex bias)</strong>: Do boys or girls run in families? That is,
+<li><strong>Model 0: Sex Unconditional Model (Equal probabilities).</strong> Is a child just as likely to be a boy as it is to be a girl; is <span class="math inline">\(p_B\)</span> = 0.5?</li>
+<li><strong>Model 1: Sex Unconditional Model (Different probabilities).</strong> Is the coin loaded; is <span class="math inline">\(p_B \neq 0.5\)</span>?</li>
+<li><strong>Model 2: Sex Conditional Model (Sex bias).</strong> Do boys or girls run in families? That is,
 is there a tendency for families with more boys than girls to be more likely to produce another boy? Is the case the same for girls?</li>
-<li><strong>Model 3: Stopping Rule Model (Waiting for a boy)</strong>
+<li><strong>Model 3: Stopping Rule Model (Waiting for a boy).</strong>
 Is there evidence that couples stop having children once a boy is born?</li>
 </ol>
 <p>Ultimately, our goal is to incorporate the family composition data represented as series of coin flips to find the “best” estimate for the probability of having a boy, <span class="math inline">\(p_B\)</span>, and evaluate the assumptions built into these models. We will be using likelihood-based methods, not ordinary least squares, to fit and compare these models.</p>
-<p>While the NLSY data is of interest, we start with a smaller, hypothetical data set of 30 families with a total of 50 children in order to illustrate concepts related to likelihoods (Table <a href="ch-beyondmost.html#tab:table1chp2">2.1</a>). The data are the frequencies of possible family gender compositions for one-, two-, and three-child families. The methods we develop on this small data set will then be applied to the one-, two- and three-family NLSY data. It is straightforward to include all of the family sizes up to the four-or five-child families in the NLSY data.</p>
+<p>While the NLSY data is of interest, we start with a smaller, hypothetical data set of 30 families with a total of 50 children in order to illustrate concepts related to likelihoods (Table <a href="ch-beyondmost.html#tab:table1chp2">2.1</a>). The data are the frequencies of possible family gender compositions for one-, two-, and three-child families. The methods we develop on this small data set will then be applied to the one-, two- and three-family NLSY data. It is straightforward to include all of the family sizes up to the four- or five-child families in the NLSY data.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table1chp2">Table 2.1: </span>The gender composition of 30 families in the hypothetical data set of n=50 children.
@@ -655,15 +662,15 @@ Total
 </table>
 </div>
 </div>
-<div id="model-0-sex-unconditional-model-equal-probabilities-independence" class="section level2">
-<h2><span class="header-section-number">2.3</span> Model 0: Sex Unconditional Model (Equal probabilities, Independence)</h2>
+<div id="model-0-sex-unconditional-equal-probabilities" class="section level2">
+<h2><span class="header-section-number">2.3</span> Model 0: Sex Unconditional, Equal Probabilities</h2>
 <p>For the Sex Unconditional models, having children is modeled using coin flips. With a coin flip model, the result of each flip is independent of results of other flips. With this version of the Sex Unconditional Model, the chance that a baby is a boy is specified to be <span class="math inline">\(p_B=0.5\)</span>. It makes no difference if the first and third children are boys, the probability that the second child is a boy is 0.5; that is, the results for each child are <strong>independent</strong>  of the others. Under this model you expect to see equal numbers of boys and girls.</p>
 </div>
 <div id="sex_unconditional_model" class="section level2">
-<h2><span class="header-section-number">2.4</span> Model 1: Sex Unconditional Model (Any Probability, Independence)</h2>
+<h2><span class="header-section-number">2.4</span> Model 1: Sex Unconditional, Unequal Probabilities</h2>
 <p>You may want your model to allow for the probability of a boy, <span class="math inline">\(p_B\)</span>, to be something different than 0.5. With this version of the Sex Unconditional model, <span class="math inline">\(p_B&gt;0.5\)</span> or <span class="math inline">\(p_B&lt;0.5\)</span> or <span class="math inline">\(p_B=0.5\)</span>, in which case you expect to see more boys than girls or fewer boys than girls or equal numbers of boys and girls, respectively. We would retain the assumption of independence; that is, the probability of a boy, <span class="math inline">\(p_B\)</span>, is the same for each child. Seeing a boy for the first child will not lead you to change the probability that the second child is a boy; this would not imply that “sex runs in families.”</p>
 <div id="what-is-a-likelihood" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> What is a likelihood?</h3>
+<h3><span class="header-section-number">2.4.1</span> What Is a Likelihood?</h3>
 <p>As is often the case in statistics, our objective is to find an estimate for a model parameter using our data; here, the parameter to estimate is the probability of a boy, <span class="math inline">\(p_B\)</span>, and the data is the gender composition for each family. One way in which to interpret probability is to imagine repeatedly producing children. The probability of a boy will be the overall proportion of boys as the number of children increases.
 With likelihood methods, conceptually we consider different possible values for our parameter(s), <span class="math inline">\(p_B\)</span>, and determine how likely we would be to see our observed data in each case, <span class="math inline">\(\mathrm{Lik}(p_B)\)</span>. We’ll select as our estimate the value of <span class="math inline">\(p_B\)</span> for which our data is most likely. A <strong>likelihood</strong>  is a function that tells us how likely we are to observe our data for a given parameter value, <span class="math inline">\(p_B\)</span>. For a single family which has a girl followed by two boys, GBB, the likelihood function looks like:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -685,9 +692,9 @@ Figure 2.2: Likehood function for GBB.
 \end{align*}\]</span></p>
 <p>A plot of this likelihood appears in Figure <a href="ch-beyondmost.html#fig:lik2">2.3</a>. It is right skewed with an MLE at approximately 0.3. Using calculus, we can show that the MLE is precisely 1/3 which is consistent with intuition given the 2 boys and 4 girls in our data.</p>
 <div class="figure" style="text-align: center"><span id="fig:lik2"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/lik2-1.png" alt="Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$" width="90%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lik2-1.png" alt="Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE,  ${p}_B=1/3$." width="90%" />
 <p class="caption">
-Figure 2.3: Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE, <span class="math inline">\({p}_B=1/3\)</span>
+Figure 2.3: Likelihood function for the data of 2 families (GBB and GGG). The solid line is at the MLE, <span class="math inline">\({p}_B=1/3\)</span>.
 </p>
 </div>
 <p>Turning now to our hypothetical data with 30 families who have a total of 50 children, we can create the likelihood contribution for each of the family compositions.</p>
@@ -852,7 +859,7 @@ Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and
 </div>
 <div id="numerically-approximating-an-mle" class="section level4">
 <h4><span class="header-section-number">2.4.2.2</span> Numerically approximating an MLE</h4>
-<p>Here a grid search is used with the software package R to find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for <span class="math inline">\(p_B\)</span> and then the likelihood, <span class="math inline">\(\mathrm{Lik}(p_B)\)</span>, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for <span class="math inline">\(p_B\)</span> and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for <span class="math inline">\(p_B\)</span>, which allows us to determine a better (more precise) approximation of the MLE. In addition, most packages, like R, have an optimize function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.</p>
+<p>Here a grid search is used with the software package R to find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for <span class="math inline">\(p_B\)</span> and then the likelihood, <span class="math inline">\(\mathrm{Lik}(p_B)\)</span>, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for <span class="math inline">\(p_B\)</span> and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for <span class="math inline">\(p_B\)</span>, which allows us to determine a better (more precise) approximation of the MLE. In addition, most packages, like R, have an optimization function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ch-beyondmost.html#cb32-1"></a>Lik.f &lt;-<span class="st"> </span><span class="cf">function</span>(nBoys,nGirls,nGrid){</span>
 <span id="cb32-2"><a href="ch-beyondmost.html#cb32-2"></a>    <span class="co"># possible values for prob a boy is born</span></span>
 <span id="cb32-3"><a href="ch-beyondmost.html#cb32-3"></a>    pb &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> nGrid)   </span>
@@ -868,7 +875,7 @@ Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ch-beyondmost.html#cb34-1"></a><span class="co"># more precise MLE for p_B based on finer grid (more points)</span></span>
 <span id="cb34-2"><a href="ch-beyondmost.html#cb34-2"></a><span class="kw">Lik.f</span>(<span class="dt">nBoys =</span> <span class="dv">30</span>, <span class="dt">nGirls =</span> <span class="dv">20</span>, <span class="dt">nGrid =</span> <span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5996</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ch-beyondmost.html#cb36-1"></a><span class="co">## Another approach: using R&#39;s optimize command</span></span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ch-beyondmost.html#cb36-1"></a><span class="co">## Another approach: using R&#39;s optimize function</span></span>
 <span id="cb36-2"><a href="ch-beyondmost.html#cb36-2"></a><span class="co">##   Note that the log-likelihood is optimized here</span></span>
 <span id="cb36-3"><a href="ch-beyondmost.html#cb36-3"></a>oLik.f &lt;-<span class="st"> </span><span class="cf">function</span>(pb){</span>
 <span id="cb36-4"><a href="ch-beyondmost.html#cb36-4"></a>    <span class="kw">return</span>(<span class="dv">30</span><span class="op">*</span><span class="kw">log</span>(pb) <span class="op">+</span><span class="st"> </span><span class="dv">20</span><span class="op">*</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span>pb))</span>
@@ -881,7 +888,7 @@ Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and
 ## [1] -33.65</code></pre>
 </div>
 <div id="calc-sec" class="section level4">
-<h4><span class="header-section-number">2.4.2.3</span> MLEs using calculus (Optional)</h4>
+<h4><span class="header-section-number">2.4.2.3</span> MLEs using calculus (optional)</h4>
 <p>Calculus may provide another way to determine an MLE. Here, we can ascertain the value of <span class="math inline">\(p_B\)</span> where the likelihood is a maximum by using the first derivative of the likelihood with respect to <span class="math inline">\(p_B\)</span>. We obtain the first derivative using the Product Rule, set it to 0, solve for <span class="math inline">\(p_B\)</span>, and verify that a maximum occurs there.</p>
 <p><span class="math display">\[\begin{equation*}
 \frac{d}{dp_B}p_B^{30}(1-p_B)^{20} = 30p_B^{29}(1-p_B)^{20}-p^{30}_B20(1-p_B)^{19} = 0
@@ -910,13 +917,13 @@ Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and
 <p>Work to understand the <em>idea</em> of a likelihood. Likelihoods are the foundation upon which estimates are obtained and models compared for most of this course. Do not be overly concerned with calculus and computation at this point.</p>
 </div>
 <div id="is-a-likelihood-a-probability-function-optional" class="section level3">
-<h3><span class="header-section-number">2.4.4</span> Is a likelihood a probability function? (Optional)</h3>
-<p>No. Even though we use probabilities to construct likelihoods, a likelihood is not a probability function. A probability function fixes parameter values and take as inputs possible outcomes, returning the probability of seeing different outcomes given the parameter value. For example, you flip a loaded coin which comes up heads 25% of the time. After 5 flips, you observe the outcome of three heads and two tails. A <em>probability function</em> provides the probability of observing (3H,2T) when <span class="math inline">\(p_H=0.25\)</span>. If you flip this same coin another 5 times and observe all tails (5T), the probability function provides the probability of (5T) when <span class="math inline">\(p_H=0.25\)</span>.</p>
+<h3><span class="header-section-number">2.4.4</span> Is a Likelihood a Probability Function? (optional)</h3>
+<p>No. Even though we use probabilities to construct likelihoods, a likelihood is not a probability function. A probability function fixes parameter values and takes as inputs possible outcomes, returning the probability of seeing different outcomes given the parameter value. For example, you flip a loaded coin which comes up heads 25% of the time. After 5 flips, you observe the outcome of three heads and two tails. A <em>probability function</em> provides the probability of observing (3H,2T) when <span class="math inline">\(p_H=0.25\)</span>. If you flip this same coin another 5 times and observe all tails (5T), the probability function provides the probability of (5T) when <span class="math inline">\(p_H=0.25\)</span>.</p>
 <p>In contrast, a likelihood is constructed by fixing the data, say (3H,2T). It takes as input <em>possible parameter values</em> and returns the probability of seeing the fixed data for each parameter value. For example, the likelihood will provide the chance of seeing the data (3H,2T) if <span class="math inline">\(p_H=0.6\)</span>, the chance of seeing the data (3H,2T) if <span class="math inline">\(p_H=0.3\)</span>, and so on. With the likelihood we can find the value of <span class="math inline">\(p_H\)</span> where we are most likely to see our data.</p>
 </div>
 </div>
 <div id="sex_conditional.sec" class="section level2">
-<h2><span class="header-section-number">2.5</span> Model 2: Sex Conditional Model (Sex Bias)</h2>
+<h2><span class="header-section-number">2.5</span> Model 2: Sex Conditional</h2>
 <p>Our first research question involves determining whether sex runs in the family. Do families who already have boys tend to have more additional boys than expected by chance, and do families who already have girls tend to have more additional girls than expected by chance? What do you think? And how could we use a statistical model to investigate this phenomenon? There are a number of different ways to construct a model for this question. Here’s one possibility.</p>
 <div id="model-specification" class="section level3">
 <h3><span class="header-section-number">2.5.1</span> Model Specification</h3>
@@ -1091,24 +1098,24 @@ Total
 \hat{p}_{B|N}&amp;= \frac{17}{32} \\
 &amp;=0.53 \\
 \end{align*}\]</span></p>
-<p>This estimate follows naturally. First consider all of the children who enter into a family with an equal number of boys and girls. From Table <a href="ch-beyondmost.html#tab:table3chp2">2.3</a>, we can see there are 32 such children (30 are first kids and 2 are third kids in families with 1 boy and 1 girl). Of those children, 17 are boys. So, given that a child joins a sex neutral family, the chance they are a boy is 17/32. Similar calculations for <span class="math inline">\(p_{B|\textrm{B Bias}}\)</span> and <span class="math inline">\(p_{B|\textrm{G Bias}}\)</span> yield:</p>
+<p>This estimate follows naturally. First consider all of the children who enter into a family with an equal number of boys and girls. From Table <a href="ch-beyondmost.html#tab:table3chp2">2.3</a>, we can see there are 32 such children (30 are first kids and 2 are third kids in families with 1 boy and 1 girl). Of those children, 17 are boys. So, given that a child joins a sex-neutral family, the chance they are a boy is 17/32. Similar calculations for <span class="math inline">\(p_{B|\textrm{B Bias}}\)</span> and <span class="math inline">\(p_{B|\textrm{G Bias}}\)</span> yield:</p>
 <p><span class="math display">\[\begin{align*}
  \hat{p}_{B|N} &amp;= 17/32 = 0.53  \\  
  \hat{p}_{B|\textrm{B Bias}} &amp;= 5/9 = 0.56  \\
  \hat{p}_{B|\textrm{G Bias}} &amp;= 8/9 = 0.89  
 \end{align*}\]</span></p>
-<p>If we anticipate any “sex running in families” effect, we would expect <span class="math inline">\(p_{B|\textrm{B Bias}}\)</span> to be larger than the the probability of a boy in the neutral setting, <span class="math inline">\(p_{B|N}\)</span>. In our small hypothetical example, <span class="math inline">\(\hat{p}_{B|\textrm{B Bias}}\)</span> is slightly greater than 0.53, providing light support for the “sex runs in families” theory when it comes to boys. What about girls? Do families with more girls than boys tend to have a greater probability of having a girl? We found that the MLE for the probability of a girl in a girl biased setting is 1-0.89=0.11.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This data does not provide evidence that girls run in families since <span class="math inline">\(\hat{p}_{G|G_{bias}} = 0.11 &lt; \hat{p}_{G|N}=0.47\)</span>; there is a markedly lower probability of a girl if the family is already girl biased. This data is, however, hypothetical. Let’s take a look at some real data and see what we find.</p>
+<p>If we anticipate any “sex running in families” effect, we would expect <span class="math inline">\(p_{B|\textrm{B Bias}}\)</span> to be larger than the probability of a boy in the neutral setting, <span class="math inline">\(p_{B|N}\)</span>. In our small hypothetical example, <span class="math inline">\(\hat{p}_{B|\textrm{B Bias}}\)</span> is slightly greater than 0.53, providing light support for the “sex runs in families” theory when it comes to boys. What about girls? Do families with more girls than boys tend to have a greater probability of having a girl? We found that the MLE for the probability of a girl in a girl-biased setting is 1-0.89=0.11.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This data does not provide evidence that girls run in families since <span class="math inline">\(\hat{p}_{G|G_{bias}} = 0.11 &lt; \hat{p}_{G|N}=0.47\)</span>; there is a markedly lower probability of a girl if the family is already girl biased. This data is, however, hypothetical. Let’s take a look at some real data and see what we find.</p>
 </div>
 </div>
 <div id="case-study-analysis-of-the-nlsy-data" class="section level2">
-<h2><span class="header-section-number">2.6</span> Case Study: Analysis of the NLSY data</h2>
+<h2><span class="header-section-number">2.6</span> Case Study: Analysis of the NLSY Data</h2>
 <div id="model-building-plan" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Model Building Plan</h3>
 <p>You should now have a feel for using the Likelihood Principle to obtain estimates of parameters using family gender composition data. Next, these ideas will be applied to the NLSY data summarized in Table 2 of <span class="citation">(Rodgers and Doughty <a href="#ref-Rodgers2001" role="doc-biblioref">2001</a>)</span>. In addition to considering the Sex Unconditional and Conditional Models, we investigate some models that incorporate choices couples may make about when to stop having more children.</p>
 </div>
 <div id="EDA.sec" class="section level3">
-<h3><span class="header-section-number">2.6.2</span> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</h3>
-<p>We begin by performing an exploratory data analysis aimed at shedding some light on our research questions. We are looking for clues as to which of our models is most plausible. The first statistic of interest is the proportion of boys in the sample. There are 5,416 boys out of the 10,672 children or a proportion of .507 boys. While this proportion is very close to .500, it is worth noting that a difference of .007 could be meaningful in population terms.</p>
+<h3><span class="header-section-number">2.6.2</span> Exploratory Data Analysis</h3>
+<p>We begin by performing an exploratory data analysis (EDA) aimed at shedding some light on our research questions. We are looking for clues as to which of our models is most plausible. The first statistic of interest is the proportion of boys in the sample. There are 5,416 boys out of the 10,672 children or a proportion of .507 boys. While this proportion is very close to .500, it is worth noting that a difference of .007 could be meaningful in population terms.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table4chp2">Table 2.4: </span>Number of families and children in families with given composition in NLSY data. Sex ratio and proportion males are given by family size.
@@ -1144,7 +1151,7 @@ B
 930
 </td>
 <td style="text-align:left;width: 3cm; ">
-97 boys to 100 girls
+97:100
 </td>
 <td style="text-align:left;width: 3cm; ">
 0.494
@@ -1176,7 +1183,7 @@ BB
 1164
 </td>
 <td style="text-align:left;width: 3cm; ">
-104 boys to 100 girls
+104:100
 </td>
 <td style="text-align:left;width: 3cm; ">
 0.511
@@ -1238,7 +1245,7 @@ BBB
 558
 </td>
 <td style="text-align:left;width: 3cm; ">
-104 boys to 100 girls
+104:100
 </td>
 <td style="text-align:left;width: 3cm; ">
 0.510
@@ -1351,11 +1358,11 @@ GGG
 </tr>
 </tbody>
 </table>
-<p>Table <a href="ch-beyondmost.html#tab:table4chp2">2.4</a> displays family composition data for the 5,626 families with one, two, or three children in the NLSY data set. This dataset includes 10,672 children. Because our interest centers on the proportion of males, let’s calculate sex ratios and proportions of males for each family size. For one-child families the male to female ratio is less than one (97 males:100 females) whereas both two- and three-child families have ratios of 104 boys to 100 girls, what we may expect in a population which favors males. While our research questions do not specifically call for these measures stratified by family size, it still provides us with an idea of gender imbalance in the data.</p>
+<p>Table <a href="ch-beyondmost.html#tab:table4chp2">2.4</a> displays family composition data for the 5,626 families with one, two, or three children in the NLSY data set. This data set includes 10,672 children. Because our interest centers on the proportion of males, let’s calculate sex ratios and proportions of males for each family size. For one-child families the male to female ratio is less than one (97 males:100 females), whereas both two- and three-child families have ratios of 104 boys to 100 girls, what we may expect in a population which favors males. While our research questions do not specifically call for these measures stratified by family size, it still provides us with an idea of gender imbalance in the data.</p>
 <p>Table <a href="ch-beyondmost.html#tab:table6chp2">2.5</a> provides insight into whether sex runs in families if the probability of a boy is 0.5. Simple probability suggests that the percentage of 2-child families with all the same sex would be 50% (BB or GG vs. BG or GB) but in our data we see only 45%. For 3-child families, we have 8 possible orderings of boys and girls and so we would expect 2 out of the 8 orderings (25%) to be of the same sex (BBB or GGG), but in fact 27% have the same sex among the 3-children families. These results do not provide overwhelming evidence of sex running in families. There are some potentially complicating factors: the probability of a boy may not be 0.5 or couples may be waiting for a boy or a girl or both.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:table6chp2">Table 2.5: </span>Proportion of families in NLSY data with all the same sex by number of children in the family. Note that 1-child families are all homogeneous with respect to sex so we look at 2- and 3- child families.
+<span id="tab:table6chp2">Table 2.5: </span>Proportion of families in NLSY data with all the same sex by number of children in the family. Note that 1-child families are all homogeneous with respect to sex, so we look at 2- and 3-child families.
 </caption>
 <thead>
 <tr>
@@ -1404,7 +1411,7 @@ Three Children
 </tr>
 </tbody>
 </table>
-<p>Table <a href="ch-beyondmost.html#tab:table7chp2">2.6</a> contains the number of families by size and the percentage of those which are families with one boy who is last. Some of these families may have “waited” for a boy and then quit childbearing after a boy was born. We see the proportion of one child families with a boy is slightly less than the 50% expected. We’d expect one out of four, or 25%, of 2-child family configurations to have one boy last and there is 27% in our dataset. Only 8.6% of 3-child families have one boy last, but in theory we would expect one out of eight or 12.5% of 3-child families to have one boy last. So if, in fact, the probability of a boy is 50%, there does not appear to be evidence supporting the notion that families wait for a boy.</p>
+<p>Table <a href="ch-beyondmost.html#tab:table7chp2">2.6</a> contains the number of families by size and the percentage of those which are families with one boy who is last. Some of these families may have “waited” for a boy and then quit childbearing after a boy was born. We see the proportion of one-child families with a boy is slightly less than the 50% expected. We’d expect one out of four, or 25%, of 2-child family configurations to have one boy last and there is 27% in our dataset. Only 8.6% of 3-child families have one boy last, but in theory we would expect one out of eight or 12.5% of 3-child families to have one boy last. So if, in fact, the probability of a boy is 50%, there does not appear to be evidence supporting the notion that families wait for a boy.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table7chp2">Table 2.6: </span>Proportion of families in NLSY data with only one boy who is born last.
@@ -1472,13 +1479,13 @@ Three Children
 </table>
 <p>There are many other ways to formulate and explore the idea that sex runs in families or that couples wait for a boy (or a girl). See <span class="citation">Rodgers and Doughty (<a href="#ref-Rodgers2001" role="doc-biblioref">2001</a>)</span> for other examples.</p>
 </div>
-<div id="likelihood-for-the-sex-unconditional-model-the-nlsy-data" class="section level3">
-<h3><span class="header-section-number">2.6.3</span> Likelihood for the Sex Unconditional Model: the NLSY data</h3>
+<div id="likelihood-for-the-sex-unconditional-model" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> Likelihood for the Sex Unconditional Model</h3>
 <p>We construct a likelihood for the Sex Unconditional Model for the one-, two- and three-child families from the NLSY. See Table <a href="ch-beyondmost.html#tab:table4chp2">2.4</a> for the frequencies of each gender composition.</p>
 <p>Families with different compositions will contribute different factors to the likelihood. For example, Table <a href="ch-beyondmost.html#tab:sexuncondmodel">2.7</a> shows a sample of contributions for a few family compositions, where coefficients come from Table <a href="ch-beyondmost.html#tab:table4chp2">2.4</a>.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:sexuncondmodel">Table 2.7: </span>Contributions to the likelihood function for the Sex Unconditional Model for a sample of family compositions from the NLSY data
+<span id="tab:sexuncondmodel">Table 2.7: </span>Contributions to the likelihood function for the Sex Unconditional Model for a sample of family compositions from the NLSY data.
 </caption>
 <thead>
 <tr>
@@ -1537,7 +1544,7 @@ BGB
 <p>The contribution to a Sex Conditional Model likelihood for the same family compositions we considered in the previous section appear in Table <a href="ch-beyondmost.html#tab:sexcondmodel">2.8</a>.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:sexcondmodel">Table 2.8: </span>Contributions to the likelihood function for the Sex Conditional Model for a sample of family compositions from the NLSY data
+<span id="tab:sexcondmodel">Table 2.8: </span>Contributions to the likelihood function for the Sex Conditional Model for a sample of family compositions from the NLSY data.
 </caption>
 <thead>
 <tr>
@@ -1606,7 +1613,7 @@ Num. families
 Sex Unconditional
 </th>
 <th style="text-align:left;">
-Child1
+Child 1
 </th>
 <th style="text-align:left;">
 Child 2
@@ -1959,7 +1966,7 @@ BIC
  \hat{p}_{B|N}&amp;=\frac{3161}{3161+3119} \\
  &amp;=0.5033
 \end{align*}\]</span></p>
-<p>There are 6,280 times when a child is joining a neutral family and, of those times, 3,161 are boys. Thus the MLE of the probability of a boy joining a family where the number of boys and girls are equal (including when there are no children) is 0.5033.</p>
+<p>There are 6,280 times when a child is joining a neutral family and, of those times, 3,161 are boys. Thus the MLE of the probability of a boy joining a family where the numbers of boys and girls are equal (including when there are no children) is 0.5033.</p>
 <p>Similarly, MLEs for <span class="math inline">\(p_{B|\textrm{B Bias}}\)</span> and <span class="math inline">\(p_{B|\textrm{G Bias}}\)</span> can be obtained:</p>
 <p><span class="math display">\[\begin{align*}
  \hat{p}_{B|\textrm{B Bias}}&amp;= \frac{1131}{1131+1164}\\
@@ -1972,9 +1979,9 @@ BIC
 <p>Even though initial estimates don’t support the idea, let’s formally take a look as to whether prior gender composition affects the probability of a boy. To do so, we’ll see if the Sex Conditional Model is statistically significantly better than the Sex Unconditional Model.</p>
 </div>
 <div id="sec-lrtest" class="section level3">
-<h3><span class="header-section-number">2.6.5</span> Comparing the Sex Unconditional to the Sex Conditional Model</h3>
+<h3><span class="header-section-number">2.6.5</span> Model Comparisons</h3>
 <div id="nested-models" class="section level4">
-<h4><span class="header-section-number">2.6.5.1</span> Nested Models</h4>
+<h4><span class="header-section-number">2.6.5.1</span> Nested models</h4>
 <p>Likelihoods are not only useful for fitting models, but they are also useful when comparing models. If the parameters for a reduced model are a subset of parameters for a larger model, we say the models are <strong>nested</strong>  and the difference between their likelihoods can be incorporated into a statistical test to help judge the benefit of including additional parameters. Another way in which to think of nesting is to consider whether parameters in the larger model can be equated to obtain the simpler model or whether some parameters in the larger model can be set to constants. Since <span class="math inline">\(p_{B|\textrm{B Bias}}, p_{B|N}\)</span> and <span class="math inline">\(p_{B|\textrm{G Bias}}\)</span> in the Sex Conditional Model can be set to <span class="math inline">\(p_B\)</span> to obtain the Sex Unconditional Model, we can say the models are nested.</p>
 <p>If the parameters are not nested, comparing models with the likelihood can still be useful but will take a different form. We’ll see that the Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) are functions of the log-likelihood that can be used to compare models even when the models are not nested. Either way we see that this notion of likelihood is pretty useful.</p>
 <p><strong>Hypotheses</strong></p>
@@ -2007,22 +2014,22 @@ The probability of a boy does depend on the prior family composition.</p>
 <p>Intuitively, when the likelihood for the larger model is much greater than it is for the reduced model, we have evidence that the larger model is more closely aligned with the observed data. This isn’t really a fair comparison on the face of it. We need to account for the fact that more parameters were estimated and used for the larger model. That is accomplished by taking into account the degrees of freedom for the <span class="math inline">\(\chi^2\)</span> distribution. The expected value of the <span class="math inline">\(\chi^2\)</span> distribution is its degrees of freedom. Thus when the difference in the number of parameters is large, the test statistic will need to be much larger to convince us that it is not simply chance variation with two identical models. Here, under the reduced model we’d expect our test statistic to be 2, when in fact it is over 9. The evidence favors our larger model. More precisely, the test statistic is <span class="math inline">\(2(-7391.448+7396.073) = 9.238\; (p=.0099)\)</span>, where the p-value is the probability of obtaining a value above 9.238 from a <span class="math inline">\(\chi^2\)</span> distribution with 2 degrees of freedom.</p>
 <p>We have convincing evidence that the Sex Conditional Model provides a significant improvement over the Sex Unconditional Model. However, keep in mind that our point estimates for a probability of a boy were not what we had expected for “sex runs in families.” It may be that this discrepancy stems from behavioral aspects of family formation. The next section on stopping rules explores how types of couples’ decisions may affect the relative proportions of family compositions in the data.</p>
 <p><em>Note: </em>You may notice that the LRT is similar in spirit to the extra-sum-of-squares F-test used in linear regression. Recall that the extra-sum-of-squares F-test involves comparing two nested models. When the smaller model is true, the F-ratio follows an F-distribution which on average is 1.0. A large, unusual F-ratio provides evidence that the larger model provides a significant improvement.</p>
-<p><em>Also note: </em> It might have been more logical to start by using Likelihood Ratio Test to determine whether the probability of having a boy differs significantly from 0.5. We leave this as an exercise.</p>
+<p><em>Also note: </em> It might have been more logical to start by using a Likelihood Ratio Test to determine whether the probability of having a boy differs significantly from 0.5. We leave this as an exercise.</p>
 </div>
 </div>
 </div>
 <div id="model-3-stopping-rule-model-waiting-for-a-boy" class="section level2">
-<h2><span class="header-section-number">2.7</span> Model 3: Stopping Rule Model (Waiting for a boy)</h2>
+<h2><span class="header-section-number">2.7</span> Model 3: Stopping Rule Model (waiting for a boy)</h2>
 <p><span class="citation">Rodgers and Doughty (<a href="#ref-Rodgers2001" role="doc-biblioref">2001</a>)</span> offer one reason to explain the contradictory results: waiting for a male child. It has been noted by demographers that some parents are only interested in producing a male heir so that the appearance of a boy leads more often to the family ending childbearing. Stopping models investigate questions like: Are couples more likely to stop childbearing once they have a boy? Or are some parents waiting for a girl? Others might wish to have at least one boy and girl. The exploratory data analysis results in Table <a href="ch-beyondmost.html#tab:table7chp2">2.6</a> provide some insight but cannot definitively settle the question about couples’ stopping once they have a boy.</p>
 <p>For stopping models, two probabilities are recorded for each child: the probability of the sex and the conditional probability of stopping after that child. As we have done in previous models, let <span class="math inline">\(p_B\)</span> = probability the child is a boy. When conditioning, every possible condition must have a probability associated with it. Here the stopping conditions for Model 3 are: stop on first boy <span class="math inline">\((S|B1)\)</span> or stopping on a child who is not the first boy <span class="math inline">\((S|N)\)</span>.</p>
-<p><strong>Additional Parameters for the First Boy Stopping Model</strong></p>
+<p><strong>Additional parameters for the First Boy Stopping Model</strong></p>
 <ul>
 <li><span class="math inline">\(p_{S|B1}=\)</span> probability of stopping after the first boy</li>
 <li><span class="math inline">\(1 - p_{S|B1}=\)</span> probability of not stopping after the first boy</li>
 <li><span class="math inline">\(p_{S|N}=\)</span> probability of stopping after a child who is not the first boy</li>
 <li><span class="math inline">\(1 - p_{S|N}=\)</span> probability of not stopping after a child who is not the first boy</li>
 </ul>
-<p>Our interest centers on whether the probability of stopping after the first boy, <span class="math inline">\(p_{S|B1}\)</span> is greater than stopping when it is not a first boy, <span class="math inline">\(p_{S|N}\)</span>.</p>
+<p>With these additional parameters, likelihood contributions of the NLSY families are listed in Table <a href="ch-beyondmost.html#tab:table9chp2">2.10</a>. Our interest centers on whether the probability of stopping after the first boy, <span class="math inline">\(p_{S|B1}\)</span> is greater than stopping when it is not a first boy, <span class="math inline">\(p_{S|N}\)</span>.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table9chp2">Table 2.10: </span>Likelihood contributions for NLSY families in Model 3: Waiting for a boy.
@@ -2350,15 +2357,15 @@ not an only girl in the family up to that point
 </tr>
 </tbody>
 </table>
-<p>Using calculus, the MLEs are derived to be <span class="math inline">\(\hat{p}_B = 0.507\)</span>, <span class="math inline">\(\hat{p}_{S|B1} = 0.432\)</span>, and <span class="math inline">\(\hat{p}_{S|N} = 0.584\)</span>. These are consistent with intuition. The estimated proportion of boys for this model is the same as the estimate for the Sex Unconditional Model (Model 1). The estimates of the stopping parameters are consistent with the fact that of the 3,986 first boys, parents stop 43.2% of the time and of the 6,686 children who are not first boys childbearing stopped 58.4% of the time. See Table <a href="ch-beyondmost.html#tab:table10chp2">2.11</a></p>
-<p>These results do, in fact, suggest that the probability a couple stops childbearing on the first boy is different than the probability of stopping at a child who is not the first boy, but the direction of the difference does not imply that couples “wait for a boy;” rather it appears that they are less likely to stop childbearing after the first boy in comparison to children who are not the first born male.</p>
+<p>Using calculus, the MLEs are derived to be <span class="math inline">\(\hat{p}_B = 0.507\)</span>, <span class="math inline">\(\hat{p}_{S|B1} = 0.432\)</span>, and <span class="math inline">\(\hat{p}_{S|N} = 0.584\)</span>. These are consistent with intuition. The estimated proportion of boys for this model is the same as the estimate for the Sex Unconditional Model (Model 1). The estimates of the stopping parameters are consistent with the fact that of the 3,986 first boys, parents stop 43.2% of the time and of the 6,686 children who are not first boys, childbearing stopped 58.4% of the time. See Table <a href="ch-beyondmost.html#tab:table10chp2">2.11</a>.</p>
+<p>These results do, in fact, suggest that the probability a couple stops childbearing on the first boy is different than the probability of stopping at a child who is not the first boy, but the direction of the difference does not imply that couples “wait for a boy;” rather it appears that they are less likely to stop childbearing after the first boy in comparison to children who are not the first-born male.</p>
 <p>Similarly, for girls, the MLEs are <span class="math inline">\(\hat{p}_{S|G1}\)</span> = 0.457 and <span class="math inline">\(\hat{p}_{S|N}\)</span> = 0.568. Once again, the estimates do not provide evidence of waiting for a girl.</p>
 <div id="non-nested-models" class="section level3">
 <h3><span class="header-section-number">2.7.1</span> Non-nested Models</h3>
 <p>How does the waiting for a boy model compare to the waiting for a girl model? Thus far we’ve seen how nested models can be compared. But these two models are not nested since one is not simply a reduced version of the other. Two measures referred to as information criteria, AIC and BIC, are useful when comparing non-nested models. Each measure can be calculated for a model using a function of the model’s maximum log-likelihood. You can find the log-likelihood in the output from most modeling software packages.</p>
 <ul>
 <li><span class="math inline">\(\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p\)</span>, where <span class="math inline">\(p\)</span> represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion.  Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity—the more variables we use, the larger the AIC.</li>
-<li><span class="math inline">\(\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)\)</span>, where <span class="math inline">\(p\)</span> is the number of parameters and <span class="math inline">\(n\)</span> is the number of observations. BIC stands for Bayesian Information Criterion,  also known as Schwarz’s Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large datasets.</li>
+<li><span class="math inline">\(\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)\)</span>, where <span class="math inline">\(p\)</span> is the number of parameters and <span class="math inline">\(n\)</span> is the number of observations. BIC stands for Bayesian Information Criterion,  also known as Schwarz’s Bayesian criterion (SBC). Here we see that the penalty for the BIC differs from the AIC, where the log of the number of observations places a greater penalty on each extra predictor, especially for large data sets.</li>
 </ul>
 <p>So which explanation of the data seems more plausible—waiting for a boy or waiting for a girl? These models are not nested (i.e., one is not a simplified version of the other), so it is not correct to perform a Likelihood Ratio Test, but we can legitimately compare these models using information criteria (Table <a href="ch-beyondmost.html#tab:tab1chp2">2.12</a>).</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -2421,18 +2428,18 @@ BIC
 <h2><span class="header-section-number">2.8</span> Summary of Model Building</h2>
 <p>Using a Likelihood Ratio Test, we found statistical evidence that the Sex Conditional Model (Sex Bias) is preferred to the Sex Unconditional Models. However, the parameter estimates were not what we expected if we believe that sex runs in families. Quite to the contrary, the results suggested that if there were more of one sex in a family, the next child is likely to be of the other sex. The results may support the idea that gender composition tends to “even out” over time.</p>
 <p>Using AICs and BICs to compare the non-nested models of waiting for a boy or waiting for a girl, we found that the model specifying stopping for a first boy was superior to the model for stopping for the first girl. Again, neither model suggested that couples were <em>more</em> likely to stop after the first male or female, rather it appeared just the opposite—couples were <em>less</em> likely to be stopping after the first boy or first girl.</p>
-<p>These results may need to be considered conditional on the size of a family. In which case, a look at the exploratory data analysis results may be informative. The reported percentages in Table <a href="ch-beyondmost.html#tab:table6chp2">2.5</a> could be compared to the percentages expected if the sex of the baby occurs randomly, P(all one sex|2 child family) = 1/2, and we observed 45%. For three child families, P(all one sex|3 child family) = 1/4, and we observed 27%. There is very slight evidence for sex running in families for three child families and none for two child families.</p>
-<p>Under a random model that assumes the probability of a boy is 50%, the percentage of one-, two- and three- child families with the the first boy showing up last in the family is 50%, 25%, and 12.5%, respectively. Comparing these probabilities to what was observed in the data in Table <a href="ch-beyondmost.html#tab:table7chp2">2.6</a>, we find little support for the idea that couples are waiting for a boy.</p>
+<p>These results may need to be considered conditional on the size of a family. In which case, a look at the exploratory data analysis results may be informative. The reported percentages in Table <a href="ch-beyondmost.html#tab:table6chp2">2.5</a> could be compared to the percentages expected if the sex of the baby occurs randomly, P(all one sex|2-child family) = 1/2, and we observed 45%. For three-child families, P(all one sex|3-child family) = 1/4, and we observed 27%. There is very slight evidence for sex running in families for three-child families and none for two-child families.</p>
+<p>Under a random model that assumes the probability of a boy is 50%, the percentage of one-, two- and three-child families with the first boy showing up last in the family is 50%, 25%, and 12.5%, respectively. Comparing these probabilities to what was observed in the data in Table <a href="ch-beyondmost.html#tab:table7chp2">2.6</a>, we find little support for the idea that couples are waiting for a boy.</p>
 <p>We can perform a LRT to compare stopping at the first boy to a Random Stopping Model. The parameters for the first model (waiting for a boy) are <span class="math inline">\(p_B, p_{S|B1}, p_{S|N}\)</span> and the parameters for the second model (random stopping) are <span class="math inline">\(p_B\)</span> and <span class="math inline">\(p_S\)</span>. The results suggest that the Waiting for a Boy Model is significantly better than the Random Stopping Model. The Random Stopping Model takes into account that the odds of stopping after a child are not 50-50, but may be closer to the MLE for <span class="math inline">\(p_S\)</span> of 52.7%. We leave the derivation of this result as an exercise.</p>
 </div>
 <div id="likelihood-based-methods" class="section level2">
-<h2><span class="header-section-number">2.9</span> Likelihood-based Methods</h2>
+<h2><span class="header-section-number">2.9</span> Likelihood-Based Methods</h2>
 <p>With likelihood methods, we are no longer restricted to independent, identically distributed normal responses (iidN). Likelihood methods can accommodate non-normal responses and correlated data. Likelihood-based methods are useful for every model in this text, so that it is worth your time and effort to understand them.</p>
 <p>Models that in the past you would fit using ordinary least squares can also be fit using the principle of maximum likelihood. It is pleasing to discover that under the right assumptions the maximum likelihood estimates (MLEs) for the intercept and slope in a linear regression are identical to ordinary least squares estimators (OLS) despite the fact that they are obtained in quite different ways.</p>
 <p>Beyond the intuitively appealing aspects of MLEs, they also have some very desirable statistical properties. You learn more about these features in a statistical theory course. Here we briefly summarize the highlights in non-technical terms. MLEs are <em>consistent</em>; i.e., MLEs converge in probability to the true value of the parameter as the sample size increases. MLEs are <em>asymptotically normal</em>; as the sample size increases, the distribution of MLEs is closer to normal. MLEs are <em>efficient</em> because no consistent estimator has a lower mean squared error. Of all the estimators that produce unbiased estimates of the true parameter value, no estimator will have a smaller mean square error than the MLE. While likelihoods are powerful and flexible, there are times when likelihood-based methods fail: either MLEs do not exist, likelihoods cannot be written down, or MLEs cannot be written explicitly. It is also worth noting that other approaches to the likelihood, such as bootstrapping, can be employed.</p>
 </div>
 <div id="likelihoods-and-this-course" class="section level2">
-<h2><span class="header-section-number">2.10</span> Likelihoods and this Course</h2>
+<h2><span class="header-section-number">2.10</span> Likelihoods and This Course</h2>
 <p><span class="citation">Rodgers and Doughty (<a href="#ref-Rodgers2001" role="doc-biblioref">2001</a>)</span> noted that</p>
 <blockquote>
 <p>Many factors have been identified that can potentially affect the human sex
@@ -2445,11 +2452,11 @@ wars and environmental pathogens.</p>
 <p>One of the reasons many of the likelihoods will become complex is because of covariates. Here we estimated probabilities of having a boy in different settings, but we did not use any specific information about families other than sex composition. The problems in the remainder of the book will typically employ covariates. For example, suppose we had information on paternal age for each family. Consider the Sex Unconditional Model, and let</p>
 <p><span class="math display">\[
 p_B= \frac{e^{\beta_0+\beta_1(\textrm{parental age})}}
-{1+e^{\beta_0+\beta_1(\textrm{parental age})}}
-\]</span>.</p>
+{1+e^{\beta_0+\beta_1(\textrm{parental age})}}.
+\]</span></p>
 <p>(We will give a good reason for this crazy-looking expression for <span class="math inline">\(p_B\)</span> in later chapters.) The next step would be to replace <span class="math inline">\(p_B\)</span> in the likelihood, <span class="math inline">\(\mathrm{Lik}(p_B)\)</span>, (Equation <a href="ch-beyondmost.html#eq:lik30">(2.1)</a>), with the complicated expression for <span class="math inline">\(p_B\)</span>. The result would be a function of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. We could then use calculus to find the MLEs for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 <p>Another compelling reason for likelihoods occurs when we encounter correlated data. For example, models with conditional probabilities do not conform to the independence assumption. The Sex Conditional Model is an example of such a model. We’ll see that likelihoods can be useful when the data has structure such as multilevel that induces a correlation. A good portion of the book addresses this.</p>
-<p>When the responses are are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we’ll find it difficult to use the linear least squares regression models of the past and we’ll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will enable us to move <em>beyond multiple linear regression</em>!</p>
+<p>When the responses are not normal such as in generalized linear models, where we see binary responses and responses which are counts, we’ll find it difficult to use the linear least squares regression models of the past and we’ll find the flexibility of likelihood methods to be extremely useful. Likelihood methods will enable us to move <em>beyond multiple linear regression</em>!</p>
 </div>
 <div id="exercises-1" class="section level2">
 <h2><span class="header-section-number">2.11</span> Exercises</h2>
@@ -2496,18 +2503,18 @@ of <span class="math inline">\(p_B\)</span> given what we observed (our data)?</
 <li>Compare the Waiting for a Boy Model to a Random Stopping Model. The parameters for the first model (Waiting for a Boy) are <span class="math inline">\(p_B\)</span>, <span class="math inline">\(p_{S|B1}\)</span>, <span class="math inline">\(p_{S|N}\)</span> and the parameters for the second model (Random Stopping) are <span class="math inline">\(p_B\)</span> and <span class="math inline">\(p_S\)</span>. Use an intuitive approach to arrive at the MLEs for the parameters for each model. Perform a LRT to compare these two models.</li>
 </ol>
 </div>
-<div id="open-ended-exercise" class="section level3">
-<h3><span class="header-section-number">2.11.3</span> Open-ended Exercise</h3>
+<div id="open-ended-exercises-1" class="section level3">
+<h3><span class="header-section-number">2.11.3</span> Open-Ended Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Another Stopping Rule Model: Balance-preference</strong>
+<li><p><strong>Another stopping rule model: balance-preference.</strong>
 Can you construct a model which suggests that childbearing is stopped when couples have a boy <em>and</em> a girl? Define the parameter(s) for balance-preference stopping combined with the sex conditional model and write out likelihood contributions for the same family compositions that appear in Table <a href="ch-beyondmost.html#tab:table3chp2">2.3</a>.</p>
 <ul>
 <li><strong>Extra Credit</strong> Obtain the MLEs for your balance-preference model parameters and interpret the results. Then, compare the balance-preference stopping rule model to the random stopping model using a LRT.</li>
 </ul></li>
-<li><p><strong>The Hot Hand in Basketball</strong> <span class="citation">Gilovich, Vallone, and Tversky (<a href="#ref-Gilovich1985" role="doc-biblioref">1985</a>)</span> wrote a controversial but compelling article claiming that there is no such thing as “the hot hand” in basketball. That is, there is no empirical evidence that shooters have stretches where they are more likely to make consecutive shots, and basketball shots are essentially independent events. One of the many ways they tested for evidence of a “hot hand” was to record sequences of shots for players under game conditions and determine if players are more likely to make shots after made baskets than after misses. For instance, assume we recorded data from one player’s first 5 three-point attempts over a 5-game period. We can assume games are independent, but we’ll consider two models for shots within a game:</p>
+<li><p><strong>The hot hand in basketball.</strong> <span class="citation">Gilovich, Vallone, and Tversky (<a href="#ref-Gilovich1985" role="doc-biblioref">1985</a>)</span> wrote a controversial but compelling article claiming that there is no such thing as “the hot hand” in basketball. That is, there is no empirical evidence that shooters have stretches where they are more likely to make consecutive shots, and basketball shots are essentially independent events. One of the many ways they tested for evidence of a “hot hand” was to record sequences of shots for players under game conditions and determine if players are more likely to make shots after made baskets than after misses. For instance, assume we recorded data from one player’s first 5 three-point attempts over a 5-game period. We can assume games are independent, but we’ll consider two models for shots within a game:</p>
 <ul>
-<li><p>No Hot Hand (1 parameter): <span class="math inline">\(p_B\)</span> = probability of making a basket (thus <span class="math inline">\(1-p_B\)</span> = probability of not making a basket)</p></li>
-<li><p>Hot Hand (2 parameters): <span class="math inline">\(p_B\)</span> = probability of making a basket after a miss (or the first shot of a game); <span class="math inline">\(p_{B|B}\)</span> = probability of making a basket after making the previous shot</p></li>
+<li><p>No Hot Hand (1 parameter): <span class="math inline">\(p_B\)</span> = probability of making a basket (thus <span class="math inline">\(1-p_B\)</span> = probability of not making a basket).</p></li>
+<li><p>Hot Hand (2 parameters): <span class="math inline">\(p_B\)</span> = probability of making a basket after a miss (or the first shot of a game); <span class="math inline">\(p_{B|B}\)</span> = probability of making a basket after making the previous shot.</p></li>
 </ul>
 <ol style="list-style-type: lower-alpha">
 <li><p>Fill out Table <a href="ch-beyondmost.html#tab:hothandchp2">2.13</a>—write out the contribution of each game to the likelihood for both models along with the total likelihood for each model.</p></li>
@@ -2517,7 +2524,7 @@ Can you construct a model which suggests that childbearing is stopped when coupl
 </ol>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:hothandchp2">Table 2.13: </span>Data for Open Exercise 2. B = made basket. M = missed basket.
+<span id="tab:hothandchp2">Table 2.13: </span>Data for Open-ended Exercise 2. (B = made basket. M = missed basket.)
 </caption>
 <thead>
 <tr>
@@ -2691,7 +2698,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

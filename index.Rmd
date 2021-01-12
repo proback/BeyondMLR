@@ -15,6 +15,8 @@ cover-image: "data/cover.png"
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
+
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
 )
@@ -28,9 +30,13 @@ options(
 
 # Preface {-}
 
-```{r, cover, fig.show='hold', echo=FALSE, fig.cap="'Beyond Multiple Regression: Applied Generalized Linear Models and Multilevel Models in R' will be available in hard copy through Chapman and Hall / CRC Press in January 2021."}
+```{block, include=is_html_output(), purl=FALSE}
+Welcome!  This is the [online version](https://bookdown.org/roback/bookdown-BeyondMLR/) of *Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R*.  Hard copies can be purchased through [CRC Press](https://www.routledge.com/Beyond-Multiple-Linear-Regression-Applied-Generalized-Linear-Models-And/Roback-Legler/p/book/9781439885383) or on [Amazon](https://www.amazon.com/Generalized-Correlated-Methods-Chapman-Statistical/dp/1439885389).  
+```
+
+```{r, cover, fig.show='hold', echo=FALSE, out.width='50%'}
 if(knitr::is_html_output()){
-  knitr::include_graphics("data/cover.png")}
+  knitr::include_graphics("data/book_cover.jpg")}
 ```
 
 **Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R** [@RProject] is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like *Stat2* [@Cannon2019]. We started teaching this course at St. Olaf College in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St. Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook (and [available at our GitHub repo](https://github.com/proback/BeyondMLR)) arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
@@ -49,9 +55,31 @@ When we teach this course at St. Olaf, we are able to cover Chapters 1-11 during
 - Chapter 10: Multilevel Data with More Than Two Levels.  The ideas from Chapters 8 and 9 are extended to a three-level case study.  New ideas include boundary constraints and exploding numbers of variance components and fixed effects.
 - Chapter 11: Multilevel Generalized Linear Models.  This chapter brings everything together, combining multilevel data with non-normal responses.  Crossed random effects and random effects estimates are both introduced here.
 
-Three types of exercises are available for each chapter.  **Conceptual Exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided Exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-Ended Exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises will be available to qualified instructors at our [book’s website](www.routledge.com). 
+Three types of exercises are available for each chapter.  **Conceptual Exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided Exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-Ended Exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises will be available to qualified instructors at our [book’s website](www.routledge.com/Beyond-Multiple-Linear-Regression-Applied-Generalized-Linear-Models-And/Roback-Legler/p/book/9781439885383). 
+
+```{block, include=is_html_output(), purl=FALSE}
+## Copyright {-}
+
+© 2021 by Taylor & Francis Group, LLC. Except as permitted under U.S. copyright law, no part of this book may be reprinted, reproduced, transmitted, or utilized in any form by an electronic, mechanical, or other means, now known or hereafter invented, including photocopying, microfilming, and recording, or in any information storage or retrieval system, without written permission from the publishers.
+```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+```{block, include=is_html_output(), purl=FALSE}
+## About the Authors {-}  
+
+**Paul Roback** is the Kenneth O. Bjork Distinguished Professor of Statistics and Data Science and **Julie Legler** is Professor Emeritus of Statistics at St. Olaf College in Northfield, MN. Both are Fellows of the American Statistical Association and are founders of the Center for Interdisciplinary Research at St. Olaf. Dr. Roback is the past Chair of the ASA Section on Statistical and Data Science Education, conducts applied research using multilevel modeling, text analysis, and Bayesian methods, and has been a statistical consultant in the pharmaceutical, health care, and food processing industries. Dr. Legler is past Chair of the ASA/MAA Joint Committee on Undergraduate Statistics, is a co-author of Stat2: Modelling with Regression and ANOVA, and was a biostatistician at the National Cancer Institute.
+```
+
+```{block, include=is_html_output(), purl=FALSE}
+## Dedication {-}  
+
+>To our families:
+
+>Karen, Samantha, Timothy, and Sophie
+
+>Paul, Ali, Mark, Sean, Lila, and Eva
+```
 
 **Acknowledgments.**  We would like to thank students of Stat 316 at St. Olaf College since 2010 for their patience as this book has taken shape with their feedback.  We would especially like to thank these St. Olaf students for their summer research efforts which significantly improved aspects of this book: Cecilia Noecker, Anna Johanson, Nicole Bettes, Kiegan Rice, Anna Wall, Jack Wolf, Josh Pelayo, Spencer Eanes, and Emily Patterson.  Early editions of this book also benefitted greatly from feedback from instructors who used these materials in their classes, including Matt Beckman, Laura Boehm Vock, Beth Chance, Laura Chihara, Mine Dogucu, and Katie Ziegler-Graham.  Finally, we have appreciated the support of two NSF grants (#DMS-1045015 and #DMS-0354308) and of our colleagues in the Department of Mathematics, Statistics, and Computer Science at St. Olaf.  We are also thankful to Samantha Roback for developing the cover image.
 

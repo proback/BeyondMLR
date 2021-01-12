@@ -60,9 +60,9 @@ tModelName <- c("fit\\_1a\\_binom", "fit\\_1a\\_quasi", "fit\\_1b\\_binom", "fit
                        "Model Name", "fit\\_2a\\_binom","fit\\_2a\\_quasi", "fit\\_2b\\_binom", "fit\\_2b\\_quasi")
 
 tBeta <- c("","","","","",
-           "$\\beta_1$", "","","","")
+           "$\\hat{\\beta}_1$", "","","","")
 tSEBeta <- c("","","","","",
-           "SE $\\beta_1$", "","","","")
+           "SE $\\hat{\\beta}_1$", "","","","")
 tTStat <- c("","","","","",
            "$t$", "","","","")
 tPVal <- c("","","","","",
@@ -81,7 +81,7 @@ tGOFP <- c("","X","","X","",
            "GOF p value", "","X","","X")
 
 scenarioSimTab <- tibble(tScenario, tModel, tModelName, tBeta, tSEBeta, tTStat, tPVal, tPhi, tEst, tCI, tMeanCount, tSDCount, tGOFP)
-colnames(scenarioSimTab) <- c("Scenario", "Model", "Model Name", "$\\beta_0$", "SE $\\beta_0$", "$t$", "p value", "$\\phi$", "Est prob", "CI prob", "Mean count", "SD count", "GOF p value")
+colnames(scenarioSimTab) <- c("Scenario", "Model", "Model Name", "$\\hat{\\beta}_0$", "SE $\\hat{\\beta}_0$", "$t$", "p value", "$\\phi$", "Est prob", "CI prob", "Mean count", "SD count", "GOF p value")
 
 kable(scenarioSimTab, booktabs=T, caption="Summary of simulations for Dams and Pups case study.", escape=F) %>%
   kable_styling(latex_options = "scale_down", font_size = 9) %>%

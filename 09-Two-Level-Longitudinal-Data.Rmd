@@ -102,7 +102,7 @@ For most statistical analyses, it will be advantageous to convert WIDE format to
 
 In this case, before we convert our data to LONG form, we should first address problems with missing data. \index{missing data}  Missing data is a common phenomenon in longitudinal studies. For instance, it could arise if a new school was started during the observation period, a school was shut down during the observation period, or no results were reported in a given year. Dealing with missing data in a statistical analysis is not trivial, but fortunately many multilevel packages (including the lme4 package in R) are adept at handling missing data.
 
-First, we must understand the extent and nature of missing data in our study. Table \@ref(tab:table2chp9) is a frequency table of missing data patterns, where 1 indicates presence of a variable and 0 indicates a missing value for a particular variable, is a helpful starting point. Among our 618 schools, 540 had complete data (all covariates and math scores for all three years), 25 were missing a math score for 2008, 35 were missing math scores in both 2008 and 2009, etc.
+First, we must understand the extent and nature of missing data in our study. Table \@ref(tab:table2chp9) is a frequency table of missing data patterns, where 1 indicates presence of a variable and 0 indicates a missing value for a particular variable; this table is a helpful starting point. Among our 618 schools, 540 had complete data (all covariates and math scores for all three years), 25 were missing a math score for 2008, 35 were missing math scores in both 2008 and 2009, etc.
 
 The number of schools with a particular missing data pattern are listed in the left column; the remaining columns of 0's and 1's describe the missing data pattern, with 0 indicating a missing value.  Some covariates that are present for every school are not listed.  The bottom row gives the number of schools with missing values for specific variables; the last entry indicates that 121 total observations were missing.
 
@@ -579,7 +579,7 @@ year10.box <- chart.long %>% filter(year08 == 2) %>%
 lon.box3 <- grid.arrange(year08.box, year10.box, nrow=2)
 ```
 
-```{r, lon-box3, fig.align="center",out.width="60%",fig.cap='Boxplots of (a) 2008 and (b) 2010 math scores by school type (charter vs. public non-charter).',echo=FALSE, warning=FALSE}
+```{r, lon-box3, fig.align="center",out.width="60%",fig.cap='Boxplots of (a) 2008 and (b) 2010 math scores by school type (charter (1) vs. public non-charter (0)).',echo=FALSE, warning=FALSE}
 grid.arrange(year08.box,year10.box, nrow=2)
 ```
 
@@ -716,7 +716,7 @@ From this output, we obtain estimates of our three model parameters:
 
 - $\hat{\alpha}_{0}$ = 652.7 = the mean math score across all schools and all years
 
-- $\hat{\sigma}^2$= 10.6 = the variance in within-school deviations between individual scores and the school mean across all years
+- $\hat{\sigma}^2$= 10.6 = the variance in within-school deviations between individual yearly scores and the school mean across all years
 
 - $\hat{\sigma}^2_u$= 41.9 = the variance in between-school deviations between school means and the overall mean across all schools and all years
 
@@ -960,7 +960,7 @@ a_{i} & = (\alpha_{0} + \alpha_{1}) + u_{i}\\
 b_{i} & = (\beta_{0}+ \beta_{1}) + v_{i}
 \end{align*}
 
-Writing the Level Two model in this manner helps us interpret the model parameters from our two-level model. We can use statistical software (such as the `lmer()` function from the `lme4` package in R) to obtain parameter estimates using our $1733$ observations, after first converting our Level One and Level Two models into a composite model (Model C) with fixed effects and variance components separated:
+Writing the Level Two model in this manner helps us interpret the model parameters from our two-level model. We can use statistical software (such as the `lmer()` function from the `lme4` package in R) to obtain parameter estimates using our $1733$ observations, after first converting our Level One and Level Two models into a composite model (Model C) with fixed effects and random effects separated:
 
 \begin{align*}
 Y_{ij} & = a_{i} + b_{i}\textrm{Year08}_{ij}+ \epsilon_{ij} \\
@@ -1954,7 +1954,7 @@ did_print
 
 ```{r, include=FALSE}
 Predictor <- c("Intercept (initial status)", "Base (intercept for predicting int term)", "Peer behavior", "Black ethnicity", "White/Other ethnicity", "Parenting", "Black ethnicity X parenting", "White/Other ethnicity X parenting", "Slope (change)", "Base (intercept for predicting slope term)", "Peer behavior", "Black ethnicity", "White/Other ethnicity", "Parenting", "Black ethnicity X parenting", "White/Other ethnicity X parenting")
-Gammafiller <- c(" ","-.219",".252**",".671*",".149",".076","-.161+","-.026"," ",".028","-.011*","-.132*","-.059","-.015+","-.048**",".016")
+Gammafiller <- c(" ","-.219",".252**",".671*",".149",".076","-.161+","-.026"," ",".028","-.011*","-.132*","-.059","-.015+",".048**",".016")
 SE <- c(" ", ".160",".026",".289",".252",".050",".088",".082"," ",".030",".005",".054",".046",".009",".017",".015")
 ```
 
@@ -2030,9 +2030,9 @@ footnote(temp,
     
     e. Fit a linear trend to the data from each of the 82 subjects using `age` as the time variable.  Generate histograms as in Figure \@ref(fig:lon-histmat1) showing the results of these 82 linear regression lines, and generate pairs of boxplots as in Figure \@ref(fig:lon-box2) for `coa` and `male`.  No commentary necessary.  [Hint: to produce Figure \@ref(fig:lon-box2), you will need a data frame with one observation per subject.]
     
-    f. Repeat 5 using centered age (`age14 = age - 14`) as the time variable.  Also generate a pair of scatterplots as in Figure \@ref(fig:lon-boxcatmat1) for peer alcohol use.  Comment on trends you observe in these plots.  [Hint: after forming `age14`, append it to your current data frame.]
+    f. Repeat (e) using centered age (`age14 = age - 14`) as the time variable.  Also generate a pair of scatterplots as in Figure \@ref(fig:lon-boxcatmat1) for peer alcohol use.  Comment on trends you observe in these plots.  [Hint: after forming `age14`, append it to your current data frame.]
     
-    g. Discuss similarities and differences between (5) and (6).  Why does using `age14` as the time variable make more sense in this example?
+    g. Discuss similarities and differences between (e) and (f).  Why does using `age14` as the time variable make more sense in this example?
     
     h. (Model A) Run an unconditional means model.  Report and interpret the intraclass correlation coefficient.
     

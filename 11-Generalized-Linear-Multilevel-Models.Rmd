@@ -31,6 +31,7 @@ library(pander)
 library(ggmosaic)
 library(knitr)
 library(kableExtra)
+library(broom)
 library(tidyverse)
 ```
 
@@ -707,7 +708,7 @@ From a modeling perspective, accounting for clustering by game and by home team 
 
 A two-level model which accounts for variability among games, home teams, and visiting teams would take on a slightly new look.  First, the full subscripting would change a bit.  Our primary response variable would now be written as $Y_{i[gh]j}$, an indicator variable recording if the $j^{th}$ foul from Game $i$ was called on the home team (1) or the visiting team (0), where Game $i$ pitted Visiting Team $g$ against Home Team $h$.  Square brackets are introduced since $g$ and $h$ are essentially at the same level as $i$, whereas we have assumed (without stating so) throughout this book that subscripting without square brackets implies a movement to lower levels as the subscripts move left to right (e.g., $ij$ indicates $i$ units are at Level Two, while $j$ units are at Level One, nested inside Level Two units).  We can then consider $Y_{i[gh]j}$ to be a Bernoulli random variable with parameter $p_{i[gh]j}$, where $p_{i[gh]j}$ is the true probability that the $j^{th}$ foul from Game $i$ was called on Home Team $h$ rather than Visiting Team $g$.  We will include the crossed subscripting only where necessary.
 
-Typically, with the addition of crossed effects, the Level One model will remain familiar and changes will be seen at Level Two, especially in the equation for the intercept term.  In the model formulation below we allow, as before, the slope and intercept to vary by game:
+Typically, with the addition of crossed effects, the Level One model will remain familiar and changes will be seen at Level Two, especially in the equation for the intercept term.  In the model formulation below we allow, as before, the slope and intercept to potentially vary by game:
 
 - Level One:
 
@@ -1020,8 +1021,8 @@ In constructing a final model for this college basketball case study, we are gui
 \begin{align*}
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = a_{i} + b_{i}\mathrm{foul.diff}_{ij} + c_{i}\mathrm{score.diff}_{ij} + d_{i}\mathrm{lead.home}_{ij} \\ 
  &{} + f_{i}\mathrm{time}_{ij} + k_{i}\mathrm{offensive}_{ij} + l_{i}\mathrm{personal}_{ij} \\ 
- &{} + m_{i}\mathrm{foul.diff}_{ij}:\mathrm{offensive}_{ij} + n_{i}\mathrm{foul.diff}_{ij}:\mathrm{personal}_{ij} \\ 
- &{} + o_{i}\mathrm{foul.diff}_{ij}:\mathrm{time}_{ij} + q_{i}\mathrm{lead.home}_{ij}:\mathrm{time}_{ij}
+ &{} + m_{i}\mathrm{foul.diff}_{ij}\mathrm{offensive}_{ij} + n_{i}\mathrm{foul.diff}_{ij}\mathrm{personal}_{ij} \\ 
+ &{} + o_{i}\mathrm{foul.diff}_{ij}\mathrm{time}_{ij} + q_{i}\mathrm{lead.home}_{ij}\mathrm{time}_{ij}
 \end{align*}
 
 - Level Two:
@@ -1053,8 +1054,8 @@ Our composite model then looks like:
 \begin{align*}
 \log\bigg(\frac{p_{i[gh]j}}{1-p_{i[gh]j}}\bigg) & = [\alpha_{0} + \beta_{0}\mathrm{foul.diff}_{ij} + \gamma_{0}\mathrm{score.diff}_{ij} + \delta_{0}\mathrm{lead.home}_{ij} \\ 
  &{} + \phi_{0}\mathrm{time}_{ij} + \kappa_{0}\mathrm{offensive}_{ij} + \lambda_{0}\mathrm{personal}_{ij} \\ 
- &{} + \mu_{0}\mathrm{foul.diff}_{ij}:\mathrm{offensive}_{ij} + \nu_{0}\mathrm{foul.diff}_{ij}:\mathrm{personal}_{ij} \\ 
- &{} + \omega_{0}\mathrm{foul.diff}_{ij}:\mathrm{time}_{ij} + \xi_{0}\mathrm{lead.home}_{ij}:\mathrm{time}_{ij}] \\ 
+ &{} + \mu_{0}\mathrm{foul.diff}_{ij}\mathrm{offensive}_{ij} + \nu_{0}\mathrm{foul.diff}_{ij}\mathrm{personal}_{ij} \\ 
+ &{} + \omega_{0}\mathrm{foul.diff}_{ij}\mathrm{time}_{ij} + \xi_{0}\mathrm{lead.home}_{ij}\mathrm{time}_{ij}] \\ 
  &{} + [u_{i}+v_{h}+w_{g}].
 \end{align*}
 
@@ -1095,7 +1096,7 @@ Here are specific interpretations of key model parameters:
 - $\exp(\hat{\beta}_{0})=\exp(-0.172)=0.842$.  Also, $0.842^{-1}=1.188$.  As the foul differential decreases by 1 (the visiting team accumulates another foul relative to the home team), the odds of a home foul increase by 18.8\%.  This interpretation applies to shooting fouls at the end of the half, after controlling for the effects of score differential and whether the home team has the lead.
 - $\exp(\hat{\gamma}_{0})=\exp(0.034)=1.034$.  As the score differential increases by 1 (the home team accumulates another point relative to the visiting team), the odds of a home foul increase by 3.4\%, after controlling for foul differential, type of foul, whether or not the home team has the lead, and time remaining in the half.  Referees are more likely to call fouls on the home team when the home team is leading, and vice versa.  Note that a change in the score differential could result in the home team gaining the lead, so that the effect of score differential experiences a non-linear "bump" at 0, where the size of the bump depends on the time remaining (this would involve the interpretation for $\hat{\xi}_{0}$).
 - $\exp(\hat{\mu}_{0})=\exp(-0.103)=0.902$.  Also, $0.902^{-1}=1.109$.  The effect of foul differential increases by 10.9\% if a foul is an offensive foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.  As hypothesized, the effect of foul differential is greater for offensive fouls, over which referees have more control when compared with shooting fouls.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while the odds that an offensive foul is on the home team increase by 43.6\%.
-- $\exp(\hat{\nu}_{0})=\exp(-0.056)=0.946$.  Also, $0.946^{-1}=1.057$.  The effect of foul differential increases by 5.7\% if a foul is a personal foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.  As hypothesized, the effect of foul differential is greater for personal fouls, over which referees have more control when compared with shooting fouls.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while the odds that an offensive foul is on the home team increase by 36.9\%.
+- $\exp(\hat{\nu}_{0})=\exp(-0.056)=0.946$.  Also, $0.946^{-1}=1.057$.  The effect of foul differential increases by 5.7\% if a foul is a personal foul rather than a shooting foul, after controlling for score differential, whether the home team has the lead, and time remaining.  As hypothesized, the effect of foul differential is greater for personal fouls, over which referees have more control when compared with shooting fouls.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while the odds that a personal foul is on the home team increase by 36.9\%.
 - $\exp(\hat{\omega}_{0})=\exp(-0.0087)=0.991$.  Also, $0.991^{-1}=1.009$.  The effect of foul differential increases by 0.9\% for each extra minute that is remaining in the half, after controlling for foul differential, score differential, whether the home team has the lead, and type of foul.  Thus, the tendency to even out foul calls is strongest earlier in the game.  For example, midway through the half (`time=10`), the odds that a shooting foul is on the home team increase by 29.6\% for each extra foul on the visiting team, while at the end of the half (`time=0`) the odds increase by 18.8\% for each extra visiting foul.
 - $\hat{\sigma}_{u}^{2}=0.185=$ the variance in log-odds intercepts from game-to-game after controlling for all other covariates in the model.
 

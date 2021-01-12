@@ -732,7 +732,7 @@ table4ch4 <- c.data %>%
 kable(table4ch4, booktabs=T, caption = 'The mean and variance of the violent crime rate by region and type of institution.')
 ```
 
-```{r, boxtyperegion, fig.align="center",out.width="60%", fig.cap='Boxplot of violent crime rate by region and type of institution.',echo=FALSE, warning=FALSE, message=FALSE}
+```{r, boxtyperegion, fig.align="center",out.width="60%", fig.cap='Boxplot of violent crime rate by region and type of institution (colleges (C) on the left, and universities (U) on the right).',echo=FALSE, warning=FALSE, message=FALSE}
 #Insert boxplot without the outlier and combining S and SE
 ggplot(c.data, aes(x = region, y = nvrate, fill = type)) +
   geom_boxplot() +

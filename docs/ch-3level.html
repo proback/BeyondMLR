@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-08-05" />
+<meta name="date" content="2021-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -135,13 +135,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Beyond Multiple Linear Regression</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-without-assumption-violations"><i class="fa fa-check"></i><b>1.3.1</b> Cases Without Assumption Violations</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-with-assumption-violations"><i class="fa fa-check"></i><b>1.3.2</b> Cases With Assumption Violations</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
@@ -151,16 +155,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
-<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
-<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
-<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
-<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
-<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
+<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple Linear Regression Modeling</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple Linear Regression with a Continuous Predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear Regression with a Binary Predictor</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple Linear Regression with Two Predictors</a></li>
+<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in Multiple Linear Regression: Normal Theory</a></li>
+<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in Multiple Linear Regression: Bootstrapping</a></li>
+<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple Linear Regression with an Interaction Term</a></li>
+<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a Multiple Linear Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of Remaining Chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -169,42 +173,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.8" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#conceptual-exercises"><i class="fa fa-check"></i><b>1.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="1.8.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#guided-exercises"><i class="fa fa-check"></i><b>1.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods to Fit and Compare Models</a><ul>
+<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods</a><ul>
 <li class="chapter" data-level="2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does sex run in families?</a><ul>
+<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does Sex Run in Families?</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#research-questions"><i class="fa fa-check"></i><b>2.2.1</b> Research Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-model-equal-probabilities-independence"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional Model (Equal probabilities, Independence)</a></li>
-<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional Model (Any Probability, Independence)</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What is a likelihood?</a></li>
+<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-equal-probabilities"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional, Equal Probabilities</a></li>
+<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional, Unequal Probabilities</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What Is a Likelihood?</a></li>
 <li class="chapter" data-level="2.4.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#findMLE.sec"><i class="fa fa-check"></i><b>2.4.2</b> Finding MLEs</a></li>
 <li class="chapter" data-level="2.4.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary"><i class="fa fa-check"></i><b>2.4.3</b> Summary</a></li>
-<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a likelihood a probability function? (Optional)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a Likelihood a Probability Function? (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional Model (Sex Bias)</a><ul>
+<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-specification"><i class="fa fa-check"></i><b>2.5.1</b> Model Specification</a></li>
 <li class="chapter" data-level="2.5.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#application-to-hypothetical-data"><i class="fa fa-check"></i><b>2.5.2</b> Application to Hypothetical Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY data</a><ul>
+<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY Data</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
-<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model</a></li>
 <li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
-<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
+<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (waiting for a boy)</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#non-nested-models"><i class="fa fa-check"></i><b>2.7.1</b> Non-nested Models</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary-of-model-building"><i class="fa fa-check"></i><b>2.8</b> Summary of Model Building</a></li>
-<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-based Methods</a></li>
-<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
+<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-Based Methods</a></li>
+<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and This Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
+<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>2.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ch-distthry.html"><a href="ch-distthry.html"><i class="fa fa-check"></i><b>3</b> Distribution Theory</a><ul>
@@ -224,10 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="ch-distthry.html"><a href="ch-distthry.html#normal-gaussian-random-variable"><i class="fa fa-check"></i><b>3.4.3</b> Normal (Gaussian) Random Variable</a></li>
 <li class="chapter" data-level="3.4.4" data-path="ch-distthry.html"><a href="ch-distthry.html#beta-random-variable"><i class="fa fa-check"></i><b>3.4.4</b> Beta Random Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions used in Testing</a><ul>
+<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions Used in Testing</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="ch-distthry.html"><a href="ch-distthry.html#chi2-distribution"><i class="fa fa-check"></i><b>3.5.1</b> <span class="math inline">\(\chi^2\)</span> Distribution</a></li>
-<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-tdistribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>–Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#fdistribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>–Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-t-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#f-distribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>-Distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
@@ -247,13 +251,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
-<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
+<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to Fit Models (optional)</a></li>
 <li class="chapter" data-level="4.4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#second-order-model"><i class="fa fa-check"></i><b>4.4.6</b> Second Order Model</a></li>
-<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a covariate</a></li>
-<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
-<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a Covariate</a></li>
+<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (optional)</a></li>
+<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -264,31 +268,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#tukeys-honestly-significant-differences"><i class="fa fa-check"></i><b>4.8.1</b> Tukey’s Honestly Significant Differences</a></li>
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
-<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion Parameter Adjustment</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No Dispersion vs. Overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative Binomial Modeling</a></li>
 </ul></li>
-<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
+<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend Drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
 <li class="chapter" data-level="4.10.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-2"><i class="fa fa-check"></i><b>4.10.2</b> Data Organization</a></li>
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> The Vuong Test (optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>4.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models (GLMs): A Unifying Theory</a><ul>
+<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models: A Unifying Theory</a><ul>
 <li class="chapter" data-level="5.1" data-path="ch-glms.html"><a href="ch-glms.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One parameter exponential families</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-possion"><i class="fa fa-check"></i><b>5.2.1</b> One Parameter Exponential Family: Possion</a></li>
-<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One parameter exponential family: Normal</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One-Parameter Exponential Families</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-poisson"><i class="fa fa-check"></i><b>5.2.1</b> One-Parameter Exponential Family: Poisson</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One-Parameter Exponential Family: Normal</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="ch-glms.html"><a href="ch-glms.html#generalized-linear-modeling"><i class="fa fa-check"></i><b>5.3</b> Generalized Linear Modeling</a></li>
 <li class="chapter" data-level="5.4" data-path="ch-glms.html"><a href="ch-glms.html#exercises-4"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
@@ -303,45 +307,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-soccer-goalkeepers"><i class="fa fa-check"></i><b>6.4</b> Case Study: Soccer Goalkeepers</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="ch-logreg.html"><a href="ch-logreg.html#modeling-odds"><i class="fa fa-check"></i><b>6.4.1</b> Modeling Odds</a></li>
 <li class="chapter" data-level="6.4.2" data-path="ch-logreg.html"><a href="ch-logreg.html#logistic-regression-models-for-binomial-responses"><i class="fa fa-check"></i><b>6.4.2</b> Logistic Regression Models for Binomial Responses</a></li>
-<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-for-logistic-regression-models-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical rationale for logistic regression models (Optional)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical Rationale (optional)</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-reconstructing-alabama"><i class="fa fa-check"></i><b>6.5</b> Case Study: Reconstructing Alabama</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-3"><i class="fa fa-check"></i><b>6.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.5.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-analyses"><i class="fa fa-check"></i><b>6.5.2</b> Exploratory Analyses</a></li>
 <li class="chapter" data-level="6.5.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-1"><i class="fa fa-check"></i><b>6.5.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for significance of model coefficients</a></li>
-<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence intervals for model coefficients</a></li>
-<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for goodness of fit</a></li>
+<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence Intervals for Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for Goodness-of-Fit</a></li>
 <li class="chapter" data-level="6.5.7" data-path="ch-logreg.html"><a href="ch-logreg.html#residuals-for-binomial-regression"><i class="fa fa-check"></i><b>6.5.7</b> Residuals for Binomial Regression</a></li>
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-vs.-binomial-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares  vs. Binomial Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="6.7.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-2"><i class="fa fa-check"></i><b>6.7.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-deviance Tests</a></li>
+<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-Deviance Tests</a></li>
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>6.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-corrdata.html"><a href="ch-corrdata.html"><i class="fa fa-check"></i><b>7</b> Correlated Data</a><ul>
 <li class="chapter" data-level="7.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#learning-objectives-6"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#introduction-1"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing correlation</a></li>
-<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and pups</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing Correlation</a></li>
+<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and Pups</a></li>
 <li class="chapter" data-level="7.5" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability"><i class="fa fa-check"></i><b>7.5</b> Sources of Variability</a></li>
-<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No covariates</a></li>
-<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose effect</a></li>
+<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No Covariates</a></li>
+<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose Effect</a></li>
 <li class="chapter" data-level="7.8" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-tree-growth"><i class="fa fa-check"></i><b>7.8</b> Case Study: Tree Growth</a><ul>
-<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the data set</a></li>
-<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of variability</a></li>
-<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation-within-transect"><i class="fa fa-check"></i><b>7.8.3</b> Analysis preview: accounting for correlation within transect</a></li>
+<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the Data Set</a></li>
+<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of Variability</a></li>
+<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation"><i class="fa fa-check"></i><b>7.8.3</b> Analysis Preview: Accounting for Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
@@ -358,77 +362,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two level modeling: preliminary considerations</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the two level structure (not recommended)</a></li>
-<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A two-stage modeling approach (better but imperfect)</a></li>
+<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two-Level Modeling: Preliminary Considerations</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the Two-Level Structure (not recommended)</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A Two-Stage Modeling Approach (better but imperfect)</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
-<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
-<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
-<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
+<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two-Level Modeling: A Unified Approach</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our Framework</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of Errors: Multivariate Normal</a></li>
+<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical Issues when Testing Parameters (optional)</a></li>
+<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An Initial Model with Parameter Interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
-<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a Multilevel Model</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model Building Strategy</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An Initial Model: Random Intercepts</a></li>
 </ul></li>
-<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
-<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo <span class="math inline">\(R^2\)</span> values</a></li>
-<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a covariate at Level Two</a></li>
+<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary Covariates at Level One and Level Two</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random Slopes and Intercepts Model</a></li>
+<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo R-squared Values</a></li>
+<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a Covariate at Level Two</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Additional covariates: model comparison and interpretability</a><ul>
-<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of parameter estimates</a></li>
-<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model comparisons</a></li>
+<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Adding Further Covariates</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of Parameter Estimates</a></li>
+<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Center covariates</a></li>
-<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A potential final model for music performance anxiety</a></li>
-<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling the multilevel structure: is it really necessary?</a></li>
-<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Centering Covariates</a></li>
+<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A Final Model for Music Performance Anxiety</a></li>
+<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling Multilevel Structure: Is It Necessary?</a></li>
+<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercises-6"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>8.13.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two Level Longitudinal Data</a><ul>
-<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case study: Charter schools</a></li>
+<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two-Level Longitudinal Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case Study: Charter Schools</a></li>
 <li class="chapter" data-level="9.3" data-path="ch-lon.html"><a href="ch-lon.html#exploratoryanalysis"><i class="fa fa-check"></i><b>9.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing data</a></li>
-<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory analyses for general multilevel models</a></li>
-<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory analyses for longitudinal data</a></li>
+<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing Data</a></li>
+<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory Analyses for Longitudinal Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
-<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary Two-Stage Modeling</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear Trends Within Schools</a></li>
+<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of Level Two Covariates on Linear Time Trends</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error Structure Within Schools</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
-<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
+<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial Models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling Other Trends over Time</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
-<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
-<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
-<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
+<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a Final Model</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add Percent Free and Reduced Lunch as a Covariate</a></li>
+<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A Final Model with Three Level Two Covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric Bootstrap Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
-<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative covariance structures</a></li>
-<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#covariance-structure-in-non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Covariance structure in non-longitudinal multilevel models</a></li>
-<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final thoughts regarding covariance structures</a></li>
-<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of covariance structures (Optional)</a></li>
+<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance Structure among Observations</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final Thoughts Regarding Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of Covariance Structures (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercises-7"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>9.9.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ch-3level.html"><a href="ch-3level.html"><i class="fa fa-check"></i><b>10</b> Multilevel Data With More Than Two Levels</a><ul>
@@ -438,41 +442,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.1" data-path="ch-3level.html"><a href="ch-3level.html#organizedata3"><i class="fa fa-check"></i><b>10.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="10.3.2" data-path="ch-3level.html"><a href="ch-3level.html#explore3v2"><i class="fa fa-check"></i><b>10.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial models: unconditional means and unconditional growth</a></li>
-<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering boundary constraints</a></li>
-<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric bootstrap testing</a></li>
-<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding variance components</a></li>
-<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a final model</a></li>
-<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance structure (Optional)</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of covariance structures</a></li>
+<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial Models</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-means"><i class="fa fa-check"></i><b>10.4.1</b> Unconditional Means</a></li>
+<li class="chapter" data-level="10.4.2" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-growth"><i class="fa fa-check"></i><b>10.4.2</b> Unconditional Growth</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering Boundary Constraints</a></li>
+<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric Bootstrap Testing</a></li>
+<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding Variance Components</a></li>
+<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a Final Model</a></li>
+<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance Structure (optional)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of Covariance Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-8"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>10.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory analyses</a></li>
+<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two level Modeling with a Generalized Response</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM approach (correlation not accounted for)</a></li>
-<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A two-stage modeling approach (provides the basic idea for multilevel modeling)</a></li>
-<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A unified multilevel approach (the framework we’ll use)</a></li>
+<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two-Level Modeling with a Generalized Response</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM Approach</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A Two-Stage Modeling Approach</a></li>
+<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A Unified Multilevel Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="ch-GLMM.html"><a href="ch-GLMM.html#crossedre"><i class="fa fa-check"></i><b>11.5</b> Crossed Random Effects</a></li>
-<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Model Comparisons Using the Parametric Bootstrap</a></li>
-<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Potential Final Model for Examining Referee Bias</a></li>
+<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Parametric Bootstrap for Model Comparisons</a></li>
+<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Final Model for Examining Referee Bias</a></li>
 <li class="chapter" data-level="11.8" data-path="ch-GLMM.html"><a href="ch-GLMM.html#estimatedRE"><i class="fa fa-check"></i><b>11.8</b> Estimated Random Effects</a></li>
-<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="11.10" data-path="ch-GLMM.html"><a href="ch-GLMM.html#exercises-10"><i class="fa fa-check"></i><b>11.10</b> Exercises</a><ul>
 <li class="chapter" data-level="11.10.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#conceptual-exercises-8"><i class="fa fa-check"></i><b>11.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>11.10.2</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-7"><i class="fa fa-check"></i><b>11.10.2</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -527,14 +534,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="cs:seeds" class="section level2">
 <h2><span class="header-section-number">10.2</span> Case Studies: Seed Germination</h2>
-<p>It is estimated that 82-99% of historic tallgrass prairie ecosystems have been converted to agricultural use <span class="citation">(Baer et al. <a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>. A prime example of this large scale conversion of native prairie to agricultural purposes can be seen in Minnesota, where less than 1% of the prairies that once existed in the state still remain <span class="citation">(Camill et al. <a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>. Such large scale alteration of prairie communities has been associated with numerous problems. For example, erosion and decomposition that readily take place in cultivated soils have increased atmospheric CO2 levels and increased nitrogen inputs to adjacent waterways (<span class="citation">Baer et al. (<a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>, <span class="citation">Camill et al. (<a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>, <span class="citation">Knops and Tilman (<a href="#ref-Knops2000" role="doc-biblioref">2000</a>)</span>). In addition, cultivation practices are known to affect rhizosphere composition as tilling can disrupt networks of soil microbes <span class="citation">(Allison et al. <a href="#ref-Allison2005" role="doc-biblioref">2005</a>)</span>. The rhizosphere is the narrow region of soil that is directly influenced by root secretions and associated soil microorganisms; much of the nutrient cycling and disease suppression needed by plants occur immediately adjacent to roots. It is important to note that microbial communities in prairie soils have been implicated with plant diversity and overall ecosystem function by controlling carbon and nitrogen cycling in the soils <span class="citation">(Zak et al. <a href="#ref-Zak2003" role="doc-biblioref">2003</a>)</span>.</p>
-<p>There have been many responses to these claims, but one response in recent years is reconstruction of the native prairie community. These reconstruction projects provide new habitat for a variety of native prairie species, yet it is important to know as much as possible about the outcomes of prairie reconstruction projects in order to ensure that a functioning prairie community is established. The ecological repercussions resulting from prairie reconstruction are not well known. For example, all of the aforementioned changes associated with cultivation practices are known to affect the subsequent reconstructed prairie community (<span class="citation">Baer et al. (<a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>, <span class="citation">Camill et al. (<a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>), yet there are few explanations for this phenomenon. For instance, prairies reconstructed in different years (using the same seed combinations and dispersal techniques) have yielded disparate prairie communities.</p>
-<p>Researchers at a small Midwestern college decided to experimentally explore the underlying causes of variation in reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect longitudinal data on native plant species grown in a greenhouse setting, using soil samples from surrounding lands <span class="citation">(Angell <a href="#ref-Angell2010" role="doc-biblioref">2010</a>)</span>. We will examine their data to compare germination and growth of two species of prairie plants—leadplants (<em>Amorpha canescens</em>) and coneflowers (<em>Ratibida pinnata</em>)—in soils taken from a remnant (natural) prairie, a cultivated (agricultural) field, and a restored (reconstructed) prairie. Additionally, half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation, so we will examine the effects of sterilization as well.</p>
+<p>It is estimated that 82-99% of historic tallgrass prairie ecosystems have been converted to agricultural use <span class="citation">(Baer et al. <a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>. A prime example of this large scale conversion of native prairie to agricultural purposes can be seen in Minnesota, where less than 1% of the prairies that once existed in the state remain <span class="citation">(Camill et al. <a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>. Such large-scale alteration of prairie communities has been associated with numerous problems. For example, erosion and decomposition that readily take place in cultivated soils have increased atmospheric <span class="math inline">\(\textrm{CO}_2\)</span> levels and increased nitrogen inputs to adjacent waterways (<span class="citation">Baer et al. (<a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>, <span class="citation">Camill et al. (<a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>, <span class="citation">Knops and Tilman (<a href="#ref-Knops2000" role="doc-biblioref">2000</a>)</span>). In addition, cultivation practices are known to affect rhizosphere composition as tilling can disrupt networks of soil microbes <span class="citation">(Allison et al. <a href="#ref-Allison2005" role="doc-biblioref">2005</a>)</span>. The rhizosphere is the narrow region of soil that is directly influenced by root secretions and associated soil microorganisms; much of the nutrient cycling and disease suppression needed by plants occur immediately adjacent to roots. It is important to note that microbial communities in prairie soils have been implicated with plant diversity and overall ecosystem function by controlling carbon and nitrogen cycling in the soils <span class="citation">(Zak et al. <a href="#ref-Zak2003" role="doc-biblioref">2003</a>)</span>.</p>
+<p>There have been many responses to these claims, but one response in recent years is reconstruction of the native prairie community. These reconstruction projects provide a new habitat for a variety of native prairie species, yet it is important to know as much as possible about the outcomes of prairie reconstruction projects in order to ensure that a functioning prairie community is established. The ecological repercussions resulting from prairie reconstruction are not well known. For example, all of the aforementioned changes associated with cultivation practices are known to affect the subsequent reconstructed prairie community (<span class="citation">Baer et al. (<a href="#ref-Baer2002" role="doc-biblioref">2002</a>)</span>, <span class="citation">Camill et al. (<a href="#ref-Camill2004" role="doc-biblioref">2004</a>)</span>), yet there are few explanations for this phenomenon. For instance, prairies reconstructed in different years (using the same seed combinations and dispersal techniques) have yielded disparate prairie communities.</p>
+<p>Researchers at a small midwestern college decided to experimentally explore the underlying causes of variation in reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect longitudinal data on native plant species grown in a greenhouse setting, using soil samples from surrounding lands <span class="citation">(Angell <a href="#ref-Angell2010" role="doc-biblioref">2010</a>)</span>. We will examine their data to compare germination and growth of two species of prairie plants—leadplants (<em>Amorpha canescens</em>) and coneflowers (<em>Ratibida pinnata</em>)—in soils taken from a remnant (natural) prairie, a cultivated (agricultural) field, and a restored (reconstructed) prairie. Additionally, half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation, so we will examine the effects of sterilization as well.</p>
 <p>The data we’ll examine was collected through an experiment run using a 3x2x2 factorial design, with 3 levels of soil type (remnant, cultivated, and restored), 2 levels of sterilization (yes or no), and 2 levels of species (leadplant and coneflower). Each of the 12 treatments (unique combinations of factor levels) was replicated in 6 pots, for a total of 72 pots. Six seeds were planted in each pot (although a few pots had 7 or 8 seeds), and initially student researchers recorded days to germination (defined as when two leaves are visible), if germination occurred. In addition, the height of each germinated plant (in mm) was measured at 13, 18, 23, and 28 days after planting. The study design is illustrated in Figure <a href="ch-3level.html#fig:seedstudy">10.1</a>.</p>
 <div class="figure"><span id="fig:seedstudy"></span>
-<img src="data/StudyDesignDiagram.PNG" alt="The design of the seed germination study" width="80%" />
+<img src="data/StudyDesignDiagram.PNG" alt="The design of the seed germination study." width="80%" />
 <p class="caption">
-Figure 10.1: The design of the seed germination study
+Figure 10.1: The design of the seed germination study.
 </p>
 </div>
 </div>
@@ -1019,7 +1026,7 @@ NA
 </tr>
 </tbody>
 </table>
-<p>Although the experimental design called for <span class="math inline">\(72*6=432\)</span> plants, the wide data set has 437 plants because a few pots had more than six plants (likely because two of the microscopically small seeds stuck together when planted). Of those 437 plants, 154 had no height data (did not germinate by the 28th day) and were removed from analysis (for example, see rows 145-146 in Table <a href="ch-3level.html#tab:table1chp10">10.1</a>). 248 plants had complete height data (e.g., rows 135-139 and 141-143), 13 germinated later than the 13th day but had complete heights once they germinated (e.g., row 144), and 22 germinated and had measurable height on the 13th day but died before the 28th day (e.g., row 140). Ultimately, the long data set contains 1132 unique observations where plants heights were recorded; representation of plants 236-242 in the long data set can be seen in Table <a href="ch-3level.html#tab:table2chp10">10.2</a>.</p>
+<p>Although the experimental design called for <span class="math inline">\(72*6=432\)</span> plants, the wide data set has 437 plants because a few pots had more than six plants (likely because two of the microscopically small seeds stuck together when planted). Of those 437 plants, 154 had no height data (did not germinate by the 28th day) and were removed from analysis (for example, see rows 145-146 in Table <a href="ch-3level.html#tab:table1chp10">10.1</a>). A total of 248 plants had complete height data (e.g., rows 135-139 and 141-143), 13 germinated later than the 13th day but had complete heights once they germinated (e.g., row 144), and 22 germinated and had measurable height on the 13th day but died before the 28th day (e.g., row 140). Ultimately, the long data set contains 1132 unique observations where plant heights were recorded; representation of plants 236-242 in the long data set can be seen in Table <a href="ch-3level.html#tab:table2chp10">10.2</a>.</p>
 <table>
 <caption>
 <span id="tab:table2chp10">Table 10.2: </span>A snapshot of data (Plants 236-242) from the Seed Germination case study in long format.
@@ -1381,17 +1388,17 @@ Figure 10.2: Plant height comparisons of (a) soil type and (b) sterilization wit
 </div>
 <p>We also use spaghetti plots to examine time trends within species to see (a) if it is reasonable to assume linear growth between Day 13 and Day 28 after planting, and (b) if initial height and rate of growth is similar in the two species. Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a> illustrates differences between species. While both species have similar average heights 13 days after planting, coneflowers appear to have faster early growth which slows later, while leadplants have a more linear growth rate which culminates in greater average heights 28 days after planting. Coneflowers also appear to have greater variability in initial height and growth rate, although there are more coneflowers with height data.</p>
 <div class="figure" style="text-align: center"><span id="fig:spagbyspec"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/spagbyspec-1.png" alt="Spaghetti plot by species with loess fit.  Each &quot;line&quot; represents one plant." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/spagbyspec-1.png" alt="Spaghetti plot by species with loess fit.  Each line represents one plant." width="60%" />
 <p class="caption">
-Figure 10.3: Spaghetti plot by species with loess fit. Each “line” represents one plant.
+Figure 10.3: Spaghetti plot by species with loess fit. Each line represents one plant.
 </p>
 </div>
-<p>Exploratory analyses such as these confirm the suspicions of biology researchers that leadplants and coneflowers should be analyzed separately. Because of biological differences, it is expected that these two species will show different growth patterns and respond differently to treatments such as fertilization. Coneflowers are members of the aster family, growing up to 4 feet tall with their distinctive gray seed heads and drooping yellow petals. Leadplants, on the other hand, are members of the bean family, with purple flowers, a height of 1 to 3 feet, and compound greyish green leaves which look to be dusted with white lead. Leadplants have deep root systems and are symbiotic N-fixers, which means they might experience stifled growth in sterilized soil compared with other species. For the remainder of this chapter, we will focus on <strong>leadplants</strong> and how their growth patterns are affected by soil type and sterilization. You will have a chance to analyze coneflower data later in the Exercises section.</p>
+<p>Exploratory analyses such as these confirm the suspicions of biology researchers that leadplants and coneflowers should be analyzed separately. Because of biological differences, it is expected that these two species will show different growth patterns and respond differently to treatments such as fertilization. Coneflowers are members of the aster family, growing up to 4 feet tall with their distinctive gray seed heads and drooping yellow petals. Leadplants, on the other hand, are members of the bean family, with purple flowers, a height of 1 to 3 feet, and compound grayish green leaves which look to be dusted with white lead. Leadplants have deep root systems and are symbiotic N-fixers, which means they might experience stifled growth in sterilized soil compared with other species. For the remainder of this chapter, we will focus on <strong>leadplants</strong> and how their growth patterns are affected by soil type and sterilization. You will have a chance to analyze coneflower data later in the Exercises section.</p>
 <p>Lattice plots, illustrating several observational units simultaneously, each with fitted lines where appropriate, are also valuable to examine during the exploratory analysis phase. Figure <a href="ch-3level.html#fig:lattlpall">10.4</a> shows height over time for 24 randomly selected leadplants that germinated in this study, with a fitted linear regression line. Linearity appears reasonable in most cases, although there is some variability in the intercepts and a good deal of variability in the slopes of the fitted lines. These intercepts and slopes by plant, of course, will be potential parameters in a multilevel model which we will fit to this data. Given the three-level nature of this data, it is also useful to examine a spaghetti plot by pot (Figure <a href="ch-3level.html#fig:spaglppot">10.5</a>). While linearity appears to reasonably model the average trend over time within pot, we see differences in the plant-to-plant variability within pot, but some consistency in intercept and slope from pot to pot.</p>
 <div class="figure" style="text-align: center"><span id="fig:lattlpall"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/lattlpall-1.png" alt=" Lattice plot of linear trends fit to 24 randomly selected leadplants.  One plant with only a single height measurement has no associated regression line." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/lattlpall-1.png" alt=" Lattice plot of linear trends fit to 24 randomly selected leadplants.  Two plants with only a single height measurement have no associated regression line." width="60%" />
 <p class="caption">
-Figure 10.4:  Lattice plot of linear trends fit to 24 randomly selected leadplants. One plant with only a single height measurement has no associated regression line.
+Figure 10.4:  Lattice plot of linear trends fit to 24 randomly selected leadplants. Two plants with only a single height measurement have no associated regression line.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:spaglppot"></span>
@@ -1428,7 +1435,7 @@ Figure 10.9: Histograms of (a) intercepts, (b) slopes, and (c) R-squared values 
 </div>
 <p>Another way to examine variability due to plant vs. variability due to pot is through summary statistics. Plant-to-plant variability can be estimated by averaging standard deviations from each pot (.489 for intercepts and .039 for slopes), while pot-to-pot variability can be estimated by finding the standard deviation of average intercept (.478) or slope (.051) within pot. Based on these rough measurements, variability due to plants and pots is comparable.</p>
 <p>Fitted lines by plant and pot are modeled using a centered time variable (<code>time13</code>), adjusted so that the first day of height measurements (13 days after planting) corresponds to <code>time13</code>=0. This centering has two primary advantages. First, the estimated intercept becomes more interpretable. Rather than representing height on the day of planting (which should be 0 mm, but which represents a hefty extrapolation from our observed range of days 13 to 28), the intercept now represents height on Day 13. Second, the intercept and slope are much less correlated (r=-0.16) than when uncentered time is used, which improves the stability of future models.</p>
-<p>Fitted intercepts and slopes by plant can be used for an additional exploratory examination of factor effects to complement those from the earlier spaghetti plots. Figure <a href="ch-3level.html#fig:irboxbyspec">10.10</a> complements Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a>, again showing differences between species—coneflowers tend to start smaller and have slower growth rates, although they have much more variability in growth patterns than leadplants. Returning to our focus on leadplants, Figure <a href="ch-3level.html#fig:irboxbysoil">10.11</a> shows that plants grown in soil from cultivated fields tends to be taller at Day 13, and plants grown in soil from remnant prairies tend to grow more slowly than plants grown in other soil types. Figure <a href="ch-3level.html#fig:irboxbyster">10.12</a> shows the strong tendency for plants grown in sterilized soil to grow faster than plants grown in non-sterilized soil. We will soon see if our fitted multilevel models support these observed trends.</p>
+<p>Fitted intercepts and slopes by plant can be used for an additional exploratory examination of factor effects to complement those from the earlier spaghetti plots. Figure <a href="ch-3level.html#fig:irboxbyspec">10.10</a> complements Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a>, again showing differences between species—coneflowers tend to start smaller and have slower growth rates, although they have much more variability in growth patterns than leadplants. Returning to our focus on leadplants, Figure <a href="ch-3level.html#fig:irboxbysoil">10.11</a> shows that plants grown in soil from cultivated fields tend to be taller at Day 13, and plants grown in soil from remnant prairies tend to grow more slowly than plants grown in other soil types. Figure <a href="ch-3level.html#fig:irboxbyster">10.12</a> shows the strong tendency for plants grown in sterilized soil to grow faster than plants grown in non-sterilized soil. We will soon see if our fitted multilevel models support these observed trends.</p>
 <div class="figure" style="text-align: center"><span id="fig:irboxbyspec"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/irboxbyspec-1.png" alt="Boxplots of (a) intercepts and (b) slopes for all plants by species, based on a linear fit to height data from each plant." width="60%" />
 <p class="caption">
@@ -1457,8 +1464,10 @@ Figure 10.13: Correlation structure within plant. The upper right contains corre
 </div>
 </div>
 <div id="initialmodels-3level" class="section level2">
-<h2><span class="header-section-number">10.4</span> Initial models: unconditional means and unconditional growth</h2>
-<p>The structure and notation for three level models will closely resemble the structure and notation for two level models, just with extra subscripts. Therein lies some of the power of multilevel models—extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section <a href="ch-3level.html#sec:explodingvarcomps">10.7</a>).</p>
+<h2><span class="header-section-number">10.4</span> Initial Models</h2>
+<p>The structure and notation for three level models will closely resemble the structure and notation for two-level models, just with extra subscripts. Therein lies some of the power of multilevel models—extensions are relatively easy and allow you to control for many sources of variability, obtaining more precise estimates of important parameters. However, the number of variance component parameters to estimate can quickly mushroom as covariates are added at lower levels, so implementing simplifying restrictions will often become necessary (see Section <a href="ch-3level.html#sec:explodingvarcomps">10.7</a>).</p>
+<div id="unconditional-means" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> Unconditional Means</h3>
 <p>We once again begin with the <strong>unconditional means model</strong>,  in which there are no predictors at any level, in order to assess the amount of variation at each level. Here, Level Three is pot, Level Two is plant within pot, and Level One is time within plant. Using model formulations at each of the three levels, the unconditional means three-level model can be expressed as:</p>
 <ul>
 <li>Level One (timepoint within plant):</li>
@@ -1479,17 +1488,17 @@ a_{ij} = a_{i}+u_{ij} \textrm{ where } u_{ij}\sim N(0,\sigma_{u}^{2})
 a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_{\tilde{u}}^{2})
 \end{equation*}\]</span></p>
 <p>where the heights of plants from different pots are considered independent, but plants from the same pot are correlated as well as measurements at different times from the same plant.</p>
-<p>Keeping track of all the model terms, especially with three subscripts, is not a trivial task, but it’s worth spending time thinking through. Here is a quick guide to the meaning of terms found in our three-level model:</p>
+<p>Keeping track of all the model terms, especially with three subscripts, is not a trivial task, but it’s worth spending time thinking it through. Here is a quick guide to the meaning of terms found in our three-level model:</p>
 <ul>
 <li><span class="math inline">\(Y_{ijk}\)</span> is the height (in mm) of plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> at time <span class="math inline">\(k\)</span></li>
 <li><span class="math inline">\(a_{ij}\)</span> is the true mean height for plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> across all time points. This is not considered a model parameter, since we further model <span class="math inline">\(a_{ij}\)</span> at Level Two.</li>
 <li><span class="math inline">\(a_{i}\)</span> is the true mean height for pot <span class="math inline">\(i\)</span> across all plants from that pot and all time points. This is also not considered a model parameter, since we further model <span class="math inline">\(a_{i}\)</span> at Level Three.</li>
-<li><span class="math inline">\(\alpha_{0}\)</span> is a fixed effects model parameter representing the true mean height across all pots, plants, and time points</li>
-<li><span class="math inline">\(\epsilon_{ijk}\)</span> describes how far an observed height <span class="math inline">\(Y_{ijk}\)</span> is from the mean height for plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(u_{ij}\)</span> describe how far the mean height of plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> is from the mean height of all plants from pot <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\alpha_{0}\)</span> is a fixed effects model parameter representing the true mean height across all pots, plants, and time points.</li>
+<li><span class="math inline">\(\epsilon_{ijk}\)</span> describes how far an observed height <span class="math inline">\(Y_{ijk}\)</span> is from the mean height for plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(u_{ij}\)</span> describe how far the mean height of plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> is from the mean height of all plants from pot <span class="math inline">\(i\)</span>.</li>
 <li><span class="math inline">\(\tilde{u}_{i}\)</span> describes how far the mean height of all observations from pot <span class="math inline">\(i\)</span> is from the overall mean height across all pots, plants, and time points. None of the error terms (<span class="math inline">\(\epsilon, u, \tilde{u}\)</span>) are considered model parameters; they simply account for differences between the observed data and expected values under our model.</li>
-<li><span class="math inline">\(\sigma^2\)</span> is a variance component (random effects model parameter) that describes within-plant variability over time</li>
-<li><span class="math inline">\(\sigma_{u}^{2}\)</span> is the variance component describing plant-to-plant variability within pot</li>
+<li><span class="math inline">\(\sigma^2\)</span> is a variance component (random effects model parameter) that describes within-plant variability over time.</li>
+<li><span class="math inline">\(\sigma_{u}^{2}\)</span> is the variance component describing plant-to-plant variability within pot.</li>
 <li><span class="math inline">\(\sigma_{\tilde{u}}^{2}\)</span> is the variance component describing pot-to-pot variability.</li>
 </ul>
 <p>The three-level unconditional means model can also be expressed as a composite model:</p>
@@ -1516,6 +1525,9 @@ and this composite model can be fit using statistical software:</p>
 <li><span class="math inline">\(\hat{\sigma}_{\tilde{u}}^{2}=0.049=\)</span> the variance between pots.</li>
 </ul>
 <p>From the estimates of variance components, 69.0% of total variability in height measurements is due to differences over time for each plant, 26.4% of total variability is due to differences between plants from the same pot, and only 4.6% of total variability is due to difference between pots. Accordingly, we will next explore whether the incorporation of time as a linear predictor at Level One can reduce the unexplained variability within plant.</p>
+</div>
+<div id="unconditional-growth" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> Unconditional Growth</h3>
 <p>The <strong>unconditional growth model</strong>  introduces time as a predictor at Level One, but there are still no predictors at Levels Two or Three. The unconditional growth model allows us to assess how much of the within-plant variability (the variability among height measurements from the same plant at different time points) can be attributed to linear changes over time, while also determining how much variability we see in the intercept (Day 13 height) and slope (daily growth rate) from plant-to-plant and pot-to-pot. Later, we can model plant-to-plant and pot-to-pot differences in intercepts and slopes with Level Two and Three covariates.</p>
 <p>The three-level unconditional growth model (Model B) can be specified either using formulations at each level:</p>
 <ul>
@@ -1592,10 +1604,11 @@ Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
 <li><span class="math inline">\(\hat{\sigma}_{\tilde{v}}=.0355=\)</span> the standard deviation in rates of change in height between pots.</li>
 <li><span class="math inline">\(\hat{\rho}_{\tilde{u}\tilde{v}}=-.610=\)</span> the correlation in pots’ Day 13 height and their rate of change in height.</li>
 </ul>
-<p>We see that, on average, leadplants have a height of 1.54 mm thirteen days after planting (pooled across pots and treatment groups), and their heights tend to grow by 0.11 mm per day, producing an average height at the end of the study (Day 28) of 3.22 mm. According to the t-values listed in R, both the Day 13 height and the growth rate are statistically significant. The estimated within-plant variance <span class="math inline">\(\hat{\sigma}^2\)</span> decreased by 88.7% from the unconditional means model (from 0.728 to 0.082), implying that 88.7% of within-plant variability in height can be explained by linear growth over time.</p>
+<p>We see that, on average, leadplants have a height of 1.54 mm 13 days after planting (pooled across pots and treatment groups), and their heights tend to grow by 0.11 mm per day, producing an average height at the end of the study (Day 28) of 3.22 mm. According to the t-values listed in R, both the Day 13 height and the growth rate are statistically significant. The estimated within-plant variance <span class="math inline">\(\hat{\sigma}^2\)</span> decreased by 88.7% from the unconditional means model (from 0.728 to 0.082), implying that 88.7% of within-plant variability in height can be explained by linear growth over time.</p>
+</div>
 </div>
 <div id="sec:boundary" class="section level2">
-<h2><span class="header-section-number">10.5</span> Encountering boundary constraints</h2>
+<h2><span class="header-section-number">10.5</span> Encountering Boundary Constraints</h2>
 <p>Typically, with models consisting of three or more levels, the next step after adding covariates at Level One (such as time) is considering covariates at Level Two. In the seed germination experiment, however, there are no Level Two covariates of interest, and the treatments being studied were applied to pots (Level Three). We are primarily interested in the effects of soil type and sterilization on the growth of leadplants. Since soil type is a categorical factor with three levels, we can represent soil type in our model with indicator variables for cultivated lands (<code>cult</code>) and remnant prairies (<code>rem</code>), using reconstructed prairies as the reference level. For sterilization, we create a single indicator variable (<code>strl</code>) which takes on the value 1 for sterilized soil.</p>
 <p>Our Level One and Level Two models will look identical to those from Model B; our Level Three models will contain the new covariates for soil type (<code>cult</code> and <code>rem</code>) and sterilization (<code>strl</code>):</p>
 <p><span class="math display">\[\begin{align*}
@@ -1648,17 +1661,17 @@ modelcl 1.493e-05</code></pre>
 <p>Consider a model in which we have two parameters that must be estimated: <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma^2\)</span>. As the intercept, <span class="math inline">\(\beta_0\)</span> can take on any value; any real number is “allowable”. But, by definition, variance terms such as <span class="math inline">\(\sigma^2\)</span> must be non-negative; that is, <span class="math inline">\(\sigma^2 \geq 0\)</span>. Under the Principle of Maximum Likelihood, maximum likelihood estimators for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\sigma^2\)</span> will be chosen to maximize the likelihood of observing our given data. The left plot in Figure <a href="ch-3level.html#fig:boundary">10.14</a> shows hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span>; the likelihood is clearly maximized at <span class="math inline">\((\hat{\beta}_0 , \hat{\sigma}^2)=(4,-2)\)</span>. However, variance terms cannot be negative! A more sensible approach would have been to perform a constrained search for MLEs, considering any potential values for <span class="math inline">\(\beta_0\)</span> but only non-negative values for <span class="math inline">\(\sigma^2\)</span>. This constrained search is illustrated in the right plot in Figure <a href="ch-3level.html#fig:boundary">10.14</a>. In this case, the likelihood is maximized at <span class="math inline">\((\hat{\beta}_0 , \hat{\sigma}^2)=(4,0)\)</span>. Note that the estimated intercept did not change, but the estimated variance is simply set at the smallest allowable value – at the <strong>boundary constraint</strong>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:boundary"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/boundary-1.png" alt="Left (a): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with no restrictions on \(\sigma^2\); the likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\). Right (b): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with the restriction that \(\sigma^2 \geq 0\); the constrained likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/boundary-1.png" alt="Left (a): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with no restrictions on \(\sigma^2\); the likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\). Right (b): hypothetical contours of the likelihood function \(L(\beta_0, \sigma^2)\) with the restriction that \(\sigma^2 \geq 0\); the constrained likelihood function is maximized at \((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)." width="60%" />
 <p class="caption">
-Figure 10.14: Left (a): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with no restrictions on <span class="math inline">\(\sigma^2\)</span>; the likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\)</span>. Right (b): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with the restriction that <span class="math inline">\(\sigma^2 \geq 0\)</span>; the constrained likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)</span>
+Figure 10.14: Left (a): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with no restrictions on <span class="math inline">\(\sigma^2\)</span>; the likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,-2)\)</span>. Right (b): hypothetical contours of the likelihood function <span class="math inline">\(L(\beta_0, \sigma^2)\)</span> with the restriction that <span class="math inline">\(\sigma^2 \geq 0\)</span>; the constrained likelihood function is maximized at <span class="math inline">\((\hat{\beta}_0, \hat{\sigma}^2)=(4,0)\)</span>.
 </p>
 </div>
 <p>Graphically, in this simple illustration, the effect of the boundary constraint is to alter the likelihood function from a nice hill (in the left plot in Figure <a href="ch-3level.html#fig:boundary">10.14</a>) with a single peak at <span class="math inline">\((4,-2)\)</span>, to a hill with a huge cliff face where <span class="math inline">\(\sigma^2=0\)</span>. The highest point overlooking this cliff is at <span class="math inline">\((4,0)\)</span>, straight down the hill from the original peak.</p>
 <p>In general, then, boundary constraints occur when the maximum likelihood estimator of at least one model parameter occurs at the limits of allowable values (such as estimated correlation coefficients of -1 or 1, or estimated variances of 0). Maximum likelihood estimates at the boundary tend to indicate that the likelihood function would be maximized at non-allowable values of that parameter, if an unconstrained search for MLEs was conducted. Most software packages, however, will only report maximum likelihood estimates with allowable values. Therefore, boundary constraints would ideally be avoided, if possible.</p>
-<p>What should you do if you encounter boundary constraints? Often, boundary constraints signal that your model needs to be reparameterized – i.e., you should alter your model to feature different parameters or ones that are interpreted differently. This can be accomplished in several ways:</p>
+<p>What should you do if you encounter boundary constraints? Often, boundary constraints signal that your model needs to be reparameterized, i.e., you should alter your model to feature different parameters or ones that are interpreted differently. This can be accomplished in several ways:</p>
 <ul>
-<li>remove parameters, especially those variance and correlation terms which are being estimated on their boundaries</li>
-<li>fix the values of certain parameters; for instance, you could set two variance terms equal to each other, thereby reducing the number of unknown parameters to estimate by one</li>
+<li>remove parameters, especially those variance and correlation terms which are being estimated on their boundaries.</li>
+<li>fix the values of certain parameters; for instance, you could set two variance terms equal to each other, thereby reducing the number of unknown parameters to estimate by one.</li>
 <li>transform covariates. Centering variables, standardizing variables, or changing units can all help stabilize a model. Numerical procedures for searching for and finding maximum likelihood estimates can encounter difficulties when variables have very high or low values, extreme ranges, outliers, or are highly correlated.</li>
 </ul>
 <p>Although it is worthwhile attempting to reparameterize models to remove boundary constraints, sometimes they can be tolerated if (a) you are not interested in estimates of those parameters encountering boundary issues, and (b) removing those parameters does not affect conclusions about parameters of interest. For example, in the output below we explore the implications of simply removing the correlation between error terms at the pot level (i.e., assume <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}=0\)</span> rather than accepting the (constrained) maximum likelihood estimate of <span class="math inline">\(\hat{\rho}_{\tilde{u}\tilde{v}}=-1\)</span> that we saw in Model C).</p>
@@ -1705,7 +1718,7 @@ b_{ij} &amp; = b_{i}+v_{ij}
 a_{i} &amp; = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}+\alpha_{3}\textrm{rem}_{i}+\tilde{u}_{i} \\
 b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}\]</span></p>
-<p>Note that there is no longer an error term associated with the model for mean growth rate <span class="math inline">\(b_{i}\)</span> at the pot level. The growth rate for pot <span class="math inline">\(i\)</span> is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal: <span class="math inline">\(\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})\)</span>. By removing one of our two Level Three error terms (<span class="math inline">\(\tilde{v}_{i}\)</span>), we effectively removed two parameters – the variance for <span class="math inline">\(\tilde{v}_{i}\)</span> and the correlation between <span class="math inline">\(\tilde{u}_{i}\)</span> and <span class="math inline">\(\tilde{v}_{i}\)</span>. Fixed effects remain similar, as can be seen in the output below:</p>
+<p>Note that there is no longer an error term associated with the model for mean growth rate <span class="math inline">\(b_{i}\)</span> at the pot level. The growth rate for pot <span class="math inline">\(i\)</span> is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal: <span class="math inline">\(\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})\)</span>. By removing one of our two Level Three error terms (<span class="math inline">\(\tilde{v}_{i}\)</span>), we effectively removed two parameters: the variance for <span class="math inline">\(\tilde{v}_{i}\)</span> and the correlation between <span class="math inline">\(\tilde{u}_{i}\)</span> and <span class="math inline">\(\tilde{v}_{i}\)</span>. Fixed effects remain similar, as can be seen in the output below:</p>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ch-3level.html#cb285-1"></a><span class="co"># Try Model C without time at pot level</span></span>
 <span id="cb285-2"><a href="ch-3level.html#cb285-2"></a>modelcl0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
 <span id="cb285-3"><a href="ch-3level.html#cb285-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
@@ -1733,22 +1746,22 @@ modelcl0   13 581.6 633.9 -277.8 555.6    NA NA     NA
 modelcl    15 583.6 643.9 -276.8 553.6 2.089  2 0.3519</code></pre>
 </div>
 <div id="threelevel-paraboot" class="section level2">
-<h2><span class="header-section-number">10.6</span> Parametric bootstrap testing</h2>
+<h2><span class="header-section-number">10.6</span> Parametric Bootstrap Testing</h2>
 <p>As in Section <a href="ch-lon.html#longitudinal-paraboot">9.6.4</a>, when testing variance components at the boundary (such as <span class="math inline">\(\sigma_{\tilde{v}}^{2} = 0\)</span>), a method like the <strong>parametric bootstrap</strong>  should be used, since using a chi-square distribution to conduct a likelihood ratio test produces p-values that tend to be too large.</p>
 <p>Under the parametric bootstrap, we must simulate data under the null hypothesis many times. Here are the basic steps for running a parametric bootstrap procedure to compare Model C.1 with Model C:</p>
 <ul>
-<li>Fit Model C.1 (the null model) to obtain estimated fixed effects and variance components (this is the “parametric” part.)</li>
-<li>Use the estimated fixed effects and variance components from the null model to regenerate a new set of plant heights with the same sample size (<span class="math inline">\(n=413\)</span>) and associated covariates for each observation as the original data (this is the “bootstrap” part.)</li>
-<li>Fit both Model C.1 (the reduced model) and Model C (the full model) to the new data</li>
-<li>Compute a likelihood ratio statistic comparing Models C.1 and C</li>
-<li>Repeat the previous 3 steps many times (e.g., 1000)</li>
-<li>Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true</li>
-<li>Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic</li>
+<li>Fit Model C.1 (the null model) to obtain estimated fixed effects and variance components (this is the “parametric” part).</li>
+<li>Use the estimated fixed effects and variance components from the null model to regenerate a new set of plant heights with the same sample size (<span class="math inline">\(n=413\)</span>) and associated covariates for each observation as the original data (this is the “bootstrap” part).</li>
+<li>Fit both Model C.1 (the reduced model) and Model C (the full model) to the new data.</li>
+<li>Compute a likelihood ratio statistic comparing Models C.1 and C.</li>
+<li>Repeat the previous 3 steps many times (e.g., 1000).</li>
+<li>Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true.</li>
+<li>Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic.</li>
 </ul>
 <p>Let’s see how new plant heights are generated under the parametric bootstrap. Consider, for instance, <span class="math inline">\(i=1\)</span> and <span class="math inline">\(j=1,2\)</span>. That is, consider Plants #11 and #12 as shown in Table <a href="ch-3level.html#tab:10verb7">10.3</a>. These plants are found in Pot #1, which was randomly assigned to contain sterilized soil from a restored prairie (STP):</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:10verb7">Table 10.3: </span>Original data for Plants 11 and 12 from Pot 1
+<span id="tab:10verb7">Table 10.3: </span>Original data for Plants 11 and 12 from Pot 1.
 </caption>
 <thead>
 <tr>
@@ -1858,7 +1871,7 @@ a_{i} &amp; = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}
 b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}\]</span></p>
 <p>All the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> terms will be fixed at their estimated values, so the one term that will change for each bootstrapped data set is <span class="math inline">\(\tilde{u}_{i}\)</span>. As we obtain a numeric value for <span class="math inline">\(\tilde{u}_{i}\)</span> for each pot, we will fix the subscript. For example, if <span class="math inline">\(\tilde{u}_{i}\)</span> is set to -.192 for Pot #1, then we would denote this by <span class="math inline">\(\tilde{u}_{1}=-.192\)</span>. Similarly, in the context of Model C.1, <span class="math inline">\(a_{1}\)</span> represents the mean height at Day 13 across all plants in Pot #1, where <span class="math inline">\(\tilde{u}_{1}\)</span> quantifies how Pot #1’s Day 13 height relates to other pots with the same sterilization and soil type.</p>
-<p>According to Model C.1, each <span class="math inline">\(\tilde{u}_{i}\)</span> is sampled from a normal distribution with mean 0 and standard deviation .240 (note that the standard deviation <span class="math inline">\(\sigma^2_{u}\)</span> is also fixed at its estimated value from Model C.1, given in Section <a href="ch-3level.html#sec:boundary">10.5</a>). That is, a random component to the intercept for Pot #1 (<span class="math inline">\(\tilde{u}_{1}\)</span>) would be sampled from a normal distribution with mean 0 and SD .240; say, for instance, <span class="math inline">\(\tilde{u}_{1}=-.192\)</span>. We would sample <span class="math inline">\(\tilde{u}_{2},...,\tilde{u}_{72}\)</span> in a similar manner. Then we can produce a model-based intercept and slope for Pot #1:</p>
+<p>According to Model C.1, each <span class="math inline">\(\tilde{u}_{i}\)</span> is sampled from a normal distribution with mean 0 and standard deviation .240 (note that the standard deviation <span class="math inline">\(\sigma_{u}\)</span> is also fixed at its estimated value from Model C.1, given in Section <a href="ch-3level.html#sec:boundary">10.5</a>). That is, a random component to the intercept for Pot #1 (<span class="math inline">\(\tilde{u}_{1}\)</span>) would be sampled from a normal distribution with mean 0 and SD .240; say, for instance, <span class="math inline">\(\tilde{u}_{1}=-.192\)</span>. We would sample <span class="math inline">\(\tilde{u}_{2},...,\tilde{u}_{72}\)</span> in a similar manner. Then we can produce a model-based intercept and slope for Pot #1:</p>
 <p><span class="math display">\[\begin{align*}
 a_{1} &amp; = 1.512-.088(1)+.133(0)+.107(0)-.192 = 1.232 \\
 b_{1} &amp; = .101+.059(1)-.031(0)-.036(0) = .160
@@ -1889,7 +1902,7 @@ Although plants from Pot #1 have a mean Day 13 height of 1.232 mm, Plant #11’s
 <p>Once an entire set of simulated heights for every pot, plant, and time point have been generated based on Model C.1, two models are fit to this data:</p>
 <ul>
 <li>Model C.1 – the correct (null) model that was actually used to generate the responses</li>
-<li>Model C – the incorrect (full) model that contains two extra variance components – <span class="math inline">\(\sigma_{\tilde{v}}^{2}\)</span> and <span class="math inline">\(\sigma_{\tilde{u}\tilde{v}}\)</span> – that were not actually used when generating the responses</li>
+<li>Model C – the incorrect (full) model that contains two extra variance components, <span class="math inline">\(\sigma_{\tilde{v}}^{2}\)</span> and <span class="math inline">\(\sigma_{\tilde{u}\tilde{v}}\)</span>, that were not actually used when generating the responses</li>
 </ul>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ch-3level.html#cb291-1"></a><span class="co"># Generate 1 set of bootstrapped data and run chi-square test</span></span>
 <span id="cb291-2"><a href="ch-3level.html#cb291-2"></a><span class="co">#  (will also work if use REML models, but may take longer)</span></span>
@@ -1908,9 +1921,9 @@ m2   15 591.1 651.4 -280.5 561.1 1.405  2 0.4953</code></pre>
 m0 13 -277.8 555.6    NA    NA        NA
 mA 15 -276.8 553.6 2.089     2     0.088</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:paraboot10"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/paraboot10-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/paraboot10-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve).  The vertical line represents the observed likelihood ratio test statistic." width="60%" />
 <p class="caption">
-Figure 10.15: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve). The horizontal line represents the observed likelihood ratio test statistic.
+Figure 10.15: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 2 degrees of freedom (smooth curve). The vertical line represents the observed likelihood ratio test statistic.
 </p>
 </div>
 <p>Another way of testing whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95% confidence intervals for both <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}\)</span> and <span class="math inline">\(\sigma_{\tilde{v}}\)</span>. From the output below, the 95% bootstrapped confidence interval for <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}\)</span> (-1, 1) contains 0, and the interval for <span class="math inline">\(\sigma_{\tilde{v}}\)</span> (.00050, .0253) nearly contains 0, providing further evidence that the larger model is not needed.</p>
@@ -1933,7 +1946,7 @@ Figure 10.15: Null distribution of likelihood ratio test statistic derived using
 ## time13:rem                   -0.0590428 -0.009094</code></pre>
 </div>
 <div id="sec:explodingvarcomps" class="section level2">
-<h2><span class="header-section-number">10.7</span> Exploding variance components</h2>
+<h2><span class="header-section-number">10.7</span> Exploding Variance Components</h2>
 <p>Our modeling task in Section <a href="ch-3level.html#sec:boundary">10.5</a> was simplified by the absence of covariates at Level Two. As multilevel models grow to include three or more levels, the addition of just a few covariates at lower levels can lead to a huge increase in the number of parameters (fixed effects and variance components)  that must be estimated throughout the model. In this section, we will examine when and why the number of model parameters might explode, and we will consider strategies for dealing with these potentially complex models.</p>
 <p>For instance, consider Model C, where we must estimate a total of 15 parameters: 8 fixed effects plus 7 variance components (1 at Level One, 3 at Level Two, and 3 at Level Three). By adding just a single covariate to the equations for <span class="math inline">\(a_{ij}\)</span> and <span class="math inline">\(b_{ij}\)</span> at Level Two in Model C (say, for instance, the size of each seed), we would now have a total of 30 parameters to estimate! The new multilevel model (Model C_plus) could be written as follows:</p>
 <ul>
@@ -1993,7 +2006,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_
             \sigma_{\tilde{u}\tilde{z}} &amp; \sigma_{\tilde{v}\tilde{z}} &amp; \sigma_{\tilde{w}\tilde{z}} &amp; \sigma_{\tilde{z}}^{2}
           \end{array} \right] \right). \]</span>
 We would have 16 fixed effects from the four equations at Level Three, each with 4 fixed effects to estimate. And, with four equations at Level Three, the error covariance matrix at the pot level would be 4x4 with 10 variance components to estimate; each error term (4) has a variance associated with it, and each pair of error terms (6) has an associated correlation. The error structure at Levels One (1 variance term) and Two (2 variance terms and 1 correlation) would remain the same, for a total of 14 variance components.</p>
-<p>Now consider adding an extra Level One covariate to the model in the previous paragraph. How many model parameters would now need to be estimated? (Try writing out the multilevel models and counting parameters…) The correct answer is 52 total parameters! There are 24 fixed effects (from 6 Level Three equations) and 28 variance components (1 at Level One, 6 at Level Two, and 21 at Level Three).</p>
+<p>Now consider adding an extra Level One covariate to the model in the previous paragraph. How many model parameters would now need to be estimated? (Try writing out the multilevel models and counting parameters.) The correct answer is 52 total parameters! There are 24 fixed effects (from 6 Level Three equations) and 28 variance components (1 at Level One, 6 at Level Two, and 21 at Level Three).</p>
 <p>Estimating even 30 parameters as in Model C_plus from a single set of data is an ambitious task and computationally very challenging. Essentially we (or the statistics package we are using) must determine which combination of values for the 30 parameters would maximize the likelihood associated with our model and the observed data. Even in the absolute simplest case, with only two options for each parameter, there would be over one billion possible combinations to consider! But if our primary interest is in fixed effects, we really only have 5 covariates (and their associated interactions) in our model. What can be done to make fitting a 3-level model with 1 covariate at Level One, 1 at Level Two, and 3 at Level Three more manageable? Reasonable options include:</p>
 <ul>
 <li>Reduce the number of variance components by assuming all error terms to be independent; that is, set all correlation terms to 0.</li>
@@ -2032,7 +2045,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_
 <p>The simplified 9-parameter model essentially includes a random effect for pot (<span class="math inline">\(\sigma_{\tilde{u}}^{2}\)</span>) after controlling for sterilization and soil type, a random effect for plant within pot (<span class="math inline">\(\sigma_{u}^{2}\)</span>) after controlling for seed size, and a random effect for error about the time trend for individual plants (<span class="math inline">\(\sigma^{2}\)</span>). We must assume that the effect of time is the same for all plants and all pots, and it does not depend on seed size, sterilization, or soil type. Similarly, we must assume that the effect of seed size is the same for each pot and does not depend on sterilization or soil type. While somewhat proscriptive, a <strong>random intercepts model</strong> such as this can be a sensible starting point, since the simple act of accounting for variability of observational units at Levels Two and Three can produce better estimates of fixed effects of interest and their standard errors.</p>
 </div>
 <div id="modelsDEF" class="section level2">
-<h2><span class="header-section-number">10.8</span> Building to a final model</h2>
+<h2><span class="header-section-number">10.8</span> Building to a Final Model</h2>
 <p>In Model C we considered the main effects of soil type and sterilization on leadplant initial height and growth rate, but we did not consider interactions—even though biology researchers expect that sterilization will aid growth in certain soil types more than others. Thus, in Model D we will build Level Three interaction terms into Model C.1:</p>
 <ul>
 <li>Level One:</li>
@@ -2081,7 +2094,7 @@ b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\b
 ## strl:rem         -0.07139   0.378060 -0.1888
 ## time13:strl:cult -0.01608   0.024812 -0.6481
 ## time13:strl:rem  -0.05199   0.023951 -2.1707</code></pre>
-<p>To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appear to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level). This means we may have a <strong>three-way interaction</strong>  in our final composite model between sterilization, remnant prairies, and time. Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor. Whew!</p>
+<p>To form Model F, we begin by removing all covariates describing the intercept (Day 13 height), since neither sterilization nor soil type nor their interaction appears to be significantly related to initial height. However, sterilization, remnant prairie soil, and their interaction appear to have significant influences on growth rate, although the effect of cultivated soil on growth rate did not appear significantly different from that of restored prairie soil (the reference level). This means we may have a <strong>three-way interaction</strong>  in our final composite model between sterilization, remnant prairies, and time. Three-way interactions show that the size of an interaction between two predictors differs depending on the level of a third predictor. Whew!</p>
 <p>Our final model (Model F), with its constraints on Level Three error terms, can be expressed level-by-level as:</p>
 <ul>
 <li>Level One:</li>
@@ -2144,9 +2157,9 @@ modelfl0   10 581.2 621.4 -280.6 561.2    NA NA     NA
 modeldl0   17 584.0 652.4 -275.0 550.0 11.15  7 0.1323</code></pre>
 <p>We mentioned in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> that we could also compare Model F and Model D, which differ only in their fixed effects terms, using the parametric bootstrap approach. In fact, in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> we suggested that the p-value using the chi-square approximation (.1323) may be a slight under-estimate of the true p-value, but probably in the ballpark. In fact, when we generated 1000 bootstrapped samples of plant heights under Model F, and produced 1000 simulated likelihood ratios comparing Models D and F, we produced a p-value of .201. In Figure <a href="ch-3level.html#fig:parabootDF">10.16</a>, we see that the chi-square distribution has too much area in the peak and too little area in the tails, although in general it approximates the parametric bootstrap distribution of the likelihood ratio pretty nicely.</p>
 <div class="figure" style="text-align: center"><span id="fig:parabootDF"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/parabootDF-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The horizontal line represents the observed likelihood ratio test statistic." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/parabootDF-1.png" alt="Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve).  The vertical line represents the observed likelihood ratio test statistic." width="60%" />
 <p class="caption">
-Figure 10.16: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve). The horizontal line represents the observed likelihood ratio test statistic.
+Figure 10.16: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve). The vertical line represents the observed likelihood ratio test statistic.
 </p>
 </div>
 <div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="ch-3level.html#cb307-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>modeldl0, <span class="dt">m0=</span>modelfl0, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
@@ -2177,7 +2190,7 @@ modelfl0 0.009091</code></pre>
 <p>Based on t-values produced by Model F, sterilization has the most significant effect on leadplant growth, while there is some evidence that growth rate is somewhat slower in remnant prairies, and that the effect of sterilization is also somewhat muted in remnant prairies. Sterilization leads to an estimated 66% increase in growth rate of leadplants from Days 13 to 28 in soil from reconstructed prairies and cultivated lands, and an estimated 28% increase in soil from remnant prairies. In unsterilized soil, plants from remnant prairies grow an estimated 19% slower than plants from other soil types.</p>
 </div>
 <div id="error-3level" class="section level2">
-<h2><span class="header-section-number">10.9</span> Covariance structure (Optional)</h2>
+<h2><span class="header-section-number">10.9</span> Covariance Structure (optional)</h2>
 <p>As in Chapter <a href="ch-lon.html#ch-lon">9</a>, it is important to be aware of the covariance structure  implied by our chosen models (focusing initially on Model B). Our three-level model, through error terms at each level, defines a specific covariance structure at both the plant level (Level Two) and the pot level (Level Three). For example, our standard model implies a certain level of correlation among measurements from the same plant and among plants from the same pot. Although three-level models are noticeably more complex than two-level models, it is still possible to systematically determine the implication of our standard model; by doing this, we can evaluate whether our fitted model agrees with our exploratory analyses, and we can also decide if it’s worth considering alternative covariance structures.</p>
 <p>We will first consider Model B with <span class="math inline">\(\tilde{v}_{i}\)</span> at Level Three, and then we will evaluate the resulting covariance structure that results from removing <span class="math inline">\(\tilde{v}_{i}\)</span>, thereby restricting <span class="math inline">\(\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0\)</span>. The composite version of Model B has been previously expressed as:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -2256,7 +2269,7 @@ Cov(Y_{ijk},Y_{ij^{&#39;}k^{&#39;}}) = \sigma_{\tilde{u}}^{2} + \sigma_{\tilde{u
             -.002 &amp; .067 &amp; .116 &amp; \\
             -.037 &amp; .068 &amp; .144 &amp; .191
           \end{array} \right]. \]</span></p>
-<p>The within-plant correlation structure suggests that measurements taken closer in time tend to be more highly correlated than those with more separation in time, and later measurements tend to be more highly correlated than earlier measurements. Examination of standard deviation terms by timepoint suggests that variability increases over time within a plant (estimated SDs of .652, .703, .828, and .999 for days 13, 18, 23, and 28, respectively). The correlation structure between plants from the same pot depicts a fairly low level of correlation; even for measurements taken at the same timepoint, the largest correlation between plants from the same pot occurs on Day 28 (r=.191) while the smallest correlation occurs on Day 18 (r=.061).</p>
+<p>The within-plant correlation structure suggests that measurements taken closer in time tend to be more highly correlated than those with more separation in time, and later measurements tend to be more highly correlated than earlier measurements. Examination of standard deviation terms by timepoint suggests that variability increases over time within a plant (estimated SDs of .652, .703, .828, and .999 for Days 13, 18, 23, and 28, respectively). The correlation structure between plants from the same pot depicts a fairly low level of correlation; even for measurements taken at the same timepoint, the largest correlation between plants from the same pot occurs on Day 28 (r=.191) while the smallest correlation occurs on Day 18 (r=.061).</p>
 <p>We can use these results to estimate within-plant and within-pot correlation structure after imposing the same constraints on Model B that we did on Model F (i.e., <span class="math inline">\(\sigma_{\tilde{v}}^{2}=\sigma_{\tilde{u}\tilde{v}}=0\)</span>). Using the same REML variance components estimates as above except that <span class="math inline">\(\hat{\sigma}_{\tilde{v}}^{2}=0\)</span> rather than <span class="math inline">\(.00126\)</span> and <span class="math inline">\(\hat{\sigma}_{\tilde{u}\tilde{v}}=\hat{\rho}_{\tilde{u}\tilde{v}}\sqrt{\hat{\sigma}_{\tilde{u}}^{2}\hat{\sigma}_{\tilde{v}}^{2}}=0\)</span> rather than <span class="math inline">\(-.00455\)</span>, the within-plant correlation structure is estimated to be:</p>
 <p><span class="math display">\[  Corr(\textbf{Y}_{ij}) = \left[
           \begin{array}{cccc}
@@ -2273,9 +2286,9 @@ Cov(Y_{ijk},Y_{ij^{&#39;}k^{&#39;}}) = \sigma_{\tilde{u}}^{2} + \sigma_{\tilde{u
             .084 &amp; .077 &amp; .068 &amp; \\
             .073 &amp; .067 &amp; .059 &amp; .052
           \end{array} \right]. \]</span></p>
-<p>Our model restrictions produced slightly higher estimated within-plant correlations, especially for observations separated by longer periods of time. Standard deviation terms by timepoint are very similar (estimated SDs of .652, .713, .806, and .923 for days 13, 18, 23, and 28, respectively). In terms of the relationship between heights of different plants from the same pot, our model restrictions produced slightly higher correlation estimates with Day 13 height, but slightly lower correlation estimates associated with heights at Days 23 and 28. For measurements taken at the same timepoint, the largest correlation between plants from the same pot now occurs on Day 13 (r=.104) while the smallest correlation now occurs on Day 28 (r=.052). None of the differences in the covariance structure, however, should have a large impact on final conclusions, especially regarding fixed effects, so our strategy for dealing with boundary constraints appears very reasonable. In addition, the covariance structure implied by our standard 3-level model appears to model the correlation structure we observed in Figure <a href="ch-3level.html#fig:corrstruct">10.13</a> during our exploratory analyses very nicely. Even the variability over time implied by the standard model matches well with the raw observed variability in height by time period (respective standard deviations of .64, .64, .86, and .91). Thus, we feel well justified in fitting models based on the standard covariance structure.</p>
+<p>Our model restrictions produced slightly higher estimated within-plant correlations, especially for observations separated by longer periods of time. Standard deviation terms by timepoint are very similar (estimated SDs of .652, .713, .806, and .923 for Days 13, 18, 23, and 28, respectively). In terms of the relationship between heights of different plants from the same pot, our model restrictions produced slightly higher correlation estimates with Day 13 height, but slightly lower correlation estimates associated with heights at Days 23 and 28. For measurements taken at the same timepoint, the largest correlation between plants from the same pot now occurs on Day 13 (r=.104) while the smallest correlation now occurs on Day 28 (r=.052). None of the differences in the covariance structure, however, should have a large impact on final conclusions, especially regarding fixed effects, so our strategy for dealing with boundary constraints appears very reasonable. In addition, the covariance structure implied by our standard 3-level model appears to model the correlation structure we observed in Figure <a href="ch-3level.html#fig:corrstruct">10.13</a> during our exploratory analyses very nicely. Even the variability over time implied by the standard model matches well with the raw observed variability in height by time period (respective standard deviations of .64, .64, .86, and .91). Thus, we feel well justified in fitting models based on the standard covariance structure.</p>
 <div id="optionalerror" class="section level3">
-<h3><span class="header-section-number">10.9.1</span> Details of covariance structures</h3>
+<h3><span class="header-section-number">10.9.1</span> Details of Covariance Structures</h3>
 <p>In this section, we present additional details regarding implications of our standard covariance structure for 3-level models. We will focus on Model B; derivations for Model F would proceed in a similar fashion.</p>
 <p>The variance for an individual observation can be derived as:</p>
 <p><span class="math display">\[\begin{align*}
@@ -2315,12 +2328,12 @@ Cov(\textbf{Y}_{i}) &amp; = \left[
           \end{array} \right]. 
 \end{align*}\]</span></p>
 <p>A covariance matrix for our entire data set, therefore, would be block diagonal, with <span class="math inline">\(Cov(\textbf{Y}_{i})\)</span> matrices along the diagonal reflecting within pot correlation and 0’s off-diagonal reflecting the assumed independence of observations from plants from different pots. As with any covariance matrix, we can convert the <span class="math inline">\(Cov(\textbf{Y}_{ij},\textbf{Y}_{ij&#39;})\)</span> blocks for two different plants from the same pot into correlation matrices by dividing covariance terms by the product of corresponding standard deviations. Specifically, for <span class="math inline">\(Cov(\textbf{Y}_{ij},\textbf{Y}_{ij&#39;})\)</span>, the diagonal terms in a correlation matrix are formed by <span class="math inline">\(Corr(Y_{ijk},Y_{ij&#39;k})=\frac{\tilde{\tau}_{kk}}{\sqrt{Var(Y_{ijk})Var(Y_{ij&#39;k})}}=\frac{\tilde{\tau}_{kk}}{\tau_{k}^{2}}\)</span> and the off-diagonal terms are formed by <span class="math inline">\(Corr(Y_{ijk},Y_{ij&#39;k&#39;})=\frac{\tilde{\tau}_{kk&#39;}}{\sqrt{Var(Y_{ijk})Var(Y_{ij&#39;k&#39;})}}=\frac{\tilde{\tau}_{kk&#39;}}{\tau_{k}\tau_{k&#39;}}\)</span>.</p>
-<p>We calculated estimated covariance and correlation matrices within plant and between plants in Section <a href="ch-3level.html#error-3level">10.9</a> based on the standard covariance structure for three-level models. However, it can sometimes be helpful to consider alternative covariance structures and evaluate the robustness of results to changes in assumptions. A couple of natural covariance structures to fit in the Seed Germination case study, given the observed structure in our data, are the heterogeneous compound symmetry and heterogeneous AR(1) models. We fit both structures, along with the toeplitz structure, and compared the resulting models with our standard 3-level model. In all cases, the AIC and BIC from the standard model (615.2 and 651.4, respectively) are considerably lower than the corresponding performance measures from the models with alternative covariance structures. Thus, we feel justified in fitting models based on the standard covariance structure.</p>
+<p>We calculated estimated covariance and correlation matrices within plant and between plants in Section <a href="ch-3level.html#error-3level">10.9</a> based on the standard covariance structure for three-level models. However, it can sometimes be helpful to consider alternative covariance structures and evaluate the robustness of results to changes in assumptions. A couple of natural covariance structures to fit in the Seed Germination case study, given the observed structure in our data, are the heterogeneous compound symmetry and heterogeneous AR(1) models. We fit both structures, along with the toeplitz structure, and compared the resulting models with our standard three-level model. In all cases, the AIC and BIC from the standard model (615.2 and 651.4, respectively) are considerably lower than the corresponding performance measures from the models with alternative covariance structures. Thus, we feel justified in fitting models based on the standard covariance structure.</p>
 </div>
 </div>
 <div id="usingR3" class="section level2">
-<h2><span class="header-section-number">10.10</span> Notes on Using R (Optional)</h2>
-<p>When fitting three level models in <code>lmer()</code>, note that an estimated variance at Level One (<span class="math inline">\(\sigma^{2}\)</span>) comes for “free”, but variance terms at Level Two (<span class="math inline">\(\sigma_{u}^{2}\)</span>) and Level Three (<span class="math inline">\(\sigma_{\tilde{u}}^{2}\)</span>) must be specified separately in Model A through <code>(1 | plant)</code> and <code>(1 | pot)</code>. Specifying <code>(time13 | plant)</code> in Model B is equivalent to specifying <code>(1+time13 | plant)</code> and produces a total of 3 variance components to estimate: variances for error terms associated with the intercept (<span class="math inline">\(\sigma_{u}^{2}\)</span> comes for “free”) and slope (<span class="math inline">\(\sigma_{v}^{2}\)</span> comes from the <code>time13</code> term) at the plant level, along with a covariance or correlation (<span class="math inline">\(\sigma_{uv}\)</span> or <span class="math inline">\(\rho_{uv}\)</span>) between those two error terms. To restrict <span class="math inline">\(\sigma_{uv} = \rho_{uv} = 0\)</span>, you could specify each error term separately: <code>(1 | plant) + (0+time13 | plant)</code>.</p>
+<h2><span class="header-section-number">10.10</span> Notes on Using R (optional)</h2>
+<p>When fitting three-level models in <code>lmer()</code>, note that an estimated variance at Level One (<span class="math inline">\(\sigma^{2}\)</span>) comes for “free”, but variance terms at Level Two (<span class="math inline">\(\sigma_{u}^{2}\)</span>) and Level Three (<span class="math inline">\(\sigma_{\tilde{u}}^{2}\)</span>) must be specified separately in Model A through <code>(1 | plant)</code> and <code>(1 | pot)</code>. Specifying <code>(time13 | plant)</code> in Model B is equivalent to specifying <code>(1+time13 | plant)</code> and produces a total of 3 variance components to estimate: variances for error terms associated with the intercept (<span class="math inline">\(\sigma_{u}^{2}\)</span> comes for “free”) and slope (<span class="math inline">\(\sigma_{v}^{2}\)</span> comes from the <code>time13</code> term) at the plant level, along with a covariance or correlation (<span class="math inline">\(\sigma_{uv}\)</span> or <span class="math inline">\(\rho_{uv}\)</span>) between those two error terms. To restrict <span class="math inline">\(\sigma_{uv} = \rho_{uv} = 0\)</span>, you could specify each error term separately: <code>(1 | plant) + (0+time13 | plant)</code>.</p>
 <p>Also note that to fit Model C.1 in R, the random error components are written as <code>(time13 | plant) + (1 | pot)</code>, indicating you’d like error terms associated with the intercept and slope at the plant level, but only for the intercept term at the pot level. The fixed effects in Model C.1 just reflect all fixed effects in the composite model.</p>
 <p>In Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> we sought to perform a significance test comparing Models C and C.1, where Model C.1 restricted two variance components from Model C to be 0. Our initial attempt used the <code>anova()</code> function in R, which created two problems: (a) the <code>anova()</code> function uses full maximum likelihood estimates rather than REML estimates of model parameters and performance, which is fine when two models differ in fixed effects but not, as in this case, when two models differ only in random effects; and, (b) the likelihood ratio test statistic is often not well approximated by a chi-square distribution. Therefore, we implemented the parametric bootstrap method to simulate the distribution of the likelihood ratio test statistic and obtain a more reliable p-value, also illustrating that the chi-square distribution would produce an artificially large p-value.</p>
 </div>
@@ -2329,7 +2342,7 @@ Cov(\textbf{Y}_{i}) &amp; = \left[
 <div id="conceptual-exercises-7" class="section level3">
 <h3><span class="header-section-number">10.11.1</span> Conceptual Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Seed Germination.</strong> In Sections <a href="ch-3level.html#organizedata3">10.3.1</a> and <a href="ch-3level.html#explore3v2">10.3.2</a>, why must we be careful excluding plants with no height data? Why can’t we simply leave those plants in our 3-level analysis with all missing heights set to 0 mm?</p></li>
+<li><p><strong>Seed germination.</strong> In Sections <a href="ch-3level.html#organizedata3">10.3.1</a> and <a href="ch-3level.html#explore3v2">10.3.2</a>, why must we be careful excluding plants with no height data? Why can’t we simply leave those plants in our 3-level analysis with all missing heights set to 0 mm?</p></li>
 <li><p>Give an example of a Level Two covariate that might have been recorded in this study.</p></li>
 <li><p>In Figure <a href="ch-3level.html#fig:boxbyspec">10.2</a>, would using mean heights by pot be reasonable as well? How about for Figure <a href="ch-3level.html#fig:spagbyspec">10.3</a>?</p></li>
 <li><p>Explain how “plant-to-plant variability can be estimated by averaging standard deviations from each pot … while pot-to-pot variability can be estimated by finding the standard deviation of average intercept or slope within pot.”</p></li>
@@ -2344,12 +2357,10 @@ Cov(\textbf{Y}_{i}) &amp; = \left[
 <li><p>In Section <a href="ch-3level.html#sec:explodingvarcomps">10.7</a>, a model with 52 parameters is described: (a) illustrate that the model does indeed contain 52 parameters; (b) explain how to minimize the total number of parameters using ideas from Section <a href="ch-3level.html#sec:explodingvarcomps">10.7</a>; (c) what assumptions have you made in your simplification in (b)?</p></li>
 <li><p>In Section <a href="ch-3level.html#modelsDEF">10.8</a>, Model F (the null model) is compared to Model D using a parametric bootstrap test. As in Section <a href="ch-3level.html#threelevel-paraboot">10.6</a>, show in detail how bootstrapped data would be generated under Model F for, say, Plant # 1 from Pot # 1. For the random parts, tell what distribution the random pieces are coming from and then select a random value from that distribution. Finally, explain how the parametric bootstrap test would be carried out.</p></li>
 <li><p>Section <a href="ch-3level.html#modelsDEF">10.8</a> contains an interpretation for the coefficient of a three-way interaction term, <span class="math inline">\(\hat{\beta}_{3}\)</span>. Provide an alternative interpretation for <span class="math inline">\(\hat{\beta}_{3}\)</span> by focusing on how the sterilization-by-soil type interaction differs over time.</p></li>
-<li><p><strong>Collective Efficacy and Violent Crime.</strong> In a 1997 <em>Science</em> article, <span class="citation">Sampson, Raudenbush, and Earls (<a href="#ref-Sampson1997" role="doc-biblioref">1997</a>)</span> studied the effects on violent crime of a neighborhood’s collective efficacy, defined as “social cohesion among neighbors combined with their willingness to intervene on behalf of the common good.” Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.</p></li>
-<li><p>Table <a href="ch-3level.html#tab:table4chp10">10.4</a> shows Table 3 from <span class="citation">Sampson, Raudenbush, and Earls (<a href="#ref-Sampson1997" role="doc-biblioref">1997</a>)</span>. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.</p></li>
 </ol>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:table4chp10">Table 10.4: </span>Table 3: Correlates of collective efficacy from Sampson et al. (1997)
+<span id="tab:table4chp10">Table 10.4: </span>Correlates of collective efficacy from Table 3 of Sampson et al. (1997).
 </caption>
 <thead>
 <tr>
@@ -2648,7 +2659,9 @@ Between neighborhoods
 </tr>
 </tbody>
 </table>
-<ol start="18" style="list-style-type: decimal">
+<ol start="16" style="list-style-type: decimal">
+<li><p><strong>Collective efficacy and violent crime.</strong> In a 1997 <em>Science</em> article, <span class="citation">Sampson, Raudenbush, and Earls (<a href="#ref-Sampson1997" role="doc-biblioref">1997</a>)</span> studied the effects on violent crime of a neighborhood’s collective efficacy, defined as “social cohesion among neighbors combined with their willingness to intervene on behalf of the common good.” Multiple items related to collective efficacy were collected from 8782 Chicago residents from 343 neighborhood clusters. For this study, give the observational units at Levels One, Two, and Three.</p></li>
+<li><p>Table <a href="ch-3level.html#tab:table4chp10">10.4</a> shows Table 3 from <span class="citation">Sampson, Raudenbush, and Earls (<a href="#ref-Sampson1997" role="doc-biblioref">1997</a>)</span>. Provide interpretations of the following coefficients in context: homeowner, age, SES, immigrant concentration, and residential stability.</p></li>
 <li><p>Based on Table <a href="ch-3level.html#tab:table4chp10">10.4</a>, let <span class="math inline">\(Y_{ijk}\)</span> be the response of person <span class="math inline">\(j\)</span> from neighborhood <span class="math inline">\(i\)</span> to item <span class="math inline">\(k\)</span> regarding collective efficacy; these are (difficulty-adjusted) responses to 10 items per person about collective efficacy. Then (a) write out the three-level model that likely produced this table, and (b) write out the corresponding composite model. Assume there was also an unreported variance component estimating item-to-item variability within person.</p></li>
 <li><p>Suggest valuable exploratory data analysis plots to complement Table <a href="ch-3level.html#tab:table4chp10">10.4</a>.</p></li>
 <li><p>If the model suggested by Table <a href="ch-3level.html#tab:table4chp10">10.4</a> were expanded to include all potential variance components, how many total parameters would need to be estimated? If it were expanded further to include the 3 neighborhood-level covariates as predictors in all Level Three equations, how many total parameters would need to be estimated?</p></li>
@@ -2657,7 +2670,7 @@ Between neighborhoods
 </ol>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:table5chp10">Table 10.5: </span>A portion of Table 4: Neighborhood correlates of perceived neighborhood violence from Sampson et al. (1997).
+<span id="tab:table5chp10">Table 10.5: </span>Neighborhood correlates of perceived neighborhood violence from a portion of Table 4 from Sampson et al. (1997).
 </caption>
 <thead>
 <tr>
@@ -2805,10 +2818,10 @@ Collective efficacy
 </tbody>
 </table>
 </div>
-<div id="guided-exercises-6" class="section level3">
+<div id="guided-exercises-8" class="section level3">
 <h3><span class="header-section-number">10.11.2</span> Guided Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><strong>Tree Tubes</strong> A student research team at St. Olaf College contributed to the efforts of biologist Dr. Kathy Shea to investigate a rich data set concerning forestation in the surrounding land <span class="citation">(Eisinger, Elling, and Stamp <a href="#ref-Eisinger2011" role="doc-biblioref">2011</a>)</span>. Tubes were placed on trees in some locations or <em>transects</em> but not in others. Interest centers on whether tree growth is affected by the presence of tubes. The data is currently stored in long format in <code>treetube.csv</code>. Each row represents one tree in a given year. Key variables include:
+<li><strong>Tree tubes.</strong> A student research team at St. Olaf College contributed to the efforts of biologist Dr. Kathy Shea to investigate a rich data set concerning forestation in the surrounding land <span class="citation">(Eisinger, Elling, and Stamp <a href="#ref-Eisinger2011" role="doc-biblioref">2011</a>)</span>. Tubes were placed on trees in some locations or <em>transects</em> but not in others. Interest centers on whether tree growth is affected by the presence of tubes. The data is currently stored in long format in <code>treetube.csv</code>. Each row represents one tree in a given year. Key variables include:
 <ul>
 <li><code>TRANSECT</code>: The id of the transect housing the tree</li>
 <li><code>TUBEX</code>: 1 if the tree had a tube, 0 if not</li>
@@ -2821,9 +2834,9 @@ Collective efficacy
 <ol style="list-style-type: lower-alpha">
 <li>Perform basic exploratory data analysis. For example, which variables are correlated with the heights of the trees?</li>
 <li>Explore patterns of missing data. Consider looking for patterns between transects. If you found any patterns of missing data, how might this affect your modeling?</li>
-<li>We wish to fit a three level model for a tree’s height. What would be observational units at level three? At level two? At level one? What are our level three variables? Level two variables? Level one variables?</li>
+<li>We wish to fit a three-level model for a tree’s height. What would be observational units at Level Three? At Level Two? At Level One? What are our Level Three variables? Level Two variables? Level One variables?</li>
 <li>Generate spaghetti plots showing how height varies over time for trees which had tubes and for trees which did not have tubes. What do you notice?</li>
-<li>Fit Model A, a three level, unconditional means model for height. Write out the model at levels three, two, and one, as well as the composite model.</li>
+<li>Fit Model A, a three-level, unconditional means model for height. Write out the model at levels three, two, and one, as well as the composite model.</li>
 <li>Create a new variable, <code>TIME</code>, which represents the number of years since 1990. Use this to fit Model B, an unconditonal growth model for height. Write out this model at levels three, two, and one. What is the correlation of random effects at level two? What does this mean? (Section <a href="ch-3level.html#sec:boundary">10.5</a> may help.)</li>
 <li>In response to part (f), fit a new unconditional growth model (Model C) with <span class="math inline">\(\rho_{uv} = 0\)</span> and <span class="math inline">\(\rho_{\hat{u}\hat{v}} = 0\)</span> (uncorrelated random effects at levels two and three). Write out the model at levels two and three.</li>
 <li>If we wanted to compare Model B and Model C, it would not be appropriate to use a likelihood ratio test. Why is this?</li>
@@ -2833,7 +2846,7 @@ Collective efficacy
 
 </ul></li>
 </ol></li>
-<li><strong>Kentucky Math Scores.</strong> Data was collected from 48,058 eighth graders from Kentucky who took the California Basic Educational Skills Test <span class="citation">(Bickel <a href="#ref-Bickel2007" role="doc-biblioref">2007</a>)</span>. These students attended 235 different middle schools from 132 different districts, and the following variables were collected and can be found in <code>kentucky.csv</code>:
+<li><strong>Kentucky math scores.</strong> Data was collected from 48,058 eighth graders from Kentucky who took the California Basic Educational Skills Test <span class="citation">(Bickel <a href="#ref-Bickel2007" role="doc-biblioref">2007</a>)</span>. These students attended 235 different middle schools from 132 different districts, and the following variables were collected and can be found in <code>kentucky.csv</code>:
 <ul>
 <li><code>dis_id</code> = District Identifier</li>
 <li><code>sch_id</code> = School Identifier</li>
@@ -2843,25 +2856,25 @@ Collective efficacy
 <li><code>readn</code> = California Test of Basic Skills Reading Score</li>
 <li><code>mathn</code> = California Test of Basic Skills Math Score</li>
 <li><code>sch_size</code> = School-Level Size (centered natural log)</li>
-<li><code>sch_ses</code> = School-Level SES (socio-economic status - centered)</li>
+<li><code>sch_ses</code> = School-Level SES (socio-economic status, centered)</li>
 <li><code>dis_size</code> = District-Level Size (centered natural log)</li>
-<li><code>dis_ses</code> = District-Level SES (socio-economic status - centered)
+<li><code>dis_ses</code> = District-Level SES (socio-economic status, centered)
 </ul></li>
 </ul>
-The primary research questions are whether or not math scores of eighth graders in Kentucky differ based on gender or ethnicity, and if any gender gap differs by ethnicity, or if any ethnicity gap differs by gender. Researchers wanted to be sure to adjust for important covariates at the school and district levels (e.g. school/district size and socio-economic status).
+The primary research questions are whether or not math scores of eighth graders in Kentucky differ based on gender or ethnicity, and if any gender gap differs by ethnicity, or if any ethnicity gap differs by gender. Researchers wanted to be sure to adjust for important covariates at the school and district levels (e.g., school/district size and socio-economic status).
 <ol style="list-style-type: lower-alpha">
 <li>Conduct a short exploratory data analysis. Which variables are most strongly related to <code>mathn</code>? Illustrate with summary statistics and plots. [Hints: your plots should accommodate the large number of observations in the data, and your summary statistics will have to handle occasional missing values.]</li>
 <li>(Model A) Run an unconditional means model with 3 levels and report the percentage of variability in math scores that can be explained at each level.</li>
 <li>(Model B) Add <code>female</code>, <code>nonwhite</code>, and their interaction at Level One.
 <ul>
 <li>Write out the complete three-level model. How many parameters must be estimated?</li>
-<li>Run the model (be patient – it may take a few minutes!). Report and interpret a relevant pseudo-Rsquare value. Is there evidence (based on the t-value) of a significant interaction? In layman’s terms, what can you conclude based on the test for interaction?</li>
+<li>Run the model (be patient – it may take a few minutes!). Report and interpret a relevant pseudo R-squared value. Is there evidence (based on the t-value) of a significant interaction? In layman’s terms, what can you conclude based on the test for interaction?</li>
 </ul></li>
-<li>(Model C) Subtract the <code>female</code>-by-<code>nonwhite</code> interaction from Model B and add <code>sch_ses</code>, where <code>sch_ses</code> is a predictor in all Level Two equations. How many parameters must be estimated? Break your count down into fixed effects + variance components at Level 1 + varcomps at Level 2 + varcomps at Level 3. (No need to write out the model or run the model unless you want to…)</li>
+<li>(Model C) Subtract the <code>female</code>-by-<code>nonwhite</code> interaction from Model B and add <code>sch_ses</code>, where <code>sch_ses</code> is a predictor in all Level Two equations. How many parameters must be estimated? Break your count down into variance components at Level One + varcomps at Level Two + fixed effects + varcomps at Level Three. (No need to write out the model or run the model unless you want to.)</li>
 <li>(Model D) Subtract <code>nonwhite</code> from Model C and add <code>dis_size</code>, where <code>dis_size</code> is a predictor in all Level Three equations.
 <ul>
 <li>Write out the complete three-level model. Also write out the composite model. How many parameters must be estimated?</li>
-<li>Run the model (be patient!), and then re-run it with an error term only on the intercept equation at Level Three. What are the implications of using this error structure? Does it change any conclusions about fixed effects? Which of the two models would you choose and why?</li>
+<li>Run the model (be patient!) and then re-run it with an error term only on the intercept equation at Level Three. What are the implications of using this error structure? Does it change any conclusions about fixed effects? Which of the two models would you choose and why?</li>
 <li>(Optional) Explore the nature of the 3-way interaction between female, sch_ses, and dis_size by finding the predicted math score for 5 cases based on Model D with an error term only on the intercept equation at Level Three. Comment on trends you observe.
 <ul>
 <li>Female vs. male with average <code>sch_ses</code> and <code>dis_size</code></li>
@@ -2875,15 +2888,15 @@ The primary research questions are whether or not math scores of eighth graders 
 </ol></li>
 </ol>
 </div>
-<div id="open-ended-exercises-5" class="section level3">
-<h3><span class="header-section-number">10.11.3</span> Open-ended Exercises</h3>
+<div id="open-ended-exercises-6" class="section level3">
+<h3><span class="header-section-number">10.11.3</span> Open-Ended Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Seed Germination: Coneflowers</strong> Repeat the exploratory data analyses and model fitting from this chapter using coneflowers rather than leadplants.</p></li>
-<li><p><strong>Mudamalai Leaf Growth</strong> Plant growth is influenced by many environmental factors, among them sunlight and water availability. A study conducted in the Mudamalai Wildlife Sanctuary in India in October of 2008 had as its purpose to “broaden the specific knowledge of certain tree species and climate zones located in the Nilgiri Hills of South India, and to enhance the overall knowledge of the dynamic relationship between plant growth and its environment” <span class="citation">(Pray <a href="#ref-Pray2009" role="doc-biblioref">2009</a>)</span>.</p>
-<p>Study researchers collected 1,960 leaves from 45 different trees (5 trees from each of 3 species within each of 3 climate zone). Within each tree, 3 branches were randomly chosen from each of 3 strata (high, medium, and low), and 5 leaves were randomly selected from each branch. Three different descriptive climatic zones were chosen for analysis—dry thorn, dry deciduous, and moist deciduous—and three different species of trees were analyzed—<em>Cassia fistula</em> (golden shower tree), <em>Anogeissus latifolia</em> (axlewood tree), and <em>Diospyros montana</em> (mountain ebony). Height and girth were measured for each tree, and length was assessed for each branch. Measurements taken on each leaf included length, width, surface area (determined carefully for 25 leaves per species and then by linear regression using length and width as predictors for the rest), pedial length (the length of the stem), pedial width, and percent herbivory (an eyeball estimate of the percent of each leaf that had been removed or eaten by herbivores). In addition, stomata density was measured using a compound scope to examine nail polish impressions of leaves for each strata of each tree (135 measurements).</p>
+<li><p><strong>Seed germination: coneflowers.</strong> Repeat the exploratory data analyses and model fitting from this chapter using coneflowers rather than leadplants.</p></li>
+<li><p><strong>Mudamalai leaf growth.</strong> Plant growth is influenced by many environmental factors, among them sunlight and water availability. A study conducted in the Mudamalai Wildlife Sanctuary in India in October of 2008 had as its purpose to “broaden the specific knowledge of certain tree species and climate zones located in the Nilgiri Hills of South India, and to enhance the overall knowledge of the dynamic relationship between plant growth and its environment” <span class="citation">(Pray <a href="#ref-Pray2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p>Study researchers collected 1,960 leaves from 45 different trees (5 trees from each of 3 species within each of 3 climate zones). Within each tree, 3 branches were randomly chosen from each of 3 strata (high, medium, and low), and 5 leaves were randomly selected from each branch. Three different descriptive climatic zones were chosen for analysis—dry thorn, dry deciduous, and moist deciduous—and three different species of trees were analyzed—<em>Cassia fistula</em> (golden shower tree), <em>Anogeissus latifolia</em> (axlewood tree), and <em>Diospyros montana</em> (mountain ebony). Height and girth were measured for each tree, and length was assessed for each branch. Measurements taken on each leaf included length, width, surface area (determined carefully for 25 leaves per species and then by linear regression using length and width as predictors for the rest), pedial length (the length of the stem), pedial width, and percent herbivory (an eyeball estimate of the percent of each leaf that had been removed or eaten by herbivores). In addition, stomata density was measured using a compound scope to examine nail polish impressions of leaves for each strata of each tree (135 measurements).</p>
 <p>Here is a description of available variables in <code>mudamalai.csv</code>:</p>
 <ul>
-<li><code>Species</code> = tree species (Cassia fistula, Anogeissus latifolia, or Diospyros montana)</li>
+<li><code>Species</code> = tree species (<em>Cassia fistula</em>, <em>Anogeissus latifolia</em>, or <em>Diospyros montana</em>)</li>
 <li><code>Zone</code> = climate zone (dry thorn, dry deciduous, or moist deciduous)</li>
 <li><code>Tree</code> = tree number (1-5) within climate zone</li>
 <li><code>Tree.height</code> = tree height (m)</li>
@@ -2917,7 +2930,7 @@ The primary research questions are whether or not math scores of eighth graders 
 <p>Baer, S. G., D. J. Kitchen, J. M. Blair, and C. W. Rice. 2002. “Changes in Ecosystem Structure and Function Along a Chronosequence of Restored Grasslands.” <em>Ecological Applications</em> 12 (6): 1688–1701. <a href="https://doi.org/10.1890/1051-0761(2002)012%5B1688:CIESAF%5D2.0.CO;2">https://doi.org/10.1890/1051-0761(2002)012[1688:CIESAF]2.0.CO;2</a>.</p>
 </div>
 <div id="ref-Bickel2007">
-<p>Bickel, Robert. 2007. <em>Multilevel Analysis for Applied Research: It’s Just Regression!</em> New York, New York: Guilford Publications.</p>
+<p>Bickel, Robert. 2007. <em>Multilevel Analysis for Applied Research: It’s Just Regression!</em> New York: Guilford Publications.</p>
 </div>
 <div id="ref-Camill2004">
 <p>Camill, Philip, Mark J. McKone, Sean T. Sturges, William J. Severud, Erin Ellis, Jacob Limmer, Christopher B. Martin, et al. 2004. “Community- and Ecosystem-Level Changes in a Specie-Rich Tallgrass Prairie Restoration.” <em>Ecological Applications</em> 14 (6): 1680–94. <a href="https://doi.org/10.1890/03-5273">https://doi.org/10.1890/03-5273</a>.</p>
@@ -2986,7 +2999,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

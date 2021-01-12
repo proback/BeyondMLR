@@ -351,7 +351,7 @@ Suppose we have a Poisson process with rate $\lambda$, and we wish to model the 
 f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
 (\#eq:expRV)
 \end{equation}
-where $\E(Y) = 1/\lambda$, $\SD(Y) = 1/\lambda$. Figure \@ref(fig:multExp) displays three exponential distributions with different $\lambda$ values. As $\lambda$ increases, $\E(Y)$ tends towards 0, and distributions "die off" quicker. 
+where $\E(Y) = 1/\lambda$ and $\SD(Y) = 1/\lambda$. Figure \@ref(fig:multExp) displays three exponential distributions with different $\lambda$ values. As $\lambda$ increases, $\E(Y)$ tends towards 0, and distributions "die off" quicker. 
 
 (ref:multExp) Exponential distributions with $\lambda = 0.5, 1,$ and $5$.
 
@@ -586,7 +586,7 @@ In this course, we encounter $\chi^2$ distributions \index{chi-square distributi
 
 In general, $\chi^2$ distributions with $k$ degrees of freedom are right skewed with a mean $k$ and standard deviation $\sqrt{2k}$.  Figure \@ref(fig:multChisq) displays chi-square distributions with different values of $k$.
 
-The $\chi^2$ distribution is a special case of gamma distributions. Specifically, a $\chi^2$ distribution with $k$ degrees of freedom can be expressed as a gamma distribution with $\lambda = 1/2$ and $r = k/2$.
+The $\chi^2$ distribution is a special case of a gamma distribution. Specifically, a $\chi^2$ distribution with $k$ degrees of freedom can be expressed as a gamma distribution with $\lambda = 1/2$ and $r = k/2$.
 
 (ref:multChisq) $\chi^2$ distributions with 1, 3, and 7 degrees of freedom..
 

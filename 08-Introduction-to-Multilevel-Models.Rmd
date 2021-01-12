@@ -541,7 +541,7 @@ b_{i} & =  \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i}
 \end{align}
 where $\textrm{Orch}_{i}=1$ if Subject $i$ plays an orchestral instrument and $\textrm{Orch}_{i}=0$ if Subject $i$ plays keyboard or is a vocalist. Note that, at Level Two, our response variables are not observed measurements such as performance anxiety scores, but rather the fitted regression coefficients from the Level One models fit to each subject. (Well, in our theoretical model, the responses are actually the true intercepts and slopes from Level One models for each subject, but in reality, we have to use our estimated slopes and intercepts.)
 
-Exploratory data analysis (see boxplots by instrument in Figure \@ref(fig:mli-boxmat2)) suggests that subjects playing orchestral instruments have higher intercepts than vocalists or keyboardists, and that orchestral instruments are associated with slight lower (more negative) slopes, although with less variability that the slopes of vocalists and keyboardists. These trends are borne out in regression modeling. If we fit Equations \@ref(eq:level2s0) and \@ref(eq:level2s1) using fitted intercepts and slopes as our response variables, we obtain the following estimated parameters: $\hat{\alpha}_{0}=16.3$, $\hat{\alpha}_{1}=1.4$, $\hat{\beta}_{0}=-0.8$, and $\hat{\beta}_{1}=-1.4$. Thus, the intercept ($a_{i}$) and slope ($b_{i}$) for Subject $i$ can be modeled as:
+Exploratory data analysis (see boxplots by instrument in Figure \@ref(fig:mli-boxmat2)) suggests that subjects playing orchestral instruments have higher intercepts than vocalists or keyboardists, and that orchestral instruments are associated with slightly lower (more negative) slopes, although with less variability that the slopes of vocalists and keyboardists. These trends are borne out in regression modeling. If we fit Equations \@ref(eq:level2s0) and \@ref(eq:level2s1) using fitted intercepts and slopes as our response variables, we obtain the following estimated parameters: $\hat{\alpha}_{0}=16.3$, $\hat{\alpha}_{1}=1.4$, $\hat{\beta}_{0}=-0.8$, and $\hat{\beta}_{1}=-1.4$. Thus, the intercept ($a_{i}$) and slope ($b_{i}$) for Subject $i$ can be modeled as:
 
 \begin{align}
 \hat{a}_{i} & = 16.3+1.4\textrm{Orch}_{i}+u_{i}
@@ -589,7 +589,7 @@ mli.boxmat2 <- grid.arrange(int.box, slope.box, ncol = 1)
 grid.arrange(int.box, slope.box, ncol = 1)
 ```
 
-This two-stage modeling process does have some drawbacks. Among other things, (1) it weights every subject the same regardless of the number of diary entries we have, (2) it responds to missing individual slopes (from 7 subjects who never performed in a large ensemble) by simply dropping those subjects, and (3) it does not share strength effectively across individuals. These issues can be better handled through a unified multilevel modeling framework which we will develop over the remainder of this section.
+This two-stage modeling process does have some drawbacks. Among other things, (1) it weights every subject the same regardless of the number of diary entries we have, (2) it responds to missing individual slopes (from 7 subjects who never performed in a large ensemble) by simply dropping those subjects, and (3) it does not share strength effectively across individuals. These issues can be better handled through a unified multilevel modeling framework which we will develop in the next section.
 
 
 ## Two-Level Modeling: A Unified Approach {#twolevelmodelingunified}
@@ -1362,7 +1362,7 @@ sim1.plot2 = data.frame(model=c("MLM","LLSR"),
   summary(olsreg.sim)$coefficients[2,1]))
 ```
 
-```{r mli-spag2,fig.align="center",out.width="60%",fig.cap='Hypothetical data from 4 subjects relating number of previous performances to negative affect.  The solid black line depicts the overall relationship between previous performances and negative affect as determined by a multilevel model, while the dashed black line depicts the overall relationship as determined by an LLSR regression model.',echo=FALSE, warning=FALSE}
+```{r mli-spag2,fig.align="center",out.width="60%",fig.cap='Hypothetical data from 4 subjects relating number of previous performances to negative affect.  The dashed black line depicts the overall relationship between previous performances and negative affect as determined by a multilevel model, while the solid black line depicts the overall relationship as determined by an LLSR regression model.',echo=FALSE, warning=FALSE}
 ggplot() +  
   geom_point(data=simdata, aes(x=previj,y=yij)) + 
   geom_abline(data=sim1.plot, aes(intercept=ints.sim,
@@ -1376,7 +1376,7 @@ ggplot() +
   scale_y_continuous(name="Negative Affect", limits=c(0,40)) 
 ```
 
-Figure \@ref(fig:mli-spag2) is based on a synthetic data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in Section \@ref(modelb)) shows an overall relationship (the solid black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting a LLSR model, however, produces an overall relationship (the dashed black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the LLSR analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
+Figure \@ref(fig:mli-spag2) is based on a synthetic data set containing 10 observations from each of 4 subjects. For each subject, the relationship between previous performances and negative affect is linear and negative, with slope approximately -0.5 but different intercepts. The multilevel model (a random intercepts model as described in Section \@ref(modelb)) shows an overall relationship (the dashed black line) that's consistent with the individual subjects---slope around -0.5 with an intercept that appears to average the 4 subjects. Fitting a LLSR model, however, produces an overall relationship (the solid black line) that is strongly positive. In this case, by naively fitting the 40 observations as if they were all independent and ignoring subject effects, the LLSR analysis has gotten the estimated slope of the overall relationship backwards, producing a continuous data version of Simpson's Paradox.
 
 ```{r ch8simulations, include=FALSE, cache=TRUE}
 # Simulation 2 - use estimated parameters from Model C
@@ -1557,7 +1557,7 @@ summary(model0)
 
 12. Explain how the interpretations of the following parameter estimates change (or don't change) as we change our model:
     - $\hat{\alpha}_{0}$ from Model A to B to C to D to E
-    - $\hat{\beta}_{1}$ from Model B to C to D to E
+    - $\hat{\beta}_{0}$ from Model B to C to D to E
     - $\hat{\alpha}_{1}$ from Model C to D to E
     - $\hat{\beta}_{1}$ from Model C to D to E
     - $\hat{\sigma}_{u}$ from Model A to B to C to D to E
@@ -1585,18 +1585,26 @@ summary(model0)
     - Model D = indicator for instructor audience type and indicator for student audience type at Level One;
       centered MPQ absorption subscale and a male indicator as Level Two predictors for intercept and all slope terms </ul>
 <br>
-    1. Perform an exploratory data analysis by comparing positive affect (happiness) to Level One and Level Two covariates using appropriate graphs. Comment on interesting trends, supporting your comments with appropriate summary statistics.
-    2. Report estimated fixed effects and variance components from Model A, using proper notation from this chapter (no interpretations required). Also report and interpret an intraclass correlation coefficient.
-    3. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo R-squared value.
-    4. Write out Model C, using both separate Level One and Level Two models as well as a composite model. Be sure to express distributions for error terms. How many parameters must be estimated in Model C?
-    5. Report and interpret the following parameter estimates from Model C: $\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\gamma}_{0}$, $\hat{\beta}_{1}$, $\hat{\sigma}_{u}$, $\hat{\sigma}_{v}$, and $\hat{\rho}_{uv}$. Interpretations for variance components should be done in terms of standard deviations and correlation coefficients.
-    6. Report and interpret the same parameter estimates listed above from Model D. In each case, the new interpretation should involve a small modification of your interpretation from Model C.  Use underlines or highlights to denote the part of the Model D interpretation that differs from the Model C interpretation.
-    7. Also report and interpret the following parameter estimates from Model D: $\hat{\alpha}_{2}$ and $\hat{\beta}_{2}$.
-    8. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo R-squared value(s) and with AIC and BIC statistics.
+
+    a. Perform an exploratory data analysis by comparing positive affect (happiness) to Level One and Level Two covariates using appropriate graphs. Comment on interesting trends, supporting your comments with appropriate summary statistics.
+    
+    b. Report estimated fixed effects and variance components from Model A, using proper notation from this chapter (no interpretations required). Also report and interpret an intraclass correlation coefficient.
+    
+    c. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo R-squared value.
+    
+    d. Write out Model C, using both separate Level One and Level Two models as well as a composite model. Be sure to express distributions for error terms. How many parameters must be estimated in Model C?
+    
+    e. Report and interpret the following parameter estimates from Model C: $\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\gamma}_{0}$, $\hat{\beta}_{1}$, $\hat{\sigma}_{u}$, $\hat{\sigma}_{v}$, and $\hat{\rho}_{uv}$. Interpretations for variance components should be done in terms of standard deviations and correlation coefficients.
+    
+    f. Report and interpret the same parameter estimates listed above from Model D. In each case, the new interpretation should involve a small modification of your interpretation from Model C.  Use underlines or highlights to denote the part of the Model D interpretation that differs from the Model C interpretation.
+    
+    g. Also report and interpret the following parameter estimates from Model D: $\hat{\alpha}_{2}$ and $\hat{\beta}_{2}$.
+    
+    h. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo R-squared value(s) and with AIC and BIC statistics.
 
 ### Open-Ended Exercises
 
-1. __Political ambiguity.__ @Chapp2018 explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand-coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. A total of 2014 websites were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model of candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
+1. __Political ambiguity.__ @Chapp2018 explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand-coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. A total of 870 websites from 2014 were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model for candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
     - "when incumbents do hazard issue statements, these statements will be marked by a higher degree of clarity." (Hypothesis 1b)
     - "ideological distance [from district residents] will be associated with greater ambiguity." (Hypothesis 2a)
     - "controlling for ideological distance, ideological extremity [of the candidate] should correspond to less ambiguity." (Hypothesis 2b)

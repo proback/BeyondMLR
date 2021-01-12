@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2020-08-05" />
+<meta name="date" content="2021-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -135,13 +135,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Beyond Multiple Linear Regression</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="1.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#introduction-to-beyond-multiple-linear-regression"><i class="fa fa-check"></i><b>1.2</b> Introduction to Beyond Multiple Linear Regression</a></li>
-<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression-llsr"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression (LLSR)</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-that-do-not-violate-assumptions-for-inference-in-llsr"><i class="fa fa-check"></i><b>1.3.1</b> Cases that do not violate assumptions for inference in LLSR</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-where-assumptions-for-inference-in-llsr-are-violated"><i class="fa fa-check"></i><b>1.3.2</b> Cases where assumptions for inference in LLSR are violated</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#assumptions-for-linear-least-squares-regression"><i class="fa fa-check"></i><b>1.3</b> Assumptions for Linear Least Squares Regression</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-without-assumption-violations"><i class="fa fa-check"></i><b>1.3.1</b> Cases Without Assumption Violations</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cases-with-assumption-violations"><i class="fa fa-check"></i><b>1.3.2</b> Cases With Assumption Violations</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#review-of-multiple-linear-regression"><i class="fa fa-check"></i><b>1.4</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#cs:derby"><i class="fa fa-check"></i><b>1.4.1</b> Case Study: Kentucky Derby</a></li>
@@ -151,16 +155,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#univariate-summaries"><i class="fa fa-check"></i><b>1.5.2</b> Univariate Summaries</a></li>
 <li class="chapter" data-level="1.5.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#bivariate-summaries"><i class="fa fa-check"></i><b>1.5.3</b> Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple linear regression modeling</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple linear regression with a continuous predictor</a></li>
-<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear regression with a binary predictor</a></li>
-<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple linear regression with two predictors</a></li>
-<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in multiple linear regression: normal theory</a></li>
-<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in multiple linear regression: bootstrapping</a></li>
-<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple linear regression with an interaction term</a></li>
-<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a multiple linear regression model</a></li>
+<li class="chapter" data-level="1.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg"><i class="fa fa-check"></i><b>1.6</b> Multiple Linear Regression Modeling</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#SLRcontinuous"><i class="fa fa-check"></i><b>1.6.1</b> Simple Linear Regression with a Continuous Predictor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#linear-regression-with-a-binary-predictor"><i class="fa fa-check"></i><b>1.6.2</b> Linear Regression with a Binary Predictor</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.6.3</b> Multiple Linear Regression with Two Predictors</a></li>
+<li class="chapter" data-level="1.6.4" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-inference"><i class="fa fa-check"></i><b>1.6.4</b> Inference in Multiple Linear Regression: Normal Theory</a></li>
+<li class="chapter" data-level="1.6.5" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg-boot"><i class="fa fa-check"></i><b>1.6.5</b> Inference in Multiple Linear Regression: Bootstrapping</a></li>
+<li class="chapter" data-level="1.6.6" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multiple-linear-regression-with-an-interaction-term"><i class="fa fa-check"></i><b>1.6.6</b> Multiple Linear Regression with an Interaction Term</a></li>
+<li class="chapter" data-level="1.6.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#multreg_build"><i class="fa fa-check"></i><b>1.6.7</b> Building a Multiple Linear Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of remaining chapters</a><ul>
+<li class="chapter" data-level="1.7" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#preview-of-remaining-chapters"><i class="fa fa-check"></i><b>1.7</b> Preview of Remaining Chapters</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#soccer"><i class="fa fa-check"></i><b>1.7.1</b> Soccer</a></li>
 <li class="chapter" data-level="1.7.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#elephant-mating"><i class="fa fa-check"></i><b>1.7.2</b> Elephant Mating</a></li>
 <li class="chapter" data-level="1.7.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#parenting-and-gang-activity"><i class="fa fa-check"></i><b>1.7.3</b> Parenting and Gang Activity</a></li>
@@ -169,42 +173,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.8" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#conceptual-exercises"><i class="fa fa-check"></i><b>1.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="1.8.2" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#guided-exercises"><i class="fa fa-check"></i><b>1.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="1.8.3" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#open-ended-exercises"><i class="fa fa-check"></i><b>1.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods to Fit and Compare Models</a><ul>
+<li class="chapter" data-level="2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html"><i class="fa fa-check"></i><b>2</b> Beyond Least Squares: Using Likelihoods</a><ul>
 <li class="chapter" data-level="2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does sex run in families?</a><ul>
+<li class="chapter" data-level="2.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-does-sex-run-in-families"><i class="fa fa-check"></i><b>2.2</b> Case Study: Does Sex Run in Families?</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#research-questions"><i class="fa fa-check"></i><b>2.2.1</b> Research Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-model-equal-probabilities-independence"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional Model (Equal probabilities, Independence)</a></li>
-<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional Model (Any Probability, Independence)</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What is a likelihood?</a></li>
+<li class="chapter" data-level="2.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-0-sex-unconditional-equal-probabilities"><i class="fa fa-check"></i><b>2.3</b> Model 0: Sex Unconditional, Equal Probabilities</a></li>
+<li class="chapter" data-level="2.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_unconditional_model"><i class="fa fa-check"></i><b>2.4</b> Model 1: Sex Unconditional, Unequal Probabilities</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#what-is-a-likelihood"><i class="fa fa-check"></i><b>2.4.1</b> What Is a Likelihood?</a></li>
 <li class="chapter" data-level="2.4.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#findMLE.sec"><i class="fa fa-check"></i><b>2.4.2</b> Finding MLEs</a></li>
 <li class="chapter" data-level="2.4.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary"><i class="fa fa-check"></i><b>2.4.3</b> Summary</a></li>
-<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a likelihood a probability function? (Optional)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#is-a-likelihood-a-probability-function-optional"><i class="fa fa-check"></i><b>2.4.4</b> Is a Likelihood a Probability Function? (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional Model (Sex Bias)</a><ul>
+<li class="chapter" data-level="2.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex_conditional.sec"><i class="fa fa-check"></i><b>2.5</b> Model 2: Sex Conditional</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-specification"><i class="fa fa-check"></i><b>2.5.1</b> Model Specification</a></li>
 <li class="chapter" data-level="2.5.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#application-to-hypothetical-data"><i class="fa fa-check"></i><b>2.5.2</b> Application to Hypothetical Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY data</a><ul>
+<li class="chapter" data-level="2.6" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#case-study-analysis-of-the-nlsy-data"><i class="fa fa-check"></i><b>2.6</b> Case Study: Analysis of the NLSY Data</a><ul>
 <li class="chapter" data-level="2.6.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-building-plan"><i class="fa fa-check"></i><b>2.6.1</b> Model Building Plan</a></li>
-<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Family Composition of Boys and Girls, NLSY: Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model-the-nlsy-data"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model: the NLSY data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#EDA.sec"><i class="fa fa-check"></i><b>2.6.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="2.6.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-for-the-sex-unconditional-model"><i class="fa fa-check"></i><b>2.6.3</b> Likelihood for the Sex Unconditional Model</a></li>
 <li class="chapter" data-level="2.6.4" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sex-cond-lik"><i class="fa fa-check"></i><b>2.6.4</b> Likelihood for the Sex Conditional Model</a></li>
-<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Comparing the Sex Unconditional to the Sex Conditional Model</a></li>
+<li class="chapter" data-level="2.6.5" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#sec-lrtest"><i class="fa fa-check"></i><b>2.6.5</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (Waiting for a boy)</a><ul>
+<li class="chapter" data-level="2.7" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#model-3-stopping-rule-model-waiting-for-a-boy"><i class="fa fa-check"></i><b>2.7</b> Model 3: Stopping Rule Model (waiting for a boy)</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#non-nested-models"><i class="fa fa-check"></i><b>2.7.1</b> Non-nested Models</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#summary-of-model-building"><i class="fa fa-check"></i><b>2.8</b> Summary of Model Building</a></li>
-<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-based Methods</a></li>
-<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and this Course</a></li>
+<li class="chapter" data-level="2.9" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihood-based-methods"><i class="fa fa-check"></i><b>2.9</b> Likelihood-Based Methods</a></li>
+<li class="chapter" data-level="2.10" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#likelihoods-and-this-course"><i class="fa fa-check"></i><b>2.10</b> Likelihoods and This Course</a></li>
 <li class="chapter" data-level="2.11" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#exercises-1"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
 <li class="chapter" data-level="2.11.1" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#conceptual-exercises-1"><i class="fa fa-check"></i><b>2.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="2.11.2" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#guided-exercises-1"><i class="fa fa-check"></i><b>2.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercise"><i class="fa fa-check"></i><b>2.11.3</b> Open-ended Exercise</a></li>
+<li class="chapter" data-level="2.11.3" data-path="ch-beyondmost.html"><a href="ch-beyondmost.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>2.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ch-distthry.html"><a href="ch-distthry.html"><i class="fa fa-check"></i><b>3</b> Distribution Theory</a><ul>
@@ -224,10 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="ch-distthry.html"><a href="ch-distthry.html#normal-gaussian-random-variable"><i class="fa fa-check"></i><b>3.4.3</b> Normal (Gaussian) Random Variable</a></li>
 <li class="chapter" data-level="3.4.4" data-path="ch-distthry.html"><a href="ch-distthry.html#beta-random-variable"><i class="fa fa-check"></i><b>3.4.4</b> Beta Random Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions used in Testing</a><ul>
+<li class="chapter" data-level="3.5" data-path="ch-distthry.html"><a href="ch-distthry.html#distributions-used-in-testing"><i class="fa fa-check"></i><b>3.5</b> Distributions Used in Testing</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="ch-distthry.html"><a href="ch-distthry.html#chi2-distribution"><i class="fa fa-check"></i><b>3.5.1</b> <span class="math inline">\(\chi^2\)</span> Distribution</a></li>
-<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-tdistribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>–Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#fdistribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>–Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="ch-distthry.html"><a href="ch-distthry.html#students-t-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="ch-distthry.html"><a href="ch-distthry.html#f-distribution"><i class="fa fa-check"></i><b>3.5.3</b> <span class="math inline">\(F\)</span>-Distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="ch-distthry.html"><a href="ch-distthry.html#additional-resources"><i class="fa fa-check"></i><b>3.6</b> Additional Resources</a></li>
 <li class="chapter" data-level="3.7" data-path="ch-distthry.html"><a href="ch-distthry.html#exercises-2"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
@@ -247,13 +251,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploreHH"><i class="fa fa-check"></i><b>4.4.2</b> Exploratory Data Analyses</a></li>
 <li class="chapter" data-level="4.4.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisInference"><i class="fa fa-check"></i><b>4.4.3</b> Estimation and Inference</a></li>
 <li class="chapter" data-level="4.4.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-Devtocompare"><i class="fa fa-check"></i><b>4.4.4</b> Using Deviances to Compare Models</a></li>
-<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to fit Poisson Regression Models (Optional)</a></li>
+<li class="chapter" data-level="4.4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#likelihood.sec"><i class="fa fa-check"></i><b>4.4.5</b> Using Likelihoods to Fit Models (optional)</a></li>
 <li class="chapter" data-level="4.4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#second-order-model"><i class="fa fa-check"></i><b>4.4.6</b> Second Order Model</a></li>
-<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a covariate</a></li>
-<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (Optional)</a></li>
-<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="4.4.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#adding-a-covariate"><i class="fa fa-check"></i><b>4.4.7</b> Adding a Covariate</a></li>
+<li class="chapter" data-level="4.4.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisResid"><i class="fa fa-check"></i><b>4.4.8</b> Residuals for Poisson Models (optional)</a></li>
+<li class="chapter" data-level="4.4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-PoisGOF"><i class="fa fa-check"></i><b>4.4.9</b> Goodness-of-Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-regression-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares Regression  vs. Poisson Regression </a></li>
+<li class="chapter" data-level="4.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#linear-least-squares-vs.-poisson-regression"><i class="fa fa-check"></i><b>4.5</b> Linear Least Squares  vs. Poisson Regression </a></li>
 <li class="chapter" data-level="4.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#case-study-campus-crime"><i class="fa fa-check"></i><b>4.6</b> Case Study: Campus Crime</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-1"><i class="fa fa-check"></i><b>4.6.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Exploratory Data Analysis</a></li>
@@ -264,31 +268,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#tukeys-honestly-significant-differences"><i class="fa fa-check"></i><b>4.8.1</b> Tukey’s Honestly Significant Differences</a></li>
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#sec-overdispPois"><i class="fa fa-check"></i><b>4.9</b> Overdispersion</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion parameter adjustment</a></li>
-<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No dispersion vs. overdispersion</a></li>
-<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative binomial modeling</a></li>
+<li class="chapter" data-level="4.9.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#dispersion-parameter-adjustment"><i class="fa fa-check"></i><b>4.9.1</b> Dispersion Parameter Adjustment</a></li>
+<li class="chapter" data-level="4.9.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#no-dispersion-vs.-overdispersion"><i class="fa fa-check"></i><b>4.9.2</b> No Dispersion vs. Overdispersion</a></li>
+<li class="chapter" data-level="4.9.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#negative-binomial-modeling"><i class="fa fa-check"></i><b>4.9.3</b> Negative Binomial Modeling</a></li>
 </ul></li>
-<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend drinking</a><ul>
+<li class="chapter" data-level="4.10" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#cs:drinking"><i class="fa fa-check"></i><b>4.10</b> Case Study: Weekend Drinking</a><ul>
 <li class="chapter" data-level="4.10.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#research-question"><i class="fa fa-check"></i><b>4.10.1</b> Research Question</a></li>
 <li class="chapter" data-level="4.10.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#data-organization-2"><i class="fa fa-check"></i><b>4.10.2</b> Data Organization</a></li>
 <li class="chapter" data-level="4.10.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.10.3</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="4.10.4" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#modeling"><i class="fa fa-check"></i><b>4.10.4</b> Modeling</a></li>
 <li class="chapter" data-level="4.10.5" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#fitting-a-zip-model"><i class="fa fa-check"></i><b>4.10.5</b> Fitting a ZIP Model</a></li>
-<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#comparing-zip-to-ordinary-poisson-with-the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> Comparing ZIP to ordinary Poisson with the Vuong Test (Optional)</a></li>
+<li class="chapter" data-level="4.10.6" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#the-vuong-test-optional"><i class="fa fa-check"></i><b>4.10.6</b> The Vuong Test (optional)</a></li>
 <li class="chapter" data-level="4.10.7" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#residual-plot"><i class="fa fa-check"></i><b>4.10.7</b> Residual Plot</a></li>
 <li class="chapter" data-level="4.10.8" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#limitations"><i class="fa fa-check"></i><b>4.10.8</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.11" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exercises-3"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
 <li class="chapter" data-level="4.11.1" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#exer:concept"><i class="fa fa-check"></i><b>4.11.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="4.11.2" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#guided-exercises-3"><i class="fa fa-check"></i><b>4.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-1"><i class="fa fa-check"></i><b>4.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="4.11.3" data-path="ch-poissonreg.html"><a href="ch-poissonreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>4.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models (GLMs): A Unifying Theory</a><ul>
+<li class="chapter" data-level="5" data-path="ch-glms.html"><a href="ch-glms.html"><i class="fa fa-check"></i><b>5</b> Generalized Linear Models: A Unifying Theory</a><ul>
 <li class="chapter" data-level="5.1" data-path="ch-glms.html"><a href="ch-glms.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One parameter exponential families</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-possion"><i class="fa fa-check"></i><b>5.2.1</b> One Parameter Exponential Family: Possion</a></li>
-<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One parameter exponential family: Normal</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-families"><i class="fa fa-check"></i><b>5.2</b> One-Parameter Exponential Families</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-poisson"><i class="fa fa-check"></i><b>5.2.1</b> One-Parameter Exponential Family: Poisson</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch-glms.html"><a href="ch-glms.html#one-parameter-exponential-family-normal"><i class="fa fa-check"></i><b>5.2.2</b> One-Parameter Exponential Family: Normal</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="ch-glms.html"><a href="ch-glms.html#generalized-linear-modeling"><i class="fa fa-check"></i><b>5.3</b> Generalized Linear Modeling</a></li>
 <li class="chapter" data-level="5.4" data-path="ch-glms.html"><a href="ch-glms.html#exercises-4"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
@@ -303,45 +307,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-soccer-goalkeepers"><i class="fa fa-check"></i><b>6.4</b> Case Study: Soccer Goalkeepers</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="ch-logreg.html"><a href="ch-logreg.html#modeling-odds"><i class="fa fa-check"></i><b>6.4.1</b> Modeling Odds</a></li>
 <li class="chapter" data-level="6.4.2" data-path="ch-logreg.html"><a href="ch-logreg.html#logistic-regression-models-for-binomial-responses"><i class="fa fa-check"></i><b>6.4.2</b> Logistic Regression Models for Binomial Responses</a></li>
-<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-for-logistic-regression-models-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical rationale for logistic regression models (Optional)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="ch-logreg.html"><a href="ch-logreg.html#theoretical-rationale-optional"><i class="fa fa-check"></i><b>6.4.3</b> Theoretical Rationale (optional)</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-reconstructing-alabama"><i class="fa fa-check"></i><b>6.5</b> Case Study: Reconstructing Alabama</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-3"><i class="fa fa-check"></i><b>6.5.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.5.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-analyses"><i class="fa fa-check"></i><b>6.5.2</b> Exploratory Analyses</a></li>
 <li class="chapter" data-level="6.5.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-1"><i class="fa fa-check"></i><b>6.5.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for significance of model coefficients</a></li>
-<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence intervals for model coefficients</a></li>
-<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for goodness of fit</a></li>
+<li class="chapter" data-level="6.5.4" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logisticInf"><i class="fa fa-check"></i><b>6.5.4</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.5" data-path="ch-logreg.html"><a href="ch-logreg.html#confidence-intervals-for-model-coefficients"><i class="fa fa-check"></i><b>6.5.5</b> Confidence Intervals for Model Coefficients</a></li>
+<li class="chapter" data-level="6.5.6" data-path="ch-logreg.html"><a href="ch-logreg.html#testing-for-goodness-of-fit"><i class="fa fa-check"></i><b>6.5.6</b> Testing for Goodness-of-Fit</a></li>
 <li class="chapter" data-level="6.5.7" data-path="ch-logreg.html"><a href="ch-logreg.html#residuals-for-binomial-regression"><i class="fa fa-check"></i><b>6.5.7</b> Residuals for Binomial Regression</a></li>
 <li class="chapter" data-level="6.5.8" data-path="ch-logreg.html"><a href="ch-logreg.html#sec-logOverdispersion"><i class="fa fa-check"></i><b>6.5.8</b> Overdispersion</a></li>
 <li class="chapter" data-level="6.5.9" data-path="ch-logreg.html"><a href="ch-logreg.html#summary-1"><i class="fa fa-check"></i><b>6.5.9</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-regression-vs.-binomial-logistic-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares Regression  vs. Binomial Logistic Regression </a></li>
+<li class="chapter" data-level="6.6" data-path="ch-logreg.html"><a href="ch-logreg.html#linear-least-squares-vs.-binomial-regression"><i class="fa fa-check"></i><b>6.6</b> Linear Least Squares  vs. Binomial Regression </a></li>
 <li class="chapter" data-level="6.7" data-path="ch-logreg.html"><a href="ch-logreg.html#case-study-trying-to-lose-weight"><i class="fa fa-check"></i><b>6.7</b> Case Study: Trying to Lose Weight</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="ch-logreg.html"><a href="ch-logreg.html#data-organization-4"><i class="fa fa-check"></i><b>6.7.1</b> Data Organization</a></li>
 <li class="chapter" data-level="6.7.2" data-path="ch-logreg.html"><a href="ch-logreg.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>6.7.2</b> Exploratory Data Analysis</a></li>
 <li class="chapter" data-level="6.7.3" data-path="ch-logreg.html"><a href="ch-logreg.html#initial-models-2"><i class="fa fa-check"></i><b>6.7.3</b> Initial Models</a></li>
-<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-deviance Tests</a></li>
+<li class="chapter" data-level="6.7.4" data-path="ch-logreg.html"><a href="ch-logreg.html#drop-in-deviance-tests"><i class="fa fa-check"></i><b>6.7.4</b> Drop-in-Deviance Tests</a></li>
 <li class="chapter" data-level="6.7.5" data-path="ch-logreg.html"><a href="ch-logreg.html#model-discussion-and-summary"><i class="fa fa-check"></i><b>6.7.5</b> Model Discussion and Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="ch-logreg.html"><a href="ch-logreg.html#exercises-5"><i class="fa fa-check"></i><b>6.8</b> Exercises</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="ch-logreg.html"><a href="ch-logreg.html#conceptual-exercises-3"><i class="fa fa-check"></i><b>6.8.1</b> Conceptual Exercises</a></li>
 <li class="chapter" data-level="6.8.2" data-path="ch-logreg.html"><a href="ch-logreg.html#guided-exercises-4"><i class="fa fa-check"></i><b>6.8.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-2"><i class="fa fa-check"></i><b>6.8.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="6.8.3" data-path="ch-logreg.html"><a href="ch-logreg.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>6.8.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ch-corrdata.html"><a href="ch-corrdata.html"><i class="fa fa-check"></i><b>7</b> Correlated Data</a><ul>
 <li class="chapter" data-level="7.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#learning-objectives-6"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="7.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#introduction-1"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing correlation</a></li>
-<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and pups</a></li>
+<li class="chapter" data-level="7.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#recognizing-correlation"><i class="fa fa-check"></i><b>7.3</b> Recognizing Correlation</a></li>
+<li class="chapter" data-level="7.4" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-dams-and-pups"><i class="fa fa-check"></i><b>7.4</b> Case Study: Dams and Pups</a></li>
 <li class="chapter" data-level="7.5" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability"><i class="fa fa-check"></i><b>7.5</b> Sources of Variability</a></li>
-<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No covariates</a></li>
-<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose effect</a></li>
+<li class="chapter" data-level="7.6" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-1-no-covariates"><i class="fa fa-check"></i><b>7.6</b> Scenario 1: No Covariates</a></li>
+<li class="chapter" data-level="7.7" data-path="ch-corrdata.html"><a href="ch-corrdata.html#scenario-2-dose-effect"><i class="fa fa-check"></i><b>7.7</b> Scenario 2: Dose Effect</a></li>
 <li class="chapter" data-level="7.8" data-path="ch-corrdata.html"><a href="ch-corrdata.html#case-study-tree-growth"><i class="fa fa-check"></i><b>7.8</b> Case Study: Tree Growth</a><ul>
-<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the data set</a></li>
-<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of variability</a></li>
-<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation-within-transect"><i class="fa fa-check"></i><b>7.8.3</b> Analysis preview: accounting for correlation within transect</a></li>
+<li class="chapter" data-level="7.8.1" data-path="ch-corrdata.html"><a href="ch-corrdata.html#format-of-the-data-set"><i class="fa fa-check"></i><b>7.8.1</b> Format of the Data Set</a></li>
+<li class="chapter" data-level="7.8.2" data-path="ch-corrdata.html"><a href="ch-corrdata.html#sources-of-variability-1"><i class="fa fa-check"></i><b>7.8.2</b> Sources of Variability</a></li>
+<li class="chapter" data-level="7.8.3" data-path="ch-corrdata.html"><a href="ch-corrdata.html#analysis-preview-accounting-for-correlation"><i class="fa fa-check"></i><b>7.8.3</b> Analysis Preview: Accounting for Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="ch-corrdata.html"><a href="ch-corrdata.html#summary-2"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
 <li class="chapter" data-level="7.10" data-path="ch-corrdata.html"><a href="ch-corrdata.html#exercises-6"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
@@ -358,77 +362,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore1"><i class="fa fa-check"></i><b>8.3.2</b> Exploratory Analyses: Univariate Summaries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#explore2"><i class="fa fa-check"></i><b>8.3.3</b> Exploratory Analyses: Bivariate Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two level modeling: preliminary considerations</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the two level structure (not recommended)</a></li>
-<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A two-stage modeling approach (better but imperfect)</a></li>
+<li class="chapter" data-level="8.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodeling"><i class="fa fa-check"></i><b>8.4</b> Two-Level Modeling: Preliminary Considerations</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multregr"><i class="fa fa-check"></i><b>8.4.1</b> Ignoring the Two-Level Structure (not recommended)</a></li>
+<li class="chapter" data-level="8.4.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twostage"><i class="fa fa-check"></i><b>8.4.2</b> A Two-Stage Modeling Approach (better but imperfect)</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two level modeling: a unified approach</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our framework</a></li>
-<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. fixed effects</a></li>
-<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of errors: the multivariate normal distribution</a></li>
-<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical issues when estimating and testing parameters (Optional)</a></li>
-<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An initial model with parameter interpretations</a></li>
+<li class="chapter" data-level="8.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#twolevelmodelingunified"><i class="fa fa-check"></i><b>8.5</b> Two-Level Modeling: A Unified Approach</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#ourframework"><i class="fa fa-check"></i><b>8.5.1</b> Our Framework</a></li>
+<li class="chapter" data-level="8.5.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>8.5.2</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="8.5.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#MVN"><i class="fa fa-check"></i><b>8.5.3</b> Distribution of Errors: Multivariate Normal</a></li>
+<li class="chapter" data-level="8.5.4" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multileveltechnical"><i class="fa fa-check"></i><b>8.5.4</b> Technical Issues when Testing Parameters (optional)</a></li>
+<li class="chapter" data-level="8.5.5" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#initialmodel"><i class="fa fa-check"></i><b>8.5.5</b> An Initial Model with Parameter Interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a multilevel model</a><ul>
-<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model building strategy</a></li>
-<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An initial model: unconditional means or random intercepts</a></li>
+<li class="chapter" data-level="8.6" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:buildmodel"><i class="fa fa-check"></i><b>8.6</b> Building a Multilevel Model</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#buildstrategy"><i class="fa fa-check"></i><b>8.6.1</b> Model Building Strategy</a></li>
+<li class="chapter" data-level="8.6.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modela8"><i class="fa fa-check"></i><b>8.6.2</b> An Initial Model: Random Intercepts</a></li>
 </ul></li>
-<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary covariates at Level One and Level Two</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random slopes and intercepts model</a></li>
-<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo <span class="math inline">\(R^2\)</span> values</a></li>
-<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a covariate at Level Two</a></li>
+<li class="chapter" data-level="8.7" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelb"><i class="fa fa-check"></i><b>8.7</b> Binary Covariates at Level One and Level Two</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#randomslopeandint"><i class="fa fa-check"></i><b>8.7.1</b> Random Slopes and Intercepts Model</a></li>
+<li class="chapter" data-level="8.7.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#pseudoR2"><i class="fa fa-check"></i><b>8.7.2</b> Pseudo R-squared Values</a></li>
+<li class="chapter" data-level="8.7.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelc"><i class="fa fa-check"></i><b>8.7.3</b> Adding a Covariate at Level Two</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Additional covariates: model comparison and interpretability</a><ul>
-<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of parameter estimates</a></li>
-<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model comparisons</a></li>
+<li class="chapter" data-level="8.8" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modeld"><i class="fa fa-check"></i><b>8.8</b> Adding Further Covariates</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#interp:modeld"><i class="fa fa-check"></i><b>8.8.1</b> Interpretation of Parameter Estimates</a></li>
+<li class="chapter" data-level="8.8.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#compare:modeld"><i class="fa fa-check"></i><b>8.8.2</b> Model Comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Center covariates</a></li>
-<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A potential final model for music performance anxiety</a></li>
-<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling the multilevel structure: is it really necessary?</a></li>
-<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="8.9" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#sec:modele"><i class="fa fa-check"></i><b>8.9</b> Centering Covariates</a></li>
+<li class="chapter" data-level="8.10" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#modelf"><i class="fa fa-check"></i><b>8.10</b> A Final Model for Music Performance Anxiety</a></li>
+<li class="chapter" data-level="8.11" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#multinecessary"><i class="fa fa-check"></i><b>8.11</b> Modeling Multilevel Structure: Is It Necessary?</a></li>
+<li class="chapter" data-level="8.12" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#notesr8"><i class="fa fa-check"></i><b>8.12</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="8.13" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#exercises-7"><i class="fa fa-check"></i><b>8.13</b> Exercises</a><ul>
 <li class="chapter" data-level="8.13.1" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#conceptual-exercises-5"><i class="fa fa-check"></i><b>8.13.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercise"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-3"><i class="fa fa-check"></i><b>8.13.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="8.13.2" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#guided-exercises-6"><i class="fa fa-check"></i><b>8.13.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="8.13.3" data-path="ch-multilevelintro.html"><a href="ch-multilevelintro.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>8.13.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two Level Longitudinal Data</a><ul>
-<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case study: Charter schools</a></li>
+<li class="chapter" data-level="9" data-path="ch-lon.html"><a href="ch-lon.html"><i class="fa fa-check"></i><b>9</b> Two-Level Longitudinal Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-lon.html"><a href="ch-lon.html#learning-objectives-8"><i class="fa fa-check"></i><b>9.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="ch-lon.html"><a href="ch-lon.html#cs:charter"><i class="fa fa-check"></i><b>9.2</b> Case Study: Charter Schools</a></li>
 <li class="chapter" data-level="9.3" data-path="ch-lon.html"><a href="ch-lon.html#exploratoryanalysis"><i class="fa fa-check"></i><b>9.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing data</a></li>
-<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory analyses for general multilevel models</a></li>
-<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory analyses for longitudinal data</a></li>
+<li class="chapter" data-level="9.3.1" data-path="ch-lon.html"><a href="ch-lon.html#data"><i class="fa fa-check"></i><b>9.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ch-lon.html"><a href="ch-lon.html#missing"><i class="fa fa-check"></i><b>9.3.2</b> Missing Data</a></li>
+<li class="chapter" data-level="9.3.3" data-path="ch-lon.html"><a href="ch-lon.html#generalanalyses"><i class="fa fa-check"></i><b>9.3.3</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="9.3.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinalanalyses"><i class="fa fa-check"></i><b>9.3.4</b> Exploratory Analyses for Longitudinal Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary two-stage modeling</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear trends within schools</a></li>
-<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of level two covariates on linear time trends</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error structure within schools</a></li>
+<li class="chapter" data-level="9.4" data-path="ch-lon.html"><a href="ch-lon.html#twostage9"><i class="fa fa-check"></i><b>9.4</b> Preliminary Two-Stage Modeling</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostage"><i class="fa fa-check"></i><b>9.4.1</b> Linear Trends Within Schools</a></li>
+<li class="chapter" data-level="9.4.2" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageL2effects"><i class="fa fa-check"></i><b>9.4.2</b> Effects of Level Two Covariates on Linear Time Trends</a></li>
+<li class="chapter" data-level="9.4.3" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror2"><i class="fa fa-check"></i><b>9.4.3</b> Error Structure Within Schools</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial models</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional means model</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional growth model</a></li>
-<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling other trends over time</a></li>
+<li class="chapter" data-level="9.5" data-path="ch-lon.html"><a href="ch-lon.html#lineartwostageerror"><i class="fa fa-check"></i><b>9.5</b> Initial Models</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="ch-lon.html"><a href="ch-lon.html#modela"><i class="fa fa-check"></i><b>9.5.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="9.5.2" data-path="ch-lon.html"><a href="ch-lon.html#modelb9"><i class="fa fa-check"></i><b>9.5.2</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="9.5.3" data-path="ch-lon.html"><a href="ch-lon.html#othertimetrends"><i class="fa fa-check"></i><b>9.5.3</b> Modeling Other Trends over Time</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a final model</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled effects of school type</a></li>
-<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add percent free and reduced lunch as a covariate</a></li>
-<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A potential final model with three Level Two covariates</a></li>
-<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric bootstrap testing</a></li>
+<li class="chapter" data-level="9.6" data-path="ch-lon.html"><a href="ch-lon.html#finalmodel"><i class="fa fa-check"></i><b>9.6</b> Building to a Final Model</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="ch-lon.html"><a href="ch-lon.html#sec:modelc9"><i class="fa fa-check"></i><b>9.6.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="9.6.2" data-path="ch-lon.html"><a href="ch-lon.html#modeld"><i class="fa fa-check"></i><b>9.6.2</b> Add Percent Free and Reduced Lunch as a Covariate</a></li>
+<li class="chapter" data-level="9.6.3" data-path="ch-lon.html"><a href="ch-lon.html#modelf9"><i class="fa fa-check"></i><b>9.6.3</b> A Final Model with Three Level Two Covariates</a></li>
+<li class="chapter" data-level="9.6.4" data-path="ch-lon.html"><a href="ch-lon.html#longitudinal-paraboot"><i class="fa fa-check"></i><b>9.6.4</b> Parametric Bootstrap Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance structure among observations</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard covariance structure</a></li>
-<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative covariance structures</a></li>
-<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#covariance-structure-in-non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Covariance structure in non-longitudinal multilevel models</a></li>
-<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final thoughts regarding covariance structures</a></li>
-<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of covariance structures (Optional)</a></li>
+<li class="chapter" data-level="9.7" data-path="ch-lon.html"><a href="ch-lon.html#errorcovariance"><i class="fa fa-check"></i><b>9.7</b> Covariance Structure among Observations</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="ch-lon.html"><a href="ch-lon.html#standarderror"><i class="fa fa-check"></i><b>9.7.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="9.7.2" data-path="ch-lon.html"><a href="ch-lon.html#alternateerror"><i class="fa fa-check"></i><b>9.7.2</b> Alternative Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.3" data-path="ch-lon.html"><a href="ch-lon.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>9.7.3</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="9.7.4" data-path="ch-lon.html"><a href="ch-lon.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>9.7.4</b> Final Thoughts Regarding Covariance Structures</a></li>
+<li class="chapter" data-level="9.7.5" data-path="ch-lon.html"><a href="ch-lon.html#optionalcov"><i class="fa fa-check"></i><b>9.7.5</b> Details of Covariance Structures (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="9.8" data-path="ch-lon.html"><a href="ch-lon.html#notesr9"><i class="fa fa-check"></i><b>9.8</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="9.9" data-path="ch-lon.html"><a href="ch-lon.html#exercises-8"><i class="fa fa-check"></i><b>9.9</b> Exercises</a><ul>
 <li class="chapter" data-level="9.9.1" data-path="ch-lon.html"><a href="ch-lon.html#conceptual-exercises-6"><i class="fa fa-check"></i><b>9.9.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercise-1"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercise</a></li>
-<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-4"><i class="fa fa-check"></i><b>9.9.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="9.9.2" data-path="ch-lon.html"><a href="ch-lon.html#guided-exercises-7"><i class="fa fa-check"></i><b>9.9.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="9.9.3" data-path="ch-lon.html"><a href="ch-lon.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>9.9.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ch-3level.html"><a href="ch-3level.html"><i class="fa fa-check"></i><b>10</b> Multilevel Data With More Than Two Levels</a><ul>
@@ -438,41 +442,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.1" data-path="ch-3level.html"><a href="ch-3level.html#organizedata3"><i class="fa fa-check"></i><b>10.3.1</b> Data Organization</a></li>
 <li class="chapter" data-level="10.3.2" data-path="ch-3level.html"><a href="ch-3level.html#explore3v2"><i class="fa fa-check"></i><b>10.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial models: unconditional means and unconditional growth</a></li>
-<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering boundary constraints</a></li>
-<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric bootstrap testing</a></li>
-<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding variance components</a></li>
-<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a final model</a></li>
-<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance structure (Optional)</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of covariance structures</a></li>
+<li class="chapter" data-level="10.4" data-path="ch-3level.html"><a href="ch-3level.html#initialmodels-3level"><i class="fa fa-check"></i><b>10.4</b> Initial Models</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-means"><i class="fa fa-check"></i><b>10.4.1</b> Unconditional Means</a></li>
+<li class="chapter" data-level="10.4.2" data-path="ch-3level.html"><a href="ch-3level.html#unconditional-growth"><i class="fa fa-check"></i><b>10.4.2</b> Unconditional Growth</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="10.5" data-path="ch-3level.html"><a href="ch-3level.html#sec:boundary"><i class="fa fa-check"></i><b>10.5</b> Encountering Boundary Constraints</a></li>
+<li class="chapter" data-level="10.6" data-path="ch-3level.html"><a href="ch-3level.html#threelevel-paraboot"><i class="fa fa-check"></i><b>10.6</b> Parametric Bootstrap Testing</a></li>
+<li class="chapter" data-level="10.7" data-path="ch-3level.html"><a href="ch-3level.html#sec:explodingvarcomps"><i class="fa fa-check"></i><b>10.7</b> Exploding Variance Components</a></li>
+<li class="chapter" data-level="10.8" data-path="ch-3level.html"><a href="ch-3level.html#modelsDEF"><i class="fa fa-check"></i><b>10.8</b> Building to a Final Model</a></li>
+<li class="chapter" data-level="10.9" data-path="ch-3level.html"><a href="ch-3level.html#error-3level"><i class="fa fa-check"></i><b>10.9</b> Covariance Structure (optional)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="ch-3level.html"><a href="ch-3level.html#optionalerror"><i class="fa fa-check"></i><b>10.9.1</b> Details of Covariance Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="ch-3level.html"><a href="ch-3level.html#usingR3"><i class="fa fa-check"></i><b>10.10</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="10.11" data-path="ch-3level.html"><a href="ch-3level.html#exercises-9"><i class="fa fa-check"></i><b>10.11</b> Exercises</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="ch-3level.html"><a href="ch-3level.html#conceptual-exercises-7"><i class="fa fa-check"></i><b>10.11.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-6"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
-<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-5"><i class="fa fa-check"></i><b>10.11.3</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="10.11.2" data-path="ch-3level.html"><a href="ch-3level.html#guided-exercises-8"><i class="fa fa-check"></i><b>10.11.2</b> Guided Exercises</a></li>
+<li class="chapter" data-level="10.11.3" data-path="ch-3level.html"><a href="ch-3level.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>10.11.3</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ch-GLMM.html"><a href="ch-GLMM.html"><i class="fa fa-check"></i><b>11</b> Multilevel Generalized Linear Models</a><ul>
 <li class="chapter" data-level="11.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#objectives"><i class="fa fa-check"></i><b>11.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="11.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#cs:refs"><i class="fa fa-check"></i><b>11.2</b> Case Study: College Basketball Referees</a></li>
 <li class="chapter" data-level="11.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#explore-glmm"><i class="fa fa-check"></i><b>11.3</b> Initial Exploratory Analyses</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data organization</a></li>
-<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory analyses</a></li>
+<li class="chapter" data-level="11.3.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#data-organization-5"><i class="fa fa-check"></i><b>11.3.1</b> Data Organization</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-eda"><i class="fa fa-check"></i><b>11.3.2</b> Exploratory Analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two level Modeling with a Generalized Response</a><ul>
-<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM approach (correlation not accounted for)</a></li>
-<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A two-stage modeling approach (provides the basic idea for multilevel modeling)</a></li>
-<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A unified multilevel approach (the framework we’ll use)</a></li>
+<li class="chapter" data-level="11.4" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twolevelmodeling-glmm"><i class="fa fa-check"></i><b>11.4</b> Two-Level Modeling with a Generalized Response</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#multregr-glmm"><i class="fa fa-check"></i><b>11.4.1</b> A GLM Approach</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#twostage-glmm"><i class="fa fa-check"></i><b>11.4.2</b> A Two-Stage Modeling Approach</a></li>
+<li class="chapter" data-level="11.4.3" data-path="ch-GLMM.html"><a href="ch-GLMM.html#unified-glmm"><i class="fa fa-check"></i><b>11.4.3</b> A Unified Multilevel Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="ch-GLMM.html"><a href="ch-GLMM.html#crossedre"><i class="fa fa-check"></i><b>11.5</b> Crossed Random Effects</a></li>
-<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Model Comparisons Using the Parametric Bootstrap</a></li>
-<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Potential Final Model for Examining Referee Bias</a></li>
+<li class="chapter" data-level="11.6" data-path="ch-GLMM.html"><a href="ch-GLMM.html#glmm-paraboot"><i class="fa fa-check"></i><b>11.6</b> Parametric Bootstrap for Model Comparisons</a></li>
+<li class="chapter" data-level="11.7" data-path="ch-GLMM.html"><a href="ch-GLMM.html#sec:finalmodel-glmm"><i class="fa fa-check"></i><b>11.7</b> A Final Model for Examining Referee Bias</a></li>
 <li class="chapter" data-level="11.8" data-path="ch-GLMM.html"><a href="ch-GLMM.html#estimatedRE"><i class="fa fa-check"></i><b>11.8</b> Estimated Random Effects</a></li>
-<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (Optional)</a></li>
+<li class="chapter" data-level="11.9" data-path="ch-GLMM.html"><a href="ch-GLMM.html#usingR-glmm"><i class="fa fa-check"></i><b>11.9</b> Notes on Using R (optional)</a></li>
 <li class="chapter" data-level="11.10" data-path="ch-GLMM.html"><a href="ch-GLMM.html#exercises-10"><i class="fa fa-check"></i><b>11.10</b> Exercises</a><ul>
 <li class="chapter" data-level="11.10.1" data-path="ch-GLMM.html"><a href="ch-GLMM.html#conceptual-exercises-8"><i class="fa fa-check"></i><b>11.10.1</b> Conceptual Exercises</a></li>
-<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-6"><i class="fa fa-check"></i><b>11.10.2</b> Open-ended Exercises</a></li>
+<li class="chapter" data-level="11.10.2" data-path="ch-GLMM.html"><a href="ch-GLMM.html#open-ended-exercises-7"><i class="fa fa-check"></i><b>11.10.2</b> Open-Ended Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -504,7 +511,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Identify a binomial random variable and assess the validity of the binomial assumptions.</li>
 <li>Write a generalized linear model for binomial responses in two forms, one as a function of the logit and one as a function of <span class="math inline">\(p\)</span>.</li>
-<li>Explain how fitting a logistic regression differs from fitting an linear least squares regression (LLSR) model.</li>
+<li>Explain how fitting a logistic regression differs from fitting a linear least squares regression (LLSR) model.</li>
 <li>Interpret estimated coefficients in logistic regression.</li>
 <li>Differentiate between logistic regression models with binary and binomial responses.</li>
 <li>Use the residual deviance to compare models, to test for lack-of-fit when appropriate, and to check for unusual observations or needed transformations.</li>
@@ -527,11 +534,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><strong>Binary Responses:</strong> Recall from Section <a href="ch-distthry.html#sec-binary">3.3.1</a> that binary responses take on only two values: success (Y=1) or failure (Y=0), Yes (Y=1) or No (Y=0), etc. Binary responses are ubiquitous; they are one of the most common types of data that statisticians encounter. We are often interested in modeling the probability of success <span class="math inline">\(p\)</span> based on a set of covariates, although sometimes we wish to use those covariates to classify a future observation as a success or a failure.</p>
 <p>Examples (a) and (b) above would be considered to have binary responses (Does a student binge drink? Was a patient diagnosed with cancer?), assuming that we have a unique set of covariates for each individual student or patient.</p>
-<p><strong>Binomial Responses:</strong> Also recall from Section <a href="ch-distthry.html#sec-binomial">3.3.2</a> that binomial responses are number of successes in <span class="math inline">\(n\)</span> identical, independent trials with constant probability <span class="math inline">\(p\)</span> of success. A sequence of independent trials like this with the same probability of success is called a <strong>Bernoulli process</strong>.  As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, <span class="math inline">\(p\)</span>, is associated with relevant covariates.</p>
-<p>Example (c) above would be considered to have a binonial response, assuming we have vote totals at the congressional district level rather than information on individual voters.</p>
+<p><strong>Binomial Responses:</strong> Also recall from Section <a href="ch-distthry.html#sec-binomial">3.3.2</a> that binomial responses are the number of successes in <span class="math inline">\(n\)</span> identical, independent trials with constant probability <span class="math inline">\(p\)</span> of success. A sequence of independent trials like this with the same probability of success is called a <strong>Bernoulli process</strong>.  As with binary responses, our objective in modeling binomial responses is to quantify how the probability of success, <span class="math inline">\(p\)</span>, is associated with relevant covariates.</p>
+<p>Example (c) above would be considered to have a binomial response, assuming we have vote totals at the congressional district level rather than information on individual voters.</p>
 <div id="logistic-regression-assumptions" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Logistic Regression Assumptions</h3>
-<p>Much like OLS, using <strong>logistic regression</strong>  to make inferences requires model assumptions.</p>
+<p>Much like ordinary least squares (OLS), using <strong>logistic regression</strong>  to make inferences requires model assumptions.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Binary Response</strong> The response variable is dichotomous (two possible responses) or the sum of dichotomous responses.</li>
 <li><strong>Independence</strong> The observations must be independent of one another.</li>
@@ -542,12 +549,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-graphical-look-at-logistic-regression" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> A Graphical Look at Logistic Regression</h3>
 <div class="figure" style="text-align: center"><span id="fig:OLSlogistic"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/OLSlogistic-1.png" alt="Linear vs. Logistic regression models for binary response data." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/OLSlogistic-1.png" alt="Linear vs. logistic regression models for binary response data." width="60%" />
 <p class="caption">
-Figure 6.1: Linear vs. Logistic regression models for binary response data.
+Figure 6.1: Linear vs. logistic regression models for binary response data.
 </p>
 </div>
-<p>Figure <a href="ch-logreg.html#fig:OLSlogistic">6.1</a> illustrates a data set with a binary (0 or 1) response (Y) and a single continuous predictor (X). The blue line is a linear regression fit with least squares to model the probability of a success (Y=1) for a given value of X. With a binary response, the line doesn’t fit the data well, and it produces predicted probabilities below 0 and above 1. On the other hand, the logistic regression fit (red curve) with its typical “S” shape follows the data closely and always produces predicted probabilities between 0 and 1. For these and several other reasons detailed in this chapter, we will focus on the following model for logistic regression with binary or binomial responses:</p>
+<p>Figure <a href="ch-logreg.html#fig:OLSlogistic">6.1</a> illustrates a data set with a binary (0 or 1) response (Y) and a single continuous predictor (X). The solid line is a linear regression fit with least squares to model the probability of a success (Y=1) for a given value of X. With a binary response, the line doesn’t fit the data well, and it produces predicted probabilities below 0 and above 1. On the other hand, the logistic regression fit (dashed curve) with its typical “S” shape follows the data closely and always produces predicted probabilities between 0 and 1. For these and several other reasons detailed in this chapter, we will focus on the following model for logistic regression with binary or binomial responses:</p>
 <p><span class="math display">\[\begin{equation*}
 log(\frac{p_i}{1-p_i})=\beta_0+\beta_1 x_i
 \end{equation*}\]</span>
@@ -556,17 +563,17 @@ where the observed values <span class="math inline">\(Y_i \sim\)</span> binomial
 </div>
 <div id="case-studies-overview-1" class="section level2">
 <h2><span class="header-section-number">6.3</span> Case Studies Overview</h2>
-<p>We consider three case studies in this chapter. The first two involve binomial responses (Soccer Goalkeepers and Reconstructing Alabama), while the last case uses a binary response (Trying to Lose Weight). Even though binary responses are much more common, their models have a very similar form to binomial responses, so the first two case studies will illustrate important principles that also apply to the binary case. Here are the statistical concepts you will encounter for each Case Study.</p>
-<p>The soccer goalkeeper data can be written in the form of a 2 <span class="math inline">\(\times\)</span> 2 table. This example is used to describe some of the underlying theory for logistic regression. We demonstrate how binomial probability mass functions (pmfs) can be written in one parameter exponential family form, from which we can identify the canonical link as in Chapter <a href="ch-glms.html#ch-glms">5</a>. Using the canonical link, we write a Generalized Linear Model for binomial counts and determine corresponding MLEs for model coefficients. Interpretation of the estimated parameters involves a fundamental concept, the odds ratio.</p>
-<p>The Reconstructing Alabama case study is another binomial example which introduces the notion of deviances, which are used to compare and assess models. Thus, we will investigate hypothesis tests and confidence intervals, including issues of interaction terms, overdispersion, and lack of fit. We will also check the assumptions of logistic regression using empirical logit plots and deviance residuals.</p>
+<p>We consider three case studies in this chapter. The first two involve binomial responses (Soccer Goalkeepers and Reconstructing Alabama), while the last case uses a binary response (Trying to Lose Weight). Even though binary responses are much more common, their models have a very similar form to binomial responses, so the first two case studies will illustrate important principles that also apply to the binary case. Here are the statistical concepts you will encounter for each case study.</p>
+<p>The soccer goalkeeper data can be written in the form of a 2 <span class="math inline">\(\times\)</span> 2 table. This example is used to describe some of the underlying theory for logistic regression. We demonstrate how binomial probability mass functions (pmfs) can be written in one-parameter exponential family form, from which we can identify the canonical link as in Chapter <a href="ch-glms.html#ch-glms">5</a>. Using the canonical link, we write a Generalized Linear Model for binomial counts and determine corresponding MLEs for model coefficients. Interpretation of the estimated parameters involves a fundamental concept, the odds ratio.</p>
+<p>The Reconstructing Alabama case study is another binomial example which introduces the notion of deviances, which are used to compare and assess models. Thus, we will investigate hypothesis tests and confidence intervals, including issues of interaction terms, overdispersion, and lack-of-fit. We will also check the assumptions of logistic regression using empirical logit plots and deviance residuals.</p>
 <p>The last case study addresses why teens try to lose weight. Here the response is a binary variable which allows us to analyze individual level data. The analysis builds on concepts from the previous sections in the context of a random sample from CDC’s Youth Risk Behavior Survey (YRBS).</p>
 </div>
 <div id="case-study-soccer-goalkeepers" class="section level2">
 <h2><span class="header-section-number">6.4</span> Case Study: Soccer Goalkeepers</h2>
-<p>Does the probability of a save in a soccer match depend upon whether the goalkeeper’s team is behind or not? <span class="citation">Roskes et al. (<a href="#ref-Roskes2011" role="doc-biblioref">2011</a>)</span> looked at penalty kicks in the men’s World Cup soccer championships from 1982 - 2010, and they assembled data on 204 penalty kicks during shootouts. The data for this study is summarized in Table <a href="ch-logreg.html#tab:table1chp6">6.1</a>.</p>
+<p>Does the probability of a save in a soccer match depend upon whether the goalkeeper’s team is behind or not? <span class="citation">Roskes et al. (<a href="#ref-Roskes2011" role="doc-biblioref">2011</a>)</span> looked at penalty kicks in the men’s World Cup soccer championships from 1982 to 2010, and they assembled data on 204 penalty kicks during shootouts. The data for this study is summarized in Table <a href="ch-logreg.html#tab:table1chp6">6.1</a>.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:table1chp6">Table 6.1: </span>Soccer goalkeepers’ penalty kick saves when their team is and is not behind. Source: Roskes et al. 2011 Psychological Science
+<span id="tab:table1chp6">Table 6.1: </span>Soccer goalkeepers’ penalty kick saves when their team is and is not behind.
 </caption>
 <thead>
 <tr>
@@ -627,6 +634,13 @@ Total
 </td>
 </tr>
 </tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> (Source: Roskes et al. 2011.)
+</td>
+</tr>
+</tfoot>
 </table>
 <div id="modeling-odds" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Modeling Odds</h3>
@@ -638,7 +652,7 @@ Total
 </div>
 <div id="logistic-regression-models-for-binomial-responses" class="section level3">
 <h3><span class="header-section-number">6.4.2</span> Logistic Regression Models for Binomial Responses</h3>
-<p>We would like to model the odds of success, however odds are strictly positive. Therefore, similar to modeling log(<span class="math inline">\(\lambda\)</span>) in Poisson regression, which allowed the response to take on values from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, we will model the log(odds), the <strong>logit</strong>,  in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:</p>
+<p>We would like to model the odds of success; however, odds are strictly positive. Therefore, similar to modeling log(<span class="math inline">\(\lambda\)</span>) in Poisson regression, which allowed the response to take on values from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, we will model the log(odds), the <strong>logit</strong>,  in logistic regression. Logits will be suitable for modeling with a linear function of the predictors:</p>
 <p><span class="math display">\[\begin{equation*}
 \log\left(\frac{p}{1 - p}\right)=\beta_0+\beta_1X 
  \end{equation*}\]</span>
@@ -679,7 +693,7 @@ p_0=\frac{e^{\beta_0}}{1+e^{\beta_0}}
 \tag{6.3}
 \end{equation}\]</span></p>
 <p>We use likelihood methods to estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. As we had done in Chapter <a href="ch-beyondmost.html#ch-beyondmost">2</a>, we can write the likelihood for this example in the following form:</p>
-<p><span class="math display">\[\mathrm{Lik}(p_1, p_0) = {28 \choose 22}p_1^{22}(1-p_1)^{2}
+<p><span class="math display">\[\mathrm{Lik}(p_1, p_0) = {24 \choose 22}p_1^{22}(1-p_1)^{2}
 {180 \choose 141}p_0^{141}(1-p_0)^{39}\]</span></p>
 <p>Our interest centers on estimating <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span>, not <span class="math inline">\(p_1\)</span> or <span class="math inline">\(p_0\)</span>. So we replace <span class="math inline">\(p_1\)</span> in the likelihood with an expression for <span class="math inline">\(p_1\)</span> in terms of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> as in Equation <a href="ch-logreg.html#eq:pBehindform">(6.2)</a>. Similarly, <span class="math inline">\(p_0\)</span> in Equation <a href="ch-logreg.html#eq:pNotBehindform">(6.3)</a> involves only <span class="math inline">\(\beta_0\)</span>. After removing constants, the new likelihood looks like:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -690,17 +704,17 @@ p_0=\frac{e^{\beta_0}}{1+e^{\beta_0}}
 \end{gathered}
 \end{equation*}\]</span></p>
 <p>Now what? Fitting the model means finding estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, but familiar methods from calculus for maximizing the likelihood don’t work here. Instead, we consider all possible combinations of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. That is, we will pick that pair of values for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that yield the largest likelihood for our data. Trial and error to find the best pair is tedious at best, but more efficient numerical methods are available. The MLEs for the coefficients in the soccer goalkeeper study are <span class="math inline">\(\hat{\beta_0}= 1.2852\)</span> and <span class="math inline">\(\hat{\beta_1}=1.1127\)</span>.</p>
-<p>Exponentiating <span class="math inline">\(\hat{\beta_1}\)</span> provides an estimate of the odds ratio (the odds of scoring when the goalkeeper’s team is behind compared to the odds of scoring when the team is not behind) of 3.04, which is consistent with our calculations using the 2 <span class="math inline">\(\times\)</span> 2 table. We estimate that the odds of scoring when the goalkeeper’s team is behind is over 3 times that of when the team is not behind or, in other words, the odds a shooter is successful in a penalty kick shootout are 3.04 times higher when his team is leading.
+<p>Exponentiating <span class="math inline">\(\hat{\beta_1}\)</span> provides an estimate of the odds ratio (the odds of scoring when the goalkeeper’s team is behind, compared to the odds of scoring when the team is not behind) of 3.04, which is consistent with our calculations using the 2 <span class="math inline">\(\times\)</span> 2 table. We estimate that the odds of scoring when the goalkeeper’s team is behind is over 3 times that of when the team is not behind or, in other words, the odds a shooter is successful in a penalty kick shootout are 3.04 times higher when his team is leading.
 </p>
-<p><strong>Time out for study discussion (Optional).</strong></p>
+<p><strong>Time out for study discussion (optional).</strong></p>
 <ul>
 <li><p>Discuss the following quote from the study abstract: “Because penalty takers shot at the two sides of the goal equally often, the goalkeepers’ right-oriented bias was dysfunctional, allowing more goals to be scored.”</p></li>
 <li><p>Construct an argument for why the greater success observed when the goalkeeper’s team was behind might be better explained from the shooter’s perspective.</p></li>
 </ul>
-<p>Before we go on, you may be curious as to why there is <em>no error term</em> in our model statements for logistic or Poisson regression. One way to look at it is to consider that all models describe how observed values are generated. With the logistic model we assume that the observations are generated as a binomial random variables. Each observation or realization of <span class="math inline">\(Y\)</span> = number of successes in <span class="math inline">\(n\)</span> independent and identical trials with a probability of success on any one trial of <span class="math inline">\(p\)</span> is produced by <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>. So the randomness in this model is not introduced by an added error term but rather by appealing to a Binomial probability distribution, where variability depends only on <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> through <span class="math inline">\(\textrm{Var}(Y)=np(1-p)\)</span>, and where <span class="math inline">\(n\)</span> is usually considered fixed and <span class="math inline">\(p\)</span> the parameter of interest.</p>
+<p>Before we go on, you may be curious as to why there is <em>no error term</em> in our model statements for logistic or Poisson regression. One way to look at it is to consider that all models describe how observed values are generated. With the logistic model we assume that the observations are generated as binomial random variables. Each observation or realization of <span class="math inline">\(Y\)</span> = number of successes in <span class="math inline">\(n\)</span> independent and identical trials with a probability of success on any one trial of <span class="math inline">\(p\)</span> is produced by <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>. So the randomness in this model is not introduced by an added error term, but rather by appealing to a binomial probability distribution, where variability depends only on <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> through <span class="math inline">\(\textrm{Var}(Y)=np(1-p)\)</span>, and where <span class="math inline">\(n\)</span> is usually considered fixed and <span class="math inline">\(p\)</span> the parameter of interest.</p>
 </div>
-<div id="theoretical-rationale-for-logistic-regression-models-optional" class="section level3">
-<h3><span class="header-section-number">6.4.3</span> Theoretical rationale for logistic regression models (Optional)</h3>
+<div id="theoretical-rationale-optional" class="section level3">
+<h3><span class="header-section-number">6.4.3</span> Theoretical Rationale (optional)</h3>
 <p>Recall from Chapter <a href="ch-glms.html#ch-glms">5</a> that generalized linear models (GLMs)  are a way in which to model a variety of different types of responses. In this chapter, we apply the general results of GLMs to the specific application of binomial responses. Let <span class="math inline">\(Y\)</span> = the number scored out of <span class="math inline">\(n\)</span> penalty kicks. The parameter, <span class="math inline">\(p\)</span>, is the probability of a score on a single penalty kick. Recall that the theory of GLMs is based on the unifying notion of the one-parameter exponential family form:</p>
 <p><span class="math display">\[\begin{equation*}
 f(y;\theta)=e^{[a(y)b(\theta)+c(\theta)+d(y)]}
@@ -711,18 +725,18 @@ To see that we can apply the general approach of GLMs  to binomial responses, we
 P(Y=y)&amp;= \binom{n}{y}p^y(1-p)^{(n-y)} \\
       &amp;=e^{y\log(p) + (n-y)\log(1-p) + \log\binom{n}{y}}
 \end{align*}\]</span>
-However, this probability mass function is not quite in one parameter exponential family form. Note that there are two terms in the exponent which consist of a product of functions of <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span>. So more simplification is in order:</p>
+However, this probability mass function is not quite in one-parameter exponential family form. Note that there are two terms in the exponent which consist of a product of functions of <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span>. So more simplification is in order:</p>
 <p><span class="math display">\[\begin{equation*}
 P(Y=y) = e^{y\log\left(\frac{p}{1-p}\right) + n\log(1-p)+ \log\binom{n}{y}}
 \end{equation*}\]</span>
 Don’t forget to consider the support; we must make sure that the set of possible values for this response is not dependent upon <span class="math inline">\(p\)</span>. For fixed <span class="math inline">\(n\)</span> and any value of <span class="math inline">\(p\)</span>, <span class="math inline">\(0&lt;p&lt;1\)</span>, all integer values from <span class="math inline">\(0\)</span> to <span class="math inline">\(n\)</span> are possible, so the support is indeed independent of <span class="math inline">\(p\)</span>.</p>
-<p>The one parameter exponential family form for binomial responses shows that the canonical link is <span class="math inline">\(\log\left(\frac{p}{1-p}\right)\)</span>. Thus, GLM theory suggests that constructing a model using the logit, the log odds of a score, as a linear function of covariates is a reasonable approach.</p>
+<p>The one-parameter exponential family form for binomial responses shows that the canonical link is <span class="math inline">\(\log\left(\frac{p}{1-p}\right)\)</span>. Thus, GLM theory suggests that constructing a model using the logit, the log odds of a score, as a linear function of covariates is a reasonable approach.</p>
 </div>
 </div>
 <div id="case-study-reconstructing-alabama" class="section level2">
 <h2><span class="header-section-number">6.5</span> Case Study: Reconstructing Alabama</h2>
-<p>This case study demonstrates how wide-ranging applications of statistics can be. Many would not associate statistics with historical research, but this case study shows that it can be done. US Census data from 1870 helped historian Michael Fitzgerald of St. Olaf College gain insight into important questions about how railroads were supported during the Reconstruction Era.</p>
-<p>In a paper entitled “Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research,” Ben Bayer performs an analysis of data from 1870 to explain influences on voting on referendums related to railroad subsidies <span class="citation">(Bayer and Fitzgerald <a href="#ref-Bayer2011" role="doc-biblioref">2011</a>)</span>. Positive votes are hypothesized to be inversely proportional to the distance a voter is from the proposed railroad, but the racial composition of a community (as measured by the percentage of blacks) is hypothesized to be associated with voting behavior as well. Separate analyses of three counties in Alabama—Hale, Clarke, and Dallas—were performed; we discuss Hale County here. This example differs from the soccer example in that it includes continuous covariates. Was voting on railroad referenda related to distance from the proposed railroad line and the racial composition of a community?</p>
+<p>This case study demonstrates how wide-ranging applications of statistics can be. Many would not associate statistics with historical research, but this case study shows that it can be done. U.S. Census data from 1870 helped historian Michael Fitzgerald of St. Olaf College gain insight into important questions about how railroads were supported during the Reconstruction Era.</p>
+<p>In a paper entitled “Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research,” Ben Bayer performs an analysis of data from 1870 to explain factors that influence voting on referendums related to railroad subsidies <span class="citation">(Bayer and Fitzgerald <a href="#ref-Bayer2011" role="doc-biblioref">2011</a>)</span>. Positive votes are hypothesized to be inversely proportional to the distance a voter is from the proposed railroad, but the racial composition of a community (as measured by the percentage of blacks) is hypothesized to be associated with voting behavior as well. Separate analyses of three counties in Alabama—Hale, Clarke, and Dallas—were performed; we discuss Hale County here. This example differs from the soccer example in that it includes continuous covariates. Was voting on railroad referenda related to distance from the proposed railroad line and the racial composition of a community?</p>
 <div id="data-organization-3" class="section level3">
 <h3><span class="header-section-number">6.5.1</span> Data Organization</h3>
 <p>The unit of observation for this data is a community in Hale County. We will focus on the following variables from <code>RR_Data_Hale.csv</code> collected for each community (see Table <a href="ch-logreg.html#tab:table2chp6">6.2</a>):</p>
@@ -838,14 +852,14 @@ Figure 6.2:  Scatterplot of distance from a proposed rail line and percent black
 </div>
 <p>Recall that a model with two covariates has the form:</p>
 <p><span class="math display">\[\log(\textrm{odds}) = \log\left(\frac{p}{1-p}\right) = \beta_0+\beta_1X_1+\beta_2X_2.\]</span>
-where <span class="math inline">\(p\)</span> is the proportion of Yes votes in a community. In logistic regression, we expect the logits to be a linear function of <span class="math inline">\(X\)</span>, the predictors. To assess the linearity assumption, we construct <strong>empirical logit plots</strong>,  where “empirical” means “based on sample data.” Empirical logits are computed for each community by taking <span class="math inline">\(\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)\)</span>. In Figure <a href="ch-logreg.html#fig:emplogits">6.3</a>, we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2% voting yes with only 59.4% black.</p>
+where <span class="math inline">\(p\)</span> is the proportion of Yes votes in a community. In logistic regression, we expect the logits to be a linear function of <span class="math inline">\(X\)</span>, the predictors. To assess the linearity assumption, we construct <strong>empirical logit plots</strong>,  where “empirical” means “based on sample data.” Empirical logits are computed for each community by taking <span class="math inline">\(\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)\)</span>. In Figure <a href="ch-logreg.html#fig:emplogits">6.3</a>, we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2% voting yes, with only 59.4% black.</p>
 <div class="figure" style="text-align: center"><span id="fig:emplogits"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/emplogits-1.png" alt="Empirical logit plots for the Railroad Referendum data." width="60%" />
 <p class="caption">
 Figure 6.3: Empirical logit plots for the Railroad Referendum data.
 </p>
 </div>
-<p>In addition to examining how the response correlates with the predictors, it is a good idea to determine whether the predictors correlate with one another. Here the correlation between distance and percent black is negative and moderately strong with <span class="math inline">\(r = -0.49\)</span>. We’ll watch to see if the correlation affects the stability of our odds ratio estimates.</p>
+<p>In addition to examining how the response correlates with the predictors, it is a good idea to determine whether the predictors correlate with one another. Here, the correlation between distance and percent black is negative and moderately strong with <span class="math inline">\(r = -0.49\)</span>. We’ll watch to see if the correlation affects the stability of our odds ratio estimates.</p>
 </div>
 <div id="initial-models-1" class="section level3">
 <h3><span class="header-section-number">6.5.3</span> Initial Models</h3>
@@ -876,10 +890,10 @@ where <span class="math inline">\(\hat{p}_i\)</span> is the estimated proportion
 <p>Despite the somewhat strong negative correlation between percent black and distance, the estimated odds ratio for distance remains approximately the same in this new model (OR <span class="math inline">\(= e^{-0.29} = 0.747\)</span>); controlling for percent black does little to change our estimate of the effect of distance. For each additional mile from the proposed railroad, odds of a Yes vote declines by 25.3% after adjusting for the racial composition of a community. We also see that, for a fixed distance from the proposed railroad, the odds of a Yes vote declines by 1.3% (OR <span class="math inline">\(= e^{-.0132} = .987\)</span>) for each additional percent black in the community.</p>
 </div>
 <div id="sec-logisticInf" class="section level3">
-<h3><span class="header-section-number">6.5.4</span> Tests for significance of model coefficients</h3>
-<p>Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section <a href="ch-poissonreg.html#cs-philippines">4.4</a> with Poisson regression, there are two primary approaches to testing signficance of model coefficients: <strong>Drop-in-deviance test to compare models</strong>  and <strong>Wald test for a single coefficient</strong>. </p>
+<h3><span class="header-section-number">6.5.4</span> Tests for Significance of Model Coefficients</h3>
+<p>Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section <a href="ch-poissonreg.html#cs-philippines">4.4</a> with Poisson regression, there are two primary approaches to testing significance of model coefficients: <strong>Drop-in-deviance test to compare models</strong>  and <strong>Wald test for a single coefficient</strong>. </p>
 <p>With our larger model given by <span class="math inline">\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i\)</span>, the Wald test produces a highly significant p-value (<span class="math inline">\(Z=\frac{-0.0132}{0.0039}= -3.394\)</span>, <span class="math inline">\(p=.00069\)</span>) indicating significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.</p>
-<p>The drop in deviance test would compare the larger model above to the reduced model <span class="math inline">\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i\)</span> by comparing residual deviances from the two models.</p>
+<p>The drop-in-deviance test would compare the larger model above to the reduced model <span class="math inline">\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i\)</span> by comparing residual deviances from the two models.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ch-logreg.html#cb123-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.HaleD, model.HaleBD, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1       9    318.4       NA NA        NA
@@ -888,7 +902,7 @@ where <span class="math inline">\(\hat{p}_i\)</span> is the estimated proportion
 <p>A third approach to determining significance of <span class="math inline">\(\beta_2\)</span> would be to generate a 95% confidence interval and then checking if 0 falls within the interval or, equivalently, if 1 falls within a 95% confidence interval for <span class="math inline">\(e^{\beta_2}.\)</span> The next section describes two approaches to producing a confidence interval for coefficients in logistic regression models.</p>
 </div>
 <div id="confidence-intervals-for-model-coefficients" class="section level3">
-<h3><span class="header-section-number">6.5.5</span> Confidence intervals for model coefficients</h3>
+<h3><span class="header-section-number">6.5.5</span> Confidence Intervals for Model Coefficients</h3>
 <p>Since the Wald statistic follows a normal distribution with <span class="math inline">\(n\)</span> large, we could generate a Wald-type (normal-based) confidence interval  for <span class="math inline">\(\beta_2\)</span> using:</p>
 <p><span class="math display">\[\hat\beta_2 \pm 1.96\cdot\textrm{SE}(\hat\beta_2)\]</span>
 and then exponentiating endpoints if we prefer a confidence interval for the odds ratio <span class="math inline">\(e^{\beta_2}\)</span>. In this case,</p>
@@ -912,12 +926,12 @@ pctBlack     0.9794   0.9945</code></pre>
 <p>In the model with <code>distance</code> and <code>pctBlack</code>, the profile likelihood 95% confidence interval for <span class="math inline">\(e^{\beta_2}\)</span> is (.979, .994), which is approximately equal to the Wald-based interval despite the small sample size. We can also confirm the statistically significant association between percent black and odds of voting Yes (after controlling for distance), because 1 is not a plausible value of <span class="math inline">\(e^{\beta_2}\)</span> (where an odds ratio of 1 would imply that the odds of voting Yes do not change with percent black).</p>
 </div>
 <div id="testing-for-goodness-of-fit" class="section level3">
-<h3><span class="header-section-number">6.5.6</span> Testing for goodness of fit</h3>
-<p>As in Section <a href="ch-poissonreg.html#sec-PoisGOF">4.4.9</a>, we can evaluate the goodness of fit for our model by comparing the residual deviance (307.22) to a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> (8) degrees of freedom.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="ch-logreg.html#cb127-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(<span class="fl">307.2173</span>, <span class="dv">8</span>)  <span class="co"># Goodness of fit test</span></span></code></pre></div>
+<h3><span class="header-section-number">6.5.6</span> Testing for Goodness-of-Fit</h3>
+<p>As in Section <a href="ch-poissonreg.html#sec-PoisGOF">4.4.9</a>, we can evaluate the goodness-of-fit for our model by comparing the residual deviance (307.22) to a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> (8) degrees of freedom.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="ch-logreg.html#cb127-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(<span class="fl">307.2173</span>, <span class="dv">8</span>)  <span class="co"># Goodness-of-fit test</span></span></code></pre></div>
 <pre><code>[1] 0</code></pre>
-<p>The model with <code>pctBlack</code> and <code>distance</code> has statistically significant evidence of lack of fit (<span class="math inline">\(p&lt;.001\)</span>).</p>
-<p>Similar to the Poisson regression models, this lack of fit  could result from (a) missing covariates, (b) outliers, or (c) overdispersion. We will first attempt to address (a) by fitting a model with an interaction between distance and percent black, to determine whether the effect of racial composition differs based on how far a community is from the proposed railroad.</p>
+<p>The model with <code>pctBlack</code> and <code>distance</code> has statistically significant evidence of lack-of-fit (<span class="math inline">\(p&lt;.001\)</span>).</p>
+<p>Similar to the Poisson regression models, this lack-of-fit  could result from (a) missing covariates, (b) outliers, or (c) overdispersion. We will first attempt to address (a) by fitting a model with an interaction between distance and percent black, to determine whether the effect of racial composition differs based on how far a community is from the proposed railroad.</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="ch-logreg.html#cb129-1"></a>model.HaleBxD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
 <span id="cb129-2"><a href="ch-logreg.html#cb129-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
 <span id="cb129-3"><a href="ch-logreg.html#cb129-3"></a>  <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
@@ -938,9 +952,9 @@ pctBlack     0.9794   0.9945</code></pre>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1       8    307.2       NA NA        NA
 2       7    274.2    32.98  1 9.294e-09</code></pre>
-<p>We have statistically significant evidence (Wald test: <span class="math inline">\(Z = 5.974, p&lt;.001\)</span>; Drop in deviance test: <span class="math inline">\(\chi^2=32.984, p&lt;.001\)</span>) that the effect of the proportion of the community that is black on the odds of voting Yes depends on the distance of the community from the proposed railroad.</p>
+<p>We have statistically significant evidence (Wald test: <span class="math inline">\(Z = 5.974, p&lt;.001\)</span>; Drop-in-deviance test: <span class="math inline">\(\chi^2=32.984, p&lt;.001\)</span>) that the effect of the proportion of the community that is black on the odds of voting Yes depends on the distance of the community from the proposed railroad.</p>
 <p>To interpret the interaction coefficient in context, we will compare two cases: one where a community is right on the proposed railroad (<code>distance</code> = 0), and the other where the community is 15 miles away (<code>distance</code> = 15). The significant interaction implies that the effect of <code>pctBlack</code> should differ in these two cases. In the first case, the coefficient for <code>pctBlack</code> is -0.0647, while in the second case, the relevant coefficient is <span class="math inline">\(-0.0647+15(.00537) = 0.0158\)</span>. Thus, for a community right on the proposed railroad, a 1% increase in percent black is associated with a 6.3% (<span class="math inline">\(e^{-.0647}=.937\)</span>) decrease in the odds of voting Yes, while for a community 15 miles away, a 1% increase in percent black is associated with a (<span class="math inline">\(e^{.0158}=1.016\)</span>) 1.6% <em>increase</em> in the odds of voting Yes. A significant interaction term doesn’t always imply a change in the direction of the association, but it does here.</p>
-<p>Because our interaction model still exhibits lack of fit (residual deviance of 274.23 on just 7 df), and because we have used the covariates at our disposal, we will assess this model for potential outliers and overdispersion by examining the model’s residuals.</p>
+<p>Because our interaction model still exhibits lack-of-fit (residual deviance of 274.23 on just 7 df), and because we have used the covariates at our disposal, we will assess this model for potential outliers and overdispersion by examining the model’s residuals.</p>
 </div>
 <div id="residuals-for-binomial-regression" class="section level3">
 <h3><span class="header-section-number">6.5.7</span> Residuals for Binomial Regression</h3>
@@ -958,7 +972,7 @@ A deviance residual can be calculated for each observation using:</p>
 (m_i - Y_i) \log\left(\frac{m_i - Y_i}{m_i - m_i \hat{p_i}}\right)]}
 \end{equation*}\]</span></p>
 <p>When the number of trials is large for all of the observations and the models are appropriate, both sets of residuals should follow a standard normal distribution.</p>
-<p>The sum of the individual deviance residuals is referred to as the <strong>deviance</strong> or <strong>residual deviance</strong>.  The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, <span class="math inline">\(m_i\)</span>, are large and a model fits, the residual deviance follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a <span class="math inline">\(\chi_{n-p}^2\)</span> that are greater than the observed residual deviance.</p>
+<p>The sum of the individual deviance residuals is referred to as the <strong>deviance</strong> or <strong>residual deviance</strong>.  The residual deviance is used to assess the model. As the name suggests, a model with a small deviance is preferred. In the case of binomial regression, when the denominators, <span class="math inline">\(m_i\)</span>, are large and a model fits, the residual deviance follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom (the residual degrees of freedom). Thus for a good fitting model the residual deviance should be approximately equal to its corresponding degrees of freedom. When binomial data meets these conditions, the deviance can be used for a goodness-of-fit test. The p-value for lack-of-fit is the proportion of values from a <span class="math inline">\(\chi_{n-p}^2\)</span> distribution that are greater than the observed residual deviance.</p>
 <p>We begin a residual analysis of our interaction model by plotting the residuals against the fitted values in Figure <a href="ch-logreg.html#fig:resid">6.4</a>. This kind of plot for binomial regression would produce two linear trends with similar negative slopes if there were equal sample sizes <span class="math inline">\(m_i\)</span> for each observation.</p>
 <div class="figure" style="text-align: center"><span id="fig:resid"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/resid-1.png" alt="Fitted values by residuals for the interaction model for the Railroad Referendum data." width="60%" />
@@ -970,17 +984,17 @@ Figure 6.4: Fitted values by residuals for the interaction model for the Railroa
 </div>
 <div id="sec-logOverdispersion" class="section level3">
 <h3><span class="header-section-number">6.5.8</span> Overdispersion</h3>
-<p>Similarly to Poisson regression we can adjust for overdispersion  in binomial regression. With overdispersion there is <strong>extra-binomial variation</strong>,  so the actual variance will be greater than the variance of a binomial variable, <span class="math inline">\(np(1-p)\)</span>. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), <span class="math inline">\(\hat{\phi}\)</span>, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section <a href="ch-poissonreg.html#sec-overdispPois">4.9</a>, and we will use the same estimate here: <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span>.</p>
+<p>Similar to Poisson regression, we can adjust for overdispersion  in binomial regression. With overdispersion there is <strong>extra-binomial variation</strong>,  so the actual variance will be greater than the variance of a binomial variable, <span class="math inline">\(np(1-p)\)</span>. One way to adjust for overdispersion is to estimate a multiplier (dispersion parameter), <span class="math inline">\(\hat{\phi}\)</span>, for the variance that will inflate it and reflect the reduction in the amount of information we would otherwise have with independent observations. We used a similar approach to adjust for overdispersion in a Poisson regression model in Section <a href="ch-poissonreg.html#sec-overdispPois">4.9</a>, and we will use the same estimate here: <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span>.</p>
 <p>When overdispersion is adjusted for in this way, we can no longer use maximum likelihood to fit our regression model; instead we use a quasilikelihood approach.  Quasilikelihood is similar to likelihood-based inference, but because the model uses the dispersion parameter, it is not a binomial model with a true likelihood (we call it <strong>quasibinomial</strong>).  R offers quasilikelihood as an option when model fitting. The quasilikelihood approach will yield the same coefficient point estimates as maximum likelihood; however, the variances will be larger in the presence of overdispersion (assuming <span class="math inline">\(\phi&gt;1\)</span>). We will see other ways in which to deal with overdispersion and clusters in the remaining chapters in the book, but the following describes how overdispersion is accounted for using <span class="math inline">\(\hat{\phi}\)</span>:
 </p>
-<p><strong>Summary: Accounting for Overdispersion</strong></p>
+<p><strong>Summary: accounting for overdispersion</strong></p>
 <ul>
-<li>Use the dispersion parameter <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span> to inflate standard errors of model coefficients</li>
-<li>Wald test statistics: multiply the standard errors by <span class="math inline">\(\sqrt{\hat{\phi}}\)</span> so that <span class="math inline">\(\textrm{SE}_\textrm{Q}(\hat\beta)=\sqrt{\hat\phi}\cdot\textrm{SE}(\hat\beta)\)</span> and conduct tests using the <span class="math inline">\(t\)</span>-distribution</li>
-<li>CIs use the adjusted standard errors and multiplier based on <span class="math inline">\(t\)</span>, so they are thereby wider: <span class="math inline">\(\hat\beta \pm t_{n-p} \cdot \textrm{SE}_\textrm{Q}(\hat\beta)\)</span></li>
-<li>Drop-in-deviance test statistic comparing Model 1 (larger model with <span class="math inline">\(p\)</span> parameters) to Model 2 (smaller model with <span class="math inline">\(q&lt;p\)</span> parameters) is <span class="math inline">\(F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}\)</span> where <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> are the residual deviances for models 1 and 2 respectively and <span class="math inline">\(p-q\)</span> is the difference in the number of parameters for the two models. Note that both <span class="math inline">\(D_2-D_1\)</span> and <span class="math inline">\(p-q\)</span> are positive. This test statistic is compared to an F-distribution with <span class="math inline">\(p-q\)</span> and <span class="math inline">\(n-p\)</span> degrees of freedom.</li>
+<li>Use the dispersion parameter <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span> to inflate standard errors of model coefficients.</li>
+<li>Wald test statistics: multiply the standard errors by <span class="math inline">\(\sqrt{\hat{\phi}}\)</span> so that <span class="math inline">\(\textrm{SE}_\textrm{Q}(\hat\beta)=\sqrt{\hat\phi}\cdot\textrm{SE}(\hat\beta)\)</span> and conduct tests using the <span class="math inline">\(t\)</span>-distribution.</li>
+<li>Confidence intervals use the adjusted standard errors and multiplier based on <span class="math inline">\(t\)</span>, so they are thereby wider: <span class="math inline">\(\hat\beta \pm t_{n-p} \cdot \textrm{SE}_\textrm{Q}(\hat\beta)\)</span>.</li>
+<li>Drop-in-deviance test statistic comparing Model 1 (larger model with <span class="math inline">\(p\)</span> parameters) to Model 2 (smaller model with <span class="math inline">\(q&lt;p\)</span> parameters) is <span class="math inline">\(F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}\)</span> where <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> are the residual deviances for models 1 and 2, respectively, and <span class="math inline">\(p-q\)</span> is the difference in the number of parameters for the two models. Note that both <span class="math inline">\(D_2-D_1\)</span> and <span class="math inline">\(p-q\)</span> are positive. This test statistic is compared to an F-distribution with <span class="math inline">\(p-q\)</span> and <span class="math inline">\(n-p\)</span> degrees of freedom.</li>
 </ul>
-<p>Output for a model which adjusts our interaction model for overdispersion appears below, where <span class="math inline">\(\hat{\phi}=51.6\)</span> is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of <span class="math inline">\(\sqrt{51.6}=7.2\)</span>. As a results, there are no significant terms in the adjusted interaction model below.</p>
+<p>Output for a model which adjusts our interaction model for overdispersion appears below, where <span class="math inline">\(\hat{\phi}=51.6\)</span> is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of <span class="math inline">\(\sqrt{51.6}=7.2\)</span>. As a result, there are no significant terms in the adjusted interaction model below.</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="ch-logreg.html#cb134-1"></a>model.HaleBxDq &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
 <span id="cb134-2"><a href="ch-logreg.html#cb134-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
 <span id="cb134-3"><a href="ch-logreg.html#cb134-3"></a>  <span class="dt">family =</span> quasibinomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
@@ -1020,15 +1034,15 @@ pctBlack    0.9366    1.044</code></pre>
 <p>We began by fitting a logistic regression model with <code>distance</code> alone. Then we added the covariate <code>pctBlack</code>, and the Wald-type test and the drop-in-deviance test both provided strong support for the addition of <code>pctBlack</code> to the model. The model with <code>distance</code> and <code>pctBlack</code> had a large residual deviance suggesting an ill-fitted model. When we looked at the residuals, we saw that Greensboro is an extreme observation. Models without Greensboro were fitted and compared to our initial models. Seeing no appreciable improvement or differences with Greensboro removed, we left it in the model. There remained a large residual deviance so we attempted to account for it by using an estimated dispersion parameter similar to Section <a href="ch-poissonreg.html#sec-overdispPois">4.9</a> with Poisson regression. The final model included distance and percent black, although percent black was no longer significant after adjusting for overdispersion.</p>
 </div>
 </div>
-<div id="linear-least-squares-regression-vs.-binomial-logistic-regression" class="section level2">
-<h2><span class="header-section-number">6.6</span> Linear Least Squares Regression  vs. Binomial Logistic Regression </h2>
+<div id="linear-least-squares-vs.-binomial-regression" class="section level2">
+<h2><span class="header-section-number">6.6</span> Linear Least Squares  vs. Binomial Regression </h2>
 <p><span class="math display">\[\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{LLSR:}\textrm{ normal} \\
 \mathbf{Binomial\ Regression:}\textrm{ number of successes in n trials} \\
 \textrm{ } \\
 \underline{\textrm{Variance}} \\
-\mathbf{LLSR:}\textrm{ Equal for each level of}\ X \\
+\mathbf{LLSR:}\textrm{ equal for each level of}\ X \\
 \mathbf{Binomial\ Regression:}\ np(1-p)\textrm{ for each level of}\ X \\
 \textrm{ } \\
 \underline{\textrm{Model Fitting}} \\
@@ -1038,10 +1052,11 @@ pctBlack    0.9366    1.044</code></pre>
 \underline{\textrm{EDA}} \\
 \mathbf{LLSR:}\textrm{ plot $X$ vs. $Y$; add line} \\
 \mathbf{Binomial\ Regression:}\textrm{ find $\log(\textrm{odds})$ for several subgroups; plot vs. $X$} \\
-\textrm{ } \\
+\end{gather*}\]</span></p>
+<p><span class="math display">\[\begin{gather*}
 \underline{\textrm{Comparing Models}} \\
 \mathbf{LLSR:}\textrm{ extra sum of squares F-tests; AIC/BIC} \\
-\mathbf{Binomial\ Regression:}\textrm{ Drop in Deviance tests; AIC/BIC} \\
+\mathbf{Binomial\ Regression:}\textrm{ drop-in-deviance tests; AIC/BIC} \\
 \textrm{ } \\
 \underline{\textrm{Interpreting Coefficients}} \\
 \mathbf{LLSR:}\ \beta_1=\textrm{ change in mean response for unit change in $X$} \\
@@ -1050,11 +1065,11 @@ pctBlack    0.9366    1.044</code></pre>
 </div>
 <div id="case-study-trying-to-lose-weight" class="section level2">
 <h2><span class="header-section-number">6.7</span> Case Study: Trying to Lose Weight</h2>
-<p>The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.). This type of problem—<strong>binary logistic regression</strong>—is exceedingly common in practice . Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among US youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.</p>
+<p>The final case study uses individual-specific information so that our response, rather than the number of successes out of some number of trials, is simply a binary variable taking on values of 0 or 1 (for failure/success, no/yes, etc.). This type of problem—<strong>binary logistic regression</strong>—is exceedingly common in practice.  Here we examine characteristics of young people who are trying to lose weight. The prevalence of obesity among U.S. youth suggests that wanting to lose weight is sensible and desirable for some young people such as those with a high body mass index (BMI). On the flip side, there are young people who do not need to lose weight but make ill-advised attempts to do so nonetheless. A multitude of studies on weight loss focus specifically on youth and propose a variety of motivations for the young wanting to lose weight; athletics and the media are two commonly cited sources of motivation for losing weight for young people.</p>
 <p>Sports have been implicated as a reason for young people wanting to shed pounds, but not all studies are consistent with this idea. For example, a study by <span class="citation">Martinsen et al. (<a href="#ref-Martinsen2009" role="doc-biblioref">2009</a>)</span> reported that, despite preconceptions to the contrary, there was a higher rate of self-reported eating disorders among controls (non-elite athletes) as opposed to elite athletes. Interestingly, the kind of sport was not found to be a factor, as participants in leanness sports (for example, distance running, swimming, gymnastics, dance, and diving) did not differ in the proportion with eating disorders when compared to those in non-leanness sports. So, in our analysis, we will not make a distinction between different sports.</p>
 <p>Other studies suggest that mass media is the culprit. They argue that students’ exposure to unrealistically thin celebrities may provide unhealthy motivation for some, particularly young women, to try to slim down. An examination and analysis of a large number of related studies (referred to as a <strong>meta-analysis</strong>) <span class="citation">(Grabe, Hyde, and Ward <a href="#ref-Grabe2008" role="doc-biblioref">2008</a>)</span> found a strong relationship between exposure to mass media and the amount of time that adolescents spend talking about what they see in the media, deciphering what it means, and figuring out how they can be more like the celebrities.</p>
-<p>We are interested in the following questions: Are the odds that young females report trying to lose weight greater that the odds that males do? Is increasing BMI is associated with an interest in losing weight, regardless of sex? Does sports participation increase the desire to lose weight? Is media exposure is associated with more interest in losing weight?</p>
-<p>We have sample of 500 teens from data collected in 2009 through the U.S. Youth Risk Behavior Surveillance System (YRBSS) <span class="citation">(Centers for Disease Control and Prevention <a href="#ref-YRBS2009" role="doc-biblioref">2009</a>)</span>. The YRBSS is an annual national school-based survey conducted by the Centers for Disease Control and Prevention (CDC) and state, territorial, and local education and health agencies and tribal governments. More information on this survey can be found <a href="http://www.cdc.gov/HealthyYouth/yrbs/index.htm">here</a>.</p>
+<p>We are interested in the following questions: Are the odds that young females report trying to lose weight greater than the odds that males do? Is increasing BMI associated with an interest in losing weight, regardless of sex? Does sports participation increase the desire to lose weight? Is media exposure associated with more interest in losing weight?</p>
+<p>We have a sample of 500 teens from data collected in 2009 through the U.S. Youth Risk Behavior Surveillance System (YRBSS) <span class="citation">(Centers for Disease Control and Prevention <a href="#ref-YRBS2009" role="doc-biblioref">2009</a>)</span>. The YRBSS is an annual national school-based survey conducted by the Centers for Disease Control and Prevention (CDC) and state, territorial, and local education and health agencies and tribal governments. More information on this survey can be found <a href="http://www.cdc.gov/HealthyYouth/yrbs/index.htm">here</a>.</p>
 <div id="data-organization-4" class="section level3">
 <h3><span class="header-section-number">6.7.1</span> Data Organization</h3>
 <p>Here are the three questions from the YRBSS we use for our investigation:</p>
@@ -1082,17 +1097,17 @@ pctBlack    0.9366    1.044</code></pre>
 <li>C. 2 teams</li>
 <li>D. 3 or more teams</li>
 </ul>
-<p>Answers to Q66 are used to define our response variable: Y = 1 corresponds to “(A) trying to lose weight”, while Y = 0 corresponds to the other non-missing values. Q84 provides information on students’ sports participation and is treated as numerical, 0 through 3, with 3 representing 3 or more. As a proxy for media exposure we use answers to Q81 as numerical values 0, 0.5, 1, 2, 3, 4, and 5, with 5 representing 5 or more. Media exposure and sports participation are also considered as categorical factors, that is, as variables with distinct levels which can be denoted by indicator variables as opposed to their numerical values.</p>
+<p>Answers to Q66 are used to define our response variable: Y = 1 corresponds to “(A) trying to lose weight”, while Y = 0 corresponds to the other non-missing values. Q84 provides information on students’ sports participation and is treated as numerical, 0 through 3, with 3 representing 3 or more. As a proxy for media exposure, we use answers to Q81 as numerical values 0, 0.5, 1, 2, 3, 4, and 5, with 5 representing 5 or more. Media exposure and sports participation are also considered as categorical factors, that is, as variables with distinct levels which can be denoted by indicator variables as opposed to their numerical values.</p>
 <p>BMI is included in this study as the percentile for a given BMI for members of the same sex. This facilitates comparisons when modeling with males and females. We will use the terms <em>BMI</em> and <em>BMI percentile</em> interchangeably with the understanding that we are always referring to the percentile.</p>
 <p>With our sample, we use only the cases that include all of the data for these four questions. This is referred to as a <strong>complete case analysis</strong>. That brings our sample of 500 to 445. There are limitations of complete case analyses that we address in the Discussion.</p>
 </div>
 <div id="exploratory-data-analysis-2" class="section level3">
 <h3><span class="header-section-number">6.7.2</span> Exploratory Data Analysis</h3>
-<p>Nearly half (44.7%) of our sample of 445 youth report that they are trying to lose weight, 48.1% percent of the sample are females, and 59.3% play on one or more sports teams. 8.8 percent report that they do not watch any TV on school days, whereas another 13.0% watched 5 or more hours each day. Interestingly, the median BMI percentile for our 445 youth is 68. The most dramatic difference in the proportions of those who are trying to lose weight is by sex; 58% of the females want to lose weight in contrast to only 32% of the males (see Figure <a href="ch-logreg.html#fig:mosaicsexlose">6.5</a>). This provides strong support for the inclusion of a sex term in every model considered.</p>
+<p>Nearly half (44.7%) of our sample of 445 youths report that they are trying to lose weight, 48.1% of the sample are females, and 59.3% play on one or more sports teams. Also, 8.8% report that they do not watch any TV on school days, whereas another 13.0% watched 5 or more hours each day. Interestingly, the median BMI percentile for our 445 youths is 68. The most dramatic difference in the proportions of those who are trying to lose weight is by sex; 58% of the females want to lose weight in contrast to only 32% of the males (see Figure <a href="ch-logreg.html#fig:mosaicsexlose">6.5</a>). This provides strong support for the inclusion of a sex term in every model considered.</p>
 <div class="figure" style="text-align: center"><span id="fig:mosaicsexlose"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexlose-1.png" alt="Weight loss plans vs. Sex" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexlose-1.png" alt="Weight loss plans vs. sex." width="60%" />
 <p class="caption">
-Figure 6.5: Weight loss plans vs. Sex
+Figure 6.5: Weight loss plans vs. sex.
 </p>
 </div>
 <table>
@@ -1188,21 +1203,21 @@ Lose weight
 </tbody>
 </table>
 <p>Table <a href="ch-logreg.html#tab:table3chp6">6.3</a> displays the mean BMI of those wanting and not wanting to lose weight for males and females. The mean BMI is greater for those trying to lose weight compared to those not trying to lose weight, regardless of sex. The size of the difference is remarkably similar for the two sexes.</p>
-If we consider including a BMI term in our model(s), the logit should be linearly related to BMI. We can investigate this assumption by constructing an empirical logit plot. In order to calculate empirical logits, we first divide our data by sex. Within each sex, we generate 10 groups of equal sizes, the first holding the bottom 10% in BMI percentile for that sex, the second holding the next lowest 10%, etc.. Within each group, we calculate the proporton, <span class="math inline">\(\hat{p}\)</span> that reported wanting to lose weight, and then the empirical log odds, <span class="math inline">\(log(\frac{\hat{p}}{1-\hat{p}})\)</span>, that a young person in that group wants to lose weight.
+If we consider including a BMI term in our model(s), the logit should be linearly related to BMI. We can investigate this assumption by constructing an empirical logit plot. In order to calculate empirical logits, we first divide our data by sex. Within each sex, we generate 10 groups of equal sizes, the first holding the bottom 10% in BMI percentile for that sex, the second holding the next lowest 10%, etc. Within each group, we calculate the proportion, <span class="math inline">\(\hat{p}\)</span> that reported wanting to lose weight, and then the empirical log odds, <span class="math inline">\(log(\frac{\hat{p}}{1-\hat{p}})\)</span>, that a young person in that group wants to lose weight.
 <div class="figure" style="text-align: center"><span id="fig:logitBMIsex"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/logitBMIsex-1.png" alt="Empirical logits of trying to lose weight by BMI and Sex." width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/logitBMIsex-1.png" alt="Empirical logits of trying to lose weight by BMI and sex." width="60%" />
 <p class="caption">
-Figure 6.6: Empirical logits of trying to lose weight by BMI and Sex.
+Figure 6.6: Empirical logits of trying to lose weight by BMI and sex.
 </p>
 </div>
 <p>Figure <a href="ch-logreg.html#fig:logitBMIsex">6.6</a> presents the empirical logits for the BMI intervals by sex. Both males and females exhibit an increasing linear trend on the logit scale indicating that increasing BMI is associated with a greater desire to lose weight and that modeling log odds as a linear function of BMI is reasonable. The slope for the females appears to be similar to the slope for males, so we do not need to consider an interaction term between BMI and sex in the model.</p>
 <div class="figure" style="text-align: center"><span id="fig:mosaicsexsports"></span>
-<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexsports-1.png" alt="Weight loss plans vs. sex and sports participation" width="60%" />
+<img src="bookdown-BeyondMLR_files/figure-html/mosaicsexsports-1.png" alt="Weight loss plans vs. sex and sports participation." width="60%" />
 <p class="caption">
-Figure 6.7: Weight loss plans vs. sex and sports participation
+Figure 6.7: Weight loss plans vs. sex and sports participation.
 </p>
 </div>
-<p>Out of those who play sports, 44% want to lose weight whereas 46% want to lose weight among those who do not play sports. Figure <a href="ch-logreg.html#fig:mosaicsexsports">6.7</a> compares the proportion of respondents who want to lose weight by their sex and sport participation. The data suggest that sports participation is associated with the same or even a slightly lower desire to lose weight, contrary to what had originally been hypothesized. While the overall levels of those wanting to lose weight differ considerably between the sexes, the differences between those in and out of sports within sex appear to be very small. A term for sports participation or number of teams will be considered, but there is not compelling evidence that an interaction term will be needed.</p>
+<p>Out of those who play sports, 44% want to lose weight, whereas 46% want to lose weight among those who do not play sports. Figure <a href="ch-logreg.html#fig:mosaicsexsports">6.7</a> compares the proportion of respondents who want to lose weight by their sex and sport participation. The data suggest that sports participation is associated with the same or even a slightly lower desire to lose weight, contrary to what had originally been hypothesized. While the overall levels of those wanting to lose weight differ considerably between the sexes, the differences between those in and out of sports within sex appear to be very small. A term for sports participation or number of teams will be considered, but there is not compelling evidence that an interaction term will be needed.</p>
 <p>It was posited that increased exposure to media, here measured as hours of TV daily, is associated with increased desire to lose weight, particularly for females. Overall, the percentage who want to lose weight ranges from 38% of those watching 5 hours of TV per day to 55% among those watching 2 hours daily. There is minimal variation in the proportion wanting to lose weight with both sexes combined. However, we are more interested in differences between the sexes (see Figure <a href="ch-logreg.html#fig:mediaXsex">6.8</a>). We create empirical logits using the proportion of students trying to lose weight for each level of hours spent watching TV daily and look at the trends in the logits separately for males and females. From Figure <a href="ch-logreg.html#fig:logitmediasex">6.9</a>, there does not appear to be a linear relationship for males or females.</p>
 <div class="figure" style="text-align: center"><span id="fig:mediaXsex"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/mediaXsex-1.png" alt="Weight loss plans vs. daily hours of TV and sex." width="60%" />
@@ -1240,7 +1255,7 @@ where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion o
 <p>We see that there is statistically significant evidence (<span class="math inline">\(Z=8.997, p&lt;.001\)</span>) that BMI is positively associated with the odds of trying to lose weight, after controlling for sex. Clearly BMI percentile belongs in the model with sex.</p>
 <p>Our estimated binomial regression model is:</p>
 <p><span class="math display">\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)= -4.26+1.86\textrm{female}+0.047\textrm{bmipct}\]</span></p>
-<p>To interpret the coefficient on <code>bmipct</code>, we will consider a 10 unit increase in <code>bmipct</code>. Because <span class="math inline">\(e^{10*0.047}=1.602\)</span>, then there is an estimated 60.2% increase in the odds of wanting to lose weight for each additional 10 percentile points of BMI for members of the same sex. Just as we had done in other multiple regression models we need to interpret our coefficient <em>given that the other variables remain constant</em>. An interaction term for BMI by sex was tested (not shown) and it was not significant (<span class="math inline">\(Z=-0.70\)</span>, <span class="math inline">\(p=0.485\)</span>), so the effect of BMI does not differ by sex.</p>
+<p>To interpret the coefficient on <code>bmipct</code>, we will consider a 10-unit increase in <code>bmipct</code>. Because <span class="math inline">\(e^{10*0.047}=1.602\)</span>, then there is an estimated 60.2% increase in the odds of wanting to lose weight for each additional 10 percentile points of BMI for members of the same sex. Just as we had done in other multiple regression models, we need to interpret our coefficient <em>given that the other variables remain constant</em>. An interaction term for BMI by sex was tested (not shown) and it was not significant (<span class="math inline">\(Z=-0.70\)</span>, <span class="math inline">\(p=0.485\)</span>), so the effect of BMI does not differ by sex.</p>
 <p>We next add <code>sport</code> to our model. Sports participation was considered for inclusion in the model in three ways: an indicator of sports participation (0 = no teams, 1 = one or more teams), treating the number of teams (0, 1, 2, or 3) as numeric, and treating the number of teams as a factor. The models below treat sports participation using an indicator variable, but all three models produced similar results.</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="ch-logreg.html#cb148-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>sport, </span>
 <span id="cb148-2"><a href="ch-logreg.html#cb148-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
@@ -1281,7 +1296,7 @@ where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion o
 <p>Media is not a statistically significant term (<span class="math inline">\(Z=-1.371\)</span>, <span class="math inline">\(p=0.170\)</span>). However, because our interest centers on how media may affect attempts to lose weight and how its effect might be different for females and males, we fit a model with a media term and a sex by media interaction term (not shown). Neither term was statistically significant, so we have no support in our data that media exposure as measured by hours spent watching TV is associated with the odds a teen is trying to lose weight after accounting for sex and BMI.</p>
 </div>
 <div id="drop-in-deviance-tests" class="section level3">
-<h3><span class="header-section-number">6.7.4</span> Drop-in-deviance Tests</h3>
+<h3><span class="header-section-number">6.7.4</span> Drop-in-Deviance Tests</h3>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="ch-logreg.html#cb157-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model1, model2, model3, model4,</span>
 <span id="cb157-2"><a href="ch-logreg.html#cb157-2"></a>                     <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
@@ -1301,7 +1316,7 @@ model4  4 469.1</code></pre>
 <h3><span class="header-section-number">6.7.5</span> Model Discussion and Summary</h3>
 <p>We found that the odds of wanting to lose weight are considerably greater for females compared to males. In addition, respondents with greater BMI percentiles express a greater desire to lose weight for members of the same sex. Regardless of sex or BMI percentile, sports participation and TV watching are not associated with different odds for wanting to lose weight.</p>
 <p>A limitation of this analysis is that we used complete cases in place of a method of imputing responses or modeling missingness. This reduced our sample from 500 to 445, and it may have introduced bias. For example, if respondents who watch a lot of TV were unwilling to reveal as much, and if they differed with respect to their desire to lose weight from those respondents who reported watching little TV, our inferences regarding the relationship between lots of TV and desire to lose weight may be biased.</p>
-<p>Other limitations may result from definitions. Trying to lose weight is self-reported and may not correlate with any action undertaken to do so. The number of sports teams may not accurately reflect sports related pressures to lose weight. For example, elite athletes may focus on a single sport and be subject to greater pressures whereas athletes who casually participate in three sports may not feel any pressure to lose weight. Hours spent watching TV is not likely to encompass the totality of media exposure, particularly because exposure to celebrities occurs often online. Furthermore, this analysis does not explore in any detail maladaptions—inappropriate motivations for wanting to lose weight. For example, we did not focus our study on subsets of respondents with low BMI who are attempting to lose weight.</p>
+<p>Other limitations may result from definitions. Trying to lose weight is self-reported and may not correlate with any action undertaken to do so. The number of sports teams may not accurately reflect sports-related pressures to lose weight. For example, elite athletes may focus on a single sport and be subject to greater pressures, whereas athletes who casually participate in three sports may not feel any pressure to lose weight. Hours spent watching TV are not likely to encompass the totality of media exposure, particularly because exposure to celebrities occurs often online. Furthermore, this analysis does not explore in any detail maladaptions—inappropriate motivations for wanting to lose weight. For example, we did not focus our study on subsets of respondents with low BMI who are attempting to lose weight.</p>
 <p>It would be instructive to use data science methodologies to explore the entire data set of 16,000 instead of sampling 500. However, the types of exploration and models used here could translate to the larger sample size.</p>
 <p>Finally a limitation may be introduced as a result of the acknowledged variation in the administration of the YRBSS. States and local authorities are allowed to administer the survey as they see fit, which at times results in significant variation in sample selection and response.</p>
 </div>
@@ -1320,22 +1335,22 @@ model4  4 469.1</code></pre>
 <li>Is exposure to a particular chemical associated with a cancer diagnosis?</li>
 </ol></li>
 <li><p>Interpret the odds ratios in the following abstract.</p>
-<p><em>Day Care Centers and Respiratory Health</em> <span class="citation">(Nafstad et al. <a href="#ref-Nafstad1999" role="doc-biblioref">1999</a>)</span></p>
+<p><em>Daycare Centers and Respiratory Health</em> <span class="citation">(Nafstad et al. <a href="#ref-Nafstad1999" role="doc-biblioref">1999</a>)</span></p>
 <ul>
-<li><p><strong>Objective</strong>. To estimate the effects of the type of day care on respiratory health in preschool children.</p></li>
-<li><p><strong>Methods</strong>. A population-based cross-sectional study of Oslo children born in 1992 was conducted at the end of 1996. A self-administered questionnaire inquired about day care arrangements, environmental conditions, and family characteristics (n = 3853; response rate, 79%).</p></li>
-<li><p><strong>Results</strong>. In a logistic regression controlling for confounding, children in day care centers had more often nightly cough (adjusted odds ratio, 1.89; 95% confidence interval 1.34-2.67), and blocked or runny nose without common cold (1.55; 1.07-1.61) during the past 12 months compared with children in home care…</p></li>
+<li><p><strong>Objective</strong>. To estimate the effects of the type of daycare on respiratory health in preschool children.</p></li>
+<li><p><strong>Methods</strong>. A population-based, cross-sectional study of Oslo children born in 1992 was conducted at the end of 1996. A self-administered questionnaire inquired about daycare arrangements, environmental conditions, and family characteristics (n = 3853; response rate, 79%).</p></li>
+<li><p><strong>Results</strong>. In a logistic regression controlling for confounding, children in daycare centers had more often nightly cough (adjusted odds ratio, 1.89; 95% confidence interval 1.34-2.67), and blocked or runny nose without common cold (1.55; 1.07-1.61) during the past 12 months compared with children in home care.</p></li>
 </ul></li>
 <li><p>Construct a table and calculate the corresponding odds and odds ratios. Comment on the reported and calculated results in this <em>New York Times</em> article from <span class="citation">Kolata (<a href="#ref-Kolata2009" role="doc-biblioref">2009</a>)</span>.</p>
 <ul>
-<li><p>In November, the Centers for Disease Control and Prevention published a paper reporting that babies conceived with IVF, or with a technique in which sperm are injected directly into eggs, have a slightly increased risk of several birth defects, including a hole between the two chambers of the heart, a cleft lip or palate, an improperly developed esophagus and a malformed rectum. The study involved 9,584 babies with birth defects and 4,792 babies without. Among the mothers of babies without birth defects, 1.1 percent had used IVF or related methods, compared with 2.4 percent of mothers of babies with birth defects.</p></li>
-<li><p>The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3 percent chance that any given baby will have a birth defect.</p></li>
+<li><p>In November, the Centers for Disease Control and Prevention published a paper reporting that babies conceived with IVF, or with a technique in which sperm are injected directly into eggs, have a slightly increased risk of several birth defects, including a hole between the two chambers of the heart, a cleft lip or palate, an improperly developed esophagus and a malformed rectum. The study involved 9,584 babies with birth defects and 4,792 babies without. Among the mothers of babies without birth defects, 1.1% had used IVF or related methods, compared with 2.4% of mothers of babies with birth defects.</p></li>
+<li><p>The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3% chance that any given baby will have a birth defect.</p></li>
 </ul></li>
-<li><p>In a small pilot study, researchers compared two groups of 3 turbine wheels each under low humidity and two groups of 3 turbine wheels each under high humidity conditions to determine if humidity is related to the number of fissures that occur. If <span class="math inline">\(Y\)</span> = number of turbine wheels that develop fissures, then assume that <span class="math inline">\(Y \sim \textrm{Binomial}(n=3, p=p_L)\)</span> under low humidity, and <span class="math inline">\(Y \sim \textrm{Binomial}(n=3, p=p_H)\)</span> under high humidity, where <span class="math inline">\(f(y;p)=\binom{n}{y} p^y (1-p)^{n-y}\)</span>. Write out the log-likelihood function <span class="math inline">\(\textrm{logL}(p_L, p_H)\)</span>, using the data in Table <a href="ch-logreg.html#tab:fissurechp6">6.4</a> and simplifying where possible.</p></li>
+<li><p>In a small pilot study, researchers compared two groups of 3 turbine wheels each under low humidity and two groups of 3 turbine wheels each under high-humidity conditions to determine if humidity is related to the number of fissures that occur. If <span class="math inline">\(Y\)</span> = number of turbine wheels that develop fissures, then assume that <span class="math inline">\(Y \sim \textrm{Binomial}(n=3, p=p_L)\)</span> under low humidity, and <span class="math inline">\(Y \sim \textrm{Binomial}(n=3, p=p_H)\)</span> under high humidity, where <span class="math inline">\(f(y;p)=\binom{n}{y} p^y (1-p)^{n-y}\)</span>. Write out the log-likelihood function <span class="math inline">\(\textrm{logL}(p_L, p_H)\)</span>, using the data in Table <a href="ch-logreg.html#tab:fissurechp6">6.4</a> and simplifying where possible.</p></li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:fissurechp6">Table 6.4: </span>Data for Conceptual Exercise 4
+<span id="tab:fissurechp6">Table 6.4: </span>Data for Conceptual Exercise 4.
 </caption>
 <thead>
 <tr>
@@ -1419,7 +1434,7 @@ y = number of fissures
 <li><p>Calculate the odds of a successful penalty kick for games in which the goalkeeper’s team was behind, tied, or ahead. Then, construct empirical odds ratios for successful penalty kicks for (a) behind versus tied, and (b) tied versus ahead.</p></li>
 <li><p>Fit a model with the categorical predictor c(“behind”,“tied”,“ahead”) and interpret the exponentiated coefficients. How do they compare to the empirical odds ratios you calculated?</p></li>
 </ol></li>
-<li><p><strong>Medical School Admissions.</strong> The data for Medical School Admissions is in <code>MedGPA.csv</code>, taken from undergraduates from a small liberal arts school over several years. We are interested in student attributes that are associated with higher acceptance rates.</p>
+<li><p><strong>Medical school admissions.</strong> The data for Medical School Admissions is in <code>MedGPA.csv</code>, taken from undergraduates from a small liberal arts school over several years. We are interested in student attributes that are associated with higher acceptance rates.</p>
 <ul>
 <li><code>Accept</code> = accepted (A) into medical school or denied (D)</li>
 <li><code>Acceptance</code> = accepted (1) into medical school or denied (0)</li>
@@ -1440,10 +1455,10 @@ y = number of fissures
 <li>Is one MCAT subscale more important than the others?</li>
 <li>Is there any evidence that the effect of MCAT score or GPA differs for males and females?</li>
 </ol></li>
-<li><p><strong>Moths.</strong> An article in the <em>Journal of Animal Ecology</em> by <span class="citation">Bishop (<a href="#ref-Bishop1972" role="doc-biblioref">1972</a>)</span> investigated whether moths provide evidence of “survival of the fittest” with their camouflage traits. Researchers glued equal numbers of light and dark morph moths in lifelike positions on tree trunks at 7 locations from 0 to 51.2 km from Liverpool. They then recorded the numbers of moths removed after 24 hours, presumably by predators. The hypothesis was that, since tree trunks near Liverpool were blackened by pollution, light morph moths would be more likely to be removed near Liverpool.</p>
+<li><p><strong>Moths.</strong> An article in the <em>Journal of Animal Ecology</em> by <span class="citation">Bishop (<a href="#ref-Bishop1972" role="doc-biblioref">1972</a>)</span> investigated whether moths provide evidence of “survival of the fittest” with their camouflage traits. Researchers glued equal numbers of light and dark morph moths in lifelike positions on tree trunks at 7 locations from 0 to 51.2 km from Liverpool. They then recorded the number of moths removed after 24 hours, presumably by predators. The hypothesis was that, since tree trunks near Liverpool were blackened by pollution, light morph moths would be more likely to be removed near Liverpool.</p>
 <p>Data <span class="citation">(Ramsey and Schafer <a href="#ref-Ramsey2002" role="doc-biblioref">2002</a>)</span> can be found in <code>moth.csv</code> and contains the variables below. In addition, R code at the end of the problem can be used to input the data and create additional useful variables.</p>
 <ul>
-<li><code>MOPRH</code> = light or dark</li>
+<li><code>MORPH</code> = light or dark</li>
 <li><code>DISTANCE</code> = kilometers from Liverpool</li>
 <li><code>PLACED</code> = number of moths of a specific morph glued to trees at that location</li>
 <li><code>REMOVED</code> = number of moths of a specific morph removed after 24 hours</li>
@@ -1454,7 +1469,7 @@ y = number of fissures
 <li>Create a model with <code>DISTANCE</code> and <code>dark</code>. Interpret all the coefficients.</li>
 <li>Create a model with <code>DISTANCE</code>, <code>dark</code>, and the interaction between both variables. Interpret all the coefficients.</li>
 <li>Interpret a drop-in-deviance test and a Wald test to test the significance of the interaction term in (d).</li>
-<li>Test the goodness of fit for the interaction model. What can we conclude about this model?</li>
+<li>Test the goodness-of-fit for the interaction model. What can we conclude about this model?</li>
 <li>Is there evidence of overdispersion in the interaction model? What factors might lead to overdispersion in this case? Regardless of your answer, repeat (d) adjusting for overdispersion.</li>
 <li>Compare confidence intervals for coefficients in your models from (g) and (d).</li>
 <li>What happens if we expand the data set to contain one row per moth (968 rows)? Now we can run a logistic binary regression model. How does the logistic binary regression model compare to the binomial regression model? What are similarities and differences? Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? Some starter code can be found below the input code.</li>
@@ -1487,7 +1502,7 @@ y = number of fissures
 <span id="cb161-19"><a href="ch-logreg.html#cb161-19"></a>newdata[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>,]</span>
 <span id="cb161-20"><a href="ch-logreg.html#cb161-20"></a><span class="kw">cdplot</span>(<span class="kw">as.factor</span>(rtemp1)<span class="op">~</span>dtemp1)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li><p><strong>Birdkeeping and Lung Cancer: A Retrospective Observational Study</strong> A 1972-1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer. To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague. They identified 49 cases of lung cancer among patients who were registered with a general practice, who were age 65 or younger, and who had resided in the city since 1965. Each patient (case) with cancer was matched with two control subjects (without cancer) by age and sex. Further details can be found in <span class="citation">Holst, Kromhout, and Brand (<a href="#ref-Holst1988" role="doc-biblioref">1988</a>)</span>.</p>
+<li><p><strong>Birdkeeping and lung cancer: a retrospective observational study.</strong> A 1972-1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer. To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague. They identified 49 cases of lung cancer among patients who were registered with a general practice, who were age 65 or younger, and who had resided in the city since 1965. Each patient (case) with cancer was matched with two control subjects (without cancer) by age and sex. Further details can be found in <span class="citation">Holst, Kromhout, and Brand (<a href="#ref-Holst1988" role="doc-biblioref">1988</a>)</span>.</p>
 <p>Age, sex, and smoking history are all known to be associated with lung cancer incidence. Thus, researchers wished to determine after age, sex, socioeconomic status, and smoking have been controlled for, is an additional risk associated with birdkeeping? The data <span class="citation">(Ramsey and Schafer <a href="#ref-Ramsey2002" role="doc-biblioref">2002</a>)</span> is found in <code>birdkeeping.csv</code>, and the variables are listed below. In addition, R code at the end of the problem can be used to input the data and create additional useful variables.</p>
 <ul>
 <li><code>female</code> = sex (1 = Female, 0 = Male)</li>
@@ -1544,7 +1559,7 @@ y = number of fissures
 <span id="cb162-11"><a href="ch-logreg.html#cb162-11"></a>                       <span class="st">&quot;Over 25 years&quot;</span>)))</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li><p><strong>2016 Election.</strong> An <a href="https://www.causeweb.org/usproc/usclap/2018/spring/winners">award-winning</a> student project <span class="citation">(Blakeman, Renier, and Shandaq <a href="#ref-Renier2018" role="doc-biblioref">2018</a>)</span> examined driving forces behind Donald Trump’s surprising victory in the 2016 Presidential Election, using data from nearly 40,000 voters collected as part of the 2016 Cooperative Congressional Election Survey (CCES). The student researchers investigated two theories: (1) Trump was seen as the candidate of change for voters experiencing economic hardship, and (2) Trump exploited voter fears about immigrants and minorities.</p>
-<p>The dataset <code>electiondata.csv</code> has individual level data on voters in the 2016 Presidential election, collected from the CCES and subsequently tidied. We will focus on the following variables:</p>
+<p>The data set <code>electiondata.csv</code> has individual level data on voters in the 2016 Presidential Election, collected from the CCES and subsequently tidied. We will focus on the following variables:</p>
 <ul>
 <li><code>Vote</code> = 1 if Trump; 0 if another candidate</li>
 <li><code>zfaminc</code> = family income expressed as a z-score (number of standard deviations above or below the mean)</li>
@@ -1558,7 +1573,7 @@ y = number of fissures
 </ul>
 <p>The questions below address Theory 1 (Economic Model). We want to see if there is significant evidence that voting for Trump was associated with family income level and/or with a belief that the economy became worse during the Obama Administration.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Create a plot showing the relationship between whether a voter voted for Trump and their opinion about the status of the economy. What do you find?</li>
+<li>Create a plot showing the relationship between whether voters voted for Trump and their opinion about the status of the economy. What do you find?</li>
 <li>Repeat (a) separately for Republicans and non-Republicans. Again describe what you find.</li>
 <li>Create a plot with one observation per state showing the relationship between a state’s median income and the log odds of a resident of that state voting for Trump. What can you conclude from this plot?</li>
 </ol>
@@ -1578,10 +1593,10 @@ y = number of fissures
 <span id="cb163-4"><a href="ch-logreg.html#cb163-4"></a>    <span class="dt">family =</span> binomial, <span class="dt">data =</span> electiondata)</span>
 <span id="cb163-5"><a href="ch-logreg.html#cb163-5"></a><span class="kw">summary</span>(model1a)</span></code></pre></div>
 </div>
-<div id="open-ended-exercises-2" class="section level3">
-<h3><span class="header-section-number">6.8.3</span> Open-ended Exercises</h3>
+<div id="open-ended-exercises-3" class="section level3">
+<h3><span class="header-section-number">6.8.3</span> Open-Ended Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>2008 Presidential Voting in Minnesota counties.</strong> Data in <code>mn08.csv</code> contains results from the 2008 US Presidential election by county in Minnesota, focusing on the two primary candidates (Democrat Barack Obama and Republican John McCain). You can consider the response to be either the percent of Obama votes in a county (binomial) or whether or not Obama had more votes than McCain (binary). Then build a model for your response using county-level predictors listed below. Interpret the results of your model.</p>
+<li><p><strong>2008 Presidential voting in Minnesota counties.</strong> Data in <code>mn08.csv</code> contains results from the 2008 U.S. Presidential Election by county in Minnesota, focusing on the two primary candidates (Democrat Barack Obama and Republican John McCain). You can consider the response to be either the percent of Obama votes in a county (binomial) or whether or not Obama had more votes than McCain (binary). Then build a model for your response using county-level predictors listed below. Interpret the results of your model.</p>
 <ul>
 <li><code>County</code> = county name</li>
 <li><code>Obama</code> = total votes for Obama</li>
@@ -1596,18 +1611,18 @@ y = number of fissures
 <li><code>Gini_Index</code> = measure of income disparity in a county</li>
 <li><code>pct_native</code> = percent of native born residents</li>
 </ul></li>
-<li><p><strong>Crime on Campus.</strong> The data set <code>c_data2.csv</code> contains statistics on violent crimes and property crimes for a sample of 81 US colleges and universities. Characterize rates of violent crimes as a proportion of total crimes reported (i.e., <code>num_viol</code> / <code>total_crime</code>) – do they differ based on type of institution, size of institution, or region of the country?</p>
+<li><p><strong>Crime on campus.</strong> The data set <code>c_data2.csv</code> contains statistics on violent crimes and property crimes for a sample of 81 U.S. colleges and universities. Characterize rates of violent crimes as a proportion of total crimes reported (i.e., <code>num_viol</code> / <code>total_crime</code>). Do they differ based on type of institution, size of institution, or region of the country?</p>
 <ul>
 <li><code>Enrollment</code> = number of students enrolled</li>
 <li><code>type</code> = university (U) or college (C)</li>
 <li><code>num_viol</code> = number of violent crimes reported</li>
 <li><code>num_prop</code> = number of property crimes reported</li>
-<li><code>viol_rate_10000</code> = violent crime rate per 10000 students enrolled</li>
-<li><code>prop_rate_10000</code> = property crime rate per 10000 students enrolled</li>
+<li><code>viol_rate_10000</code> = violent crime rate per 10,000 students enrolled</li>
+<li><code>prop_rate_10000</code> = property crime rate per 10,000 students enrolled</li>
 <li><code>total_crime</code> = total crimes reported (property and violent)</li>
 <li><code>region</code> = region of the country</li>
 </ul></li>
-<li><p><strong>NBA Data.</strong> Data in <code>NBA1718team.csv</code> <span class="citation">(Kaggle <a href="#ref-rossotti" role="doc-biblioref">2018</a><a href="#ref-rossotti" role="doc-biblioref">b</a>)</span> looks at factors that are associated with a pro basketball team’s winning percentage in the 2017-18 season. After a thorough exploratory data analyses, create the best model you can to predict a team’s winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team’s success.</p>
+<li><p><strong>NBA data.</strong> Data in <code>NBA1718team.csv</code> <span class="citation">(Kaggle <a href="#ref-rossotti" role="doc-biblioref">2018</a><a href="#ref-rossotti" role="doc-biblioref">b</a>)</span> looks at factors that are associated with a professional basketball team’s winning percentage in the 2017-18 season. After thorough exploratory data analyses, create the best model you can to predict a team’s winning percentage; be careful of collinearity between the covariates. Based on your EDA and modeling, describe the factors that seem to explain a team’s success.</p>
 <ul>
 <li><code>win_pct</code> = Percentage of Wins,</li>
 <li><code>FT_pct</code> = Average Free Throw Percentage per game,</li>
@@ -1626,10 +1641,10 @@ y = number of fissures
 <li><code>PF</code> = Average Fouls per game,</li>
 <li><code>attempts_2P</code> = Average 2 Point Attempts per game</li>
 </ul></li>
-<li><p><strong>Trashball.</strong> Great for a rainy day! A fun way to generate overdispersed binomial data. Each student crumbles an 8-1/2 by 11 inch sheet and tosses it from three prescribed distances ten times each. The response is the number of made baskets out of 10 tosses, keeping track of the distance. Have the class generate and collect potential covariates, and include them in your dataset (ex: years of basketball experience, using a tennis ball instead of a sheet of paper, height). Some sample analysis steps:</p>
+<li><p><strong>Trashball.</strong> Great for a rainy day! A fun way to generate overdispersed binomial data. Each student crumbles an 8.5 by 11 inch sheet and tosses it from three prescribed distances ten times each. The response is the number of made baskets out of 10 tosses, keeping track of the distance. Have the class generate and collect potential covariates, and include them in your data set (e.g., years of basketball experience, using a tennis ball instead of a sheet of paper, height). Some sample analysis steps:</p>
 <ol style="list-style-type: lower-alpha">
 <li>Create scatterplots of logits vs. continuous predictors (distance, height, shot number, etc.) and boxplots of logit vs. categorical variables (sex, type of ball, etc.). Summarize important trends in one or two sentences.</li>
-<li>Create a graph with empirical logits vs. distance plotted separately by sex. What might you conclude from this plot?</li>
+<li>Create a graph with empirical logits vs. distance plotted separately by type of ball. What might you conclude from this plot?</li>
 <li>Find a binomial model using the variables that you collected. Give a brief discussion on your findings.</li>
 </ol></li>
 </ol>
@@ -1670,7 +1685,7 @@ y = number of fissures
 <p>Nafstad, Per, Jorgen A. Hagen, Leif Oie, Per Magnus, and Jouni J. K. Jaakkola. 1999. “Day Care Centers and Respiratory Health.” <em>Pediatrics</em> 103 (4): 753–58. <a href="http://pediatrics.aappublications.org/content/103/4/753">http://pediatrics.aappublications.org/content/103/4/753</a>.</p>
 </div>
 <div id="ref-Ramsey2002">
-<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. 2nd ed. Boston, Massachusetts: Brooks/ Cole Cengage.</p>
+<p>Ramsey, Fred, and Daniel Schafer. 2002. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. 2nd ed. Boston, Massachusetts: Brooks/Cole Cengage.</p>
 </div>
 <div id="ref-Roskes2011">
 <p>Roskes, Marieke, Daniel Sligte, Shaul Shalvi, and Carsten K. W. De Dreu. 2011. “The Right Side? Under Time Pressure, Approach Motivation Leads to Right-Oriented Bias.” <em>Psychology Science</em> 22 (11): 1403–7. <a href="https://doi.org/10.1177/0956797611418677">https://doi.org/10.1177/0956797611418677</a>.</p>
@@ -1724,7 +1739,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["bookdown-BeyondMLR.pdf"],
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true
