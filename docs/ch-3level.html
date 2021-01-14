@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -518,19 +518,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Recognize when a fitted model has encountered boundary constraints and understand strategies for moving forward.</li>
 <li>Apply a parametric bootstrap test of significance to appropriate situations with more than two levels.</li>
 </ul>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ch-3level.html#cb266-1"></a><span class="co"># Packages required for Chapter 10</span></span>
-<span id="cb266-2"><a href="ch-3level.html#cb266-2"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb266-3"><a href="ch-3level.html#cb266-3"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb266-4"><a href="ch-3level.html#cb266-4"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb266-5"><a href="ch-3level.html#cb266-5"></a><span class="kw">library</span>(mice)</span>
-<span id="cb266-6"><a href="ch-3level.html#cb266-6"></a><span class="kw">library</span>(nlme)</span>
-<span id="cb266-7"><a href="ch-3level.html#cb266-7"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb266-8"><a href="ch-3level.html#cb266-8"></a><span class="kw">library</span>(mnormt)</span>
-<span id="cb266-9"><a href="ch-3level.html#cb266-9"></a><span class="kw">library</span>(boot)</span>
-<span id="cb266-10"><a href="ch-3level.html#cb266-10"></a><span class="kw">library</span>(HLMdiag)</span>
-<span id="cb266-11"><a href="ch-3level.html#cb266-11"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb266-12"><a href="ch-3level.html#cb266-12"></a><span class="kw">library</span>(pander)</span>
-<span id="cb266-13"><a href="ch-3level.html#cb266-13"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ch-3level.html#cb267-1"></a><span class="co"># Packages required for Chapter 10</span></span>
+<span id="cb267-2"><a href="ch-3level.html#cb267-2"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb267-3"><a href="ch-3level.html#cb267-3"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb267-4"><a href="ch-3level.html#cb267-4"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb267-5"><a href="ch-3level.html#cb267-5"></a><span class="kw">library</span>(mice)</span>
+<span id="cb267-6"><a href="ch-3level.html#cb267-6"></a><span class="kw">library</span>(nlme)</span>
+<span id="cb267-7"><a href="ch-3level.html#cb267-7"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb267-8"><a href="ch-3level.html#cb267-8"></a><span class="kw">library</span>(mnormt)</span>
+<span id="cb267-9"><a href="ch-3level.html#cb267-9"></a><span class="kw">library</span>(boot)</span>
+<span id="cb267-10"><a href="ch-3level.html#cb267-10"></a><span class="kw">library</span>(HLMdiag)</span>
+<span id="cb267-11"><a href="ch-3level.html#cb267-11"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb267-12"><a href="ch-3level.html#cb267-12"></a><span class="kw">library</span>(pander)</span>
+<span id="cb267-13"><a href="ch-3level.html#cb267-13"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="cs:seeds" class="section level2">
 <h2><span class="header-section-number">10.2</span> Case Studies: Seed Germination</h2>
@@ -1506,9 +1506,9 @@ a_{i} = \alpha_{0}+\tilde{u}_{i} \textrm{ where } \tilde{u}_{i} \sim N(0,\sigma_
 Y_{ijk}=\alpha_{0}+\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}
 \end{equation*}\]</span>
 and this composite model can be fit using statistical software:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ch-3level.html#cb267-1"></a><span class="co"># Model A - unconditional means</span></span>
-<span id="cb267-2"><a href="ch-3level.html#cb267-2"></a>modelal =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), </span>
-<span id="cb267-3"><a href="ch-3level.html#cb267-3"></a>               <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ch-3level.html#cb268-1"></a><span class="co"># Model A - unconditional means</span></span>
+<span id="cb268-2"><a href="ch-3level.html#cb268-2"></a>modelal =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), </span>
+<span id="cb268-3"><a href="ch-3level.html#cb268-3"></a>               <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  plant    (Intercept) 0.2782   0.527   
 ##  pot      (Intercept) 0.0487   0.221   
@@ -1578,9 +1578,9 @@ Y_{ijk}=[\alpha_{0}+\beta_{0}\textrm{time}_{ijk}]+
           \end{array} \right] \right). \]</span></p>
 <p>In this model, at Level One the trajectory for plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> is assumed to be linear, with intercept <span class="math inline">\(a_{ij}\)</span> (height on Day 13) and slope <span class="math inline">\(b_{ij}\)</span> (daily growth rate between Days 13 and 28); the <span class="math inline">\(\epsilon_{ijk}\)</span> terms capture the deviation between the true growth trajectory of plant <span class="math inline">\(j\)</span> from pot <span class="math inline">\(i\)</span> and its observed heights. At Level Two, <span class="math inline">\(a_{i}\)</span> represents the true mean intercept and <span class="math inline">\(b_{i}\)</span> represents the true mean slope for all plants from pot <span class="math inline">\(i\)</span>, while <span class="math inline">\(u_{ij}\)</span> and <span class="math inline">\(v_{ij}\)</span> capture the deviation between plant <span class="math inline">\(j\)</span>’s true growth trajectory and the mean intercept and slope for pot <span class="math inline">\(i\)</span>. The deviations in intercept and slope at Level Two are allowed to be correlated through the covariance parameter <span class="math inline">\(\sigma_{uv}\)</span>. Finally, <span class="math inline">\(\alpha_{0}\)</span> is the true mean intercept and <span class="math inline">\(\beta_{0}\)</span> is the true mean daily growth rate over the entire population of leadplants, while <span class="math inline">\(\tilde{u}_{i}\)</span> and <span class="math inline">\(\tilde{v}_{i}\)</span> capture the deviation between pot <span class="math inline">\(i\)</span>’s true overall growth trajectory and the population mean intercept and slope. Note that between-plant and between-pot variability are both partitioned now into variability in initial status (<span class="math inline">\(\sigma_{u}^{2}\)</span> and <span class="math inline">\(\sigma_{\tilde{u}}^{2}\)</span>) and variability in rates of change (<span class="math inline">\(\sigma_{v}^{2}\)</span> and <span class="math inline">\(\sigma_{\tilde{v}}^{2}\)</span>).</p>
 <p>Using the composite model specification, the unconditional growth model can be fit to the seed germination data:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ch-3level.html#cb271-1"></a><span class="co"># Model B - unconditional growth</span></span>
-<span id="cb271-2"><a href="ch-3level.html#cb271-2"></a>modelbl =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>pot),</span>
-<span id="cb271-3"><a href="ch-3level.html#cb271-3"></a>               <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ch-3level.html#cb272-1"></a><span class="co"># Model B - unconditional growth</span></span>
+<span id="cb272-2"><a href="ch-3level.html#cb272-2"></a>modelbl =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>pot),</span>
+<span id="cb272-3"><a href="ch-3level.html#cb272-3"></a>               <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr 
 ##  plant    (Intercept) 0.29914  0.5469        
 ##           time13      0.00119  0.0346   0.28 
@@ -1629,10 +1629,10 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_
  &amp; [\tilde{u}_{i}+u_{ij}+\epsilon_{ijk}+\tilde{v}_{i}\textrm{time}_{ijk}+v_{ij}\textrm{time}_{ijk}]
 \end{align*}\]</span></p>
 <p>From the output below, the addition of Level Three covariates in Model C (<code>cult</code>, <code>rem</code>, <code>strl</code>, and their interactions with <code>time</code>) appears to provide a significant improvement (likelihood ratio test statistic = 32.2 on 6 df, <span class="math inline">\(p&lt;.001\)</span>) to the unconditional growth model (Model B).</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="ch-3level.html#cb275-1"></a><span class="co"># Model C - add covariates at pot level</span></span>
-<span id="cb275-2"><a href="ch-3level.html#cb275-2"></a>modelcl =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
-<span id="cb275-3"><a href="ch-3level.html#cb275-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
-<span id="cb275-4"><a href="ch-3level.html#cb275-4"></a><span class="st">    </span>(time13<span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ch-3level.html#cb276-1"></a><span class="co"># Model C - add covariates at pot level</span></span>
+<span id="cb276-2"><a href="ch-3level.html#cb276-2"></a>modelcl =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
+<span id="cb276-3"><a href="ch-3level.html#cb276-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
+<span id="cb276-4"><a href="ch-3level.html#cb276-4"></a><span class="st">    </span>(time13<span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr 
 ##  plant    (Intercept) 0.298087 0.5460        
 ##           time13      0.001208 0.0348   0.28 
@@ -1650,7 +1650,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_
 ## time13:strl  0.05892   0.010282  5.7300
 ## time13:cult -0.02977   0.012263 -2.4273
 ## time13:rem  -0.03586   0.011978 -2.9939</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="ch-3level.html#cb279-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelbl, modelcl, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ch-3level.html#cb280-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelbl, modelcl, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>        npar   AIC   BIC logLik   dev Chisq Df
 modelbl    9 603.8 640.0 -292.9 585.8    NA NA
 modelcl   15 583.6 643.9 -276.8 553.6  32.2  6
@@ -1675,10 +1675,10 @@ Figure 10.14: Left (a): hypothetical contours of the likelihood function <span c
 <li>transform covariates. Centering variables, standardizing variables, or changing units can all help stabilize a model. Numerical procedures for searching for and finding maximum likelihood estimates can encounter difficulties when variables have very high or low values, extreme ranges, outliers, or are highly correlated.</li>
 </ul>
 <p>Although it is worthwhile attempting to reparameterize models to remove boundary constraints, sometimes they can be tolerated if (a) you are not interested in estimates of those parameters encountering boundary issues, and (b) removing those parameters does not affect conclusions about parameters of interest. For example, in the output below we explore the implications of simply removing the correlation between error terms at the pot level (i.e., assume <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}=0\)</span> rather than accepting the (constrained) maximum likelihood estimate of <span class="math inline">\(\hat{\rho}_{\tilde{u}\tilde{v}}=-1\)</span> that we saw in Model C).</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="ch-3level.html#cb281-1"></a><span class="co"># Try Model C without correlation between L2 errors</span></span>
-<span id="cb281-2"><a href="ch-3level.html#cb281-2"></a>modelcl.noL2corr &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span></span>
-<span id="cb281-3"><a href="ch-3level.html#cb281-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
-<span id="cb281-4"><a href="ch-3level.html#cb281-4"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span><span class="op">+</span>time13<span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ch-3level.html#cb282-1"></a><span class="co"># Try Model C without correlation between L2 errors</span></span>
+<span id="cb282-2"><a href="ch-3level.html#cb282-2"></a>modelcl.noL2corr &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span></span>
+<span id="cb282-3"><a href="ch-3level.html#cb282-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
+<span id="cb282-4"><a href="ch-3level.html#cb282-4"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span><span class="op">+</span>time13<span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  plant    (Intercept) 0.294076 0.5423       
 ##           time13      0.001206 0.0347   0.22
@@ -1719,10 +1719,10 @@ a_{i} &amp; = \alpha_{0}+\alpha_{1}\textrm{strl}_{i}+\alpha_{2}\textrm{cult}_{i}
 b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\beta_{3}\textrm{rem}_{i}
 \end{align*}\]</span></p>
 <p>Note that there is no longer an error term associated with the model for mean growth rate <span class="math inline">\(b_{i}\)</span> at the pot level. The growth rate for pot <span class="math inline">\(i\)</span> is assumed to be fixed, after accounting for soil type and sterilization; all pots with the same soil type and sterilization are assumed to have the same growth rate. As a result, our error assumption at Level Three is no longer bivariate normal, but rather univariate normal: <span class="math inline">\(\tilde{u}_{i}\sim N(0,\sigma_{\tilde{u}}^{2})\)</span>. By removing one of our two Level Three error terms (<span class="math inline">\(\tilde{v}_{i}\)</span>), we effectively removed two parameters: the variance for <span class="math inline">\(\tilde{v}_{i}\)</span> and the correlation between <span class="math inline">\(\tilde{u}_{i}\)</span> and <span class="math inline">\(\tilde{v}_{i}\)</span>. Fixed effects remain similar, as can be seen in the output below:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ch-3level.html#cb285-1"></a><span class="co"># Try Model C without time at pot level</span></span>
-<span id="cb285-2"><a href="ch-3level.html#cb285-2"></a>modelcl0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
-<span id="cb285-3"><a href="ch-3level.html#cb285-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
-<span id="cb285-4"><a href="ch-3level.html#cb285-4"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="ch-3level.html#cb286-1"></a><span class="co"># Try Model C without time at pot level</span></span>
+<span id="cb286-2"><a href="ch-3level.html#cb286-2"></a>modelcl0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
+<span id="cb286-3"><a href="ch-3level.html#cb286-3"></a><span class="st">    </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>(time13<span class="op">|</span>plant) <span class="op">+</span></span>
+<span id="cb286-4"><a href="ch-3level.html#cb286-4"></a><span class="st">    </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  plant    (Intercept) 0.29471  0.5429       
 ##           time13      0.00133  0.0364   0.19
@@ -1740,7 +1740,7 @@ b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\b
 ## time13:cult -0.03082   0.011353 -2.7151
 ## time13:rem  -0.03624   0.011101 -3.2649</code></pre>
 <p>We now have a more stable model, free of boundary constraints. In fact, we can attempt to determine whether or not removing the two variance component parameters for Model C.1 provides a significant reduction in performance. Based on a likelihood ratio test (see below), we do not have significant evidence (chi-square test statistic=2.089 on 2 df, p=0.3519) that <span class="math inline">\(\sigma_{\tilde{v}}^{2}\)</span> or <span class="math inline">\(\sigma_{\tilde{u}\tilde{v}}\)</span> is non-zero, so it is advisable to use the simpler Model C.1. However, Section <a href="ch-3level.html#threelevel-paraboot">10.6</a> describes why this test may be misleading and prescribes a potentially better approach.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ch-3level.html#cb289-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelcl0, modelcl, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="ch-3level.html#cb290-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelcl0, modelcl, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar   AIC   BIC logLik   dev Chisq Df   pval
 modelcl0   13 581.6 633.9 -277.8 555.6    NA NA     NA
 modelcl    15 583.6 643.9 -276.8 553.6 2.089  2 0.3519</code></pre>
@@ -1904,19 +1904,19 @@ Although plants from Pot #1 have a mean Day 13 height of 1.232 mm, Plant #11’s
 <li>Model C.1 – the correct (null) model that was actually used to generate the responses</li>
 <li>Model C – the incorrect (full) model that contains two extra variance components, <span class="math inline">\(\sigma_{\tilde{v}}^{2}\)</span> and <span class="math inline">\(\sigma_{\tilde{u}\tilde{v}}\)</span>, that were not actually used when generating the responses</li>
 </ul>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ch-3level.html#cb291-1"></a><span class="co"># Generate 1 set of bootstrapped data and run chi-square test</span></span>
-<span id="cb291-2"><a href="ch-3level.html#cb291-2"></a><span class="co">#  (will also work if use REML models, but may take longer)</span></span>
-<span id="cb291-3"><a href="ch-3level.html#cb291-3"></a><span class="kw">set.seed</span>(<span class="dv">3333</span>)</span>
-<span id="cb291-4"><a href="ch-3level.html#cb291-4"></a>d &lt;-<span class="st"> </span><span class="kw">drop</span>(<span class="kw">simulate</span>(modelcl0.ml))</span>
-<span id="cb291-5"><a href="ch-3level.html#cb291-5"></a>m2 &lt;-<span class="st"> </span><span class="kw">refit</span>(modelcl.ml, <span class="dt">newresp=</span>d)</span>
-<span id="cb291-6"><a href="ch-3level.html#cb291-6"></a>m1 &lt;-<span class="st"> </span><span class="kw">refit</span>(modelcl0.ml, <span class="dt">newresp=</span>d)</span>
-<span id="cb291-7"><a href="ch-3level.html#cb291-7"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(m2, m1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="ch-3level.html#cb292-1"></a><span class="co"># Generate 1 set of bootstrapped data and run chi-square test</span></span>
+<span id="cb292-2"><a href="ch-3level.html#cb292-2"></a><span class="co">#  (will also work if use REML models, but may take longer)</span></span>
+<span id="cb292-3"><a href="ch-3level.html#cb292-3"></a><span class="kw">set.seed</span>(<span class="dv">3333</span>)</span>
+<span id="cb292-4"><a href="ch-3level.html#cb292-4"></a>d &lt;-<span class="st"> </span><span class="kw">drop</span>(<span class="kw">simulate</span>(modelcl0.ml))</span>
+<span id="cb292-5"><a href="ch-3level.html#cb292-5"></a>m2 &lt;-<span class="st"> </span><span class="kw">refit</span>(modelcl.ml, <span class="dt">newresp=</span>d)</span>
+<span id="cb292-6"><a href="ch-3level.html#cb292-6"></a>m1 &lt;-<span class="st"> </span><span class="kw">refit</span>(modelcl0.ml, <span class="dt">newresp=</span>d)</span>
+<span id="cb292-7"><a href="ch-3level.html#cb292-7"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(m2, m1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>   npar   AIC   BIC logLik   dev Chisq Df   pval
 m1   13 588.5 640.8 -281.2 562.5    NA NA     NA
 m2   15 591.1 651.4 -280.5 561.1 1.405  2 0.4953</code></pre>
 <p>A likelihood ratio test statistic is calculated comparing Model C.1 to Model C. For example, after continuing as above to generate new <span class="math inline">\(Y_{ijk}\)</span> values corresponding to all 413 leadplant height measurements, we fit both models to the “bootstrapped” data. Since the data was generated using Model C.1, we would expect the two extra terms in Model C (<span class="math inline">\(\sigma^2_{\tilde{v}}\)</span> and <span class="math inline">\(\sigma_{\tilde{u}\tilde{v}}\)</span>) to contribute very little to the quality of the fit; Model C will have a slightly larger likelihood and loglikelihood since it contains every parameter from Model C.1 plus two more, but the difference in the likelihoods should be due to chance. In fact, that is what the output above shows. Model C does have a larger loglikelihood than Model C.1 (-280.54 vs. -281.24), but this small difference is not statistically significant based on a chi-square test with 2 degrees of freedom (p=.4953).</p>
 <p>However, we are really only interested in saving the likelihood ratio test statistic from this bootstrapped sample (<span class="math inline">\(2*(-280.54 - (-281.24) = 1.40\)</span>). By generating (“bootstrapping”) many sets of responses based on estimated parameters from Model C.1 and calculating many likelihood ratio test statistics, we can observe how this test statistic behaves under the null hypothesis of <span class="math inline">\(\sigma_{\tilde{v}}^{2} = \sigma_{\tilde{u}\tilde{v}} = 0\)</span>, rather than making the (dubious) assumption that its behavior is described by a chi-square distribution with 2 degrees of freedom. Figure <a href="ch-3level.html#fig:paraboot10">10.15</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution. A p-value for comparing our full and reduced models can be approximated by finding the proportion of likelihood ratio test statistics generated under the null model which exceed our observed likelihood ratio test (2.089). The parametric bootstrap provides a more reliable p-value in this case (.088 from table below); a chi-square distribution puts too much mass in the tail and not enough near 0, leading to overestimation of the p-value. Based on this test, we would still choose our simpler Model C.1, but we nearly had enough evidence to favor the more complex model.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ch-3level.html#cb293-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>modelcl.ml, <span class="dt">m0=</span>modelcl0.ml, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="ch-3level.html#cb294-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>modelcl.ml, <span class="dt">m0=</span>modelcl0.ml, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>   Df logLik   dev Chisq ChiDf pval_boot
 m0 13 -277.8 555.6    NA    NA        NA
 mA 15 -276.8 553.6 2.089     2     0.088</code></pre>
@@ -1927,7 +1927,7 @@ Figure 10.15: Null distribution of likelihood ratio test statistic derived using
 </p>
 </div>
 <p>Another way of testing whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95% confidence intervals for both <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}\)</span> and <span class="math inline">\(\sigma_{\tilde{v}}\)</span>. From the output below, the 95% bootstrapped confidence interval for <span class="math inline">\(\rho_{\tilde{u}\tilde{v}}\)</span> (-1, 1) contains 0, and the interval for <span class="math inline">\(\sigma_{\tilde{v}}\)</span> (.00050, .0253) nearly contains 0, providing further evidence that the larger model is not needed.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ch-3level.html#cb295-1"></a><span class="kw">confint</span>(modelcl, <span class="dt">method=</span><span class="st">&quot;boot&quot;</span>, <span class="dt">oldNames =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="ch-3level.html#cb296-1"></a><span class="kw">confint</span>(modelcl, <span class="dt">method=</span><span class="st">&quot;boot&quot;</span>, <span class="dt">oldNames =</span> F)</span></code></pre></div>
 <pre><code>##                                   2.5 %    97.5 %
 ## sd_(Intercept)|plant          0.4546698  0.643747
 ## cor_time13.(Intercept)|plant -0.0227948  0.624198
@@ -2069,11 +2069,11 @@ b_{i} &amp; = \beta_{0}+\beta_{1}\textrm{strl}_{i}+\beta_{2}\textrm{cult}_{i}+\b
 \end{align*}\]</span></p>
 <p>where error terms are defined as in Model C.1.</p>
 <p>From the output below, we see that the interaction terms were not especially helpful, except possibly for a differential effect of sterilization in remnant and reconstructed prairies on the growth rate of leadplants. But it’s clear that Model D can be simplified through the removal of certain fixed effects with low t-ratios.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ch-3level.html#cb297-1"></a><span class="co"># Model D - add interactions to Model C.1</span></span>
-<span id="cb297-2"><a href="ch-3level.html#cb297-2"></a>modeldl0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
-<span id="cb297-3"><a href="ch-3level.html#cb297-3"></a><span class="st">  </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>strl<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span></span>
-<span id="cb297-4"><a href="ch-3level.html#cb297-4"></a><span class="st">  </span>strl<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>rem <span class="op">+</span></span>
-<span id="cb297-5"><a href="ch-3level.html#cb297-5"></a><span class="st">  </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ch-3level.html#cb298-1"></a><span class="co"># Model D - add interactions to Model C.1</span></span>
+<span id="cb298-2"><a href="ch-3level.html#cb298-2"></a>modeldl0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>strl <span class="op">+</span><span class="st"> </span>cult <span class="op">+</span><span class="st"> </span>rem <span class="op">+</span><span class="st"> </span></span>
+<span id="cb298-3"><a href="ch-3level.html#cb298-3"></a><span class="st">  </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>strl<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span></span>
+<span id="cb298-4"><a href="ch-3level.html#cb298-4"></a><span class="st">  </span>strl<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>cult <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>rem <span class="op">+</span></span>
+<span id="cb298-5"><a href="ch-3level.html#cb298-5"></a><span class="st">  </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  plant    (Intercept) 0.29271  0.5410       
 ##           time13      0.00128  0.0357   0.20
@@ -2133,10 +2133,10 @@ and <span class="math inline">\(\tilde{{u}_{i}}\sim N(0,\sigma_{\tilde{u}}^{2})\
 Y_{ijk} &amp; = [\alpha_{0}+ \beta_{0}\textrm{time}_{ijk} + \beta_{1}\textrm{strl}_{i}\textrm{time}_{ijk} + \beta_{2}\textrm{rem}_{i}\textrm{time}_{ijk}  \\
  &amp; + \beta_{3}\textrm{strl}_{i}\textrm{rem}_{i}\textrm{time}_{ijk}] + [\tilde{u}_{i}+u_{ij}+ \epsilon_{ijk}+ v_{ij}\textrm{time}_{ijk}]
 \end{align*}\]</span></p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="ch-3level.html#cb301-1"></a><span class="co"># Model F - simplify and move toward &quot;final model&quot;</span></span>
-<span id="cb301-2"><a href="ch-3level.html#cb301-2"></a>modelfl0 =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span></span>
-<span id="cb301-3"><a href="ch-3level.html#cb301-3"></a><span class="st">  </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>rem <span class="op">+</span></span>
-<span id="cb301-4"><a href="ch-3level.html#cb301-4"></a><span class="st">  </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="ch-3level.html#cb302-1"></a><span class="co"># Model F - simplify and move toward &quot;final model&quot;</span></span>
+<span id="cb302-2"><a href="ch-3level.html#cb302-2"></a>modelfl0 =<span class="st"> </span><span class="kw">lmer</span>(hgt <span class="op">~</span><span class="st"> </span>time13 <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl <span class="op">+</span><span class="st"> </span></span>
+<span id="cb302-3"><a href="ch-3level.html#cb302-3"></a><span class="st">  </span>time13<span class="op">:</span>rem <span class="op">+</span><span class="st"> </span>time13<span class="op">:</span>strl<span class="op">:</span>rem <span class="op">+</span></span>
+<span id="cb302-4"><a href="ch-3level.html#cb302-4"></a><span class="st">  </span>(time13<span class="op">|</span>plant) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot), <span class="dt">REML=</span>T, <span class="dt">data=</span>leaddata)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  plant    (Intercept) 0.29404  0.5423       
 ##           time13      0.00143  0.0378   0.16
@@ -2151,7 +2151,7 @@ Y_{ijk} &amp; = [\alpha_{0}+ \beta_{0}\textrm{time}_{ijk} + \beta_{1}\textrm{str
 ## time13:rem      -0.01649   0.013238  -1.246
 ## time13:strl:rem -0.03939   0.023847  -1.652</code></pre>
 <p>A likelihood ratio test shows no significant difference between Models D and F (chi-square test statistic = 11.15 on 7 df, p=.1323), supporting the use of simplified Model F.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="ch-3level.html#cb305-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelfl0, modeldl0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="ch-3level.html#cb306-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelfl0, modeldl0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar   AIC   BIC logLik   dev Chisq Df   pval
 modelfl0   10 581.2 621.4 -280.6 561.2    NA NA     NA
 modeldl0   17 584.0 652.4 -275.0 550.0 11.15  7 0.1323</code></pre>
@@ -2162,12 +2162,12 @@ modeldl0   17 584.0 652.4 -275.0 550.0 11.15  7 0.1323</code></pre>
 Figure 10.16: Null distribution of likelihood ratio test statistic derived using parametric bootstrap (histogram) compared to a chi-square distribution with 7 degrees of freedom (smooth curve). The vertical line represents the observed likelihood ratio test statistic.
 </p>
 </div>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="ch-3level.html#cb307-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>modeldl0, <span class="dt">m0=</span>modelfl0, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="ch-3level.html#cb308-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>modeldl0, <span class="dt">m0=</span>modelfl0, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>   Df logLik   dev Chisq ChiDf pval_boot
 m0 10 -280.6 561.2    NA    NA        NA
 mA 17 -275.0 550.0 11.15     7     0.201</code></pre>
 <p>The effects of remnant prairie soil and the interaction between remnant soil and sterilization appear to have marginal benefit in Model F, so we remove those two terms to create Model E. A likelihood ratio test comparing Models E and F, however, shows that Model F significantly outperforms Model E (chi-square test statistic = 9.40 on 2 df, p=.0090). Thus, we will use Model F as our “Final Model” for generating inference.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="ch-3level.html#cb309-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelel0, modelfl0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="ch-3level.html#cb310-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modelel0, modelfl0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar   AIC   BIC logLik   dev Chisq Df
 modelel0    8 586.6 618.8 -285.3 570.6    NA NA
 modelfl0   10 581.2 621.4 -280.6 561.2 9.401  2

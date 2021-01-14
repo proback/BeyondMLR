@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -518,22 +518,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Consider different ways of modeling the variance-covariance structure in longitudinal data.</li>
 <li>Understand how a parametric bootstrap test of significance works and when it might be useful.</li>
 </ul>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="ch-lon.html#cb213-1"></a><span class="co"># Packages required for Chapter 9</span></span>
-<span id="cb213-2"><a href="ch-lon.html#cb213-2"></a><span class="kw">library</span>(GGally)</span>
-<span id="cb213-3"><a href="ch-lon.html#cb213-3"></a><span class="kw">library</span>(data.table)</span>
-<span id="cb213-4"><a href="ch-lon.html#cb213-4"></a><span class="kw">library</span>(Hmisc)</span>
-<span id="cb213-5"><a href="ch-lon.html#cb213-5"></a><span class="kw">library</span>(mice)</span>
-<span id="cb213-6"><a href="ch-lon.html#cb213-6"></a><span class="kw">library</span>(lattice)</span>
-<span id="cb213-7"><a href="ch-lon.html#cb213-7"></a><span class="kw">library</span>(nlme)</span>
-<span id="cb213-8"><a href="ch-lon.html#cb213-8"></a><span class="kw">library</span>(reshape2)</span>
-<span id="cb213-9"><a href="ch-lon.html#cb213-9"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb213-10"><a href="ch-lon.html#cb213-10"></a><span class="kw">library</span>(mnormt)</span>
-<span id="cb213-11"><a href="ch-lon.html#cb213-11"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb213-12"><a href="ch-lon.html#cb213-12"></a><span class="kw">library</span>(gridExtra) </span>
-<span id="cb213-13"><a href="ch-lon.html#cb213-13"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb213-14"><a href="ch-lon.html#cb213-14"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb213-15"><a href="ch-lon.html#cb213-15"></a><span class="kw">library</span>(broom)</span>
-<span id="cb213-16"><a href="ch-lon.html#cb213-16"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="ch-lon.html#cb214-1"></a><span class="co"># Packages required for Chapter 9</span></span>
+<span id="cb214-2"><a href="ch-lon.html#cb214-2"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb214-3"><a href="ch-lon.html#cb214-3"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb214-4"><a href="ch-lon.html#cb214-4"></a><span class="kw">library</span>(Hmisc)</span>
+<span id="cb214-5"><a href="ch-lon.html#cb214-5"></a><span class="kw">library</span>(mice)</span>
+<span id="cb214-6"><a href="ch-lon.html#cb214-6"></a><span class="kw">library</span>(lattice)</span>
+<span id="cb214-7"><a href="ch-lon.html#cb214-7"></a><span class="kw">library</span>(nlme)</span>
+<span id="cb214-8"><a href="ch-lon.html#cb214-8"></a><span class="kw">library</span>(reshape2)</span>
+<span id="cb214-9"><a href="ch-lon.html#cb214-9"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb214-10"><a href="ch-lon.html#cb214-10"></a><span class="kw">library</span>(mnormt)</span>
+<span id="cb214-11"><a href="ch-lon.html#cb214-11"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb214-12"><a href="ch-lon.html#cb214-12"></a><span class="kw">library</span>(gridExtra) </span>
+<span id="cb214-13"><a href="ch-lon.html#cb214-13"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb214-14"><a href="ch-lon.html#cb214-14"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb214-15"><a href="ch-lon.html#cb214-15"></a><span class="kw">library</span>(broom)</span>
+<span id="cb214-16"><a href="ch-lon.html#cb214-16"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="cs:charter" class="section level2">
 <h2><span class="header-section-number">9.2</span> Case Study: Charter Schools</h2>
@@ -1306,9 +1306,9 @@ As in Chapter <a href="ch-multilevelintro.html#ch-multilevelintro">8</a>, we wil
 Y _{ij} = \alpha_{0} + u_{i} + \epsilon_{ij} \textrm{ with } u_{i} \sim N(0, \sigma^2_u) \textrm{ and } \epsilon_{ij} \sim N(0, \sigma^2)
 \end{equation*}\]</span>
 the unconditional means model can be fit to the MCA-II data:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="ch-lon.html#cb214-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
-<span id="cb214-2"><a href="ch-lon.html#cb214-2"></a>model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), </span>
-<span id="cb214-3"><a href="ch-lon.html#cb214-3"></a>                <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="ch-lon.html#cb215-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
+<span id="cb215-2"><a href="ch-lon.html#cb215-2"></a>model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), </span>
+<span id="cb215-3"><a href="ch-lon.html#cb215-3"></a>                <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  schoolid (Intercept) 41.9     6.47    
 ##  Residual             10.6     3.25</code></pre>
@@ -1371,9 +1371,9 @@ where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</
           \end{array} \right] \right) . \]</span></p>
 <p>As before, <span class="math inline">\(\sigma^2\)</span> quantifies the within-school variability (the scatter of points around schools’ linear growth trajectories), while now the between-school variability is partitioned into variability in initial status <span class="math inline">\((\sigma^2_u)\)</span> and variability in rates of change <span class="math inline">\((\sigma^2_v)\)</span>.</p>
 <p>Using the composite model specification, the unconditional growth model can be fit to the MCA-II test data:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="ch-lon.html#cb218-1"></a><span class="co">#Model B (Unconditional growth)</span></span>
-<span id="cb218-2"><a href="ch-lon.html#cb218-2"></a>model.b &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), </span>
-<span id="cb218-3"><a href="ch-lon.html#cb218-3"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="ch-lon.html#cb219-1"></a><span class="co">#Model B (Unconditional growth)</span></span>
+<span id="cb219-2"><a href="ch-lon.html#cb219-2"></a>model.b &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), </span>
+<span id="cb219-3"><a href="ch-lon.html#cb219-3"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  schoolid (Intercept) 39.441   6.280        
 ##           year08       0.111   0.332    0.72
@@ -1433,9 +1433,9 @@ b_{i} &amp; = \beta_{0}\\
 c_{i} &amp; = \gamma_{0}
 \end{align*}\]</span>
 where <span class="math inline">\(u_{i}\sim N(0,\sigma^2_u)\)</span>. Models like this are frequently used in practice—they allow for a separate overall effect on test scores for each school, while minimizing parameters that must be estimated. The tradeoff is that this model does not allow linear and quadratic effects to differ by school, but we have little choice here without more observations per school. Thus, using the composite model specification, the unconditional quadratic growth model with random intercept for each school can be fit to the MCA-II test data:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="ch-lon.html#cb223-1"></a><span class="co"># Modeling quadratic time trend</span></span>
-<span id="cb223-2"><a href="ch-lon.html#cb223-2"></a>model.b2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>yearc <span class="op">+</span><span class="st"> </span>yearc2 <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), </span>
-<span id="cb223-3"><a href="ch-lon.html#cb223-3"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="ch-lon.html#cb224-1"></a><span class="co"># Modeling quadratic time trend</span></span>
+<span id="cb224-2"><a href="ch-lon.html#cb224-2"></a>model.b2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>yearc <span class="op">+</span><span class="st"> </span>yearc2 <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), </span>
+<span id="cb224-3"><a href="ch-lon.html#cb224-3"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  schoolid (Intercept) 43.05    6.56    
 ##  Residual              8.52    2.92</code></pre>
@@ -1493,11 +1493,11 @@ Y_{ij} &amp; = a_{i} + b_{i}\textrm{Year08}_{ij}+ \epsilon_{ij} \\
        &amp; = [\alpha_{0} + \beta_{0}\textrm{Year08}_{ij} +\alpha_{1}\textrm{Charter}_i+ \beta_{1}\textrm{Charter}_i\textrm{Year08}_{ij}] + \\
        &amp; \quad [u_{i} + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
 \end{align*}\]</span></p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ch-lon.html#cb228-1"></a><span class="co">#Model C (uncontrolled effects of school type on </span></span>
-<span id="cb228-2"><a href="ch-lon.html#cb228-2"></a><span class="co">#   intercept and slope)</span></span>
-<span id="cb228-3"><a href="ch-lon.html#cb228-3"></a>model.c &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb228-4"><a href="ch-lon.html#cb228-4"></a><span class="st">  </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), </span>
-<span id="cb228-5"><a href="ch-lon.html#cb228-5"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="ch-lon.html#cb229-1"></a><span class="co">#Model C (uncontrolled effects of school type on </span></span>
+<span id="cb229-2"><a href="ch-lon.html#cb229-2"></a><span class="co">#   intercept and slope)</span></span>
+<span id="cb229-3"><a href="ch-lon.html#cb229-3"></a>model.c &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb229-4"><a href="ch-lon.html#cb229-4"></a><span class="st">  </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), </span>
+<span id="cb229-5"><a href="ch-lon.html#cb229-5"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  schoolid (Intercept) 35.832   5.986        
 ##           year08       0.131   0.362    0.88
@@ -1556,10 +1556,10 @@ Y_{ij}= [\alpha_{0}&amp;+\alpha_{1}\textrm{Charter}_i +\alpha_{2}\textrm{schpctf
  &amp;+ [u_{i} + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
 \end{align*}\]</span>
 where error terms are defined as in Model C.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="ch-lon.html#cb233-1"></a><span class="co">#Model D2 (Introduce SchPctFree at level 2)</span></span>
-<span id="cb233-2"><a href="ch-lon.html#cb233-2"></a>model.d2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb233-3"><a href="ch-lon.html#cb233-3"></a><span class="st">  </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>SchPctFree<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid),</span>
-<span id="cb233-4"><a href="ch-lon.html#cb233-4"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="ch-lon.html#cb234-1"></a><span class="co">#Model D2 (Introduce SchPctFree at level 2)</span></span>
+<span id="cb234-2"><a href="ch-lon.html#cb234-2"></a>model.d2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb234-3"><a href="ch-lon.html#cb234-3"></a><span class="st">  </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>SchPctFree<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid),</span>
+<span id="cb234-4"><a href="ch-lon.html#cb234-4"></a>  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  schoolid (Intercept) 19.13    4.37         
 ##           year08       0.16    0.40     0.51
@@ -1573,7 +1573,7 @@ where error terms are defined as in Model C.</p>
 ## charter:year08      0.98076   0.318583    3.078
 ## SchPctFree:year08  -0.01041   0.003839   -2.711</code></pre>
 <pre><code>##  AIC =  9988 ;  BIC =  10043</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ch-lon.html#cb238-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.d2, model.c, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="ch-lon.html#cb239-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.d2, model.c, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar   AIC   BIC logLik   dev Chisq Df
 model.c     8 10305 10348  -5144 10289    NA NA
 model.d2   10  9967 10022  -4974  9947 341.5  2
@@ -1607,10 +1607,10 @@ a_{i} &amp; = \alpha_{0} + \alpha_{1}\textrm{Charter}_i + \alpha_{2}\textrm{urba
 b_{i} &amp; = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{urban}_i + \beta_{3}\textrm{schpctsped}_i + v_{i}
 \end{align*}\]</span></p>
 <p>where we find the effect of charter schools on 2008 test scores after adjusting for urban or rural location, percentage of special education students, and percentage of students that receive free or reduced lunch, and the effect of charter schools on yearly change between 2008 and 2010 after adjusting for urban or rural location and percentage of special education students. We can use AIC and BIC criteria to compare Model F with Model D, since the two models are not nested. By both criteria, Model F is significantly better than Model D: AIC of 9885 vs. 9988, and BIC of 9956 vs. 10043. Based on the R output below, we offer interpretations for estimates of model fixed effects:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="ch-lon.html#cb240-1"></a>model.f2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span></span>
-<span id="cb240-2"><a href="ch-lon.html#cb240-2"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb240-3"><a href="ch-lon.html#cb240-3"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
-<span id="cb240-4"><a href="ch-lon.html#cb240-4"></a><span class="st">  </span>(year08<span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="ch-lon.html#cb241-1"></a>model.f2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span></span>
+<span id="cb241-2"><a href="ch-lon.html#cb241-2"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb241-3"><a href="ch-lon.html#cb241-3"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
+<span id="cb241-4"><a href="ch-lon.html#cb241-4"></a><span class="st">  </span>(year08<span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev. Corr
 ##  schoolid (Intercept) 16.94756 4.1167       
 ##           year08       0.00475 0.0689   0.85
@@ -1644,11 +1644,11 @@ b_{i} &amp; = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{urban}_
 <div id="longitudinal-paraboot" class="section level3">
 <h3><span class="header-section-number">9.6.4</span> Parametric Bootstrap Testing</h3>
 <p>We could further examine whether or not a simplified version of Model F, with fewer random effects, might be preferable. For instance, consider testing whether we could remove <span class="math inline">\(v_i\)</span> in Model F in Section <a href="ch-lon.html#modelf9">9.6.3</a>, to create Model F0. Removing <span class="math inline">\(v_i\)</span> is equivalent to setting <span class="math inline">\(\sigma_{v}^{2} = 0\)</span> and <span class="math inline">\(\rho_{uv} = 0\)</span>. We begin by comparing Model F (full model) to Model F0 (reduced model) using a likelihood ratio test:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="ch-lon.html#cb245-1"></a><span class="co">#Model F0 (remove 2 variance components from Model F)</span></span>
-<span id="cb245-2"><a href="ch-lon.html#cb245-2"></a>model.f0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span></span>
-<span id="cb245-3"><a href="ch-lon.html#cb245-3"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb245-4"><a href="ch-lon.html#cb245-4"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
-<span id="cb245-5"><a href="ch-lon.html#cb245-5"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="ch-lon.html#cb246-1"></a><span class="co">#Model F0 (remove 2 variance components from Model F)</span></span>
+<span id="cb246-2"><a href="ch-lon.html#cb246-2"></a>model.f0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span><span class="st"> </span></span>
+<span id="cb246-3"><a href="ch-lon.html#cb246-3"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb246-4"><a href="ch-lon.html#cb246-4"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
+<span id="cb246-5"><a href="ch-lon.html#cb246-5"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups   Name        Variance Std.Dev.
 ##  schoolid (Intercept) 17.46    4.18    
 ##  Residual              8.83    2.97</code></pre>
@@ -1664,7 +1664,7 @@ b_{i} &amp; = \beta_{0} + \beta_{1}\textrm{Charter}_i + \beta_{2}\textrm{urban}_
 ## urban:year08       -0.52330    0.18651   -2.806
 ## SchPctSped:year08  -0.04645    0.01017   -4.568</code></pre>
 <pre><code>##  AIC =  9881 ;  BIC =  9941</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="ch-lon.html#cb250-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.f2, model.f0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="ch-lon.html#cb251-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.f2, model.f0, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>         npar  AIC  BIC logLik  dev  Chisq Df   pval
 model.f0   11 9854 9914  -4916 9832     NA NA     NA
 model.f2   13 9857 9928  -4916 9831 0.3376  2 0.8447</code></pre>
@@ -1680,7 +1680,7 @@ model.f2   13 9857 9928  -4916 9831 0.3376  2 0.8447</code></pre>
 <li>Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic</li>
 </ul>
 <div class="figure"><span id="fig:parabootdiagram"></span>
-<img src="data/ParametricBootstrapDiagram.png" alt="The steps in conducting a parametric bootstrap test comparing Models F and F0." width="100%" height="100%" />
+<img src="data/ParametricBootstrapDiagram9.png" alt="The steps in conducting a parametric bootstrap test comparing Models F and F0." width="90%" />
 <p class="caption">
 Figure 9.19: The steps in conducting a parametric bootstrap test comparing Models F and F0.
 </p>
@@ -1813,19 +1813,19 @@ b_{1} &amp; = 2.14+1.03(0)-0.52(0)-.046(11.8) = 1.60
 <li>Model F0 – the correct (null) model that was actually used to generate the responses</li>
 <li>Model F – the incorrect (full) model that contains two extra variance components – <span class="math inline">\(\sigma_{v}^{2}\)</span> and <span class="math inline">\(\sigma_{uv}\)</span> – that were not actually used when generating the responses</li>
 </ul>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ch-lon.html#cb252-1"></a><span class="co"># Generate 1 set of bootstrapped data and run chi-square test</span></span>
-<span id="cb252-2"><a href="ch-lon.html#cb252-2"></a><span class="co">#  (will also work if use REML models, but may take longer)</span></span>
-<span id="cb252-3"><a href="ch-lon.html#cb252-3"></a><span class="kw">set.seed</span>(<span class="dv">3333</span>)</span>
-<span id="cb252-4"><a href="ch-lon.html#cb252-4"></a>d &lt;-<span class="st"> </span><span class="kw">drop</span>(<span class="kw">simulate</span>(model.f0ml))</span>
-<span id="cb252-5"><a href="ch-lon.html#cb252-5"></a>m2 &lt;-<span class="kw">refit</span>(model.f2ml, <span class="dt">newresp=</span>d)</span>
-<span id="cb252-6"><a href="ch-lon.html#cb252-6"></a>m1 &lt;-<span class="kw">refit</span>(model.f0ml, <span class="dt">newresp=</span>d)</span>
-<span id="cb252-7"><a href="ch-lon.html#cb252-7"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(m2, m1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ch-lon.html#cb253-1"></a><span class="co"># Generate 1 set of bootstrapped data and run chi-square test</span></span>
+<span id="cb253-2"><a href="ch-lon.html#cb253-2"></a><span class="co">#  (will also work if use REML models, but may take longer)</span></span>
+<span id="cb253-3"><a href="ch-lon.html#cb253-3"></a><span class="kw">set.seed</span>(<span class="dv">3333</span>)</span>
+<span id="cb253-4"><a href="ch-lon.html#cb253-4"></a>d &lt;-<span class="st"> </span><span class="kw">drop</span>(<span class="kw">simulate</span>(model.f0ml))</span>
+<span id="cb253-5"><a href="ch-lon.html#cb253-5"></a>m2 &lt;-<span class="kw">refit</span>(model.f2ml, <span class="dt">newresp=</span>d)</span>
+<span id="cb253-6"><a href="ch-lon.html#cb253-6"></a>m1 &lt;-<span class="kw">refit</span>(model.f0ml, <span class="dt">newresp=</span>d)</span>
+<span id="cb253-7"><a href="ch-lon.html#cb253-7"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(m2, m1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>   npar  AIC  BIC logLik  dev Chisq Df   pval
 m1   11 9891 9951  -4935 9869    NA NA     NA
 m2   13 9891 9962  -4932 9865 4.581  2 0.1012</code></pre>
 <p>A likelihood ratio test statistic is calculated comparing Model F0 to Model F. For example, after continuing as above to generate new <span class="math inline">\(Y_{ij}\)</span> values corresponding to all 1733 score observations, we fit both models to the “bootstrapped” data. Since the data was generated using Model F0, we would expect the two extra terms in Model F (<span class="math inline">\(\sigma^2_{v}\)</span> and <span class="math inline">\(\sigma_{uv}\)</span>) to contribute very little to the quality of the fit; Model F will have a slightly larger likelihood and loglikelihood since it contains every parameter from Model F0 plus two more, but the difference in the likelihoods should be due to chance. In fact, that is what the output above shows. Model F does have a larger loglikelihood than Model F0 (-4932 vs. -4935), but this small difference is not statistically significant based on a chi-square test with 2 degrees of freedom (p=.1012).</p>
 <p>However, we are really only interested in saving the likelihood ratio test statistic from this bootstrapped sample (<span class="math inline">\(2*(-4932) - (-4935) = 4.581\)</span>). By generating (“bootstrapping”) many sets of responses based on estimated parameters from Model F0 and calculating many likelihood ratio test statistics, we can observe how this test statistic behaves under the null hypothesis of <span class="math inline">\(\sigma_{v}^{2} = \sigma_{uv} = 0\)</span>, rather than making the (dubious) assumption that its behavior is described by a chi-square distribution with 2 degrees of freedom. Figure <a href="ch-lon.html#fig:paraboot9">9.20</a> illustrates the null distribution of the likelihood ratio test statistic derived by the parametric bootstrap procedure as compared to a chi-square distribution. A p-value for comparing our full and reduced models can be approximated by finding the proportion of likelihood ratio test statistics generated under the null model which exceed our observed likelihood ratio test (0.3376). The parametric bootstrap provides a more reliable p-value in this case (.578 from table below); a chi-square distribution puts too much mass in the tail and not enough near 0, leading to overestimation of the p-value. Based on this test, we would still choose our simpler Model F0.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="ch-lon.html#cb254-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.f2ml, <span class="dt">m0=</span>model.f0ml, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="ch-lon.html#cb255-1"></a><span class="kw">bootstrapAnova</span>(<span class="dt">mA=</span>model.f2ml, <span class="dt">m0=</span>model.f0ml, <span class="dt">B=</span><span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>   npar logLik  dev  Chisq Df pval_boot
 m0   11  -4916 9832     NA NA        NA
 mA   13  -4916 9831 0.3376  2     0.578</code></pre>
@@ -1836,8 +1836,8 @@ Figure 9.20: Null distribution of likelihood ratio test statistic derived using 
 </p>
 </div>
 <p>Another way of examining whether or not we should stick with the reduced model or reject it in favor of the larger model is by generating parametric bootstrap samples, and then using those samples to produce 95% confidence intervals for both <span class="math inline">\(\rho_{uv}\)</span> and <span class="math inline">\(\sigma_{v}\)</span>.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="ch-lon.html#cb256-1"></a>bootciF =<span class="st"> </span><span class="kw">confint</span>(model.f2, <span class="dt">method=</span><span class="st">&quot;boot&quot;</span>, <span class="dt">oldNames=</span>F)</span>
-<span id="cb256-2"><a href="ch-lon.html#cb256-2"></a>bootciF</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ch-lon.html#cb257-1"></a>bootciF =<span class="st"> </span><span class="kw">confint</span>(model.f2, <span class="dt">method=</span><span class="st">&quot;boot&quot;</span>, <span class="dt">oldNames=</span>F)</span>
+<span id="cb257-2"><a href="ch-lon.html#cb257-2"></a>bootciF</span></code></pre></div>
 <pre><code>##                                      2.5 %    97.5 %
 ## sd_(Intercept)|schoolid           3.801826   4.50866
 ## cor_year08.(Intercept)|schoolid  -1.000000   1.00000
@@ -2033,11 +2033,11 @@ and this covariance matrix can be converted into a within-subject correlation ma
 <div id="notesr9" class="section level2">
 <h2><span class="header-section-number">9.8</span> Notes on Using R (optional)</h2>
 <p>The model below is our final model with <span class="math inline">\(\sigma_{uv}\)</span> set to 0—i.e., we have added the restriction that Level Two error terms are uncorrelated. Motivation for this restriction came from repeated estimates of correlation in different versions of the final model near 1, when empirically a slightly negative correlation might be expected. As we will describe in Chapter <a href="ch-3level.html#ch-3level">10</a>, inclusion of the Level Two correlation as a model parameter appears to lead to boundary constraints—maximum likelihood parameter estimates near the maximum or minimum allowable value for a parameter. A likelihood ratio test using full maximum likelihood estimates confirms that the inclusion of a correlation term does not lead to an improved model (LRT test statistic = .223 on 1 df, <span class="math inline">\(p=.637\)</span>); a parametric bootstrap test provides a similar result and is more trustworthy when testing a hypothesis about a variance component. Estimates of fixed effects and their standard errors are extremely consistent with the full model in Section <a href="ch-lon.html#modelf9">9.6.3</a>; only the estimate of the variability in <span class="math inline">\(\sigma_{1}\)</span> is noticeably higher.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="ch-lon.html#cb258-1"></a><span class="co"># Modified final model</span></span>
-<span id="cb258-2"><a href="ch-lon.html#cb258-2"></a>model.f2a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span></span>
-<span id="cb258-3"><a href="ch-lon.html#cb258-3"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span></span>
-<span id="cb258-4"><a href="ch-lon.html#cb258-4"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
-<span id="cb258-5"><a href="ch-lon.html#cb258-5"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>schoolid) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span><span class="op">+</span>year08<span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ch-lon.html#cb259-1"></a><span class="co"># Modified final model</span></span>
+<span id="cb259-2"><a href="ch-lon.html#cb259-2"></a>model.f2a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>SchPctFree <span class="op">+</span></span>
+<span id="cb259-3"><a href="ch-lon.html#cb259-3"></a><span class="st">  </span>SchPctSped <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>urban<span class="op">:</span>year08 <span class="op">+</span></span>
+<span id="cb259-4"><a href="ch-lon.html#cb259-4"></a><span class="st">  </span>SchPctSped<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span></span>
+<span id="cb259-5"><a href="ch-lon.html#cb259-5"></a><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>schoolid) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span><span class="op">+</span>year08<span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</span></code></pre></div>
 <pre><code>##  Groups     Name        Variance Std.Dev.
 ##  schoolid   (Intercept) 17.355   4.166   
 ##  schoolid.1 year08       0.114   0.337   
@@ -2054,10 +2054,10 @@ and this covariance matrix can be converted into a within-subject correlation ma
 ## urban:year08       -0.52442   0.187678   -2.794
 ## SchPctSped:year08  -0.04672   0.010219   -4.572</code></pre>
 <pre><code>##  AIC =  9883 ;  BIC =  9948</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ch-lon.html#cb263-1"></a><span class="co"># LRT comparing final model in chapter (model.f2ml) with maximum</span></span>
-<span id="cb263-2"><a href="ch-lon.html#cb263-2"></a><span class="co">#  likelihood estimates to modified final model (model.f2aml)</span></span>
-<span id="cb263-3"><a href="ch-lon.html#cb263-3"></a><span class="co">#  with uncorrelated Level Two errors.</span></span>
-<span id="cb263-4"><a href="ch-lon.html#cb263-4"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.f2ml, model.f2aml, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ch-lon.html#cb264-1"></a><span class="co"># LRT comparing final model in chapter (model.f2ml) with maximum</span></span>
+<span id="cb264-2"><a href="ch-lon.html#cb264-2"></a><span class="co">#  likelihood estimates to modified final model (model.f2aml)</span></span>
+<span id="cb264-3"><a href="ch-lon.html#cb264-3"></a><span class="co">#  with uncorrelated Level Two errors.</span></span>
+<span id="cb264-4"><a href="ch-lon.html#cb264-4"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.f2ml, model.f2aml, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>            npar  AIC  BIC logLik  dev  Chisq Df
 model.f2aml   12 9855 9921  -4916 9831     NA NA
 model.f2ml    13 9857 9928  -4916 9831 0.2231  1
@@ -2374,18 +2374,18 @@ more drinks in a row, and (d) got drunk—were each scored on an 8-point scale, 
 <li>Show how you would produce a bootstrapped value for <span class="math inline">\(Y_{11}\)</span>, the first row of <code>ambulance3.csv</code>. Show all calculations with as many specific values filled in as possible. If you need to select a random value from a normal distribution, identify the mean and SD for the normal distribution you’d like to sample from.</li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ch-lon.html#cb265-1"></a>modelD &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-2"><a href="ch-lon.html#cb265-2"></a><span class="st">  </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
-<span id="cb265-3"><a href="ch-lon.html#cb265-3"></a></span>
-<span id="cb265-4"><a href="ch-lon.html#cb265-4"></a>modelD0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-5"><a href="ch-lon.html#cb265-5"></a><span class="st">  </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
-<span id="cb265-6"><a href="ch-lon.html#cb265-6"></a></span>
-<span id="cb265-7"><a href="ch-lon.html#cb265-7"></a>modelE &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span></span>
-<span id="cb265-8"><a href="ch-lon.html#cb265-8"></a><span class="st">  </span>ems_basic<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
-<span id="cb265-9"><a href="ch-lon.html#cb265-9"></a></span>
-<span id="cb265-10"><a href="ch-lon.html#cb265-10"></a>modelG &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>totalvisits1 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-11"><a href="ch-lon.html#cb265-11"></a><span class="st">  </span>ems_basic <span class="op">+</span><span class="st"> </span>stations <span class="op">+</span><span class="st"> </span>ems_basic<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-12"><a href="ch-lon.html#cb265-12"></a><span class="st">  </span>stations<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ch-lon.html#cb266-1"></a>modelD &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span><span class="st"> </span></span>
+<span id="cb266-2"><a href="ch-lon.html#cb266-2"></a><span class="st">  </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
+<span id="cb266-3"><a href="ch-lon.html#cb266-3"></a></span>
+<span id="cb266-4"><a href="ch-lon.html#cb266-4"></a>modelD0 &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span><span class="st"> </span></span>
+<span id="cb266-5"><a href="ch-lon.html#cb266-5"></a><span class="st">  </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
+<span id="cb266-6"><a href="ch-lon.html#cb266-6"></a></span>
+<span id="cb266-7"><a href="ch-lon.html#cb266-7"></a>modelE &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>ems_basic <span class="op">+</span></span>
+<span id="cb266-8"><a href="ch-lon.html#cb266-8"></a><span class="st">  </span>ems_basic<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span>
+<span id="cb266-9"><a href="ch-lon.html#cb266-9"></a></span>
+<span id="cb266-10"><a href="ch-lon.html#cb266-10"></a>modelG &lt;-<span class="st"> </span><span class="kw">lmer</span>(diverthours <span class="op">~</span><span class="st"> </span>year2013 <span class="op">+</span><span class="st"> </span>totalvisits1 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb266-11"><a href="ch-lon.html#cb266-11"></a><span class="st">  </span>ems_basic <span class="op">+</span><span class="st"> </span>stations <span class="op">+</span><span class="st"> </span>ems_basic<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb266-12"><a href="ch-lon.html#cb266-12"></a><span class="st">  </span>stations<span class="op">:</span>year2013 <span class="op">+</span><span class="st"> </span>(year2013 <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> ambulance3)</span></code></pre></div>
 </div>
 <div id="open-ended-exercises-5" class="section level3">
 <h3><span class="header-section-number">9.9.3</span> Open-Ended Exercises</h3>

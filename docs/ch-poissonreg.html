@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -517,17 +517,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Use an offset to account for varying effort in data collection.</li>
 <li>Fit and use a zero-inflated Poisson (ZIP) model.</li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="ch-poissonreg.html#cb57-1"></a><span class="co"># Packages required for Chapter 4</span></span>
-<span id="cb57-2"><a href="ch-poissonreg.html#cb57-2"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb57-3"><a href="ch-poissonreg.html#cb57-3"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb57-4"><a href="ch-poissonreg.html#cb57-4"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb57-5"><a href="ch-poissonreg.html#cb57-5"></a><span class="kw">library</span>(mosaic)</span>
-<span id="cb57-6"><a href="ch-poissonreg.html#cb57-6"></a><span class="kw">library</span>(xtable)</span>
-<span id="cb57-7"><a href="ch-poissonreg.html#cb57-7"></a><span class="kw">library</span>(pscl) </span>
-<span id="cb57-8"><a href="ch-poissonreg.html#cb57-8"></a><span class="kw">library</span>(multcomp)</span>
-<span id="cb57-9"><a href="ch-poissonreg.html#cb57-9"></a><span class="kw">library</span>(pander)</span>
-<span id="cb57-10"><a href="ch-poissonreg.html#cb57-10"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb57-11"><a href="ch-poissonreg.html#cb57-11"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ch-poissonreg.html#cb58-1"></a><span class="co"># Packages required for Chapter 4</span></span>
+<span id="cb58-2"><a href="ch-poissonreg.html#cb58-2"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb58-3"><a href="ch-poissonreg.html#cb58-3"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb58-4"><a href="ch-poissonreg.html#cb58-4"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb58-5"><a href="ch-poissonreg.html#cb58-5"></a><span class="kw">library</span>(mosaic)</span>
+<span id="cb58-6"><a href="ch-poissonreg.html#cb58-6"></a><span class="kw">library</span>(xtable)</span>
+<span id="cb58-7"><a href="ch-poissonreg.html#cb58-7"></a><span class="kw">library</span>(pscl) </span>
+<span id="cb58-8"><a href="ch-poissonreg.html#cb58-8"></a><span class="kw">library</span>(multcomp)</span>
+<span id="cb58-9"><a href="ch-poissonreg.html#cb58-9"></a><span class="kw">library</span>(pander)</span>
+<span id="cb58-10"><a href="ch-poissonreg.html#cb58-10"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb58-11"><a href="ch-poissonreg.html#cb58-11"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="introduction-to-poisson-regression" class="section level2">
 <h2><span class="header-section-number">4.2</span> Introduction to Poisson Regression</h2>
@@ -959,7 +959,7 @@ Figure 4.6: Empirical log of the mean household sizes vs. age of the head of ho
 <p><span class="math display">\[\begin{equation*}
 log(\hat{\lambda}) = 1.55 - 0.0047 \textrm{age}
 \end{equation*}\]</span></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ch-poissonreg.html#cb58-1"></a>modela =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="ch-poissonreg.html#cb59-1"></a>modela =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
 <pre><code>##              Estimate Std. Error z value   Pr(&gt;|z|)
 ## (Intercept)  1.549942  0.0502754  30.829 1.070e-208
 ## age         -0.004706  0.0009363  -5.026  5.013e-07</code></pre>
@@ -983,12 +983,12 @@ log \left(\frac{\lambda_{X+1}}{\lambda_X}\right)   &amp;= \beta_1\\
 <span class="math display">\[ (-0.0065, -0.0029).
  \]</span></p>
 <p>Exponentiating the endpoints yields a confidence interval for the relative risk; i.e., the percent change in household size for each additional year older. Thus <span class="math inline">\((e^{-0.0065},e^{-0.0029})=(0.993,0.997)\)</span> suggests that we are 95% confident that the mean number in the house decreases between 0.7% and 0.3% for each additional year older the head of household is. It is best to construct a confidence interval for the coefficient and then exponentiate the endpoints because the estimated coefficients more closely follow a normal distribution than the exponentiated coefficients. There are other approaches to constructing intervals in these circumstances, including profile likelihood, the delta method, and bootstrapping, and we will discuss some of those approaches later. In this case, for instance, the profile likelihood interval is nearly identical to the Wald-type (normal theory) confidence interval  above.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="ch-poissonreg.html#cb61-1"></a><span class="co"># CI for betas using profile likelihood</span></span>
-<span id="cb61-2"><a href="ch-poissonreg.html#cb61-2"></a><span class="kw">confint</span>(modela)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ch-poissonreg.html#cb62-1"></a><span class="co"># CI for betas using profile likelihood</span></span>
+<span id="cb62-2"><a href="ch-poissonreg.html#cb62-2"></a><span class="kw">confint</span>(modela)</span></code></pre></div>
 <pre><code>##                 2.5 %    97.5 %
 ## (Intercept)  1.451170  1.648249
 ## age         -0.006543 -0.002873</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="ch-poissonreg.html#cb63-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(modela))</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ch-poissonreg.html#cb64-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(modela))</span></code></pre></div>
 <pre><code>##              2.5 % 97.5 %
 ## (Intercept) 4.2681 5.1979
 ## age         0.9935 0.9971</code></pre>
@@ -998,9 +998,9 @@ log \left(\frac{\lambda_{X+1}}{\lambda_X}\right)   &amp;= \beta_1\\
 <div id="sec-Devtocompare" class="section level3">
 <h3><span class="header-section-number">4.4.4</span> Using Deviances to Compare Models</h3>
 <p>There is another way in which to assess how useful age is in our model. A <strong>deviance</strong>  is a way in which to measure how the observed data deviates from the model predictions; it will be defined more precisely in Section <a href="ch-poissonreg.html#sec-PoisResid">4.4.8</a>, but it is similar to sum of squared errors (unexplained variability in the response) in LLSR regression. Because we want models that minimize deviance, we calculate the <strong>drop-in-deviance</strong>  when adding age to the model with no covariates (the <strong>null model</strong>).  The deviances for the null model and the model with age can be found in the model output. A residual deviance for the model with age is reported as 2337.1 with 1498 df. The output also includes the deviance and degrees of freedom for the null model (2362.5 with 1499 df). The drop-in-deviance is 25.4 (2362.5 - 2337.1) with a difference of only 1 df, so that the addition of one extra term (age) reduced unexplained variability by 25.4. If the null model were true, we would expect the drop-in-deviance to follow a <span class="math inline">\(\chi^2\)</span> distribution with 1 df. Therefore, the p-value for comparing the null model to the model with age is found by determining the probability that the value for a <span class="math inline">\(\chi^2\)</span> random variable with one degree of freedom exceeds 25.4, which is essentially 0. Once again, we can conclude that we have statistically significant evidence (<span class="math inline">\(\chi^2_{\text{df} =1}=25.4\)</span>, <span class="math inline">\(p &lt; .001\)</span>) that average household size decreases as age of the head of household increases.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="ch-poissonreg.html#cb65-1"></a><span class="co"># model0 is the null/reduced model</span></span>
-<span id="cb65-2"><a href="ch-poissonreg.html#cb65-2"></a>model0 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb65-3"><a href="ch-poissonreg.html#cb65-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model0, modela, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ch-poissonreg.html#cb66-1"></a><span class="co"># model0 is the null/reduced model</span></span>
+<span id="cb66-2"><a href="ch-poissonreg.html#cb66-2"></a>model0 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb66-3"><a href="ch-poissonreg.html#cb66-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model0, modela, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1    1499     2362       NA NA        NA
 2    1498     2337     25.4  1 4.661e-07</code></pre>
@@ -1066,9 +1066,9 @@ where each <span class="math inline">\(\lambda_i\)</span> can differ for each ho
 <div id="second-order-model" class="section level3">
 <h3><span class="header-section-number">4.4.6</span> Second Order Model</h3>
 <p>In Section <a href="ch-poissonreg.html#sec-Devtocompare">4.4.4</a>, the Wald-type test and drop-in-deviance test both suggest that a linear term in age is useful. But our exploratory data analysis in Section <a href="ch-poissonreg.html#exploreHH">4.4.2</a> suggests that a quadratic model might be more appropriate. A quadratic model would allow us to see if there exists an age where the number in the house is, on average, a maximum. The output for a quadratic model appears below.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ch-poissonreg.html#cb67-1"></a>fHH1 &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">age2 =</span> age<span class="op">*</span>age)</span>
-<span id="cb67-2"><a href="ch-poissonreg.html#cb67-2"></a>modela2 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2, <span class="dt">family =</span> poisson, </span>
-<span id="cb67-3"><a href="ch-poissonreg.html#cb67-3"></a>              <span class="dt">data =</span> fHH1)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="ch-poissonreg.html#cb68-1"></a>fHH1 &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">age2 =</span> age<span class="op">*</span>age)</span>
+<span id="cb68-2"><a href="ch-poissonreg.html#cb68-2"></a>modela2 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2, <span class="dt">family =</span> poisson, </span>
+<span id="cb68-3"><a href="ch-poissonreg.html#cb68-3"></a>              <span class="dt">data =</span> fHH1)</span></code></pre></div>
 <pre><code>##               Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept) -0.3325296  1.788e-01  -1.859 6.297e-02
 ## age          0.0708868  6.890e-03  10.288 8.007e-25
@@ -1076,7 +1076,7 @@ where each <span class="math inline">\(\lambda_i\)</span> can differ for each ho
 <pre><code>##  Residual deviance =  2201  on  1497 df 
 ##  Dispersion parameter =  1</code></pre>
 <p>We can assess the importance of the quadratic term in two ways. First, the p-value for the Wald-type statistic for age<span class="math inline">\(^2\)</span> is statistically significant (Z = -11.058, p &lt; 0.001). Another approach is to perform a drop-in-deviance test.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ch-poissonreg.html#cb70-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modela, modela2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="ch-poissonreg.html#cb71-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modela, modela2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1    1498     2337       NA NA        NA
 2    1497     2201    136.1  1 1.854e-31</code></pre>
@@ -1096,8 +1096,8 @@ where each <span class="math inline">\(\lambda_i\)</span> can differ for each ho
 <div id="adding-a-covariate" class="section level3">
 <h3><span class="header-section-number">4.4.7</span> Adding a Covariate</h3>
 <p>We should consider other covariates that may be related to household size. By controlling for important covariates, we can obtain more precise estimates of the relationship between age and household size. In addition, we may discover that the relationship between age and household size may differ by levels of a covariate. One important covariate to consider is location. As described earlier in the case study, there are 5 different regions that are associated with the <code>Location</code> variable: Central Luzon, Metro Manila, Visayas, Davao Region, and Ilocos Region. Assessing the utility of including the covariate <code>Location</code> is, in essence, comparing two nested models; here the quadratic model is compared to the quadratic model plus terms for <code>Location</code>. Results from the fitted model appears below; note that Central Luzon is the reference region that all other regions are compared to.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ch-poissonreg.html#cb72-1"></a>modela2L =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, </span>
-<span id="cb72-2"><a href="ch-poissonreg.html#cb72-2"></a>               <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ch-poissonreg.html#cb73-1"></a>modela2L =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, </span>
+<span id="cb73-2"><a href="ch-poissonreg.html#cb73-2"></a>               <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
 <pre><code>##                        Estimate Std. Error  z value
 ## (Intercept)          -0.3843338  0.1820919  -2.1107
 ## age                   0.0703628  0.0069051  10.1900
@@ -1122,7 +1122,7 @@ where each <span class="math inline">\(\lambda_i\)</span> can differ for each ho
  &amp; 0.054 \cdot\textrm{MetroManila}  +0.112 \cdot\textrm{Visayas} - 0.019 \cdot \textrm{DavaoRegion}
 \end{align*}\]</span>
 Notice that because there are 5 different locations, we must represent the effects of different locations through 4 indicator variables. For example, <span class="math inline">\(\hat{\beta}_6=-0.0194\)</span> indicates that, after controlling for the age of the head of household, the log mean household size is 0.0194 lower for households in the Davao Region than for households in the reference location of Central Luzon. In more interpretable terms, mean household size is <span class="math inline">\(e^{-0.0194}=0.98\)</span> times “higher” (i.e., 2% lower) in the Davao Region than in Central Luzon, when holding age constant.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ch-poissonreg.html#cb75-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modela2, modela2L, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ch-poissonreg.html#cb76-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modela2, modela2L, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df    pval
 1    1497     2201       NA NA      NA
 2    1493     2188    13.14  4 0.01059</code></pre>
@@ -1167,7 +1167,7 @@ Figure 4.7: Residual plot for the Poisson model of household size by age of the 
 <div id="sec-PoisGOF" class="section level3">
 <h3><span class="header-section-number">4.4.9</span> Goodness-of-Fit</h3>
 <p>The model residual deviance can be used to assess the degree to which the predicted values differ from the observed. When a model is true, we can expect the residual deviance to be distributed as a <span class="math inline">\(\chi^2\)</span> random variable with degrees of freedom equal to the model’s residual degrees of freedom. Our model thus far, the quadratic terms for age plus the indicators for location, has a residual deviance of 2187.8 with 1493 df. The probability of observing a deviance this large if the model fits is esentially 0, saying that there is significant evidence of lack-of-fit.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="ch-poissonreg.html#cb77-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(modela2<span class="op">$</span>deviance, modela2<span class="op">$</span>df.residual)  <span class="co"># GOF test</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="ch-poissonreg.html#cb78-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(modela2<span class="op">$</span>deviance, modela2<span class="op">$</span>df.residual)  <span class="co"># GOF test</span></span></code></pre></div>
 <pre><code>[1] 0</code></pre>
 <p>There are several reasons why <strong>lack-of-fit</strong>  may be observed. (1) We may be missing important covariates or interactions; a more comprehensive data set may be needed. (2) There may be extreme observations that may cause the deviance to be larger than expected; however, our residual plots did not reveal any unusual points. (3) Lastly, there may be a problem with the Poisson model. In particular, the Poisson model has only a single parameter, <span class="math inline">\(\lambda\)</span>, for each combination of the levels of the predictors which must describe both the mean and the variance. This limitation can become manifest when the variance appears to be larger than the corresponding means. In that case, the response is more variable than the Poisson model would imply, and the response is considered to be <strong>overdispersed</strong>. </p>
 </div>
@@ -1607,8 +1607,8 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 <div id="initial-models" class="section level2">
 <h2><span class="header-section-number">4.8</span> Initial Models</h2>
 <p>We are interested primarily in differences in violent crime between institutional types controlling for difference in regions, so we fit a model with region, institutional type, and our offset. Note that the central region is the reference level in our model.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="ch-poissonreg.html#cb80-1"></a>modeltr &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> poisson,</span>
-<span id="cb80-2"><a href="ch-poissonreg.html#cb80-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ch-poissonreg.html#cb81-1"></a>modeltr &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> poisson,</span>
+<span id="cb81-2"><a href="ch-poissonreg.html#cb81-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept) -1.54780     0.1711 -9.0439 1.512e-19
 ## typeU        0.27956     0.1331  2.0997 3.576e-02
@@ -1622,7 +1622,7 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 <div id="tukeys-honestly-significant-differences" class="section level3">
 <h3><span class="header-section-number">4.8.1</span> Tukey’s Honestly Significant Differences</h3>
 <p>Comparisons to regions other than the Central region can be accomplished by changing the reference region. If many comparisons are made, it would be best to adjust for multiple comparisons using a method such as <strong>Tukey’s Honestly Significant Differences</strong>,  which considers all pairwise comparisons among regions. This method helps control the large number of false positives that we would see if we ran multiple t-tests comparing groups. The honestly significant difference compares a standardized mean difference between two groups to a critical value from a studentized range distribution.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="ch-poissonreg.html#cb83-1"></a>mult_comp &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">glht</span>(modeltr, <span class="kw">mcp</span>(<span class="dt">region=</span><span class="st">&quot;Tukey&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="ch-poissonreg.html#cb84-1"></a>mult_comp &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">glht</span>(modeltr, <span class="kw">mcp</span>(<span class="dt">region=</span><span class="st">&quot;Tukey&quot;</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 5
 ##    comparison estimate    SE z_value    p_value
 ##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
@@ -1638,9 +1638,9 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 ## 10 W - S       -0.320  0.163  -1.96  0.280</code></pre>
 <p>In our case, Tukey’s Honestly Significant Differences simultaneously evaluates all 10 mean differences between pairs of regions. We find that the Northeast has significantly higher rates of violent crimes than the Central, Midwest, and Western regions, while the South has significantly higher rates of violent crimes than the Central and the Midwest, controlling for the type of institution. In the primary model, the University indicator is significant and, after exponentiating the coefficient, can be interpreted as an approximately (<span class="math inline">\(e^{0.280}\)</span>) 32% increase in violent crime rate over colleges after controlling for region.</p>
 <p>These results certainly suggest significant differences in regions and type of institution. However, the EDA findings suggest the effect of the type of institution may vary depending upon the region, so we consider a model with an interaction between region and type.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="ch-poissonreg.html#cb85-1"></a>modeli &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
-<span id="cb85-2"><a href="ch-poissonreg.html#cb85-2"></a>              <span class="dt">family =</span> poisson,</span>
-<span id="cb85-3"><a href="ch-poissonreg.html#cb85-3"></a>              <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="ch-poissonreg.html#cb86-1"></a>modeli &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
+<span id="cb86-2"><a href="ch-poissonreg.html#cb86-2"></a>              <span class="dt">family =</span> poisson,</span>
+<span id="cb86-3"><a href="ch-poissonreg.html#cb86-3"></a>              <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
 <pre><code>##                Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept)     -1.4741     0.3536 -4.1694 3.054e-05
 ## typeU            0.1959     0.3775  0.5190 6.038e-01
@@ -1655,7 +1655,7 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 <pre><code>##  Residual deviance =  276.7  on  70 df 
 ##  Dispersion parameter =  1</code></pre>
 <p>These results provide convincing evidence of an interaction between the effect of region and the type of institution. A drop-in-deviance test like the one we carried out in the previous case study confirms the significance of the contribution of the interaction to this model. We have statistically significant evidence (<span class="math inline">\(\chi^2=71.98, df=4, p&lt;.001\)</span>) that the difference between colleges and universities in violent crime rate differs by region. For example, our model estimates that violent crime rates are 13.6 (<span class="math inline">\(e^{.196+2.411}\)</span>) times higher in universities in the West compared to colleges, while in the Northeast we estimate that violent crime rates are 2.4 (<span class="math inline">\(\frac{1}{e^{.196-1.070}}\)</span>) times higher in colleges.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="ch-poissonreg.html#cb88-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltr, modeli, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="ch-poissonreg.html#cb89-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltr, modeli, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1      74    348.7       NA NA        NA
 2      70    276.7    71.98  4 8.664e-15</code></pre>
@@ -1670,9 +1670,9 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 <p><strong>Overdispersion</strong>  suggests that there is more variation in the response than the model implies. Under a Poisson model, we would expect the means and variances of the response to be about the same in various groups. Without adjusting for overdispersion, we use incorrect, artificially small standard errors leading to artificially small p-values for model coefficients. We may also end up with artificially complex models.</p>
 <p>We can take overdispersion into account in several different ways. The simplest is to use an estimated dispersion factor to inflate standard errors. Another way is to use a negative-binomial regression model. We begin with using an estimate of the dispersion parameter.</p>
 <p>We can estimate a dispersion parameter, <span class="math inline">\(\phi\)</span>, by dividing the model deviance by its corresponding degrees of freedom; i.e., <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span> where <span class="math inline">\(p\)</span> is the number of model parameters. It follows from what we know about the <span class="math inline">\(\chi^2\)</span> distribution that if there is no overdispersion, this estimate should be close to one. It will be larger than one in the presence of overdispersion. We inflate the standard errors by multiplying the variance by <span class="math inline">\(\phi\)</span>, so that the standard errors are larger than the likelihood approach would imply; i.e., <span class="math inline">\(SE_Q(\hat\beta)=\sqrt{\hat\phi}*SE(\hat\beta)\)</span>, where <span class="math inline">\(Q\)</span> stands for “quasi-Poisson”  since multiplying variances by <span class="math inline">\(\phi\)</span> is an ad-hoc solution. Our process for model building and comparison is called <strong>quasilikelihood</strong>—similar to likelihood but without exact underlying distributions.  If we choose to use a dispersion parameter with our model, we refer to the approach as quasilikelihood. The following output illustrates a quasi-Poisson approach to the interaction model:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ch-poissonreg.html#cb90-1"></a>modeliq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
-<span id="cb90-2"><a href="ch-poissonreg.html#cb90-2"></a>               <span class="dt">family =</span> quasipoisson,</span>
-<span id="cb90-3"><a href="ch-poissonreg.html#cb90-3"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ch-poissonreg.html#cb91-1"></a>modeliq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
+<span id="cb91-2"><a href="ch-poissonreg.html#cb91-2"></a>               <span class="dt">family =</span> quasipoisson,</span>
+<span id="cb91-3"><a href="ch-poissonreg.html#cb91-3"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span></code></pre></div>
 <pre><code>##                Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)     -1.4741     0.7455 -1.9773  0.05195
 ## typeU            0.1959     0.7961  0.2461  0.80631
@@ -1688,9 +1688,9 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 ##  Dispersion parameter =  4.447</code></pre>
 <p>In the absence of overdispersion, we expect the dispersion parameter estimate to be 1.0. The estimated dispersion parameter here is much larger than 1.0 (4.447) indicating overdispersion (extra variance) that should be accounted for. The larger estimated standard errors in the quasi-Poisson model reflect the adjustment. For example, the standard error for the West region term from a likelihood based approach is 0.7906, whereas the quasilikelihood standard error is <span class="math inline">\(\sqrt{4.47}*0.7906\)</span> or 1.6671. This term is no longer significant under the quasi-Poisson model. In fact, after adjusting for overdispersion (extra variation), none of the model coefficients in the quasi-Poisson model are significant at the .05 level! This is because standard errors were all increased by a factor of 2.1 (<span class="math inline">\(\sqrt{\hat\phi}=\sqrt{4.447}=2.1\)</span>), while estimated coefficients remain unchanged.</p>
 <p>Note that tests for individual parameters are now based on the t-distribution rather than a standard normal distribution, with test statistic <span class="math inline">\(t=\frac{\hat\beta}{SE_Q(\hat\beta)}\)</span> following an (approximate) t-distribution with <span class="math inline">\(n-p\)</span> degrees of freedom if the null hypothesis is true (<span class="math inline">\(H_O:\beta=0\)</span>). Drop-in-deviance tests can be similarly adjusted for overdispersion in the quasi-Poisson model. In this case, you can divide the test statistic (per degree of freedom) by the estimated dispersion parameter and compare the result to an F-distribution with the difference in the model degrees of freedom for the numerator and the degrees of freedom for the larger model in the denominator. That is, <span class="math inline">\(F=\frac{\textrm{drop in deviance}}{\textrm{difference in df}} / {\hat\phi}\)</span> follows an (approximate) F-distribution when the null hypothesis is true (<span class="math inline">\(H_0\)</span>: reduced model sufficient). The output below tests for an interaction between region and type of institution after adjusting for overdispersion (extra variance):</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="ch-poissonreg.html#cb93-1"></a>modeltrq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> quasipoisson,</span>
-<span id="cb93-2"><a href="ch-poissonreg.html#cb93-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
-<span id="cb93-3"><a href="ch-poissonreg.html#cb93-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltrq, modeliq, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="ch-poissonreg.html#cb94-1"></a>modeltrq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> quasipoisson,</span>
+<span id="cb94-2"><a href="ch-poissonreg.html#cb94-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
+<span id="cb94-3"><a href="ch-poissonreg.html#cb94-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltrq, modeliq, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev     F Df     pval
 1      74    348.7    NA NA       NA
 2      70    276.7 4.047  4 0.005213</code></pre>
@@ -1779,9 +1779,9 @@ Drop in deviance test
 <p>Another approach to dealing with overdispersion is to model the response using a negative binomial instead of a Poisson distribution. An advantage of this approach is that it introduces another parameter in addition to <span class="math inline">\(\lambda\)</span>, which gives the model more flexibility and, as opposed to the quasi-Poisson model, the negative binomial model assumes an explicit likelihood model. You may recall that negative binomial random variables take on non-negative integer values, which is consistent with modeling counts. This model posits selecting a <span class="math inline">\(\lambda\)</span> for each institution and then generating a count using a Poisson random variable with the selected <span class="math inline">\(\lambda\)</span>. With this approach, the counts will be more dispersed than would be expected for observations based on a single Poisson variable with rate <span class="math inline">\(\lambda\)</span>. (See Guided Exercises on the Gamma-Poisson mixture in Chapter <a href="ch-distthry.html#ch-distthry">3</a>.)</p>
 <p>Mathematically, you can think of the negative binomial model as a Poisson model where <span class="math inline">\(\lambda\)</span> is also random, following a gamma distribution. Specifically, if <span class="math inline">\(Y|\lambda \sim \textrm{Poisson}(\lambda)\)</span> and <span class="math inline">\(\lambda \sim \textrm{gamma}(r,\frac{1-p}{p})\)</span>, then <span class="math inline">\(Y \sim \textrm{NegBinom}(r,p)\)</span> where <span class="math inline">\(E(Y)=\frac{pr}{1-p}=\mu\)</span> and <span class="math inline">\(Var(Y)=\frac{pr}{(1-p)^2}=\mu+\frac{\mu^2}{r}\)</span>. The overdispersion in this case is given by <span class="math inline">\(\frac{\mu^2}{r}\)</span>, which approaches 0 as <span class="math inline">\(r\)</span> increases (so smaller values of <span class="math inline">\(r\)</span> indicate greater overdispersion).</p>
 <p>Here is what happens if we apply a negative binomial regression model  to the interaction model, which we’ve already established suffers from overdispersion issues under regular Poisson regression:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="ch-poissonreg.html#cb95-1"></a><span class="co"># Account for overdispersion with negative binomial model</span></span>
-<span id="cb95-2"><a href="ch-poissonreg.html#cb95-2"></a>modelinb &lt;-<span class="st"> </span><span class="kw">glm.nb</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
-<span id="cb95-3"><a href="ch-poissonreg.html#cb95-3"></a>               <span class="kw">offset</span>(<span class="kw">log</span>(enroll1000)), <span class="dt">data =</span> c.data2)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="ch-poissonreg.html#cb96-1"></a><span class="co"># Account for overdispersion with negative binomial model</span></span>
+<span id="cb96-2"><a href="ch-poissonreg.html#cb96-2"></a>modelinb &lt;-<span class="st"> </span><span class="kw">glm.nb</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
+<span id="cb96-3"><a href="ch-poissonreg.html#cb96-3"></a>               <span class="kw">offset</span>(<span class="kw">log</span>(enroll1000)), <span class="dt">data =</span> c.data2)</span></code></pre></div>
 <pre><code>##                Estimate Std. Error z value Pr(&gt;|z|)
 ## (Intercept)      0.4904     0.4281  1.1455 0.252008
 ## typeU            1.2174     0.4608  2.6422 0.008237
@@ -1809,7 +1809,7 @@ Drop in deviance test
 <div id="data-organization-2" class="section level3">
 <h3><span class="header-section-number">4.10.2</span> Data Organization</h3>
 <p>Each line of <code>weekendDrinks.csv</code> contains data provided by a student in an introductory statistics course. In this analysis, the response of interest is the respondent’s report of the number of alcoholic <code>drinks</code> they consumed the previous weekend, whether the student lives <code>off.campus</code>, and <code>sex</code>. We will also consider whether a student is likely a <code>firstYear</code> student based on the <code>dorm</code> they live in. Here is a sample of observations from this data set:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="ch-poissonreg.html#cb98-1"></a><span class="kw">head</span>(zip.data[<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="ch-poissonreg.html#cb99-1"></a><span class="kw">head</span>(zip.data[<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>  drinks sex off.campus firstYear
 1      0   f          0      TRUE
 2      5   f          0     FALSE
@@ -1839,21 +1839,21 @@ Figure 4.10: Observed (a) versus modeled (b) number of drinks.
 <div id="modeling" class="section level3">
 <h3><span class="header-section-number">4.10.4</span> Modeling</h3>
 <p>We first fit a simple Poisson model with the covariates <code>off.campus</code> and <code>sex</code>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="ch-poissonreg.html#cb100-1"></a>pois.m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(drinks <span class="op">~</span><span class="st"> </span>off.campus <span class="op">+</span><span class="st"> </span>sex, <span class="dt">family =</span> poisson,</span>
-<span id="cb100-2"><a href="ch-poissonreg.html#cb100-2"></a>               <span class="dt">data =</span> zip.data)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="ch-poissonreg.html#cb101-1"></a>pois.m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(drinks <span class="op">~</span><span class="st"> </span>off.campus <span class="op">+</span><span class="st"> </span>sex, <span class="dt">family =</span> poisson,</span>
+<span id="cb101-2"><a href="ch-poissonreg.html#cb101-2"></a>               <span class="dt">data =</span> zip.data)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept)   0.1293     0.1241   1.041 2.976e-01
 ## off.campus    0.8976     0.2008   4.470 7.830e-06
 ## sexm          1.1154     0.1611   6.925 4.361e-12</code></pre>
 <pre><code>##  Residual deviance =  230.5  on  74 df 
 ##  Dispersion parameter =  1</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="ch-poissonreg.html#cb103-1"></a><span class="co"># Exponentiated coefficients</span></span>
-<span id="cb103-2"><a href="ch-poissonreg.html#cb103-2"></a><span class="kw">exp</span>(<span class="kw">coef</span>(pois.m1))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="ch-poissonreg.html#cb104-1"></a><span class="co"># Exponentiated coefficients</span></span>
+<span id="cb104-2"><a href="ch-poissonreg.html#cb104-2"></a><span class="kw">exp</span>(<span class="kw">coef</span>(pois.m1))</span></code></pre></div>
 <pre><code>## (Intercept)  off.campus        sexm 
 ##       1.138       2.454       3.051</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="ch-poissonreg.html#cb105-1"></a><span class="co"># Goodness-of-fit test</span></span>
-<span id="cb105-2"><a href="ch-poissonreg.html#cb105-2"></a>gof.pvalue =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(pois.m1<span class="op">$</span>deviance, pois.m1<span class="op">$</span>df.residual)</span>
-<span id="cb105-3"><a href="ch-poissonreg.html#cb105-3"></a>gof.pvalue</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="ch-poissonreg.html#cb106-1"></a><span class="co"># Goodness-of-fit test</span></span>
+<span id="cb106-2"><a href="ch-poissonreg.html#cb106-2"></a>gof.pvalue =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(pois.m1<span class="op">$</span>deviance, pois.m1<span class="op">$</span>df.residual)</span>
+<span id="cb106-3"><a href="ch-poissonreg.html#cb106-3"></a>gof.pvalue</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Both covariates are statistically significant, but a goodness-of-fit test reveals that there remains significant lack-of-fit (residual deviance: 230.54 with only 74 df; p&lt;.001 based on <span class="math inline">\(\chi^2\)</span> test with 74 df). In the absence of important missing covariates or extreme observations, this lack-of-fit may be explained by the presence of a group of non-drinkers.</p>
 <p>A zero-inflated Poisson regression model to take non-drinkers into account consists of two parts:</p>
@@ -1876,8 +1876,8 @@ where <span class="math inline">\(\alpha\)</span> is the probability of being in
 <h3><span class="header-section-number">4.10.5</span> Fitting a ZIP Model</h3>
 <p>How is it possible to fit such a model? We cannot observe whether a respondent is a drinker or not (which probably would’ve been good to ask). The ZIP model is a special case of a more general type of statistical model referred to as a <strong>latent variable model</strong>. More specifically, it is a type of a <strong>mixture model</strong>  where observations for one or more groups occur together and the group membership is unknown. Zero-inflated models are a particularly common example of a mixture model, but the response does not need to follow a Poisson distribution. Likelihood methods are at the core of this methodology, but fitting is an iterative process where it is necessary to start out with some guesses (or starting values). In general, it is important to know that models like ZIP exist, although we’ll only explore interpretations and fitting options for a single case study here.</p>
 <p>Here is the general idea of how ZIP models are fit. Imagine that the graph of the Poisson distribution in Figure <a href="ch-poissonreg.html#fig:obsVmodel">4.10</a>b is removed from the observed data distribution in Figure <a href="ch-poissonreg.html#fig:obsVmodel">4.10</a>a. Some zero responses will remain. These would correspond to non-drinkers, and the proportion of all observations these zeros constitute might make a reasonable estimate for <span class="math inline">\(\alpha\)</span>, the proportion of non-drinkers. The likelihood is used and some iterating in the fitting process is involved because the Poisson distribution in Figure <a href="ch-poissonreg.html#fig:obsVmodel">4.10</a>b is based on the mean of the observed data, which means it is the average among all students, not only among drinkers. Furthermore, the likelihood incorporates the predictors, <code>sex</code> and <code>off.campus</code>. So there is a little more to it than computing the proportion of zeros, but this heuristic should provide you a general idea of how these kinds of models are fit. We will use the R function <code>zeroinfl</code> from the package <code>pscl</code> to fit a ZIP model.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="ch-poissonreg.html#cb107-1"></a>zip.m2 &lt;-<span class="st"> </span><span class="kw">zeroinfl</span>(drinks <span class="op">~</span><span class="st"> </span>off.campus <span class="op">+</span><span class="st"> </span>sex <span class="op">|</span><span class="st"> </span>firstYear, </span>
-<span id="cb107-2"><a href="ch-poissonreg.html#cb107-2"></a>                   <span class="dt">data =</span> zip.data)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="ch-poissonreg.html#cb108-1"></a>zip.m2 &lt;-<span class="st"> </span><span class="kw">zeroinfl</span>(drinks <span class="op">~</span><span class="st"> </span>off.campus <span class="op">+</span><span class="st"> </span>sex <span class="op">|</span><span class="st"> </span>firstYear, </span>
+<span id="cb108-2"><a href="ch-poissonreg.html#cb108-2"></a>                   <span class="dt">data =</span> zip.data)</span></code></pre></div>
 <pre><code>## $count
 ##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept)   0.7543     0.1440   5.238 1.624e-07
@@ -1889,7 +1889,7 @@ where <span class="math inline">\(\alpha\)</span> is the probability of being in
 ## (Intercept)    -0.6036     0.3114  -1.938  0.05261
 ## firstYearTRUE   1.1364     0.6095   1.864  0.06226</code></pre>
 <pre><code>##  Log likelihood =  -140.8</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="ch-poissonreg.html#cb110-1"></a><span class="kw">exp</span>(<span class="kw">coef</span>(zip.m2))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="ch-poissonreg.html#cb111-1"></a><span class="kw">exp</span>(<span class="kw">coef</span>(zip.m2))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
 <pre><code>##  count_(Intercept)   count_off.campus 
 ##             2.1261             1.5158 
 ##         count_sexm   zero_(Intercept) 
@@ -1923,7 +1923,7 @@ or 63.0%, while for non-first-year students, the estimated probability of being 
 <h3><span class="header-section-number">4.10.6</span> The Vuong Test (optional)</h3>
 <p>Moving from ordinary Poisson to zero-inflated Poisson has helped us address additional research questions: What proportion of students are non-drinkers, and what factors are associated with whether or not a student is a non-drinker? While a ZIP model seems more faithful to the nature and structure of this data, can we quantitatively show that a zero-inflated Poisson is better than an ordinary Poisson model?</p>
 <p>We cannot use the drop-in-deviance test we discussed earlier because these two models are not nested within one another. Vuong <span class="citation">(<a href="#ref-Vuong1989" role="doc-biblioref">1989</a>)</span> devised a test to make this comparison for the special case of comparing a zero-inflated model and ordinary regression model. Essentially, the Vuong Test  is able to compare predicted probabilities of <strong>non-nested</strong> models.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="ch-poissonreg.html#cb112-1"></a><span class="kw">vuong</span>(pois.m1, zip.m2)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="ch-poissonreg.html#cb113-1"></a><span class="kw">vuong</span>(pois.m1, zip.m2)</span></code></pre></div>
 <pre><code>Vuong Non-Nested Hypothesis Test-Statistic: 
 (test-statistic is asymptotically distributed N(0,1) under the
  null that the models are indistinguishible)
@@ -2373,11 +2373,11 @@ Y (cigarettes)
 <li>Run the following model, then interpret the coefficients for <code>tuition.thous</code> and the interaction between <code>tuition.thous</code> and <code>act.comp</code>.</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="ch-poissonreg.html#cb114-1"></a>crime &lt;-<span class="st"> </span><span class="kw">mutate</span>(crime, <span class="dt">total.thous =</span> total<span class="op">/</span><span class="dv">1000</span>)</span>
-<span id="cb114-2"><a href="ch-poissonreg.html#cb114-2"></a>fit3 &lt;-<span class="st"> </span><span class="kw">glm</span>(burg09 <span class="op">~</span><span class="st"> </span>act.comp <span class="op">+</span><span class="st"> </span>tuition.thous <span class="op">+</span><span class="st"> </span></span>
-<span id="cb114-3"><a href="ch-poissonreg.html#cb114-3"></a><span class="st">            </span>total.thous <span class="op">+</span><span class="st"> </span>act.comp<span class="op">:</span>tuition.thous <span class="op">+</span></span>
-<span id="cb114-4"><a href="ch-poissonreg.html#cb114-4"></a><span class="st">            </span>act.comp<span class="op">:</span>total.thous, <span class="dt">family =</span> poisson, </span>
-<span id="cb114-5"><a href="ch-poissonreg.html#cb114-5"></a>            <span class="dt">data =</span> crime)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="ch-poissonreg.html#cb115-1"></a>crime &lt;-<span class="st"> </span><span class="kw">mutate</span>(crime, <span class="dt">total.thous =</span> total<span class="op">/</span><span class="dv">1000</span>)</span>
+<span id="cb115-2"><a href="ch-poissonreg.html#cb115-2"></a>fit3 &lt;-<span class="st"> </span><span class="kw">glm</span>(burg09 <span class="op">~</span><span class="st"> </span>act.comp <span class="op">+</span><span class="st"> </span>tuition.thous <span class="op">+</span><span class="st"> </span></span>
+<span id="cb115-3"><a href="ch-poissonreg.html#cb115-3"></a><span class="st">            </span>total.thous <span class="op">+</span><span class="st"> </span>act.comp<span class="op">:</span>tuition.thous <span class="op">+</span></span>
+<span id="cb115-4"><a href="ch-poissonreg.html#cb115-4"></a><span class="st">            </span>act.comp<span class="op">:</span>total.thous, <span class="dt">family =</span> poisson, </span>
+<span id="cb115-5"><a href="ch-poissonreg.html#cb115-5"></a>            <span class="dt">data =</span> crime)</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li><p><strong>U.S. National Medical Expenditure Survey.</strong> The data set <code>NMES1988</code> in the <code>AER</code> package contains a sample of individuals over 65 who are covered by Medicare in order to assess the demand for health care through physician office visits, outpatient visits, ER visits, hospital stays, etc. The data can be accessed by installing and loading the <code>AER</code> package and then running <code>data(NMES1988)</code>. More background information and references about the <code>NMES1988</code> data can be found in help pages for the <code>AER</code> package.</p>
 <ol style="list-style-type: lower-alpha">

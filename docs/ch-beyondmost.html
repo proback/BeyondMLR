@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -517,13 +517,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>This text encourages you to broaden your statistical horizons by moving beyond independent, identically distributed, normal responses (iidN). This chapter on likelihood focuses on ways to fit models, determine estimates, and compare models for a wide range of types of responses, not just iidN data. In your earlier study of statistics, you fit simple linear models using ordinary least squares (OLS). Fitting those models assumes that the mean value of a response, Y, is linearly related to some variable, X. However, often responses are not normally distributed. For example, a study in education may involve scoring responses on a test as correct or incorrect. This binary response may be explained by the number of hours students spend studying. However, we do not expect a variable which takes on only 0 or 1 to be a linear function of time spent studying (see Figure <a href="ch-beyondmost.html#fig:logistic1">2.1</a>).</p>
 
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="ch-beyondmost.html#cb31-1"></a><span class="co"># Packages required for Chapter 2</span></span>
-<span id="cb31-2"><a href="ch-beyondmost.html#cb31-2"></a><span class="kw">library</span>(gridExtra)  </span>
-<span id="cb31-3"><a href="ch-beyondmost.html#cb31-3"></a><span class="kw">library</span>(knitr) </span>
-<span id="cb31-4"><a href="ch-beyondmost.html#cb31-4"></a><span class="kw">library</span>(mosaic)</span>
-<span id="cb31-5"><a href="ch-beyondmost.html#cb31-5"></a><span class="kw">library</span>(xtable)</span>
-<span id="cb31-6"><a href="ch-beyondmost.html#cb31-6"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb31-7"><a href="ch-beyondmost.html#cb31-7"></a><span class="kw">library</span>(tidyverse) </span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ch-beyondmost.html#cb32-1"></a><span class="co"># Packages required for Chapter 2</span></span>
+<span id="cb32-2"><a href="ch-beyondmost.html#cb32-2"></a><span class="kw">library</span>(gridExtra)  </span>
+<span id="cb32-3"><a href="ch-beyondmost.html#cb32-3"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb32-4"><a href="ch-beyondmost.html#cb32-4"></a><span class="kw">library</span>(mosaic)</span>
+<span id="cb32-5"><a href="ch-beyondmost.html#cb32-5"></a><span class="kw">library</span>(xtable)</span>
+<span id="cb32-6"><a href="ch-beyondmost.html#cb32-6"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb32-7"><a href="ch-beyondmost.html#cb32-7"></a><span class="kw">library</span>(tidyverse) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:logistic1"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/logistic1-1.png" alt="An attempt to fit a linear regression model to a binary response variable." width="90%" />
 <p class="caption">
@@ -860,27 +860,27 @@ Figure 2.4: Likelihood and log-likelihood functions for 50 children (30 boys and
 <div id="numerically-approximating-an-mle" class="section level4">
 <h4><span class="header-section-number">2.4.2.2</span> Numerically approximating an MLE</h4>
 <p>Here a grid search is used with the software package R to find maximum likelihood estimates, something that can be done with most software. A grid search specifies a set of finite possible values for <span class="math inline">\(p_B\)</span> and then the likelihood, <span class="math inline">\(\mathrm{Lik}(p_B)\)</span>, is computed for each of the possible values. First, we define a relatively coarse grid by specifying 50 values for <span class="math inline">\(p_B\)</span> and then computing how likely we would see our data for each of these possible values. The second example uses a finer grid, 1,000 values for <span class="math inline">\(p_B\)</span>, which allows us to determine a better (more precise) approximation of the MLE. In addition, most packages, like R, have an optimization function which can also be used to obtain MLEs. Both of these approaches are illustrated in the following code.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ch-beyondmost.html#cb32-1"></a>Lik.f &lt;-<span class="st"> </span><span class="cf">function</span>(nBoys,nGirls,nGrid){</span>
-<span id="cb32-2"><a href="ch-beyondmost.html#cb32-2"></a>    <span class="co"># possible values for prob a boy is born</span></span>
-<span id="cb32-3"><a href="ch-beyondmost.html#cb32-3"></a>    pb &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> nGrid)   </span>
-<span id="cb32-4"><a href="ch-beyondmost.html#cb32-4"></a>    lik &lt;-<span class="st"> </span>pb<span class="op">^</span>{nBoys} <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pb)<span class="op">^</span>{nGirls}</span>
-<span id="cb32-5"><a href="ch-beyondmost.html#cb32-5"></a>    <span class="co"># maximum likelihood over nGrid values of pb</span></span>
-<span id="cb32-6"><a href="ch-beyondmost.html#cb32-6"></a>    <span class="kw">max</span>(lik)             </span>
-<span id="cb32-7"><a href="ch-beyondmost.html#cb32-7"></a>    <span class="co"># value of pb where likelihood maximized</span></span>
-<span id="cb32-8"><a href="ch-beyondmost.html#cb32-8"></a>    pb[lik<span class="op">==</span><span class="kw">max</span>(lik)]    </span>
-<span id="cb32-9"><a href="ch-beyondmost.html#cb32-9"></a>  }</span>
-<span id="cb32-10"><a href="ch-beyondmost.html#cb32-10"></a><span class="co"># estimated maximum likelihood estimator for p_B</span></span>
-<span id="cb32-11"><a href="ch-beyondmost.html#cb32-11"></a><span class="kw">Lik.f</span>(<span class="dt">nBoys =</span> <span class="dv">30</span>, <span class="dt">nGirls =</span> <span class="dv">20</span>, <span class="dt">nGrid =</span> <span class="dv">50</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ch-beyondmost.html#cb33-1"></a>Lik.f &lt;-<span class="st"> </span><span class="cf">function</span>(nBoys,nGirls,nGrid){</span>
+<span id="cb33-2"><a href="ch-beyondmost.html#cb33-2"></a>    <span class="co"># possible values for prob a boy is born</span></span>
+<span id="cb33-3"><a href="ch-beyondmost.html#cb33-3"></a>    pb &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> nGrid)   </span>
+<span id="cb33-4"><a href="ch-beyondmost.html#cb33-4"></a>    lik &lt;-<span class="st"> </span>pb<span class="op">^</span>{nBoys} <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pb)<span class="op">^</span>{nGirls}</span>
+<span id="cb33-5"><a href="ch-beyondmost.html#cb33-5"></a>    <span class="co"># maximum likelihood over nGrid values of pb</span></span>
+<span id="cb33-6"><a href="ch-beyondmost.html#cb33-6"></a>    <span class="kw">max</span>(lik)             </span>
+<span id="cb33-7"><a href="ch-beyondmost.html#cb33-7"></a>    <span class="co"># value of pb where likelihood maximized</span></span>
+<span id="cb33-8"><a href="ch-beyondmost.html#cb33-8"></a>    pb[lik<span class="op">==</span><span class="kw">max</span>(lik)]    </span>
+<span id="cb33-9"><a href="ch-beyondmost.html#cb33-9"></a>  }</span>
+<span id="cb33-10"><a href="ch-beyondmost.html#cb33-10"></a><span class="co"># estimated maximum likelihood estimator for p_B</span></span>
+<span id="cb33-11"><a href="ch-beyondmost.html#cb33-11"></a><span class="kw">Lik.f</span>(<span class="dt">nBoys =</span> <span class="dv">30</span>, <span class="dt">nGirls =</span> <span class="dv">20</span>, <span class="dt">nGrid =</span> <span class="dv">50</span>) </span></code></pre></div>
 <pre><code>## [1] 0.5918</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ch-beyondmost.html#cb34-1"></a><span class="co"># more precise MLE for p_B based on finer grid (more points)</span></span>
-<span id="cb34-2"><a href="ch-beyondmost.html#cb34-2"></a><span class="kw">Lik.f</span>(<span class="dt">nBoys =</span> <span class="dv">30</span>, <span class="dt">nGirls =</span> <span class="dv">20</span>, <span class="dt">nGrid =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="ch-beyondmost.html#cb35-1"></a><span class="co"># more precise MLE for p_B based on finer grid (more points)</span></span>
+<span id="cb35-2"><a href="ch-beyondmost.html#cb35-2"></a><span class="kw">Lik.f</span>(<span class="dt">nBoys =</span> <span class="dv">30</span>, <span class="dt">nGirls =</span> <span class="dv">20</span>, <span class="dt">nGrid =</span> <span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5996</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ch-beyondmost.html#cb36-1"></a><span class="co">## Another approach: using R&#39;s optimize function</span></span>
-<span id="cb36-2"><a href="ch-beyondmost.html#cb36-2"></a><span class="co">##   Note that the log-likelihood is optimized here</span></span>
-<span id="cb36-3"><a href="ch-beyondmost.html#cb36-3"></a>oLik.f &lt;-<span class="st"> </span><span class="cf">function</span>(pb){</span>
-<span id="cb36-4"><a href="ch-beyondmost.html#cb36-4"></a>    <span class="kw">return</span>(<span class="dv">30</span><span class="op">*</span><span class="kw">log</span>(pb) <span class="op">+</span><span class="st"> </span><span class="dv">20</span><span class="op">*</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span>pb))</span>
-<span id="cb36-5"><a href="ch-beyondmost.html#cb36-5"></a>  }</span>
-<span id="cb36-6"><a href="ch-beyondmost.html#cb36-6"></a><span class="kw">optimize</span>(oLik.f, <span class="dt">interval=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">maximum=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="ch-beyondmost.html#cb37-1"></a><span class="co">## Another approach: using R&#39;s optimize function</span></span>
+<span id="cb37-2"><a href="ch-beyondmost.html#cb37-2"></a><span class="co">##   Note that the log-likelihood is optimized here</span></span>
+<span id="cb37-3"><a href="ch-beyondmost.html#cb37-3"></a>oLik.f &lt;-<span class="st"> </span><span class="cf">function</span>(pb){</span>
+<span id="cb37-4"><a href="ch-beyondmost.html#cb37-4"></a>    <span class="kw">return</span>(<span class="dv">30</span><span class="op">*</span><span class="kw">log</span>(pb) <span class="op">+</span><span class="st"> </span><span class="dv">20</span><span class="op">*</span><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span>pb))</span>
+<span id="cb37-5"><a href="ch-beyondmost.html#cb37-5"></a>  }</span>
+<span id="cb37-6"><a href="ch-beyondmost.html#cb37-6"></a><span class="kw">optimize</span>(oLik.f, <span class="dt">interval=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">maximum=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## $maximum
 ## [1] 0.6
 ## 

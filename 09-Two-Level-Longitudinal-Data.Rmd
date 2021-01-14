@@ -1469,8 +1469,8 @@ Researchers often use methods like the __parametric bootstrap__ \index{parametri
 - Produce a histogram of likelihood ratio statistics to illustrate its behavior when the null hypothesis is true
 - Calculate a p-value by finding the proportion of times the bootstrapped test statistic is greater than our observed test statistic
 
-```{r, parabootdiagram, out.width='100%', out.height='100%', fig.show='hold', fig.cap="The steps in conducting a parametric bootstrap test comparing Models F and F0.", echo=FALSE}
-knitr::include_graphics("data/ParametricBootstrapDiagram.png")
+```{r, parabootdiagram, out.width='90%', out.length='90%', fig.show='hold', fig.cap="The steps in conducting a parametric bootstrap test comparing Models F and F0.", echo=FALSE}
+knitr::include_graphics("data/ParametricBootstrapDiagram9.png")
 
 # Can also put these lines outside of R chunk
 # ![The steps in conducting a parametric bootstrap test comparing # Models F and F0.](data/ParametricBootstrapDiagram.png)

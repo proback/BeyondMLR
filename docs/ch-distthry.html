@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -519,11 +519,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Create a mixture of distributions and evaluate the shape, mean, and variance.</li>
 </ul>
 
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="ch-distthry.html#cb38-1"></a><span class="co"># Packages required for Chapter 3</span></span>
-<span id="cb38-2"><a href="ch-distthry.html#cb38-2"></a><span class="kw">library</span>(gridExtra)  </span>
-<span id="cb38-3"><a href="ch-distthry.html#cb38-3"></a><span class="kw">library</span>(knitr) </span>
-<span id="cb38-4"><a href="ch-distthry.html#cb38-4"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb38-5"><a href="ch-distthry.html#cb38-5"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="ch-distthry.html#cb39-1"></a><span class="co"># Packages required for Chapter 3</span></span>
+<span id="cb39-2"><a href="ch-distthry.html#cb39-2"></a><span class="kw">library</span>(gridExtra)  </span>
+<span id="cb39-3"><a href="ch-distthry.html#cb39-3"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb39-4"><a href="ch-distthry.html#cb39-4"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb39-5"><a href="ch-distthry.html#cb39-5"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2><span class="header-section-number">3.2</span> Introduction</h2>
@@ -571,7 +571,7 @@ a Bernoulli distribution! In fact, Bernoulli random variables are a special case
 <p>In R we can use the function <code>dbinom(y, n, p)</code>, which outputs the probability of <span class="math inline">\(y\)</span> successes given <span class="math inline">\(n\)</span> trials with probability <span class="math inline">\(p\)</span>, i.e., <span class="math inline">\(P(Y=y)\)</span> for <span class="math inline">\(Y \sim \textrm{Binomial}(n,p)\)</span>.</p>
 <p><strong>Example 2:</strong> While taking a multiple choice test, a student encountered 10 problems where she ended up completely guessing, randomly selecting one of the four options. What is the chance that she got exactly 2 of the 10 correct?</p>
 <p>Knowing that the student randomly selected her answers, we assume she has a 25% chance of a correct response. Thus, <span class="math inline">\(P(Y=2) = {10 \choose 2}(.25)^2(.75)^8 = 0.282\)</span>. We can use R to verify this:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="ch-distthry.html#cb39-1"></a><span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ch-distthry.html#cb40-1"></a><span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.25</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2816</code></pre>
 <p>Therefore, there is a 28% chance of exactly 2 correct answers out of 10.</p>
 </div>
@@ -594,7 +594,7 @@ Figure 3.2: Geometric distributions with <span class="math inline">\(p = 0.3,\ 0
 <p>Once again, we can use R to aid our calculations. The function <code>dgeom(y, p)</code> will output the probability of <span class="math inline">\(y\)</span> failures before the first success where <span class="math inline">\(Y \sim \textrm{Geometric}(p)\)</span>.</p>
 <p><strong>Example 3:</strong> Consider rolling a fair, six-sided die until a five appears. What is the probability of rolling the first five on the third roll?</p>
 <p>First note that <span class="math inline">\(p = 1/6\)</span>. We are then interested in <span class="math inline">\(P(Y=2)\)</span>, as we would want 2 failures before our success. We know that <span class="math inline">\(P(Y=2) = (5/6)^2(1/6) = 0.116\)</span>. Verifying through R:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="ch-distthry.html#cb41-1"></a><span class="kw">dgeom</span>(<span class="dv">2</span>, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ch-distthry.html#cb42-1"></a><span class="kw">dgeom</span>(<span class="dv">2</span>, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1157</code></pre>
 <p>Thus, there is a 12% chance of rolling the first five on the third roll.</p>
 </div>
@@ -642,8 +642,8 @@ With this formulation, <span class="math inline">\(r\)</span> is no longer restr
           &amp;= 0.89
 \end{align*}\]</span>
 Using R:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="ch-distthry.html#cb43-1"></a><span class="co"># could also use pnbinom(2, 10, .9)</span></span>
-<span id="cb43-2"><a href="ch-distthry.html#cb43-2"></a><span class="kw">sum</span>(<span class="kw">dnbinom</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.9</span>))  </span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="ch-distthry.html#cb44-1"></a><span class="co"># could also use pnbinom(2, 10, .9)</span></span>
+<span id="cb44-2"><a href="ch-distthry.html#cb44-2"></a><span class="kw">sum</span>(<span class="kw">dnbinom</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">.9</span>))  </span></code></pre></div>
 <pre><code>## [1] 0.8891</code></pre>
 <p>Thus, there is a 89% chance that she gets 10 correct responses before missing 3.</p>
 </div>
@@ -666,7 +666,7 @@ Figure 3.4: Hypergeometric distributions with different values of <span class="m
 <p>If we wish to calculate probabilities through R, <code>dhyper(y, m, N-m, n)</code> gives <span class="math inline">\(P(Y=y)\)</span> given <span class="math inline">\(n\)</span> draws without replacement from <span class="math inline">\(m\)</span> successes and <span class="math inline">\(N-m\)</span> failures.</p>
 <p><strong>Example 5:</strong> Suppose a deck of cards is randomly shuffled. What is the probability that all 4 queens are located within the first 10 cards?</p>
 <p>We can model <span class="math inline">\(Y\)</span>, the number of queens in the first 10 cards as a hypergeometric random variable where <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(m = 4\)</span>, and <span class="math inline">\(N = 52\)</span>. Then, <span class="math inline">\(P(Y=4) = \displaystyle \frac{\binom{4}{4}\binom{48}{6}}{\binom{52}{10}} = 0.0008\)</span>. We can avoid this calculation through R, of course:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="ch-distthry.html#cb45-1"></a><span class="kw">dhyper</span>(<span class="dv">4</span>, <span class="dt">m =</span> <span class="dv">4</span>, <span class="dt">n =</span> <span class="dv">48</span>, <span class="dt">k =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="ch-distthry.html#cb46-1"></a><span class="kw">dhyper</span>(<span class="dv">4</span>, <span class="dt">m =</span> <span class="dv">4</span>, <span class="dt">n =</span> <span class="dv">48</span>, <span class="dt">k =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0007757</code></pre>
 <p>So, there is a 0.08% chance of all 4 queens being within the first 10 cards of a randomly shuffled deck of cards.</p>
 </div>
@@ -696,7 +696,7 @@ Figure 3.5: Poisson distributions with <span class="math inline">\(\lambda = 0.5
             &amp;= 0.27.
 \end{align*}\]</span></p>
 <p>We can verify through R:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="ch-distthry.html#cb47-1"></a><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lambda =</span> <span class="dv">5</span>))   <span class="co"># or use ppois(3, 5)</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="ch-distthry.html#cb48-1"></a><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lambda =</span> <span class="dv">5</span>))   <span class="co"># or use ppois(3, 5)</span></span></code></pre></div>
 <pre><code>## [1] 0.265</code></pre>
 <p>Therefore, there is a 27% chance of 3 or fewer tickets being issued within one month.</p>
 </div>
@@ -737,7 +737,7 @@ Figure 3.6: Exponential distributions with <span class="math inline">\(\lambda =
 P(Y &lt; 10) = \int_{0}^{10} \textstyle \frac16 e^{-\frac16y} dy = 0.81.
 \end{align*}\]</span></p>
 <p>We can also use R:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="ch-distthry.html#cb49-1"></a><span class="kw">pexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="ch-distthry.html#cb50-1"></a><span class="kw">pexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 0.8111</code></pre>
 <p>Hence, there is a 81% chance of waiting fewer than 10 days between tickets.</p>
 </div>
@@ -770,7 +770,7 @@ an exponential distribution. Just as how the geometric distribution was a specia
 P(Y &lt; 3) = \int_0^3 \frac{2^4}{\Gamma(5)} y^{4} e^{-2y}dy = 0.715.
 \end{align*}\]</span></p>
 <p>Using R:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="ch-distthry.html#cb51-1"></a><span class="kw">pgamma</span>(<span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="ch-distthry.html#cb52-1"></a><span class="kw">pgamma</span>(<span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7149</code></pre>
 <p>There is a 71.5% chance of catching 5 fish within the first 3 hours.</p>
 </div>
@@ -796,7 +796,7 @@ Figure 3.8: Normal distributions with different values of <span class="math inli
 P(Y &gt; 15.5) = \int_{15.5}^{\infty} \frac{e^{-(y-15)^2/ (2\cdot 0.5^2)}}{\sqrt{2\pi\cdot 0.5^2}}dy = 0.159
 \end{align*}\]</span></p>
 <p>We can use R as well:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="ch-distthry.html#cb53-1"></a><span class="kw">pnorm</span>(<span class="fl">15.5</span>, <span class="dt">mean =</span> <span class="dv">15</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ch-distthry.html#cb54-1"></a><span class="kw">pnorm</span>(<span class="fl">15.5</span>, <span class="dt">mean =</span> <span class="dv">15</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1587</code></pre>
 <p>There is a 16% chance of a randomly selected box weighing more than 15.5 ounces.</p>
 </div>
@@ -828,7 +828,7 @@ This distribution is referred to as a <strong>uniform distribution</strong>.</p>
 P(Y &gt; 0.8) = \int_{0.8}^1 \frac{\Gamma(4/3 + 2)}{\Gamma(4/3)\Gamma(2)} y^{4/3-1} (1-y)^{2-1}dy = 0.06.
 \end{align*}\]</span></p>
 <p>Alternatively, in R:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="ch-distthry.html#cb55-1"></a><span class="kw">pbeta</span>(<span class="fl">0.8</span>, <span class="dt">shape1 =</span> <span class="dv">4</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ch-distthry.html#cb56-1"></a><span class="kw">pbeta</span>(<span class="fl">0.8</span>, <span class="dt">shape1 =</span> <span class="dv">4</span><span class="op">/</span><span class="dv">3</span>, <span class="dt">shape2 =</span> <span class="dv">2</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0593</code></pre>
 <p>Hence, there is a 6% chance that a randomly selected student has a probability of accepting an admission decision above 80%.</p>
 </div>

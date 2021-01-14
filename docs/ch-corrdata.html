@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -517,14 +517,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Describe differences in the kind of inferences that can be made using fixed versus random effects models.</li>
 <li>Use software to fit a model taking correlation into account.</li>
 </ul>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="ch-corrdata.html#cb164-1"></a><span class="co"># Packages required for Chapter 7</span></span>
-<span id="cb164-2"><a href="ch-corrdata.html#cb164-2"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb164-3"><a href="ch-corrdata.html#cb164-3"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb164-4"><a href="ch-corrdata.html#cb164-4"></a><span class="kw">library</span>(kableExtra)</span>
-<span id="cb164-5"><a href="ch-corrdata.html#cb164-5"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb164-6"><a href="ch-corrdata.html#cb164-6"></a><span class="kw">library</span>(ICC)</span>
-<span id="cb164-7"><a href="ch-corrdata.html#cb164-7"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb164-8"><a href="ch-corrdata.html#cb164-8"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="ch-corrdata.html#cb165-1"></a><span class="co"># Packages required for Chapter 7</span></span>
+<span id="cb165-2"><a href="ch-corrdata.html#cb165-2"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb165-3"><a href="ch-corrdata.html#cb165-3"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb165-4"><a href="ch-corrdata.html#cb165-4"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb165-5"><a href="ch-corrdata.html#cb165-5"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb165-6"><a href="ch-corrdata.html#cb165-6"></a><span class="kw">library</span>(ICC)</span>
+<span id="cb165-7"><a href="ch-corrdata.html#cb165-7"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb165-8"><a href="ch-corrdata.html#cb165-8"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">7.2</span> Introduction</h2>
@@ -928,11 +928,11 @@ X
 <p>In Scenario 1, we will ignore dose and assume that dose has no effect on the probability of a deformed pup. You can follow along with the simulation (and modify it as desired) in the <em>Rmd</em> file for this chapter (note that some lines of code are run but not printed in the chapter text), and fill out Table <a href="ch-corrdata.html#tab:simulationTableCh7">7.1</a>.</p>
 <p>First, we will consider Scenario 1a where each dam’s probability of producing a deformed pup is <span class="math inline">\(p = 0.5\)</span>; thus, each dam’s log odds are 0. We then will compare this to Scenario 1b, where dams’ probabilities of producing a deformed pup follow a beta distribution where <span class="math inline">\(\alpha = \beta = 0.5\)</span> (which has expected value <span class="math inline">\(0.5\)</span>). So, in Scenario 1b, each dam has a different probability of producing a deformed pup, but the probabilities average out to 0.5, whereas in Scenario 1a each dam has an identical probability of producing a deformed pup (0.5). Figure <a href="ch-corrdata.html#fig:scenario1ProbabilityPlot">7.1</a> illustrates these two scenarios; every dam in Scenario 1a has a probability of 0.5 (the thick vertical line), while probabilities in Scenario 1b are selected from the black dashed distribution, so that probabilities near 0 and 1 are more likely than probabilities near 0.5. The histogram shows 24 randomly generated probabilities under one run of Scenario 1b.</p>
 <p>The R code below produces a simulated number of deformed pups for each of the 24 dams under Scenario 1a and Scenario 1b, and Figure <a href="ch-corrdata.html#fig:scenario1Plot">7.2</a> displays distributions of counts of deformed pups per dam for the two simulations. In Scenario 1a, the mean number of deformed pups is 5.17 with standard deviation 1.49. In Scenario 1b, the mean number of deformed pups is 5.67 with standard deviation 4.10.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="ch-corrdata.html#cb165-1"></a>pi_1a &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">24</span>)</span>
-<span id="cb165-2"><a href="ch-corrdata.html#cb165-2"></a>count_1a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_1a)</span>
-<span id="cb165-3"><a href="ch-corrdata.html#cb165-3"></a></span>
-<span id="cb165-4"><a href="ch-corrdata.html#cb165-4"></a>pi_1b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>,.<span class="dv">5</span>,.<span class="dv">5</span>)  </span>
-<span id="cb165-5"><a href="ch-corrdata.html#cb165-5"></a>count_1b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_1b)  </span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="ch-corrdata.html#cb166-1"></a>pi_1a &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">24</span>)</span>
+<span id="cb166-2"><a href="ch-corrdata.html#cb166-2"></a>count_1a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_1a)</span>
+<span id="cb166-3"><a href="ch-corrdata.html#cb166-3"></a></span>
+<span id="cb166-4"><a href="ch-corrdata.html#cb166-4"></a>pi_1b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>,.<span class="dv">5</span>,.<span class="dv">5</span>)  </span>
+<span id="cb166-5"><a href="ch-corrdata.html#cb166-5"></a>count_1b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_1b)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:scenario1ProbabilityPlot"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/scenario1ProbabilityPlot-1.png" alt="Dam probabilities in Scenario 1." width="60%" />
 <p class="caption">
@@ -1008,17 +1008,17 @@ That is, we assume that the log odds of a deformity is linearly related to dose 
 Thus, dams who received doses of 0, 1, 2, and 3 mg would have probabilities 0.12, 0.34, 0.66, and 0.88, respectively, under Scenario 2a.</p>
 <p>In Scenario 2b, each dam who received a dose of <span class="math inline">\(x\)</span> has probability of deformity randomly chosen from a beta distribution where <span class="math inline">\(\alpha = 2p/(1-p)\)</span> and <span class="math inline">\(\beta = 2\)</span>. These beta distribution parameters ensure that, on average, dams with a dose <span class="math inline">\(x\)</span> in Scenario 2b have the same probability of a deformed pup as dams with dose <span class="math inline">\(x\)</span> in Scenario 2a. For example, dams receiving the 1-mg dosage under Scenario 2b would have probabilities following a beta distribution with <span class="math inline">\(\alpha = 2(0.34)/(1-0.34) = 1.03\)</span> and <span class="math inline">\(\beta = 2\)</span>, which has mean <span class="math inline">\(\frac{\alpha}{\alpha + \beta}=0.34\)</span>. The big difference is that <em>all</em> dams receiving the 1-mg dosage in Scenario 2a have probability 0.34 of a deformed pup, whereas dams receiving the 1-mg dosage in Scenario 2b each have a unique probability of a deformed pup, but those probabilities average out to 0.34.</p>
 <p>Figure <a href="ch-corrdata.html#fig:scenario2bPlot">7.3</a> displays histograms for each dosage group of each dam’s probability of producing deformed pups under Scenario 2b as well as theoretical distributions of probabilities. A vertical line is displayed at each hypothetical distribution’s mean; the vertical line represents the fixed probability of a deformed pup for all dams under Scenario 2a.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="ch-corrdata.html#cb166-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb166-2"><a href="ch-corrdata.html#cb166-2"></a></span>
-<span id="cb166-3"><a href="ch-corrdata.html#cb166-3"></a>dose &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">6</span>))</span>
-<span id="cb166-4"><a href="ch-corrdata.html#cb166-4"></a></span>
-<span id="cb166-5"><a href="ch-corrdata.html#cb166-5"></a>pi_2a &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>dose)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>dose))</span>
-<span id="cb166-6"><a href="ch-corrdata.html#cb166-6"></a>count_2a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_2a)</span>
-<span id="cb166-7"><a href="ch-corrdata.html#cb166-7"></a></span>
-<span id="cb166-8"><a href="ch-corrdata.html#cb166-8"></a>b &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb166-9"><a href="ch-corrdata.html#cb166-9"></a>a &lt;-<span class="st"> </span>b<span class="op">*</span>pi_2a <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>pi_2a)</span>
-<span id="cb166-10"><a href="ch-corrdata.html#cb166-10"></a>pi_2b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>, a, b)</span>
-<span id="cb166-11"><a href="ch-corrdata.html#cb166-11"></a>count_2b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_2b)  </span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="ch-corrdata.html#cb167-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb167-2"><a href="ch-corrdata.html#cb167-2"></a></span>
+<span id="cb167-3"><a href="ch-corrdata.html#cb167-3"></a>dose &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">6</span>),<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">6</span>))</span>
+<span id="cb167-4"><a href="ch-corrdata.html#cb167-4"></a></span>
+<span id="cb167-5"><a href="ch-corrdata.html#cb167-5"></a>pi_2a &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>dose)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>dose))</span>
+<span id="cb167-6"><a href="ch-corrdata.html#cb167-6"></a>count_2a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_2a)</span>
+<span id="cb167-7"><a href="ch-corrdata.html#cb167-7"></a></span>
+<span id="cb167-8"><a href="ch-corrdata.html#cb167-8"></a>b &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb167-9"><a href="ch-corrdata.html#cb167-9"></a>a &lt;-<span class="st"> </span>b<span class="op">*</span>pi_2a <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>pi_2a)</span>
+<span id="cb167-10"><a href="ch-corrdata.html#cb167-10"></a>pi_2b &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">24</span>, a, b)</span>
+<span id="cb167-11"><a href="ch-corrdata.html#cb167-11"></a>count_2b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">24</span>, <span class="dv">10</span>, pi_2b)  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:scenario2bPlot"></span>
 <img src="bookdown-BeyondMLR_files/figure-html/scenario2bPlot-1.png" alt="Observed (histograms) and theoretical (density curves) distributions of dams' probabilities of producing deformed pups by dose group in Scenario 2b.  The thick vertical lines represent the fixed probabilities of a deformed pup by dose group in Scenario 2a." width="60%" />
 <p class="caption">
@@ -1526,15 +1526,15 @@ Black Walnut
 <p><span class="math display">\[\begin{equation*}
   \hat{\textrm{Growth}} = 0.106 - 0.040\; \textrm{Tube}
 \end{equation*}\]</span></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="ch-corrdata.html#cb167-1"></a>tube_linear &lt;-<span class="st"> </span><span class="kw">lm</span>(growth_yr1 <span class="op">~</span><span class="st"> </span>tubes, <span class="dt">data =</span> treetubes_yr1)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="ch-corrdata.html#cb168-1"></a>tube_linear &lt;-<span class="st"> </span><span class="kw">lm</span>(growth_yr1 <span class="op">~</span><span class="st"> </span>tubes, <span class="dt">data =</span> treetubes_yr1)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)
 ## (Intercept)  0.10585   0.005665  18.685 9.931e-56
 ## tubes       -0.04013   0.041848  -0.959 3.382e-01</code></pre>
 <pre><code>##  R squared =  0.002414 
 ##  Residual standard error =  0.1097</code></pre>
 <p>However, the LLSR model assumes that all observations are independent, including trees in the same transect. One way to account for potential correlation is to estimate an additional parameter for the transect-to-transect variance. In other words, we are allowing for a random effect that each transect contributes to the overall variability. The multilevel model below does just that.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="ch-corrdata.html#cb170-1"></a>tube_multi1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(growth_yr1 <span class="op">~</span><span class="st"> </span>tubes <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>transect), </span>
-<span id="cb170-2"><a href="ch-corrdata.html#cb170-2"></a>                    <span class="dt">data =</span> treetubes_yr1)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="ch-corrdata.html#cb171-1"></a>tube_multi1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(growth_yr1 <span class="op">~</span><span class="st"> </span>tubes <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>transect), </span>
+<span id="cb171-2"><a href="ch-corrdata.html#cb171-2"></a>                    <span class="dt">data =</span> treetubes_yr1)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value
 ## (Intercept)  0.10636    0.01329   8.005
 ## tubes       -0.04065    0.05165  -0.787</code></pre>
@@ -1611,12 +1611,12 @@ Black Walnut
 <li>How might you decide on values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> if you have run a preliminary experiment and gathered data on the number of dams with deformed pups?</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="ch-corrdata.html#cb173-1"></a><span class="co"># inputs for the beta distribution must be between 0 and 1</span></span>
-<span id="cb173-2"><a href="ch-corrdata.html#cb173-2"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span>.<span class="dv">05</span>)  </span>
-<span id="cb173-3"><a href="ch-corrdata.html#cb173-3"></a></span>
-<span id="cb173-4"><a href="ch-corrdata.html#cb173-4"></a><span class="co"># To plot a beta density use dbeta; here I selected a=5, b=1</span></span>
-<span id="cb173-5"><a href="ch-corrdata.html#cb173-5"></a>density &lt;-<span class="st"> </span><span class="kw">dbeta</span>(p,<span class="dv">5</span>,<span class="dv">1</span>)</span>
-<span id="cb173-6"><a href="ch-corrdata.html#cb173-6"></a><span class="kw">plot</span>(p, density, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="ch-corrdata.html#cb174-1"></a><span class="co"># inputs for the beta distribution must be between 0 and 1</span></span>
+<span id="cb174-2"><a href="ch-corrdata.html#cb174-2"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span>.<span class="dv">05</span>)  </span>
+<span id="cb174-3"><a href="ch-corrdata.html#cb174-3"></a></span>
+<span id="cb174-4"><a href="ch-corrdata.html#cb174-4"></a><span class="co"># To plot a beta density use dbeta; here I selected a=5, b=1</span></span>
+<span id="cb174-5"><a href="ch-corrdata.html#cb174-5"></a>density &lt;-<span class="st"> </span><span class="kw">dbeta</span>(p,<span class="dv">5</span>,<span class="dv">1</span>)</span>
+<span id="cb174-6"><a href="ch-corrdata.html#cb174-6"></a><span class="kw">plot</span>(p, density, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p><strong>Dams and pups (continued)</strong>. Modify the dams and pups simulation in the following ways. In each case, produce plots and describe the results of your modified simulation.</p>
 <ol style="list-style-type: lower-alpha">

@@ -24,7 +24,7 @@
 <meta name="author" content="Paul Roback and Julie Legler" />
 
 
-<meta name="date" content="2021-01-12" />
+<meta name="date" content="2021-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i>Copyright</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions-of-r-packages-used"><i class="fa fa-check"></i>Versions of R Packages Used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="ch-MLRreview.html"><a href="ch-MLRreview.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
@@ -516,13 +516,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Differentiate between logistic regression models with binary and binomial responses.</li>
 <li>Use the residual deviance to compare models, to test for lack-of-fit when appropriate, and to check for unusual observations or needed transformations.</li>
 </ul>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="ch-logreg.html#cb116-1"></a><span class="co"># Packages required for Chapter 6</span></span>
-<span id="cb116-2"><a href="ch-logreg.html#cb116-2"></a><span class="kw">library</span>(gridExtra)  </span>
-<span id="cb116-3"><a href="ch-logreg.html#cb116-3"></a><span class="kw">library</span>(mnormt) </span>
-<span id="cb116-4"><a href="ch-logreg.html#cb116-4"></a><span class="kw">library</span>(lme4) </span>
-<span id="cb116-5"><a href="ch-logreg.html#cb116-5"></a><span class="kw">library</span>(knitr) </span>
-<span id="cb116-6"><a href="ch-logreg.html#cb116-6"></a><span class="kw">library</span>(pander)</span>
-<span id="cb116-7"><a href="ch-logreg.html#cb116-7"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="ch-logreg.html#cb117-1"></a><span class="co"># Packages required for Chapter 6</span></span>
+<span id="cb117-2"><a href="ch-logreg.html#cb117-2"></a><span class="kw">library</span>(gridExtra)  </span>
+<span id="cb117-3"><a href="ch-logreg.html#cb117-3"></a><span class="kw">library</span>(mnormt) </span>
+<span id="cb117-4"><a href="ch-logreg.html#cb117-4"></a><span class="kw">library</span>(lme4) </span>
+<span id="cb117-5"><a href="ch-logreg.html#cb117-5"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb117-6"><a href="ch-logreg.html#cb117-6"></a><span class="kw">library</span>(pander)</span>
+<span id="cb117-7"><a href="ch-logreg.html#cb117-7"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="introduction-to-logistic-regression" class="section level2">
 <h2><span class="header-section-number">6.2</span> Introduction to Logistic Regression</h2>
@@ -864,12 +864,12 @@ Figure 6.3: Empirical logit plots for the Railroad Referendum data.
 <div id="initial-models-1" class="section level3">
 <h3><span class="header-section-number">6.5.3</span> Initial Models</h3>
 <p>The first model includes only one covariate, distance.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="ch-logreg.html#cb117-1"></a><span class="co"># Model with just distance</span></span>
-<span id="cb117-2"><a href="ch-logreg.html#cb117-2"></a>model.HaleD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
-<span id="cb117-3"><a href="ch-logreg.html#cb117-3"></a><span class="st">    </span>distance, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span>
-<span id="cb117-4"><a href="ch-logreg.html#cb117-4"></a><span class="co"># alternative expression</span></span>
-<span id="cb117-5"><a href="ch-logreg.html#cb117-5"></a>model.HaleD.alt &lt;-<span class="st"> </span><span class="kw">glm</span>(YesVotes <span class="op">/</span><span class="st"> </span>NumVotes <span class="op">~</span><span class="st"> </span>distance, </span>
-<span id="cb117-6"><a href="ch-logreg.html#cb117-6"></a>    <span class="dt">weights =</span> NumVotes, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="ch-logreg.html#cb118-1"></a><span class="co"># Model with just distance</span></span>
+<span id="cb118-2"><a href="ch-logreg.html#cb118-2"></a>model.HaleD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
+<span id="cb118-3"><a href="ch-logreg.html#cb118-3"></a><span class="st">    </span>distance, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span>
+<span id="cb118-4"><a href="ch-logreg.html#cb118-4"></a><span class="co"># alternative expression</span></span>
+<span id="cb118-5"><a href="ch-logreg.html#cb118-5"></a>model.HaleD.alt &lt;-<span class="st"> </span><span class="kw">glm</span>(YesVotes <span class="op">/</span><span class="st"> </span>NumVotes <span class="op">~</span><span class="st"> </span>distance, </span>
+<span id="cb118-6"><a href="ch-logreg.html#cb118-6"></a>    <span class="dt">weights =</span> NumVotes, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value   Pr(&gt;|z|)
 ## (Intercept)   3.3093    0.11313   29.25 4.268e-188
 ## distance     -0.2876    0.01302  -22.08 4.447e-108</code></pre>
@@ -879,8 +879,8 @@ Figure 6.3: Empirical logit plots for the Railroad Referendum data.
 <p><span class="math display">\[\log\left(\frac{\hat{p}_i}{1-\hat{p}_i}\right)=3.309-0.288 \textrm{distance}_i\]</span>
 where <span class="math inline">\(\hat{p}_i\)</span> is the estimated proportion of Yes votes in community <span class="math inline">\(i\)</span>. The estimated odds ratio for distance, that is the exponentiated coefficient for distance, in this model is <span class="math inline">\(e^{-0.288}=0.750\)</span>. It can be interpreted as follows: for each additional mile from the proposed railroad, the support (odds of a Yes vote) declines by 25.0%.</p>
 <p>The covariate <code>pctBlack</code> is then added to the first model.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="ch-logreg.html#cb120-1"></a>model.HaleBD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
-<span id="cb120-2"><a href="ch-logreg.html#cb120-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="ch-logreg.html#cb121-1"></a>model.HaleBD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
+<span id="cb121-2"><a href="ch-logreg.html#cb121-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack, <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value   Pr(&gt;|z|)
 ## (Intercept)  4.22202   0.296963  14.217  7.155e-46
 ## distance    -0.29173   0.013100 -22.270 7.236e-110
@@ -894,7 +894,7 @@ where <span class="math inline">\(\hat{p}_i\)</span> is the estimated proportion
 <p>Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line? As discussed in Section <a href="ch-poissonreg.html#cs-philippines">4.4</a> with Poisson regression, there are two primary approaches to testing significance of model coefficients: <strong>Drop-in-deviance test to compare models</strong>  and <strong>Wald test for a single coefficient</strong>. </p>
 <p>With our larger model given by <span class="math inline">\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i\)</span>, the Wald test produces a highly significant p-value (<span class="math inline">\(Z=\frac{-0.0132}{0.0039}= -3.394\)</span>, <span class="math inline">\(p=.00069\)</span>) indicating significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.</p>
 <p>The drop-in-deviance test would compare the larger model above to the reduced model <span class="math inline">\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i\)</span> by comparing residual deviances from the two models.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ch-logreg.html#cb123-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.HaleD, model.HaleBD, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="ch-logreg.html#cb124-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.HaleD, model.HaleBD, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1       9    318.4       NA NA        NA
 2       8    307.2    11.22  1 0.0008083</code></pre>
@@ -918,7 +918,7 @@ and then exponentiating endpoints if we prefer a confidence interval for the odd
 \end{align*}\]</span></p>
 <p>Thus, we can be 95% confident that a 10% increase in the proportion of black residents is associated with a 5.4% to 18.8% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance. This same relationship could be expressed as (a) between a 0.6% and a 2.1% decrease in odds for each 1% increase in the black population, or (b) between a 5.7% (<span class="math inline">\(1/e^{-.056}\)</span>) and a 23.1% (<span class="math inline">\(1/e^{-.208}\)</span>) increase in odds for each 10% decrease in the black population, after adjusting for distance. Of course, with <span class="math inline">\(n=11\)</span>, we should be cautious about relying on a Wald-type interval in this example.</p>
 <p>Another approach available in R is the <strong>profile likelihood method</strong>,  similar to Section <a href="ch-poissonreg.html#cs-philippines">4.4</a>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="ch-logreg.html#cb125-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(model.HaleBD))</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="ch-logreg.html#cb126-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(model.HaleBD))</span></code></pre></div>
 <pre><code>              2.5 %   97.5 %
 (Intercept) 38.2285 122.6116
 distance     0.7276   0.7660
@@ -928,13 +928,13 @@ pctBlack     0.9794   0.9945</code></pre>
 <div id="testing-for-goodness-of-fit" class="section level3">
 <h3><span class="header-section-number">6.5.6</span> Testing for Goodness-of-Fit</h3>
 <p>As in Section <a href="ch-poissonreg.html#sec-PoisGOF">4.4.9</a>, we can evaluate the goodness-of-fit for our model by comparing the residual deviance (307.22) to a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> (8) degrees of freedom.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="ch-logreg.html#cb127-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(<span class="fl">307.2173</span>, <span class="dv">8</span>)  <span class="co"># Goodness-of-fit test</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="ch-logreg.html#cb128-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(<span class="fl">307.2173</span>, <span class="dv">8</span>)  <span class="co"># Goodness-of-fit test</span></span></code></pre></div>
 <pre><code>[1] 0</code></pre>
 <p>The model with <code>pctBlack</code> and <code>distance</code> has statistically significant evidence of lack-of-fit (<span class="math inline">\(p&lt;.001\)</span>).</p>
 <p>Similar to the Poisson regression models, this lack-of-fit  could result from (a) missing covariates, (b) outliers, or (c) overdispersion. We will first attempt to address (a) by fitting a model with an interaction between distance and percent black, to determine whether the effect of racial composition differs based on how far a community is from the proposed railroad.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="ch-logreg.html#cb129-1"></a>model.HaleBxD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
-<span id="cb129-2"><a href="ch-logreg.html#cb129-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
-<span id="cb129-3"><a href="ch-logreg.html#cb129-3"></a>  <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="ch-logreg.html#cb130-1"></a>model.HaleBxD &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
+<span id="cb130-2"><a href="ch-logreg.html#cb130-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
+<span id="cb130-3"><a href="ch-logreg.html#cb130-3"></a>  <span class="dt">family =</span> binomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
 <pre><code>##                    Estimate Std. Error z value
 ## (Intercept)        7.550902  0.6383697  11.828
 ## distance          -0.614005  0.0573808 -10.701
@@ -947,8 +947,8 @@ pctBlack     0.9794   0.9945</code></pre>
 ## distance:pctBlack 2.321e-09</code></pre>
 <pre><code>##  Residual deviance =  274.2  on  7 df 
 ##  Dispersion parameter =  1</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="ch-logreg.html#cb132-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.HaleBD, model.HaleBxD, </span>
-<span id="cb132-2"><a href="ch-logreg.html#cb132-2"></a>                     <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="ch-logreg.html#cb133-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model.HaleBD, model.HaleBxD, </span>
+<span id="cb133-2"><a href="ch-logreg.html#cb133-2"></a>                     <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1       8    307.2       NA NA        NA
 2       7    274.2    32.98  1 9.294e-09</code></pre>
@@ -995,9 +995,9 @@ Figure 6.4: Fitted values by residuals for the interaction model for the Railroa
 <li>Drop-in-deviance test statistic comparing Model 1 (larger model with <span class="math inline">\(p\)</span> parameters) to Model 2 (smaller model with <span class="math inline">\(q&lt;p\)</span> parameters) is <span class="math inline">\(F = \frac{1}{\hat\phi} \cdot \frac{D_2 - D_1}{p-q}\)</span> where <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> are the residual deviances for models 1 and 2, respectively, and <span class="math inline">\(p-q\)</span> is the difference in the number of parameters for the two models. Note that both <span class="math inline">\(D_2-D_1\)</span> and <span class="math inline">\(p-q\)</span> are positive. This test statistic is compared to an F-distribution with <span class="math inline">\(p-q\)</span> and <span class="math inline">\(n-p\)</span> degrees of freedom.</li>
 </ul>
 <p>Output for a model which adjusts our interaction model for overdispersion appears below, where <span class="math inline">\(\hat{\phi}=51.6\)</span> is used to adjust the standard errors for the coefficients and the drop-in-deviance tests during model building. Standard errors will be inflated by a factor of <span class="math inline">\(\sqrt{51.6}=7.2\)</span>. As a result, there are no significant terms in the adjusted interaction model below.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="ch-logreg.html#cb134-1"></a>model.HaleBxDq &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
-<span id="cb134-2"><a href="ch-logreg.html#cb134-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
-<span id="cb134-3"><a href="ch-logreg.html#cb134-3"></a>  <span class="dt">family =</span> quasibinomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="ch-logreg.html#cb135-1"></a>model.HaleBxDq &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
+<span id="cb135-2"><a href="ch-logreg.html#cb135-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack <span class="op">+</span><span class="st"> </span>distance<span class="op">:</span>pctBlack, </span>
+<span id="cb135-3"><a href="ch-logreg.html#cb135-3"></a>  <span class="dt">family =</span> quasibinomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
 <pre><code>##                    Estimate Std. Error t value
 ## (Intercept)        7.550902   4.585464  1.6467
 ## distance          -0.614005   0.412171 -1.4897
@@ -1011,9 +1011,9 @@ Figure 6.4: Fitted values by residuals for the interaction model for the Railroa
 <pre><code>##  Residual deviance =  274.2  on  7 df 
 ##  Dispersion parameter =  51.6</code></pre>
 <p>We therefore remove the interaction term and refit the model, adjusting for the extra-binomial variation that still exists.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="ch-logreg.html#cb137-1"></a>model.HaleBDq &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
-<span id="cb137-2"><a href="ch-logreg.html#cb137-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack, </span>
-<span id="cb137-3"><a href="ch-logreg.html#cb137-3"></a>  <span class="dt">family =</span> quasibinomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="ch-logreg.html#cb138-1"></a>model.HaleBDq &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(YesVotes, NumVotes <span class="op">-</span><span class="st"> </span>YesVotes) <span class="op">~</span></span>
+<span id="cb138-2"><a href="ch-logreg.html#cb138-2"></a><span class="st">  </span>distance <span class="op">+</span><span class="st"> </span>pctBlack, </span>
+<span id="cb138-3"><a href="ch-logreg.html#cb138-3"></a>  <span class="dt">family =</span> quasibinomial, <span class="dt">data =</span> rrHale.df)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)  4.22202    1.99031  2.1213  0.06669
 ## distance    -0.29173    0.08780 -3.3228  0.01050
@@ -1022,7 +1022,7 @@ Figure 6.4: Fitted values by residuals for the interaction model for the Railroa
 ##  Dispersion parameter =  44.92</code></pre>
 <p>By removing the interaction term and using the overdispersion parameter, we see that distance is significantly associated with support, but percent black is no longer significant after adjusting for distance.</p>
 <p>Because quasilikelihood methods do not change estimated coefficients, we still estimate a 25% decline <span class="math inline">\((1-e^{-0.292})\)</span> in support for each additional mile from the proposed railroad (odds ratio of .75).</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="ch-logreg.html#cb140-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(model.HaleBDq))</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="ch-logreg.html#cb141-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(model.HaleBDq))</span></code></pre></div>
 <pre><code>             2.5 %   97.5 %
 (Intercept) 1.3609 5006.722
 distance    0.6091    0.871
@@ -1236,8 +1236,8 @@ Figure 6.9: Empirical logits for the odds of trying to lose weight by TV watchin
 <h3><span class="header-section-number">6.7.3</span> Initial Models</h3>
 <p>Our strategy for modeling is to use our questions of interest and what we have learned in the exploratory data analysis. For each model we interpret the coefficient of interest, look at the corresponding Wald test and, as a final step, compare the deviances for the different models we considered.</p>
 <p>We first use a model where sex is our only predictor.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ch-logreg.html#cb142-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female, <span class="dt">family =</span> binomial, </span>
-<span id="cb142-2"><a href="ch-logreg.html#cb142-2"></a>              <span class="dt">data =</span> risk2009)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="ch-logreg.html#cb143-1"></a>model1 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female, <span class="dt">family =</span> binomial, </span>
+<span id="cb143-2"><a href="ch-logreg.html#cb143-2"></a>              <span class="dt">data =</span> risk2009)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept)  -0.7522     0.1410  -5.334 9.588e-08
 ## female        1.0919     0.1978   5.520 3.382e-08</code></pre>
@@ -1245,8 +1245,8 @@ Figure 6.9: Empirical logits for the odds of trying to lose weight by TV watchin
 <p>Our estimated binomial regression model is:</p>
 <p><span class="math display">\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)=-0.75+1.09 \textrm{female}\]</span>
 where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion of youth wanting to lose weight. We can interpret the coefficient on <code>female</code> by exponentiating <span class="math inline">\(e^{1.0919} = 2.98\)</span> (95% CI = <span class="math inline">\((2.03, 4.41)\)</span>) indicating that the odds of a female trying to lose weight is nearly three times the odds of a male trying to lose weight (<span class="math inline">\(Z=5.520\)</span>, <span class="math inline">\(p=3.38e-08\)</span>). We retain sex in the model and consider adding the BMI percentile:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="ch-logreg.html#cb145-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct, </span>
-<span id="cb145-2"><a href="ch-logreg.html#cb145-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="ch-logreg.html#cb146-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct, </span>
+<span id="cb146-2"><a href="ch-logreg.html#cb146-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept) -4.25914    0.44927  -9.480 2.541e-21
 ## female       1.86067    0.25896   7.185 6.714e-13
@@ -1257,17 +1257,17 @@ where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion o
 <p><span class="math display">\[\log\left(\frac{\hat{p}}{1-\hat{p}}\right)= -4.26+1.86\textrm{female}+0.047\textrm{bmipct}\]</span></p>
 <p>To interpret the coefficient on <code>bmipct</code>, we will consider a 10-unit increase in <code>bmipct</code>. Because <span class="math inline">\(e^{10*0.047}=1.602\)</span>, then there is an estimated 60.2% increase in the odds of wanting to lose weight for each additional 10 percentile points of BMI for members of the same sex. Just as we had done in other multiple regression models, we need to interpret our coefficient <em>given that the other variables remain constant</em>. An interaction term for BMI by sex was tested (not shown) and it was not significant (<span class="math inline">\(Z=-0.70\)</span>, <span class="math inline">\(p=0.485\)</span>), so the effect of BMI does not differ by sex.</p>
 <p>We next add <code>sport</code> to our model. Sports participation was considered for inclusion in the model in three ways: an indicator of sports participation (0 = no teams, 1 = one or more teams), treating the number of teams (0, 1, 2, or 3) as numeric, and treating the number of teams as a factor. The models below treat sports participation using an indicator variable, but all three models produced similar results.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="ch-logreg.html#cb148-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>sport, </span>
-<span id="cb148-2"><a href="ch-logreg.html#cb148-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="ch-logreg.html#cb149-1"></a>model3 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>sport, </span>
+<span id="cb149-2"><a href="ch-logreg.html#cb149-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept) -4.17138   0.468463 -8.9044 5.367e-19
 ## female       1.84951   0.259514  7.1268 1.027e-12
 ## bmipct       0.04728   0.005251  9.0032 2.193e-19
 ## sportSports -0.14767   0.235101 -0.6281 5.299e-01</code></pre>
 <pre><code>##  Residual deviance =  462.6  on  441 df</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="ch-logreg.html#cb151-1"></a>model3int &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>sport <span class="op">+</span></span>
-<span id="cb151-2"><a href="ch-logreg.html#cb151-2"></a><span class="st">              </span>female<span class="op">:</span>sport <span class="op">+</span><span class="st"> </span>bmipct<span class="op">:</span>sport, </span>
-<span id="cb151-3"><a href="ch-logreg.html#cb151-3"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="ch-logreg.html#cb152-1"></a>model3int &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>sport <span class="op">+</span></span>
+<span id="cb152-2"><a href="ch-logreg.html#cb152-2"></a><span class="st">              </span>female<span class="op">:</span>sport <span class="op">+</span><span class="st"> </span>bmipct<span class="op">:</span>sport, </span>
+<span id="cb152-3"><a href="ch-logreg.html#cb152-3"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
 <pre><code>##                     Estimate Std. Error z value
 ## (Intercept)        -3.643635   0.604821  -6.024
 ## female              1.451017   0.378547   3.833
@@ -1285,8 +1285,8 @@ where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion o
 <pre><code>##  Residual deviance =  460.5  on  439 df</code></pre>
 <p>Sports teams were not significant in any of these models, nor were interaction terms (sex by sports and bmipct by sports). As a result, sports participation was no longer considered for inclusion in the model.</p>
 <p>We last look at adding <code>media</code> to our model.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ch-logreg.html#cb154-1"></a>model4 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>media, </span>
-<span id="cb154-2"><a href="ch-logreg.html#cb154-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="ch-logreg.html#cb155-1"></a>model4 &lt;-<span class="st"> </span><span class="kw">glm</span>(lose.wt<span class="fl">.01</span> <span class="op">~</span><span class="st"> </span>female <span class="op">+</span><span class="st"> </span>bmipct <span class="op">+</span><span class="st"> </span>media, </span>
+<span id="cb155-2"><a href="ch-logreg.html#cb155-2"></a>              <span class="dt">family =</span> binomial, <span class="dt">data =</span> risk2009)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value  Pr(&gt;|z|)
 ## (Intercept) -4.08892   0.462947  -8.832 1.025e-18
 ## female       1.84776   0.259636   7.117 1.105e-12
@@ -1297,8 +1297,8 @@ where <span class="math inline">\(\hat{p}\)</span> is the estimated proportion o
 </div>
 <div id="drop-in-deviance-tests" class="section level3">
 <h3><span class="header-section-number">6.7.4</span> Drop-in-Deviance Tests</h3>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="ch-logreg.html#cb157-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model1, model2, model3, model4,</span>
-<span id="cb157-2"><a href="ch-logreg.html#cb157-2"></a>                     <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="ch-logreg.html#cb158-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(model1, model2, model3, model4,</span>
+<span id="cb158-2"><a href="ch-logreg.html#cb158-2"></a>                     <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>  ResidDF ResidDev Deviance Df      pval
 1     443    580.3       NA NA        NA
 2     442    463.0 117.3301  1 2.431e-27
@@ -1475,32 +1475,32 @@ y = number of fissures
 <li>What happens if we expand the data set to contain one row per moth (968 rows)? Now we can run a logistic binary regression model. How does the logistic binary regression model compare to the binomial regression model? What are similarities and differences? Would there be any reason to run a logistic binomial regression rather than a logistic binary regression in a case like this? Some starter code can be found below the input code.</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="ch-logreg.html#cb160-1"></a>moth &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/moth.csv&quot;</span>)</span>
-<span id="cb160-2"><a href="ch-logreg.html#cb160-2"></a>moth &lt;-<span class="st"> </span><span class="kw">mutate</span>(moth, </span>
-<span id="cb160-3"><a href="ch-logreg.html#cb160-3"></a>               <span class="dt">notremoved =</span> PLACED <span class="op">-</span><span class="st"> </span>REMOVED, </span>
-<span id="cb160-4"><a href="ch-logreg.html#cb160-4"></a>               <span class="dt">logit1 =</span> <span class="kw">log</span>(REMOVED <span class="op">/</span><span class="st"> </span>notremoved),</span>
-<span id="cb160-5"><a href="ch-logreg.html#cb160-5"></a>               <span class="dt">prop1 =</span> REMOVED <span class="op">/</span><span class="st"> </span>PLACED, </span>
-<span id="cb160-6"><a href="ch-logreg.html#cb160-6"></a>               <span class="dt">dark =</span> <span class="kw">ifelse</span>(MORPH<span class="op">==</span><span class="st">&quot;dark&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) )</span></code></pre></div>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="ch-logreg.html#cb161-1"></a>mtemp1 =<span class="st"> </span><span class="kw">rep</span>(moth<span class="op">$</span>dark[<span class="dv">1</span>],moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
-<span id="cb161-2"><a href="ch-logreg.html#cb161-2"></a>dtemp1 =<span class="st"> </span><span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[<span class="dv">1</span>],moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
-<span id="cb161-3"><a href="ch-logreg.html#cb161-3"></a>rtemp1 =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
-<span id="cb161-4"><a href="ch-logreg.html#cb161-4"></a>mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[<span class="dv">1</span>],</span>
-<span id="cb161-5"><a href="ch-logreg.html#cb161-5"></a>                      moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
-<span id="cb161-6"><a href="ch-logreg.html#cb161-6"></a>dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[<span class="dv">1</span>],</span>
-<span id="cb161-7"><a href="ch-logreg.html#cb161-7"></a>                      moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
-<span id="cb161-8"><a href="ch-logreg.html#cb161-8"></a>rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">0</span>,moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
-<span id="cb161-9"><a href="ch-logreg.html#cb161-9"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">14</span>)  {</span>
-<span id="cb161-10"><a href="ch-logreg.html#cb161-10"></a>  mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[i],moth<span class="op">$</span>REMOVED[i]))</span>
-<span id="cb161-11"><a href="ch-logreg.html#cb161-11"></a>  dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[i],moth<span class="op">$</span>REMOVED[i]))</span>
-<span id="cb161-12"><a href="ch-logreg.html#cb161-12"></a>  rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">1</span>,moth<span class="op">$</span>REMOVED[i]))</span>
-<span id="cb161-13"><a href="ch-logreg.html#cb161-13"></a>  mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[i],</span>
-<span id="cb161-14"><a href="ch-logreg.html#cb161-14"></a>                        moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))</span>
-<span id="cb161-15"><a href="ch-logreg.html#cb161-15"></a>  dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[i],</span>
-<span id="cb161-16"><a href="ch-logreg.html#cb161-16"></a>                        moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))</span>
-<span id="cb161-17"><a href="ch-logreg.html#cb161-17"></a>  rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">0</span>,moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))  }</span>
-<span id="cb161-18"><a href="ch-logreg.html#cb161-18"></a>newdata =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">removed=</span>rtemp1,<span class="dt">dark=</span>mtemp1,<span class="dt">dist=</span>dtemp1)</span>
-<span id="cb161-19"><a href="ch-logreg.html#cb161-19"></a>newdata[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>,]</span>
-<span id="cb161-20"><a href="ch-logreg.html#cb161-20"></a><span class="kw">cdplot</span>(<span class="kw">as.factor</span>(rtemp1)<span class="op">~</span>dtemp1)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="ch-logreg.html#cb161-1"></a>moth &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/moth.csv&quot;</span>)</span>
+<span id="cb161-2"><a href="ch-logreg.html#cb161-2"></a>moth &lt;-<span class="st"> </span><span class="kw">mutate</span>(moth, </span>
+<span id="cb161-3"><a href="ch-logreg.html#cb161-3"></a>               <span class="dt">notremoved =</span> PLACED <span class="op">-</span><span class="st"> </span>REMOVED, </span>
+<span id="cb161-4"><a href="ch-logreg.html#cb161-4"></a>               <span class="dt">logit1 =</span> <span class="kw">log</span>(REMOVED <span class="op">/</span><span class="st"> </span>notremoved),</span>
+<span id="cb161-5"><a href="ch-logreg.html#cb161-5"></a>               <span class="dt">prop1 =</span> REMOVED <span class="op">/</span><span class="st"> </span>PLACED, </span>
+<span id="cb161-6"><a href="ch-logreg.html#cb161-6"></a>               <span class="dt">dark =</span> <span class="kw">ifelse</span>(MORPH<span class="op">==</span><span class="st">&quot;dark&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="ch-logreg.html#cb162-1"></a>mtemp1 =<span class="st"> </span><span class="kw">rep</span>(moth<span class="op">$</span>dark[<span class="dv">1</span>],moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
+<span id="cb162-2"><a href="ch-logreg.html#cb162-2"></a>dtemp1 =<span class="st"> </span><span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[<span class="dv">1</span>],moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
+<span id="cb162-3"><a href="ch-logreg.html#cb162-3"></a>rtemp1 =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,moth<span class="op">$</span>REMOVED[<span class="dv">1</span>])</span>
+<span id="cb162-4"><a href="ch-logreg.html#cb162-4"></a>mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[<span class="dv">1</span>],</span>
+<span id="cb162-5"><a href="ch-logreg.html#cb162-5"></a>                      moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
+<span id="cb162-6"><a href="ch-logreg.html#cb162-6"></a>dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[<span class="dv">1</span>],</span>
+<span id="cb162-7"><a href="ch-logreg.html#cb162-7"></a>                      moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
+<span id="cb162-8"><a href="ch-logreg.html#cb162-8"></a>rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">0</span>,moth<span class="op">$</span>PLACED[<span class="dv">1</span>]<span class="op">-</span>moth<span class="op">$</span>REMOVED[<span class="dv">1</span>]))</span>
+<span id="cb162-9"><a href="ch-logreg.html#cb162-9"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">14</span>)  {</span>
+<span id="cb162-10"><a href="ch-logreg.html#cb162-10"></a>  mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[i],moth<span class="op">$</span>REMOVED[i]))</span>
+<span id="cb162-11"><a href="ch-logreg.html#cb162-11"></a>  dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[i],moth<span class="op">$</span>REMOVED[i]))</span>
+<span id="cb162-12"><a href="ch-logreg.html#cb162-12"></a>  rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">1</span>,moth<span class="op">$</span>REMOVED[i]))</span>
+<span id="cb162-13"><a href="ch-logreg.html#cb162-13"></a>  mtemp1 =<span class="st"> </span><span class="kw">c</span>(mtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>dark[i],</span>
+<span id="cb162-14"><a href="ch-logreg.html#cb162-14"></a>                        moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))</span>
+<span id="cb162-15"><a href="ch-logreg.html#cb162-15"></a>  dtemp1 =<span class="st"> </span><span class="kw">c</span>(dtemp1,<span class="kw">rep</span>(moth<span class="op">$</span>DISTANCE[i],</span>
+<span id="cb162-16"><a href="ch-logreg.html#cb162-16"></a>                        moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))</span>
+<span id="cb162-17"><a href="ch-logreg.html#cb162-17"></a>  rtemp1 =<span class="st"> </span><span class="kw">c</span>(rtemp1,<span class="kw">rep</span>(<span class="dv">0</span>,moth<span class="op">$</span>PLACED[i]<span class="op">-</span>moth<span class="op">$</span>REMOVED[i]))  }</span>
+<span id="cb162-18"><a href="ch-logreg.html#cb162-18"></a>newdata =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">removed=</span>rtemp1,<span class="dt">dark=</span>mtemp1,<span class="dt">dist=</span>dtemp1)</span>
+<span id="cb162-19"><a href="ch-logreg.html#cb162-19"></a>newdata[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>,]</span>
+<span id="cb162-20"><a href="ch-logreg.html#cb162-20"></a><span class="kw">cdplot</span>(<span class="kw">as.factor</span>(rtemp1)<span class="op">~</span>dtemp1)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><p><strong>Birdkeeping and lung cancer: a retrospective observational study.</strong> A 1972-1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer. To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague. They identified 49 cases of lung cancer among patients who were registered with a general practice, who were age 65 or younger, and who had resided in the city since 1965. Each patient (case) with cancer was matched with two control subjects (without cancer) by age and sex. Further details can be found in <span class="citation">Holst, Kromhout, and Brand (<a href="#ref-Holst1988" role="doc-biblioref">1988</a>)</span>.</p>
 <p>Age, sex, and smoking history are all known to be associated with lung cancer incidence. Thus, researchers wished to determine after age, sex, socioeconomic status, and smoking have been controlled for, is an additional risk associated with birdkeeping? The data <span class="citation">(Ramsey and Schafer <a href="#ref-Ramsey2002" role="doc-biblioref">2002</a>)</span> is found in <code>birdkeeping.csv</code>, and the variables are listed below. In addition, R code at the end of the problem can be used to input the data and create additional useful variables.</p>
@@ -1546,17 +1546,17 @@ y = number of fissures
 <li><p>Read the article that appeared in the <em>British Medical Journal</em>. What similarities and differences do you see between their analyses and yours? What are a couple of things you learned from the article that weren’t apparent in the short summary at the beginning of the assignment.</p></li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="ch-logreg.html#cb162-1"></a>birds &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/birdkeeping.csv&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb162-2"><a href="ch-logreg.html#cb162-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">ifelse</span>(female <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>),</span>
-<span id="cb162-3"><a href="ch-logreg.html#cb162-3"></a>         <span class="dt">socioecon_status =</span> <span class="kw">ifelse</span>(highstatus <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, </span>
-<span id="cb162-4"><a href="ch-logreg.html#cb162-4"></a>                                   <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>),</span>
-<span id="cb162-5"><a href="ch-logreg.html#cb162-5"></a>         <span class="dt">keep_bird =</span> <span class="kw">ifelse</span>(bird <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Keep Bird&quot;</span>, <span class="st">&quot;No Bird&quot;</span>),</span>
-<span id="cb162-6"><a href="ch-logreg.html#cb162-6"></a>         <span class="dt">lung_cancer =</span> <span class="kw">ifelse</span>(cancer <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Cancer&quot;</span>, </span>
-<span id="cb162-7"><a href="ch-logreg.html#cb162-7"></a>                              <span class="st">&quot;No Cancer&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb162-8"><a href="ch-logreg.html#cb162-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">years_factor =</span> <span class="kw">cut</span>(yrsmoke, </span>
-<span id="cb162-9"><a href="ch-logreg.html#cb162-9"></a>                            <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">25</span>, <span class="ot">Inf</span>),</span>
-<span id="cb162-10"><a href="ch-logreg.html#cb162-10"></a>            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;No smoking&quot;</span>, <span class="st">&quot;1-25 years&quot;</span>, </span>
-<span id="cb162-11"><a href="ch-logreg.html#cb162-11"></a>                       <span class="st">&quot;Over 25 years&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="ch-logreg.html#cb163-1"></a>birds &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/birdkeeping.csv&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb163-2"><a href="ch-logreg.html#cb163-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">ifelse</span>(female <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb163-3"><a href="ch-logreg.html#cb163-3"></a>         <span class="dt">socioecon_status =</span> <span class="kw">ifelse</span>(highstatus <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, </span>
+<span id="cb163-4"><a href="ch-logreg.html#cb163-4"></a>                                   <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>),</span>
+<span id="cb163-5"><a href="ch-logreg.html#cb163-5"></a>         <span class="dt">keep_bird =</span> <span class="kw">ifelse</span>(bird <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Keep Bird&quot;</span>, <span class="st">&quot;No Bird&quot;</span>),</span>
+<span id="cb163-6"><a href="ch-logreg.html#cb163-6"></a>         <span class="dt">lung_cancer =</span> <span class="kw">ifelse</span>(cancer <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Cancer&quot;</span>, </span>
+<span id="cb163-7"><a href="ch-logreg.html#cb163-7"></a>                              <span class="st">&quot;No Cancer&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb163-8"><a href="ch-logreg.html#cb163-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">years_factor =</span> <span class="kw">cut</span>(yrsmoke, </span>
+<span id="cb163-9"><a href="ch-logreg.html#cb163-9"></a>                            <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">25</span>, <span class="ot">Inf</span>),</span>
+<span id="cb163-10"><a href="ch-logreg.html#cb163-10"></a>            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;No smoking&quot;</span>, <span class="st">&quot;1-25 years&quot;</span>, </span>
+<span id="cb163-11"><a href="ch-logreg.html#cb163-11"></a>                       <span class="st">&quot;Over 25 years&quot;</span>)))</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li><p><strong>2016 Election.</strong> An <a href="https://www.causeweb.org/usproc/usclap/2018/spring/winners">award-winning</a> student project <span class="citation">(Blakeman, Renier, and Shandaq <a href="#ref-Renier2018" role="doc-biblioref">2018</a>)</span> examined driving forces behind Donald Trump’s surprising victory in the 2016 Presidential Election, using data from nearly 40,000 voters collected as part of the 2016 Cooperative Congressional Election Survey (CCES). The student researchers investigated two theories: (1) Trump was seen as the candidate of change for voters experiencing economic hardship, and (2) Trump exploited voter fears about immigrants and minorities.</p>
 <p>The data set <code>electiondata.csv</code> has individual level data on voters in the 2016 Presidential Election, collected from the CCES and subsequently tidied. We will focus on the following variables:</p>
@@ -1587,11 +1587,11 @@ y = number of fissures
 <li>Is there any concern about the independence assumption in these models? We will return to this question in later chapters.</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="ch-logreg.html#cb163-1"></a>model1a &lt;-<span class="st"> </span><span class="kw">glm</span>(Vote01 <span class="op">~</span><span class="st"> </span>zfaminc <span class="op">+</span><span class="st"> </span>zmedinc <span class="op">+</span><span class="st"> </span>EconWorse <span class="op">+</span></span>
-<span id="cb163-2"><a href="ch-logreg.html#cb163-2"></a><span class="st">    </span>EducStatus <span class="op">+</span><span class="st"> </span>republican <span class="op">+</span><span class="st"> </span>EducStatus<span class="op">:</span>republican <span class="op">+</span></span>
-<span id="cb163-3"><a href="ch-logreg.html#cb163-3"></a><span class="st">    </span>EconWorse<span class="op">:</span>zfaminc <span class="op">+</span><span class="st"> </span>EconWorse<span class="op">:</span>republican, </span>
-<span id="cb163-4"><a href="ch-logreg.html#cb163-4"></a>    <span class="dt">family =</span> binomial, <span class="dt">data =</span> electiondata)</span>
-<span id="cb163-5"><a href="ch-logreg.html#cb163-5"></a><span class="kw">summary</span>(model1a)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="ch-logreg.html#cb164-1"></a>model1a &lt;-<span class="st"> </span><span class="kw">glm</span>(Vote01 <span class="op">~</span><span class="st"> </span>zfaminc <span class="op">+</span><span class="st"> </span>zmedinc <span class="op">+</span><span class="st"> </span>EconWorse <span class="op">+</span></span>
+<span id="cb164-2"><a href="ch-logreg.html#cb164-2"></a><span class="st">    </span>EducStatus <span class="op">+</span><span class="st"> </span>republican <span class="op">+</span><span class="st"> </span>EducStatus<span class="op">:</span>republican <span class="op">+</span></span>
+<span id="cb164-3"><a href="ch-logreg.html#cb164-3"></a><span class="st">    </span>EconWorse<span class="op">:</span>zfaminc <span class="op">+</span><span class="st"> </span>EconWorse<span class="op">:</span>republican, </span>
+<span id="cb164-4"><a href="ch-logreg.html#cb164-4"></a>    <span class="dt">family =</span> binomial, <span class="dt">data =</span> electiondata)</span>
+<span id="cb164-5"><a href="ch-logreg.html#cb164-5"></a><span class="kw">summary</span>(model1a)</span></code></pre></div>
 </div>
 <div id="open-ended-exercises-3" class="section level3">
 <h3><span class="header-section-number">6.8.3</span> Open-Ended Exercises</h3>
