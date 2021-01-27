@@ -16,6 +16,7 @@ cover-image: "data/book_cover.jpg"
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(kableExtra)
 library(sessioninfo)
 
 options(
@@ -55,7 +56,7 @@ When we teach this course at St. Olaf, we are able to cover Chapters 1-11 during
 - Chapter 10: Multilevel Data with More Than Two Levels.  The ideas from Chapters 8 and 9 are extended to a three-level case study.  New ideas include boundary constraints and exploding numbers of variance components and fixed effects.
 - Chapter 11: Multilevel Generalized Linear Models.  This chapter brings everything together, combining multilevel data with non-normal responses.  Crossed random effects and random effects estimates are both introduced here.
 
-Three types of exercises are available for each chapter.  **Conceptual Exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided Exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-Ended Exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises will be available to qualified instructors at our [book’s website](www.routledge.com/Beyond-Multiple-Linear-Regression-Applied-Generalized-Linear-Models-And/Roback-Legler/p/book/9781439885383). 
+Three types of exercises are available for each chapter.  **Conceptual Exercises** ask about key ideas in the contexts of case studies from the chapter and additional research articles where those ideas appear.  **Guided Exercises** provide real data sets with background descriptions and lead students step-by-step through a set of questions to explore the data, build and interpret models, and address key research questions.  Finally, **Open-Ended Exercises** provide real data sets with contextual descriptions and ask students to explore key questions without prescribing specific steps.  A solutions manual with solutions to all exercises will be available to qualified instructors at our [book’s website](https://www.routledge.com/Beyond-Multiple-Linear-Regression-Applied-Generalized-Linear-Models-And/Roback-Legler/p/book/9781439885383). 
 
 ```{block, include=is_html_output()}
 **Copyright**
@@ -146,7 +147,7 @@ remotes::install_version(package = "broom", version = "0.5.6")
 package_info(needed_pkgs) %>% 
   as_tibble() %>% 
   filter(attached == TRUE) %>% 
-  select(package, version = ondiskversion) %>% 
+  dplyr::select(package, version = ondiskversion) %>% 
   kable(
     booktabs = TRUE, 
     linesep = "",

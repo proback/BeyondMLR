@@ -264,14 +264,14 @@ The one-parameter exponential family form for binomial responses shows that the 
 
 This case study demonstrates how wide-ranging applications of statistics can be. Many would not associate statistics with historical research, but this case study shows that it can be done. U.S. Census data from 1870 helped historian Michael Fitzgerald of St. Olaf College gain insight into important questions about how railroads were supported during the Reconstruction Era.
 
-In a paper entitled "Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research," Ben Bayer performs an analysis of data from 1870 to explain factors that influence voting on referendums related to railroad subsidies [@Bayer2011]. Positive votes are hypothesized to be inversely proportional to the distance a voter is from the proposed railroad, but the racial composition of a community (as measured by the percentage of blacks) is hypothesized to be associated with voting behavior as well. Separate analyses of three counties in Alabama---Hale, Clarke, and Dallas---were performed; we discuss Hale County here. This example differs from the soccer example in that it includes continuous covariates. Was voting on railroad referenda related to distance from the proposed railroad line and the racial composition of a community?
+In a paper entitled "Reconstructing Alabama: Reconstruction Era Demographic and Statistical Research," Ben Bayer performs an analysis of data from 1870 to explain factors that influence voting on referendums related to railroad subsidies [@Bayer2011]. Positive votes are hypothesized to be inversely proportional to the distance a voter is from the proposed railroad, but the racial composition of a community (as measured by the percentage of Black residents) is hypothesized to be associated with voting behavior as well. Separate analyses of three counties in Alabama---Hale, Clarke, and Dallas---were performed; we discuss Hale County here. This example differs from the soccer example in that it includes continuous covariates. Was voting on railroad referenda related to distance from the proposed railroad line and the racial composition of a community?
 
 
 ### Data Organization
 
 The unit of observation for this data is a community in Hale County. We will focus on the following variables from `RR_Data_Hale.csv` collected for each community (see Table \@ref(tab:table2chp6)):
 
-- `pctBlack` = the percentage of blacks in the community
+- `pctBlack` = the percentage of Black residents in the community
 
 - `distance` = the distance, in miles, the proposed railroad is from the community
 
@@ -320,21 +320,21 @@ sum(rrHale.df$YesVotes[rrHale.df$community!="Greensboro"]) /
 
 ### Exploratory Analyses
 
-We first look at a coded scatterplot to see our data. Figure \@ref(fig:coded) portrays the relationship between `distance` and `pctBlack` coded by the `InFavor` status (whether a community supported the referendum with over 50\% Yes votes). From this scatterplot, we can see that all of the communities in favor of the railroad referendum are over 55\% black, and all of those opposed are 7 miles or farther from the proposed line. The overall percentage of voters in Hale County in favor of the railroad is 87.9\%.
+We first look at a coded scatterplot to see our data. Figure \@ref(fig:coded) portrays the relationship between `distance` and `pctBlack` coded by the `InFavor` status (whether a community supported the referendum with over 50\% Yes votes). From this scatterplot, we can see that all of the communities in favor of the railroad referendum had over 55\% Black residents, and all of those opposed are 7 miles or farther from the proposed line. The overall percentage of voters in Hale County in favor of the railroad is 87.9\%.
 
-```{r, coded, fig.align="center",out.width="60%", fig.cap=' Scatterplot of distance from a proposed rail line and percent black in the community coded by whether the community was in favor of the referendum or not.',echo=FALSE, warning=FALSE}
+```{r, coded, fig.align="center",out.width="60%", fig.cap=' Scatterplot of distance from a proposed rail line and percent Black residents in the community coded by whether the community was in favor of the referendum or not.',echo=FALSE, warning=FALSE}
 #Coded Scatterplot
 ggplot(rrHale.df, aes(x=distance, y=pctBlack, color=InFavor)) + 
   geom_point(aes(shape = InFavor), size = 2.5) +
   #scale_shape_manual(values=c(1,2)) + # Use a slightly darker palette than normal
-  ylab("Percent black in the community") +
+  ylab("Percent Black residents in the community") +
   xlab("Distance to the proposed railroad")
 ```
 
 Recall that a model with two covariates has the form:
 
  \[\log(\textrm{odds}) = \log\left(\frac{p}{1-p}\right) = \beta_0+\beta_1X_1+\beta_2X_2.\]
-where $p$ is the proportion of Yes votes in a community.  In logistic regression, we expect the logits to be a linear function of $X$, the predictors. To assess the linearity assumption, we construct **empirical logit plots**, \index{empirical logit plot} where "empirical" means "based on sample data." Empirical logits are computed for each community by taking $\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)$.  In Figure \@ref(fig:emplogits), we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent black reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes, with only 59.4\% black. 
+where $p$ is the proportion of Yes votes in a community.  In logistic regression, we expect the logits to be a linear function of $X$, the predictors. To assess the linearity assumption, we construct **empirical logit plots**, \index{empirical logit plot} where "empirical" means "based on sample data." Empirical logits are computed for each community by taking $\log\left(\frac{\textrm{number of successes}}{\textrm{number of failures}}\right)$.  In Figure \@ref(fig:emplogits), we see that the plot of empirical logits versus distance produces a plot that looks linear, as needed for the logistic regression assumption. In contrast, the empirical logits by percent Black residents reveal that Greensboro deviates quite a bit from the otherwise linear pattern; this suggests that Greensboro is an outlier and possibly an influential point. Greensboro has 99.2\% voting yes, with only 59.4\% Black residents. 
 
 ```{r,emplogits, fig.align="center",out.width="60%", fig.cap='Empirical logit plots for the Railroad Referendum data.',echo=FALSE, warning=FALSE, message=FALSE}
 #elogitXdist and elogitXperBlk
@@ -357,13 +357,13 @@ logblack <- ggplot(rrHale.df, aes(x=pctBlack, y=elogit))+
     geom_point(shape=1) +    # Use hollow circles
     geom_smooth(method=lm,   # Add linear regression line
                 se=FALSE) +   # Don't add shaded confidence region
-  xlab("percent black") + ylab("empirical logits") + 
-  labs(title="Hale Empirical logits by percent black") +
+  xlab("percent Black residents") + ylab("empirical logits") + 
+  labs(title="Hale Empirical logits by percent Black residents") +
   geom_text(aes(label=Greensboro), nudge_x = 7.5, nudge_y = -.5)
 grid.arrange(logdis, logblack ,ncol=1)
 ```
 
-In addition to examining how the response correlates with the predictors, it is a good idea to determine whether the predictors correlate with one another. Here, the correlation between distance and percent black is negative and moderately strong with $r = -0.49$. We'll watch to see if the correlation affects the stability of our odds ratio estimates.
+In addition to examining how the response correlates with the predictors, it is a good idea to determine whether the predictors correlate with one another. Here, the correlation between distance and percent Black residents is negative and moderately strong with $r = -0.49$. We'll watch to see if the correlation affects the stability of our odds ratio estimates.
  
 
 ### Initial Models
@@ -413,14 +413,14 @@ cat(" Residual deviance = ",
 exp(coef(model.HaleBD))
 ```
 
-Despite the somewhat strong negative correlation between percent black and distance, the estimated odds ratio for distance remains approximately the same in this new model (OR $= e^{-0.29} = 0.747$); controlling for percent black does little to change our estimate of the effect of distance. For each additional mile from the proposed railroad, odds of a Yes vote declines by 25.3\% after adjusting for the racial composition of a community.  We also see that, for a fixed distance from the proposed railroad, the odds of a Yes vote declines by 1.3\% (OR $= e^{-.0132} = .987$) for each additional percent black in the community.
+Despite the somewhat strong negative correlation between percent Black residents and distance, the estimated odds ratio for distance remains approximately the same in this new model (OR $= e^{-0.29} = 0.747$); controlling for percent Black residents does little to change our estimate of the effect of distance. For each additional mile from the proposed railroad, odds of a Yes vote declines by 25.3\% after adjusting for the racial composition of a community.  We also see that, for a fixed distance from the proposed railroad, the odds of a Yes vote declines by 1.3\% (OR $= e^{-.0132} = .987$) for each additional percent of Black residents in the community.
 
 
 ### Tests for Significance of Model Coefficients {#sec-logisticInf}
 
-Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(cs-philippines) with Poisson regression, there are two primary approaches to testing significance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__. \index{Wald-type test}
+Do we have statistically significant evidence that support for the railroad referendum decreases with higher proportions of Black residents in a community, after accounting for the distance a community is from the railroad line?  As discussed in Section \@ref(cs-philippines) with Poisson regression, there are two primary approaches to testing significance of model coefficients: __Drop-in-deviance test to compare models__ \index{drop-in-deviance test} and __Wald test for a single coefficient__. \index{Wald-type test}
 
-With our larger model given by $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i$, the Wald test produces a highly significant p-value ($Z=\frac{-0.0132}{0.0039}= -3.394$, $p=.00069$) indicating significant evidence that support for the railroad referendum decreases with higher proportions of black residents in a community, after adjusting for the distance a community is from the railroad line.
+With our larger model given by $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i+\beta_2\textrm{pctBlack}_i$, the Wald test produces a highly significant p-value ($Z=\frac{-0.0132}{0.0039}= -3.394$, $p=.00069$) indicating significant evidence that support for the railroad referendum decreases with higher proportions of Black residents in a community, after adjusting for the distance a community is from the railroad line.
 
 The drop-in-deviance test would compare the larger model above to the reduced model $\log\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1\textrm{distance}_i$ by comparing residual deviances from the two models. 
 
@@ -459,7 +459,7 @@ and then exponentiating endpoints if we prefer a confidence interval for the odd
                                       &= (.812, .946)
 \end{align*}
 
-Thus, we can be 95\% confident that a 10\% increase in the proportion of black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance.  This same relationship could be expressed as (a) between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the black population, or (b) between a 5.7\% ($1/e^{-.056}$) and a 23.1\% ($1/e^{-.208}$) increase in odds for each 10\% decrease in the black population, after adjusting for distance.  Of course, with $n=11$, we should be cautious about relying on a Wald-type interval in this example.
+Thus, we can be 95\% confident that a 10\% increase in the proportion of Black residents is associated with a 5.4\% to 18.8\% decrease in the odds of a Yes vote for the railroad referendum after controlling for distance.  This same relationship could be expressed as (a) between a 0.6\% and a 2.1\% decrease in odds for each 1\% increase in the Black population, or (b) between a 5.7\% ($1/e^{-.056}$) and a 23.1\% ($1/e^{-.208}$) increase in odds for each 10\% decrease in the Black population, after adjusting for distance.  Of course, with $n=11$, we should be cautious about relying on a Wald-type interval in this example.
 
 Another approach available in R is the **profile likelihood method**, \index{profile likelihood} similar to Section \@ref(cs-philippines).
 
@@ -467,7 +467,7 @@ Another approach available in R is the **profile likelihood method**, \index{pro
 exp(confint(model.HaleBD))
 ```
 
-In the model with `distance` and `pctBlack`, the profile likelihood 95\% confidence interval for $e^{\beta_2}$ is (.979, .994), which is approximately equal to the Wald-based interval despite the small sample size.  We can also confirm the statistically significant association between percent black and odds of voting Yes (after controlling for distance), because 1 is not a plausible value of $e^{\beta_2}$ (where an odds ratio of 1 would imply that the odds of voting Yes do not change with percent black).
+In the model with `distance` and `pctBlack`, the profile likelihood 95\% confidence interval for $e^{\beta_2}$ is (.979, .994), which is approximately equal to the Wald-based interval despite the small sample size.  We can also confirm the statistically significant association between percent Black residents and odds of voting Yes (after controlling for distance), because 1 is not a plausible value of $e^{\beta_2}$ (where an odds ratio of 1 would imply that the odds of voting Yes do not change with percent Black residents).
   
 ### Testing for Goodness-of-Fit
 
@@ -478,7 +478,7 @@ As in Section \@ref(sec-PoisGOF), we can evaluate the goodness-of-fit for our mo
 
 The model with `pctBlack` and `distance` has statistically significant evidence of lack-of-fit ($p<.001$).  
 
-Similar to the Poisson regression models, this lack-of-fit \index{lack-of-fit} could result from (a) missing covariates, (b) outliers, or (c) overdispersion.  We will first attempt to address (a) by fitting a model with an interaction between distance and percent black, to determine whether the effect of racial composition differs based on how far a community is from the proposed railroad. 
+Similar to the Poisson regression models, this lack-of-fit \index{lack-of-fit} could result from (a) missing covariates, (b) outliers, or (c) overdispersion.  We will first attempt to address (a) by fitting a model with an interaction between distance and percent Black residents, to determine whether the effect of racial composition differs based on how far a community is from the proposed railroad. 
 
 ```{r, comment = NA}
 model.HaleBxD <- glm(cbind(YesVotes, NumVotes - YesVotes) ~
@@ -509,9 +509,9 @@ row.names(did_print) <- row.names(drop_in_dev)
 did_print
 ```
 
-We have statistically significant evidence (Wald test: $Z = 5.974, p<.001$; Drop-in-deviance test: $\chi^2=32.984, p<.001$) that the effect of the proportion of the community that is black on the odds of voting Yes depends on the distance of the community from the proposed railroad.  
+We have statistically significant evidence (Wald test: $Z = 5.974, p<.001$; Drop-in-deviance test: $\chi^2=32.984, p<.001$) that the effect of the proportion of community residents who are Black on the odds of voting Yes depends on the distance of the community from the proposed railroad.  
 
-To interpret the interaction coefficient in context, we will compare two cases: one where a community is right on the proposed railroad (`distance` = 0), and the other where the community is 15 miles away (`distance` = 15). The significant interaction implies that the effect of `pctBlack` should differ in these two cases.  In the first case, the coefficient for `pctBlack` is -0.0647, while in the second case, the relevant coefficient is $-0.0647+15(.00537) = 0.0158$.  Thus, for a community right on the proposed railroad, a 1\% increase in percent black is associated with a 6.3\% ($e^{-.0647}=.937$) decrease in the odds of voting Yes, while for a community 15 miles away, a 1\% increase in percent black is associated with a ($e^{.0158}=1.016$) 1.6\% *increase* in the odds of voting Yes.  A significant interaction term doesn't always imply a change in the direction of the association, but it does here. 
+To interpret the interaction coefficient in context, we will compare two cases: one where a community is right on the proposed railroad (`distance` = 0), and the other where the community is 15 miles away (`distance` = 15). The significant interaction implies that the effect of `pctBlack` should differ in these two cases.  In the first case, the coefficient for `pctBlack` is -0.0647, while in the second case, the relevant coefficient is $-0.0647+15(.00537) = 0.0158$.  Thus, for a community right on the proposed railroad, a 1\% increase in percent Black residents is associated with a 6.3\% ($e^{-.0647}=.937$) decrease in the odds of voting Yes, while for a community 15 miles away, a 1\% increase in percent Black residents is associated with a ($e^{.0158}=1.016$) 1.6\% *increase* in the odds of voting Yes.  A significant interaction term doesn't always imply a change in the direction of the association, but it does here. 
   
 Because our interaction model still exhibits lack-of-fit (residual deviance of 274.23 on just 7 df), and because we have used the covariates at our disposal, we will assess this model for potential outliers and overdispersion by examining the model's residuals.
 
@@ -601,7 +601,7 @@ cat(" Residual deviance = ",
     summary(model.HaleBDq)$dispersion)
 ```
 
-By removing the interaction term and using the overdispersion parameter, we see that distance is significantly associated with support, but percent black is no longer significant after adjusting for distance.  
+By removing the interaction term and using the overdispersion parameter, we see that distance is significantly associated with support, but percent Black residents is no longer significant after adjusting for distance.  
 
 ```{r, include=FALSE}
 exp(coef(model.HaleBDq))
@@ -616,7 +616,7 @@ While we previously found a 95\% confidence interval for the odds ratio associat
 
 ### Summary
 
-We began by fitting a logistic regression model with `distance` alone. Then we added the covariate `pctBlack`, and the Wald-type test and the drop-in-deviance test both provided strong support for the addition of `pctBlack` to the model. The model with `distance` and `pctBlack` had a large residual deviance suggesting an ill-fitted model. When we looked at the residuals, we saw that Greensboro is an extreme observation. Models without Greensboro were fitted and compared to our initial models. Seeing no appreciable improvement or differences with Greensboro removed, we left it in the model. There remained a large residual deviance so we attempted to account for it by using an estimated dispersion parameter similar to Section \@ref(sec-overdispPois) with Poisson regression. The final model included distance and percent black, although percent black was no longer significant after adjusting for overdispersion.
+We began by fitting a logistic regression model with `distance` alone. Then we added the covariate `pctBlack`, and the Wald-type test and the drop-in-deviance test both provided strong support for the addition of `pctBlack` to the model. The model with `distance` and `pctBlack` had a large residual deviance suggesting an ill-fitted model. When we looked at the residuals, we saw that Greensboro is an extreme observation. Models without Greensboro were fitted and compared to our initial models. Seeing no appreciable improvement or differences with Greensboro removed, we left it in the model. There remained a large residual deviance so we attempted to account for it by using an estimated dispersion parameter similar to Section \@ref(sec-overdispPois) with Poisson regression. The final model included distance and percent Black residents, although percent Black residents was no longer significant after adjusting for overdispersion.
 
 
 ## Linear Least Squares \index{linear least squares regression (LLSR)} vs. Binomial Regression \index{binomial logistic regression}
