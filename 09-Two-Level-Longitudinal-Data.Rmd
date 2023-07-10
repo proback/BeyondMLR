@@ -131,7 +131,7 @@ chart.long <- chart.wide %>%
   gather(key = "key", value = "MathAvgScore",
          MathAvgScore.0:MathAvgScore.2) %>%
   separate(key, into = c("name", "year08"), sep = "\\.") %>%
-  select(-c("X1", "name")) %>%
+  select(-c("...1", "name")) %>%
   arrange(schoolid, year08) %>%
   mutate(year08 = as.numeric(year08))
 head(chart.long)
@@ -184,7 +184,7 @@ wide.public <- chart.wide %>%
   filter(charter == 0) %>%
   sample_n( dim(wide.charter)[1] )
 sampdata <- bind_rows(wide.charter, wide.public) %>%
-  select(-X1) %>%
+  select(-`...1`) %>%
   mutate(vars = row_number())   # Just use numbers 1-146 as school ids
 head(sampdata)
 
@@ -384,9 +384,14 @@ Another advantage of assuming a linear trend at Level One (within schools) is th
 
 ```{r, include=FALSE, warning=FALSE}
 #95% CI's for slope and intercept of 24 schools	(2 are filtered out since 1 obs)		
-regressions <- smallchart.long %>% 
-  group_by(schoolid) %>% 
-  do(fit = lm(MathAvgScore ~ year08, data=.))
+# regressions <- smallchart.long %>%
+#   group_by(schoolid) %>%
+#   do(fit = lm(MathAvgScore ~ year08, data=.))
+
+regressions <- smallchart.long %>%
+  group_by(schoolid) %>%
+  # do(fit = lm(MathAvgScore ~ year08, data=.))
+  group_modify(~ broom::tidy(lm(MathAvgScore ~ year08, data = .x)))
 
 sd_filter <- smallchart.long %>%
   group_by(schoolid) %>%
@@ -397,22 +402,31 @@ regressions <- regressions %>%
   filter(!is.na(sds))
 
 lm_info1 <- regressions %>%
-  tidy(fit) %>%
-  ungroup() %>%
+  # tidy(fit) %>%
+  # ungroup() %>%
   select(schoolid, term, estimate) %>%
   spread(key = term, value = estimate) %>%
   rename(rate = year08, int = `(Intercept)`)
 
 lm_info2 <- regressions %>%
-  tidy(fit) %>%
-  ungroup() %>%
+  # tidy(fit) %>%
+  # ungroup() %>%
   select(schoolid, term, std.error) %>%
   spread(key = term, value = std.error) %>%
   rename(se_rate = year08, se_int = `(Intercept)`)
 
-lm_info <- regressions %>%
-  glance(fit) %>%
-  ungroup() %>%
+regressions_glance <- smallchart.long %>%
+  group_by(schoolid) %>%
+  # do(fit = lm(MathAvgScore ~ year08, data=.))
+  group_modify(~ broom::glance(lm(MathAvgScore ~ year08, data = .x)))
+
+regressions_glance <- regressions_glance %>%
+  right_join(sd_filter, by="schoolid") %>%
+  filter(!is.na(sds))
+
+lm_info <- regressions_glance %>%
+  # glance(fit) %>%
+  # ungroup() %>%
   select(schoolid, r.squared, df.residual) %>%
   inner_join(lm_info1, by = "schoolid") %>%
   inner_join(lm_info2, by = "schoolid") %>%
@@ -447,7 +461,8 @@ grid.arrange(slope.ci,int.ci,ncol=2)
 # Find slope and intercept of all 618 schools	(540 after filter those with 1 obs)		
 regressions <- chart.long %>% 
   group_by(schoolid) %>% 
-  do(fit = lm(MathAvgScore ~ year08, data=.))
+  # do(fit = lm(MathAvgScore ~ year08, data=.))
+  group_modify(~ broom::tidy(lm(MathAvgScore ~ year08, data = .x)))
 
 sd_filter <- chart.long %>%
   group_by(schoolid) %>%
@@ -458,22 +473,31 @@ regressions <- regressions %>%
   filter(!is.na(sds))
 
 lm_info1 <- regressions %>%
-  tidy(fit) %>%
-  ungroup() %>%
+  # tidy(fit) %>%
+  # ungroup() %>%
   select(schoolid, term, estimate) %>%
   spread(key = term, value = estimate) %>%
   rename(rate = year08, int = `(Intercept)`)
 
 lm_info2 <- regressions %>%
-  tidy(fit) %>%
-  ungroup() %>%
+  # tidy(fit) %>%
+  # ungroup() %>%
   select(schoolid, term, std.error) %>%
   spread(key = term, value = std.error) %>%
   rename(se_rate = year08, se_int = `(Intercept)`)
 
-lm_info <- regressions %>%
-  glance(fit) %>%
-  ungroup() %>%
+regressions_glance <- chart.long %>%
+  group_by(schoolid) %>%
+  # do(fit = lm(MathAvgScore ~ year08, data=.))
+  group_modify(~ broom::glance(lm(MathAvgScore ~ year08, data = .x)))
+
+regressions_glance <- regressions_glance %>%
+  right_join(sd_filter, by="schoolid") %>%
+  filter(!is.na(sds))
+
+lm_info <- regressions_glance %>%
+  # glance(fit) %>%
+  # ungroup() %>%
   select(schoolid, r.squared, df.residual) %>%
   inner_join(lm_info1, by = "schoolid") %>%
   inner_join(lm_info2, by = "schoolid") %>%
@@ -482,7 +506,6 @@ lm_info <- regressions %>%
          intub = int + tstar * se_int,
          ratelb = rate - tstar * se_rate, 
          rateub = rate + tstar * se_rate)
-head(data.frame(lm_info))
 
 # summary stats for intercepts  					
 summary(lm_info$int)
@@ -1262,9 +1285,13 @@ anova(cs.lme,std.lme)
 
 # Heterogeneous compound symmetry error structure
 # lmeControl(msMaxIter=200)  # didn't help
+# https://stats.stackexchange.com/questions/40647/lme-error-iteration-limit-reached
+ctrl <- lmeControl(opt='optim');
+
 hcs.lme=lme(MathAvgScore ~ year08 * charter, chart.long, 
   random =  ~ 1 | schoolid, na.action=na.exclude,
   correlation=corCompSymm(form = ~ 1 |schoolid), 
+  control=ctrl,
   weights=varIdent(form = ~1|year08))
 summary(hcs.lme)
 hcs.lme$modelStruct
